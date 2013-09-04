@@ -1,0 +1,14 @@
+Package: archivist
+Version: 0.1
+Type: Package
+Title: Tools for datasets and figures archivisation.
+Author: Przemyslaw Biecek <przemyslaw.biecek@gmail.com>
+Maintainer: Przemyslaw Biecek <przemyslaw.biecek@gmail.com>
+Description:  Bit.ly, QRcode, Git, Github support
+Repository: CRAN
+License: GPL-2
+LazyLoad: yes
+LazyData: yes
+Depends: R (>= 2.8.0), ggplot2, reshape2, grid, digest, highlight, RCurl
+LinkingTo:
+Imports:
