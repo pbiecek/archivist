@@ -10,21 +10,22 @@ dd.default <- function(object, archiveWrite = "./", archiveRead = archiveWrite, 
   sink(file = paste0(archiveWrite, md5hash, "/load.html"))
   highlight::highlight(paste0(archiveWrite, md5hash, "/load.R"), detective = simple_detective, renderer = renderer_html( document = TRUE ))
   sink()
-  list(md5hash)
+  list(hash = md5hash, ref = paste0(archiveRead, md5hash))
 }
 
 dd.data.frame <- function(object, archiveWrite = "./", archiveRead = archiveWrite, ...) {
-  md5hash <- dd.default(object, archiveWrite, archiveRead, ...)[[1]]
-  save(file = paste0(archiveWrite, md5hash, "/df.rda"), object, ascii=TRUE)
-  list(data = md5hash)
+  md5hash <- dd.default(object, archiveWrite, archiveRead, ...)
+  save(file = paste0(archiveWrite, md5hash$hash, "/df.rda"), object, ascii=TRUE)
+  list(data.hash = md5hash[[1]], data.ref = paste0(archiveRead, md5hash[[1]]))
 }
 
 dd.ggplot <- function(object, archiveWrite = "./", archiveRead = archiveWrite, ..., archiveData = FALSE,  archiveWriteData = archiveWrite, archiveReadData = archiveRead) {
-  md5hash <- dd.default(object, archiveWrite, archiveRead, ...)[[1]]
-  save(file = paste0(archiveWrite, md5hash, "/plot.rda"), object, ascii=TRUE)
+  md5hash <- dd.default(object, archiveWrite, archiveRead, ...)
+  save(file = paste0(archiveWrite, md5hash[[1]], "/plot.rda"), object, ascii=TRUE)
   if (archiveData) {
-    md5hash2 <- dd(object$data, archiveWriteData, archiveReadData)
-    return(list(plot = md5hash, data = md5hash2))
+    md5hash2 <- dd(object$data, archiveWriteData, archiveReadData)[[1]]
+    return(list(plot.hash = md5hash[[1]], plot.ref = paste0(archiveRead, md5hash[[1]]),
+                data.hash = md5hash2[[1]], data.ref = paste0(archiveRead, md5hash2[[1]])))
   }
-  list(plot = md5hash)
+  list(plot.hash = md5hash[[1]], plot.ref = paste0(archiveRead, md5hash[[1]]))
 }
