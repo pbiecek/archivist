@@ -27,5 +27,5 @@ f.close()
 
 plotQRcode <- function(...) {
   par(mar=c(0,0,0,0))
-  image(getQRdata(...), col=c("white", "black"), bty="n", xaxt="n", yaxt="n")
+  image(getQRcode(...), col=c("white", "black"), bty="n", xaxt="n", yaxt="n")
 }
