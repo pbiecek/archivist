@@ -10,7 +10,12 @@ refs <- dd(pl, archiveData=TRUE,
          archiveWrite=archivePlotWrite, archiveRead=archivePlotRead, 
          archiveWriteData=archiveDataWrite, archiveReadData=archiveDataRead)
 
-(plref <- getBitLy(refs$plot.ref, mytoken))
-(plref <- getBitLy(refs$data.ref, mytoken))
+(plref <- getBitLy(refs$plot.ref, mytoken)$bitly)
+(dtref <- getBitLy(refs$data.ref, mytoken)$bitly)
 
+plotQRcode(plref)
+plotQRcode(dtref)
+
+pl
+addQR2ggplot(plref)
 
