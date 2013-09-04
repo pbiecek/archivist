@@ -14,7 +14,7 @@ dd.default(object, archiveWrite = "./", archiveRead = archiveWrite, ...)
 
 dd.data.frame(object, archiveWrite = "./", ...) 
 
-dd.ggplot(object, archiveWrite = "./", ...)
+dd.ggplot(object, archiveWrite = "./", archiveRead = archiveWrite, ..., archiveData = FALSE,  archiveWriteData = archiveWrite, archiveReadData = archiveRead) 
 }
 \author{
  Przemyslaw Biecek

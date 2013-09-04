@@ -10,17 +10,21 @@ dd.default <- function(object, archiveWrite = "./", archiveRead = archiveWrite, 
   sink(file = paste0(archiveWrite, md5hash, "/load.html"))
   highlight::highlight(paste0(archiveWrite, md5hash, "/load.R"), detective = simple_detective, renderer = renderer_html( document = TRUE ))
   sink()
-  md5hash
+  list(md5hash)
 }
 
-dd.data.frame <- function(object, archiveWrite = "./", ...) {
-  md5hash <- dd.default(object, archiveWrite, ...)
+dd.data.frame <- function(object, archiveWrite = "./", archiveRead = archiveWrite, ...) {
+  md5hash <- dd.default(object, archiveWrite, archiveRead, ...)[[1]]
   save(file = paste0(archiveWrite, md5hash, "/df.rda"), object, ascii=TRUE)
-  md5hash
+  list(data = md5hash)
 }
 
-dd.ggplot <- function(object, archiveWrite = "./", ...) {
-  md5hash <- dd.default(object, archiveWrite, ...)
+dd.ggplot <- function(object, archiveWrite = "./", archiveRead = archiveWrite, ..., archiveData = FALSE,  archiveWriteData = archiveWrite, archiveReadData = archiveRead) {
+  md5hash <- dd.default(object, archiveWrite, archiveRead, ...)[[1]]
   save(file = paste0(archiveWrite, md5hash, "/plot.rda"), object, ascii=TRUE)
-  md5hash
+  if (archiveData) {
+    md5hash2 <- dd(object$data, archiveWriteData, archiveReadData)
+    return(list(plot = md5hash, data = md5hash2))
+  }
+  list(plot = md5hash)
 }
