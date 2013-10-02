@@ -53,6 +53,7 @@ dd.ggplot <- function(object, archiveWrite = "./", archiveRead = archiveWrite, .
 
   if (archiveData) {
     md5hash2 <- dd(object$data, archiveWrite = archiveWriteData, archiveRead = archiveReadData)[[1]]
+    cat(file = paste0(archiveWrite, md5hash$hash, "/data.md5"), md5hash2[[1]])
     return(list(plot.hash = md5hash[[1]], plot.ref = paste0(archiveRead, md5hash[[1]]),
                 data.hash = md5hash2[[1]], data.ref = paste0(archiveReadData, md5hash2[[1]])))
   }
