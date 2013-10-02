@@ -26,4 +26,3 @@ plotQRcode(dtref)
 plotOb
 addQR2ggplot(plref)
 
-
