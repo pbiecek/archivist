@@ -2,6 +2,9 @@ ddrescueInstructions <- function(object, archiveRead, md5hash)
   UseMethod("ddrescueInstructions")
 
 ddrescueInstructions.ggplot <- function(object, archiveRead, md5hash) {
+  # for github, add raw.
+  archiveRead <- gsub(archiveRead, pattern="https://github", replacement="https://raw.github")
+  
   paste0('
 # load plot from archive
 library(ggplot2)
@@ -16,7 +19,9 @@ get(name)
 }
 
 ddrescueInstructions.data.frame <- function(object, archiveRead, md5hash) {
-  paste0('
+  archiveRead <- gsub(archiveRead, pattern="https://github", replacement="https://raw.github")
+
+paste0('
  # load data grame from archive
  library(RCurl)
  tmpobject <- getBinaryURL("',archiveRead,md5hash,'/df.rda")
