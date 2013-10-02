@@ -4,7 +4,7 @@ createSquad <- function(vlinks) {
 
   squad <- lapply(vlinks, function(link) {
     link <- gsub(link, pattern="https://github", replacement="https://raw.github")
-    instructions <- getURL(link)
+    instructions <- getURL(paste0(link, "/load.R"))
     plotObj <- evaluate(instructions)
     list(plotObj = plotObj, link = link)
   })
@@ -12,3 +12,4 @@ createSquad <- function(vlinks) {
   class(squad) <- "squad"
   squad
 }
+

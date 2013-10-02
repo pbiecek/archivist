@@ -14,7 +14,7 @@ tf <- tempfile()
 writeBin(tmpobject, tf)
 (name <- load(tf))
 unlink(tf)
-get(name)
+# get(name)
 ')
 }
 
@@ -29,6 +29,6 @@ paste0('
  writeBin(tmpobject, tf)
  (name <- load(tf))
  unlink(tf)
- get(name)
+ # get(name)
  ')
 }
