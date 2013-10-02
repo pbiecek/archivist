@@ -1,5 +1,4 @@
-
-dd <- function (object, archiveWrite = "./", archiveRead = archiveWrite,  ... 
+dd <- function (object, archiveWrite = "./", archiveRead = archiveWrite,  ... )
   UseMethod("dd")
 
 dd.default <- function(object, archiveWrite = "./", archiveRead = archiveWrite, ...) {
