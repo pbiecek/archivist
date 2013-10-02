@@ -32,7 +32,9 @@ dd.data.frame <- function(object, archiveWrite = "./", archiveRead = archiveWrit
   list(data.hash = md5hash[[1]], data.ref = paste0(archiveRead, md5hash[[1]]))
 }
 
-dd.ggplot <- function(object, archiveWrite = "./", archiveRead = archiveWrite, ..., archiveData = FALSE,  archiveWriteData = archiveWrite, archiveReadData = archiveRead, minatures = NULL) {
+dd.ggplot <- function(object, archiveWrite = "./", archiveRead = archiveWrite, ..., 
+                      archiveData = FALSE,  archiveWriteData = archiveWrite, archiveReadData = archiveRead, 
+                      miniatures = NULL) {
   md5hash <- dd.default(object, archiveWrite, archiveRead, ...)
   save(file = paste0(archiveWrite, md5hash[[1]], "/plot.rda"), object, ascii=TRUE)
   #
