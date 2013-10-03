@@ -4,7 +4,8 @@ ddWelcomePage <- function(object, archiveWrite, archiveRead, archivePlotRead=arc
 ddWelcomePage.squad <- function(object, archiveWrite, archiveRead, archivePlotRead=archiveRead, md5hash) {
   # for github, add raw.
   archiveRead <- gsub(archiveRead, pattern="https://github", replacement="https://raw.github")
-  
+  archivePlotRead <- gsub(archivePlotRead, pattern="graphGallery/master", replacement="graphGallery/tree/master")
+    
   imgs <- paste0(sapply(object, function(x) {
     paste0("<a href='", archivePlotRead, unlist(x$link)[1], "'><img src='",archiveRead, unlist(x$miniaturesLinks)[1], "'/></a><br>")
   }), collapse="\n")

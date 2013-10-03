@@ -95,7 +95,8 @@ dd.squad <- function(object, archiveWrite = "./", archiveRead = archiveWrite, ar
       obj
     })
   }
-  wplinks <- ddWelcomePage(object, archiveRead, archivePlotRead, md5hash) 
+  class(object) = "squad"
+  wplinks <- ddWelcomePage(object, archiveWrite, archiveRead, archivePlotRead, md5hash=md5hash) 
   
   list(squad.hash = md5hash[[1]], squad.ref = paste0(archiveRead, md5hash[[1]]), welcomePage = wplinks)
 }
