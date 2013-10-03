@@ -77,21 +77,25 @@ dd.data.frame <- function(object, archiveWrite = "./", archiveRead = archiveWrit
 #
 # squad is a list of lists
 # list(plotObj = , link = )
-dd.squad <- function(object, archiveWrite = "./", archiveRead = archiveWrite, ..., 
-                      miniatures = NULL) {
+dd.squad <- function(object, archiveWrite = "./", archiveRead = archiveWrite, archivePlotRead = archiveRead, ..., 
+                     miniatures = list(list(FUN = png, format="png", width=500, height=500))) {
   md5hash <- dd.default(object, archiveWrite, archiveRead, ...)
   
   save(file = paste0(archiveWrite, md5hash[[1]], "/squad.rda"), object, ascii=TRUE)
-  #
   # save miniatures of all objects in specified format
   if (!is.null(miniatures)) {
-    lapply(miniatures, function(forma) {
-      forma$FUN(paste0(archiveWrite, md5hash[[1]], "/miniature_",forma$width, "_", forma$height,".", forma$format), 
-                forma$width, forma$height)
-      print(object)
-      dev.off()
+    object <- lapply(object, function(obj) {
+      obj$miniaturesLinks <- lapply(miniatures, function(forma) {
+        forma$FUN(paste0(archiveWrite, md5hash[[1]], "/miniature_",obj$link,"_",forma$width, "_", forma$height,".", forma$format), 
+                  forma$width, forma$height)
+        print(obj$plotObj)
+        dev.off()
+        paste0(md5hash[[1]], "/miniature_",obj$link,"_",forma$width, "_", forma$height,".", forma$format)
+      })
+      obj
     })
   }
+  ddWelcomePage(object, archiveRead, archivePlotRead, md5hash) 
   
   list(squad.hash = md5hash[[1]], squad.ref = paste0(archiveRead, md5hash[[1]]))
 }
