@@ -1,12 +1,13 @@
-createSquad <- function(vlinks) {
+createSquad <- function(hlinks, archiveDir) {
   require(RCurl)
   require(evaluate)
 
-  squad <- lapply(vlinks, function(link) {
+  squad <- lapply(hlinks, function(hlink) {
+    link <- paste0(archiveDir, hlink)
     link <- gsub(link, pattern="https://github", replacement="https://raw.github")
     instructions <- getURL(paste0(link, "/load.R"))
     tmp <- evaluate(instructions)
-    list(plotObj = object, link = link)
+    list(plotObj = object, link = hlink)
   })
   
   class(squad) <- "squad"

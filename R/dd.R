@@ -59,3 +59,39 @@ dd.ggplot <- function(object, archiveWrite = "./", archiveRead = archiveWrite, .
   }
   list(plot.hash = md5hash[[1]], plot.ref = paste0(archiveRead, md5hash[[1]]))
 }
+
+
+
+
+dd.data.frame <- function(object, archiveWrite = "./", archiveRead = archiveWrite, ..., firstRows = NULL) {
+  md5hash <- dd.default(object, archiveWrite, archiveRead, ...)
+  save(file = paste0(archiveWrite, md5hash$hash, "/df.rda"), object, ascii=TRUE)
+  if (!is.null(firstRows)) {
+    sink(file = paste0(archiveWrite, md5hash, "/head.txt"))
+    print(head(object, firstRows))
+    sink()
+  }
+  list(data.hash = md5hash[[1]], data.ref = paste0(archiveRead, md5hash[[1]]))
+}
+
+#
+# squad is a list of lists
+# list(plotObj = , link = )
+dd.squad <- function(object, archiveWrite = "./", archiveRead = archiveWrite, ..., 
+                      miniatures = NULL) {
+  md5hash <- dd.default(object, archiveWrite, archiveRead, ...)
+  
+  save(file = paste0(archiveWrite, md5hash[[1]], "/squad.rda"), object, ascii=TRUE)
+  #
+  # save miniatures of all objects in specified format
+  if (!is.null(miniatures)) {
+    lapply(miniatures, function(forma) {
+      forma$FUN(paste0(archiveWrite, md5hash[[1]], "/miniature_",forma$width, "_", forma$height,".", forma$format), 
+                forma$width, forma$height)
+      print(object)
+      dev.off()
+    })
+  }
+  
+  list(squad.hash = md5hash[[1]], squad.ref = paste0(archiveRead, md5hash[[1]]))
+}
