@@ -2,7 +2,7 @@ ddWelcomePage <- function(object, archiveWrite, archiveRead, archivePlotRead=arc
   UseMethod("ddWelcomePage")
 
 ddWelcomePage.squad <- function(object, archiveWrite, archiveRead, archivePlotRead=archiveRead, md5hash) {
-  # for github, add raw.
+  # for github, add raw
   archiveRead <- gsub(archiveRead, pattern="https://github", replacement="https://raw.github")
   archivePlotRead <- gsub(archivePlotRead, pattern="graphGallery/master", replacement="graphGallery/tree/master")
     
