@@ -1,16 +1,30 @@
-ddWelcomePage <- function(object, archiveWrite, archiveRead, archivePlotRead=archiveRead, md5hash) 
+ddWelcomePage <- function(object, archiveDirs, md5hash) 
   UseMethod("ddWelcomePage")
 
-ddWelcomePage.squad <- function(object, archiveWrite, archiveRead, archivePlotRead=archiveRead, md5hash) {
+ddWelcomePage.ggplot <- function(object, archiveDirs, md5hash) {
   # for github, add raw
-  archiveRead <- gsub(archiveRead, pattern="https://github", replacement="https://raw.github")
-  archivePlotRead <- gsub(archivePlotRead, pattern="graphGallery/master", replacement="graphGallery/tree/master")
+  archiveDirs$archiveRead <- gsub(archiveDirs$archiveRead, pattern="https://github", replacement="https://raw.github")
+  archiveDirs$archivePlotRead <- gsub(archiveDirs$archivePlotRead, pattern="graphGallery/master", replacement="graphGallery/tree/master")
     
+  wplink <- paste0(archiveDirs$archiveWrite, md5hash$hash, "/index.html")
+  cat("<html>
+<body>
+<img src=''>
+</body>
+</html>", file=wplink)
+  wplink
+}
+
+ddWelcomePage.squad <- function(object, archiveDirs, md5hash) {
+  # for github, add raw
+  archiveDirs$archiveRead <- gsub(archiveDirs$archiveRead, pattern="https://github", replacement="https://raw.github")
+  archiveDirs$archivePlotRead <- gsub(archiveDirs$archivePlotRead, pattern="graphGallery/master", replacement="graphGallery/tree/master")
+  
   imgs <- paste0(sapply(object, function(x) {
-    paste0("<a href='", archivePlotRead, unlist(x$link)[1], "'><img src='",archiveRead, unlist(x$miniaturesLinks)[1], "'/></a><br>")
+    paste0("<a href='", archiveDirs$archivePlotRead, unlist(x$link)[1], "'><img src='",archiveDirs$archiveRead, unlist(x$miniaturesLinks)[1], "'/></a><br>")
   }), collapse="\n")
   
-  wplink <- paste0(archiveWrite, md5hash$hash, "/index.html")
+  wplink <- paste0(archiveDirs$archiveWrite, md5hash$hash, "/index.html")
   cat(imgs, file=wplink)
   wplink
 }

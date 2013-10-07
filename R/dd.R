@@ -57,7 +57,11 @@ dd.ggplot <- function(object, archiveWrite = "./", archiveRead = archiveWrite, .
     return(list(plot.hash = md5hash[[1]], plot.ref = paste0(archiveRead, md5hash[[1]]),
                 data.hash = md5hash2[[1]], data.ref = paste0(archiveReadData, md5hash2[[1]])))
   }
-  list(plot.hash = md5hash[[1]], plot.ref = paste0(archiveRead, md5hash[[1]]))
+
+  wplinks <- ddWelcomePage(object, archiveWrite, archiveRead, archivePlotRead, md5hash=md5hash) 
+  createQRka(object, wplinks, archiveDirs)  
+  
+  list(plot.hash = md5hash[[1]], plot.ref = paste0(archiveRead, md5hash[[1]]), welcomePage = wplinks)
 }
 
 
