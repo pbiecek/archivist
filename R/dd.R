@@ -1,50 +1,51 @@
-dd <- function (object, archiveWrite = "./", archiveRead = archiveWrite,  ... )
+dd <- function (object, archiveDirs,  ... )
   UseMethod("dd")
 
 
-dd.default <- function(object, archiveWrite = "./", archiveRead = archiveWrite, ...) {
+dd.default <- function(object, archiveDirs, ...) {
   md5hash <- digest(object)
-  dir.create(file.path(archiveWrite, md5hash), showWarnings = FALSE)
+  dir.create(file.path(archiveDirs$archiveWrite, md5hash), showWarnings = FALSE)
   
-  cat(file = paste0(archiveWrite, md5hash, "/load.R"), ddrescueInstructions(object, archiveRead, md5hash) )
-  sink(file = paste0(archiveWrite, md5hash, "/load.html"))
-  highlight::highlight(paste0(archiveWrite, md5hash, "/load.R"), detective = simple_detective, renderer = renderer_html( document = TRUE ))
+  cat(file = paste0(archiveDirs$archiveWrite, md5hash, "/load.R"), ddrescueInstructions(object, archiveDirs, md5hash) )
+  sink(file = paste0(archiveDirs$archiveWrite, md5hash, "/load.html"))
+  highlight::highlight(paste0(archiveDirs$archiveWrite, md5hash, "/load.R"), 
+                       detective = simple_detective, renderer = renderer_html( document = TRUE ))
   sink()
   #
   # add access date
-  cat(file = paste0(archiveWrite, md5hash, "/touch.txt"), as.character(Sys.time()), "\n", append=TRUE)
+  cat(file = paste0(archiveDirs$archiveWrite, md5hash, "/touch.txt"), as.character(Sys.time()), "\n", append=TRUE)
   #
   # save tags
   if (!is.null(attr(object, "tags") )) {
-    cat(file = paste0(archiveWrite, md5hash, "/tags.txt"), paste(attr(object, "tags") ), collapse="\n")
+    cat(file = paste0(archiveDirs$archiveWrite, md5hash, "/tags.txt"), paste(attr(object, "tags") ), collapse="\n")
   }
   
-  list(hash = md5hash, ref = paste0(archiveRead, md5hash))
+  list(hash = md5hash, ref = paste0(archiveDirs$archiveRead, md5hash))
 }
 
 
-dd.data.frame <- function(object, archiveWrite = "./", archiveRead = archiveWrite, ..., firstRows = NULL) {
-  md5hash <- dd.default(object, archiveWrite, archiveRead, ...)
-  save(file = paste0(archiveWrite, md5hash$hash, "/df.rda"), object, ascii=TRUE)
+dd.data.frame <- function(object, archiveDirs, ..., firstRows = NULL) {
+  md5hash <- dd.default(object, archiveDirs, ...)
+  save(file = paste0(archiveDirs$archiveWrite, md5hash$hash, "/df.rda"), object, ascii=TRUE)
   if (!is.null(firstRows)) {
-    sink(file = paste0(archiveWrite, md5hash, "/head.txt"))
+    sink(file = paste0(archiveDirs$archiveWrite, md5hash, "/head.txt"))
     print(head(object, firstRows))
     sink()
   }
-  list(data.hash = md5hash[[1]], data.ref = paste0(archiveRead, md5hash[[1]]))
+  list(data.hash = md5hash[[1]], data.ref = paste0(archiveDirs$archiveRead, md5hash[[1]]))
 }
 
 
-dd.ggplot <- function(object, archiveWrite = "./", archiveRead = archiveWrite, ..., 
-                      archiveData = FALSE,  archiveWriteData = archiveWrite, archiveReadData = archiveRead, 
+dd.ggplot <- function(object, archiveDirs, ..., 
+                      archiveData = FALSE,  
                       miniatures = NULL) {
-  md5hash <- dd.default(object, archiveWrite, archiveRead, ...)
-  save(file = paste0(archiveWrite, md5hash[[1]], "/plot.rda"), object, ascii=TRUE)
+  md5hash <- dd.default(object, archiveDirs$archiveWrite, archiveDirs$archiveRead, ...)
+  save(file = paste0(archiveDirs$archiveWrite, md5hash[[1]], "/plot.rda"), object, ascii=TRUE)
   #
   # save miniatures in specified format
   if (!is.null(miniatures)) {
     lapply(miniatures, function(forma) {
-      forma$FUN(paste0(archiveWrite, md5hash[[1]], "/miniature_",forma$width, "_", forma$height,".", forma$format), 
+      forma$FUN(paste0(archiveDirs$archiveWrite, md5hash[[1]], "/miniature_",forma$width, "_", forma$height,".", forma$format), 
                 forma$width, forma$height)
       print(object)
       dev.off()
@@ -52,45 +53,45 @@ dd.ggplot <- function(object, archiveWrite = "./", archiveRead = archiveWrite, .
   }
 
   if (archiveData) {
-    md5hash2 <- dd(object$data, archiveWrite = archiveWriteData, archiveRead = archiveReadData)[[1]]
-    cat(file = paste0(archiveWrite, md5hash$hash, "/links_data.md5"), md5hash2[[1]])
-    return(list(plot.hash = md5hash[[1]], plot.ref = paste0(archiveRead, md5hash[[1]]),
-                data.hash = md5hash2[[1]], data.ref = paste0(archiveReadData, md5hash2[[1]])))
+    md5hash2 <- dd(object$data, archiveDirs)[[1]]
+    cat(file = paste0(archiveDirs$archiveWrite, md5hash$hash, "/links_data.md5"), md5hash2[[1]])
+    return(list(plot.hash = md5hash[[1]], plot.ref = paste0(archiveDirs$archiveRead, md5hash[[1]]),
+                data.hash = md5hash2[[1]], data.ref = paste0(archiveDirs$archiveReadData, md5hash2[[1]])))
   }
 
-  wplinks <- ddWelcomePage(object, archiveWrite, archiveRead, archivePlotRead, md5hash=md5hash) 
+  wplinks <- ddWelcomePage(object, archiveDirs, md5hash=md5hash) 
   createQRka(object, wplinks, archiveDirs)  
   
-  list(plot.hash = md5hash[[1]], plot.ref = paste0(archiveRead, md5hash[[1]]), welcomePage = wplinks)
+  list(plot.hash = md5hash[[1]], plot.ref = paste0(archiveDirs$archiveRead, md5hash[[1]]), welcomePage = wplinks)
 }
 
 
 
 
-dd.data.frame <- function(object, archiveWrite = "./", archiveRead = archiveWrite, ..., firstRows = NULL) {
-  md5hash <- dd.default(object, archiveWrite, archiveRead, ...)
-  save(file = paste0(archiveWrite, md5hash$hash, "/df.rda"), object, ascii=TRUE)
+dd.data.frame <- function(object, archiveDirs, ..., firstRows = NULL) {
+  md5hash <- dd.default(object, archiveDirs, ...)
+  save(file = paste0(archiveDirs$archiveWrite, md5hash$hash, "/df.rda"), object, ascii=TRUE)
   if (!is.null(firstRows)) {
-    sink(file = paste0(archiveWrite, md5hash, "/head.txt"))
+    sink(file = paste0(archiveDirs$archiveWrite, md5hash, "/head.txt"))
     print(head(object, firstRows))
     sink()
   }
-  list(data.hash = md5hash[[1]], data.ref = paste0(archiveRead, md5hash[[1]]))
+  list(data.hash = md5hash[[1]], data.ref = paste0(archiveDirs$archiveRead, md5hash[[1]]))
 }
 
 #
 # squad is a list of lists
 # list(plotObj = , link = )
-dd.squad <- function(object, archiveWrite = "./", archiveRead = archiveWrite, archivePlotRead = archiveRead, ..., 
+dd.squad <- function(object, archiveDirs, ..., 
                      miniatures = list(list(FUN = png, format="png", width=500, height=500))) {
-  md5hash <- dd.default(object, archiveWrite, archiveRead, ...)
+  md5hash <- dd.default(object, archiveDirs, ...)
   
-  save(file = paste0(archiveWrite, md5hash[[1]], "/squad.rda"), object, ascii=TRUE)
+  save(file = paste0(archiveDirs$archiveWrite, md5hash[[1]], "/squad.rda"), object, ascii=TRUE)
   # save miniatures of all objects in specified format
   if (!is.null(miniatures)) {
     object <- lapply(object, function(obj) {
       obj$miniaturesLinks <- lapply(miniatures, function(forma) {
-        forma$FUN(paste0(archiveWrite, md5hash[[1]], "/miniature_",obj$link,"_",forma$width, "_", forma$height,".", forma$format), 
+        forma$FUN(paste0(archiveDirs$archiveWrite, md5hash[[1]], "/miniature_",obj$link,"_",forma$width, "_", forma$height,".", forma$format), 
                   forma$width, forma$height)
         print(obj$plotObj)
         dev.off()
@@ -100,7 +101,7 @@ dd.squad <- function(object, archiveWrite = "./", archiveRead = archiveWrite, ar
     })
   }
   class(object) = "squad"
-  wplinks <- ddWelcomePage(object, archiveWrite, archiveRead, archivePlotRead, md5hash=md5hash) 
+  wplinks <- ddWelcomePage(object, archiveDirs, md5hash=md5hash) 
   
-  list(squad.hash = md5hash[[1]], squad.ref = paste0(archiveRead, md5hash[[1]]), welcomePage = wplinks)
+  list(squad.hash = md5hash[[1]], squad.ref = paste0(archiveDirs$archiveRead, md5hash[[1]]), welcomePage = wplinks)
 }
