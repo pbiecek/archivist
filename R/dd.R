@@ -21,7 +21,7 @@ dd.default <- function(object, archiveDirs, ...) {
   #
   # save tags
   if (!is.null(attr(object, "tags") )) {
-    cat(file = paste0(archiveDirs$archiveWrite, md5hash, "/tags.txt"), paste(attr(object, "tags") ), collapse="\n")
+    cat(file = paste0(archiveDirs$archiveWrite, md5hash, "/tags.txt"), paste(attr(object, "tags") , collapse="\n"))
   }
   #
   # add to object history
