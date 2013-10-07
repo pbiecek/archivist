@@ -51,17 +51,20 @@ dd.ggplot <- function(object, archiveDirs, ...,
   # save miniatures in specified format
   plotMlinks <- createFigureMiniature(object, archiveDirs, md5hash[[1]], miniatures)
 
+  wplinks <- ddWelcomePage(object, archiveDirs, md5hash=md5hash) 
+  QRkalinks <- createQRka(object, link=paste0("http://smarterpoland.pl/QRka/set.php?ID=",md5hash[[1]]), 
+                          archiveDirs, md5hash[[1]])  
+  
+
   if (archiveData) {
     md5hash2 <- dd(object$data, archiveDirs)[[1]]
     cat(file = paste0(archiveDirs$archiveWrite, md5hash$hash, "/links_data.md5"), md5hash2[[1]], append=TRUE)
     return(list(plot.hash = md5hash[[1]], plot.ref = paste0(archiveDirs$archiveRead, md5hash[[1]]),
-                data.hash = md5hash2[[1]], data.ref = paste0(archiveDirs$archiveRead, md5hash2[[1]])))
+                data.hash = md5hash2[[1]], data.ref = paste0(archiveDirs$archiveRead, md5hash2[[1]]), 
+                welcomePage = wplinks, plotMlinks, QRkalinks))
   }
   #
   # ceate QRka
-  wplinks <- ddWelcomePage(object, archiveDirs, md5hash=md5hash) 
-  QRkalinks <- createQRka(object, paste0("http://smarterpoland.pl/QRka/set.php?ID=",md5hash[[1]]), archiveDirs, md5hash[[1]])  
-  
   list(plot.hash = md5hash[[1]], plot.ref = paste0(archiveDirs$archiveRead, md5hash[[1]]), 
        welcomePage = wplinks, plotMlinks, QRkalinks)
 }
