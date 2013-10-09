@@ -8,3 +8,4 @@ createQRka <- function(object, link, archiveDirs, md5hash) {
   
   dev.off()
 }
+

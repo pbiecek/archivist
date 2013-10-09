@@ -13,12 +13,13 @@ ddWelcomePage.ggplot <- function(object, archiveDirs, md5hash) {
   cat("<html><body>
 <img width=200px align='right' src='https://raw.github.com/pbiecek/archivist/master/graphics/Quill_PSFsmall.png'>",
       "<h1>Object ID: ",md5hash$hash,"</h1> <a href='",paste0(archiveRead, md5hash$hash, "/QRka.pdf"),"'>Get QRka code</a>",
+      "<br><a href='http://smarterpoland.pl/QRka/set.php?ID=",md5hash$hash, "'>Push on The Wall</a>",
       "<h1>Tags</h1>",mtry(paste0(readLines(paste0(archiveDirs$archiveWrite, md5hash$hash, "/tags.txt")), collapse="<br>\n")),
       "<h1>Touch dates</h1>",mtry(paste0(readLines(paste0(archiveDirs$archiveWrite, md5hash$hash, "/touch.txt")), collapse="<br>\n")),
       "<hr/><h1>Miniatures</h1>",mlinks2,
       "<hr/><h1>Download object to R</h1>", paste0(readLines(paste0(archiveDirs$archiveWrite, md5hash$hash, "/load.html")), sep="\n"),
 "</body>
-</html>", file=wplink)
+</html>", file=wplink, sep="")
   wplink
 }
 

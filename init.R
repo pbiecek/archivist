@@ -26,3 +26,11 @@ plotQRcode(dtref)
 plotOb
 addQR2ggplot(plref)
 
+
+
+
+#
+# tags for autosearch
+tags <- createTagList(archiveDirs)
+cat(tags$uLines, file = paste0(archiveDirs$archiveWrite,"indeks0.txt"), sep="")
+cat(tags$utags, file = paste0(archiveDirs$archiveWrite,"tags.js"))

@@ -1,6 +1,8 @@
 # remove directories without protectionDate.txt
 # or with older date than dueDate
-cleanArchive <- function(archiveWriteDir, dueDate = now()) {
+cleanArchive <- function(archiveDirs, dueDate = now(), really = FALSE) {
+  if (!really) return()
+  archiveWriteDir <- archiveDirs$archiveWrite
   require(lubridate)
   md5links <- list.files(archiveWriteDir)
   sapply(md5links, function(md5l) {
