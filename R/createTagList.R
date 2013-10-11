@@ -3,8 +3,9 @@ createTagList <- function(archiveDirs) {
   tags <- na.omit(sapply(md5links, function(md5l) {
     if (file.exists(paste0(archiveDirs$archiveWrit, md5l, "/index.html")) &&
           file.exists(paste0(archiveDirs$archiveWrit, md5l, "/tags.txt"))) {
-      suppressWarnings(content <- readLines(paste0(archiveDirs$archiveWrit, md5l, "/tags.txt")))
-      set <- strsplit(gsub(content, pattern="[^0-9A-Za-z\\._]", replacement= " "), split=" ")[[1]]
+      suppressWarnings(content1 <- paste(readLines(paste0(archiveDirs$archiveWrit, md5l, "/tags.txt")), collapse=" "))
+      suppressWarnings(content2 <- paste(readLines(paste0(archiveDirs$archiveWrit, md5l, "/class.txt")), collapse=" "))
+      set <- strsplit(gsub(paste(content1, content2), pattern="[^0-9A-Za-z\\._]", replacement= " "), split=" ")[[1]]
       set[set != ""]
     } else {
       NULL
@@ -15,8 +16,9 @@ createTagList <- function(archiveDirs) {
   tagLines <- na.omit(sapply(md5links, function(md5l) {
     if (file.exists(paste0(archiveDirs$archiveWrit, md5l, "/index.html")) &&
           file.exists(paste0(archiveDirs$archiveWrit, md5l, "/tags.txt"))) {
-      suppressWarnings(content <- readLines(paste0(archiveDirs$archiveWrit, md5l, "/tags.txt")))
-      set <- strsplit(gsub(content, pattern="[^0-9A-Za-z\\._]", replacement= " "), split=" ")[[1]]
+      suppressWarnings(content1 <- paste(readLines(paste0(archiveDirs$archiveWrit, md5l, "/tags.txt")), collapse=" "))
+      suppressWarnings(content2 <- paste(readLines(paste0(archiveDirs$archiveWrit, md5l, "/class.txt")), collapse=" "))
+      set <- strsplit(gsub(paste(content1, content2), pattern="[^0-9A-Za-z\\._]", replacement= " "), split=" ")[[1]]
       paste(set[set != ""], collapse=";")
     } else {
       NA

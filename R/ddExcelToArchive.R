@@ -46,5 +46,5 @@ ddExcelToArchive <- function(filePath, archiveDirs, tags = NULL) {
       "</body>
 </html>", file=wplink, sep="")
   
-  list(hash = md5hash, ref = paste0(archiveDirs$archiveRead, md5hash), welcomePage = wplink)
+  list(hash = md5hash, ref = paste0(archiveDirs$archiveRead, md5hash), welcomePage = wplinks)
 }

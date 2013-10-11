@@ -30,23 +30,16 @@ addQR2ggplot(plref)
 
 
 #
+# Add Excel File
+filePath <- "/Users/pbiecek/camtasia/Dropbox/QRka_codes/poczekalnia/CCR_CREDIT_vs_DEBIT_Card 2.xlsx"
+ddExcelToArchive(filePath, archiveDirs, tags = c("DTV", "CCR", "Spanish", "credit")) 
+
+
+
+#
 # tags for autosearch
 tags <- createTagList(archiveDirs)
 cat(tags$uLines, file = paste0(archiveDirs$archiveWrite,"indeks0.txt"), sep="")
 cat(tags$utags, file = paste0(archiveDirs$archiveWrite,"tags.js"))
 
-fl <- "/Users/pbiecek/camtasia/Dropbox/QRka_codes/poczekalnia/CCR_CREDIT_vs_DEBIT_Card 2.xlsx"
-flp <- unz(fl, "docProps/thumbnail.jpeg")
 
-unz(fl, "docProps/thumbnail.jpeg", open="rb")
-, "/Users/pbiecek/camtasia/Dropbox/QRka_codes/poczekalnia/")
-
-writeBin(readBin(unz(fl, "docProps/thumbnail.jpeg", open="rb"), raw(), n=10^6), "/Users/pbiecek/camtasia/Dropbox/QRka_codes/poczekalnia/f.jpeg")
-
-
-
-filePath <- "/Users/pbiecek/camtasia/Dropbox/QRka_codes/poczekalnia/CCR_CREDIT_vs_DEBIT_Card 2.xlsx"
-
-ddExcelToArchive(filePath, archiveDirs, tags = c("DTV", "CCR", "Spanish", "credit")) 
-  
-  
