@@ -1,5 +1,5 @@
-addQR2ggplot <- function(textm, width = 0.16, height = 0.16, x=0.92, y=0.08, ...) {
-  qrcode <- getQRcode(textm, border=0)
+addQR2ggplot <- function(textm, width = 0.16, height = 0.16, x=0.92, y=0.08, ..., border=0) {
+  qrcode <- getQRcode(textm, border=border)
   qrplot <- ggplot(melt(qrcode), aes(x=Var1, y=Var2, fill=!value)) + geom_tile() + scale_fill_grey(start = 0, end = 1) + 
     theme(line = element_blank(),
           text = element_blank(),
