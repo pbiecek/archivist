@@ -7,6 +7,7 @@ addQR2ggplot <- function(textm, width = 0.16, height = 0.16, x=0.92, y=0.08, ...
           title = element_blank(),
           panel.background = element_blank(), 
           panel.border = element_blank(), 
+          plot.margin=unit(c(-2,-2,-2,-2),"lines"),
           axis.ticks.length = unit(0.001, "mm"),
           legend.position = "none") + labs(x=NULL, y=NULL)
   vp <- viewport(width = width, height = height, x=x, y=y, ...)
