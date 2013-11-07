@@ -22,16 +22,25 @@ dd.default <- function(object, ...) {
   
   # serialize the object
   save(file = paste0(writeDir, md5hash, "/object.rda"), object, ascii=TRUE)
+  # add serialize instructions
+  ddrescueInstructions(object, md5hash)
+  cat(file = paste0(writeDir, md5hash, "/load.R"), ddrescueInstructions(object, md5hash) )
+  sink(file = paste0(writeDir, md5hash, "/load.html"))
+  highlight::highlight(paste0(writeDir, md5hash, "/load.R"), 
+                       detective = simple_detective, renderer = renderer_html( document = TRUE ))
+  sink()
+
   
-  extractedTags <- extractTags(object)
   
   # add entry to database 
   objectName <- deparse(substitute(object))
   addArtifact(md5hash, objectName, class(object)[1], paste0(readDir, md5hash, '/index.html')) 
   # add tags
+  extractedTags <- extractTags(object)
   sapply(extractedTags, addTag, md5hash=md5hash)
   
 }
+
 # data frame serializer
 dd.data.frame <- function(object, ...) {
   md5hash <- dd.default(object, ...)
