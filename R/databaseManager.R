@@ -39,8 +39,10 @@ setUpDatabase <- function() {
   dbGetQuery(backpack, "select * from setting")
   dbGetQuery(backpack, "select * from artifact")
   dbGetQuery(backpack, "select * from tag")
+  dbGetQuery(backpack, "select * from relation")
   
   
+  dbDisconnect(backpack)
 }
 
 settingsWrapper <- function(name = "localPathToArchive") {
@@ -54,6 +56,12 @@ addArtifact <- function(md5hash, name, class, pathToWelcomePage, createdDate = n
   dbGetQuery(backpack, 
              paste0("insert into artifact (md5hash, name, class, pathToWelcomePage, createdDate) values ", 
                     "('",md5hash,"', '", name,"', '", class,"', '", pathToWelcomePage,"', '", createdDate, "')"))
+}
+
+addRelation <- function(artifactFrom, artifactTo, relationName) {
+  dbGetQuery(backpack, 
+             paste0("insert into relation (artifactFrom, artifactTo, relationName) values ", 
+                    "('",artifactFrom,"', '", artifactTo,"', '", relationName,"')"))
 }
 
 addTag <- function(md5hash, tag, timestamp = now()) {

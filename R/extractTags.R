@@ -2,7 +2,6 @@ extractTags <- function (object, ... )
   UseMethod("extractTags")
 
 extractTags.default <- function(object, ...) {
-  
 }
 
 extractTags.lm <- function(object, ...) {

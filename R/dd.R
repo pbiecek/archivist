@@ -42,20 +42,32 @@ dd.default <- function(object, ...) {
 }
 
 # data frame serializer
-dd.data.frame <- function(object, ...,  firstRows = 6) {
+dd.data.frame <- function(object, ...) {
   md5hash <- dd.default(object, ...)
   md5hash
 }
 
 # regression model serializer
-dd.lm <- function(object, ...) {
+dd.lm <- function(object, ...,  archiveData = TRUE) {
   md5hash <- dd.default(object, ...)
+
+  if (archiveData) {
+    md5hashDF <- dd(object$model)
+    addRelation(md5hash, md5hashDF, "data.source")
+  }
+  
   md5hash
 }
 
 # ggplot2 plot serializer
-dd.ggplot <- function(object, ...) {
+dd.ggplot <- function(object, ...,  archiveData = TRUE) {
   md5hash <- dd.default(object, ...)
+  
+  if (archiveData) {
+    md5hashDF <- dd(object$data)
+    addRelation(md5hash, md5hashDF, "data.source")
+  }
+  
   md5hash
 }
 
