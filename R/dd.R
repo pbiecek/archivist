@@ -23,9 +23,13 @@ dd.default <- function(object, ...) {
   # serialize the object
   save(file = paste0(writeDir, md5hash, "/object.rda"), object, ascii=TRUE)
   
+  extractedTags <- extractTags(object)
+  
   # add entry to database 
   objectName <- deparse(substitute(object))
   addArtifact(md5hash, objectName, class(object)[1], paste0(readDir, md5hash, '/index.html')) 
+  # add tags
+  sapply(extractedTags, addTag, md5hash=md5hash)
   
 }
 # data frame serializer
