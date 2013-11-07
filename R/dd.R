@@ -1,6 +1,52 @@
-dd <- function (object, archiveDirs,  ... )
+dd <- function (object, ... )
   UseMethod("dd")
 
+# new versions
+
+# default serializer
+# - create an artifact directory
+# - create serialized artifact.rda
+# - create row in the database
+# - extract tags
+# - add tags to database
+# - if it applies add the related artifact to database and update relation structure
+# - if it applies add the recreate function
+dd.default <- function(object, ...) {
+  md5hash <- digest(object)
+
+  # create dir with md5hash as name
+  writeDir <- settingsWrapper("localPathToArchive")
+  readDir <- settingsWrapper("externalPathToArchive")
+
+  dir.create(file.path(writeDir, md5hash), showWarnings = FALSE)
+  
+  # serialize the object
+  save(file = paste0(writeDir, md5hash, "/object.rda"), object, ascii=TRUE)
+  
+  # add entry to database 
+  objectName <- deparse(substitute(object))
+  addArtifact(md5hash, objectName, class(object)[1], paste0(readDir, md5hash, '/index.html')) 
+  
+}
+# data frame serializer
+dd.data.frame <- function(object, ...) {
+  md5hash <- dd.default(object, ...)
+  
+}
+# regression model serializer
+dd.lm <- function(object, ...) {
+  md5hash <- dd.default(object, ...)
+  
+}
+# ggplot2 plot serializer
+dd.ggplot <- function(object, ...) {
+  md5hash <- dd.default(object, ...)
+  
+}
+
+
+
+# old versions
 
 dd.default <- function(object, archiveDirs, ...) {
   md5hash <- digest(object)

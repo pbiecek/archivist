@@ -4,10 +4,11 @@ setUpDatabase <- function() {
   sqlite    <- dbDriver("SQLite")
   backpack <- dbConnect(sqlite,"database/backpack.db")
   
-  artifact <- data.frame(md5hash = "", 
+  artifact <- data.frame(md5hash = "",
+                         name = "",
                          class = "", 
                          createdDate = now(), 
-                         pathToWelcomePage = ""
+                         pathToWelcomePage = "",
                          stringsAsFactors=FALSE)
   
   relation <- data.frame(artifactFrom = "", artifactTo = "", relationName = now(), stringsAsFactors=FALSE)
@@ -38,5 +39,18 @@ setUpDatabase <- function() {
   dbGetQuery(backpack, "select * from setting")
   
   
+}
+
+settingsWrapper <- function(name = "localPathToArchive") {
+  dbGetQuery(backpack, 
+             paste0("select value from setting where name='", 
+                    name
+                    , "' order by createdDate"))[1,1]
+}
+
+addArtifact <- function(md5hash, name, class, pathToWelcomePage, createdDate = now()) {
+  dbGetQuery(backpack, 
+             paste0("insert into artifact (md5hash, name, class, pathToWelcomePage, createdDate) values ", 
+                    "('",md5hash,"', '", name,"', '", class,"', '", pathToWelcomePage,"', '", createdDate, "')"))
 }
 
