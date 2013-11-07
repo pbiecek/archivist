@@ -1,6 +1,3 @@
-dd <- function (object, ... )
-  UseMethod("dd")
-
 # default serializer
 # - create an artifact directory
 # - create serialized artifact.rda
@@ -9,17 +6,19 @@ dd <- function (object, ... )
 # - add tags to database
 # - if it applies add the related artifact to database and update relation structure
 # - if it applies add the recreate function
-dd.default <- function(object, ...) {
+dd <- function(object, ...,  archiveData = TRUE) {
+  objectName <- deparse(substitute(object))
+  
   md5hash <- digest(object)
 
   # create dir with md5hash as name
   writeDir <- settingsWrapper("localPathToArchive")
   readDir <- settingsWrapper("externalPathToArchive")
-
+  
   dir.create(file.path(writeDir, md5hash), showWarnings = FALSE)
   
-  # serialize the object
-  save(file = paste0(writeDir, md5hash, "/object.rda"), object, ascii=TRUE)
+  # serialize the object with it's original name
+  save(file = paste0(writeDir, md5hash, "/object.rda"), list=objectName, ascii=TRUE, envir=parent.frame(2))
   # add serialize instructions
   ddrescueInstructions(object, md5hash)
   cat(file = paste0(writeDir, md5hash, "/load.R"), ddrescueInstructions(object, md5hash) )
@@ -29,7 +28,6 @@ dd.default <- function(object, ...) {
   sink()
 
   # add entry to database 
-  objectName <- deparse(substitute(object))
   addArtifact(md5hash, objectName, class(object)[1], paste0(readDir, md5hash, '/index.html')) 
   # add tags
   extractedTags <- extractTags(object)
@@ -37,36 +35,9 @@ dd.default <- function(object, ...) {
 
   # create miniature
   createMiniature(object, md5hash, ...)
-  
-  md5hash
-}
 
-# data frame serializer
-dd.data.frame <- function(object, ...) {
-  md5hash <- dd.default(object, ...)
-  md5hash
-}
-
-# regression model serializer
-dd.lm <- function(object, ...,  archiveData = TRUE) {
-  md5hash <- dd.default(object, ...)
-
-  if (archiveData) {
-    md5hashDF <- dd(object$model)
-    addRelation(md5hash, md5hashDF, "data.source")
-  }
-  
-  md5hash
-}
-
-# ggplot2 plot serializer
-dd.ggplot <- function(object, ...,  archiveData = TRUE) {
-  md5hash <- dd.default(object, ...)
-  
-  if (archiveData) {
-    md5hashDF <- dd(object$data)
-    addRelation(md5hash, md5hashDF, "data.source")
-  }
+  if (archiveData) 
+    archiveDataFromObj(object, md5hash)
   
   md5hash
 }
