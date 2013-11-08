@@ -74,7 +74,7 @@ getBackpack <- function() {
   require("RSQLite")
   sqlite    <- dbDriver("SQLite")
   assign(".backpack", 
-         dbConnect(sqlite,paste0(path.package("archivist"), "/database/backpack.db")), 
+         dbConnect(sqlite,paste0(path.package("archivist"), "/inst/extdata/backpack.db")), 
          envir = .ArchivistEnv)
   get(".backpack", envir = .ArchivistEnv)
   
