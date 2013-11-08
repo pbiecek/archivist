@@ -7,12 +7,12 @@ setUpDatabase <- function() {
   artifact <- data.frame(md5hash = "",
                          name = "",
                          class = "", 
-                         createdDate = now(), 
+                         createdDate = as.character(now()), 
                          pathToWelcomePage = "",
                          stringsAsFactors=FALSE)
   
-  relation <- data.frame(artifactFrom = "", artifactTo = "", relationName = now(), stringsAsFactors=FALSE)
-  tag <- data.frame(artifact = "", tag = "", timestamp = now(), stringsAsFactors=FALSE)
+  relation <- data.frame(artifactFrom = "", artifactTo = "", relationName = "", stringsAsFactors=FALSE)
+  tag <- data.frame(artifact = "", tag = "", timestamp = as.character(now()), stringsAsFactors=FALSE)
 
   setting <- data.frame(name = c("localPathToArchive",
                                  "externalPathToArchive",
@@ -24,7 +24,7 @@ setUpDatabase <- function() {
                                 "png",
                                 "800",
                                 "600"), 
-                        createdDate = now(), stringsAsFactors=FALSE)
+                        createdDate = as.character(now()), stringsAsFactors=FALSE)
   
   
   
@@ -67,5 +67,5 @@ addRelation <- function(artifactFrom, artifactTo, relationName) {
 addTag <- function(md5hash, tag, timestamp = now()) {
   dbGetQuery(backpack, 
              paste0("insert into tag (artifact, tag, timestamp) values ", 
-                    "('",md5hash,"', '", tag,"', '", as.character(createdDate),"')"))
+                    "('",md5hash,"', '", tag,"', '", as.character(timestamp),"')"))
 }
