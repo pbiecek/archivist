@@ -67,8 +67,9 @@ addTag <- function(md5hash, tag, timestamp = now()) {
 
 
 getBackpack <- function() {
-  tmp <- get(".backpack", envir = .ArchivistEnv)
-  if (!is.null(tmp)) return(tmp)
+  if (".backpack" %in% ls(.ArchivistEnv)) {
+    return(get(".backpack", envir = .ArchivistEnv))
+  } 
   
   require("RSQLite")
   sqlite    <- dbDriver("SQLite")
@@ -76,5 +77,6 @@ getBackpack <- function() {
          dbConnect(sqlite,paste0(path.package("archivist"), "/database/backpack.db")), 
          envir = .ArchivistEnv)
   get(".backpack", envir = .ArchivistEnv)
+  
 }
 
