@@ -41,26 +41,40 @@ setUpDatabase <- function() {
 }
 
 settingsWrapper <- function(name = "localPathToArchive") {
-  dbGetQuery(get(".backpack", envir = .ArchivistEnv), 
+  dbGetQuery(getBackpack(), 
              paste0("select value from setting where name='", 
                     name
                     , "' order by createdDate"))[1,1]
 }
 
 addArtifact <- function(md5hash, name, class, pathToWelcomePage, createdDate = now()) {
-  dbGetQuery(get(".backpack", envir = .ArchivistEnv), 
+  dbGetQuery(getBackpack(), 
              paste0("insert into artifact (md5hash, name, class, pathToWelcomePage, createdDate) values ", 
                     "('",md5hash,"', '", name,"', '", class,"', '", pathToWelcomePage,"', '", as.character(createdDate), "')"))
 }
 
 addRelation <- function(artifactFrom, artifactTo, relationName) {
-  dbGetQuery(get(".backpack", envir = .ArchivistEnv), 
+  dbGetQuery(getBackpack(), 
              paste0("insert into relation (artifactFrom, artifactTo, relationName) values ", 
                     "('",artifactFrom,"', '", artifactTo,"', '", relationName,"')"))
 }
 
 addTag <- function(md5hash, tag, timestamp = now()) {
-  dbGetQuery(get(".backpack", envir = .ArchivistEnv), 
+  dbGetQuery(getBackpack(), 
              paste0("insert into tag (artifact, tag, timestamp) values ", 
                     "('",md5hash,"', '", tag,"', '", as.character(timestamp),"')"))
 }
+
+
+getBackpack <- function() {
+  tmp <- get(".backpack", envir = .ArchivistEnv)
+  if (!is.null(tmp)) return(tmp)
+  
+  require("RSQLite")
+  sqlite    <- dbDriver("SQLite")
+  assign(".backpack", 
+         dbConnect(sqlite,paste0(path.package("archivist"), "/database/backpack.db")), 
+         envir = .ArchivistEnv)
+  get(".backpack", envir = .ArchivistEnv)
+}
+
