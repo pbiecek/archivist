@@ -1,3 +1,8 @@
+#
+# przeneisc baze do galerii a nie trzymac jej w pakiecie
+# dodac funkcje inicjujaca polaczenie z baza
+# do uruchomieniu na starcie galerii
+
 setUpDatabase <- function() {
   library("RSQLite")
   library("lubridate")
