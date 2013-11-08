@@ -55,7 +55,7 @@ settingsWrapper <- function(name = "localPathToArchive") {
 addArtifact <- function(md5hash, name, class, pathToWelcomePage, createdDate = now()) {
   dbGetQuery(backpack, 
              paste0("insert into artifact (md5hash, name, class, pathToWelcomePage, createdDate) values ", 
-                    "('",md5hash,"', '", name,"', '", class,"', '", pathToWelcomePage,"', '", createdDate, "')"))
+                    "('",md5hash,"', '", name,"', '", class,"', '", pathToWelcomePage,"', '", as.character(createdDate), "')"))
 }
 
 addRelation <- function(artifactFrom, artifactTo, relationName) {
@@ -67,5 +67,5 @@ addRelation <- function(artifactFrom, artifactTo, relationName) {
 addTag <- function(md5hash, tag, timestamp = now()) {
   dbGetQuery(backpack, 
              paste0("insert into tag (artifact, tag, timestamp) values ", 
-                    "('",md5hash,"', '", tag,"', '", timestamp,"')"))
+                    "('",md5hash,"', '", tag,"', '", as.character(createdDate),"')"))
 }
