@@ -2,7 +2,7 @@ setUpDatabase <- function() {
   library("RSQLite")
   library("lubridate")
   sqlite    <- dbDriver("SQLite")
-  backpack <- dbConnect(sqlite,"database/backpack.db")
+  backpack <- dbConnect(sqlite,"inst/extdata/backpack.db")
   
   artifact <- data.frame(md5hash = "",
                          name = "",
@@ -37,7 +37,17 @@ setUpDatabase <- function() {
   dbGetQuery(backpack, "select * from tag")
   dbGetQuery(backpack, "select * from relation")
   
+  dbGetQuery(backpack, "delete from artifact")
+  dbGetQuery(backpack, "delete from tag")
+  dbGetQuery(backpack, "delete from relation")
+  
   dbDisconnect(backpack)
+}
+
+setSettingsWrapper <- function(name = "localPathToArchive", value = "") {
+  dbGetQuery(getBackpack(), 
+             paste0("insert into setting (name, value, createdDate) values ", 
+                    "('",name,"', '", value,"', '", as.character(now()), "')"))
 }
 
 settingsWrapper <- function(name = "localPathToArchive") {
