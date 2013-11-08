@@ -26,46 +26,41 @@ setUpDatabase <- function() {
                                 "600"), 
                         createdDate = as.character(now()), stringsAsFactors=FALSE)
   
-  
-  
-  
   dbListTables(backpack)
   dbWriteTable(backpack, "artifact",artifact, overwrite=TRUE)
   dbWriteTable(backpack, "setting",setting, overwrite=TRUE)
   dbWriteTable(backpack, "relation",relation, overwrite=TRUE)
   dbWriteTable(backpack, "tag",tag, overwrite=TRUE)
   
-  
   dbGetQuery(backpack, "select * from setting")
   dbGetQuery(backpack, "select * from artifact")
   dbGetQuery(backpack, "select * from tag")
   dbGetQuery(backpack, "select * from relation")
   
-  
   dbDisconnect(backpack)
 }
 
 settingsWrapper <- function(name = "localPathToArchive") {
-  dbGetQuery(backpack, 
+  dbGetQuery(get(".backpack", envir = .ArchivistEnv), 
              paste0("select value from setting where name='", 
                     name
                     , "' order by createdDate"))[1,1]
 }
 
 addArtifact <- function(md5hash, name, class, pathToWelcomePage, createdDate = now()) {
-  dbGetQuery(backpack, 
+  dbGetQuery(get(".backpack", envir = .ArchivistEnv), 
              paste0("insert into artifact (md5hash, name, class, pathToWelcomePage, createdDate) values ", 
                     "('",md5hash,"', '", name,"', '", class,"', '", pathToWelcomePage,"', '", as.character(createdDate), "')"))
 }
 
 addRelation <- function(artifactFrom, artifactTo, relationName) {
-  dbGetQuery(backpack, 
+  dbGetQuery(get(".backpack", envir = .ArchivistEnv), 
              paste0("insert into relation (artifactFrom, artifactTo, relationName) values ", 
                     "('",artifactFrom,"', '", artifactTo,"', '", relationName,"')"))
 }
 
 addTag <- function(md5hash, tag, timestamp = now()) {
-  dbGetQuery(backpack, 
+  dbGetQuery(get(".backpack", envir = .ArchivistEnv), 
              paste0("insert into tag (artifact, tag, timestamp) values ", 
                     "('",md5hash,"', '", tag,"', '", as.character(timestamp),"')"))
 }
