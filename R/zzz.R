@@ -3,9 +3,8 @@
 .onLoad <- function(libname, pkgname) {
   library("RSQLite")
   sqlite    <- dbDriver("SQLite")
-  browser()
   assign(".backpack", 
-         dbConnect(sqlite,paste0(libname, "/database/backpack.db")), 
+         dbConnect(sqlite,paste0(path.package("archivist"), "/database/backpack.db")), 
          envir = .ArchivistEnv)
   
 }
