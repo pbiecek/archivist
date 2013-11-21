@@ -1,4 +1,6 @@
-getBitLy <- function(url, mytoken) {
+getBitLy <- function(url, mytoken, escape=TRUE) {
+  if (escape)
+      url <- curlEscape(url)
   resp <- GET(paste0(
     "https://api-ssl.bitly.com/v3/shorten?access_token=", mytoken, 
     "&longUrl=",url))
