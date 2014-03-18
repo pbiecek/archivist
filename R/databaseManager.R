@@ -3,6 +3,8 @@
 # dodac funkcje inicjujaca polaczenie z baza
 # do uruchomieniu na starcie galerii
 
+
+#!!!! change it's localisations
 setUpDatabase <- function() {
   library("RSQLite")
   library("lubridate")
