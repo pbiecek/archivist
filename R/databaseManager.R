@@ -5,6 +5,7 @@
 
 
 #!!!! change it's localisations
+# move to gallery
 setUpDatabase <- function() {
   library("RSQLite")
   library("lubridate")
