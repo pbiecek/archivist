@@ -20,7 +20,6 @@ dd <- function(object, ...,  archiveData = TRUE) {
   # serialize the object with it's original name
   save(file = paste0(writeDir, md5hash, "/object.rda"), list=objectName, ascii=TRUE, envir=parent.frame(2))
   # add serialize instructions
-  ddrescueInstructions(object, md5hash)
   cat(file = paste0(writeDir, md5hash, "/load.R"), ddrescueInstructions(object, md5hash) )
   sink(file = paste0(writeDir, md5hash, "/load.html"))
   highlight::highlight(paste0(writeDir, md5hash, "/load.R"), 

@@ -9,6 +9,6 @@ Repository: CRAN
 License: GPL-2
 LazyLoad: yes
 LazyData: yes
-Depends: R (>= 2.8.0), ggplot2, reshape2, grid, digest, highlight, RCurl, httr, rjson
+Depends: R (>= 2.8.0), ggplot2, reshape2, grid, digest, highlight, RCurl, httr, rjson, RSQLite
 LinkingTo:
 Imports:
