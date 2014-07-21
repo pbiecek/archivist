@@ -6,10 +6,11 @@
 # - add tags to database
 # - if it applies add the related artifact to database and update relation structure
 # - if it applies add the recreate function
-dd <- function(object, ...,  archiveData = TRUE) {
+dd <- function(object,  ..., archiveData = TRUE, rememberName = TRUE) {
   objectName <- deparse(substitute(object))
   
   md5hash <- digest(object)
+  
 
   # create dir with md5hash as name
   writeDir <- settingsWrapper("localPathToArchive")
@@ -18,7 +19,11 @@ dd <- function(object, ...,  archiveData = TRUE) {
   dir.create(file.path(writeDir, md5hash), showWarnings = FALSE)
   
   # serialize the object with it's original name
-  save(file = paste0(writeDir, md5hash, "/object.rda"), list=objectName, ascii=TRUE, envir=parent.frame(2))
+  if (rememberName){
+    save(file = paste0(writeDir, md5hash, "/object.rda"), ascii=TRUE, list=objectName,  envir = parent.frame(2))
+    }else{
+    save(object, file = paste0(writeDir, md5hash, "/object2.rda"), ascii=TRUE)
+  }
   # add serialize instructions
   cat(file = paste0(writeDir, md5hash, "/load.R"), ddrescueInstructions(object, md5hash) )
   sink(file = paste0(writeDir, md5hash, "/load.html"))
@@ -33,11 +38,16 @@ dd <- function(object, ...,  archiveData = TRUE) {
   sapply(extractedTags, addTag, md5hash=md5hash)
 
   # create miniature
-  createMiniature(object, md5hash, ...)
+  createMiniature( object, md5hash, ...)
 
-  if (archiveData) 
-    archiveDataFromObj(object, md5hash)
+  if ( archiveData )
+    archiveDataFromObj( object, md5hash, changeBool = FALSE )
   
-  md5hash
+  if (!rememberName){
+    cat(" \n ")
+    cat("Data saved in folder: ", md5hash, " \n ")
+  }else{
+    cat("Object saved in folder: ", md5hash, " \n ")
+  }
 }
 

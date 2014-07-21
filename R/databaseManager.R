@@ -66,7 +66,7 @@ settingsWrapper <- function(name = "localPathToArchive") {
   dbGetQuery(getBackpack(), 
              paste0("select value from setting where name='", 
                     name
-                    , "' order by createdDate"))[1,1]
+                    , "' order by createdDate DESC"))[1,1]
 }
 
 addArtifact <- function(md5hash, name, class, pathToWelcomePage, createdDate = now()) {
@@ -102,3 +102,9 @@ getBackpack <- function() {
   
 }
 
+# dbGetInfo(.ArchivistEnv.backpack)
+# dbListTables(.ArchivistEnv$.backpack)
+# dbListFields(.ArchivistEnv$.backpack, "setting")
+# dbGetQuery(.ArchivistEnv$.backpack,
+#           "SELECT *
+ #          FROM setting")
