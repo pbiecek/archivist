@@ -16,6 +16,12 @@ dd <- function(object,  ..., archiveData = TRUE, rememberName = TRUE) {
   writeDir <- settingsWrapper("localPathToArchive")
   readDir <- settingsWrapper("externalPathToArchive")
   
+  # checking if writeDir ends with "/" and adding it if not
+  if (stri_extract(writeDir,regex=".$") != "/"){
+    writeDir <- stri_flatten(c(writeDir, "/"))
+  }
+  
+  
   dir.create(file.path(writeDir, md5hash), showWarnings = FALSE)
   
   # serialize the object with it's original name
