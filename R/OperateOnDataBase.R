@@ -1,5 +1,6 @@
-saveToRepository <- function( object, ..., archiveData = TRUE, 
-                                           archiveTags = TRUE, dir ){
+saveToRepo <- function( object, ..., archiveData = TRUE, 
+                                     archiveTags = TRUE, 
+                                     archiveMiniature = TRUE, dir ){
   stopifnot( is.character( dir ), is.logical( c( archiveData, archiveTags ) ) )
   md5hash <- digest(object)
   
@@ -25,32 +26,34 @@ saveToRepository <- function( object, ..., archiveData = TRUE,
   if ( archiveData )
     extractData( object )
   
-  
+  # whether to archive miniature
+  if ( archiveMiniature )
+    extractMiniature( object )
   
   # paste hash / return hash ?  cat( paste0( "message", md5hash ) )
 }
 
-loadFromLocalRepository <- function( md5hash, dir ){
+loadFromLocalRepo <- function( md5hash, dir ){
   stopifnot( is.character( c( dir, md5hash ) ) )
   
 }
 
-loadFromGithubRepository <- function( md5hash, repo, user ){
+loadFromGithubRepo <- function( md5hash, repo, user ){
   stopifnot( is.character( c( md5hash, repo, user ) ) )
   
 }
 
-rmFromRepository <- function( md5hash, dir ){
+rmFromRepo <- function( md5hash, dir ){
   stopifnot( is.character( c( dir, md5hash ) ) )
   
 }
 
-searchInLocalRepository( tag, dir ){
+searchInLocalRepo <- function( tag, dir ){
   stopifnot( is.character( c( tag, dir ) ) )
   
 }
 
-searchInGithubRepository( tag, repo, user ){
+searchInGithubRepo <- function( tag, repo, user ){
   stopifnot( is.character( c( tag, repo, user ) ) )
   
 }

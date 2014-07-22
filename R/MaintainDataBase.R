@@ -1,4 +1,4 @@
-createEmptyRepository <- function( dir ){
+createEmptyRepo <- function( dir ){
   stopifnot( is.character( dir ) )
   
   # check if dir has "/" at the end and add it if not
