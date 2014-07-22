@@ -8,8 +8,8 @@ archiveDataFromObj.default <- function(object, md5hash, changeBool = TRUE) {
 archiveDataFromObj.lm <- function(object, md5hash, changeBool = TRUE) {
   extractedDF <- object$model
   md5hashDF <- dd(extractedDF, rememberName = changeBool)
-    addRelation(md5hash, md5hashDF, "data.source")
-    }
+    addRelation(md5hash, md5hashDF, "data.source")  
+}
 
 archiveDataFromObj.ggplot <- function(object, md5hash, changeBool = TRUE) {
   extractedDF <- object$data

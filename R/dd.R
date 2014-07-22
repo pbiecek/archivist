@@ -16,7 +16,7 @@ dd <- function(object,  ..., archiveData = TRUE, rememberName = TRUE) {
   writeDir <- settingsWrapper("localPathToArchive")
   readDir <- settingsWrapper("externalPathToArchive")
   
-  # checking if writeDir ends with "/" and adding it if not
+  # check if writeDir ends with "/" and add it if not
   if (stri_extract(writeDir,regex=".$") != "/"){
     writeDir <- stri_flatten(c(writeDir, "/"))
   }
