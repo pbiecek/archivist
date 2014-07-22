@@ -3,11 +3,18 @@
 #' @title Search for an Object in a Repository using Tags
 #'
 #' @description
-#' desc
+#' \code{searchInRepo} searchs for an object in a repository using it's \code{Tag}.
 #' 
 #' 
 #' @details
-#' details
+#' \code{searchInRepo} searchs for an object in a repository using it's \code{Tag}.
+#' \code{Tags} can be an object's \code{name}, \code{class} or \code{archivisation date}. Further more, for various object's 
+#' classes a much more different \code{Tags} can be searched. See examples below.
+#' 
+#' Supported \code{Tags} for various objects are (so far):
+#'  to be done
+#'  
+#' 
 #' 
 #' @param tag A character string denoting a Tag to seek for. See details.
 #' 
@@ -20,7 +27,11 @@
 #' @author autor
 #'
 #' @examples
-#' #example
+#' # not work
+#' searchInLocalRepo( "class:ggplot", dir = getwd() )
+#' searchInLocalRepo( "name:prettyPlot", dir = "/home/folder/here" )
+#' searchInGithubRepo( "name:myLMmodel", user="USERNAME", repo="REPO" )
+#' searchInGithubRepo( "myLMmodel:call", user="USERNAME", repo="REPO" )
 #' @family archivist
 #' @rdname searchInRepo
 #' @export
