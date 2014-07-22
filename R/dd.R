@@ -17,8 +17,8 @@ dd <- function(object,  ..., archiveData = TRUE, rememberName = TRUE) {
   readDir <- settingsWrapper("externalPathToArchive")
   
   # check if writeDir ends with "/" and add it if not
-  if (stri_extract(writeDir,regex=".$") != "/"){
-    writeDir <- stri_flatten(c(writeDir, "/"))
+  if ( regexpr( pattern = ".$", text = writeDir) != "/" ){
+    dir <- paste0( c ( writeDir, "/" ) )
   }
   
   
@@ -28,7 +28,7 @@ dd <- function(object,  ..., archiveData = TRUE, rememberName = TRUE) {
   if (rememberName){
     save(file = paste0(writeDir, md5hash, "/object.rda"), ascii=TRUE, list=objectName,  envir = parent.frame(2))
     }else{
-    save(object, file = paste0(writeDir, md5hash, "/object2.rda"), ascii=TRUE)
+    save(object, file = paste0(writeDir, md5hash, "/object.rda"), ascii=TRUE)
   }
   # add serialize instructions
   cat(file = paste0(writeDir, md5hash, "/load.R"), ddrescueInstructions(object, md5hash) )
@@ -56,4 +56,7 @@ dd <- function(object,  ..., archiveData = TRUE, rememberName = TRUE) {
     cat("Object saved in folder: ", md5hash, " \n ")
   }
 }
+
+ 
+
 

@@ -16,3 +16,4 @@ extractMiniature.ggplot <- function( object, mdhash5, ... ){
 extractMiniature.data.frame <- function( object, mdhash5, ... ){
   
 }
+

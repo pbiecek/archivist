@@ -1,3 +1,27 @@
+##    archivist package for R
+##
+#' @title Create an Empty Repository in Given Directory
+#'
+#' @description
+#' \code{createEmptyRepo} creates an empty repository for given directory in which archivised objects will be managed.
+#' 
+#' 
+#' @details
+#' This function must be initialized prior to use archivist package.
+#' If working in groups, it is higly recommend to create repository on shared dropbox folder.
+#' 
+#' @param dir A character string that specifies the directory for repository to be made.
+#' 
+#' @author autor
+#'
+#' @examples
+#' createEmptyRepo(getwd())
+#' createEmptyRept(path.package("stats"))
+#' # not work
+#' createEmptyRepo("user/folder/here")
+#' @family archivist
+#' @rdname createEmptyRepo
+#' @export
 createEmptyRepo <- function( dir ){
   stopifnot( is.character( dir ) )
   
