@@ -1,3 +1,7 @@
+.onAttach <- function(...) {
+  packageStartupMessage("Welcome to the archivist package (ver 0.x)",
+"\n To start working build database using: createEmptyRepository() ")
+}
 .ArchivistEnv <- new.env()
 
 .onDetach <- function(libpath) {
