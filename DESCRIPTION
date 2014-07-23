@@ -4,11 +4,26 @@ Type: Package
 Title: Tools for datasets and figures archivisation.
 Author: Przemyslaw Biecek <przemyslaw.biecek@gmail.com>
 Maintainer: Przemyslaw Biecek <przemyslaw.biecek@gmail.com>
+<<<<<<< HEAD
 Description: Bit.ly, QRcode, Git, Github support
+=======
+<<<<<<< HEAD
+Description:  Tools for archivisation of R objects.
+=======
+Description: Bit.ly, QRcode, Git, Github support
+>>>>>>> c025feab84b14655b4db4cb301cc3cefccf736ed
+>>>>>>> 7bcc448e1bdcb0c07cdc0193b5df2f13cf32687f
 Repository: CRAN
 License: GPL-2
 LazyLoad: yes
 LazyData: yes
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+Depends: R (>= 2.8.0), digest, RCurl, httr, rjson
+LinkingTo:
+=======
+>>>>>>> 7bcc448e1bdcb0c07cdc0193b5df2f13cf32687f
 Depends:
     R (>= 2.8.0),
     ggplot2,
@@ -21,5 +36,9 @@ Depends:
     RSQLite,
     lubridate
 LinkingTo: 
+<<<<<<< HEAD
+=======
+>>>>>>> c025feab84b14655b4db4cb301cc3cefccf736ed
+>>>>>>> 7bcc448e1bdcb0c07cdc0193b5df2f13cf32687f
 Imports:
     
