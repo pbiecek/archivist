@@ -3,20 +3,22 @@
 #' @title Search for an Object in a Repository using Tags
 #'
 #' @description
-#' \code{searchInRepo} searchs for an object in a repository using it's \code{Tag}.
+#' \code{searchInRepo} searches for an object in a repository using it's \code{Tag}.
 #' 
 #' 
 #' @details
-#' \code{searchInRepo} searchs for an object in a repository using it's \code{Tag}.
-#' \code{Tags} can be an object's \code{name}, \code{class} or \code{archivisation date}. Further more, for various object's 
-#' classes a much more different \code{Tags} can be searched. See examples below.
+#' \code{searchInRepo} searches for an object in a repository using it's \code{Tag}.
+#' \code{Tags} can be an object's \code{name}, \code{class} or \code{archivisation date}. 
+#' Furthermore, for various object's classes more different \code{Tags} can be searched. 
+#' See \link{Tags}. If a \code{Tag} is a list of lenght 2, \code{md5hashes} of all 
+#' objects created from date \code{dataFrom} to data \code{dataTo} are returned.
+#'   
+#' @return
+#' \code{searchInRepo} returns as value a \code{md5hash} which is an object's hash that was generated while
+#' saving an object to the Repository in a moment a \link{saveToRepo} function was called. If the desired object
+#' is not in a Repository a logical value \code{FALSE} is returned.
 #' 
-#' Supported \code{Tags} for various objects are (so far):
-#'  to be done
-#'  
-#' 
-#' 
-#' @param tag A character string denoting a Tag to seek for. See details.
+#' @param tag A character denoting a Tag to seek for or a list of length 2 with \code{dataFrom} and \code{dataTo} arguments See details.
 #' 
 #' @param dir A character denoting an existing directory from which objects will be searched.
 #' 
@@ -24,7 +26,8 @@
 #' 
 #' @param user Only if working on Github Repository. A character string containing a name of Github User.
 #'
-#' @author autor
+#' @author
+#' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
 #'
 #' @examples
 #' # not work

@@ -9,7 +9,7 @@ searchInLocalRepo(tag, dir)
 searchInGithubRepo(tag, repo, user)
 }
 \arguments{
-\item{tag}{A character string denoting a Tag to seek for. See details.}
+\item{tag}{A character denoting a Tag to seek for or a list of length 2 with \code{dataFrom} and \code{dataTo} arguments See details.}
 
 \item{dir}{A character denoting an existing directory from which objects will be searched.}
 
@@ -17,20 +17,35 @@ searchInGithubRepo(tag, repo, user)
 
 \item{user}{Only if working on Github Repository. A character string containing a name of Github User.}
 }
+\value{
+\code{searchInRepo} returns as value a \code{md5hash} which is an object's hash that was generated while
+saving an object to the Repository in a moment a \link{saveToRepo} function was called. If the desired object
+is not in a Repository a logical value \code{FALSE} is returned.
+}
 \description{
-desc
+\code{searchInRepo} searches for an object in a repository using it's \code{Tag}.
 }
 \details{
-details
+\code{searchInRepo} searches for an object in a repository using it's \code{Tag}.
+\code{Tags} can be an object's \code{name}, \code{class} or \code{archivisation date}.
+Furthermore, for various object's classes more different \code{Tags} can be searched.
+See \link{Tags}. If a \code{Tag} is a list of lenght 2, \code{md5hashes} of all
+objects created from date \code{dataFrom} to data \code{dataTo} are returned.
 }
 \examples{
-#example
+# not work
+searchInLocalRepo( "class:ggplot", dir = getwd() )
+searchInLocalRepo( "name:prettyPlot", dir = "/home/folder/here" )
+searchInGithubRepo( "name:myLMmodel", user="USERNAME", repo="REPO" )
+searchInGithubRepo( "myLMmodel:call", user="USERNAME", repo="REPO" )
 }
 \author{
-autor
+Marcin Kosinski , \email{m.p.kosinski@gmail.com}
 }
 \seealso{
-Other archivist: \code{\link{createEmptyRepo}};
+Other archivist: \code{\link{Tags}};
+  \code{\link{archivist-package}};
+  \code{\link{createEmptyRepo}};
   \code{\link{loadFromGithubRepo}},
   \code{\link{loadFromLocalRepo}};
   \code{\link{rmFromRepo}}; \code{\link{saveToRepo}}

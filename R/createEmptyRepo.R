@@ -10,9 +10,22 @@
 #' This function must be initialized prior to use archivist package.
 #' If working in groups, it is higly recommend to create repository on shared dropbox folder.
 #' 
-#' @param dir A character string that specifies the directory for repository to be made.
+#' All objects desired to be archivised are going to be saved in the local Repository, which is a SQLite database named \code{backpack}. 
+#' Every object is saved (after calling \code{saveToRepo} function) in a \code{md5hash.rda} file, located in the folder (created in given directory) named 
+#' \code{gallery}. \code{md5hash} is a hash generated from object, which is wanted to be saved and is different 
+#' for various objects. This \code{md5hash} is a string of length 32 that comes out as a result of 
+#' \code{digest{digest}} function, which uses a cryptographical MD5 hash algorithm.
 #' 
-#' @author autor
+#' Created \code{backapck} database is a useful and fundamental tool for remembering object's 
+#' \code{name}, \code{class}, \code{archivisation date} etc (that are remembered as \link{Tags}) 
+#' or for keeping object's \code{md5hash}.
+#' 
+#' After every \code{saveToRepo} call the database is refreshed, so object is available immediately.
+#' 
+#' @param dir A character that specifies the directory for repository to be made.
+#' 
+#' @author 
+#' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
 #'
 #' @examples
 #' createEmptyRepo(getwd())
@@ -27,7 +40,7 @@ createEmptyRepo <- function( dir ){
   
   # check if dir has "/" at the end and add it if not
   if ( regexpr( pattern = ".$", text = dir ) != "/" ){
-    dir <- paste0( c ( dir, "/" ) )
+    dir <- paste0(  dir, "/"  )
   }
   
   # create connection
@@ -53,7 +66,7 @@ createEmptyRepo <- function( dir ){
   dbWriteTable(backpack, "artifact",artifact, overwrite=TRUE)
   dbWriteTable(backpack, "relation",relation, overwrite=TRUE)
   dbWriteTable(backpack, "tag",tag, overwrite=TRUE)
-
+  
   
   # ? is it necessary
   # dbGetQuery(backpack, "select * from setting")
@@ -79,5 +92,4 @@ addTags <- function( md5hash, tag, timestamp = now() ){
 addRelation <- function( artifactFrom, artifactTo, relationName ){
   
 }
-
 

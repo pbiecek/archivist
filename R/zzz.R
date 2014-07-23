@@ -1,6 +1,6 @@
 .onAttach <- function(...) {
-  packageStartupMessage("Welcome to the archivist package (ver 0.x)",
-"\n To start working build database using: createEmptyRepository() ")
+  packageStartupMessage("\n Welcome to the archivist package (ver 0.x).",
+                        "\n To start working, you need to build a database using: createEmptyRepo() ")
 }
 .ArchivistEnv <- new.env()
 
@@ -13,4 +13,3 @@
     }
   } 
 }
-
