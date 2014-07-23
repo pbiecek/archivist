@@ -1,14 +1,25 @@
 Package: archivist
-Version: 0.3
+Version: 0.1
 Type: Package
-Title: Tools for archivisation of R objects.
-Author: Przemyslaw Biecek <przemyslaw.biecek@gmail.com>, Marcin Kosiński <m.p.kosinski@gmail.com>
+Title: Tools for datasets and figures archivisation.
+Author: Przemyslaw Biecek <przemyslaw.biecek@gmail.com>
 Maintainer: Przemyslaw Biecek <przemyslaw.biecek@gmail.com>
-Description:  Tools for archivisation of R objects.
+Description: Bit.ly, QRcode, Git, Github support
 Repository: CRAN
 License: GPL-2
 LazyLoad: yes
 LazyData: yes
-Depends: R (>= 2.8.0), digest, RCurl, httr, rjson
-LinkingTo:
+Depends:
+    R (>= 2.8.0),
+    ggplot2,
+    reshape2,
+    grid,
+    digest,
+    RCurl,
+    httr,
+    rjson,
+    RSQLite,
+    lubridate
+LinkingTo: 
 Imports:
+    
