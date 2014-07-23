@@ -6,11 +6,15 @@
 
 #!!!! change it's localisations
 # move to gallery
-setUpDatabase <- function() {
+setUpDatabase <- function(localPathToArchive = paste0(getwd(),"/"),
+                          externalPathToArchive = "https://github.com/pbiecek/graphGallery/master/",
+                          miniatureFormat = "png",
+                          miniatureWidth = "800",
+                          miniatureHeight = "600") {
   library("RSQLite")
   library("lubridate")
   sqlite    <- dbDriver("SQLite")
-  backpack <- dbConnect(sqlite,"inst/extdata/backpack.db")
+  backpack <- dbConnect(sqlite,paste0(path.package("archivist"), "/extdata/backpack.db"))
   
   artifact <- data.frame(md5hash = "",
                          name = "",
@@ -21,17 +25,17 @@ setUpDatabase <- function() {
   
   relation <- data.frame(artifactFrom = "", artifactTo = "", relationName = "", stringsAsFactors=FALSE)
   tag <- data.frame(artifact = "", tag = "", timestamp = as.character(now()), stringsAsFactors=FALSE)
-
+  
   setting <- data.frame(name = c("localPathToArchive",
                                  "externalPathToArchive",
                                  "miniatureFormat",
                                  "miniatureWidth",
                                  "miniatureHeight"), 
-                        value=c("/Users/pbiecek/camtasia/GitHub/graphGallery/", 
-                                "https://github.com/pbiecek/graphGallery/master/",
-                                "png",
-                                "800",
-                                "600"), 
+                        value=c(localPathToArchive, 
+                                externalPathToArchive,
+                                miniatureFormat,
+                                miniatureWidth,
+                                miniatureHeight), 
                         createdDate = as.character(now()), stringsAsFactors=FALSE)
   
   dbListTables(backpack)
@@ -62,7 +66,7 @@ settingsWrapper <- function(name = "localPathToArchive") {
   dbGetQuery(getBackpack(), 
              paste0("select value from setting where name='", 
                     name
-                    , "' order by createdDate"))[1,1]
+                    , "' order by createdDate DESC"))[1,1]
 }
 
 addArtifact <- function(md5hash, name, class, pathToWelcomePage, createdDate = now()) {
@@ -98,3 +102,9 @@ getBackpack <- function() {
   
 }
 
+# dbGetInfo(.ArchivistEnv.backpack)
+# dbListTables(.ArchivistEnv$.backpack)
+# dbListFields(.ArchivistEnv$.backpack, "setting")
+# dbGetQuery(.ArchivistEnv$.backpack,
+#           "SELECT *
+ #          FROM setting")
