@@ -3,8 +3,8 @@
 #' @title Load Object Given as md5hash from Repository
 #'
 #' @description
-#' \code{loadFromLocalRepo} loads an object from a local repository into the workspace.
-#' \code{loadFromGithubRepo} loads an object from a github repository into the workspace.
+#' \code{loadFromLocalRepo} loads an object from a local \link{Repository} into the workspace.
+#' \code{loadFromGithubRepo} loads an object from a Github \link{Repository} into the workspace.
 #' 
 #' 
 #' @details
@@ -18,6 +18,12 @@
 #' Note that \code{user} and \code{repo} should be used only when working on Github Repository and ought to be omitted in a local working mode, 
 #' when \code{dir} should only be used when working on a local Repository and ought to be omitted in a Github working mode.
 #' 
+#' One may notice that loadFromGithubRepo and loadFromLocalRepo load objects to the Global
+#' Environment with it's original name. If one is not satisfied with that solution,
+#' a parameter returns = TRUE might be specified so that functions return object as a result that
+#' can be attributed to a new name.
+#' 
+#' @note
 #' You can load one object at one call.
 #' 
 #' @param dir A character denoting an existing directory from which an object will be loaded.
@@ -27,6 +33,9 @@
 #' @param repo Only if working on Github Repository. A character containing a name of Github Repository.
 #' 
 #' @param user Only if working on Github Repository. A character containing a name of Github User.
+#' 
+#' @param returns A logical value denoting whether to load an object into the Global Environment 
+#' (that is set by default \code{FALSE}) or whether to return an object as a function's result (\code{TRUE}).
 #'
 #' @author 
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}

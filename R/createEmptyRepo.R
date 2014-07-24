@@ -3,7 +3,7 @@
 #' @title Create an Empty Repository in Given Directory
 #'
 #' @description
-#' \code{createEmptyRepo} creates an empty repository for given directory in which archivised objects will be stored.
+#' \code{createEmptyRepo} creates an empty \link{Repository} for given directory in which archivised objects will be stored.
 #' 
 #' 
 #' @details

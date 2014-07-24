@@ -9,8 +9,11 @@
 #' 
 #' \code{Tags} are specific properties of an object. \code{Tags} can be an object's \code{name}, \code{class} or \code{archivisation date}. 
 #' Furthermore, for various object's classes more different \code{Tags} are available and can 
-#' be searched by \link{searchInLocalRepo} or \link{searchInGithubRepo} functions. Supported objects with
-#' extra \code{Tags} are:
+#' be searched by \link{searchInLocalRepo} or \link{searchInGithubRepo} functions. 
+#' 
+#' \code{Tags} are stored in the \link{Repository}.
+#' 
+#' Supported objects with extra \code{Tags} are:
 #' TODO: list of tags
 #' 
 #' @seealso 

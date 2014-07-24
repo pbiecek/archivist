@@ -4,20 +4,20 @@
 \alias{archivist-package}
 \title{Tools for archivisation of R objects.}
 \description{
-A description.
+TODO: A description.
 }
 \details{
-To be written.
+TODO: To be written.
 }
 \author{
-authors1 [aut] \email{mails} \cr
-authors2 [aut, cre] \email{mails}
+Przemyslaw Biecek [aut, cre] \email{przemyslaw.biecek@gmail.com} \cr
+Marcin Kosinski [aut] \email{m.p.kosinski@gmail.com}
 }
 \seealso{
-Other archivist: \code{\link{Tags}};
-  \code{\link{createEmptyRepo}};
+Other archivist: \code{\link{Repository}};
+  \code{\link{Tags}}; \code{\link{createEmptyRepo}};
   \code{\link{loadFromGithubRepo}},
-  \code{\link{loadFromLocalRepo}};
+  \code{\link{loadFromLocalRepo}}; \code{\link{md5hash}};
   \code{\link{rmFromRepo}}; \code{\link{saveToRepo}};
   \code{\link{searchInGithubRepo}},
   \code{\link{searchInLocalRepo}}

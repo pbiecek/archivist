@@ -9,19 +9,19 @@ createEmptyRepo(dir)
 \item{dir}{A character that specifies the directory for repository to be made.}
 }
 \description{
-\code{createEmptyRepo} creates an empty repository for given directory in which archivised objects will be managed.
+\code{createEmptyRepo} creates an empty \link{Repository} for given directory in which archivised objects will be stored.
 }
 \details{
-This function must be initialized prior to use archivist package.
-If working in groups, it is higly recommend to create repository on shared dropbox folder.
+At least one repository must be initialized prior to use other functions from archivist package.
+If working in groups, it is highly recommend to create repository on shared Dropbox/Git folder.
 
-All objects desired to be archivised are going to be saved in the local Repository, which is a SQLite database named \code{backpack}.
+All objects desired to be archivised are going to be saved in the local Repository, which is a SQLite database stored in a file named \code{backpack}.
 Every object is saved (after calling \code{saveToRepo} function) in a \code{md5hash.rda} file, located in the folder (created in given directory) named
 \code{gallery}. \code{md5hash} is a hash generated from object, which is wanted to be saved and is different
 for various objects. This \code{md5hash} is a string of length 32 that comes out as a result of
 \code{digest{digest}} function, which uses a cryptographical MD5 hash algorithm.
 
-Created \code{backapck} database is a useful and fundamental tool for remembering object's
+Created \code{backpack} database is a useful and fundamental tool for remembering object's
 \code{name}, \code{class}, \code{archivisation date} etc (that are remembered as \link{Tags})
 or for keeping object's \code{md5hash}.
 
@@ -34,13 +34,13 @@ createEmptyRept(path.package("stats"))
 createEmptyRepo("user/folder/here")
 }
 \author{
-Marcin Kosinski , \email{m.p.kosinski@gmail.com}
+Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 }
 \seealso{
-Other archivist: \code{\link{Tags}};
-  \code{\link{archivist-package}};
+Other archivist: \code{\link{Repository}};
+  \code{\link{Tags}}; \code{\link{archivist-package}};
   \code{\link{loadFromGithubRepo}},
-  \code{\link{loadFromLocalRepo}};
+  \code{\link{loadFromLocalRepo}}; \code{\link{md5hash}};
   \code{\link{rmFromRepo}}; \code{\link{saveToRepo}};
   \code{\link{searchInGithubRepo}},
   \code{\link{searchInLocalRepo}}

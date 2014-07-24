@@ -16,45 +16,54 @@ loadFromGithubRepo(md5hash, repo, user)
 \item{repo}{Only if working on Github Repository. A character containing a name of Github Repository.}
 
 \item{user}{Only if working on Github Repository. A character containing a name of Github User.}
+
+\item{returns}{A logical value denoting whether to load an object into the Global Environment
+(that is set by default \code{FALSE}) or whether to return an object as a function's result (\code{TRUE}).}
 }
 \description{
-\code{loadFromLocalRepo} loads an object from a local repository into workspace.
-\code{loadFromGithubRepo} loads an object from a github repository into workspace.
+\code{loadFromLocalRepo} loads an object from a local \link{Repository} into the workspace.
+\code{loadFromGithubRepo} loads an object from a Github \link{Repository} into the workspace.
 }
 \details{
-Those functions load objects from local or Github Repositories. Both of them take \code{md5hash} as a
-parameter. This \code{md5hash} is a string of length 32 that comes out as a result from \link{saveToRepo} function, which uses a cryptographical hash function with MD5 algorithm
+Functions \code{loadFromLocalRepo} and \code{loadFromGithubRepo} load objects from archivist repositories stored in local folder or on Github. Both of them take \code{md5hash} as a
+parameter. This \code{md5hash} is a string of length 32 that comes out as a result from \link{saveToRepo} function, which uses a cryptographical hash function with MD5 algorithm.
 
 Important: instead of giving whole \code{md5hash} name, user can simply give first few signs of desired \code{md5hash} - an abbreviation.
 For example \code{a09dd} instead of \code{a09ddjdkf9kj33dcjdnfjgos9jd9jkcv}. But if several tags start with the same pattern
 an error will be displayed and you will be asked to give more precise \code{md5hash} abbreviation (try abbreviation with more digits all with whole name).
 
-Note that \code{user} and \code{repo} should be used only when working on Github Repository and ought to be ommited in a local working mode,
-when \code{dir} should only be used when working on a local Repository and ought to be ommited in a Github working mode.
+Note that \code{user} and \code{repo} should be used only when working on Github Repository and ought to be omitted in a local working mode,
+when \code{dir} should only be used when working on a local Repository and ought to be omitted in a Github working mode.
 
+One may notice that loadFromGithubRepo and loadFromLocalRepo load objects to the Global
+Environment with it's original name. If one is not satisfied with that solution,
+a parameter returns = TRUE might be specified so that functions return object as a result that
+can be attributed to a new name.
+}
+\note{
 You can load one object at one call.
 }
 \examples{
 # not work
 library(digest)
-loadFromLocalRepo( md5hash = digest(plot123) , dir = getwd() )
+loadFromLocalRepo( md5hash = digest(plot123) , dir = getwd() ) # TODO: is it useful?
 loadFromLocalRepo( md5hash = "hs82h9kahs72h3nckv0dhsu28sgd73js",
                        dir = "user/folder/here" )
 loadFromGithubRepo( md5hash = "hs82h9kahs72h3nckv0dhsu28sgd73js",
-                           repo = "REPONAME", user = "USERNAME" )
+                           repo = "REPONAME", user = "USERNAME" ) # TODO: here put some real example
 
 # with md5hash abbreviation
 loadFromLocalRepo( md5hash = "hs82h9k",
-                       dir = "user/folder/here" )
+                       dir = "user/folder/here" ) # TODO: here put some real examples
 }
 \author{
 Marcin Kosinski , \email{m.p.kosinski@gmail.com}
 }
 \seealso{
-Other archivist: \code{\link{Tags}};
-  \code{\link{archivist-package}};
-  \code{\link{createEmptyRepo}}; \code{\link{rmFromRepo}};
-  \code{\link{saveToRepo}};
+Other archivist: \code{\link{Repository}};
+  \code{\link{Tags}}; \code{\link{archivist-package}};
+  \code{\link{createEmptyRepo}}; \code{\link{md5hash}};
+  \code{\link{rmFromRepo}}; \code{\link{saveToRepo}};
   \code{\link{searchInGithubRepo}},
   \code{\link{searchInLocalRepo}}
 }

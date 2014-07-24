@@ -23,13 +23,13 @@ saving an object to the Repository in a moment a \link{saveToRepo} function was 
 is not in a Repository a logical value \code{FALSE} is returned.
 }
 \description{
-\code{searchInRepo} searches for an object in a repository using it's \code{Tag}.
+\code{searchInRepo} searches for an object in a \link{Repository} using it's \code{Tag}.
 }
 \details{
 \code{searchInRepo} searches for an object in a repository using it's \code{Tag}.
 \code{Tags} can be an object's \code{name}, \code{class} or \code{archivisation date}.
 Furthermore, for various object's classes more different \code{Tags} can be searched.
-See \link{Tags}. If a \code{Tag} is a list of lenght 2, \code{md5hashes} of all
+See \link{Tags}. If a \code{Tag} is a list of length 2, \code{md5hashes} of all
 objects created from date \code{dataFrom} to data \code{dataTo} are returned.
 }
 \examples{
@@ -43,11 +43,11 @@ searchInGithubRepo( "myLMmodel:call", user="USERNAME", repo="REPO" )
 Marcin Kosinski , \email{m.p.kosinski@gmail.com}
 }
 \seealso{
-Other archivist: \code{\link{Tags}};
-  \code{\link{archivist-package}};
+Other archivist: \code{\link{Repository}};
+  \code{\link{Tags}}; \code{\link{archivist-package}};
   \code{\link{createEmptyRepo}};
   \code{\link{loadFromGithubRepo}},
-  \code{\link{loadFromLocalRepo}};
+  \code{\link{loadFromLocalRepo}}; \code{\link{md5hash}};
   \code{\link{rmFromRepo}}; \code{\link{saveToRepo}}
 }
 

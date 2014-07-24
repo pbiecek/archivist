@@ -3,7 +3,7 @@
 #' @title Save an Object into a Repository 
 #'
 #' @description
-#' \code{saveToRepo} function saves desired objects to the local Repository on a given directory.
+#' \code{saveToRepo} function saves desired objects to the local \link{Repository} on a given directory.
 #' 
 #' 
 #' @details

@@ -9,13 +9,13 @@ saveToRepo(object, ..., archiveData = TRUE, archiveTags = TRUE,
 \arguments{
 \item{object}{An arbitrary R object to be saved. For supported objects see details.}
 
-\item{...}{Graphical parameters denoting width and hight of a miniature. See details.}
+\item{...}{Graphical parameters denoting width and height of a miniature. See details.}
 
-\item{archiveData}{A logical value denoting wheter to archive the data from object.}
+\item{archiveData}{A logical value denoting whether to archive the data from object.}
 
-\item{archiveTags}{A logical value denoting wheter to archive tags from object.}
+\item{archiveTags}{A logical value denoting whether to archive tags from object.}
 
-\item{archiveMiniature}{A logical value denoting wheter to archive a miniature of an object.}
+\item{archiveMiniature}{A logical value denoting whether to archive a miniature of an object.}
 
 \item{dir}{A character denoting an existing directory in which an object will be saved.}
 }
@@ -24,7 +24,7 @@ As a result of this function a character string is returned as a value and deter
 the \code{md5hash} of an object that was used in a \code{saveToRepo} function.
 }
 \description{
-\code{saveToRepo} function saves desired objects to the local Repository on a given directory.
+\code{saveToRepo} function saves desired objects to the local \link{Repository} on a given directory.
 }
 \details{
 \code{saveToRepo} function saves desired objects to the local Repository on a given directory.
@@ -73,11 +73,11 @@ Marcin Kosinski , \email{m.p.kosinski@gmail.com}
 \seealso{
 For more detailed information check package vignette - url needed.
 
-Other archivist: \code{\link{Tags}};
-  \code{\link{archivist-package}};
+Other archivist: \code{\link{Repository}};
+  \code{\link{Tags}}; \code{\link{archivist-package}};
   \code{\link{createEmptyRepo}};
   \code{\link{loadFromGithubRepo}},
-  \code{\link{loadFromLocalRepo}};
+  \code{\link{loadFromLocalRepo}}; \code{\link{md5hash}};
   \code{\link{rmFromRepo}};
   \code{\link{searchInGithubRepo}},
   \code{\link{searchInLocalRepo}}

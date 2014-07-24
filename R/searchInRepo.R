@@ -3,7 +3,7 @@
 #' @title Search for an Object in a Repository using Tags
 #'
 #' @description
-#' \code{searchInRepo} searches for an object in a repository using it's \code{Tag}.
+#' \code{searchInRepo} searches for an object in a \link{Repository} using it's \code{Tag}.
 #' 
 #' 
 #' @details

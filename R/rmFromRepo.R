@@ -1,10 +1,10 @@
 ##    archivist package for R
 ##
-#' @title Remove an Object from a Repository
+#' @title Remove an Object Given as md5hash from a Repository
 #'
 #' @description
-#' \code{rmFromRepo} removes an object given as \code{md5hash} from a Repository.  
-#' 
+#' \code{rmFromRepo} removes an object given as \code{md5hash} from a \link{Repository}.
+#'  
 #' @details
 #' \code{rmFromRepo} removes an object given as \code{md5hash} from a Repository, 
 #' which is a SQLite database named \code{backpack} - created by a \link{createEmptyRepo} call.

@@ -10,9 +10,8 @@ library("archivist")
 createEmptyRepo( dir = "DesiredDir")
 
 # 
-# archivist has his own built in database 
-# for demo purpose and so examples given in 
-# functions' descriptions work.
+# archivist has his own built-in database 
+# for demo and examples purpose.
 # 
 # this database is situated in installation of
 # archivist package directory in folder
@@ -20,14 +19,17 @@ createEmptyRepo( dir = "DesiredDir")
 #
 demoDir <- paste0(path.package("archivist"), "/exampledata/")
 
+#
+# there is also an example Github database.
+demoGitDir <- "https://github.com/pbiecek/graphGallery/exampledata/"
+
 
 #
 # how does saving a data.frame is realized?
 #
-library("PBImisc")
-data( musculus )
+data( iris )
 
-saveToRepo( object = musculus, dir = demoDir)
+saveToRepo( object = iris, dir = demoDir)
 
 #
 # as we can see, the object's md5hash was returned
@@ -41,7 +43,7 @@ saveToRepo( object = musculus, dir = demoDir)
 # one can check with what md5hash musculus
 # data were saved to the Repository.
 #
-(musculus_md5hash  <- searchInLocalRepo( tag = "name:musculus", dir = demoDir))
+(iris_md5hash  <- searchInLocalRepo( tag = "name:iris", dir = demoDir))
 
 #
 # one might check how does loading an object process
@@ -50,17 +52,17 @@ saveToRepo( object = musculus, dir = demoDir)
 # first remove object from Global Environment before 
 # it's going to be loaded.
 #
-rm( musculus )
-loadFromLocalRepo( md5hash = musculus_md5hash, dir = demoDir)
+rm( iris )
+loadFromLocalRepo( md5hash = iris_md5hash, dir = demoDir)
 
 #
 # it also work for md5hash abbreviation.
 #
-data( apartments , package = "PBImisc")
-(apartments_md5hash <- saveToRepo( object = apartments, dir = demoDir))
+data( swiss , package = "datasets")
+(swiss_md5hash <- saveToRepo( object = swiss, dir = demoDir))
 rm( apartments ) # note that md5hash get be get strictly from saveToRepo
-apartments_md5hash_abbreviation <- abbreviate( apartments_md5hash )
-loadFromLocalRepo( md5hash = apartments_md5hash_abbreviation, dir = demoDir)
+swiss_md5hash_abbreviation <- "dhcj7s" # need to be fixed on real hash
+loadFromLocalRepo( md5hash = swiss_md5hash_abbreviation, dir = demoDir)
 
 #
 # note that md5hash get be get strictly from saveToRepo
@@ -82,7 +84,7 @@ loadFromLocalRepo( md5hash = apartments_md5hash_abbreviation, dir = demoDir)
 # a specific object, then the object might be 
 # removed from a database.
 #
-rmFromRepo( md5hash = apartments_md5hash, dir = demoDir)
+rmFromRepo( md5hash = swiss_md5hash, dir = demoDir)
 
 
 #
@@ -120,4 +122,33 @@ searchInGithubRepo( tag = "md5hash:37d8chs9jdj2jxnd0k2jdncjdh4ew23",
                     user = "USER", repo = "REPO")
 
 
-# to 
+#
+# the operations conducted on Local Repository might 
+# be conducted on a Github Repository.
+# 
+# thus one can search from Github Repository, there
+# is also a possibility of loading objects from
+# Github Repository.
+#
+loadFromGithubRepo( md5hash = "jd7fhcndkwid8fhcbs9d0ckdhen31" , 
+                    user = "pbiecek", repo = "graphGallery")
+loadFromGithubRepo( md5hash = "jdkcndjamsnzjdifockdmsnadkdk3" , 
+                    user = "pbiecek", repo = "graphGallery")
+loadFromGithubRepo( md5hash = "ff78cu" , 
+                    user = "pbiecek", repo = "graphGallery")
+# load with abbreviation
+
+#
+# one may notice that loadFromGithubRepo and
+# loadFromLocalRepo load objects to the Global
+# Environment with it's original name.
+#
+# if one is not satisfied with that solution,
+# a parameter returns = TRUE might be specified
+# so that functions return object as a result that
+# can be attributed to a new name.
+#
+exampleName1 <- loadFromGithubRepo( md5hash = "k09xd" , returns = TRUE
+                                    user = "pbiecek", repo = "graphGallery")
+exampleName2 <- loadFromLocalRepo( md5hash = "838d9dhcjajskdlfoeuajsjckdiehjd2", 
+                                   dir = demoDir, returns = TRUE )

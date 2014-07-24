@@ -3,7 +3,8 @@
 #' @title Repository 
 #'
 #' @description
-#' \code{Repository} are specific values of an object, different for various object's classes. 
+#' \code{Repository} stores specific values of an object, different for 
+#' various object's classes, and objects themselves.
 #' 
 #' @details
 #' 
@@ -12,9 +13,18 @@
 #' TODO: needs more info?
 #' 
 #' @seealso 
-#' Functions using \code{Repository} are TODO:
+#' Functions using \code{Repository} are:
+#' \link{saveToRepo}, 
+#' \link{rmFromRepo}, 
+#' \link{loadFromLocalRepo}, 
+#' \link{loadFromGithubRepo},
+#' \link{searchInLocalRepo},
+#' \link{searchInGithubRepo}.
+#' 
+#' Function creating \code{Repository} is:
+#' \link{createEmptyRepo}.
 #' 
 #' @family archivist
-#' @name Tags
+#' @name Repository
 #' @docType class
 invisible(NULL)
