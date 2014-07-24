@@ -10,7 +10,7 @@
 #' \code{searchInRepo} searches for an object in a repository using it's \code{Tag}.
 #' \code{Tags} can be an object's \code{name}, \code{class} or \code{archivisation date}. 
 #' Furthermore, for various object's classes more different \code{Tags} can be searched. 
-#' See \link{Tags}. If a \code{Tag} is a list of lenght 2, \code{md5hashes} of all 
+#' See \link{Tags}. If a \code{Tag} is a list of length 2, \code{md5hashes} of all 
 #' objects created from date \code{dataFrom} to data \code{dataTo} are returned.
 #'   
 #' @return

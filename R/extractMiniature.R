@@ -1,3 +1,5 @@
+# TODO:
+
 extractMiniature <- function( object, mdhash5, ... )
   UseMethod( "extractMiniature" )
 

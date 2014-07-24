@@ -40,13 +40,13 @@
 #' 
 #' @param object An arbitrary R object to be saved. For supported objects see details.
 #' 
-#' @param ... Graphical parameters denoting width and hight of a miniature. See details.
+#' @param ... Graphical parameters denoting width and height of a miniature. See details.
 #' 
-#' @param archiveData A logical value denoting wheter to archive the data from object.
+#' @param archiveData A logical value denoting whether to archive the data from object.
 #' 
-#' @param archiveTags A logical value denoting wheter to archive tags from object.
+#' @param archiveTags A logical value denoting whether to archive tags from object.
 #' 
-#' @param archiveMiniature A logical value denoting wheter to archive a miniature of an object.
+#' @param archiveMiniature A logical value denoting whether to archive a miniature of an object.
 #' 
 #' @param dir A character denoting an existing directory in which an object will be saved.
 #' 

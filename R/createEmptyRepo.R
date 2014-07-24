@@ -3,20 +3,20 @@
 #' @title Create an Empty Repository in Given Directory
 #'
 #' @description
-#' \code{createEmptyRepo} creates an empty repository for given directory in which archivised objects will be managed.
+#' \code{createEmptyRepo} creates an empty repository for given directory in which archivised objects will be stored.
 #' 
 #' 
 #' @details
-#' This function must be initialized prior to use archivist package.
-#' If working in groups, it is higly recommend to create repository on shared dropbox folder.
+#' At least one repository must be initialized prior to use other functions from archivist package. 
+#' If working in groups, it is highly recommend to create repository on shared Dropbox/Git folder.
 #' 
-#' All objects desired to be archivised are going to be saved in the local Repository, which is a SQLite database named \code{backpack}. 
+#' All objects desired to be archivised are going to be saved in the local Repository, which is a SQLite database stored in a file named \code{backpack}. 
 #' Every object is saved (after calling \code{saveToRepo} function) in a \code{md5hash.rda} file, located in the folder (created in given directory) named 
 #' \code{gallery}. \code{md5hash} is a hash generated from object, which is wanted to be saved and is different 
 #' for various objects. This \code{md5hash} is a string of length 32 that comes out as a result of 
 #' \code{digest{digest}} function, which uses a cryptographical MD5 hash algorithm.
 #' 
-#' Created \code{backapck} database is a useful and fundamental tool for remembering object's 
+#' Created \code{backpack} database is a useful and fundamental tool for remembering object's 
 #' \code{name}, \code{class}, \code{archivisation date} etc (that are remembered as \link{Tags}) 
 #' or for keeping object's \code{md5hash}.
 #' 
@@ -25,7 +25,7 @@
 #' @param dir A character that specifies the directory for repository to be made.
 #' 
 #' @author 
-#' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
+#' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #'
 #' @examples
 #' createEmptyRepo(getwd())
@@ -45,16 +45,11 @@ createEmptyRepo <- function( dir ){
   
   # create connection
   sqlite    <- dbDriver("SQLite")
-  backpack <- dbConnect(sqlite,paste0(dir, "backpack.db"))
+  backpack <- dbConnect(sqlite, paste0(dir, "backpack.db"))
   
-  # creat tables
+  # create tables
   artifact <- data.frame(md5hash = "",
                          createdDate = as.character(now()), 
-                         stringsAsFactors=FALSE)
-  
-  relation <- data.frame(artifactFrom = "", 
-                         artifactTo = "", 
-                         relationName = "", 
                          stringsAsFactors=FALSE)
   
   tag <- data.frame(artifact = "", 
@@ -64,19 +59,11 @@ createEmptyRepo <- function( dir ){
   
   # insert tables into database
   dbWriteTable(backpack, "artifact",artifact, overwrite=TRUE)
-  dbWriteTable(backpack, "relation",relation, overwrite=TRUE)
   dbWriteTable(backpack, "tag",tag, overwrite=TRUE)
   
   
-  # ? is it necessary
-  # dbGetQuery(backpack, "select * from setting")
-  # dbGetQuery(backpack, "select * from artifact")
-  # dbGetQuery(backpack, "select * from tag")
-  # dbGetQuery(backpack, "select * from relation")
-  
   # dbGetQuery(backpack, "delete from artifact")
   # dbGetQuery(backpack, "delete from tag")
-  # dbGetQuery(backpack, "delete from relation")
   
   dbDisconnect(backpack)
 }
@@ -85,11 +72,7 @@ addArtifact <- function( object, md5hash ){
   
 }
 
-addTags <- function( md5hash, tag, timestamp = now() ){
-  
-}
-
-addRelation <- function( artifactFrom, artifactTo, relationName ){
+addTag <- function( md5hash, tag, timestamp = now() ){
   
 }
 

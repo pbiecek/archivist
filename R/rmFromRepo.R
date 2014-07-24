@@ -16,12 +16,13 @@
 #' Important: instead of giving whole \code{md5hash} name, user can simply give first few signs of desired \code{md5hash} - an abbreviation.
 #' For example \code{a09dd} instead of \code{a09ddjdkf9kj33dcjdnfjgos9jd9jkcv}. But if several tags start with the same pattern 
 #' an error will be displayed and you will be asked to give more precise \code{md5hash} abbreviation (try abbreviation with more digits all with whole name).
+#' TODO: what is the value of rmFromRepo() function? TRUE/FALSE if anything is removed?
 #' 
 #' @note
-#' \code{md5hash} can be possessed as a value of a \link{searchInRepo} function proceeded with \code{tag = NAME} argument,
-#' where \code{NAME} is desired to remove object's name.
+#' \code{md5hash} can be a result from \link{searchInRepo} function proceeded with \code{tag = NAME} argument,
+#' where \code{NAME} is tag that describes property of objects to be deleted. 
 #' 
-#' For more informations about \code{Tags} check \link{Tags}.
+#' For more information about \code{Tags} check \link{Tags}.
 #' 
 #' @param md5hash A hash of an object. A character string being a result of a cryptographical hash function with MD5 algorithm.
 #' 

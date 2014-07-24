@@ -1,3 +1,5 @@
+# TODO:
+
 extractData <- function( object, md5hash )
   UseMethod( "extractData" )
 
@@ -16,3 +18,4 @@ extractData.lm <- function( object, md5hash ){
   md5hashDF <- saveToRepo( extractedDF )
   addRelation( md5hash, md5hashDF, "data.source" )
 }
+
