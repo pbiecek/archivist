@@ -28,6 +28,10 @@
 #' 
 #' @param dir A character denoting an existing directory from which an object will be removed.
 #' 
+#' # TODO: if one wants to remove files from date to date, it is suggested to
+#' # first perform obj2rm <- searchIn...Repo( tag = list(FromDate, ToDate), dir = )
+#' # sapply(obj2rm, rmFromRepo, dir = )
+#' 
 #' @author
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
 #'

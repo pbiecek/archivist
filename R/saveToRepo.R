@@ -29,6 +29,7 @@
 #' \code{names} or objects classes.
 #' 
 #' Supported object's classes are (so far): \code{lm, data.frame, ggplot}.
+#' TODO: EXTEND
 #' 
 #' @return
 #' As a result of this function a character string is returned as a value and determines

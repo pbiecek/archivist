@@ -43,7 +43,6 @@
 #' @examples
 #' # not work
 #' library(digest)
-#' loadFromLocalRepo( md5hash = digest(plot123) , dir = getwd() ) # TODO: is it useful?
 #' loadFromLocalRepo( md5hash = "hs82h9kahs72h3nckv0dhsu28sgd73js", 
 #'                        dir = "user/folder/here" )
 #' loadFromGithubRepo( md5hash = "hs82h9kahs72h3nckv0dhsu28sgd73js", 
