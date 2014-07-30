@@ -54,4 +54,20 @@
 rmFromRepo <- function( md5hash, dir ){
   stopifnot( is.character( c( dir, md5hash ) ) )
   
+  # creates connection and driver
+  sqlite <- dbDriver( "SQLite" )
+  conn <- dbConnect( sqlite, paste0( dir, "backpack.db" ) )
+  
+  # send deletes
+  dbGetQuery( conn,
+              paste0( "DELETE FROM artifact WHERE",
+                      "md5hash = '", md5hash, "'" ) )
+  dbGetQuery( conn,
+              paste0( "DELETE FROM tag WHERE",
+                      "artifact = '", md5hash, "'" ) )
+  # deletes connection and driver
+  dbDisconnect( conn )
+  dbUnloadDriver( sqlite ) 
+  
+  
 }

@@ -76,8 +76,9 @@
 saveToRepo <- function( object, ..., archiveData = TRUE, 
                         archiveTags = TRUE, 
                         archiveMiniature = TRUE, dir ){
-  stopifnot( is.character( dir ), is.logical( c( archiveData, archiveTags ) ) )
+  stopifnot( is.character( dir ), is.logical( c( archiveData, archiveTags, archiveMiniature ) ) )
   md5hash <- digest(object)
+  objectName <- deparse(substitute(object))
   
   # check if dir has "/" at the end and add it if not
   if ( regexpr( pattern = ".$", text = dir) != "/" ){
@@ -86,25 +87,25 @@ saveToRepo <- function( object, ..., archiveData = TRUE,
   
   # save object to .rd file
   dir.create(file.path(dir, md5hash), showWarnings = FALSE)
-  save()
+  save(file = paste0(dir, md5hash, ".rda"), ascii=TRUE, list=objectName,  envir = parent.frame(2)))
   
   # add entry to database 
-  addArtifact( ) 
+  addArtifact( md5hash, dir ) 
   
   # whether to add tags
   if ( archiveTags ) {
     extractedTags <- extractTags( object )
-    sapply( extractedTags, addTags, md5hash = md5hash )
+    sapply( extractedTags, addTag, md5hash = md5hash, dir = dir )
   }
   
   # whether to archive data
   if ( archiveData )
-    extractData( object )
+    extractData( object, dir )
   
   # whether to archive miniature
   if ( archiveMiniature )
-    extractMiniature( object, mdhash5, ... )
+    extractMiniature( object, mdhash5, dir ,... )
   
-  # paste hash / return hash ?  cat( paste0( "message", md5hash ) )
+  md5hash
 }
 

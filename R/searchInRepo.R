@@ -41,6 +41,21 @@
 searchInLocalRepo <- function( tag, dir ){
   stopifnot( is.character( c( tag, dir ) ) )
   
+  # creates connection and driver
+  dirBase <- paste0( dir, "/backpack.db")
+  sqlite <- dbDriver( "SQLite" )
+  conn <- dbConnect( sqlite, dirBase )
+  
+  # extracts md5hash
+  md5hash <- dbGetQuery( conn,
+                         paste0( "SELECT artifact FROM tag WHERE tag = ",
+                                "'", tag, "'" ) )
+  # deletes connection and driver
+  dbDisconnect( conn )
+  dbUnloadDriver( sqlite ) 
+  
+  return( md5hash )
+  
 }
 
 #' @rdname searchInRepo
@@ -48,4 +63,19 @@ searchInLocalRepo <- function( tag, dir ){
 searchInGithubRepo <- function( tag, repo, user ){
   stopifnot( is.character( c( tag, repo, user ) ) )
   
+  # not sure if it works
+  # creates connection and driver
+  urlBase <- paste0( "https://github.com/", user, repo, "/backpack.db")
+  sqlite <- dbDriver( "SQLite" )
+  conn <- dbConnect( sqlite, urlBase )
+  
+  # extracts md5hash
+  md5hash <- dbGetQuery( conn,
+              paste0( "SELECT artifact FROM tag WHERE tag = ",
+                   "'", tag, "'" ) )
+  # deletes connection and driver
+  dbDisconnect( conn )
+  dbUnloadDriver( sqlite ) 
+  
+  return( md5hash )
 }

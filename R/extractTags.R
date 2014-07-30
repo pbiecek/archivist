@@ -1,56 +1,75 @@
-# TODO:
+# TODO: TO CHECK
 
 extractTags <- function ( object, ... )
   UseMethod("extractTags")
 
 extractTags.default <- function( object, ... ) {
+  name <- paste0( "name:", deparse( substitute( object ) ) )
+  class <- paste0( "class:", class( object )[1] )
+  return( c( name, class ) )
 
 }
 
 extractTags.data.frame <- function( object, ... ) {
-  unique( c( colnames( object ),
-           "data frame" ) )
+  name <- paste0( "name:", deparse( substitute( object ) ) )
+  var <- unique( paste0( "varname:", c( colnames( object ) ) ) )
+  class <- paste0( "class:", class( object )[1] )
+  return( c( name, var, class ) )
 }
 
 extractTags.ggplot <- function( object, ... ) {
-  require( ggplot2 )
+  library( ggplot2 )
+  labx <- paste0( "labelx:", object$labels$x )
+  laby <- paste0( "labely:", object$labels$y )
+  data <- paste0( "data:", object$data )
+  class <- paste0( "class:", class( object )[1] )
+  name <- paste0( "name:", deparse( substitute( object ) ) )
+  return( c( labx, laby, data, class, name ) )
 }
-
+object <- lm(Sepal.Length~Sepal.Width+Petal.Length+Petal.Width, data=iris)
 extractTags.lm <- function( object, ... ) {
-  unique( c( names( object$coefficients ), 
-             as.character( object$terms ),
-             colnames( object$model ),
-             "linear regression model" ) )
+  var <- paste0( "coef:name", names( object$coefficients ) )
+  class <- paste0( "class:", class( object )[1] )
+  name <- paste0( "name:", deparse( substitute( object ) ) )
+  call <- paste0( "call:", object$call )
+  return( c( name, class, var, call ) )
+  
 }
 
 extractTags.htest <- function( object, ... ) {
-  require( stats )
+  library( stats )
+  alt <- paste0( "alternative:", object$alternative )
+  method <- paste0( "method:", object$method )
+  class <- paste0( "class:", class( object )[1] )
+  name <- paste0( "name:", deparse( substitute( object ) ) )
+  return( c( name, class, alt, method ) )
+  
 }
 
 extractTags.trellis <- function( object, ... ) {
-  require( lattice )
+  library( lattice )
 }
 
 extractTags.twins <- function( object, ... ) {
-  require( cluster )
+  library( cluster )
 }
 
 extractTags.partition <- function( object, ... ) {
-  require( cluster )
+  library( cluster )
 }
 
 extractTags.lda <- function( object, ... ) {
-  require( MASS )
+  library( MASS )
 }
 
 extractTags.qda <- function( object, ... ) {
-  require( MASS )
+  library( MASS )
 }
 
 extractTags.glmnet <- function( object, ... ) {
-  require( glmnet )
+  library( glmnet )
 }
 
 extractTags.survfit <- function( object, ... ) {
-  require( survival )
+  library( survival )
 }

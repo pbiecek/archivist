@@ -55,15 +55,31 @@
 #' @family archivist
 #' @rdname loadFromLocalRepo
 #' @export
-loadFromLocalRepo <- function( md5hash, dir ){
+loadFromLocalRepo <- function( md5hash, dir, returns = TRUE ){
   stopifnot( is.character( c( md5hash, dir ) ) )
+  stopifnot( is.logical( returns ))
   
+  if ( returns ){
+    load( file = paste0( dir, md5hash, ".rd" ) )
+  }else{
+    
+  }
 }
 
 
 #' @rdname loadFromLocalRepo
 #' @export
-loadFromGithubRepo <- function( md5hash, repo, user ){
+loadFromGithubRepo <- function( md5hash, repo, user, returns = TRUE ){
   stopifnot( is.character( c( md5hash, repo, user ) ) )
+  stopifnot( is.logical( returns ))
+  
+  # maybe some "raw" here ?
+  # urlLoad <- paste0("https://github.com", user, repo)
+  # load( file = paste0( urlLoad, md5hash, ".rd" ) )
+  # if ( returns ){
+  #  load( file = paste0( dir, md5hash, ".rd" ) )
+  #}else{
+  #  
+  #}
   
 }

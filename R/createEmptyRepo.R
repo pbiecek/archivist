@@ -44,35 +44,57 @@ createEmptyRepo <- function( dir ){
   }
   
   # create connection
-  sqlite    <- dbDriver("SQLite")
-  backpack <- dbConnect(sqlite, paste0(dir, "backpack.db"))
+  sqlite    <- dbDriver( "SQLite" )
+  backpack <- dbConnect( sqlite, paste0( dir, "backpack.db" ) )
   
   # create tables
   artifact <- data.frame(md5hash = "",
-                         createdDate = as.character(now()), 
-                         stringsAsFactors=FALSE)
+                         createdDate = as.character( now() ), 
+                         stringsAsFactors = FALSE ) 
   
   tag <- data.frame(artifact = "", 
                     tag = "", 
-                    timestamp = as.character(now()), 
-                    stringsAsFactors=FALSE)
+                    createdDate = as.character( now() ), 
+                    stringsAsFactors = FALSE )
   
   # insert tables into database
-  dbWriteTable(backpack, "artifact",artifact, overwrite=TRUE)
-  dbWriteTable(backpack, "tag",tag, overwrite=TRUE)
+  dbWriteTable( backpack, "artifact",artifact, overwrite=TRUE )
+  dbWriteTable( backpack, "tag",tag, overwrite=TRUE )
   
   
   # dbGetQuery(backpack, "delete from artifact")
   # dbGetQuery(backpack, "delete from tag")
   
-  dbDisconnect(backpack)
+  dbDisconnect( backpack )
+  dbUnloadDriver( sqlite )
 }
 
-addArtifact <- function( object, md5hash ){
+addArtifact <- function( md5hash, dir ){
+  # creates connection and driver
+  sqlite <- dbDriver( "SQLite" )
+  conn <- dbConnect( sqlite, paste0( dir, "backpack.db" ) )
+  
+  # send insert
+  dbGetQuery( conn,
+              paste0( "insert into artifact (md5hash, createdDate) values",
+                      "('", md5hash, "', '", as.character( createdDate ), "')" ) )
+  # deletes connection and driver
+  dbDisconnect( conn )
+  dbUnloadDriver( sqlite )  
+}
+
+addTag <- function( tag, md5hash, createdDate = now(), dir ){
+  # creates connection and driver
+  sqlite <- dbDriver( "SQLite" )
+  conn <- dbConnect( sqlite, paste0( dir, "backpack.db" ) )
+  
+  # send insert
+  dbGetQuery( conn,
+              paste0("insert into tag (artifact, tag, createdDate) values ",
+                      "('", md5hash, "', '", tag, "', '", as.character( createdDate ), "')" ) )
+  
+  # deletes connection and driver
+  dbDisconnect( conn )
+  dbUnloadDriver( sqlite ) 
   
 }
-
-addTag <- function( md5hash, tag, timestamp = now() ){
-  
-}
-
