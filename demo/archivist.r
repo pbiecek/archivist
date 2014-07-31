@@ -8,6 +8,7 @@ library("archivist")
 # database named backpack.
 #
 createEmptyRepo( dir = getwd() )
+invisible(readline())
 
 # 
 # archivist has his own built-in database 
@@ -19,12 +20,14 @@ createEmptyRepo( dir = getwd() )
 #
 # demoDir <- paste0(path.package("archivist"), "/exampledata/")
 # OR
+#
 demoDir <- getwd()
 
 #
 # there is also an example Github database.
+#
 demoGitDir <- "https://github.com/pbiecek/graphGallery/exampledata/"
-
+invisible(readline())
 
 #
 # how does saving a data.frame is realized?
@@ -37,16 +40,16 @@ saveToRepo( object = iris, dir = demoDir)
 # as we can see, the object's md5hash was returned
 # wchich means saving operation executes properly.
 #
-
+invisible(readline())
 #
 # if one forgots the object's md5hash it can be
 # easily checked in database.
 #
-# one can check with what md5hash musculus
+# one can check with what md5hash iris
 # data were saved to the Repository.
 #
 (iris_md5hash  <- searchInLocalRepo( tag = "name:iris", dir = demoDir))
-
+invisible(readline())
 #
 # one might check how does loading an object process
 # is realized?
@@ -56,7 +59,7 @@ saveToRepo( object = iris, dir = demoDir)
 #
 rm( iris )
 loadFromLocalRepo( md5hash = iris_md5hash, dir = demoDir)
-
+invisible(readline())
 #
 # it also works for md5hash abbreviation.
 #
@@ -65,7 +68,7 @@ data( swiss , package = "datasets")
 rm( apartments ) # note that md5hash get be get strictly from saveToRepo
 swiss_md5hash_abbreviation <- "dhcj7s" # need to be fixed on real hash
 loadFromLocalRepo( md5hash = swiss_md5hash_abbreviation, dir = demoDir)
-
+invisible(readline())
 #
 # note that md5hash can be get strictly from saveToRepo
 # but only at first call of this function.
@@ -79,7 +82,7 @@ loadFromLocalRepo( md5hash = swiss_md5hash_abbreviation, dir = demoDir)
 # so we higly recommend to recover md5hashes from 
 # searchInLocalRepo.
 # 
-
+invisible(readline())
 #
 # if one is not interested anymore in archivizing
 # a specific object, then the object might be 
@@ -95,7 +98,7 @@ rmFromRepo( md5hash = swiss_md5hash, dir = demoDir)
 #
 # so object will not be able to restore anymore.
 #
-
+invisible(readline())
 
 #
 # if one wanted to seek for an object in Repository, it is 
@@ -108,10 +111,14 @@ rmFromRepo( md5hash = swiss_md5hash, dir = demoDir)
 # every call return an object's md5hash.
 #
 searchInLocalRepo( tag = "name:myDataXYZ",  dir = demoDir)
+invisible(readline())
 searchInLocalRepo( tag = list( dataFrom = "2005-05-27", dataTo = "2005-07-07"), 
                    dir = demoDir)
+invisible(readline())
 searchInLocalRepo( tag = "class:ggplot",    dir = demoDir)
+invisible(readline())
 searchInLocalRepo( tag = "date:2005-05-27", dir = demoDir)
+invisible(readline())
 
 
 #
@@ -119,9 +126,12 @@ searchInLocalRepo( tag = "date:2005-05-27", dir = demoDir)
 # expresions as below.
 #
 searchInGithubRepo( tag = "name:marvelData",  user = "USER", repo = "REPO")
+invisible(readline())
 searchInGithubRepo( tag = "class:data.frame", user = "USER", repo = "REPO")
+invisible(readline())
 searchInGithubRepo( tag = "md5hash:37d8chs9jdj2jxnd0k2jdncjdh4ew23", 
                     user = "USER", repo = "REPO")
+invisible(readline())
 
 
 #
@@ -134,12 +144,14 @@ searchInGithubRepo( tag = "md5hash:37d8chs9jdj2jxnd0k2jdncjdh4ew23",
 #
 loadFromGithubRepo( md5hash = "jd7fhcndkwid8fhcbs9d0ckdhen31" , 
                     user = "pbiecek", repo = "graphGallery")
+invisible(readline())
 loadFromGithubRepo( md5hash = "jdkcndjamsnzjdifockdmsnadkdk3" , 
                     user = "pbiecek", repo = "graphGallery")
+invisible(readline())
 loadFromGithubRepo( md5hash = "ff78cu" , 
                     user = "pbiecek", repo = "graphGallery")
 # load with abbreviation
-
+invisible(readline())
 #
 # one may notice that loadFromGithubRepo and
 # loadFromLocalRepo load objects to the Global
@@ -154,10 +166,11 @@ exampleName1 <- loadFromGithubRepo( md5hash = "k09xd" , returns = TRUE,
                                     user = "pbiecek", repo = "graphGallery")
 exampleName2 <- loadFromLocalRepo( md5hash = "838d9dhcjajskdlfoeuajsjckdiehjd2", 
                                    dir = demoDir, returns = TRUE )
+invisible(readline())
 #
 # VECTORIZED OPERATIONS 
 #
-
+invisible(readline())
 #
 # functions from archivist package are not
 # vectorized.
@@ -169,7 +182,7 @@ obj2rm <- searchInLocalRepo( tag = list( dataFrom = "2005-05-27",
                                          dataTo = "2005-07-07"), 
                              dir = demoDir )
 sapply( obj2rm, rmFromRepo, dir = demoDir )
-
+invisible(readline())
 #
 # similarly when one wants to load more than one object,
 # again *apply family is recommended (?apply, ?sapply).
@@ -181,7 +194,7 @@ obj2load <- searchInGithubRepo( tag = "class:ggplot",
                                 user = "pbiecek", repo = "graphGallery")
 sapply( obj2load, loadFromGithubRepo, returns = FALSE,
         user = "pbiecek", repo = "graphGallery") 
-
+invisible(readline())
 #
 # this can be repeated if many objects are desired to 
 # be archivised at one call.
@@ -212,7 +225,7 @@ sappl(c(plotRed, plotBlue, plotGreen), saveToRepo, width = 4000,
       height = 3200, archiveData = FALSE, archiveMiniature = TRUE,
       dir = demoDir)
 # as a result md5hash of every object is returned
-
+invisible(readline())
 #
 # even search operations can be applied to *apply's family
 # function.
@@ -224,7 +237,7 @@ example_tags <- c( "class:data.frame", "class:matrix")
                                 searchInLocalRepo, dir = demoDir))
 # and apply to uniqe function to avoid repetitions
 MATRIX_and_FRAMES_md5hashes <- unique(MATRIX_and_FRAMES_md5hashes)
-
+invisible(readline())
 #
 # moreover if one wants to search for objects with 2 
 # conditions, then also *apply family is suggested.

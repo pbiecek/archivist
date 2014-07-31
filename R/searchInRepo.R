@@ -79,7 +79,7 @@ searchInLocalRepo <- function( tag, dir ){
   dbDisconnect( conn )
   dbUnloadDriver( sqlite ) 
   
-  return( md5hash )
+  return( as.character( unlist( md5hash ) ) )
   
 }
 
