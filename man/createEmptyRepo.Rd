@@ -25,6 +25,9 @@ Created \code{backpack} database is a useful and fundamental tool for rememberin
 \code{name}, \code{class}, \code{archivisation date} etc (that are remembered as \link{Tags})
 or for keeping object's \code{md5hash}.
 
+Besides \code{backpack} database, there also is created a folder named \code{gallery} in which all
+objects will be archivised.
+
 After every \code{saveToRepo} call the database is refreshed, so object is available immediately.
 }
 \examples{

@@ -10,15 +10,15 @@ extractData.default <- function( object, parrentMd5hash, parentDir ){
 extractData.ggplot <- function( object, parrentMd5hash, parentDir ){
   library( ggplot2 )
   extractedDF <- object$data
-  md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, parentDir, rememberName = FALSE )
-  addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, parentDir )
+  md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, dir = parentDir, rememberName = FALSE )
+  addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
 
 }
 
 extractData.lm <- function( object, parrentMd5hash, parentDir ){
   extractedDF <- object$model
-  md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, parentDir, rememberName = FALSE )
-  addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, parentDir )
+  md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, dir = parentDir, rememberName = FALSE )
+  addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
 }
 
 extractData.htest <- function( object, parrentMd5hash, parentDir ){
@@ -34,15 +34,15 @@ extractData.trellis <- function( object, parrentMd5hash, parentDir ){
 extractData.twins <- function( object, parrentMd5hash, parentDir ){
   library( cluster ) # agnes / diana / mona inherits after twins
   extractedDF <- object$data
-  md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, parentDir, rememberName = FALSE )
-  addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, parentDir )
+  md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, dir = parentDir, rememberName = FALSE )
+  addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
 }
 
 extractData.partition <- function( object, parrentMd5hash, parentDir ){
   library( cluster ) # pam / clara / fanny inherits after partition
   extractedDF <- object$data
-  md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, parentDir, rememberName = FALSE )
-  addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, parentDir )
+  md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, dir = parentDir, rememberName = FALSE )
+  addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
 }
 
 extractData.lda <- function( object, parrentMd5hash, parentDir ){
@@ -66,3 +66,5 @@ extractData.survfit <- function( object, parrentMd5hash, parentDir ){
   library( survival ) 
   object$call # model call
 }
+
+

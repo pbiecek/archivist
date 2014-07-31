@@ -37,6 +37,7 @@
 #' searchInLocalRepo( "name:prettyPlot", dir = "/home/folder/here" )
 #' searchInGithubRepo( "name:myLMmodel", user="USERNAME", repo="REPO" )
 #' searchInGithubRepo( "myLMmodel:call", user="USERNAME", repo="REPO" )
+#' searchInGithubRepo( "date:2014-07-31 23:43:34", user="USERNAME", repo="REPO" )
 #' searchInLocalRepo( tag = list( dataFrom = "2005-05-27", dataTo = "2005-07-07"), 
 #' dir = demoDir)
 #' @family archivist
@@ -55,10 +56,6 @@ searchInLocalRepo <- function( tag, dir ){
   sqlite <- dbDriver( "SQLite" )
   conn <- dbConnect( sqlite, dirBase )
   
-  #if ( regexpr( pattern = ".{4}" , text = tag) == "date" ){
-  #  
-  #}       #NOT WORKS FOR DATES YET
-  
   # extracts md5hash
   if ( length( tag ) == 1 ){
     md5hash <- dbGetQuery( conn,
@@ -66,13 +63,13 @@ searchInLocalRepo <- function( tag, dir ){
                                 "'", tag, "'" ) )
   }
   if ( length( tag ) == 2 ){
-    #### TO BE DONE : CREATE VECTOR WITH DATES (FROM, FROM+1,..., TO-1, TO)
-    #dates <- 
+    dates <- seq(from=as.Date(tag[[1]]), to=as.Date(tag[[2]]), by="day") 
+    # TODO nead to remember about hours
     md5hash <- sapply(dates, function(x){
       dbGetQuery(conn, paste0( "SELECT artifact FROM tag WHERE createdDate = ",
                                    "'", x, "'" ) )} )
   }
-  #}       #NOT WORKS FOR DATES YET
+     #NOT WORKS FOR 2 DATES YET
       
       
   # deletes connection and driver

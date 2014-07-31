@@ -14,12 +14,14 @@
 #' 
 #' @seealso 
 #' Functions using \code{Repository} are:
-#' \link{saveToRepo}, 
-#' \link{rmFromRepo}, 
-#' \link{loadFromLocalRepo}, 
-#' \link{loadFromGithubRepo},
-#' \link{searchInLocalRepo},
-#' \link{searchInGithubRepo}.
+#' \itemize{
+#'  \item \link{saveToRepo}, 
+#'  \item \link{rmFromRepo}, 
+#'  \item \link{loadFromLocalRepo}, 
+#'  \item \link{loadFromGithubRepo},
+#'  \item \link{searchInLocalRepo},
+#'  \item \link{searchInGithubRepo}.
+#'  }
 #' 
 #' Function creating \code{Repository} is:
 #' \link{createEmptyRepo}.

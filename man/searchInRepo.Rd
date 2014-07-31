@@ -39,6 +39,7 @@ searchInLocalRepo( "class:ggplot", dir = getwd() )
 searchInLocalRepo( "name:prettyPlot", dir = "/home/folder/here" )
 searchInGithubRepo( "name:myLMmodel", user="USERNAME", repo="REPO" )
 searchInGithubRepo( "myLMmodel:call", user="USERNAME", repo="REPO" )
+searchInGithubRepo( "date:2014-07-31 23:43:34", user="USERNAME", repo="REPO" )
 searchInLocalRepo( tag = list( dataFrom = "2005-05-27", dataTo = "2005-07-07"),
 dir = demoDir)
 }

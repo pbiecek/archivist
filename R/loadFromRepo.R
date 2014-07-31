@@ -64,9 +64,11 @@ loadFromLocalRepo <- function( md5hash, dir, returns = TRUE ){
     dir <- paste0(  dir, "/"  )
   }
   if ( returns ){
-    load( file = paste0( dir, md5hash, ".rda" ), envir = .GlobalEnv )
+    load( file = paste0( dir, "gallery/", md5hash, ".rda" ), envir = .GlobalEnv )
   }else{
-    ##TO BE DONE
+    load( file = paste0( dir, "gallery/", md5hash, ".rda" ), envir = .GlobalEnv )
+    name <- load( file = paste0( dir, "gallery/", md5hash, ".rda" ), envir = .GlobalEnv )
+    return( get( name, envir = .GlobalEnv) )
   }
 }
 

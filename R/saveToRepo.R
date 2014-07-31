@@ -40,7 +40,15 @@
 #' possible to set the Miniature \code{width} and \code{height} parameters. Default they are set to
 #' \code{width = 800}, \code{height = 600}.
 #' 
-#' Supported object's classes are (so far): \code{lm, data.frame, ggplot}.
+#' Supported object's classes are (so far): 
+#' \itemize{
+#'  \item \code{lm},
+#'  \item \code{data.frame},
+#'  \item \code{ggplot},
+#'  \item \code{twins (inherits: agnes, diana, mona)},
+#'  \item \code{partition (inherits: pam, clara, fanny)}.
+#'  }
+#'
 #' TODO: EXTEND
 #' 
 #' @return
@@ -63,7 +71,6 @@
 #' 
 #' @param dir A character denoting an existing directory in which an object will be saved.
 #'
-#' @param firstRows A numeric value specifying the number of rows of data to archivise. See details.
 #' 
 #' @author 
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
@@ -79,11 +86,17 @@
 #'   geom_point() +  geom_point(data = ds, aes(y = mean),
 #'                colour = 'red', size = 3)
 #' model.lm <- lm(Sepal.Length~ Sepal.Width + Petal.Length + Petal.Width, data= iris)
+#'  
 #' 
 #' # examples
-#' saveToRepo(myplot123, dir="REPODIR")
-#' saveToRepo(iris, dir="REPODIR")
-#' saveToRepo(model.lm, dir="REPODIR")
+#' exampleDir <- tempdir()
+#' createEmptyRepo(dir = exampleDir)
+#' saveToRepo(myplot123, dir=exampleDir)
+#' saveToRepo(iris, dir=exampleDir)
+#' saveToRepo(model.lm, dir=exampleDir)
+#' 
+#' # removing all files
+#' file.remove( exampleDir )
 #' @family archivist
 #' @rdname saveToRepo
 #' @export
@@ -91,8 +104,8 @@ saveToRepo <- function( object, ..., archiveData = TRUE,
                         archiveTags = TRUE, 
                         archiveMiniature = TRUE, dir, rememberName = TRUE ){
   stopifnot( is.character( dir ), is.logical( c( archiveData, archiveTags, archiveMiniature ) ) )
-  md5hash <- digest(object)
-  objectName <- deparse(substitute(object))
+  md5hash <- digest( object )
+  objectName <- deparse( substitute( object ) )
   
   # check if dir has "/" at the end and add it if not
   if ( regexpr( pattern = ".$", text = dir) != "/" ){
@@ -101,10 +114,15 @@ saveToRepo <- function( object, ..., archiveData = TRUE,
   
   # save object to .rd file
   if ( rememberName ){
-    save( file = paste0(dir, md5hash, ".rda"), ascii=TRUE, list=objectName,  envir = parent.frame(2))
-  }else{
-    save( object, file = paste0(dir, md5hash, "-data.rda"), ascii=TRUE)
+    save( file = paste0(dir,"gallery/", md5hash, ".rda"), ascii = TRUE, list = objectName,  envir = parent.frame(2))
+  }else{ 
+
+    saveit(  md5hash = object, file2 = paste0(dir, "gallery/", md5hash, ".rda"), ascii=TRUE)
+    # save( object, file = paste0(dir, "gallery/", md5hash, ".rda"),  ascii=TRUE)
+    # a little fix needs to be done
+    # saveit is implemented at the end of file
   }
+  
   # add entry to database 
   addArtifact( md5hash, dir ) 
   
@@ -116,12 +134,24 @@ saveToRepo <- function( object, ..., archiveData = TRUE,
   
   # whether to archive data
   if ( archiveData )
-    extractData( object, md5hash, dir )
+    extractData( object, parrentMd5hash = md5hash, parentDir = dir )
   
   # whether to archive miniature
   if ( archiveMiniature )
-    extractMiniature( object, md5hash, dir = dir ,... )
+    extractMiniature( object, md5hash, parentDir = dir ,... )
   
   md5hash
 }
 
+
+saveit <- function( ..., file2 ) {
+  x <- list( ... )
+  save( list = names( x ), file = file2, envir = list2env( x ))
+}
+
+# diir <- getwd()
+# model2 <- lm(iris[,1]~iris[,2], data=iris)
+# m <- digest(model2)
+# saveit( m = model2, file2=paste0(diir, "/mfile.rda"))
+# rm(m)
+# load(file=paste0(diir, "/mfile.rda"))

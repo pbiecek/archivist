@@ -17,15 +17,17 @@
 #' 
 #' @seealso 
 #' Functions that take \code{md5hash} as a parameter are:
-#' \link{rmFromRepo}, 
-#' \link{loadFromLocalRepo}, 
-#' \link{loadFromGithubRepo},
-#' 
+#' \itemize{
+#'  \item \link{rmFromRepo}, 
+#'  \item \link{loadFromLocalRepo}, 
+#'  \item \link{loadFromGithubRepo},
+#' }
 #' Functions returning \code{md5hash} as a value are:
-#' \link{searchInLocalRepo},
-#' \link{searchInGithubRepo},
-#' \link{saveToRepo}.
-#' 
+#'\itemize{  
+#'  \item \link{searchInLocalRepo},
+#'  \item \link{searchInGithubRepo},
+#'  \item \link{saveToRepo}.
+#' }
 #' @family archivist
 #' @name md5hash
 #' @docType class

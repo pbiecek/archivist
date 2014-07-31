@@ -91,6 +91,15 @@ rmFromRepo <- function( md5hash, dir ){
   # deletes connection and driver
   dbDisconnect( conn )
   dbUnloadDriver( sqlite ) 
-  
+
+# remove files from gallery folder
+if ( file.exists( paste0( dir, "gallery/", md5hash, ".rda" ) ) )
+  file.remove( paste0( dir, "gallery/", md5hash, ".rda" ) )
+
+if ( file.exists( paste0( dir, "gallery/", md5hash, ".png" ) ) )
+  file.remove( paste0( dir, "gallery/", md5hash, ".png" ) )
+
+if ( file.exists( paste0( dir, "gallery/", md5hash, ".txt" ) ) )
+  file.remove( paste0( dir, "gallery/", md5hash, ".txt" ) )
   
 }

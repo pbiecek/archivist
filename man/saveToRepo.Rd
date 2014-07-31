@@ -18,8 +18,6 @@ saveToRepo(object, ..., archiveData = TRUE, archiveTags = TRUE,
 \item{archiveMiniature}{A logical value denoting whether to archive a miniature of an object.}
 
 \item{dir}{A character denoting an existing directory in which an object will be saved.}
-
-\item{firstRows}{A numeric value specifying the number of rows of data to archivise. See details.}
 }
 \value{
 As a result of this function a character string is returned as a value and determines
@@ -62,7 +60,15 @@ a Miniature of this object is wanted to be archivise ( \code{archiveMiniature = 
 possible to set the Miniature \code{width} and \code{height} parameters. Default they are set to
 \code{width = 800}, \code{height = 600}.
 
-Supported object's classes are (so far): \code{lm, data.frame, ggplot}.
+Supported object's classes are (so far):
+\itemize{
+ \item \code{lm},
+ \item \code{data.frame},
+ \item \code{ggplot},
+ \item \code{twins (inherits: agnes, diana, mona)},
+ \item \code{partition (inherits: pam, clara, fanny)}.
+ }
+
 TODO: EXTEND
 }
 \examples{
@@ -77,10 +83,16 @@ myplot123 <- ggplot(df, aes(x = gp, y = y)) +
                colour = 'red', size = 3)
 model.lm <- lm(Sepal.Length~ Sepal.Width + Petal.Length + Petal.Width, data= iris)
 
+
 # examples
-saveToRepo(myplot123, dir="REPODIR")
-saveToRepo(iris, dir="REPODIR")
-saveToRepo(model.lm, dir="REPODIR")
+exampleDir <- tempdir()
+createEmptyRepo(dir = exampleDir)
+saveToRepo(myplot123, dir=exampleDir)
+saveToRepo(iris, dir=exampleDir)
+saveToRepo(model.lm, dir=exampleDir)
+
+# removing all files
+file.remove( exampleDir )
 }
 \author{
 Marcin Kosinski , \email{m.p.kosinski@gmail.com}

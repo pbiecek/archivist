@@ -17,14 +17,17 @@ objects in Repository and facilitates searching and loading them.
 }
 \seealso{
 Functions that take \code{md5hash} as a parameter are:
-\link{rmFromRepo},
-\link{loadFromLocalRepo},
-\link{loadFromGithubRepo},
-
+\itemize{
+ \item \link{rmFromRepo},
+ \item \link{loadFromLocalRepo},
+ \item \link{loadFromGithubRepo},
+}
 Functions returning \code{md5hash} as a value are:
-\link{searchInLocalRepo},
-\link{searchInGithubRepo},
-\link{saveToRepo}.
+\itemize{
+ \item \link{searchInLocalRepo},
+ \item \link{searchInGithubRepo},
+ \item \link{saveToRepo}.
+}
 
 Other archivist: \code{\link{Repository}};
   \code{\link{Tags}}; \code{\link{archivist-package}};

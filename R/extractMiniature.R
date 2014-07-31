@@ -1,84 +1,87 @@
 # TODO: TO CHECK
 
-extractMiniature <- function( object, md5hash, dir, ... )
+extractMiniature <- function( object, md5hash, parentDir, ... )
   UseMethod( "extractMiniature" )
 
-extractMiniature.default <- function( object, md5hash, dir, ... ){
+extractMiniature.default <- function( object, md5hash, parentDir, ... ){
   
 }
 
-extractMiniature.data.frame <- function( object, md5hash, dir, ..., firstRows = 6 ){
-  sink( file = paste0( dir, md5hash, ".txt" ) )
+extractMiniature.data.frame <- function( object, md5hash, parentDir, ..., firstRows = 6 ){
+  sink( file = paste0( parentDir, "gallery/", md5hash, ".txt" ) )
   print( head( object, firstRows ) )
   sink()
 }
 
-extractMiniature.ggplot <- function( object, md5hash, dir, ..., width = 800, height = 600 ){
+extractMiniature.ggplot <- function( object, md5hash, parentDir, ..., width = 800, height = 600 ){
   library( ggplot2 )
-  png( paste0( dir, md5hash, ".png" ), width, height )
+  png( paste0( parentDir, "gallery/", md5hash, ".png" ), width, height )
   print( object )
   dev.off()
 }
 
-extractMiniature.lm <- function( object, md5hash, dir, ... ){
-  sink( file = paste0(dir, md5hash, ".txt" ) )
+extractMiniature.lm <- function( object, md5hash, parentDir, ... ){
+  sink( file = paste0(parentDir, "gallery/", md5hash, ".txt" ) )
   print( summary( object ) )
   sink()
 }
 
-extractMiniature.htest <- function( object, md5hash, dir, ... ){
+extractMiniature.htest <- function( object, md5hash, parentDir, ... ){
   library( stats )
-  sink( file = paste0(dir, md5hash, ".txt" ) )
+  sink( file = paste0(parentDir, "gallery/", md5hash, ".txt" ) )
   print( object )
   sink()
 }
 
-extractMiniature.trellis <- function( object, md5hash, dir, ... ){
+extractMiniature.trellis <- function( object, md5hash, parentDir, ..., width = 800, height = 600 ){
   library( lattice )
-  fun <- get( format )
-  fun( paste0( dir, md5hash, ".", format ), width, height )
+  png( paste0( parentDir, "gallery/", md5hash, ".png" ), width, height )
   print( object )
   dev.off()
 }
 
-extractMiniature.twins <- function( object, md5hash, dir, ... ){
+extractMiniature.twins <- function( object, md5hash, parentDir, ..., width = 800, height = 600 ){
   library( cluster )
-  sink( file = paste0(dir, md5hash, ".txt" ) )
-  print( object )
-  sink()
+  png( paste0( parentDir, "gallery/", md5hash, ".png" ), width, height )
+  par( mfrow = c( 1, 2 ) )
+  plot( object )
+  dev.off()
+  par( mfrow = c( 1, 1 ) )
 }
 
-extractMiniature.partition <- function( object, md5hash, dir, ... ){
+extractMiniature.partition <- function( object, md5hash, parentDir, ... ){
   library( cluster )
-  sink( file = paste0(dir, md5hash, ".txt" ) )
-  print( summary( object ) )
-  sink()
+  png( paste0( parentDir, "gallery/", md5hash, ".png" ), width, height )
+  par( mfrow = c( 1, 2 ) )
+  plot( object )
+  dev.off()
+  par( mfrow = c( 1, 1 ) )
 }
 
-extractMiniature.lda <- function( object, md5hash, dir, ... ){
+extractMiniature.lda <- function( object, md5hash, parentDir, ... ){
   library( lda )
-  sink( file = paste0(dir, md5hash, ".txt" ) )
+  sink( file = paste0(parentDir, "gallery/", md5hash, ".txt" ) )
   print( object ) 
   sink()
 }
 
-extractMiniature.qda <- function( object, md5hash, dir, ... ){
+extractMiniature.qda <- function( object, md5hash, parentDir, ... ){
   library( qda )
-  sink( file = paste0(dir, md5hash, ".txt" ) )
+  sink( file = paste0(parentDir, "gallery/", md5hash, ".txt" ) )
   print( object ) 
   sink()
 }
 
-extractMiniature.glmnet <- function( object, md5hash, dir, ... ){
+extractMiniature.glmnet <- function( object, md5hash, parentDir, ... ){
   library( glmnet )
-  sink( file = paste0(dir, md5hash, ".txt" ) )
+  sink( file = paste0(parentDir, "gallery/", md5hash, ".txt" ) )
   print( object ) 
   sink()
 }
 
-extractMiniature.survfit <- function( object, md5hash, dir, ... ){
+extractMiniature.survfit <- function( object, md5hash, parentDir, ... ){
   library( survival )
-  sink( file = paste0(dir, md5hash, ".txt" ) )
+  sink( file = paste0(parentDir, "gallery/", md5hash, ".txt" ) )
   print( summary( object ) )
   sink()
 }

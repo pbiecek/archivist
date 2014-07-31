@@ -6,7 +6,8 @@ extractTags <- function ( object, ... )
 extractTags.default <- function( object, ... ) {
   name <- paste0( "name:", deparse( substitute( object ) ) )
   class <- paste0( "class:", class( object )[1] )
-  return( c( name, class ) )
+  date <- paste0( "date:", now() )
+  return( c( name, class, date ) )
 
 }
 
@@ -14,7 +15,8 @@ extractTags.data.frame <- function( object, ... ) {
   name <- paste0( "name:", deparse( substitute( object ) ) )
   var <- unique( paste0( "varname:", c( colnames( object ) ) ) )
   class <- paste0( "class:", class( object )[1] )
-  return( c( name, var, class ) )
+  date <- paste0( "date:", now() )
+  return( c( name, var, class, date ) )
 }
 
 extractTags.ggplot <- function( object, ... ) {
@@ -24,15 +26,18 @@ extractTags.ggplot <- function( object, ... ) {
   data <- paste0( "data:", object$data )
   class <- paste0( "class:", class( object )[1] )
   name <- paste0( "name:", deparse( substitute( object ) ) )
-  return( c( labx, laby, data, class, name ) )
+  date <- paste0( "date:", now() )
+  return( c( labx, laby, data, class, name, date ) )
+  
 }
-object <- lm(Sepal.Length~Sepal.Width+Petal.Length+Petal.Width, data=iris)
+
 extractTags.lm <- function( object, ... ) {
   var <- paste0( "coefname:", names( object$coefficients ) )
   class <- paste0( "class:", class( object )[1] )
   name <- paste0( "name:", deparse( substitute( object ) ) )
   call <- paste0( "call:", object$call )
-  return( c( name, class, var, call ) )
+  date <- paste0( "date:", now() )
+  return( c( name, class, var, call, date ) )
   
 }
 
@@ -42,7 +47,8 @@ extractTags.htest <- function( object, ... ) {
   method <- paste0( "method:", object$method )
   class <- paste0( "class:", class( object )[1] )
   name <- paste0( "name:", deparse( substitute( object ) ) )
-  return( c( name, class, alt, method ) )
+  date <- paste0( "date:", now() )
+  return( c( name, class, alt, method, date ) )
   
 }
 
