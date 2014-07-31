@@ -7,17 +7,19 @@ library("archivist")
 # create a local Repository, which is a SQLite
 # database named backpack.
 #
-createEmptyRepo( dir = "DesiredDir")
+createEmptyRepo( dir = getwd() )
 
 # 
 # archivist has his own built-in database 
 # for demo and examples purpose.
 # 
-# this database is situated in installation of
-# archivist package directory in folder
+# this database is situated in directory where
+# archivist package was installed, in folder
 # named "exampledata".
 #
-demoDir <- paste0(path.package("archivist"), "/exampledata/")
+# demoDir <- paste0(path.package("archivist"), "/exampledata/")
+# OR
+demoDir <- getwd()
 
 #
 # there is also an example Github database.
@@ -148,7 +150,7 @@ loadFromGithubRepo( md5hash = "ff78cu" ,
 # so that functions return object as a result that
 # can be attributed to a new name.
 #
-exampleName1 <- loadFromGithubRepo( md5hash = "k09xd" , returns = TRUE
+exampleName1 <- loadFromGithubRepo( md5hash = "k09xd" , returns = TRUE,
                                     user = "pbiecek", repo = "graphGallery")
 exampleName2 <- loadFromLocalRepo( md5hash = "838d9dhcjajskdlfoeuajsjckdiehjd2", 
                                    dir = demoDir, returns = TRUE )
@@ -178,7 +180,7 @@ sapply( obj2rm, rmFromRepo, dir = demoDir )
 obj2load <- searchInGithubRepo( tag = "class:ggplot", 
                                 user = "pbiecek", repo = "graphGallery")
 sapply( obj2load, loadFromGithubRepo, returns = FALSE,
-        user = "pbiecek", repo = "graphGallery") )
+        user = "pbiecek", repo = "graphGallery") 
 
 #
 # this can be repeated if many objects are desired to 

@@ -48,11 +48,23 @@
 #'                        dir = "/home/folder/here" )                      
 #'  rmFromRepo( hash, dir = "/home/folder/here" )     
 #' 
+#' # removing objects from specified date
+#' hashes <- searchInLocalRepo( tag = list( dataFrom = "2005-05-27", dataTo = "2005-07-07"), 
+#' dir = demoDir)
+#' sapply(hashes, rmFromRepo)
+#' 
+#' 
 #' @family archivist
 #' @rdname rmFromRepo
 #' @export
 rmFromRepo <- function( md5hash, dir ){
   stopifnot( is.character( c( dir, md5hash ) ) )
+  
+  # check if dir has "/" at the end and add it if not
+  if ( regexpr( pattern = ".$", text = dir ) != "/" ){
+    dir <- paste0(  dir, "/"  )
+  }
+  
   
   # creates connection and driver
   sqlite <- dbDriver( "SQLite" )
@@ -60,11 +72,22 @@ rmFromRepo <- function( md5hash, dir ){
   
   # send deletes
   dbGetQuery( conn,
-              paste0( "DELETE FROM artifact WHERE",
+              paste0( "DELETE FROM artifact WHERE ",
                       "md5hash = '", md5hash, "'" ) )
   dbGetQuery( conn,
-              paste0( "DELETE FROM tag WHERE",
+              paste0( "DELETE FROM tag WHERE ",
                       "artifact = '", md5hash, "'" ) )
+  # VECTORIZED VERSION
+  # send deletes
+#   sapply(md5hash, function(x){
+#     dbGetQuery( conn,
+#               paste0( "DELETE FROM artifact WHERE ",
+#                       "md5hash = '", x, "'" ) )} )
+#   sapply(md5hash, function(x){
+#     dbGetQuery( conn,
+#               paste0( "DELETE FROM tag WHERE ",
+#                       "artifact = '", x, "'" ) )} )
+#   
   # deletes connection and driver
   dbDisconnect( conn )
   dbUnloadDriver( sqlite ) 

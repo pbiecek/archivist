@@ -1,6 +1,6 @@
 # TODO: TO CHECK
 
-extractData <- function( object, md5hash )
+extractData <- function( object, md5hash, dir )
   UseMethod( "extractData" )
 
 extractData.default <- function( object, md5hash, dir ){
@@ -10,14 +10,17 @@ extractData.default <- function( object, md5hash, dir ){
 extractData.ggplot <- function( object, md5hash, dir ){
   library( ggplot2 )
   extractedDF <- object$data
-  md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE )
-  addTag( tag = paste0("relationWith:", md5hash), md5hash = md5hashDF, dir = dir )
+  extractedDir <- dir
+  extractedMd5hash <- md5hash
+  md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, dir = extractedDir, rememberName = FALSE )
+  addTag( tag = paste0("relationWith:", extractedMd5hash), md5hash = md5hashDF, dir = dir )
 
 }
 
 extractData.lm <- function( object, md5hash, dir ){
   extractedDF <- object$model
-  md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE )
+  extractedDir <- dir
+  md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, dir = extractedDir, rememberName = FALSE )
   addTag( tag = paste0("relationWith:", md5hash), md5hash = md5hashDF, dir = dir )
 }
 
@@ -34,14 +37,16 @@ extractData.trellis <- function( object, md5hash, dir ){
 extractData.twins <- function( object, md5hash, dir ){
   library( cluster ) # agnes / diana / mona inherits after twins
   extractedDF <- object$data
-  md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE )
+  extractedDir <- dir
+  md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, dir = extractedDir, rememberName = FALSE )
   addTag( tag = paste0("relationWith:", md5hash), md5hash = md5hashDF, dir = dir )
 }
 
 extractData.partition <- function( object, md5hash, dir ){
   library( cluster ) # pam / clara / fanny inherits after partition
   extractedDF <- object$data
-  md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE )
+  extractedDir <- dir
+  md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, dir = extractedDir, rememberName = FALSE )
   addTag( tag = paste0("relationWith:", md5hash), md5hash = md5hashDF, dir = dir )
 }
 

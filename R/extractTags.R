@@ -28,7 +28,7 @@ extractTags.ggplot <- function( object, ... ) {
 }
 object <- lm(Sepal.Length~Sepal.Width+Petal.Length+Petal.Width, data=iris)
 extractTags.lm <- function( object, ... ) {
-  var <- paste0( "coef:name", names( object$coefficients ) )
+  var <- paste0( "coefname:", names( object$coefficients ) )
   class <- paste0( "class:", class( object )[1] )
   name <- paste0( "name:", deparse( substitute( object ) ) )
   call <- paste0( "call:", object$call )

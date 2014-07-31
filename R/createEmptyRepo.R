@@ -62,8 +62,8 @@ createEmptyRepo <- function( dir ){
   dbWriteTable( backpack, "tag",tag, overwrite=TRUE )
   
   
-  # dbGetQuery(backpack, "delete from artifact")
-  # dbGetQuery(backpack, "delete from tag")
+   dbGetQuery(backpack, "delete from artifact")
+   dbGetQuery(backpack, "delete from tag")
   
   dbDisconnect( backpack )
   dbUnloadDriver( sqlite )
@@ -72,12 +72,12 @@ createEmptyRepo <- function( dir ){
 addArtifact <- function( md5hash, dir ){
   # creates connection and driver
   sqlite <- dbDriver( "SQLite" )
-  conn <- dbConnect( sqlite, paste0( dir, "backpack.db" ) )
+  conn <- dbConnect( sqlite, paste0( dir, "/backpack.db" ) )
   
   # send insert
   dbGetQuery( conn,
               paste0( "insert into artifact (md5hash, createdDate) values",
-                      "('", md5hash, "', '", as.character( createdDate ), "')" ) )
+                      "('", md5hash, "', '", as.character( now() ), "')" ) )
   # deletes connection and driver
   dbDisconnect( conn )
   dbUnloadDriver( sqlite )  
@@ -86,12 +86,12 @@ addArtifact <- function( md5hash, dir ){
 addTag <- function( tag, md5hash, createdDate = now(), dir ){
   # creates connection and driver
   sqlite <- dbDriver( "SQLite" )
-  conn <- dbConnect( sqlite, paste0( dir, "backpack.db" ) )
+  conn <- dbConnect( sqlite, paste0( dir, "/backpack.db" ) )
   
   # send insert
   dbGetQuery( conn,
               paste0("insert into tag (artifact, tag, createdDate) values ",
-                      "('", md5hash, "', '", tag, "', '", as.character( createdDate ), "')" ) )
+                      "('", md5hash, "', '", tag, "', '", as.character( now() ), "')" ) )
   
   # deletes connection and driver
   dbDisconnect( conn )

@@ -8,7 +8,11 @@ rmFromRepo(md5hash, dir)
 \arguments{
 \item{md5hash}{A hash of an object. A character string being a result of a cryptographical hash function with MD5 algorithm.}
 
-\item{dir}{A character denoting an existing directory from which an object will be removed.}
+\item{dir}{A character denoting an existing directory from which an object will be removed.
+
+# TODO: if one wants to remove files from date to date, it is suggested to
+# first perform obj2rm <- searchIn...Repo( tag = list(FromDate, ToDate), dir = )
+# sapply(obj2rm, rmFromRepo, dir = )}
 }
 \description{
 \code{rmFromRepo} removes an object given as \code{md5hash} from a \link{Repository}.
@@ -44,6 +48,11 @@ rmFromRepo( md5hash = "sksjd",
  hash <-  searchInLocalRepo( "name:prettyPlot",
                        dir = "/home/folder/here" )
  rmFromRepo( hash, dir = "/home/folder/here" )
+
+# removing objects from specified date
+hashes <- searchInLocalRepo( tag = list( dataFrom = "2005-05-27", dataTo = "2005-07-07"),
+dir = demoDir)
+sapply(hashes, rmFromRepo)
 }
 \author{
 Marcin Kosinski , \email{m.p.kosinski@gmail.com}

@@ -59,12 +59,17 @@ loadFromLocalRepo <- function( md5hash, dir, returns = TRUE ){
   stopifnot( is.character( c( md5hash, dir ) ) )
   stopifnot( is.logical( returns ))
   
+  # check if dir has "/" at the end and add it if not
+  if ( regexpr( pattern = ".$", text = dir ) != "/" ){
+    dir <- paste0(  dir, "/"  )
+  }
   if ( returns ){
-    load( file = paste0( dir, md5hash, ".rd" ) )
+    load( file = paste0( dir, md5hash, ".rda" ), envir = .GlobalEnv )
   }else{
-    
+    ##TO BE DONE
   }
 }
+
 
 
 #' @rdname loadFromLocalRepo
@@ -79,7 +84,7 @@ loadFromGithubRepo <- function( md5hash, repo, user, returns = TRUE ){
   # if ( returns ){
   #  load( file = paste0( dir, md5hash, ".rd" ) )
   #}else{
-  #  
+  #  ##TO BE DONE 
   #}
   
 }

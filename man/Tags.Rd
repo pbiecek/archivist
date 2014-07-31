@@ -14,6 +14,15 @@ be searched by \link{searchInLocalRepo} or \link{searchInGithubRepo} functions.
 \code{Tags} are stored in the \link{Repository}.
 
 Supported objects with extra \code{Tags} are:
+ggplot,
+lm,
+htest,
+twins (agnes, diana, mona),
+partition (pam, clara, fanny),
+lda,
+qda,
+glmnet (elmet, lognet, multnet, fishnet, coxnet, mrelnet),
+survfit.
 TODO: list of tags
 }
 \seealso{

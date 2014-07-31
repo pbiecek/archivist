@@ -18,7 +18,9 @@ Depends:
     digest,
     RCurl,
     httr,
-    rjson
+    rjson,
+    RSQLite,
+    lubridate
 BugReports: https://github.com/pbiecek/archivist/issues
 LinkingTo: 
 Imports:

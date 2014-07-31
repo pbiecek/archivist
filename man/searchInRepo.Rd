@@ -9,7 +9,7 @@ searchInLocalRepo(tag, dir)
 searchInGithubRepo(tag, repo, user)
 }
 \arguments{
-\item{tag}{A character denoting a Tag to seek for or a list of length 2 with \code{dataFrom} and \code{dataTo} arguments See details.}
+\item{tag}{A character denoting a Tag to seek for or a list of length 2 with \code{dataFrom} and \code{dataTo} arguments. See details.}
 
 \item{dir}{A character denoting an existing directory from which objects will be searched.}
 
@@ -30,7 +30,8 @@ is not in a Repository a logical value \code{FALSE} is returned.
 \code{Tags} can be an object's \code{name}, \code{class} or \code{archivisation date}.
 Furthermore, for various object's classes more different \code{Tags} can be searched.
 See \link{Tags}. If a \code{Tag} is a list of length 2, \code{md5hashes} of all
-objects created from date \code{dataFrom} to data \code{dataTo} are returned.
+objects created from date \code{dataFrom} to data \code{dataTo} are returned. The date
+should be formated e.g. \code{"2014-07-31"}.
 }
 \examples{
 # not work
@@ -38,6 +39,8 @@ searchInLocalRepo( "class:ggplot", dir = getwd() )
 searchInLocalRepo( "name:prettyPlot", dir = "/home/folder/here" )
 searchInGithubRepo( "name:myLMmodel", user="USERNAME", repo="REPO" )
 searchInGithubRepo( "myLMmodel:call", user="USERNAME", repo="REPO" )
+searchInLocalRepo( tag = list( dataFrom = "2005-05-27", dataTo = "2005-07-07"),
+dir = demoDir)
 }
 \author{
 Marcin Kosinski , \email{m.p.kosinski@gmail.com}

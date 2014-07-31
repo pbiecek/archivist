@@ -4,9 +4,9 @@
 \alias{loadFromLocalRepo}
 \title{Load Object Given as md5hash from Repository}
 \usage{
-loadFromLocalRepo(md5hash, dir)
+loadFromLocalRepo(md5hash, dir, returns = TRUE)
 
-loadFromGithubRepo(md5hash, repo, user)
+loadFromGithubRepo(md5hash, repo, user, returns = TRUE)
 }
 \arguments{
 \item{dir}{A character denoting an existing directory from which an object will be loaded.}
@@ -46,7 +46,6 @@ You can load one object at one call.
 \examples{
 # not work
 library(digest)
-loadFromLocalRepo( md5hash = digest(plot123) , dir = getwd() ) # TODO: is it useful?
 loadFromLocalRepo( md5hash = "hs82h9kahs72h3nckv0dhsu28sgd73js",
                        dir = "user/folder/here" )
 loadFromGithubRepo( md5hash = "hs82h9kahs72h3nckv0dhsu28sgd73js",

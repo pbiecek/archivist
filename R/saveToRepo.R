@@ -28,6 +28,18 @@
 #' \link{searchInLocalRepo} or \link{searchInGithubRepo}. Objects can be searched by their \link{Tags}, 
 #' \code{names} or objects classes.
 #' 
+#' Graphical parameters.
+#' 
+#' If a desired to archivise object is of class \code{data.frame} or data can be 
+#' (and are wanted to be - \code{archiveData = TRUE}) extracted from this object, it is possible to specify 
+#' how many rows of that data should be archivised. Simply add argument \code{firstRows} with wanted rows
+#' number.
+#' 
+#' If a desired to archivise object is of class \code{lattice} or \code{ggplot}/\code{gg} and
+#' a Miniature of this object is wanted to be archivise ( \code{archiveMiniature = TRUE}) then it is 
+#' possible to set the Miniature \code{width} and \code{height} parameters. Default they are set to
+#' \code{width = 800}, \code{height = 600}.
+#' 
 #' Supported object's classes are (so far): \code{lm, data.frame, ggplot}.
 #' TODO: EXTEND
 #' 
@@ -50,6 +62,8 @@
 #' @param archiveMiniature A logical value denoting whether to archive a miniature of an object.
 #' 
 #' @param dir A character denoting an existing directory in which an object will be saved.
+#'
+#' @param firstRows A numeric value specifying the number of rows of data to archivise. See details.
 #' 
 #' @author 
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
@@ -75,20 +89,23 @@
 #' @export
 saveToRepo <- function( object, ..., archiveData = TRUE, 
                         archiveTags = TRUE, 
-                        archiveMiniature = TRUE, dir ){
+                        archiveMiniature = TRUE, dir, rememberName = TRUE ){
   stopifnot( is.character( dir ), is.logical( c( archiveData, archiveTags, archiveMiniature ) ) )
   md5hash <- digest(object)
   objectName <- deparse(substitute(object))
   
   # check if dir has "/" at the end and add it if not
   if ( regexpr( pattern = ".$", text = dir) != "/" ){
-    dir <- paste0( c ( dir, "/" ) )
+    dir <- paste0(  dir, "/"  )
   }
   
   # save object to .rd file
-  dir.create(file.path(dir, md5hash), showWarnings = FALSE)
-  save(file = paste0(dir, md5hash, ".rda"), ascii=TRUE, list=objectName,  envir = parent.frame(2)))
-  
+  # dir.create(file.path(dir, md5hash), showWarnings = FALSE)
+  if (rememberName){
+    save(file = paste0(dir, md5hash, ".rda"), ascii=TRUE, list=objectName,  envir = parent.frame(2))
+  }else{
+    save(object, file = paste0(dir, md5hash, "-data.rda"), ascii=TRUE)
+  }
   # add entry to database 
   addArtifact( md5hash, dir ) 
   
@@ -100,11 +117,11 @@ saveToRepo <- function( object, ..., archiveData = TRUE,
   
   # whether to archive data
   if ( archiveData )
-    extractData( object, dir )
+    extractData( object, md5hash, dir )
   
   # whether to archive miniature
   if ( archiveMiniature )
-    extractMiniature( object, mdhash5, dir ,... )
+    extractMiniature( object, md5hash, dir = dir ,... )
   
   md5hash
 }

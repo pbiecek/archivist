@@ -4,7 +4,7 @@
 \title{Save an Object into a Repository}
 \usage{
 saveToRepo(object, ..., archiveData = TRUE, archiveTags = TRUE,
-  archiveMiniature = TRUE, dir)
+  archiveMiniature = TRUE, dir, rememberName = TRUE)
 }
 \arguments{
 \item{object}{An arbitrary R object to be saved. For supported objects see details.}
@@ -18,6 +18,8 @@ saveToRepo(object, ..., archiveData = TRUE, archiveTags = TRUE,
 \item{archiveMiniature}{A logical value denoting whether to archive a miniature of an object.}
 
 \item{dir}{A character denoting an existing directory in which an object will be saved.}
+
+\item{firstRows}{A numeric value specifying the number of rows of data to archivise. See details.}
 }
 \value{
 As a result of this function a character string is returned as a value and determines
@@ -48,7 +50,20 @@ Archivised object can be searched in \code{backpack} dataset using functions
 \link{searchInLocalRepo} or \link{searchInGithubRepo}. Objects can be searched by their \link{Tags},
 \code{names} or objects classes.
 
+Graphical parameters.
+
+If a desired to archivise object is of class \code{data.frame} or data can be
+(and are wanted to be - \code{archiveData = TRUE}) extracted from this object, it is possible to specify
+how many rows of that data should be archivised. Simply add argument \code{firstRows} with wanted rows
+number.
+
+If a desired to archivise object is of class \code{lattice} or \code{ggplot}/\code{gg} and
+a Miniature of this object is wanted to be archivise ( \code{archiveMiniature = TRUE}) then it is
+possible to set the Miniature \code{width} and \code{height} parameters. Default they are set to
+\code{width = 800}, \code{height = 600}.
+
 Supported object's classes are (so far): \code{lm, data.frame, ggplot}.
+TODO: EXTEND
 }
 \examples{
 # objects preparation
