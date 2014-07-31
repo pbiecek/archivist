@@ -45,7 +45,7 @@ createEmptyRepo <- function( dir ){
   
   # create connection
   sqlite    <- dbDriver( "SQLite" )
-  backpack <- dbConnect( sqlite, paste0( dir, "backpack.db" ) )
+  backpack <- dbConnect( sqlite, paste0( dir, "/backpack.db" ) )
   
   # create tables
   artifact <- data.frame(md5hash = "",
@@ -58,8 +58,8 @@ createEmptyRepo <- function( dir ){
                     stringsAsFactors = FALSE )
   
   # insert tables into database
-  dbWriteTable( backpack, "artifact",artifact, overwrite=TRUE )
-  dbWriteTable( backpack, "tag",tag, overwrite=TRUE )
+  dbWriteTable( backpack, "artifact",artifact, overwrite = TRUE, row.names = FALSE )
+  dbWriteTable( backpack, "tag",tag, overwrite = TRUE, row.names = FALSE )
   
   
    dbGetQuery(backpack, "delete from artifact")
@@ -67,6 +67,12 @@ createEmptyRepo <- function( dir ){
   
   dbDisconnect( backpack )
   dbUnloadDriver( sqlite )
+  
+  
+  # if gallery folder does not exist - make it
+  if ( !file.exists( file.path(dir, "gallery") ) ){
+    dir.create(file.path(dir, "gallery"), showWarnings = FALSE)
+  }
 }
 
 addArtifact <- function( md5hash, dir ){

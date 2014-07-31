@@ -1,73 +1,68 @@
 # TODO: TO CHECK
 
-extractData <- function( object, md5hash, dir )
+extractData <- function( object, parrentMd5hash, parentDir )
   UseMethod( "extractData" )
 
-extractData.default <- function( object, md5hash, dir ){
+extractData.default <- function( object, parrentMd5hash, parentDir ){
   
 }
 
-extractData.ggplot <- function( object, md5hash, dir ){
+extractData.ggplot <- function( object, parrentMd5hash, parentDir ){
   library( ggplot2 )
   extractedDF <- object$data
-  extractedDir <- dir
-  extractedMd5hash <- md5hash
-  md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, dir = extractedDir, rememberName = FALSE )
-  addTag( tag = paste0("relationWith:", extractedMd5hash), md5hash = md5hashDF, dir = dir )
+  md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, parentDir, rememberName = FALSE )
+  addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, parentDir )
 
 }
 
-extractData.lm <- function( object, md5hash, dir ){
+extractData.lm <- function( object, parrentMd5hash, parentDir ){
   extractedDF <- object$model
-  extractedDir <- dir
-  md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, dir = extractedDir, rememberName = FALSE )
-  addTag( tag = paste0("relationWith:", md5hash), md5hash = md5hashDF, dir = dir )
+  md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, parentDir, rememberName = FALSE )
+  addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, parentDir )
 }
 
-extractData.htest <- function( object, md5hash, dir ){
+extractData.htest <- function( object, parrentMd5hash, parentDir ){
   library( stats )
   object$data.name # variable name
 }
 
-extractData.trellis <- function( object, md5hash, dir ){
+extractData.trellis <- function( object, parrentMd5hash, parentDir ){
   library( lattice )
   as.character( object$call )[3] # name of data.frame
 }
 
-extractData.twins <- function( object, md5hash, dir ){
+extractData.twins <- function( object, parrentMd5hash, parentDir ){
   library( cluster ) # agnes / diana / mona inherits after twins
   extractedDF <- object$data
-  extractedDir <- dir
-  md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, dir = extractedDir, rememberName = FALSE )
-  addTag( tag = paste0("relationWith:", md5hash), md5hash = md5hashDF, dir = dir )
+  md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, parentDir, rememberName = FALSE )
+  addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, parentDir )
 }
 
-extractData.partition <- function( object, md5hash, dir ){
+extractData.partition <- function( object, parrentMd5hash, parentDir ){
   library( cluster ) # pam / clara / fanny inherits after partition
   extractedDF <- object$data
-  extractedDir <- dir
-  md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, dir = extractedDir, rememberName = FALSE )
-  addTag( tag = paste0("relationWith:", md5hash), md5hash = md5hashDF, dir = dir )
+  md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, parentDir, rememberName = FALSE )
+  addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, parentDir )
 }
 
-extractData.lda <- function( object, md5hash, dir ){
+extractData.lda <- function( object, parrentMd5hash, parentDir ){
   library( MASS ) 
   object$call  # model call
 }
 
-extractData.qda <- function( object, md5hash, dir ){
+extractData.qda <- function( object, parrentMd5hash, parentDir ){
   library( MASS )  
   object$call  # model call
 }
 
 
-extractData.glmnet <- function( object, md5hash, dir ){
+extractData.glmnet <- function( object, parrentMd5hash, parentDir ){
   library( glmnet ) # elmet / lognet / multnet /foshnet /coxnet /mrelnet 
                    # inherits after glmnet
   object$call # model call
 }
 
-extractData.survfit <- function( object, md5hash, dir ){
+extractData.survfit <- function( object, parrentMd5hash, parentDir ){
   library( survival ) 
   object$call # model call
 }

@@ -100,11 +100,10 @@ saveToRepo <- function( object, ..., archiveData = TRUE,
   }
   
   # save object to .rd file
-  # dir.create(file.path(dir, md5hash), showWarnings = FALSE)
-  if (rememberName){
-    save(file = paste0(dir, md5hash, ".rda"), ascii=TRUE, list=objectName,  envir = parent.frame(2))
+  if ( rememberName ){
+    save( file = paste0(dir, md5hash, ".rda"), ascii=TRUE, list=objectName,  envir = parent.frame(2))
   }else{
-    save(object, file = paste0(dir, md5hash, "-data.rda"), ascii=TRUE)
+    save( object, file = paste0(dir, md5hash, "-data.rda"), ascii=TRUE)
   }
   # add entry to database 
   addArtifact( md5hash, dir ) 

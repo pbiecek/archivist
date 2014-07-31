@@ -58,14 +58,14 @@ invisible(readline())
 # it's going to be loaded.
 #
 rm( iris )
-loadFromLocalRepo( md5hash = iris_md5hash, dir = demoDir)
+loadFromLocalRepo( md5hash = "ff575c261c949d073b2895b05d1097c3", dir = demoDir)
 invisible(readline())
 #
 # it also works for md5hash abbreviation.
 #
 data( swiss , package = "datasets")
 (swiss_md5hash <- saveToRepo( object = swiss, dir = demoDir))
-rm( apartments ) # note that md5hash get be get strictly from saveToRepo
+rm( swiss ) # note that md5hash get be get strictly from saveToRepo
 swiss_md5hash_abbreviation <- "dhcj7s" # need to be fixed on real hash
 loadFromLocalRepo( md5hash = swiss_md5hash_abbreviation, dir = demoDir)
 invisible(readline())
