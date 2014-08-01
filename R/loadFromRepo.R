@@ -195,25 +195,32 @@ loadFromGithubRepo <- function( md5hash, repo, user, returns = FALSE ){
   
   # willlll not work if abbreviation is given YET
   
-  #
-
   # load plot from archive
   if ( !returns ){
     library(RCurl)
+    options(RCurlOptions = list(cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl")))
+    
+    #if we assume the md5hash lenght after abbreviation is 1 we can try link this
+    #tmpobject <- getBinaryURL(paste0( "https://raw.githubusercontent.com/", user, "/", repo, 
+    #                                  "/master/gallery/", md5hash, ".rda"))
+    # but error occures
+    
     # sapply and replicate because of abbreviation mode can find more than 1 md5hash
-    tmpobjectS <- sapply( md5hash, function(x){
-                          getBinaryURL( paste0( "https://raw.githubusercontent.com", user, "/", repo, 
+    tmpobjectS <- lapply( md5hash, function(x){
+                          getBinaryURL( paste0( "https://raw.githubusercontent.com/", user, "/", repo, 
                                                  "/master/gallery/", x, ".rda") ) } )
     tfS <- replicate( length( md5hash ), tempfile() )
     
-    writeBin( tmpobjectS, tfS ) # not sure it fhis functions knows how to work on 
+    # writeBin( tmpobjectS, tfS ) # not sure it fhis functions knows how to work on 
                                 # arguments that are vectors. if problems - let's make a loop
-    # for (i in 1:length(tmpobjectS)){
-    # writeBin( tmpobjectS[i], tfS[i] )
-    # }
+    for (i in 1:length(tmpobjectS)){
+      writeBin( tmpobjectS[[i]], tfS[i] )
+    }
+    
+
     
     sapply( tfS, function(x){
-          load( file = x, envir = .GlobalEnv ) } )
+          load( file = x , envir =.GlobalEnv) } )
     
     sapply( tfS, unlink )
     tmpobjectS <- NULL

@@ -22,7 +22,7 @@ which uses a cryptographical hash function with MD5 algorithm.
 Also this function removes a \code{md5hash.rda} file, where \code{md5hash} is object's hash as above.
 
 Important: instead of giving whole \code{md5hash} name, user can simply give first few signs of desired \code{md5hash} - an abbreviation.
-For example \code{a09dd} instead of \code{a09ddjdkf9kj33dcjdnfjgos9jd9jkcv}. But if several tags
+For example \code{a09dd} instead of \code{a09ddjdkf9kj33dcjdnfjgos9jd9jkcv}. But if several \code{md5hashes}
 start with the same pattern all objects with this \code{md5hash} abbreviation will be removed from \link{Repository} and from
 \code{gallery} folder.
 
@@ -113,7 +113,7 @@ sapply(obj2rm, rmFromRepo, dir = exampleDir)
 modelMd5hash  <- saveToRepo(model, dir=exampleDir)
 model2Md5hash  <- saveToRepo(model2, dir=exampleDir)
 model3Md5hash  <- saveToRepo(model3, dir=exampleDir)
-objMd5hash <- searchInLocalRep("class:lm", dir = exampleDir)
+objMd5hash <- searchInLocalRepo("class:lm", dir = exampleDir)
 sapply(objMd5hash, rmFromRepo, dir = exampleDir)
 
 
