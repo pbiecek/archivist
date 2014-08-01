@@ -6,13 +6,9 @@
 rmFromRepo(md5hash, dir)
 }
 \arguments{
-\item{md5hash}{A hash of an object. A character string being a result of a cryptographical hash function with MD5 algorithm.}
+\item{md5hash}{A hash of an object. A character string being a result of a cryptographical hash function with MD5 algorithm or it's abbreviation.}
 
-\item{dir}{A character denoting an existing directory from which an object will be removed.
-
-# TODO: if one wants to remove files from date to date, it is suggested to
-# first perform obj2rm <- searchIn...Repo( tag = list(FromDate, ToDate), dir = )
-# sapply(obj2rm, rmFromRepo, dir = )}
+\item{dir}{A character denoting an existing directory from which an object will be removed.}
 }
 \description{
 \code{rmFromRepo} removes an object given as \code{md5hash} from a \link{Repository}.
@@ -26,9 +22,16 @@ which uses a cryptographical hash function with MD5 algorithm.
 Also this function removes a \code{md5hash.rda} file, where \code{md5hash} is object's hash as above.
 
 Important: instead of giving whole \code{md5hash} name, user can simply give first few signs of desired \code{md5hash} - an abbreviation.
-For example \code{a09dd} instead of \code{a09ddjdkf9kj33dcjdnfjgos9jd9jkcv}. But if several tags start with the same pattern
-an error will be displayed and you will be asked to give more precise \code{md5hash} abbreviation (try abbreviation with more digits all with whole name).
-TODO: what is the value of rmFromRepo() function? TRUE/FALSE if anything is removed?
+For example \code{a09dd} instead of \code{a09ddjdkf9kj33dcjdnfjgos9jd9jkcv}. But if several tags
+start with the same pattern all objects with this \code{md5hash} abbreviation will be removed from \link{Repository} and from
+\code{gallery} folder.
+
+If one wants to remove files from one date to another date, it is suggested to
+perform:
+\itemize{
+   \item \code{obj2rm <- searchInLocalRepo( tag = list(dateFrom, dateTo), dir = )}
+   \item \code{sapply(obj2rm, rmFromRepo, dir = )}
+}
 }
 \note{
 \code{md5hash} can be a result from \link{searchInRepo} function proceeded with \code{tag = NAME} argument,
@@ -37,22 +40,96 @@ where \code{NAME} is tag that describes property of objects to be deleted.
 For more information about \code{Tags} check \link{Tags}.
 }
 \examples{
-# not work
-rmFromRepo( md5hash = "sksjdncjdkslwifgdtsjhdt37wyshzdh",
-                       dir = "REPODIR" )
+# objects preparation
 
-# with md5hash abbreviation
-rmFromRepo( md5hash = "sksjd",
-                       dir = "REPODIR" )
+# data.frame object
+data(iris)
 
- hash <-  searchInLocalRepo( "name:prettyPlot",
-                       dir = "/home/folder/here" )
- rmFromRepo( hash, dir = "/home/folder/here" )
+# ggplot/gg object
+library(ggplot2)
+df <- data.frame(gp = factor(rep(letters[1:3], each = 10)),y = rnorm(30))
+library(plyr)
+ds <- ddply(df, .(gp), summarise, mean = mean(y), sd = sd(y))
+myplot123 <- ggplot(df, aes(x = gp, y = y)) +
+  geom_point() +  geom_point(data = ds, aes(y = mean),
+               colour = 'red', size = 3)
 
-# removing objects from specified date
-hashes <- searchInLocalRepo( tag = list( dataFrom = "2005-05-27", dataTo = "2005-07-07"),
-dir = demoDir)
-sapply(hashes, rmFromRepo)
+# lm object
+model <- lm(Sepal.Length~ Sepal.Width + Petal.Length + Petal.Width, data= iris)
+model2 <- lm(Sepal.Length~ Sepal.Width + Petal.Width, data= iris)
+model3 <- lm(Sepal.Length~ Sepal.Width, data= iris)
+
+# agnes (twins) object
+data(votes.repub)
+library(cluster)
+agn1 <- agnes(votes.repub, metric = "manhattan", stand = TRUE)
+
+# fanny (partition) object
+x <- rbind(cbind(rnorm(10, 0, 0.5), rnorm(10, 0, 0.5)),
+         cbind(rnorm(15, 5, 0.5), rnorm(15, 5, 0.5)),
+          cbind(rnorm( 3,3.2,0.5), rnorm( 3,3.2,0.5)))
+fannyx <- fanny(x, 2)
+
+# creating example Repository - that examples will work
+
+exampleDir <- tempdir()
+createEmptyRepo(dir = exampleDir)
+myplo123Md5hash <- saveToRepo(myplot123, dir=exampleDir)
+irisMd5hash <- saveToRepo(iris, dir=exampleDir)
+modelMd5hash  <- saveToRepo(model, dir=exampleDir)
+agn1Md5hash <- saveToRepo(agn1, dir=exampleDir)
+fannyxMd5hash <- saveToRepo(fannyx, dir=exampleDir)
+
+# remove examples
+
+rmFromRepo(fannyxMd5hash, dir = exampleDir)
+rmFromRepo(irisMd5hash, dir = exampleDir)
+# not that also files in gallery folder, created in exampleDir
+# directory are being removed
+
+# one can have the same object archivised in 3 different times
+agn1Md5hash2 <- saveToRepo(agn1, dir=exampleDir)
+agn1Md5hash3 <- saveToRepo(agn1, dir=exampleDir)
+
+# md5hashes are the same for that same object (agn1)
+agn1Md5hash == agn1Md5hash2
+agn1Md5hash2 == agn1Md5hash3
+
+# but there are 3 times more rows in Repository database (backpack.db).
+# one easy call removes them all
+
+rmFromRepo(agn1Md5hash, dir = exampleDir)
+
+# rest of object can be removed e.g. like this
+# looking for dates of creation and then removing all objects
+# from specific date
+
+obj2rm <- searchInLocalRepo( tag = list(dateFrom = Sys.Date(), dateTo = Sys.Date()),
+           dir = exampleDir )
+sapply(obj2rm, rmFromRepo, dir = exampleDir)
+# aboves example removed all objects from Today
+
+# one can also remove objects from only specific class
+modelMd5hash  <- saveToRepo(model, dir=exampleDir)
+model2Md5hash  <- saveToRepo(model2, dir=exampleDir)
+model3Md5hash  <- saveToRepo(model3, dir=exampleDir)
+objMd5hash <- searchInLocalRep("class:lm", dir = exampleDir)
+sapply(objMd5hash, rmFromRepo, dir = exampleDir)
+
+
+# once can remove object specifying only its md5hash abbreviation
+fannyxMd5hash <- saveToRepo(fannyx, dir=exampleDir)
+# "01785982a662038f720aa85e688f2082"
+# so example abbreviation might be : "0178598"
+rmFromRepo("0178598", dir = exampleDir)
+
+
+# removing all files generated to this function's examples
+x <- list.files( paste0(exampleDir, "/gallery/" ) )
+sapply( x , function(x ){
+     file.remove( paste0(exampleDir, "/gallery/", x ) )
+   })
+file.remove( paste0(exampleDir, "/backpack.db" ) )
 }
 \author{
 Marcin Kosinski , \email{m.p.kosinski@gmail.com}

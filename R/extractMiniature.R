@@ -49,7 +49,7 @@ extractMiniature.twins <- function( object, md5hash, parentDir, ..., width = 800
   par( mfrow = c( 1, 1 ) )
 }
 
-extractMiniature.partition <- function( object, md5hash, parentDir, ... ){
+extractMiniature.partition <- function( object, md5hash, parentDir, ...,width = 800, height = 600 ){ 
   library( cluster )
   png( paste0( parentDir, "gallery/", md5hash, ".png" ), width, height )
   par( mfrow = c( 1, 2 ) )

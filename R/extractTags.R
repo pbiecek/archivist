@@ -58,10 +58,26 @@ extractTags.trellis <- function( object, ... ) {
 
 extractTags.twins <- function( object, ... ) {
   library( cluster )
+  ac <- paste0( "ac:", object$ac)
+  merge <- paste0( "merge:", object$merge)
+  diss <- paste0( "diss:", object$diss)
+  data <- paste0( "data:", object$data)
+  class <- paste0( "class:", class( object )[1] )
+  name <- paste0( "name:", deparse( substitute( object ) ) )
+  date <- paste0( "date:", now() )
+  return( c( name, class, date, ac, merge, diss, data ) )
 }
 
 extractTags.partition <- function( object, ... ) {
   library( cluster )
+  call <- paste0( "call:", object$call )
+  data <- paste0( "data:", object$data )
+  diss <- paste0( "diss:", object$diss )
+  objective <- paste0( "objective:", object$objective )
+  class <- paste0( "class:", class( object )[1] )
+  name <- paste0( "name:", deparse( substitute( object ) ) )
+  date <- paste0( "date:", now() )
+  return( c( name, class, date, call, data, diss, objective ) )
 }
 
 extractTags.lda <- function( object, ... ) {

@@ -61,12 +61,24 @@
 #'   }
 #'   \item{\code{twins (agnes, diana, mona)}}{
 #'   \itemize{
-#'      \item
+#'      \item date
+#'      \item name
+#'      \item class
+#'      \item ac
+#'      \item merge
+#'      \item diss
+#'      \item data
 #'   }
 #'   }
 #'   \item{\code{partition (pam, clara, fanny)}}{
 #'   \itemize{
-#'      \item
+#'      \item date
+#'      \item name
+#'      \item class
+#'      \item call
+#'      \item data
+#'      \item diss
+#'      \item objective
 #'   }
 #'   }
 #'   \item{\code{lda}}{

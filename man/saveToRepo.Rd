@@ -35,7 +35,8 @@ Every object is saved in a \code{md5hash.rda} file, located in the folder (creat
 for various objects. This \code{md5hash} is a string of length 32 that comes out as a result of
 \code{digest{digest}} function, which uses a cryptographical MD5 hash algorithm.
 
-By default, a miniature of an object and (if possible) a data set needed to compute this object are extracted. #' They are also going to be saved in a file named by their \code{md5hash} and a specific
+By default, a miniature of an object and (if possible) a data set needed to compute this object are extracted.
+They are also going to be saved in a file named by their \code{md5hash} and a specific
 \code{Tag}-relation is going to be added to the \code{backpack} dataset in case there is an urge to load an
 object with it's related data set - see \link{loadFromLocalRepo} or \link{loadFromGithubRepo}. Default settings
 may be changed by using arguments \code{archiveData}, \code{archiveTag} or \code{archiveMiniature} with
@@ -46,7 +47,7 @@ information check \link{Tags}
 
 Archivised object can be searched in \code{backpack} dataset using functions
 \link{searchInLocalRepo} or \link{searchInGithubRepo}. Objects can be searched by their \link{Tags},
-\code{names} or objects classes.
+\code{names}, \code{classes} or  \code{archivisation date}.
 
 Graphical parameters.
 
@@ -73,7 +74,11 @@ TODO: EXTEND
 }
 \examples{
 # objects preparation
+
+# data.frame object
 data(iris)
+
+# ggplot/gg object
 library(ggplot2)
 df <- data.frame(gp = factor(rep(letters[1:3], each = 10)),y = rnorm(30))
 library(plyr)
@@ -81,18 +86,39 @@ ds <- ddply(df, .(gp), summarise, mean = mean(y), sd = sd(y))
 myplot123 <- ggplot(df, aes(x = gp, y = y)) +
   geom_point() +  geom_point(data = ds, aes(y = mean),
                colour = 'red', size = 3)
-model.lm <- lm(Sepal.Length~ Sepal.Width + Petal.Length + Petal.Width, data= iris)
 
+# lm object
+model <- lm(Sepal.Length~ Sepal.Width + Petal.Length + Petal.Width, data= iris)
 
-# examples
+# agnes (twins) object
+data(votes.repub)
+library(cluster)
+agn1 <- agnes(votes.repub, metric = "manhattan", stand = TRUE)
+
+# fanny (partition) object
+x <- rbind(cbind(rnorm(10, 0, 0.5), rnorm(10, 0, 0.5)),
+         cbind(rnorm(15, 5, 0.5), rnorm(15, 5, 0.5)),
+          cbind(rnorm( 3,3.2,0.5), rnorm( 3,3.2,0.5)))
+fannyx <- fanny(x, 2)
+
+# creating example Repository - that examples will work
+
+# save examples
+
 exampleDir <- tempdir()
 createEmptyRepo(dir = exampleDir)
 saveToRepo(myplot123, dir=exampleDir)
 saveToRepo(iris, dir=exampleDir)
-saveToRepo(model.lm, dir=exampleDir)
+saveToRepo(model, dir=exampleDir)
+saveToRepo(agn1, dir=exampleDir)
+saveToRepo(fannyx, dir=exampleDir)
 
-# removing all files
-file.remove( exampleDir )
+# removing all files generated to this function's examples
+x <- list.files( paste0(exampleDir, "/gallery/" ) )
+sapply( x , function(x ){
+     file.remove( paste0(exampleDir, "/gallery/", x ) )
+   })
+file.remove( paste0(exampleDir, "/backpack.db" ) )
 }
 \author{
 Marcin Kosinski , \email{m.p.kosinski@gmail.com}

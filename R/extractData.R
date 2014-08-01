@@ -19,6 +19,7 @@ extractData.lm <- function( object, parrentMd5hash, parentDir ){
   extractedDF <- object$model
   md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, dir = parentDir, rememberName = FALSE )
   addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
+  # assign( attr( parrentMd5hash, "data"), value = md5hashDF, envir = sys.frame( 2 ) )
 }
 
 extractData.htest <- function( object, parrentMd5hash, parentDir ){
