@@ -1,0 +1,20 @@
+
+Call:
+lm(formula = Sepal.Length ~ Sepal.Width + Petal.Width, data = iris)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.2076 -0.2288 -0.0450  0.2266  1.1810 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  3.45733    0.30919   11.18  < 2e-16 ***
+Sepal.Width  0.39907    0.09111    4.38 2.24e-05 ***
+Petal.Width  0.97213    0.05210   18.66  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.4511 on 147 degrees of freedom
+Multiple R-squared:  0.7072,	Adjusted R-squared:  0.7033 
+F-statistic: 177.6 on 2 and 147 DF,  p-value: < 2.2e-16
+

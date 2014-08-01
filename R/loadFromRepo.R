@@ -135,7 +135,7 @@
 #' @family archivist
 #' @rdname loadFromLocalRepo
 #' @export
-loadFromLocalRepo <- function( md5hash, dir, returns = TRUE ){
+loadFromLocalRepo <- function( md5hash, dir, returns = FALSE ){
   stopifnot( is.character( c( md5hash, dir ) ) )
   stopifnot( is.logical( returns ))
   
@@ -163,7 +163,7 @@ loadFromLocalRepo <- function( md5hash, dir, returns = TRUE ){
   }
   
   # using sapply in case abbreviation mode found more than 1 md5hash
-  if ( returns ){
+  if ( !returns ){
     sapply( md5hash, function(x){
       load( file = paste0( dir, "gallery/", x, ".rda" ), envir = .GlobalEnv )
     } )
@@ -185,17 +185,62 @@ loadFromLocalRepo <- function( md5hash, dir, returns = TRUE ){
 
 #' @rdname loadFromLocalRepo
 #' @export
-loadFromGithubRepo <- function( md5hash, repo, user, returns = TRUE ){
+loadFromGithubRepo <- function( md5hash, repo, user, returns = FALSE ){
   stopifnot( is.character( c( md5hash, repo, user ) ) )
   stopifnot( is.logical( returns ))
   
-  # maybe some "raw" here ?
-  # urlLoad <- paste0("https://github.com", user, repo)
-  # load( file = paste0( urlLoad, md5hash, ".rd" ) )
-  # if ( returns ){
-  #  load( file = paste0( dir, md5hash, ".rd" ) )
-  #}else{
-  #  ##TO BE DONE 
-  #}
+  # what if abbreviation was given
   
+  # need to check whole database
+  
+  # willlll not work if abbreviation is given YET
+  
+  #
+
+  # load plot from archive
+  if ( !returns ){
+    library(RCurl)
+    # sapply and replicate because of abbreviation mode can find more than 1 md5hash
+    tmpobjectS <- sapply( md5hash, function(x){
+                          getBinaryURL( paste0( "https://raw.githubusercontent.com", user, "/", repo, 
+                                                 "/master/gallery/", x, ".rda") ) } )
+    tfS <- replicate( length( md5hash ), tempfile() )
+    
+    writeBin( tmpobjectS, tfS ) # not sure it fhis functions knows how to work on 
+                                # arguments that are vectors. if problems - let's make a loop
+    # for (i in 1:length(tmpobjectS)){
+    # writeBin( tmpobjectS[i], tfS[i] )
+    # }
+    
+    sapply( tfS, function(x){
+          load( file = x, envir = .GlobalEnv ) } )
+    
+    sapply( tfS, unlink )
+    tmpobjectS <- NULL
+  }else{
+    library(RCurl)
+    # sapply and replicate because of abbreviation mode can find more than 1 md5hash
+      tmpobjectS <- sapply( md5hash, function(x){
+      getBinaryURL( paste0( "https://raw.github/", user, "/", repo, 
+                            "/gallery/", x, ".rda") )  } )
+      tfS <- replicate( length( md5hash ), tempfile() )
+      
+      writeBin( tmpobjectS, tfS )
+      
+      sapply( tfS, function(x){
+        load( file = x, envir = .GlobalEnv ) } )
+      
+      name <- sapply( tfS, function(x){
+        load( file = x, envir = .GlobalEnv ) } )
+      
+      objects <- sapply( name , function(y){ 
+        get(x= y, envir = .GlobalEnv ) } ) 
+      
+      sapply( tfS, unlink )
+      tmpobjectS <- NULL
+      
+      return( objects )
+      
+  }
 }
+
