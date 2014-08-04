@@ -126,12 +126,12 @@
 #' 
 #' 
 #' # removing all files generated to this function's examples
-#' x <- list.files( paste0(exampleDir, "/gallery/" ) )
+#' x <- list.files( paste0( exampleDir, "/gallery/" ) )
 #' sapply( x , function(x ){
-#'      file.remove( paste0(exampleDir, "/gallery/", x ) )
+#'      file.remove( paste0( exampleDir, "/gallery/", x ) )
 #'    })
-#' file.remove( paste0(exampleDir, "/backpack.db" ) )
-#'
+#' file.remove( paste0( exampleDir, "/backpack.db" ) )
+#' file.remove( paste0( exampleDir, "/gallery" ) )
 #' 
 #' @family archivist
 #' @rdname rmFromRepo

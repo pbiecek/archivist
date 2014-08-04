@@ -125,11 +125,12 @@
 #' newFanny  <- loadFromLocalRepo("0178598", dir = exampleDir, returns = TRUE)
 #' 
 #' # removing all files generated to this function's examples
-#' x <- list.files( paste0(exampleDir, "/gallery/" ) )
+#' x <- list.files( paste0( exampleDir, "/gallery/" ) )
 #' sapply( x , function(x ){
-#'      file.remove( paste0(exampleDir, "/gallery/", x ) )
+#'      file.remove( paste0( exampleDir, "/gallery/", x ) )
 #'    })
-#' file.remove( paste0(exampleDir, "/backpack.db" ) )
+#' file.remove( paste0( exampleDir, "/backpack.db" ) )
+#' file.remove( paste0( exampleDir, "/gallery" ) )
 #'
 #' 
 #' @family archivist
@@ -227,7 +228,7 @@ loadFromGithubRepo <- function( md5hash, repo, user, returns = FALSE ){
   }else{
     library(RCurl)
     # sapply and replicate because of abbreviation mode can find more than 1 md5hash
-      tmpobjectS <- sapply( md5hash, function(x){
+      tmpobjectS <- lapply( md5hash, function(x){
       getBinaryURL( paste0( "https://raw.github/", user, "/", repo, 
                             "/gallery/", x, ".rda") )  } )
       tfS <- replicate( length( md5hash ), tempfile() )

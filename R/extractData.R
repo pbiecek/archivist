@@ -12,24 +12,30 @@ extractData.ggplot <- function( object, parrentMd5hash, parentDir ){
   extractedDF <- object$data
   md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, dir = parentDir, rememberName = FALSE )
   addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
-
+  return( md5hashDF )
 }
 
 extractData.lm <- function( object, parrentMd5hash, parentDir ){
   extractedDF <- object$model
   md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, dir = parentDir, rememberName = FALSE )
   addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
-  # assign( attr( parrentMd5hash, "data"), value = md5hashDF, envir = sys.frame( 2 ) )
+  return( md5hashDF )
 }
 
 extractData.htest <- function( object, parrentMd5hash, parentDir ){
   library( stats )
-  object$data.name # variable name
+  extractedDF <- get( object$data.name, envir = .GlobalEnv )
+  md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, dir = parentDir, rememberName = FALSE )
+  addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
+  return( md5hashDF )
 }
 
 extractData.trellis <- function( object, parrentMd5hash, parentDir ){
   library( lattice )
-  as.character( object$call )[3] # name of data.frame
+  extractedDF <- get( as.character( object$call )[3], envir = .GlobalEnv )
+  md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, dir = parentDir, rememberName = FALSE )
+  addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
+  return( md5hashDF )
 }
 
 extractData.twins <- function( object, parrentMd5hash, parentDir ){
@@ -37,6 +43,7 @@ extractData.twins <- function( object, parrentMd5hash, parentDir ){
   extractedDF <- object$data
   md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, dir = parentDir, rememberName = FALSE )
   addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
+  return( md5hashDF )
 }
 
 extractData.partition <- function( object, parrentMd5hash, parentDir ){
@@ -44,28 +51,43 @@ extractData.partition <- function( object, parrentMd5hash, parentDir ){
   extractedDF <- object$data
   md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, dir = parentDir, rememberName = FALSE )
   addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
+  return( md5hashDF )
 }
 
 extractData.lda <- function( object, parrentMd5hash, parentDir ){
   library( MASS ) 
-  object$call  # model call
+  extractedDF <-  get( as.character( ( object$call ) )[3], envir = .GlobalEnv )
+  md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, dir = parentDir, rememberName = FALSE )
+  addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
+  return( md5hashDF )
 }
 
 extractData.qda <- function( object, parrentMd5hash, parentDir ){
   library( MASS )  
-  object$call  # model call
+  extractedDF <-  get( as.character( ( object$call ) )[2], envir = .GlobalEnv )
+  md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, dir = parentDir, rememberName = FALSE )
+  addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
+  return( md5hashDF )
 }
 
 
 extractData.glmnet <- function( object, parrentMd5hash, parentDir ){
   library( glmnet ) # elmet / lognet / multnet /foshnet /coxnet /mrelnet 
                    # inherits after glmnet
-  object$call # model call
+  extractedDF1 <- get( as.character( object$call )[2], envir = .GlobalEnv )
+  extractedDF2 <- get( as.character( object$call )[3], envir = .GlobalEnv )
+  md5hashDF <- saveToRepo( c( extractedDF1, extractedDF1 ), archiveData = FALSE, 
+                           dir = parentDir, rememberName = FALSE )
+  addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
+  return( md5hashDF )
 }
 
 extractData.survfit <- function( object, parrentMd5hash, parentDir ){
   library( survival ) 
-  object$call # model call
+  extractedDF <-  get( as.character( object$call )[3], envir = .GlobalEnv )
+  md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, dir = parentDir, rememberName = FALSE )
+  addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
+  return( md5hashDF )
 }
 
 

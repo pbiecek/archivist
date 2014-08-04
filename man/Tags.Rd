@@ -59,6 +59,14 @@ Supported objects with extra \code{Tags} are:
      \item class
   }
   }
+  \item{\code{trellis}}{
+  \itemize{
+     \item date
+     \item name
+     \item class
+     \item call
+  }
+  }
   \item{\code{twins (agnes, diana, mona)}}{
   \itemize{
      \item date
@@ -83,26 +91,42 @@ Supported objects with extra \code{Tags} are:
   }
   \item{\code{lda}}{
   \itemize{
-     \item
+     \item date
+     \item name
+     \item class
+     \item call
   }
   }
   \item{\code{qda}}{
   \itemize{
-     \item
+     \item date
+     \item name
+     \item class
+     \item call
+     \item terms
   }
   }
   \item{\code{glmnet (elmet, lognet, multnet, fishnet, coxnet, mrelnet)}}{
   \itemize{
-     \item
+     \item date
+     \item name
+     \item class
+     \item call
+     \item beta
+     \item lambda
   }
   }
   \item{\code{survfit}}{
   \itemize{
-     \item
+     \item date
+     \item name
+     \item class
+     \item call
+     \item strata
+     \item type
   }
   }
   }
-TODO: list of tags
 }
 \seealso{
 Functions using \code{Tags} are \link{searchInLocalRepo} and \link{searchInGithubRepo}.

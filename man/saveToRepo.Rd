@@ -18,10 +18,15 @@ saveToRepo(object, ..., archiveData = TRUE, archiveTags = TRUE,
 \item{archiveMiniature}{A logical value denoting whether to archive a miniature of an object.}
 
 \item{dir}{A character denoting an existing directory in which an object will be saved.}
+
+\item{rememberName}{A logical value. Should not be changed by user. It is technical parameter.}
 }
 \value{
 As a result of this function a character string is returned as a value and determines
-the \code{md5hash} of an object that was used in a \code{saveToRepo} function.
+the \code{md5hash} of an object that was used in a \code{saveToRepo} function. If argument
+\code{archiveData} was set to \code{TRUE} a result also
+has an attriubute, named \code{data}, that determines the \code{md5hash} of a data needed
+to compute an object.
 }
 \description{
 \code{saveToRepo} function saves desired objects to the local \link{Repository} on a given directory.
@@ -36,8 +41,8 @@ for various objects. This \code{md5hash} is a string of length 32 that comes out
 \code{digest{digest}} function, which uses a cryptographical MD5 hash algorithm.
 
 By default, a miniature of an object and (if possible) a data set needed to compute this object are extracted.
-They are also going to be saved in a file named by their \code{md5hash} and a specific
-\code{Tag}-relation is going to be added to the \code{backpack} dataset in case there is an urge to load an
+They are also going to be saved in a file named by their \code{md5hash} in a \code{gallery} folder that exists in directory
+specified in \code{dir} argument. Also a specific \code{Tag}-relation is going to be added to the \code{backpack} dataset in case there is an urge to load an
 object with it's related data set - see \link{loadFromLocalRepo} or \link{loadFromGithubRepo}. Default settings
 may be changed by using arguments \code{archiveData}, \code{archiveTag} or \code{archiveMiniature} with
 \code{FALSE} value.
@@ -70,6 +75,8 @@ Supported object's classes are (so far):
  \item \code{partition (inherits: pam, clara, fanny)}.
  }
 
+ To check what \code{Tags} will be extracetd for various objects see \link{Tags}.
+
 TODO: EXTEND
 }
 \examples{
@@ -101,6 +108,32 @@ x <- rbind(cbind(rnorm(10, 0, 0.5), rnorm(10, 0, 0.5)),
           cbind(rnorm( 3,3.2,0.5), rnorm( 3,3.2,0.5)))
 fannyx <- fanny(x, 2)
 
+# lda object
+library(MASS)
+
+Iris <- data.frame(rbind(iris3[,,1], iris3[,,2], iris3[,,3]),
+                  Sp = rep(c("s","c","v"), rep(50,3)))
+train <- c(8,83,115,118,146,82,76,9,70,139,85,59,78,143,68,
+           134,148,12,141,101,144,114,41,95,61,128,2,42,37,
+           29,77,20,44,98,74,32,27,11,49,52,111,55,48,33,38,
+           113,126,24,104,3,66,81,31,39,26,123,18,108,73,50,
+           56,54,65,135,84,112,131,60,102,14,120,117,53,138,5)
+lda1 <- lda(Sp ~ ., Iris, prior = c(1,1,1)/3, subset = train)
+
+# qda object
+tr <- c(7,38,47,43,20,37,44,22,46,49,50,19,4,32,12,29,27,34,2,1,17,13,3,35,36)
+train <- rbind(iris3[tr,,1], iris3[tr,,2], iris3[tr,,3])
+cl <- factor(c(rep("s",25), rep("c",25), rep("v",25)))
+qda1 <- qda(train, cl)
+
+# glmnet object
+library( glmnet )
+
+zk=matrix(rnorm(100*20),100,20)
+bk=rnorm(100)
+glmnet1=glmnet(zk,bk)
+
+
 # creating example Repository - that examples will work
 
 # save examples
@@ -112,13 +145,17 @@ saveToRepo(iris, dir=exampleDir)
 saveToRepo(model, dir=exampleDir)
 saveToRepo(agn1, dir=exampleDir)
 saveToRepo(fannyx, dir=exampleDir)
+saveToRepo(lda1, dir=exampleDir)
+saveToRepo(qda1, dir=exampleDir)
+saveToRepo(glmnet1, dir=exampleDir)
 
 # removing all files generated to this function's examples
-x <- list.files( paste0(exampleDir, "/gallery/" ) )
+x <- list.files( paste0( exampleDir, "/gallery/" ) )
 sapply( x , function(x ){
-     file.remove( paste0(exampleDir, "/gallery/", x ) )
+     file.remove( paste0( exampleDir, "/gallery/", x ) )
    })
-file.remove( paste0(exampleDir, "/backpack.db" ) )
+file.remove( paste0( exampleDir, "/backpack.db" ) )
+file.remove( paste0( exampleDir, "/gallery" ) )
 }
 \author{
 Marcin Kosinski , \email{m.p.kosinski@gmail.com}

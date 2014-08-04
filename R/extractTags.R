@@ -54,6 +54,12 @@ extractTags.htest <- function( object, ... ) {
 
 extractTags.trellis <- function( object, ... ) {
   library( lattice )
+  class <- paste0( "class:", class( object )[1] )
+  name <- paste0( "name:", deparse( substitute( object ) ) )
+  date <- paste0( "date:", now() )
+  call <- paste0( "call:", object$call )
+  return( c( name, class, date, call ) )
+  
 }
 
 extractTags.twins <- function( object, ... ) {
@@ -82,16 +88,41 @@ extractTags.partition <- function( object, ... ) {
 
 extractTags.lda <- function( object, ... ) {
   library( MASS )
+  call <- paste0( "call:", object$call )
+  class <- paste0( "class:", class( object )[1] )
+  name <- paste0( "name:", deparse( substitute( object ) ) )
+  date <- paste0( "date:", now() )
+  return( c( name, class, date, call ) )
 }
 
 extractTags.qda <- function( object, ... ) {
   library( MASS )
+  call <- paste0( "call:", object$call )
+  class <- paste0( "class:", class( object )[1] )
+  name <- paste0( "name:", deparse( substitute( object ) ) )
+  date <- paste0( "date:", now() )
+  terms <- paste0( "terms:", object$terms )
+  return( c( name, class, date, call, terms ) )
 }
 
 extractTags.glmnet <- function( object, ... ) {
   library( glmnet )
+  class <- paste0( "class:", class( object )[1] )
+  name <- paste0( "name:", deparse( substitute( object ) ) )
+  date <- paste0( "date:", now() )
+  call <- paste0( "call:", object$call )
+  beta <- paste0( "beta:", object$call )
+  lambda <- paste0( "lambda:", object$call )
+  return( c( name, class, date, call, beta, lambda ) )
 }
 
 extractTags.survfit <- function( object, ... ) {
   library( survival )
+  class <- paste0( "class:", class( object )[1] )
+  name <- paste0( "name:", deparse( substitute( object ) ) )
+  date <- paste0( "date:", now() )
+  call <- paste0( "call:", object$call )
+  strata <- paste0( "strata:", object$call )
+  type <- paste0( "type:", object$call )
+  return( c( name, class, date, call, strata, type ) )
 }

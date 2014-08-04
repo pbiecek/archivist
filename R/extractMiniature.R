@@ -59,14 +59,14 @@ extractMiniature.partition <- function( object, md5hash, parentDir, ...,width = 
 }
 
 extractMiniature.lda <- function( object, md5hash, parentDir, ... ){
-  library( lda )
+  library( MASS )
   sink( file = paste0(parentDir, "gallery/", md5hash, ".txt" ) )
   print( object ) 
   sink()
 }
 
 extractMiniature.qda <- function( object, md5hash, parentDir, ... ){
-  library( qda )
+  library( MASS )
   sink( file = paste0(parentDir, "gallery/", md5hash, ".txt" ) )
   print( object ) 
   sink()
