@@ -46,13 +46,18 @@
 #'  \item \code{lm},
 #'  \item \code{data.frame},
 #'  \item \code{ggplot},
+#'  \item \code{htest},
+#'  \item \code{trellis},
 #'  \item \code{twins (inherits: agnes, diana, mona)},
-#'  \item \code{partition (inherits: pam, clara, fanny)}.
+#'  \item \code{partition (inherits: pam, clara, fanny)},
+#'  \item \code{lda},
+#'  \item \code{qda},
+#'  \item \code{glmnet (elmet, lognet, multnet, fishnet, coxnet, mrelnet)},
+#'  \item \code{survfit}.
 #'  }
 #'  
 #'  To check what \code{Tags} will be extracetd for various objects see \link{Tags}.
 #'
-#' TODO: EXTEND
 #' 
 #' @return
 #' As a result of this function a character string is returned as a value and determines
@@ -182,7 +187,7 @@ saveToRepo <- function( object, ..., archiveData = TRUE,
   }else{ 
     assign( value = object, x = digest( object ), envir = .GlobalEnv )
     save( file = paste0(dir, "gallery/", md5hash, ".rda"),  ascii=TRUE, list = digest( object ), envir = .GlobalEnv  )
-    # rm( digest( object ), envir = .GlobalEnv ) ?
+    rm( list = digest( object ), envir = .GlobalEnv ) 
   }
   
   # add entry to database 

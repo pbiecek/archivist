@@ -71,13 +71,17 @@ Supported object's classes are (so far):
  \item \code{lm},
  \item \code{data.frame},
  \item \code{ggplot},
+ \item \code{htest},
+ \item \code{trellis},
  \item \code{twins (inherits: agnes, diana, mona)},
- \item \code{partition (inherits: pam, clara, fanny)}.
+ \item \code{partition (inherits: pam, clara, fanny)},
+ \item \code{lda},
+ \item \code{qda},
+ \item \code{glmnet (elmet, lognet, multnet, fishnet, coxnet, mrelnet)},
+ \item \code{survfit}.
  }
 
  To check what \code{Tags} will be extracetd for various objects see \link{Tags}.
-
-TODO: EXTEND
 }
 \examples{
 # objects preparation
