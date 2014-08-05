@@ -176,7 +176,9 @@ loadFromLocalRepo <- function( md5hash, dir, returns = FALSE ){
             load( file = paste0( dir, "gallery/", x, ".rda" ), envir = .GlobalEnv ) } )
       
     objects <- sapply( name , function(y){ 
-               get(x= y, envir = .GlobalEnv ) } )      
+               get(x= y, envir = .GlobalEnv ) } ) 
+    
+    sapply( name, remove(), envir = .GlobalEnv )
     
     return( objects )
   }
@@ -191,20 +193,40 @@ loadFromGithubRepo <- function( md5hash, repo, user, returns = FALSE ){
   stopifnot( is.logical( returns ))
   
   # what if abbreviation was given
+  if ( nchar( md5hash ) < 32 ){
+    # then downloading backpack.db database from GitHub is vital
+    
+    # download database
+    GitUrl <- paste0( "https://raw.githubusercontent.com/", user, "/", repo, "/master/backpack.db" )
+    dir <- tempfile()
+    dir <- paste0( dir, "\\")
+    download.file( url = GitUrl, destfile = dir )
+    
+    # search for proper tags with given abbreviation
+    sqlite <- dbDriver( "SQLite" )
+    conn <- dbConnect( sqlite, paste0( dir, "backpack.db" ) )
+    
+    md5hashList <- dbGetQuery( conn,
+                               paste0( "SELECT artifact FROM tag" ) )
+    md5hashList <- as.character( md5hashList[, 1] )
+    md5hash <- unique( grep( 
+      pattern = paste0( "^", md5hash ), 
+      x = md5hashList, 
+      value = TRUE ) )
+    
+    dbDisconnect( conn )
+    dbUnloadDriver( sqlite ) 
+    
+    # when tags are collected, delete downloaded database
+    file.remove( paste0( dir, "backpack.db" ) )
+    dir <- NULL
+    
+  }
   
-  # need to check whole database
-  
-  # willlll not work if abbreviation is given YET
-  
-  # load plot from archive
+  # load objecs from Repository
   if ( !returns ){
     library(RCurl)
     options(RCurlOptions = list(cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl")))
-    
-    #if we assume the md5hash lenght after abbreviation is 1 we can try link this
-    #tmpobject <- getBinaryURL(paste0( "https://raw.githubusercontent.com/", user, "/", repo, 
-    #                                  "/master/gallery/", md5hash, ".rda"))
-    # but error occures
     
     # sapply and replicate because of abbreviation mode can find more than 1 md5hash
     tmpobjectS <- lapply( md5hash, function(x){
@@ -212,8 +234,6 @@ loadFromGithubRepo <- function( md5hash, repo, user, returns = FALSE ){
                                                  "/master/gallery/", x, ".rda") ) } )
     tfS <- replicate( length( md5hash ), tempfile() )
     
-    # writeBin( tmpobjectS, tfS ) # not sure it fhis functions knows how to work on 
-                                # arguments that are vectors. if problems - let's make a loop
     for (i in 1:length(tmpobjectS)){
       writeBin( tmpobjectS[[i]], tfS[i] )
     }
@@ -226,28 +246,35 @@ loadFromGithubRepo <- function( md5hash, repo, user, returns = FALSE ){
     sapply( tfS, unlink )
     tmpobjectS <- NULL
   }else{
+    # returns objects as value
     library(RCurl)
+    options(RCurlOptions = list(cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl")))
+      
     # sapply and replicate because of abbreviation mode can find more than 1 md5hash
-      tmpobjectS <- lapply( md5hash, function(x){
-      getBinaryURL( paste0( "https://raw.github/", user, "/", repo, 
-                            "/gallery/", x, ".rda") )  } )
-      tfS <- replicate( length( md5hash ), tempfile() )
+    tmpobjectS <- lapply( md5hash, function(x){
+                        getBinaryURL( paste0( "https://raw.githubusercontent.com/", user, "/", repo, 
+                                                  "/master/gallery/", x, ".rda") )  } )
+    tfS <- replicate( length( md5hash ), tempfile() )
       
-      writeBin( tmpobjectS, tfS )
+    for (i in 1:length(tmpobjectS)){
+      writeBin( tmpobjectS[[i]], tfS[i] )
+    }
       
-      sapply( tfS, function(x){
-        load( file = x, envir = .GlobalEnv ) } )
+    sapply( tfS, function(x){
+      load( file = x, envir = .GlobalEnv ) } )
       
-      name <- sapply( tfS, function(x){
-        load( file = x, envir = .GlobalEnv ) } )
+    name <- sapply( tfS, function(x){
+      load( file = x, envir = .GlobalEnv ) } )
       
-      objects <- sapply( name , function(y){ 
-        get(x= y, envir = .GlobalEnv ) } ) 
+    objects <- sapply( name , function(y){ 
+      get(x= y, envir = .GlobalEnv ) } ) 
       
-      sapply( tfS, unlink )
-      tmpobjectS <- NULL
+    sapply( tfS, unlink )
+    tmpobjectS <- NULL
+    
+    sapply( name, remove(), envir = .GlobalEnv )
       
-      return( objects )
+    return( objects )
       
   }
 }

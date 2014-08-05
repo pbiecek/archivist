@@ -146,22 +146,16 @@ searchInLocalRepo <- function( tag, dir ){
 searchInGithubRepo <- function( tag, repo, user ){
   stopifnot( is.character( c( tag, repo, user ) ) )
   
+  # download database
+  GitUrl <- paste0( "https://raw.githubusercontent.com/", user, "/", repo, "/master/backpack.db" )
+  LocDir <- tempfile()
+  LocDir <- paste0( LocDir, "\\")
+  download.file( url = GitUrl, destfile = LocDir )
   
-  ## TO BE DONE - NOT FINISHED
+  md5hash <- searchInLocalRepo( tag = tag, dir = Locdir )
   
-  # not sure if it works
-  # creates connection and driver
-  urlBase <- paste0( "https://github.com/", user, repo, "/backpack.db")
-  sqlite <- dbDriver( "SQLite" )
-  conn <- dbConnect( sqlite, urlBase )
-  
-  # extracts md5hash
-  md5hash <- dbGetQuery( conn,
-              paste0( "SELECT artifact FROM tag WHERE tag = ",
-                   "'", tag, "'" ) )
-  # deletes connection and driver
-  dbDisconnect( conn )
-  dbUnloadDriver( sqlite ) 
-  
+  # when tags are collected, delete downloaded database
+  file.remove( paste0( LocDir, "backpack.db" ) )
+  LocDir <- NULL  
   return( md5hash )
 }
