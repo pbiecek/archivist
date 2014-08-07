@@ -6,16 +6,19 @@
 \usage{
 loadFromLocalRepo(md5hash, dir, returns = FALSE)
 
-loadFromGithubRepo(md5hash, repo, user, returns = FALSE)
+loadFromGithubRepo(md5hash, repo, user, branch = "master", returns = FALSE)
 }
 \arguments{
 \item{dir}{A character denoting an existing directory from which an object will be loaded.}
 
 \item{md5hash}{A hash of an object. A character string being a result of a cryptographical hash function with MD5 algorithm or it's abbreviation.}
 
-\item{repo}{Only if working on Github Repository. A character containing a name of Github Repository.}
+\item{repo}{Only if working on Github Repository. A character containing a name of Github Repository on which a Repository is archivised.}
 
-\item{user}{Only if working on Github Repository. A character containing a name of Github User.}
+\item{user}{Only if working on Github Repository. A character containing a name of Github User on which a Repository is archivised.}
+
+\item{branch}{Only if working on Github Repository. A character containing a name of
+Github Repository's branch on which a Repository is archivised. Default \code{branch} is \code{master}.}
 
 \item{returns}{A logical value denoting whether to load an object into the Global Environment
 (that is set by default \code{FALSE}) or whether to return an object as a function's result (\code{TRUE}).}
@@ -144,6 +147,8 @@ Other archivist: \code{\link{Repository}};
   \code{\link{createEmptyRepo}}; \code{\link{md5hash}};
   \code{\link{rmFromRepo}}; \code{\link{saveToRepo}};
   \code{\link{searchInGithubRepo}},
-  \code{\link{searchInLocalRepo}}
+  \code{\link{searchInLocalRepo}};
+  \code{\link{summaryGithubRepo}},
+  \code{\link{summaryLocalRepo}}
 }
 

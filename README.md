@@ -9,6 +9,8 @@ if (!require(devtools)) {
 }
 install_github("pbiecek/archivist")
 ```
+Make sure you have [rtools](http://cran.r-project.org/bin/windows/Rtools/) installed on your computer.
+
 The list of available functions:
 ```{Ruby}
 help(package="archivist")

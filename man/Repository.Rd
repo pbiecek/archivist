@@ -20,7 +20,9 @@ Functions using \code{Repository} are:
  \item \link{loadFromLocalRepo},
  \item \link{loadFromGithubRepo},
  \item \link{searchInLocalRepo},
- \item \link{searchInGithubRepo}.
+ \item \link{searchInGithubRepo},
+ \item \link{summaryLocalRepo},
+ \item \link{summaryGithubRepo}.
  }
 
 Function creating \code{Repository} is:
@@ -33,6 +35,8 @@ Other archivist: \code{\link{Tags}};
   \code{\link{loadFromLocalRepo}}; \code{\link{md5hash}};
   \code{\link{rmFromRepo}}; \code{\link{saveToRepo}};
   \code{\link{searchInGithubRepo}},
-  \code{\link{searchInLocalRepo}}
+  \code{\link{searchInLocalRepo}};
+  \code{\link{summaryGithubRepo}},
+  \code{\link{summaryLocalRepo}}
 }
 

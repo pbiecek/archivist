@@ -31,10 +31,17 @@ objects will be archivised.
 After every \code{saveToRepo} call the database is refreshed, so object is available immediately.
 }
 \examples{
-createEmptyRepo(getwd())
-createEmptyRept(path.package("stats"))
-# not work
-createEmptyRepo("user/folder/here")
+exampleDir <- tempdir()
+createEmptyRepo(dir = exampleDir)
+
+# check the state of empty Repository
+
+summaryRepo( method = "objects", dir = exampleDir )
+summaryRepo( method = "tags", dir = exampleDir )
+
+# removing all files generated to this function's examples
+file.remove( paste0( exampleDir, "/backpack.db" ) )
+file.remove( paste0( exampleDir, "/gallery" ) )
 }
 \author{
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}
@@ -46,6 +53,8 @@ Other archivist: \code{\link{Repository}};
   \code{\link{loadFromLocalRepo}}; \code{\link{md5hash}};
   \code{\link{rmFromRepo}}; \code{\link{saveToRepo}};
   \code{\link{searchInGithubRepo}},
-  \code{\link{searchInLocalRepo}}
+  \code{\link{searchInLocalRepo}};
+  \code{\link{summaryGithubRepo}},
+  \code{\link{summaryLocalRepo}}
 }
 

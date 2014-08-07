@@ -31,10 +31,18 @@
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #'
 #' @examples
-#' createEmptyRepo(getwd())
-#' createEmptyRept(path.package("stats"))
-#' # not work
-#' createEmptyRepo("user/folder/here")
+#' exampleDir <- tempdir()
+#' createEmptyRepo(dir = exampleDir)
+#'
+#' # check the state of empty Repository
+#' 
+#' summaryRepo( method = "objects", dir = exampleDir )
+#' summaryRepo( method = "tags", dir = exampleDir )
+#' 
+#' # removing all files generated to this function's examples
+#' file.remove( paste0( exampleDir, "/backpack.db" ) )
+#' file.remove( paste0( exampleDir, "/gallery" ) )
+#' 
 #' @family archivist
 #' @rdname createEmptyRepo
 #' @export

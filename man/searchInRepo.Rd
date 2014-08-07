@@ -6,7 +6,7 @@
 \usage{
 searchInLocalRepo(tag, dir)
 
-searchInGithubRepo(tag, repo, user)
+searchInGithubRepo(tag, repo, user, branch = "master")
 }
 \arguments{
 \item{tag}{A character denoting a Tag to seek for or a list of length 2 with \code{dataFrom} and \code{dataTo} arguments. See details.}
@@ -16,6 +16,9 @@ searchInGithubRepo(tag, repo, user)
 \item{repo}{Only if working on Github Repository. A character string containing a name of Github Repository.}
 
 \item{user}{Only if working on Github Repository. A character string containing a name of Github User.}
+
+\item{branch}{Only if working on Github Repository. A character containing a name of
+Github Repository's branch on which a Repository is archivised. Default \code{branch} is \code{master}.}
 }
 \value{
 \code{searchInRepo} returns as value a \code{md5hash} which is an object's hash that was generated while
@@ -114,6 +117,8 @@ Other archivist: \code{\link{Repository}};
   \code{\link{createEmptyRepo}};
   \code{\link{loadFromGithubRepo}},
   \code{\link{loadFromLocalRepo}}; \code{\link{md5hash}};
-  \code{\link{rmFromRepo}}; \code{\link{saveToRepo}}
+  \code{\link{rmFromRepo}}; \code{\link{saveToRepo}};
+  \code{\link{summaryGithubRepo}},
+  \code{\link{summaryLocalRepo}}
 }
 

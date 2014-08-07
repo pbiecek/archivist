@@ -24,7 +24,7 @@ extractTags.ggplot <- function( object, ... ) {
   labx <- paste0( "labelx:", object$labels$x )
   laby <- paste0( "labely:", object$labels$y )
   data <- paste0( "data:", object$data )
-  class <- paste0( "class:", class( object )[1] )
+  class <- paste0( "class:", class( object )[2] )
   name <- paste0( "name:", deparse( substitute( object ) ) )
   date <- paste0( "date:", now() )
   return( c( labx, laby, data, class, name, date ) )

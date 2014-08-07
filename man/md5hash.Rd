@@ -36,6 +36,8 @@ Other archivist: \code{\link{Repository}};
   \code{\link{loadFromLocalRepo}};
   \code{\link{rmFromRepo}}; \code{\link{saveToRepo}};
   \code{\link{searchInGithubRepo}},
-  \code{\link{searchInLocalRepo}}
+  \code{\link{searchInLocalRepo}};
+  \code{\link{summaryGithubRepo}},
+  \code{\link{summaryLocalRepo}}
 }
 

@@ -167,6 +167,9 @@ Marcin Kosinski , \email{m.p.kosinski@gmail.com}
 \seealso{
 For more detailed information check package vignette - url needed.
 
+The list of supported objects and their tags is available on this issue on \pkg{archivist} Github Repository:
+\href{https://github.com/pbiecek/archivist/issues/5}{https://github.com/pbiecek/archivist/issues/5}.
+
 Other archivist: \code{\link{Repository}};
   \code{\link{Tags}}; \code{\link{archivist-package}};
   \code{\link{createEmptyRepo}};
@@ -174,6 +177,8 @@ Other archivist: \code{\link{Repository}};
   \code{\link{loadFromLocalRepo}}; \code{\link{md5hash}};
   \code{\link{rmFromRepo}};
   \code{\link{searchInGithubRepo}},
-  \code{\link{searchInLocalRepo}}
+  \code{\link{searchInLocalRepo}};
+  \code{\link{summaryGithubRepo}},
+  \code{\link{summaryLocalRepo}}
 }
 

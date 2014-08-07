@@ -33,9 +33,12 @@
 #' 
 #' @param md5hash A hash of an object. A character string being a result of a cryptographical hash function with MD5 algorithm or it's abbreviation.
 #' 
-#' @param repo Only if working on Github Repository. A character containing a name of Github Repository.
+#' @param repo Only if working on Github Repository. A character containing a name of Github Repository on which a Repository is archivised.
 #' 
-#' @param user Only if working on Github Repository. A character containing a name of Github User.
+#' @param user Only if working on Github Repository. A character containing a name of Github User on which a Repository is archivised.
+#' 
+#' @param branch Only if working on Github Repository. A character containing a name of 
+#' Github Repository's branch on which a Repository is archivised. Default \code{branch} is \code{master}.
 #' 
 #' @param returns A logical value denoting whether to load an object into the Global Environment 
 #' (that is set by default \code{FALSE}) or whether to return an object as a function's result (\code{TRUE}).
@@ -188,8 +191,8 @@ loadFromLocalRepo <- function( md5hash, dir, returns = FALSE ){
 
 #' @rdname loadFromLocalRepo
 #' @export
-loadFromGithubRepo <- function( md5hash, repo, user, returns = FALSE ){
-  stopifnot( is.character( c( md5hash, repo, user ) ) )
+loadFromGithubRepo <- function( md5hash, repo, user, branch = "master" , returns = FALSE ){
+  stopifnot( is.character( c( md5hash, repo, user, branch ) ) )
   stopifnot( is.logical( returns ))
   
   # what if abbreviation was given
@@ -197,7 +200,7 @@ loadFromGithubRepo <- function( md5hash, repo, user, returns = FALSE ){
     # then downloading backpack.db database from GitHub is vital
     
     # download database
-    GitUrl <- paste0( "https://raw.githubusercontent.com/", user, "/", repo, "/master/backpack.db" )
+    GitUrl <- paste0( "https://raw.githubusercontent.com/", user, "/", repo, "/", branch, "/backpack.db" )
     dir <- tempfile()
     dir <- paste0( dir, "\\")
     download.file( url = GitUrl, destfile = dir )
@@ -231,7 +234,7 @@ loadFromGithubRepo <- function( md5hash, repo, user, returns = FALSE ){
     # sapply and replicate because of abbreviation mode can find more than 1 md5hash
     tmpobjectS <- lapply( md5hash, function(x){
                           getBinaryURL( paste0( "https://raw.githubusercontent.com/", user, "/", repo, 
-                                                 "/master/gallery/", x, ".rda") ) } )
+                                                 "/", branch, "/gallery/", x, ".rda") ) } )
     tfS <- replicate( length( md5hash ), tempfile() )
     
     for (i in 1:length(tmpobjectS)){

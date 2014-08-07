@@ -84,6 +84,10 @@
 #' 
 #' @param rememberName A logical value. Should not be changed by user. It is technical parameter.
 #'
+#' @seealso
+#' 
+#' The list of supported objects and their tags is available on this issue on \pkg{archivist} Github Repository:
+#' \href{https://github.com/pbiecek/archivist/issues/5}{https://github.com/pbiecek/archivist/issues/5}.
 #' 
 #' @author 
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}

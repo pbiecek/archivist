@@ -20,7 +20,9 @@
 #'  \item \link{loadFromLocalRepo}, 
 #'  \item \link{loadFromGithubRepo},
 #'  \item \link{searchInLocalRepo},
-#'  \item \link{searchInGithubRepo}.
+#'  \item \link{searchInGithubRepo},
+#'  \item \link{summaryLocalRepo},
+#'  \item \link{summaryGithubRepo}.
 #'  }
 #' 
 #' Function creating \code{Repository} is:

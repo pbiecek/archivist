@@ -27,6 +27,9 @@
 #' @param repo Only if working on Github Repository. A character string containing a name of Github Repository.
 #' 
 #' @param user Only if working on Github Repository. A character string containing a name of Github User.
+#' 
+#' @param branch Only if working on Github Repository. A character containing a name of 
+#' Github Repository's branch on which a Repository is archivised. Default \code{branch} is \code{master}.
 #'
 #' @author
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
@@ -143,11 +146,11 @@ searchInLocalRepo <- function( tag, dir ){
 
 #' @rdname searchInRepo
 #' @export
-searchInGithubRepo <- function( tag, repo, user ){
-  stopifnot( is.character( c( tag, repo, user ) ) )
+searchInGithubRepo <- function( tag, repo, user, branch = "master" ){
+  stopifnot( is.character( c( tag, repo, user, branch ) ) )
   
   # download database
-  GitUrl <- paste0( "https://raw.githubusercontent.com/", user, "/", repo, "/master/backpack.db" )
+  GitUrl <- paste0( "https://raw.githubusercontent.com/", user, "/", repo, "/", branch, "/backpack.db" )
   LocDir <- tempfile()
   LocDir <- paste0( LocDir, "\\")
   download.file( url = GitUrl, destfile = LocDir )
