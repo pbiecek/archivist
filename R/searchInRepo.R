@@ -1,38 +1,38 @@
 ##    archivist package for R
 ##
-#' @title Search for an Object in a Repository using Tags
+#' @title Search for an Object in a Repository Using Tags
 #'
 #' @description
 #' \code{searchInRepo} searches for an object in a \link{Repository} using it's \code{Tag}.
 #' 
 #' 
 #' @details
-#' \code{searchInRepo} searches for an object in a repository using it's \code{Tag}.
-#' \code{Tags} can be an object's \code{name}, \code{class} or \code{archivisation date}. 
-#' Furthermore, for various object's classes more different \code{Tags} can be searched. 
+#' \code{searchInRepo} searches for an object in a Repository using it's \code{Tag} 
+#' (e.g., \code{name}, \code{class} or \code{archiving date}).
+#' For various object classes different \code{Tags} can be searched for. 
 #' See \link{Tags}. If a \code{Tag} is a list of length 2, \code{md5hashes} of all 
 #' objects created from date \code{dateFrom} to data \code{dateTo} are returned. The date 
-#' should be formated e.g. \code{"2014-07-31"}.
+#' should be formatted according to the YYYY-MM-DD format, e.g., \code{"2014-07-31"}.
 #' 
 #'   
 #' @return
-#' \code{searchInRepo} returns as value a \code{md5hash} which is an object's hash that was generated while
-#' saving an object to the Repository in a moment a \link{saveToRepo} function was called. If the desired object
-#' is not in a Repository a logical value \code{FALSE} is returned.
+#' \code{searchInRepo} returns a \code{md5hash} character, which is a hash assigned to the object when
+#' saving it to the Repository by using the \link{saveToRepo} function. If the object
+#' is not in the Repository a logical value \code{FALSE} is returned.
 #' 
-#' @param tag A character denoting a Tag to seek for or a list of length 2 with \code{dataFrom} and \code{dataTo} arguments. See details.
+#' @param tag A character denoting a Tag to be searched for in the Repository. It is also possible to specify \code{tag} as a list of length 2 with \code{dataFrom} and \code{dataTo}; see details.
 #' 
-#' @param dir A character denoting an existing directory from which objects will be searched.
+#' @param dir A character denoting an existing directory in which objects will be searched.
 #' 
-#' @param repo Only if working on Github Repository. A character string containing a name of Github Repository.
+#' @param repo Only if working with a Github repository. A character containing a name of a Github repository on which the Repository is archived.
 #' 
-#' @param user Only if working on Github Repository. A character string containing a name of Github User.
+#' @param user Only if working with a Github repository. A character containing a name of a Github user on whose account the \code{repo} is created.
 #' 
-#' @param branch Only if working on Github Repository. A character containing a name of 
-#' Github Repository's branch on which a Repository is archivised. Default \code{branch} is \code{master}.
+#' @param branch Only if working with a Github repository. A character containing a name of 
+#' Github repository's branch in which Repository is archived. Default \code{branch} is \code{master}.
 #'
 #' @author
-#' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
+#' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #'
 #' @examples
 #' # objects preparation
@@ -73,6 +73,11 @@
 #' saveToRepo(agn1, dir=exampleDir)
 #' saveToRepo(fannyx, dir=exampleDir)
 #' 
+#' # let's see how the Repository look like: summary
+#' 
+#' summaryLocalRepo(method = "objects", dir = exampleDir)
+#' summaryLocalRepo(method = "tags", dir = exampleDir)
+#'  
 #' # search examples
 #' 
 #' # tag search
@@ -125,8 +130,8 @@ searchInLocalRepo <- function( tag, dir ){
   # extracts md5hash
   if ( length( tag ) == 1 ){
     md5hashES <- dbGetQuery( conn,
-                         paste0( "SELECT artifact FROM tag WHERE tag = ",
-                                "'", tag, "'" ) )
+                             paste0( "SELECT artifact FROM tag WHERE tag = ",
+                                     "'", tag, "'" ) )
   }
   if ( length( tag ) == 2 ){
     md5hashES <- dbGetQuery( conn,
@@ -134,8 +139,8 @@ searchInLocalRepo <- function( tag, dir ){
                                      "'", as.Date(tag[[1]])-1, "'", " AND createdDate <",
                                      "'", as.Date(tag[[2]])+1, "'"))
   }
-
-      
+  
+  
   # deletes connection and driver
   dbDisconnect( conn )
   dbUnloadDriver( sqlite ) 

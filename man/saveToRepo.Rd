@@ -11,59 +11,57 @@ saveToRepo(object, ..., archiveData = TRUE, archiveTags = TRUE,
 
 \item{...}{Graphical parameters denoting width and height of a miniature. See details.}
 
-\item{archiveData}{A logical value denoting whether to archive the data from object.}
+\item{archiveData}{A logical value denoting whether to archive the data from the \code{object}.}
 
-\item{archiveTags}{A logical value denoting whether to archive tags from object.}
+\item{archiveTags}{A logical value denoting whether to archive tags from the \code{object}.}
 
-\item{archiveMiniature}{A logical value denoting whether to archive a miniature of an object.}
+\item{archiveMiniature}{A logical value denoting whether to archive a miniature of the \code{object}.}
 
 \item{dir}{A character denoting an existing directory in which an object will be saved.}
 
-\item{rememberName}{A logical value. Should not be changed by user. It is technical parameter.}
+\item{rememberName}{A logical value. Should not be changed by user. It is a technical parameter.}
 }
 \value{
-As a result of this function a character string is returned as a value and determines
-the \code{md5hash} of an object that was used in a \code{saveToRepo} function. If argument
-\code{archiveData} was set to \code{TRUE} a result also
-has an attriubute, named \code{data}, that determines the \code{md5hash} of a data needed
-to compute an object.
+As a result of this function a character string is returned, which determines
+the \code{md5hash} of the object that was used in the \code{saveToRepo} function. If
+\code{archiveData} was \code{TRUE}, the result also
+has an attribute, named \code{data}, that determines \code{md5hash} of the data needed
+to compute the object.
 }
 \description{
-\code{saveToRepo} function saves desired objects to the local \link{Repository} on a given directory.
+\code{saveToRepo} function saves desired objects to the local \link{Repository} in a given directory.
 }
 \details{
-\code{saveToRepo} function saves desired objects to the local Repository on a given directory.
+\code{saveToRepo} function saves desired objects to the local Repository in a given directory.
 Objects are saved in the local Repository, which is a SQLite database named \code{backpack}.
-After every \code{saveToRepo} call the database is refreshed, so object is available immediately.
-Every object is saved in a \code{md5hash.rda} file, located in the folder (created in given directory) named
-\code{gallery}. \code{md5hash} is a hash generated from object, which is wanted to be saved and is different
-for various objects. This \code{md5hash} is a string of length 32 that comes out as a result of
+After every \code{saveToRepo} call the database is refreshed, so the object is available immediately in the database.
+Every object is archived in a \code{md5hash.rda} file. This file will be saved in a folder (under \code{dir} directory) named
+\code{gallery}. For every object, \code{md5hash} is a unique string of length 32 that comes out as a result of
 \code{digest{digest}} function, which uses a cryptographical MD5 hash algorithm.
 
 By default, a miniature of an object and (if possible) a data set needed to compute this object are extracted.
-They are also going to be saved in a file named by their \code{md5hash} in a \code{gallery} folder that exists in directory
-specified in \code{dir} argument. Also a specific \code{Tag}-relation is going to be added to the \code{backpack} dataset in case there is an urge to load an
-object with it's related data set - see \link{loadFromLocalRepo} or \link{loadFromGithubRepo}. Default settings
-may be changed by using arguments \code{archiveData}, \code{archiveTag} or \code{archiveMiniature} with
+They are also going to be saved in a file named by their \code{md5hash} in the \code{gallery} folder that exists in the directory
+specified in the \code{dir} argument. Moreover, a specific \code{Tag}-relation is going to be added to the \code{backpack} dataset in case there is a need to load
+the object with it's related data set - see \link{loadFromLocalRepo} or \link{loadFromGithubRepo}. Default settings
+may be changed by using the \code{archiveData}, \code{archiveTag} or \code{archiveMiniature} arguments with the
 \code{FALSE} value.
 
-\code{Tags} are specific values of an object, different for various object's classes. For more detailed
+\code{Tags} are object's attributes, different for various object's classes. For more detailed
 information check \link{Tags}
 
-Archivised object can be searched in \code{backpack} dataset using functions
-\link{searchInLocalRepo} or \link{searchInGithubRepo}. Objects can be searched by their \link{Tags},
-\code{names}, \code{classes} or  \code{archivisation date}.
+Archived object can be searched in the \code{backpack} dataset by using the
+\link{searchInLocalRepo} or \link{searchInGithubRepo} functions. Objects can be searched by their \link{Tags},
+\code{names}, \code{classes} or \code{archiving date}.
 
 Graphical parameters.
 
-If a desired to archivise object is of class \code{data.frame} or data can be
-(and are wanted to be - \code{archiveData = TRUE}) extracted from this object, it is possible to specify
-how many rows of that data should be archivised. Simply add argument \code{firstRows} with wanted rows
-number.
+If the object is of class \code{data.frame} or \code{archiveData = TRUE}, it is possible to specify
+how many rows of that data should be archived by adding the argument \code{firstRows} with the n
+specified number of rows. Note that, the date can be extracted only from the objects that are supported by the package; see \href{https://github.com/pbiecek/archivist/issues/5}{https://github.com/pbiecek/archivist/issues/5}
 
-If a desired to archivise object is of class \code{lattice} or \code{ggplot}/\code{gg} and
-a Miniature of this object is wanted to be archivise ( \code{archiveMiniature = TRUE}) then it is
-possible to set the Miniature \code{width} and \code{height} parameters. Default they are set to
+If the object is of class \code{lattice} or \code{ggplot}, and
+\code{archiveMiniature = TRUE}, then it is
+possible to set the miniature's \code{width} and \code{height} parameters. By default they are set to
 \code{width = 800}, \code{height = 600}.
 
 Supported object's classes are (so far):
@@ -81,7 +79,7 @@ Supported object's classes are (so far):
  \item \code{survfit}.
  }
 
- To check what \code{Tags} will be extracetd for various objects see \link{Tags}.
+To check what \code{Tags} will be extracted for various objects see \link{Tags}.
 }
 \examples{
 # objects preparation
@@ -152,6 +150,11 @@ saveToRepo(fannyx, dir=exampleDir)
 saveToRepo(lda1, dir=exampleDir)
 saveToRepo(qda1, dir=exampleDir)
 saveToRepo(glmnet1, dir=exampleDir)
+
+# let's see how the Repository look like: summary
+
+summaryLocalRepo(method = "objects", dir = exampleDir)
+summaryLocalRepo(method = "tags", dir = exampleDir)
 
 # removing all files generated to this function's examples
 x <- list.files( paste0( exampleDir, "/gallery/" ) )

@@ -10,7 +10,6 @@
 #' 
 #' \code{Repository} is folder with a SQLite database stored in a file named \code{backpack}
 #' and a subdirectory named \code{gallery} with collection of object saved as \code{.rda} files.
-#' TODO: needs more info?
 #' 
 #' @seealso 
 #' Functions using \code{Repository} are:

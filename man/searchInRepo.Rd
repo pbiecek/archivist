@@ -2,39 +2,39 @@
 \name{searchInLocalRepo}
 \alias{searchInGithubRepo}
 \alias{searchInLocalRepo}
-\title{Search for an Object in a Repository using Tags}
+\title{Search for an Object in a Repository Using Tags}
 \usage{
 searchInLocalRepo(tag, dir)
 
 searchInGithubRepo(tag, repo, user, branch = "master")
 }
 \arguments{
-\item{tag}{A character denoting a Tag to seek for or a list of length 2 with \code{dataFrom} and \code{dataTo} arguments. See details.}
+\item{tag}{A character denoting a Tag to be searched for in the Repository. It is also possible to specify \code{tag} as a list of length 2 with \code{dataFrom} and \code{dataTo}; see details.}
 
-\item{dir}{A character denoting an existing directory from which objects will be searched.}
+\item{dir}{A character denoting an existing directory in which objects will be searched.}
 
-\item{repo}{Only if working on Github Repository. A character string containing a name of Github Repository.}
+\item{repo}{Only if working with a Github repository. A character containing a name of a Github repository on which the Repository is archived.}
 
-\item{user}{Only if working on Github Repository. A character string containing a name of Github User.}
+\item{user}{Only if working with a Github repository. A character containing a name of a Github user on whose account the \code{repo} is created.}
 
-\item{branch}{Only if working on Github Repository. A character containing a name of
-Github Repository's branch on which a Repository is archivised. Default \code{branch} is \code{master}.}
+\item{branch}{Only if working with a Github repository. A character containing a name of
+Github repository's branch in which Repository is archived. Default \code{branch} is \code{master}.}
 }
 \value{
-\code{searchInRepo} returns as value a \code{md5hash} which is an object's hash that was generated while
-saving an object to the Repository in a moment a \link{saveToRepo} function was called. If the desired object
-is not in a Repository a logical value \code{FALSE} is returned.
+\code{searchInRepo} returns a \code{md5hash} character, which is a hash assigned to the object when
+saving it to the Repository by using the \link{saveToRepo} function. If the object
+is not in the Repository a logical value \code{FALSE} is returned.
 }
 \description{
 \code{searchInRepo} searches for an object in a \link{Repository} using it's \code{Tag}.
 }
 \details{
-\code{searchInRepo} searches for an object in a repository using it's \code{Tag}.
-\code{Tags} can be an object's \code{name}, \code{class} or \code{archivisation date}.
-Furthermore, for various object's classes more different \code{Tags} can be searched.
+\code{searchInRepo} searches for an object in a Repository using it's \code{Tag}
+(e.g., \code{name}, \code{class} or \code{archiving date}).
+For various object classes different \code{Tags} can be searched for.
 See \link{Tags}. If a \code{Tag} is a list of length 2, \code{md5hashes} of all
 objects created from date \code{dateFrom} to data \code{dateTo} are returned. The date
-should be formated e.g. \code{"2014-07-31"}.
+should be formatted according to the YYYY-MM-DD format, e.g., \code{"2014-07-31"}.
 }
 \examples{
 # objects preparation
@@ -75,6 +75,11 @@ saveToRepo(model, dir=exampleDir)
 saveToRepo(agn1, dir=exampleDir)
 saveToRepo(fannyx, dir=exampleDir)
 
+# let's see how the Repository look like: summary
+
+summaryLocalRepo(method = "objects", dir = exampleDir)
+summaryLocalRepo(method = "tags", dir = exampleDir)
+
 # search examples
 
 # tag search
@@ -109,7 +114,7 @@ file.remove( paste0( exampleDir, "/backpack.db" ) )
 file.remove( paste0( exampleDir, "/gallery" ) )
 }
 \author{
-Marcin Kosinski , \email{m.p.kosinski@gmail.com}
+Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 }
 \seealso{
 Other archivist: \code{\link{Repository}};

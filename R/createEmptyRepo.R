@@ -1,31 +1,31 @@
 ##    archivist package for R
 ##
-#' @title Create an Empty Repository in Given Directory
+#' @title Create an Empty Repository in a Given Directory
 #'
 #' @description
-#' \code{createEmptyRepo} creates an empty \link{Repository} for given directory in which archivised objects will be stored.
+#' \code{createEmptyRepo} creates an empty \link{Repository} in a given directory in which archived objects will be stored.
 #' 
 #' 
 #' @details
-#' At least one repository must be initialized prior to use other functions from archivist package. 
-#' If working in groups, it is highly recommend to create repository on shared Dropbox/Git folder.
+#' At least one Repository must be initialized before using other functions from the \pck{archivist} package. 
+#' When working in groups, it is highly recommended to create a Repository on a shared Dropbox/Git folder.
 #' 
-#' All objects desired to be archivised are going to be saved in the local Repository, which is a SQLite database stored in a file named \code{backpack}. 
-#' Every object is saved (after calling \code{saveToRepo} function) in a \code{md5hash.rda} file, located in the folder (created in given directory) named 
-#' \code{gallery}. \code{md5hash} is a hash generated from object, which is wanted to be saved and is different 
-#' for various objects. This \code{md5hash} is a string of length 32 that comes out as a result of 
+#' All objects desired to be archived are going to be saved in the local Repository, which is an SQLite database stored in a file named \code{backpack}. 
+#' After calling \code{saveToRepo} function, every object will be archived in a \code{md5hash.rda} file. This file will be saved in a folder (under \code{dir} directory) named 
+#' \code{gallery}. For every object, \code{md5hash} is a unique string of length 32 that comes out as a result of 
 #' \code{digest{digest}} function, which uses a cryptographical MD5 hash algorithm.
 #' 
 #' Created \code{backpack} database is a useful and fundamental tool for remembering object's 
-#' \code{name}, \code{class}, \code{archivisation date} etc (that are remembered as \link{Tags}) 
+#' \code{name}, \code{class}, \code{archiving date} etc. (that are remembered as \link{Tags}),
 #' or for keeping object's \code{md5hash}.
 #' 
-#' Besides \code{backpack} database, there also is created a folder named \code{gallery} in which all 
-#' objects will be archivised.
+#' Besides the \code{backpack} database, \code{gallery} folder is created in which all 
+#' objects will be archived.
 #' 
-#' After every \code{saveToRepo} call the database is refreshed, so object is available immediately.
+#' After every \code{saveToRepo} call the database is refreshed, so an object is available 
+#' immediately in \code{backpack.db} database for other collaborators.
 #' 
-#' @param dir A character that specifies the directory for repository to be made.
+#' @param dir A character that specifies the directory for the Repository to be made.
 #' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
@@ -34,7 +34,7 @@
 #' exampleDir <- tempdir()
 #' createEmptyRepo(dir = exampleDir)
 #'
-#' # check the state of empty Repository
+#' # check the state of an empty Repository
 #' 
 #' summaryRepo( method = "objects", dir = exampleDir )
 #' summaryRepo( method = "tags", dir = exampleDir )
@@ -73,8 +73,8 @@ createEmptyRepo <- function( dir ){
   dbWriteTable( backpack, "tag",tag, overwrite = TRUE, row.names = FALSE )
   
   
-   dbGetQuery(backpack, "delete from artifact")
-   dbGetQuery(backpack, "delete from tag")
+  dbGetQuery(backpack, "delete from artifact")
+  dbGetQuery(backpack, "delete from tag")
   
   dbDisconnect( backpack )
   dbUnloadDriver( sqlite )
@@ -108,7 +108,7 @@ addTag <- function( tag, md5hash, createdDate = now(), dir ){
   # send insert
   dbGetQuery( conn,
               paste0("insert into tag (artifact, tag, createdDate) values ",
-                      "('", md5hash, "', '", tag, "', '", as.character( now() ), "')" ) )
+                     "('", md5hash, "', '", tag, "', '", as.character( now() ), "')" ) )
   
   # deletes connection and driver
   dbDisconnect( conn )

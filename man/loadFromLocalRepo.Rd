@@ -2,7 +2,7 @@
 \name{loadFromLocalRepo}
 \alias{loadFromGithubRepo}
 \alias{loadFromLocalRepo}
-\title{Load Object Given as md5hash from Repository}
+\title{Load Object Given as a \code{md5hash} from a Repository}
 \usage{
 loadFromLocalRepo(md5hash, dir, returns = FALSE)
 
@@ -11,43 +11,40 @@ loadFromGithubRepo(md5hash, repo, user, branch = "master", returns = FALSE)
 \arguments{
 \item{dir}{A character denoting an existing directory from which an object will be loaded.}
 
-\item{md5hash}{A hash of an object. A character string being a result of a cryptographical hash function with MD5 algorithm or it's abbreviation.}
+\item{md5hash}{A character assigned to the object as a result of a cryptographical hash function with MD5 algorithm, or it's abbreviation.}
 
-\item{repo}{Only if working on Github Repository. A character containing a name of Github Repository on which a Repository is archivised.}
+\item{repo}{Only if working with a Github repository. A character containing a name of a Github repository on which the Repository is archived.}
 
-\item{user}{Only if working on Github Repository. A character containing a name of Github User on which a Repository is archivised.}
+\item{user}{Only if working with a Github repository. A character containing a name of a Github user on whose account the \code{repo} is created.}
 
-\item{branch}{Only if working on Github Repository. A character containing a name of
-Github Repository's branch on which a Repository is archivised. Default \code{branch} is \code{master}.}
+\item{branch}{Only if working with a Github repository. A character containing a name of
+Github Repository's branch on which a Repository is archived. Default \code{branch} is \code{master}.}
 
 \item{returns}{A logical value denoting whether to load an object into the Global Environment
-(that is set by default \code{FALSE}) or whether to return an object as a function's result (\code{TRUE}).}
+(that is set by default to \code{FALSE}) or whether to return an object as the result of the function (\code{TRUE}).}
 }
 \description{
 \code{loadFromLocalRepo} loads an object from a local \link{Repository} into the workspace.
 \code{loadFromGithubRepo} loads an object from a Github \link{Repository} into the workspace.
 }
 \details{
-Functions \code{loadFromLocalRepo} and \code{loadFromGithubRepo} load objects from archivist repositories stored in local folder or on Github. Both of them take \code{md5hash} as a
-parameter. This \code{md5hash} is a string of length 32 that comes out as a result from \link{saveToRepo} function, which uses a cryptographical hash function with MD5 algorithm.
+Functions \code{loadFromLocalRepo} and \code{loadFromGithubRepo} load objects from archivist repositories stored in a local folder or on Github. Both of them take \code{md5hash} as a
+parameter. This \code{md5hash} is a string of length 32, which is a result from \link{saveToRepo} function.
 
-Important: instead of giving whole \code{md5hash} name, user can simply give first few signs of desired \code{md5hash} - an abbreviation.
-For example \code{a09dd} instead of \code{a09ddjdkf9kj33dcjdnfjgos9jd9jkcv}. But if several \code{md5hashes}
-start with the same pattern, all objects with this \code{md5hash} abbreviation will be loaded from \link{Repository}.
+Important: instead of giving the whole \code{md5hash} character, the user can simply give first few characters of the \code{md5hash}.
+For example, \code{a09dd} instead of \code{a09ddjdkf9kj33dcjdnfjgos9jd9jkcv}. All objects with the same corresponing \code{md5hash} abbreviation will be loaded from \link{Repository}.
 
-Note that \code{user} and \code{repo} should be used only when working on Github Repository and ought to be omitted in a local working mode,
-when \code{dir} should only be used when working on a local Repository and ought to be omitted in a Github working mode.
+Note that \code{user} and \code{repo} should be used only when working with a Github repository and should be omitted in the local mode.
+\code{dir} should only be used when working on a local Repository and should be omitted in the Github mode.
 
-One may notice that loadFromGithubRepo and loadFromLocalRepo load objects to the Global
-Environment with it's original name. If one is not satisfied with that solution,
-a parameter returns = TRUE might be specified so that functions return object as a result that
-can be attributed to a new name.
-
-Remember that when abbreviation of \code{md5hash} was given a couple of different objects
-suiting that abbreviation will be loadad as a list.
+One may notice that \code{loadFromGithubRepo} and \code{loadFromLocalRepo} load objects to the Global
+Environment with their original names. Alternatively,
+a parameter \code{returns = TRUE} might be specified so that the functions return objects as a result so that they
+can be attributed to new names. Note that, when an abbreviation of \code{md5hash} was given a list of objects corresponding to this
+abbreviation will be loaded.
 }
 \note{
-You can load one object at one call.
+You can specify one \code{md5hash} (or its abbreviation) per function call.
 }
 \examples{
 # objects preparation
@@ -90,6 +87,10 @@ modelMd5hash  <- saveToRepo(model, dir=exampleDir)
 agn1Md5hash <- saveToRepo(agn1, dir=exampleDir)
 fannyxMd5hash <- saveToRepo(fannyx, dir=exampleDir)
 
+# let's see how the Repository look like: summary
+
+summaryLocalRepo(method = "objects", dir = exampleDir)
+summaryLocalRepo(method = "tags", dir = exampleDir)
 
 # load examples
 

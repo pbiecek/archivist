@@ -3,40 +3,39 @@
 #' @title View the Summary of a Repository 
 #'
 #' @description
-#' \code{summaryLocalRepo} and \code{summaryGithubRepo} functions show the summary
-#' of a \link{Repository} saved in given \code{dir} (directory). \code{summaryLocalRepo}
-#' works on a \code{Repository} that exists on a user's computer when \code{summaryGithubRepo}
-#' shows the summary of the \code{Repository} existing on Github Repository.
-#' 
+#' \code{summaryLocalRepo} and \code{summaryGithubRepo} functions produce the summary
+#' of a \link{Repository} saved in a given \code{dir} (directory). \code{summaryLocalRepo}
+#' shows the summary of the \code{Repository} that exists on the user's computer, whereas \code{summaryGithubRepo}
+#' shows the summary of the \code{Repository} existing on a Github repository.
 #' 
 #' @details
-#' \code{summaryLocalRepo} and \code{summaryGithubRepo} functions show the summary
-#' of a \link{Repository} saved in given \code{dir} (directory). \code{summaryLocalRepo}
-#' works on a \code{Repository} that exists on a user's computer when \code{summaryGithubRepo}
-#' shows the summary of the \code{Repository} existing on Github Repository.
+#' \code{summaryLocalRepo} and \code{summaryGithubRepo} functions produce the summary
+#' of a \link{Repository} saved in a given \code{dir} (directory). \code{summaryLocalRepo}
+#' works on a \code{Repository} that exists on the user's computer, whereas \code{summaryGithubRepo}
+#' shows the summary of the \code{Repository} existing on a Github repository.
 #' 
-#' Both functions show the current state of a \code{Repository}, inter alia all archivised objects can
-#' be seen with their unique \link{md5hash} or a \code{data.frame} with archivised \link{Tags} can 
+#' Both functions show the current state of a \code{Repository}, inter alia, all archived objects can
+#' be seen with their unique \link{md5hash} or a \code{data.frame} with archived \link{Tags} can 
 #' be obtained.
 #' 
-#' @param method A character specifying what method use to summary a Repository. Available methods: 
+#' @param method A character specifying the method to be used to summarize the Repository. Available methods: 
 #' \code{objects} (default), \code{tags}. TODO: Extend
 #' 
-#' @param dir A character denoting an existing directory of a Repository from which a summary will be returned.
+#' @param dir A character denoting an existing directory of a Repository for which a summary will be returned.
 #' 
-#' @param repo Only if working on Github Repository. A character containing a name of Github Repository on which a Repository is archivised.
+#' @param repo Only if working with a Github repository. A character containing a name of a Github repository on which the Repository is archived.
 #' 
-#' @param user Only if working on Github Repository. A character containing a name of Github User on which a Repository is archivised.
+#' @param user Only if working with a Github repository. A character containing a name of a Github user on whose account the \code{repo} is created.
 #' 
-#' @param branch Only if working on Github Repository. A character containing a name of 
-#' Github Repository's branch on which a Repository is archivised. Default \code{branch} is \code{master}.
+#' @param branch Only if working with a Github repository. A character containing a name of 
+#' Github Repository's branch on which a Repository is archived. Default \code{branch} is \code{master}.
 #'
 #' @return
 #' 
-#' If parameter \code{method} was specified as \code{objects} a \code{data.frame} with objects' names and archivised
+#' If parameter \code{method} was set as \code{objects} a \code{data.frame} with objects' names and archived
 #' \code{md5hash}es is returned.
 #' 
-#' If parameter \code{method} was specified as \code{tags} a \code{data.frame} with archivised \code{Tags} and archivised
+#' If parameter \code{method} was set as \code{tags} a \code{data.frame} with archived \code{Tags} and archived
 #' objects' \code{md5hash}es is returned.
 #' 
 #' 
@@ -156,7 +155,7 @@ summaryLocalRepo <- function( method = "objects", dir ){
   
   if ( method == "tags" )
     value <- dbReadTable( conn, "tag" )
-
+  
   
   # deletes connection and driver
   dbDisconnect( conn )
