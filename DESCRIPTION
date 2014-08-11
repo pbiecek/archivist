@@ -22,6 +22,9 @@ Depends:
     RSQLite,
     lubridate
 BugReports: https://github.com/pbiecek/archivist/issues
+Suggests:
+    knitr
+VignetteBuilder: knitr
 LinkingTo: 
 Imports:
     

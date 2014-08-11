@@ -1,0 +1,14 @@
+<!--
+%\VignetteEngine{knitr::docco_linear}
+%\VignetteIndexEntry{The archivist package compedium}
+-->
+
+# The archivist package compedium
+
+```{r}
+summary(cars)
+```
+
+
+
+
