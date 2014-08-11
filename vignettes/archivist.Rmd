@@ -5,6 +5,8 @@
 
 # The archivist package compedium
 
+
+Some text about package
 ```{r}
 summary(cars)
 ```
