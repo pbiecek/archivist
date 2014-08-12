@@ -1,9 +1,9 @@
 <!--
 %\VignetteEngine{knitr::docco_linear}
-%\VignetteIndexEntry{The archivist package compedium}
+%\VignetteIndexEntry{The archivist package compendium}
 -->
 
-# The archivist package compedium
+# The archivist package compendium
 
 
 Some text about package
