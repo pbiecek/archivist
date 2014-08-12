@@ -2,7 +2,7 @@
 \name{searchInLocalRepo}
 \alias{searchInGithubRepo}
 \alias{searchInLocalRepo}
-\title{Search for an Object in a Repository Using Tags}
+\title{Search for an Object in a Repository Using \code{Tags}}
 \usage{
 searchInLocalRepo(tag, dir)
 
@@ -35,6 +35,8 @@ For various object classes different \code{Tags} can be searched for.
 See \link{Tags}. If a \code{Tag} is a list of length 2, \code{md5hashes} of all
 objects created from date \code{dateFrom} to data \code{dateTo} are returned. The date
 should be formatted according to the YYYY-MM-DD format, e.g., \code{"2014-07-31"}.
+
+\code{Tags} should be given according to the format: "TagType:TagTypeValue" - see examples.
 }
 \examples{
 # objects preparation
@@ -55,8 +57,8 @@ myplot123 <- ggplot(df, aes(x = gp, y = y)) +
 model <- lm(Sepal.Length~ Sepal.Width + Petal.Length + Petal.Width, data= iris)
 
 # agnes (twins) object
-data(votes.repub)
 library(cluster)
+data(votes.repub)
 agn1 <- agnes(votes.repub, metric = "manhattan", stand = TRUE)
 
 # fanny (partition) object
@@ -77,7 +79,7 @@ saveToRepo(fannyx, dir=exampleDir)
 
 # let's see how the Repository look like: summary
 
-summaryLocalRepo(method = "objects", dir = exampleDir)
+summaryLocalRepo(method = "md5hashes", dir = exampleDir)
 summaryLocalRepo(method = "tags", dir = exampleDir)
 
 # search examples
@@ -91,9 +93,9 @@ searchInLocalRepo( "coefname:Petal.Length", dir = exampleDir )
 searchInLocalRepo( "ac:07977555", dir = exampleDir )
 searchInLocalRepo( paste0("diss:", agn1$diss), dir = exampleDir)
 
-searchInGithubRepo( "varname:Sepal.Width", user="USERNAME", repo="REPO" )
-searchInGithubRepo( "myLMmodel:call", user="USERNAME", repo="REPO" )
-searchInGithubRepo( "date:2014-07-31 23:43:34", user="USERNAME", repo="REPO" )
+searchInGithubRepo( "varname:Sepal.Width", user="pbiecek", repo="archivist" )
+searchInGithubRepo( "myLMmodel:call", user="pbiecek", repo="archivist", branch="master" )
+searchInGithubRepo( "date:2014-07-31 23:43:34", user="pbiecek", repo="archivist" )
 
 # date search
 
@@ -111,7 +113,6 @@ sapply( x , function(x ){
      file.remove( paste0( exampleDir, "/gallery/", x ) )
    })
 file.remove( paste0( exampleDir, "/backpack.db" ) )
-file.remove( paste0( exampleDir, "/gallery" ) )
 }
 \author{
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}

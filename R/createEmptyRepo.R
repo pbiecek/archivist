@@ -60,6 +60,7 @@ createEmptyRepo <- function( dir ){
   
   # create tables
   artifact <- data.frame(md5hash = "",
+                         name = "",
                          createdDate = as.character( now() ), 
                          stringsAsFactors = FALSE ) 
   
@@ -86,15 +87,15 @@ createEmptyRepo <- function( dir ){
   }
 }
 
-addArtifact <- function( md5hash, dir ){
+addArtifact <- function( md5hash, name, dir ){
   # creates connection and driver
   sqlite <- dbDriver( "SQLite" )
   conn <- dbConnect( sqlite, paste0( dir, "/backpack.db" ) )
   
   # send insert
   dbGetQuery( conn,
-              paste0( "insert into artifact (md5hash, createdDate) values",
-                      "('", md5hash, "', '", as.character( now() ), "')" ) )
+              paste0( "insert into artifact (md5hash, name, createdDate) values",
+                      "('", md5hash, "', '", name, "', '", as.character( now() ), "')" ) )
   # deletes connection and driver
   dbDisconnect( conn )
   dbUnloadDriver( sqlite )  

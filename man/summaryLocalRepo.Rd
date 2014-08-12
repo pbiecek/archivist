@@ -4,13 +4,13 @@
 \alias{summaryLocalRepo}
 \title{View the Summary of a Repository}
 \usage{
-summaryLocalRepo(method = "objects", dir)
+summaryLocalRepo(method = "md5hashes", dir)
 
-summaryGithubRepo(method = "objects", repo, user, branch = "master ")
+summaryGithubRepo(method = "md5hashes", repo, user, branch = "master ")
 }
 \arguments{
 \item{method}{A character specifying the method to be used to summarize the Repository. Available methods:
-\code{objects} (default), \code{tags}. TODO: Extend}
+\code{md5hashes} (default), \code{tags}. TODO: Extend}
 
 \item{dir}{A character denoting an existing directory of a Repository for which a summary will be returned.}
 
@@ -22,8 +22,8 @@ summaryGithubRepo(method = "objects", repo, user, branch = "master ")
 Github Repository's branch on which a Repository is archived. Default \code{branch} is \code{master}.}
 }
 \value{
-If parameter \code{method} was set as \code{objects} a \code{data.frame} with objects' names and archived
-\code{md5hash}es is returned.
+If parameter \code{method} was set as \code{md5hashes} a \code{data.frame} with objects' names and archived
+\code{md5hashes} is returned.
 
 If parameter \code{method} was set as \code{tags} a \code{data.frame} with archived \code{Tags} and archived
 objects' \code{md5hash}es is returned.
@@ -42,7 +42,7 @@ shows the summary of the \code{Repository} existing on a Github repository.
 
 Both functions show the current state of a \code{Repository}, inter alia, all archived objects can
 be seen with their unique \link{md5hash} or a \code{data.frame} with archived \link{Tags} can
-be obtained.
+be obtained. Also there is an extra column with a date of creation the \code{Tag} or the \code{md5hash}.
 }
 \examples{
 # objects preparation
@@ -99,10 +99,10 @@ saveToRepo(model, dir=exampleDir)
 
 # summary examples
 
-summaryLocalRepo(method = "objects", dir = exampleDir)
+summaryLocalRepo(method = "md5hashes", dir = exampleDir)
 summaryLocalRepo(method = "tags", dir = exampleDir)
 
-# let's add more objects
+# let's add more md5hashes
 
 saveToRepo(glmnet1, dir=exampleDir)
 saveToRepo(lda1, dir=exampleDir)
@@ -110,7 +110,7 @@ saveToRepo(lda1, dir=exampleDir)
 
 # summary now
 
-summaryLocalRepo(method = "objects", dir = exampleDir)
+summaryLocalRepo(method = "md5hashes", dir = exampleDir)
 summaryLocalRepo(method = "tags", dir = exampleDir)
 
 # what if we remove an object
@@ -119,12 +119,12 @@ rmFromRepo(qda1Md5hash, dir = exampleDir)
 
 # summary now
 
-summaryLocalRepo(method = "objects", dir = exampleDir)
+summaryLocalRepo(method = "md5hashes", dir = exampleDir)
 summaryLocalRepo(method = "tags", dir = exampleDir)
 
 # GitHub version
 
-summaryGithubRepo(method = "objects", user = "pbiecek", repo = "archivist")
+summaryGithubRepo(method = "md5hashes", user = "pbiecek", repo = "archivist")
 summaryGithubRepo(method = "tags", user = "pbiecek", repo = "archivist", branch = "master")
 
 
@@ -135,7 +135,6 @@ sapply( x , function(x ){
      file.remove( paste0( exampleDir, "/gallery/", x ) )
    })
 file.remove( paste0( exampleDir, "/backpack.db" ) )
-file.remove( paste0( exampleDir, "/gallery" ) )
 }
 \author{
 Marcin Kosinski , \email{m.p.kosinski@gmail.com}

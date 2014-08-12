@@ -107,8 +107,8 @@
 #' model <- lm(Sepal.Length~ Sepal.Width + Petal.Length + Petal.Width, data= iris)
 #' 
 #' # agnes (twins) object 
-#' data(votes.repub)
 #' library(cluster)
+#' data(votes.repub)
 #' agn1 <- agnes(votes.repub, metric = "manhattan", stand = TRUE)
 #' 
 #' # fanny (partition) object
@@ -160,7 +160,7 @@
 #' 
 #' # let's see how the Repository look like: summary
 #' 
-#' summaryLocalRepo(method = "objects", dir = exampleDir)
+#' summaryLocalRepo(method = "md5hashes", dir = exampleDir)
 #' summaryLocalRepo(method = "tags", dir = exampleDir)
 #' 
 #' # removing all files generated to this function's examples
@@ -169,7 +169,6 @@
 #'      file.remove( paste0( exampleDir, "/gallery/", x ) )
 #'    })
 #' file.remove( paste0( exampleDir, "/backpack.db" ) )
-#' file.remove( paste0( exampleDir, "/gallery" ) )
 #' @family archivist
 #' @rdname saveToRepo
 #' @export
@@ -192,15 +191,20 @@ saveToRepo <- function( object, ..., archiveData = TRUE,
   }else{ 
     assign( value = object, x = digest( object ), envir = .GlobalEnv )
     save( file = paste0(dir, "gallery/", md5hash, ".rda"),  ascii=TRUE, list = digest( object ), envir = .GlobalEnv  )
-    rm( list = digest( object ), envir = .GlobalEnv ) 
+    
   }
   
   # add entry to database 
-  addArtifact( md5hash, dir ) 
+  if ( rememberName ){
+  addArtifact( md5hash, name = objectName, dir ) 
+  }else{
+  addArtifact( md5hash, name = digest( object ), dir )
+  rm( list = digest( object ), envir = .GlobalEnv ) 
+  }
   
   # whether to add tags
   if ( archiveTags ) {
-    extractedTags <- extractTags( object )
+    extractedTags <- extractTags( object, objectNameX = objectName )
     sapply( extractedTags, addTag, md5hash = md5hash, dir = dir )
   }
   

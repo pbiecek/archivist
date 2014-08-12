@@ -1,0 +1,12 @@
+Call:
+qda(train, grouping = cl)
+
+Prior probabilities of groups:
+        c         s         v 
+0.3333333 0.3333333 0.3333333 
+
+Group means:
+  Sepal L. Sepal W. Petal L. Petal W.
+c    5.968    2.780    4.276    1.348
+s    5.032    3.444    1.444    0.256
+v    6.416    2.912    5.464    1.976

@@ -38,7 +38,11 @@
 #' 
 #' @param dir A character denoting an existing directory from which an object will be removed.
 #' 
+#' @param removeData A logical value denoting whether to remove a data with the \code{object} specified by the \code{md5hash}.
+#' Defualt \code{FALSE}.
 #' 
+#' @param removeMiniature A logical value denoting whether to remove a miniature with the \code{object} specified by the \code{md5hash}.
+#' Defualt \code{FALSE}.
 #' 
 #' @author
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
@@ -64,8 +68,8 @@
 #' model3 <- lm(Sepal.Length~ Sepal.Width, data= iris)
 #' 
 #' # agnes (twins) object 
-#' data(votes.repub)
 #' library(cluster)
+#' data(votes.repub)
 #' agn1 <- agnes(votes.repub, metric = "manhattan", stand = TRUE)
 #' 
 #' # fanny (partition) object
@@ -85,7 +89,7 @@
 #' fannyxMd5hash <- saveToRepo(fannyx, dir=exampleDir)
 #' 
 #' # let's see how the Repository look like: summary
-#' summaryLocalRepo(method = "objects", dir = exampleDir)
+#' summaryLocalRepo(method = "md5hashes", dir = exampleDir)
 #' summaryLocalRepo(method = "tags", dir = exampleDir)
 #' 
 #' 
@@ -97,7 +101,7 @@
 #' # directory are being removed
 #' 
 #' # let's see how the Repository look like: summary
-#' summaryLocalRepo(method = "objects", dir = exampleDir)
+#' summaryLocalRepo(method = "md5hashes", dir = exampleDir)
 #' summaryLocalRepo(method = "tags", dir = exampleDir)
 #' 
 #' # one can have the same object archivised in 3 different times
@@ -112,7 +116,7 @@
 #' 
 #' # let's see how the Repository look like: summary
 #' 
-#' summaryLocalRepo(method = "objects", dir = exampleDir)
+#' summaryLocalRepo(method = "md5hashes", dir = exampleDir)
 #' summaryLocalRepo(method = "tags", dir = exampleDir)
 #' 
 #' # one easy call removes them all
@@ -149,16 +153,14 @@
 #'      file.remove( paste0( exampleDir, "/gallery/", x ) )
 #'    })
 #' file.remove( paste0( exampleDir, "/backpack.db" ) )
-#' file.remove( paste0( exampleDir, "/gallery" ) )
 #' 
 #' @family archivist
 #' @rdname rmFromRepo
 #' @export
-rmFromRepo <- function( md5hash, dir ){
+rmFromRepo <- function( md5hash, dir, removeData = FALSE, removeMiniature = FALSE ){
   stopifnot( is.character( c( dir, md5hash ) ) )
-  # stopifnot( is.logical( c( removeMiniature, removeData ) ) )
-  # TODO
-  
+  stopifnot( is.logical( c( removeData, removeMiniature ) ) )
+    
   # check if dir has "/" at the end and add it if not
   if ( regexpr( pattern = ".$", text = dir ) != "/" ){
     dir <- paste0(  dir, "/"  )
@@ -196,7 +198,23 @@ rmFromRepo <- function( md5hash, dir ){
   #                       "artifact = '", md5hash, "'" ) )
   
   # thinks this will work when abbr mode find more than 1 md5hash
-  # send deletes
+  # send deletes for data 
+  if ( removeData ){
+    dataMd5hash <- unique( dbGetQuery( conn,
+                     paste0( "SELECT artifact FROM tags WHERE ",
+                             "tag = '", paste0("relationWith:", md5hash), "'" ) ) )
+    sapply( dataMd5hash, function(x){
+      dbGetQuery( conn,
+                  paste0( "DELETE FROM artifact WHERE ",
+                          "md5hash = '", x, "'" ) )} )
+    sapply( dataMd5hash, function(x){
+      dbGetQuery( conn,
+                  paste0( "DELETE FROM tag WHERE ",
+                          "artifact = '", x, "'" ) )} )
+    
+  }
+  
+  # remove object from database
   sapply( md5hash, function(x){
     dbGetQuery( conn,
                 paste0( "DELETE FROM artifact WHERE ",
@@ -214,10 +232,13 @@ rmFromRepo <- function( md5hash, dir ){
   if ( file.exists( paste0( dir, "gallery/", md5hash, ".rda" ) ) )
     file.remove( paste0( dir, "gallery/", md5hash, ".rda" ) )
   
+  # remove the miniature of an object
+  if ( removeMiniature ){
   if ( file.exists( paste0( dir, "gallery/", md5hash, ".png" ) ) )
     file.remove( paste0( dir, "gallery/", md5hash, ".png" ) )
-  
+    
   if ( file.exists( paste0( dir, "gallery/", md5hash, ".txt" ) ) )
     file.remove( paste0( dir, "gallery/", md5hash, ".txt" ) )
+  }
   
 }

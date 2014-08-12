@@ -64,8 +64,8 @@
 #' model3 <- lm(Sepal.Length~ Sepal.Width, data= iris)
 #' 
 #' # agnes (twins) object 
-#' data(votes.repub)
 #' library(cluster)
+#' data(votes.repub)
 #' agn1 <- agnes(votes.repub, metric = "manhattan", stand = TRUE)
 #' 
 #' # fanny (partition) object
@@ -86,7 +86,7 @@
 #' 
 #' # let's see how the Repository look like: summary
 #' 
-#' summaryLocalRepo(method = "objects", dir = exampleDir)
+#' summaryLocalRepo(method = "md5hashes", dir = exampleDir)
 #' summaryLocalRepo(method = "tags", dir = exampleDir)
 #' 
 #' # load examples
@@ -125,8 +125,22 @@
 #' # so example abbreviation might be : "0178598"
 #' loadFromLocalRepo("0178598", dir = exampleDir)
 #' 
-#' # and can be lodad as a value from it's abbreviation
+#' # and can be loaded as a value from it's abbreviation
 #' newFanny  <- loadFromLocalRepo("0178598", dir = exampleDir, returns = TRUE)
+#' 
+#' #
+#' #GitHub Version
+#' #
+#' (VARmd5hash <- searchInGithubRepo( "varname:Sepal.Width", user="pbiecek", repo="archivist" ))
+#' (NAMEmd5hash <- hsearchInGithubRepo( "name:model2", user="pbiecek", repo="archivist", branch="master" ))
+#' (CLASSmd5hash <- searchInGithubRepo( "class:lm", user="pbiecek", repo="archivist", branch="master" ))
+#' (DATEmd5hash <- searchInGithubRepo( "date:2014-07-31 23:43:34", user="pbiecek", repo="archivist" ))
+#'  
+#' loadFromGithubRepo( VARmd5hash, user="pbiecek", repo="archivist")
+#' loadFromGithubRepo( NAMEmd5hash, user="pbiecek", repo="archivist")
+#' NewObjects <- loadFromGithubRepo( CLASSmd5hash, user="pbiecek", repo="archivist", returns = TRUE )
+#' loadFromGithubRepo( DATEmd5hash, user="pbiecek", repo="archivist")
+#' 
 #' 
 #' # removing all files generated to this function's examples
 #' x <- list.files( paste0( exampleDir, "/gallery/" ) )
@@ -134,8 +148,6 @@
 #'      file.remove( paste0( exampleDir, "/gallery/", x ) )
 #'    })
 #' file.remove( paste0( exampleDir, "/backpack.db" ) )
-#' file.remove( paste0( exampleDir, "/gallery" ) )
-#'
 #' 
 #' @family archivist
 #' @rdname loadFromLocalRepo

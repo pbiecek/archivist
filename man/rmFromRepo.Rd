@@ -3,12 +3,18 @@
 \alias{rmFromRepo}
 \title{Remove an Object Given as \code{md5hash} from a Repository}
 \usage{
-rmFromRepo(md5hash, dir)
+rmFromRepo(md5hash, dir, removeData = FALSE, removeMiniature = FALSE)
 }
 \arguments{
 \item{md5hash}{A character assigned to the object as a result of a cryptographical hash function with MD5 algorithm, or it's abbreviation. This object will be removed.}
 
 \item{dir}{A character denoting an existing directory from which an object will be removed.}
+
+\item{removeData}{A logical value denoting whether to remove a data with the \code{object} specified by the \code{md5hash}.
+Defualt \code{FALSE}.}
+
+\item{removeMiniature}{A logical value denoting whether to remove a miniature with the \code{object} specified by the \code{md5hash}.
+Defualt \code{FALSE}.}
 }
 \description{
 \code{rmFromRepo} removes an object given as \code{md5hash} from a \link{Repository}.
@@ -63,8 +69,8 @@ model2 <- lm(Sepal.Length~ Sepal.Width + Petal.Width, data= iris)
 model3 <- lm(Sepal.Length~ Sepal.Width, data= iris)
 
 # agnes (twins) object
-data(votes.repub)
 library(cluster)
+data(votes.repub)
 agn1 <- agnes(votes.repub, metric = "manhattan", stand = TRUE)
 
 # fanny (partition) object
@@ -84,7 +90,7 @@ agn1Md5hash <- saveToRepo(agn1, dir=exampleDir)
 fannyxMd5hash <- saveToRepo(fannyx, dir=exampleDir)
 
 # let's see how the Repository look like: summary
-summaryLocalRepo(method = "objects", dir = exampleDir)
+summaryLocalRepo(method = "md5hashes", dir = exampleDir)
 summaryLocalRepo(method = "tags", dir = exampleDir)
 
 
@@ -96,7 +102,7 @@ rmFromRepo(irisMd5hash, dir = exampleDir)
 # directory are being removed
 
 # let's see how the Repository look like: summary
-summaryLocalRepo(method = "objects", dir = exampleDir)
+summaryLocalRepo(method = "md5hashes", dir = exampleDir)
 summaryLocalRepo(method = "tags", dir = exampleDir)
 
 # one can have the same object archivised in 3 different times
@@ -111,7 +117,7 @@ agn1Md5hash2 == agn1Md5hash3
 
 # let's see how the Repository look like: summary
 
-summaryLocalRepo(method = "objects", dir = exampleDir)
+summaryLocalRepo(method = "md5hashes", dir = exampleDir)
 summaryLocalRepo(method = "tags", dir = exampleDir)
 
 # one easy call removes them all
@@ -148,7 +154,6 @@ sapply( x , function(x ){
      file.remove( paste0( exampleDir, "/gallery/", x ) )
    })
 file.remove( paste0( exampleDir, "/backpack.db" ) )
-file.remove( paste0( exampleDir, "/gallery" ) )
 }
 \author{
 Marcin Kosinski , \email{m.p.kosinski@gmail.com}

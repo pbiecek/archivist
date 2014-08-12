@@ -100,8 +100,8 @@ myplot123 <- ggplot(df, aes(x = gp, y = y)) +
 model <- lm(Sepal.Length~ Sepal.Width + Petal.Length + Petal.Width, data= iris)
 
 # agnes (twins) object
-data(votes.repub)
 library(cluster)
+data(votes.repub)
 agn1 <- agnes(votes.repub, metric = "manhattan", stand = TRUE)
 
 # fanny (partition) object
@@ -153,7 +153,7 @@ saveToRepo(glmnet1, dir=exampleDir)
 
 # let's see how the Repository look like: summary
 
-summaryLocalRepo(method = "objects", dir = exampleDir)
+summaryLocalRepo(method = "md5hashes", dir = exampleDir)
 summaryLocalRepo(method = "tags", dir = exampleDir)
 
 # removing all files generated to this function's examples
@@ -162,7 +162,6 @@ sapply( x , function(x ){
      file.remove( paste0( exampleDir, "/gallery/", x ) )
    })
 file.remove( paste0( exampleDir, "/backpack.db" ) )
-file.remove( paste0( exampleDir, "/gallery" ) )
 }
 \author{
 Marcin Kosinski , \email{m.p.kosinski@gmail.com}

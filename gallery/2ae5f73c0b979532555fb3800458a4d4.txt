@@ -1,0 +1,23 @@
+Call:
+lda(Sp ~ ., data = Iris, prior = c(1, 1, 1)/3, subset = train)
+
+Prior probabilities of groups:
+        c         s         v 
+0.3333333 0.3333333 0.3333333 
+
+Group means:
+  Sepal.L. Sepal.W. Petal.L.  Petal.W.
+c 6.000000 2.745833 4.325000 1.3250000
+s 4.946154 3.338462 1.442308 0.2461538
+v 6.512000 2.932000 5.516000 1.9520000
+
+Coefficients of linear discriminants:
+                LD1        LD2
+Sepal.L. -0.9975685 -1.0901343
+Sepal.W. -1.4365131  3.0615193
+Petal.L.  2.6563133 -0.1075595
+Petal.W.  2.2127682  2.1763867
+
+Proportion of trace:
+   LD1    LD2 
+0.9916 0.0084 

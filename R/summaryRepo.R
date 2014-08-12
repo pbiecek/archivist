@@ -16,10 +16,10 @@
 #' 
 #' Both functions show the current state of a \code{Repository}, inter alia, all archived objects can
 #' be seen with their unique \link{md5hash} or a \code{data.frame} with archived \link{Tags} can 
-#' be obtained.
+#' be obtained. Also there is an extra column with a date of creation the \code{Tag} or the \code{md5hash}.
 #' 
 #' @param method A character specifying the method to be used to summarize the Repository. Available methods: 
-#' \code{objects} (default), \code{tags}. TODO: Extend
+#' \code{md5hashes} (default), \code{tags}. TODO: Extend
 #' 
 #' @param dir A character denoting an existing directory of a Repository for which a summary will be returned.
 #' 
@@ -32,8 +32,8 @@
 #'
 #' @return
 #' 
-#' If parameter \code{method} was set as \code{objects} a \code{data.frame} with objects' names and archived
-#' \code{md5hash}es is returned.
+#' If parameter \code{method} was set as \code{md5hashes} a \code{data.frame} with objects' names and archived
+#' \code{md5hashes} is returned.
 #' 
 #' If parameter \code{method} was set as \code{tags} a \code{data.frame} with archived \code{Tags} and archived
 #' objects' \code{md5hash}es is returned.
@@ -97,10 +97,10 @@
 #'
 #' # summary examples
 #'
-#' summaryLocalRepo(method = "objects", dir = exampleDir)
+#' summaryLocalRepo(method = "md5hashes", dir = exampleDir)
 #' summaryLocalRepo(method = "tags", dir = exampleDir)
 #' 
-#' # let's add more objects
+#' # let's add more md5hashes
 #'
 #' saveToRepo(glmnet1, dir=exampleDir)
 #' saveToRepo(lda1, dir=exampleDir)
@@ -108,7 +108,7 @@
 #' 
 #' # summary now
 #' 
-#' summaryLocalRepo(method = "objects", dir = exampleDir)
+#' summaryLocalRepo(method = "md5hashes", dir = exampleDir)
 #' summaryLocalRepo(method = "tags", dir = exampleDir)
 #' 
 #' # what if we remove an object
@@ -117,12 +117,12 @@
 #'
 #' # summary now
 #' 
-#' summaryLocalRepo(method = "objects", dir = exampleDir)
+#' summaryLocalRepo(method = "md5hashes", dir = exampleDir)
 #' summaryLocalRepo(method = "tags", dir = exampleDir)
 #' 
 #' # GitHub version
 #' 
-#' summaryGithubRepo(method = "objects", user = "pbiecek", repo = "archivist")
+#' summaryGithubRepo(method = "md5hashes", user = "pbiecek", repo = "archivist")
 #' summaryGithubRepo(method = "tags", user = "pbiecek", repo = "archivist", branch = "master")
 #' 
 #' 
@@ -133,11 +133,10 @@
 #'      file.remove( paste0( exampleDir, "/gallery/", x ) )
 #'    })
 #' file.remove( paste0( exampleDir, "/backpack.db" ) )
-#' file.remove( paste0( exampleDir, "/gallery" ) )
 #' @family archivist
 #' @rdname summaryLocalRepo
 #' @export
-summaryLocalRepo <- function( method = "objects", dir ){
+summaryLocalRepo <- function( method = "md5hashes", dir ){
   stopifnot( is.character( c( method, dir ) ) )
   
   # check if dir has "/" at the end and add it if not
@@ -150,7 +149,7 @@ summaryLocalRepo <- function( method = "objects", dir ){
   sqlite <- dbDriver( "SQLite" )
   conn <- dbConnect( sqlite, dirBase )
   
-  if ( method == "objects" )
+  if ( method == "md5hashes" )
     value <- dbReadTable( conn, "artifact" )
   
   if ( method == "tags" )
@@ -167,7 +166,7 @@ summaryLocalRepo <- function( method = "objects", dir ){
 
 #' @rdname summaryLocalRepo
 #' @export
-summaryGithubRepo <- function( method = "objects", repo, user, branch = "master "){
+summaryGithubRepo <- function( method = "md5hashes", repo, user, branch = "master "){
   stopifnot( is.character( c( method, repo, user, branch ) ) )
   
   # download database

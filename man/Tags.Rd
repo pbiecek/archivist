@@ -11,7 +11,8 @@
 Furthermore, for various object's classes more different \code{Tags} are available and can
 be searched by \link{searchInLocalRepo} or \link{searchInGithubRepo} functions.
 
-\code{Tags} are stored in the \link{Repository}.
+\code{Tags} are stored in the \link{Repository}. If data is extracted from object a special \code{Tag}
+named \code{relatedWith} is created, and specifies with which object this data is related to.
 
 Supported objects with extra \code{Tags} are:
 \describe{
