@@ -6,7 +6,7 @@
 \usage{
 summaryLocalRepo(method = "md5hashes", dir)
 
-summaryGithubRepo(method = "md5hashes", repo, user, branch = "master ")
+summaryGithubRepo(method = "md5hashes", repo, user, branch = "master")
 }
 \arguments{
 \item{method}{A character specifying the method to be used to summarize the Repository. Available methods:

@@ -92,19 +92,27 @@ searchInLocalRepo( "class:lm", dir = exampleDir )
 searchInLocalRepo( "coefname:Petal.Length", dir = exampleDir )
 searchInLocalRepo( "ac:07977555", dir = exampleDir )
 
+# Github version
+summaryGithubRepo( user="pbiecek", repo="archivist" )
 searchInGithubRepo( "varname:Sepal.Width", user="pbiecek", repo="archivist" )
-searchInGithubRepo( "myLMmodel:call", user="pbiecek", repo="archivist", branch="master" )
-searchInGithubRepo( "date:2014-07-31 23:43:34", user="pbiecek", repo="archivist" )
+searchInGithubRepo( "class:lm", user="pbiecek", repo="archivist", branch="master" )
+searchInGithubRepo( "date:2014-08-17 13:44:47", user="pbiecek", repo="archivist" )
 
 # date search
 
 # objects archivised between 2 different days
 searchInLocalRepo( tag = list( dateFrom = Sys.Date()-1, dateTo = Sys.Date()+1),
-dir = exampleDir)
+dir = exampleDir )
+
+# also on Github
+
+searchInGithubRepo( tag = list( dateFrom = "2014-08-16", dateTo = "2014-08-18" ),
+user="pbiecek", repo="archivist", branch="master" )
+
 
 # objects from Today
-searchInLocalRepo( tag = list(dateFrom=Sys.Date(), dateTo=Sys.Date()),
-dir = exampleDir)
+searchInLocalRepo( tag = list( dateFrom=Sys.Date(), dateTo=Sys.Date() ),
+dir = exampleDir )
 
 # removing all files generated to this function's examples
 x <- list.files( paste0( exampleDir, "/gallery/" ) )

@@ -59,7 +59,7 @@ library(plyr)
 ds <- ddply(df, .(gp), summarise, mean = mean(y), sd = sd(y))
 myplot123 <- ggplot(df, aes(x = gp, y = y)) +
   geom_point() +  geom_point(data = ds, aes(y = mean),
-               colour = 'red', size = 3)
+                             colour = 'red', size = 3)
 
 # lm object
 model <- lm(Sepal.Length~ Sepal.Width + Petal.Length + Petal.Width, data= iris)
@@ -73,8 +73,8 @@ agn1 <- agnes(votes.repub, metric = "manhattan", stand = TRUE)
 
 # fanny (partition) object
 x <- rbind(cbind(rnorm(10, 0, 0.5), rnorm(10, 0, 0.5)),
-         cbind(rnorm(15, 5, 0.5), rnorm(15, 5, 0.5)),
-          cbind(rnorm( 3,3.2,0.5), rnorm( 3,3.2,0.5)))
+           cbind(rnorm(15, 5, 0.5), rnorm(15, 5, 0.5)),
+           cbind(rnorm( 3,3.2,0.5), rnorm( 3,3.2,0.5)))
 fannyx <- fanny(x, 2)
 
 # creating example Repository - that examples will work
@@ -97,9 +97,7 @@ summaryLocalRepo(method = "tags", dir = exampleDir)
 # first let's remove object from Global Environment
 rm(myplot123)
 rm(iris)
-rm(model)
 rm(agn1)
-rm(fannyx)
 
 # it those objects were archivised, they can be loaded
 # from Repository, when knowing their tags
@@ -123,21 +121,27 @@ modelHash == modelMd5hash
 newData <- loadFromLocalRepo(irisMd5hash, dir = exampleDir, returns = TRUE)
 
 # object can be also loaded from it's abbreviation
-# fannyxMd5hash <- saveToRepo(fannyx, dir=exampleDir)
-# "01785982a662038f720aa85e688f2082"
-# so example abbreviation might be : "0178598"
-loadFromLocalRepo("0178598", dir = exampleDir)
+# modelMd5hash <- saveToRepo( model , dir=exampleDir)
+rm( model )
+# "cd6557c6163a6f9800f308f343e75e72"
+# so example abbreviation might be : "cd6557c"
+loadFromLocalRepo("cd6557c", dir = exampleDir)
 
 # and can be loaded as a value from it's abbreviation
-newFanny  <- loadFromLocalRepo("0178598", dir = exampleDir, returns = TRUE)
+newModel  <- loadFromLocalRepo("cd6557c", dir = exampleDir, returns = TRUE)
+# note that "model" was not deleted
 
 #
 #GitHub Version
 #
+
+# check the state of database
+summaryGithubRepo( user="pbiecek", repo="archivist" )
+
 (VARmd5hash <- searchInGithubRepo( "varname:Sepal.Width", user="pbiecek", repo="archivist" ))
-(NAMEmd5hash <- hsearchInGithubRepo( "name:model2", user="pbiecek", repo="archivist", branch="master" ))
+(NAMEmd5hash <- searchInGithubRepo( "name:model2", user="pbiecek", repo="archivist", branch="master" ))
 (CLASSmd5hash <- searchInGithubRepo( "class:lm", user="pbiecek", repo="archivist", branch="master" ))
-(DATEmd5hash <- searchInGithubRepo( "date:2014-07-31 23:43:34", user="pbiecek", repo="archivist" ))
+(DATEmd5hash <- searchInGithubRepo( "date:2014-08-17 13:44:47", user="pbiecek", repo="archivist" ))
 
 loadFromGithubRepo( VARmd5hash, user="pbiecek", repo="archivist")
 loadFromGithubRepo( NAMEmd5hash, user="pbiecek", repo="archivist")
@@ -151,6 +155,8 @@ sapply( x , function(x ){
      file.remove( paste0( exampleDir, "/gallery/", x ) )
    })
 file.remove( paste0( exampleDir, "/backpack.db" ) )
+
+rm( exampleDir )
 }
 \author{
 Marcin Kosinski , \email{m.p.kosinski@gmail.com}

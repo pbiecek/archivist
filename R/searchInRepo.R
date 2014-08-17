@@ -89,19 +89,27 @@
 #' searchInLocalRepo( "coefname:Petal.Length", dir = exampleDir )
 #' searchInLocalRepo( "ac:07977555", dir = exampleDir )
 #' 
+#' # Github version
+#' summaryGithubRepo( user="pbiecek", repo="archivist" )
 #' searchInGithubRepo( "varname:Sepal.Width", user="pbiecek", repo="archivist" )
-#' searchInGithubRepo( "myLMmodel:call", user="pbiecek", repo="archivist", branch="master" )
-#' searchInGithubRepo( "date:2014-07-31 23:43:34", user="pbiecek", repo="archivist" )
-#' 
+#' searchInGithubRepo( "class:lm", user="pbiecek", repo="archivist", branch="master" )
+#' searchInGithubRepo( "date:2014-08-17 13:44:47", user="pbiecek", repo="archivist" )
+#'
 #' # date search
 #' 
 #' # objects archivised between 2 different days
 #' searchInLocalRepo( tag = list( dateFrom = Sys.Date()-1, dateTo = Sys.Date()+1), 
-#' dir = exampleDir)
+#' dir = exampleDir )
+#' 
+#' # also on Github
+#' 
+#' searchInGithubRepo( tag = list( dateFrom = "2014-08-16", dateTo = "2014-08-18" ), 
+#' user="pbiecek", repo="archivist", branch="master" )
+#' 
 #' 
 #' # objects from Today
-#' searchInLocalRepo( tag = list(dateFrom=Sys.Date(), dateTo=Sys.Date()), 
-#' dir = exampleDir)
+#' searchInLocalRepo( tag = list( dateFrom=Sys.Date(), dateTo=Sys.Date() ), 
+#' dir = exampleDir )
 #' 
 #' # removing all files generated to this function's examples
 #' x <- list.files( paste0( exampleDir, "/gallery/" ) )
@@ -153,23 +161,37 @@ searchInLocalRepo <- function( tag, dir ){
 #' @rdname searchInRepo
 #' @export
 searchInGithubRepo <- function( tag, repo, user, branch = "master" ){
-  stopifnot( is.character( c( tag, repo, user, branch ) ) )
+  stopifnot( is.character( c( repo, user, branch ) ) )
+  stopifnot( is.character( tag ) | is.list( tag ) )
   
-#   # download database
-#   library(RCurl)
-#   options(RCurlOptions = list(cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl")))
-#   tmpDB <- getBinaryURL( paste0( "https://raw.githubusercontent.com/", user, "/", repo, 
-#                         "/", branch, "/backpack.db") )
-#   tfS <- tempfile()
-#   writeBin( tmpDB, tfS )
-#   file.rename(from = tfS , to= "backpack.db")
-#   tfS <- sub( x = tfS, pattern ="\\\\file.+", replacement="")
-#   
-#   # perform local search on downloaded database
-#   md5hash <- searchInLocalRepo( tag = tag, dir = tfS )
-#   
-#     # when tags are collected, delete downloaded database
-#   file.remove( paste0( tfS, "\\backpack.db" ) )
-#   tfS <- NULL  
-  return( md5hash )
-}
+  # first download database
+  URLdb <- paste0( "https://raw.githubusercontent.com/", user, "/", repo, 
+                                                           "/", branch, "/backpack.db") 
+  library( RCurl )
+  db <- getBinaryURL( URLdb, ssl.verifypeer = FALSE )
+  writeBin( db, "search.db")
+  
+  sqlite <- dbDriver( "SQLite" )
+  conn <- dbConnect( sqlite, "search.db" )
+  
+  # extracts md5hash
+  if ( length( tag ) == 1 ){
+    md5hashES <- dbGetQuery( conn,
+                             paste0( "SELECT artifact FROM tag WHERE tag = ",
+                                     "'", tag, "'" ) )
+  }
+  if ( length( tag ) == 2 ){
+    md5hashES <- dbGetQuery( conn,
+                             paste0( "SELECT artifact FROM tag WHERE createdDate >",
+                                     "'", as.Date(tag[[1]])-1, "'", " AND createdDate <",
+                                     "'", as.Date(tag[[2]])+1, "'"))
+  }
+  
+  
+  # deletes connection and driver
+  dbDisconnect( conn )
+  dbUnloadDriver( sqlite ) 
+  file.remove( "search.db" )
+  return( as.character( md5hashES[, 1] ) ) 
+  
+  }

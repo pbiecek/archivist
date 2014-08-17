@@ -166,20 +166,35 @@ summaryLocalRepo <- function( method = "md5hashes", dir ){
 
 #' @rdname summaryLocalRepo
 #' @export
-summaryGithubRepo <- function( method = "md5hashes", repo, user, branch = "master "){
+summaryGithubRepo <- function( method = "md5hashes", repo, user, branch = "master"){
   stopifnot( is.character( c( method, repo, user, branch ) ) )
   
-  # download database
-  GitUrl <- paste0( "https://raw.githubusercontent.com/", user, "/", repo, "/", branch, "/backpack.db" )
-  LocDir <- tempfile()
-  LocDir <- paste0( LocDir, "\\")
-  download.file( url = GitUrl, destfile = LocDir )
+  # database is needed to be downloaded
+  URLdb <- paste0( "https://raw.githubusercontent.com/", user, "/", repo, 
+                   "/", branch, "/backpack.db") 
+  library( RCurl )
+  db <- getBinaryURL( URLdb, ssl.verifypeer = FALSE )
+  writeBin( db, "summary.db")
   
-  GitMethod <- method
-  summaryLocalRepo( method = GitMethod , dir = LocDir)
+  sqlite <- dbDriver( "SQLite" )
+  conn <- dbConnect( sqlite, "summary.db" )
+  
+  # now perform summary
+  if ( method == "md5hashes" )
+    value <- dbReadTable( conn, "artifact" )
+  
+  if ( method == "tags" )
+    value <- dbReadTable( conn, "tag" )
+  
+  
+  # deletes connection and driver
+  dbDisconnect( conn )
+  dbUnloadDriver( sqlite ) 
   
   # when summary is returned, delete downloaded database
-  file.remove( paste0( LocDir, "backpack.db" ) )
-  LocDir <- NULL 
+  file.remove( "summary.db" ) 
+  
+  return( value )
+
   
 }

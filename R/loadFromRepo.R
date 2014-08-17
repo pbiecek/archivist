@@ -56,22 +56,22 @@
 #' ds <- ddply(df, .(gp), summarise, mean = mean(y), sd = sd(y))
 #' myplot123 <- ggplot(df, aes(x = gp, y = y)) +
 #'   geom_point() +  geom_point(data = ds, aes(y = mean),
-#'                colour = 'red', size = 3)
-#'                
-#' # lm object                
+#'                              colour = 'red', size = 3)
+#' 
+#' # lm object
 #' model <- lm(Sepal.Length~ Sepal.Width + Petal.Length + Petal.Width, data= iris)
 #' model2 <- lm(Sepal.Length~ Sepal.Width + Petal.Width, data= iris)
 #' model3 <- lm(Sepal.Length~ Sepal.Width, data= iris)
 #' 
-#' # agnes (twins) object 
+#' # agnes (twins) object
 #' library(cluster)
 #' data(votes.repub)
 #' agn1 <- agnes(votes.repub, metric = "manhattan", stand = TRUE)
 #' 
 #' # fanny (partition) object
 #' x <- rbind(cbind(rnorm(10, 0, 0.5), rnorm(10, 0, 0.5)),
-#'          cbind(rnorm(15, 5, 0.5), rnorm(15, 5, 0.5)),
-#'           cbind(rnorm( 3,3.2,0.5), rnorm( 3,3.2,0.5)))
+#'            cbind(rnorm(15, 5, 0.5), rnorm(15, 5, 0.5)),
+#'            cbind(rnorm( 3,3.2,0.5), rnorm( 3,3.2,0.5)))
 #' fannyx <- fanny(x, 2)
 #' 
 #' # creating example Repository - that examples will work
@@ -94,9 +94,7 @@
 #' # first let's remove object from Global Environment
 #' rm(myplot123)
 #' rm(iris)
-#' rm(model)
 #' rm(agn1)
-#' rm(fannyx)
 #' 
 #' # it those objects were archivised, they can be loaded
 #' # from Repository, when knowing their tags
@@ -120,21 +118,27 @@
 #' newData <- loadFromLocalRepo(irisMd5hash, dir = exampleDir, returns = TRUE)
 #' 
 #' # object can be also loaded from it's abbreviation
-#' # fannyxMd5hash <- saveToRepo(fannyx, dir=exampleDir)        
-#' # "01785982a662038f720aa85e688f2082"
-#' # so example abbreviation might be : "0178598"
-#' loadFromLocalRepo("0178598", dir = exampleDir)
+#' # modelMd5hash <- saveToRepo( model , dir=exampleDir)
+#' rm( model )
+#' # "cd6557c6163a6f9800f308f343e75e72"
+#' # so example abbreviation might be : "cd6557c"
+#' loadFromLocalRepo("cd6557c", dir = exampleDir)
 #' 
 #' # and can be loaded as a value from it's abbreviation
-#' newFanny  <- loadFromLocalRepo("0178598", dir = exampleDir, returns = TRUE)
+#' newModel  <- loadFromLocalRepo("cd6557c", dir = exampleDir, returns = TRUE)
+#' # note that "model" was not deleted
 #' 
 #' #
 #' #GitHub Version
 #' #
+#' 
+#' # check the state of database
+#' summaryGithubRepo( user="pbiecek", repo="archivist" )
+#' 
 #' (VARmd5hash <- searchInGithubRepo( "varname:Sepal.Width", user="pbiecek", repo="archivist" ))
-#' (NAMEmd5hash <- hsearchInGithubRepo( "name:model2", user="pbiecek", repo="archivist", branch="master" ))
+#' (NAMEmd5hash <- searchInGithubRepo( "name:model2", user="pbiecek", repo="archivist", branch="master" ))
 #' (CLASSmd5hash <- searchInGithubRepo( "class:lm", user="pbiecek", repo="archivist", branch="master" ))
-#' (DATEmd5hash <- searchInGithubRepo( "date:2014-07-31 23:43:34", user="pbiecek", repo="archivist" ))
+#' (DATEmd5hash <- searchInGithubRepo( "date:2014-08-17 13:44:47", user="pbiecek", repo="archivist" ))
 #'  
 #' loadFromGithubRepo( VARmd5hash, user="pbiecek", repo="archivist")
 #' loadFromGithubRepo( NAMEmd5hash, user="pbiecek", repo="archivist")
@@ -149,6 +153,7 @@
 #'    })
 #' file.remove( paste0( exampleDir, "/backpack.db" ) )
 #' 
+#' rm( exampleDir )
 #' @family archivist
 #' @rdname loadFromLocalRepo
 #' @export
@@ -185,17 +190,22 @@ loadFromLocalRepo <- function( md5hash, dir, returns = FALSE ){
       load( file = paste0( dir, "gallery/", x, ".rda" ), envir = .GlobalEnv )
     } )
   }else{
+    .nameEnv <- new.env()
+    name <- character( length = length( md5hash ) )
+    for( i in 1:length( md5hash ) ){
+      name[i] <- load( file = paste0( dir, "gallery/", md5hash[i], ".rda" ), 
+                       envir = .nameEnv ) 
+      }
+    # in case there existed an object in GlobalEnv this function will not delete him
+    NotDelete <- as.logical(sapply( name , exists, envir = .GlobalEnv))
+    
     sapply( md5hash, function(x){
       load( file = paste0( dir, "gallery/", x, ".rda" ), envir = .GlobalEnv ) } )
-    
-    name <- 
-      load( file = sapply( md5hash, function(x){
-        paste0( dir, "gallery/", x, ".rda" )} ), envir = .GlobalEnv )  
     
     objects <- sapply( name , function(y){ 
       get(x= y, envir = .GlobalEnv ) } ) 
     
-    rm( list = name, envir = .GlobalEnv)
+    rm( list = name[!NotDelete], envir = .GlobalEnv)
     
     return( objects )
   }
@@ -213,17 +223,15 @@ loadFromGithubRepo <- function( md5hash, repo, user, branch = "master" , returns
   
   # what if abbreviation was given
   if ( nchar( md5hash ) < 32 ){
-    # then downloading backpack.db database from GitHub is vital
+    # database is needed to be downloaded
+    URLdb <- paste0( "https://raw.githubusercontent.com/", user, "/", repo, 
+                     "/", branch, "/backpack.db") 
+    library( RCurl )
+    db <- getBinaryURL( URLdb, ssl.verifypeer = FALSE )
+    writeBin( db, "load.db")
     
-    # download database
-    GitUrl <- paste0( "https://raw.githubusercontent.com/", user, "/", repo, "/", branch, "/backpack.db" )
-    dir <- tempfile()
-    dir <- paste0( dir, "\\")
-    download.file( url = GitUrl, destfile = dir )
-    
-    # search for proper tags with given abbreviation
     sqlite <- dbDriver( "SQLite" )
-    conn <- dbConnect( sqlite, paste0( dir, "backpack.db" ) )
+    conn <- dbConnect( sqlite, "load.db" )
     
     md5hashList <- dbGetQuery( conn,
                                paste0( "SELECT artifact FROM tag" ) )
@@ -278,11 +286,15 @@ loadFromGithubRepo <- function( md5hash, repo, user, branch = "master" , returns
     for (i in 1:length(tmpobjectS)){
       writeBin( tmpobjectS[[i]], tfS[i] )
     }
+    # in case there existed an object in GlobalEnv this function will not delete him
+    .nameEnv <- new.env()
+    name <- character( length = length( md5hash ) )
+    for( i in 1:length( md5hash ) ){
+      name[i] <- load( file =  tfS[i] , envir = .nameEnv ) 
+    }    
+    NotDelete <- sapply( name , exists, envir = .GlobalEnv)
     
     sapply( tfS, function(x){
-      load( file = x, envir = .GlobalEnv ) } )
-    
-    name <- sapply( tfS, function(x){
       load( file = x, envir = .GlobalEnv ) } )
     
     objects <- sapply( name , function(y){ 
@@ -291,7 +303,7 @@ loadFromGithubRepo <- function( md5hash, repo, user, branch = "master" , returns
     sapply( tfS, unlink )
     tmpobjectS <- NULL
     
-    sapply( name, rm, envir = .GlobalEnv )
+    rm( list = name[!NotDelete], envir = .GlobalEnv)
     
     return( objects )
     
