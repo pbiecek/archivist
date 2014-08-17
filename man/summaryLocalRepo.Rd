@@ -4,7 +4,7 @@
 \alias{summaryLocalRepo}
 \title{View the Summary of a Repository}
 \usage{
-summaryLocalRepo(method = "md5hashes", dir)
+summaryLocalRepo(method = "md5hashes", repoDir)
 
 summaryGithubRepo(method = "md5hashes", repo, user, branch = "master")
 }
@@ -12,7 +12,7 @@ summaryGithubRepo(method = "md5hashes", repo, user, branch = "master")
 \item{method}{A character specifying the method to be used to summarize the Repository. Available methods:
 \code{md5hashes} (default), \code{tags}. TODO: Extend}
 
-\item{dir}{A character denoting an existing directory of a Repository for which a summary will be returned.}
+\item{repoDir}{A character denoting an existing repoDirectory of a Repository for which a summary will be returned.}
 
 \item{repo}{Only if working with a Github repository. A character containing a name of a Github repository on which the Repository is archived.}
 
@@ -30,13 +30,13 @@ objects' \code{md5hash}es is returned.
 }
 \description{
 \code{summaryLocalRepo} and \code{summaryGithubRepo} functions produce the summary
-of a \link{Repository} saved in a given \code{dir} (directory). \code{summaryLocalRepo}
+of a \link{Repository} saved in a given \code{repoDir} (repoDirectory). \code{summaryLocalRepo}
 shows the summary of the \code{Repository} that exists on the user's computer, whereas \code{summaryGithubRepo}
 shows the summary of the \code{Repository} existing on a Github repository.
 }
 \details{
 \code{summaryLocalRepo} and \code{summaryGithubRepo} functions produce the summary
-of a \link{Repository} saved in a given \code{dir} (directory). \code{summaryLocalRepo}
+of a \link{Repository} saved in a given \code{repoDir} (repoDirectory). \code{summaryLocalRepo}
 works on a \code{Repository} that exists on the user's computer, whereas \code{summaryGithubRepo}
 shows the summary of the \code{Repository} existing on a Github repository.
 
@@ -91,36 +91,36 @@ glmnet1=glmnet(zk,bk)
 # creating example Repository - that examples will work
 
 
-exampleDir <- tempdir()
-createEmptyRepo(dir = exampleDir)
-saveToRepo(myplot123, dir=exampleDir)
-saveToRepo(iris, dir=exampleDir)
-saveToRepo(model, dir=exampleDir)
+exampleRepoDir <- tempdir()
+createEmptyRepo(repoDir = exampleRepoDir)
+saveToRepo(myplot123, repoDir=exampleRepoDir)
+saveToRepo(iris, repoDir=exampleRepoDir)
+saveToRepo(model, repoDir=exampleRepoDir)
 
 # summary examples
 
-summaryLocalRepo(method = "md5hashes", dir = exampleDir)
-summaryLocalRepo(method = "tags", dir = exampleDir)
+summaryLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
+summaryLocalRepo(method = "tags", repoDir = exampleRepoDir)
 
 # let's add more md5hashes
 
-saveToRepo(glmnet1, dir=exampleDir)
-saveToRepo(lda1, dir=exampleDir)
-(qda1Md5hash <- saveToRepo(qda1, dir=exampleDir))
+saveToRepo(glmnet1, repoDir=exampleRepoDir)
+saveToRepo(lda1, repoDir=exampleRepoDir)
+(qda1Md5hash <- saveToRepo(qda1, repoDir=exampleRepoDir))
 
 # summary now
 
-summaryLocalRepo(method = "md5hashes", dir = exampleDir)
-summaryLocalRepo(method = "tags", dir = exampleDir)
+summaryLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
+summaryLocalRepo(method = "tags", repoDir = exampleRepoDir)
 
 # what if we remove an object
 
-rmFromRepo(qda1Md5hash, dir = exampleDir)
+rmFromRepo(qda1Md5hash, repoDir = exampleRepoDir)
 
 # summary now
 
-summaryLocalRepo(method = "md5hashes", dir = exampleDir)
-summaryLocalRepo(method = "tags", dir = exampleDir)
+summaryLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
+summaryLocalRepo(method = "tags", repoDir = exampleRepoDir)
 
 # GitHub version
 
@@ -130,11 +130,11 @@ summaryGithubRepo(method = "tags", user = "pbiecek", repo = "archivist", branch 
 
 
 # removing all files generated to this function's examples
-x <- list.files( paste0( exampleDir, "/gallery/" ) )
+x <- list.files( paste0( exampleRepoDir, "/gallery/" ) )
 sapply( x , function(x ){
-     file.remove( paste0( exampleDir, "/gallery/", x ) )
+     file.remove( paste0( exampleRepoDir, "/gallery/", x ) )
    })
-file.remove( paste0( exampleDir, "/backpack.db" ) )
+file.remove( paste0( exampleRepoDir, "/backpack.db" ) )
 }
 \author{
 Marcin Kosinski , \email{m.p.kosinski@gmail.com}
