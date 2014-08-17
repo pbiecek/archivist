@@ -23,5 +23,3 @@ Depends: R (>= 3.0.0),
 BugReports: https://github.com/pbiecek/archivist/issues
 Suggests: knitr
 VignetteBuilder: knitr
-LinkingTo: 
-Imports:
