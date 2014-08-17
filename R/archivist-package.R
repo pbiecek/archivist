@@ -1,6 +1,6 @@
 ##    archivist package for R
 ##
-#' @title Tools for archivisation of R objects.
+#' @title Tools for archivisation of R objects
 #'
 #' @description
 #' TODO: A description.

@@ -32,16 +32,17 @@
 #'
 #' @examples
 #' exampleDir <- tempdir()
-#' createEmptyRepo(dir = exampleDir)
+#' createEmptyRepo( dir = exampleDir )
 #'
 #' # check the state of an empty Repository
 #' 
-#' summaryRepo( method = "objects", dir = exampleDir )
-#' summaryRepo( method = "tags", dir = exampleDir )
+#' summaryLocalRepo( method = "md5hashes", dir = exampleDir )
+#' summaryLocalRepo( method = "tags", dir = exampleDir )
 #' 
 #' # removing all files generated to this function's examples
 #' file.remove( paste0( exampleDir, "/backpack.db" ) )
-#' file.remove( paste0( exampleDir, "/gallery" ) )
+#' 
+#' rm( exampleDir )
 #' 
 #' @family archivist
 #' @rdname createEmptyRepo
@@ -56,7 +57,7 @@ createEmptyRepo <- function( dir ){
   
   # create connection
   sqlite    <- dbDriver( "SQLite" )
-  backpack <- dbConnect( sqlite, paste0( dir, "/backpack.db" ) )
+  backpack <- dbConnect( sqlite, paste0( dir, "backpack.db" ) )
   
   # create tables
   artifact <- data.frame(md5hash = "",

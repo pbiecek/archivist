@@ -1,4 +1,3 @@
-# TODO: TO CHECK
 
 extractTags <- function ( object, objectNameX, ... )
   UseMethod("extractTags")
@@ -23,7 +22,7 @@ extractTags.ggplot <- function( object, objectNameX, ... ) {
   library( ggplot2 )
   labx <- paste0( "labelx:", object$labels$x )
   laby <- paste0( "labely:", object$labels$y )
-  data <- paste0( "data:", object$data )
+  data <- paste0( "data:", paste0( object$data, collapse=" " ) )
   class <- paste0( "class:", class( object )[2] )
   name <- paste0( "name:", objectNameX )
   date <- paste0( "date:", now() )
@@ -35,7 +34,7 @@ extractTags.lm <- function( object, objectNameX, ... ) {
   var <- paste0( "coefname:", names( object$coefficients ) )
   class <- paste0( "class:", class( object )[1] )
   name <- paste0( "name:", objectNameX )
-  call <- paste0( "call:", object$call )
+  call <- paste0( "call:", paste0( object$call, collapse=" " ) )
   date <- paste0( "date:", now() )
   return( c( name, class, var, call, date ) )
   
@@ -57,7 +56,7 @@ extractTags.trellis <- function( object, objectNameX, ... ) {
   class <- paste0( "class:", class( object )[1] )
   name <- paste0( "name:", objectNameX )
   date <- paste0( "date:", now() )
-  call <- paste0( "call:", object$call )
+  call <- paste0( "call:", paste0( object$call, collapse=" " ) )
   return( c( name, class, date, call ) )
   
 }
@@ -65,30 +64,28 @@ extractTags.trellis <- function( object, objectNameX, ... ) {
 extractTags.twins <- function( object, objectNameX, ... ) {
   library( cluster )
   ac <- paste0( "ac:", object$ac)
-  merge <- paste0( "merge:", object$merge)
-  diss <- paste0( "diss:", object$diss)
-  data <- paste0( "data:", object$data)
+  merge <- paste0( "merge:", paste0( object$merge, collapse=" " ) )
+  data <- paste0( "data:", paste0( object$data, collapse=" " ) )
   class <- paste0( "class:", class( object )[1] )
   name <- paste0( "name:", objectNameX )
   date <- paste0( "date:", now() )
-  return( c( name, class, date, ac, merge, diss, data ) )
+  return( c( name, class, date, ac, merge, data ) )
 }
 
 extractTags.partition <- function( object, objectNameX, ... ) {
   library( cluster )
-  call <- paste0( "call:", object$call )
-  data <- paste0( "data:", object$data )
-  diss <- paste0( "diss:", object$diss )
+  call <- paste0( "call:", paste0( object$call, collapse=" " ) )
+  data <- paste0( "data:", paste0( object$data, collapse=" " ) )
   objective <- paste0( "objective:", object$objective )
   class <- paste0( "class:", class( object )[1] )
   name <- paste0( "name:", objectNameX )
   date <- paste0( "date:", now() )
-  return( c( name, class, date, call, data, diss, objective ) )
+  return( c( name, class, date, call, data, objective ) )
 }
 
 extractTags.lda <- function( object, objectNameX, ... ) {
   library( MASS )
-  call <- paste0( "call:", object$call )
+  call <- paste0( "call:", paste0( object$call, collapse=" " ) )
   class <- paste0( "class:", class( object )[1] )
   name <- paste0( "name:", objectNameX )
   date <- paste0( "date:", now() )
@@ -97,7 +94,7 @@ extractTags.lda <- function( object, objectNameX, ... ) {
 
 extractTags.qda <- function( object, objectNameX, ... ) {
   library( MASS )
-  call <- paste0( "call:", object$call )
+  call <- paste0( "call:", paste0( object$call, collapse=" " ) )
   class <- paste0( "class:", class( object )[1] )
   name <- paste0( "name:", objectNameX )
   date <- paste0( "date:", now() )
@@ -110,9 +107,9 @@ extractTags.glmnet <- function( object, objectNameX, ... ) {
   class <- paste0( "class:", class( object )[1] )
   name <- paste0( "name:", objectNameX )
   date <- paste0( "date:", now() )
-  call <- paste0( "call:", object$call )
-  beta <- paste0( "beta:", object$call )
-  lambda <- paste0( "lambda:", object$call )
+  call <- paste0( "call:", paste0( object$call, collapse=" " ) )
+  beta <- paste0( "beta:", paste0( object$beta, collapse=" " ) )
+  lambda <- paste0( "lambda:", paste0( object$lambda, collapse=" " ) )
   return( c( name, class, date, call, beta, lambda ) )
 }
 
@@ -121,8 +118,8 @@ extractTags.survfit <- function( object, objectNameX, ... ) {
   class <- paste0( "class:", class( object )[1] )
   name <- paste0( "name:", objectNameX )
   date <- paste0( "date:", now() )
-  call <- paste0( "call:", object$call )
-  strata <- paste0( "strata:", object$call )
-  type <- paste0( "type:", object$call )
+  call <- paste0( "call:", paste0( object$call, collapse=" " ) )
+  strata <- paste0( "strata:", object$strata )
+  type <- paste0( "type:", object$type )
   return( c( name, class, date, call, strata, type ) )
 }

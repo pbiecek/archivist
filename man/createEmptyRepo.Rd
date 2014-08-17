@@ -32,16 +32,17 @@ immediately in \code{backpack.db} database for other collaborators.
 }
 \examples{
 exampleDir <- tempdir()
-createEmptyRepo(dir = exampleDir)
+createEmptyRepo( dir = exampleDir )
 
 # check the state of an empty Repository
 
-summaryRepo( method = "objects", dir = exampleDir )
-summaryRepo( method = "tags", dir = exampleDir )
+summaryLocalRepo( method = "md5hashes", dir = exampleDir )
+summaryLocalRepo( method = "tags", dir = exampleDir )
 
 # removing all files generated to this function's examples
 file.remove( paste0( exampleDir, "/backpack.db" ) )
-file.remove( paste0( exampleDir, "/gallery" ) )
+
+rm( exampleDir )
 }
 \author{
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}

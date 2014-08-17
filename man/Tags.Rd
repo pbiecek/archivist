@@ -75,7 +75,6 @@ Supported objects with extra \code{Tags} are:
      \item class
      \item ac
      \item merge
-     \item diss
      \item data
   }
   }
@@ -86,7 +85,6 @@ Supported objects with extra \code{Tags} are:
      \item class
      \item call
      \item data
-     \item diss
      \item objective
   }
   }

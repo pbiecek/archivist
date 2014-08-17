@@ -1,4 +1,3 @@
-# TODO: TO CHECK
 
 extractMiniature <- function( object, md5hash, parentDir, ... )
   UseMethod( "extractMiniature" )

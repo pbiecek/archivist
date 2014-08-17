@@ -2,7 +2,7 @@
 \docType{package}
 \name{archivist-package}
 \alias{archivist-package}
-\title{Tools for archivisation of R objects.}
+\title{Tools for archivisation of R objects}
 \description{
 TODO: A description.
 }

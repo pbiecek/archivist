@@ -26,7 +26,7 @@ demoDir <- getwd()
 #
 # there is also an example Github database.
 #
-demoGitDir <- "https://github.com/pbiecek/graphGallery/exampledata/"
+demoGitDir <- c( user = "pbiecek", repo = "archivist" )
 invisible(readline())
 
 #

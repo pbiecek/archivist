@@ -141,20 +141,20 @@ glmnet1=glmnet(zk,bk)
 # save examples
 
 exampleDir <- tempdir()
-createEmptyRepo(dir = exampleDir)
-saveToRepo(myplot123, dir=exampleDir)
-saveToRepo(iris, dir=exampleDir)
-saveToRepo(model, dir=exampleDir)
-saveToRepo(agn1, dir=exampleDir)
-saveToRepo(fannyx, dir=exampleDir)
-saveToRepo(lda1, dir=exampleDir)
-saveToRepo(qda1, dir=exampleDir)
-saveToRepo(glmnet1, dir=exampleDir)
+createEmptyRepo( dir = exampleDir )
+saveToRepo( myplot123, dir=exampleDir )
+saveToRepo( iris, dir=exampleDir )
+saveToRepo( model, dir=exampleDir )
+saveToRepo( agn1, dir=exampleDir )
+saveToRepo( fannyx, dir=exampleDir )
+saveToRepo( lda1, dir=exampleDir )
+saveToRepo( qda1, dir=exampleDir )
+saveToRepo( glmnet1, dir=exampleDir )
 
 # let's see how the Repository look like: summary
 
-summaryLocalRepo(method = "md5hashes", dir = exampleDir)
-summaryLocalRepo(method = "tags", dir = exampleDir)
+summaryLocalRepo( method = "md5hashes", dir = exampleDir )
+summaryLocalRepo( method = "tags", dir = exampleDir )
 
 # removing all files generated to this function's examples
 x <- list.files( paste0( exampleDir, "/gallery/" ) )
@@ -162,6 +162,8 @@ sapply( x , function(x ){
      file.remove( paste0( exampleDir, "/gallery/", x ) )
    })
 file.remove( paste0( exampleDir, "/backpack.db" ) )
+
+rm( exampleDir )
 }
 \author{
 Marcin Kosinski , \email{m.p.kosinski@gmail.com}

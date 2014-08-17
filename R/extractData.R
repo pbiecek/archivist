@@ -1,4 +1,3 @@
-# TODO: TO CHECK
 
 extractData <- function( object, parrentMd5hash, parentDir )
   UseMethod( "extractData" )
