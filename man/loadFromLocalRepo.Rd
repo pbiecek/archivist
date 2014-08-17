@@ -95,7 +95,7 @@ summaryLocalRepo(method = "tags", dir = exampleDir)
 # load examples
 
 # first let's remove object from Global Environment
-rm(myplo123)
+rm(myplot123)
 rm(iris)
 rm(model)
 rm(agn1)
@@ -104,8 +104,8 @@ rm(fannyx)
 # it those objects were archivised, they can be loaded
 # from Repository, when knowing their tags
 
-loadFromLocalRepo(myplo123Md5hash, dir = exmapleDir)
-loadFromLocalRepo(irisMd5hash, dir = exmapleDir)
+loadFromLocalRepo(myplo123Md5hash, dir = exampleDir)
+loadFromLocalRepo(irisMd5hash, dir = exampleDir)
 
 
 # if one can not remembers the object's md5hash but

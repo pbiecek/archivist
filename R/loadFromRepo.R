@@ -92,7 +92,7 @@
 #' # load examples
 #' 
 #' # first let's remove object from Global Environment
-#' rm(myplo123)
+#' rm(myplot123)
 #' rm(iris)
 #' rm(model)
 #' rm(agn1)
@@ -101,8 +101,8 @@
 #' # it those objects were archivised, they can be loaded
 #' # from Repository, when knowing their tags
 #' 
-#' loadFromLocalRepo(myplo123Md5hash, dir = exmapleDir)
-#' loadFromLocalRepo(irisMd5hash, dir = exmapleDir)
+#' loadFromLocalRepo(myplo123Md5hash, dir = exampleDir)
+#' loadFromLocalRepo(irisMd5hash, dir = exampleDir)
 #' 
 #' 
 #' # if one can not remembers the object's md5hash but
@@ -188,17 +188,20 @@ loadFromLocalRepo <- function( md5hash, dir, returns = FALSE ){
     sapply( md5hash, function(x){
       load( file = paste0( dir, "gallery/", x, ".rda" ), envir = .GlobalEnv ) } )
     
-    name <- sapply( md5hash, function(x){
-      load( file = paste0( dir, "gallery/", x, ".rda" ), envir = .GlobalEnv ) } )
+    name <- 
+      load( file = sapply( md5hash, function(x){
+        paste0( dir, "gallery/", x, ".rda" )} ), envir = .GlobalEnv )  
     
     objects <- sapply( name , function(y){ 
       get(x= y, envir = .GlobalEnv ) } ) 
     
-    sapply( name, remove(), envir = .GlobalEnv )
+    rm( list = name, envir = .GlobalEnv)
     
     return( objects )
   }
 }
+
+
 
 
 
@@ -288,7 +291,7 @@ loadFromGithubRepo <- function( md5hash, repo, user, branch = "master" , returns
     sapply( tfS, unlink )
     tmpobjectS <- NULL
     
-    sapply( name, remove(), envir = .GlobalEnv )
+    sapply( name, rm, envir = .GlobalEnv )
     
     return( objects )
     

@@ -3,7 +3,7 @@
 #' @title Search for an Object in a Repository Using \code{Tags}
 #'
 #' @description
-#' \code{searchInRepo} searches for an object in a \link{Repository} using it's \code{Tag}.
+#' \code{searchInRepo} searches for an object in a \link{Repository} using it's \link{Tags}.
 #' 
 #' 
 #' @details
@@ -14,7 +14,7 @@
 #' objects created from date \code{dateFrom} to data \code{dateTo} are returned. The date 
 #' should be formatted according to the YYYY-MM-DD format, e.g., \code{"2014-07-31"}.
 #' 
-#' \code{Tags} should be given according to the format: "TagType:TagTypeValue" - see examples.
+#' \code{Tags} should be given according to the format: \code{"TagType:TagTypeValue"} - see examples.
 #'   
 #' @return
 #' \code{searchInRepo} returns a \code{md5hash} character, which is a hash assigned to the object when
@@ -88,7 +88,6 @@
 #' searchInLocalRepo( "class:lm", dir = exampleDir )
 #' searchInLocalRepo( "coefname:Petal.Length", dir = exampleDir )
 #' searchInLocalRepo( "ac:07977555", dir = exampleDir )
-#' searchInLocalRepo( paste0("diss:", agn1$diss), dir = exampleDir)
 #' 
 #' searchInGithubRepo( "varname:Sepal.Width", user="pbiecek", repo="archivist" )
 #' searchInGithubRepo( "myLMmodel:call", user="pbiecek", repo="archivist", branch="master" )
@@ -110,6 +109,8 @@
 #'      file.remove( paste0( exampleDir, "/gallery/", x ) )
 #'    })
 #' file.remove( paste0( exampleDir, "/backpack.db" ) )
+#' 
+#' rm( exampleDir )
 #' @family archivist
 #' @rdname searchInRepo
 #' @export
@@ -154,16 +155,21 @@ searchInLocalRepo <- function( tag, dir ){
 searchInGithubRepo <- function( tag, repo, user, branch = "master" ){
   stopifnot( is.character( c( tag, repo, user, branch ) ) )
   
-  # download database
-  GitUrl <- paste0( "https://raw.githubusercontent.com/", user, "/", repo, "/", branch, "/backpack.db" )
-  LocDir <- tempfile()
-  LocDir <- paste0( LocDir, "\\")
-  download.file( url = GitUrl, destfile = LocDir )
-  
-  md5hash <- searchInLocalRepo( tag = tag, dir = Locdir )
-  
-  # when tags are collected, delete downloaded database
-  file.remove( paste0( LocDir, "backpack.db" ) )
-  LocDir <- NULL  
+#   # download database
+#   library(RCurl)
+#   options(RCurlOptions = list(cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl")))
+#   tmpDB <- getBinaryURL( paste0( "https://raw.githubusercontent.com/", user, "/", repo, 
+#                         "/", branch, "/backpack.db") )
+#   tfS <- tempfile()
+#   writeBin( tmpDB, tfS )
+#   file.rename(from = tfS , to= "backpack.db")
+#   tfS <- sub( x = tfS, pattern ="\\\\file.+", replacement="")
+#   
+#   # perform local search on downloaded database
+#   md5hash <- searchInLocalRepo( tag = tag, dir = tfS )
+#   
+#     # when tags are collected, delete downloaded database
+#   file.remove( paste0( tfS, "\\backpack.db" ) )
+#   tfS <- NULL  
   return( md5hash )
 }

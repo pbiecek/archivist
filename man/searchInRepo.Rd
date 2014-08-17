@@ -26,7 +26,7 @@ saving it to the Repository by using the \link{saveToRepo} function. If the obje
 is not in the Repository a logical value \code{FALSE} is returned.
 }
 \description{
-\code{searchInRepo} searches for an object in a \link{Repository} using it's \code{Tag}.
+\code{searchInRepo} searches for an object in a \link{Repository} using it's \link{Tags}.
 }
 \details{
 \code{searchInRepo} searches for an object in a Repository using it's \code{Tag}
@@ -36,7 +36,7 @@ See \link{Tags}. If a \code{Tag} is a list of length 2, \code{md5hashes} of all
 objects created from date \code{dateFrom} to data \code{dateTo} are returned. The date
 should be formatted according to the YYYY-MM-DD format, e.g., \code{"2014-07-31"}.
 
-\code{Tags} should be given according to the format: "TagType:TagTypeValue" - see examples.
+\code{Tags} should be given according to the format: \code{"TagType:TagTypeValue"} - see examples.
 }
 \examples{
 # objects preparation
@@ -91,7 +91,6 @@ searchInLocalRepo( "varname:Sepal.Width", dir = exampleDir )
 searchInLocalRepo( "class:lm", dir = exampleDir )
 searchInLocalRepo( "coefname:Petal.Length", dir = exampleDir )
 searchInLocalRepo( "ac:07977555", dir = exampleDir )
-searchInLocalRepo( paste0("diss:", agn1$diss), dir = exampleDir)
 
 searchInGithubRepo( "varname:Sepal.Width", user="pbiecek", repo="archivist" )
 searchInGithubRepo( "myLMmodel:call", user="pbiecek", repo="archivist", branch="master" )
@@ -113,6 +112,8 @@ sapply( x , function(x ){
      file.remove( paste0( exampleDir, "/gallery/", x ) )
    })
 file.remove( paste0( exampleDir, "/backpack.db" ) )
+
+rm( exampleDir )
 }
 \author{
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}
