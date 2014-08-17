@@ -27,4 +27,3 @@ Suggests:
 VignetteBuilder: knitr
 LinkingTo: 
 Imports:
-    
