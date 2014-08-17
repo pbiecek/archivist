@@ -12,7 +12,7 @@ createEmptyRepo(dir)
 \code{createEmptyRepo} creates an empty \link{Repository} in a given directory in which archived objects will be stored.
 }
 \details{
-At least one Repository must be initialized before using other functions from the \pck{archivist} package.
+At least one Repository must be initialized before using other functions from the \pkg{archivist} package.
 When working in groups, it is highly recommended to create a Repository on a shared Dropbox/Git folder.
 
 All objects desired to be archived are going to be saved in the local Repository, which is an SQLite database stored in a file named \code{backpack}.
