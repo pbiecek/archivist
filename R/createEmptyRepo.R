@@ -107,9 +107,9 @@ addArtifact <- function( md5hash, name, dir ){
 
 addTag <- function( tag, md5hash, createdDate = now(), dir ){
   # creates connection and driver
-  sqlite <- dbDriver( "SQLite" )
-  conn <- dbConnect( sqlite, paste0( dir, "/backpack.db" ) )
-  
+  #sqlite <- dbDriver( "SQLite" )
+  #conn <- dbConnect( sqlite, paste0( dir, "/backpack.db" ) )
+  conn <- dbConnect( get( "sqlite", envir = .ArchivistEnv ), paste0( dir, "/backpack.db" ) )
   # send insert
   dbGetQuery( conn,
               paste0("insert into tag (artifact, tag, createdDate) values ",
@@ -117,6 +117,11 @@ addTag <- function( tag, md5hash, createdDate = now(), dir ){
   
   # deletes connection and driver
   dbDisconnect( conn )
-  dbUnloadDriver( sqlite ) 
   
 }
+
+connectWithDB <- function( repoDir ){
+    conn <- dbConnect( .sqlite, paste0( repoDir, "backpack.db" ) )
+    return( conn )
+}
+  

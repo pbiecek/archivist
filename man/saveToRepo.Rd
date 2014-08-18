@@ -71,11 +71,11 @@ Supported object's classes are (so far):
  \item \code{ggplot},
  \item \code{htest},
  \item \code{trellis},
- \item \code{twins (inherits: agnes, diana, mona)},
- \item \code{partition (inherits: pam, clara, fanny)},
+ \item \code{twins (result of agnes, diana or mona function)},
+ \item \code{partition (result of pam, clara or fanny fuction)},
  \item \code{lda},
  \item \code{qda},
- \item \code{glmnet (elmet, lognet, multnet, fishnet, coxnet, mrelnet)},
+ \item \code{glmnet},
  \item \code{survfit}.
  }
 
@@ -171,8 +171,8 @@ Marcin Kosinski , \email{m.p.kosinski@gmail.com}
 \seealso{
 For more detailed information check package vignette - url needed.
 
-The list of supported objects and their tags is available on this issue on \pkg{archivist} Github Repository:
-\href{https://github.com/pbiecek/archivist/issues/5}{https://github.com/pbiecek/archivist/issues/5}.
+The list of supported objects and their tags is available on \code{wikis} on \pkg{archivist} Github Repository:
+\href{https://github.com/pbiecek/archivist/wiki/archivist-package---Tags}{https://github.com/pbiecek/archivist/wiki/archivist-package---Tags}.
 
 Other archivist: \code{\link{Repository}};
   \code{\link{Tags}}; \code{\link{archivist-package}};

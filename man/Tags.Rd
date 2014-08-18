@@ -12,35 +12,15 @@ Furthermore, for various object's classes more different \code{Tags} are availab
 be searched by \link{searchInLocalRepo} or \link{searchInGithubRepo} functions.
 
 \code{Tags} are stored in the \link{Repository}. If data is extracted from object a special \code{Tag}
-named \code{relatedWith} is created, and specifies with which object this data is related to.
+named \code{relationWith} is created, and specifies with which object this data is related to.
 
-Supported objects with extra \code{Tags} are:
+So far supported objects list is presented below. Objects are divided thematically.
+The newest list is also available on \pkg{archivist} \code{wikis} on
+\href{https://github.com/pbiecek/archivist/wiki/archivist-package---Tags}{https://github.com/pbiecek/archivist/wiki/archivist-package---Tags}.
+
+Regression Models
+
 \describe{
-  \item{\code{default}}{
-  \itemize{
-     \item name
-     \item class
-     \item date
-  }
-  }
-  \item{\code{data.frame}}{
-  \itemize{
-     \item name
-     \item class
-     \item date
-     \item varname
-  }
-  }
-  \item{\code{ggplot}}{
-  \itemize{
-     \item name
-     \item class
-     \item date
-     \item data
-     \item labelx
-     \item labely
-  }
-  }
   \item{\code{lm}}{
   \itemize{
      \item coefname
@@ -51,13 +31,38 @@ Supported objects with extra \code{Tags} are:
      \item date
   }
   }
-  \item{\code{htest}}{
+  \item{\code{glmnet}}{
   \itemize{
-     \item alternative
-     \item method
      \item date
      \item name
      \item class
+     \item call
+     \item beta
+     \item lambda
+  }
+  }
+  \item{\code{survfit}}{
+  \itemize{
+     \item date
+     \item name
+     \item class
+     \item call
+     \item strata
+     \item type
+  }
+  }
+}
+Plots
+
+\describe{
+  \item{\code{ggplot}}{
+  \itemize{
+     \item name
+     \item class
+     \item date
+     \item data
+     \item labelx
+     \item labely
   }
   }
   \item{\code{trellis}}{
@@ -68,7 +73,11 @@ Supported objects with extra \code{Tags} are:
      \item call
   }
   }
-  \item{\code{twins (agnes, diana, mona)}}{
+}
+Results of Agglomeration Methods
+
+\describe{
+\item{\code{twins which is a result of agnes, diana or mona functions}}{
   \itemize{
      \item date
      \item name
@@ -78,7 +87,7 @@ Supported objects with extra \code{Tags} are:
      \item data
   }
   }
-  \item{\code{partition (pam, clara, fanny)}}{
+  \item{\code{partition which is a result of pam, clara or fanny functions}}{
   \itemize{
      \item date
      \item name
@@ -105,24 +114,37 @@ Supported objects with extra \code{Tags} are:
      \item terms
   }
   }
-  \item{\code{glmnet (elmet, lognet, multnet, fishnet, coxnet, mrelnet)}}{
+}
+Statistical Tests
+
+\describe{
+  \item{\code{htest}}{
   \itemize{
+     \item alternative
+     \item method
      \item date
      \item name
      \item class
-     \item call
-     \item beta
-     \item lambda
   }
   }
-  \item{\code{survfit}}{
+}
+
+When non of above is specified, tags are corresponded by default
+
+\describe{
+  \item{\code{default}}{
   \itemize{
-     \item date
      \item name
      \item class
-     \item call
-     \item strata
-     \item type
+     \item date
+  }
+  }
+  \item{\code{data.frame}}{
+  \itemize{
+     \item name
+     \item class
+     \item date
+     \item varname
   }
   }
   }

@@ -4,7 +4,14 @@
 .ArchivistEnv <- new.env()
 
 .GithubURL <- "https://raw.githubusercontent.com/"
+library( "RSQLite" )
+assign( x = "sqlite", value = dbDriver( "SQLite" ), envir = .ArchivistEnv )
 
+.onDetach <- function( libpath ){
+  rm(.ArchivistEnv)
+  rm(.GithubURL)
+  rm(.sqlite)
+}
 # .onDetach <- function(libpath) {
 #   if (".backpack" %in% ls(.ArchivistEnv)) {
 #     tmp <- get(".backpack", envir = .ArchivistEnv)
