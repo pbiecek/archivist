@@ -162,7 +162,7 @@ loadFromLocalRepo <- function( md5hash, repoDir, returns = FALSE ){
   stopifnot( is.logical( returns ))
   
   # check if repoDir has "/" at the end and add it if not
-  if ( regexpr( pattern = ".$", text = repoDir ) != "/" ){
+  if ( regexpr( pattern = ".$", text = repoDir ) != "/" ) {
     repoDir <- paste0(  repoDir, "/"  )
   }
   
@@ -172,42 +172,30 @@ loadFromLocalRepo <- function( md5hash, repoDir, returns = FALSE ){
     conn <- dbConnect( sqlite, paste0( repoDir, "backpack.db" ) )
     
     md5hashList <- dbGetQuery( conn,
-                               paste0( "SELECT artifact FROM tag" ) )
-    md5hashList <- as.character( md5hashList[, 1] )
-    md5hash <- unique( grep( 
-      pattern = paste0( "^", md5hash ), 
-      x = md5hashList, 
-      value = TRUE ) )
+                               paste0( "SELECT DISTINCT artifact FROM tag WHERE artifact LIKE '",md5hash,"%'" ) )
+    md5hash <- as.character( md5hashList[, 1] )
     
     dbDisconnect( conn )
     dbUnloadDriver( sqlite ) 
-    
   }
   
   # using sapply in case abbreviation mode found more than 1 md5hash
-  if ( !returns ){
-    sapply( md5hash, function(x){
+  if ( !returns ) {
+    sapply( md5hash, function(x) {
       load( file = paste0( repoDir, "gallery/", x, ".rda" ), envir = .GlobalEnv )
     } )
   }else{
     .nameEnv <- new.env()
     name <- character( length = length( md5hash ) )
-    for( i in 1:length( md5hash ) ){
+    for( i in seq_along( md5hash ) ) {
       name[i] <- load( file = paste0( repoDir, "gallery/", md5hash[i], ".rda" ), 
                        envir = .nameEnv ) 
       }
-    # in case there existed an object in GlobalEnv this function will not delete him
-    NotDelete <- as.logical(sapply( name , exists, envir = .GlobalEnv))
-    
-    sapply( md5hash, function(x){
-      load( file = paste0( repoDir, "gallery/", x, ".rda" ), envir = .GlobalEnv ) } )
-    
-    objects <- sapply( name , function(y){ 
-      get(x= y, envir = .GlobalEnv ) } ) 
-    
-    rm( list = name[!NotDelete], envir = .GlobalEnv)
-    
-    return( objects )
+    if (length(name) == 1) {
+      return(as.list(.nameEnv)[[1]])
+    } else {
+      return(as.list(.nameEnv))
+    }
   }
 }
 
