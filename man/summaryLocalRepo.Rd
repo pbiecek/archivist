@@ -12,7 +12,7 @@ summaryGithubRepo(method = "md5hashes", repo, user, branch = "master")
 \item{method}{A character specifying the method to be used to summarize the Repository. Available methods:
 \code{md5hashes} (default), \code{tags}. TODO: Extend}
 
-\item{repoDir}{A character denoting an existing repoDirectory of a Repository for which a summary will be returned.}
+\item{repoDir}{A character denoting an existing directory of a Repository for which a summary will be returned.}
 
 \item{repo}{Only if working with a Github repository. A character containing a name of a Github repository on which the Repository is archived.}
 
@@ -30,13 +30,13 @@ objects' \code{md5hash}es is returned.
 }
 \description{
 \code{summaryLocalRepo} and \code{summaryGithubRepo} functions produce the summary
-of a \link{Repository} saved in a given \code{repoDir} (repoDirectory). \code{summaryLocalRepo}
+of a \link{Repository} saved in a given \code{repoDir} (directory). \code{summaryLocalRepo}
 shows the summary of the \code{Repository} that exists on the user's computer, whereas \code{summaryGithubRepo}
 shows the summary of the \code{Repository} existing on a Github repository.
 }
 \details{
 \code{summaryLocalRepo} and \code{summaryGithubRepo} functions produce the summary
-of a \link{Repository} saved in a given \code{repoDir} (repoDirectory). \code{summaryLocalRepo}
+of a \link{Repository} saved in a given \code{repoDir} (directory). \code{summaryLocalRepo}
 works on a \code{Repository} that exists on the user's computer, whereas \code{summaryGithubRepo}
 shows the summary of the \code{Repository} existing on a Github repository.
 

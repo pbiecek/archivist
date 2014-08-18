@@ -23,7 +23,7 @@
 #' 
 #' @param tag A character denoting a Tag to be searched for in the Repository. It is also possible to specify \code{tag} as a list of length 2 with \code{dataFrom} and \code{dataTo}; see details.
 #' 
-#' @param repoDir A character denoting an existing repoDirectory in which objects will be searched.
+#' @param repoDir A character denoting an existing directory in which objects will be searched.
 #' 
 #' @param repo Only if working with a Github repository. A character containing a name of a Github repository on which the Repository is archived.
 #' 

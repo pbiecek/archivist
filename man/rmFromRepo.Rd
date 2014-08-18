@@ -8,7 +8,7 @@ rmFromRepo(md5hash, repoDir, removeData = FALSE, removeMiniature = FALSE)
 \arguments{
 \item{md5hash}{A character assigned to the object as a result of a cryptographical hash function with MD5 algorithm, or it's abbreviation. This object will be removed.}
 
-\item{repoDir}{A character denoting an existing repoDirectory from which an object will be removed.}
+\item{repoDir}{A character denoting an existing directory from which an object will be removed.}
 
 \item{removeData}{A logical value denoting whether to remove a data with the \code{object} specified by the \code{md5hash}.
 Defualt \code{FALSE}.}
@@ -32,6 +32,12 @@ Also this function removes a \code{md5hash.rda} file, where \code{md5hash} is th
 Important: instead of giving the whole \code{md5hash} character, the user can simply give first few characters of the \code{md5hash}.
 For example, \code{a09dd} instead of \code{a09ddjdkf9kj33dcjdnfjgos9jd9jkcv}. All objects with the same corresponing \code{md5hash} abbreviation
 will be removed from the \link{Repository} and from the \code{gallery} folder.
+
+\code{rmFromRepo} provides functionality that enables to delete miniatures of the objects (.txt or .png files)
+while removing .rda files. To disable this functionality use \code{removeMiniature = FALSE}. Also, if the
+ data from the object were archived, the data will be removed by default but there is a possibility not to
+ delete this data while performing \code{rmFromRepo} - simply use \code{removeData = TRUE}.
+
 
 \code{rmFromRepo} provides functionality that enables to delete miniatures of the objects (.txt or .png files) while removing .rda files.
 To delete miniature use \code{removeMiniature = TRUE}. Also if the data from the object was archived, there is a possibility to delete this
@@ -64,7 +70,7 @@ library(plyr)
 ds <- ddply(df, .(gp), summarise, mean = mean(y), sd = sd(y))
 myplot123 <- ggplot(df, aes(x = gp, y = y)) +
   geom_point() +  geom_point(data = ds, aes(y = mean),
-               colour = 'red', size = 3)
+                             colour = 'red', size = 3)
 
 # lm object
 model <- lm(Sepal.Length~ Sepal.Width + Petal.Length + Petal.Width, data= iris)
@@ -78,8 +84,8 @@ agn1 <- agnes(votes.repub, metric = "manhattan", stand = TRUE)
 
 # fanny (partition) object
 x <- rbind(cbind(rnorm(10, 0, 0.5), rnorm(10, 0, 0.5)),
-         cbind(rnorm(15, 5, 0.5), rnorm(15, 5, 0.5)),
-          cbind(rnorm( 3,3.2,0.5), rnorm( 3,3.2,0.5)))
+           cbind(rnorm(15, 5, 0.5), rnorm(15, 5, 0.5)),
+           cbind(rnorm( 3,3.2,0.5), rnorm( 3,3.2,0.5)))
 fannyx <- fanny(x, 2)
 
 # creating example Repository - that examples will work
@@ -99,11 +105,12 @@ summaryLocalRepo(method = "tags", repoDir = exampleRepoDir)
 
 # remove examples
 
-rmFromRepo(fannyxMd5hash, repoDir = exampleRepoDir, removeData= TRUE)
-# removeData = TRUE also removes archived data from fannyxMd5hash object
+rmFromRepo(fannyxMd5hash, repoDir = exampleRepoDir, removeData= FALSE)
+# removeData = FALSE provides from removing archived "fannyxMd5hash object"-data from
+# a Repository and gallery
 rmFromRepo(irisMd5hash, repoDir = exampleRepoDir)
 # not that also files in gallery folder, created in exampleRepoDir
-# repoDirectory are being removed
+# directory are being removed
 
 # let's see how the Repository look like: summary
 summaryLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
@@ -134,7 +141,7 @@ rmFromRepo(agn1Md5hash, repoDir = exampleRepoDir, removeData = TRUE, removeMinia
 # from specific date
 
 obj2rm <- searchInLocalRepo( tag = list(dateFrom = Sys.Date(), dateTo = Sys.Date()),
-           repoDir = exampleRepoDir )
+                             repoDir = exampleRepoDir )
 sapply(obj2rm, rmFromRepo, repoDir = exampleRepoDir)
 # above example removed all objects from Today
 
@@ -155,19 +162,19 @@ summaryLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
 
 
 # once can remove object specifying only its md5hash abbreviation
-fannyxMd5hash <- saveToRepo(fannyx, repoDir=exampleRepoDir)
+myplo123Md5hash <- saveToRepo(myplot123, repoDir=exampleRepoDir)
 summaryLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
-# "01785982a662038f720aa85e688f2082"
-# so example abbreviation might be : "0178598"
-rmFromRepo("0178598", repoDir = exampleRepoDir)
+# "84445ca3cb23ccf2656ff25cc0fcaccd"
+# so example abbreviation might be : "84445ca3"
+rmFromRepo("84445ca3", repoDir = exampleRepoDir)
 summaryLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
 
 
 # removing all files generated to this function's examples
 x <- list.files( paste0( exampleRepoDir, "/gallery/" ) )
 sapply( x , function(x ){
-     file.remove( paste0( exampleRepoDir, "/gallery/", x ) )
-   })
+  file.remove( paste0( exampleRepoDir, "/gallery/", x ) )
+})
 file.remove( paste0( exampleRepoDir, "/backpack.db" ) )
 
 rm( exampleRepoDir )

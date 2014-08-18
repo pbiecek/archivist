@@ -9,7 +9,7 @@ loadFromLocalRepo(md5hash, repoDir, returns = FALSE)
 loadFromGithubRepo(md5hash, repo, user, branch = "master", returns = FALSE)
 }
 \arguments{
-\item{repoDir}{A character denoting an existing repoDirectory from which an object will be loaded.}
+\item{repoDir}{A character denoting an existing directory from which an object will be loaded.}
 
 \item{md5hash}{A character assigned to the object as a result of a cryptographical hash function with MD5 algorithm, or it's abbreviation.}
 

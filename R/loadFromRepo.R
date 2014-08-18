@@ -26,7 +26,7 @@
 #' @note
 #' You can specify one \code{md5hash} (or its abbreviation) per function call.
 #' 
-#' @param repoDir A character denoting an existing repoDirectory from which an object will be loaded.
+#' @param repoDir A character denoting an existing directory from which an object will be loaded.
 #' 
 #' @param md5hash A character assigned to the object as a result of a cryptographical hash function with MD5 algorithm, or it's abbreviation.
 #' 

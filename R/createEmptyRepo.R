@@ -1,9 +1,9 @@
 ##    archivist package for R
 ##
-#' @title Create an Empty Repository in a Given repoDirectory
+#' @title Create an Empty Repository in a Given Directory
 #'
 #' @description
-#' \code{createEmptyRepo} creates an empty \link{Repository} in a given repoDirectory in which archived objects will be stored.
+#' \code{createEmptyRepo} creates an empty \link{Repository} in a given directory in which archived objects will be stored.
 #' 
 #' 
 #' @details
@@ -11,7 +11,7 @@
 #' When working in groups, it is highly recommended to create a Repository on a shared Dropbox/Git folder.
 #' 
 #' All objects desired to be archived are going to be saved in the local Repository, which is an SQLite database stored in a file named \code{backpack}. 
-#' After calling \code{saveToRepo} function, every object will be archived in a \code{md5hash.rda} file. This file will be saved in a folder (under \code{repoDir} repoDirectory) named 
+#' After calling \code{saveToRepo} function, every object will be archived in a \code{md5hash.rda} file. This file will be saved in a folder (under \code{repoDir} directory) named 
 #' \code{gallery}. For every object, \code{md5hash} is a unique string of length 32 that comes out as a result of 
 #' \code{digest{digest}} function, which uses a cryptographical MD5 hash algorithm.
 #' 
@@ -25,7 +25,7 @@
 #' After every \code{saveToRepo} call the database is refreshed, so an object is available 
 #' immediately in \code{backpack.db} database for other collaborators.
 #' 
-#' @param repoDir A character that specifies the repoDirectory for the Repository to be made.
+#' @param repoDir A character that specifies the directory for the Repository to be made.
 #' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
