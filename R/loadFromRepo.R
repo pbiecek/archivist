@@ -19,7 +19,7 @@
 #' 
 #' One may notice that \code{loadFromGithubRepo} and \code{loadFromLocalRepo} load objects to the Global
 #' Environment with their original names. Alternatively,
-#' a parameter \code{returns = TRUE} might be specified so that the functions return objects as a result so that they
+#' a parameter \code{value = TRUE} might be specified so that the functions return objects as a result so that they
 #' can be attributed to new names. Note that, when an abbreviation of \code{md5hash} was given a list of objects corresponding to this
 #' abbreviation will be loaded.
 #' 
@@ -37,8 +37,9 @@
 #' @param branch Only if working with a Github repository. A character containing a name of 
 #' Github Repository's branch on which a Repository is archived. Default \code{branch} is \code{master}.
 #' 
-#' @param returns A logical value denoting whether to load an object into the Global Environment 
-#' (that is set by default to \code{FALSE}) or whether to return an object as the result of the function (\code{TRUE}).
+#' @param value If \code{FALSE} (default) then artifacts are loaded into the Global Environment with their original names, 
+#' if \code{TRUE} then artifacts are returned as a list of values (if there is more than one artifact)
+#' or as a single value (if there is only one arfifact that matches md5hash).
 #'
 #' @author 
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
@@ -115,7 +116,7 @@
 #' 
 #' # object can be loadad as a value
 #' 
-#' newData <- loadFromLocalRepo(irisMd5hash, repoDir = exampleRepoDir, returns = TRUE)
+#' newData <- loadFromLocalRepo(irisMd5hash, repoDir = exampleRepoDir, value = TRUE)
 #' 
 #' # object can be also loaded from it's abbreviation
 #' # modelMd5hash <- saveToRepo( model , repoDir=exampleRepoDir)
@@ -125,7 +126,7 @@
 #' loadFromLocalRepo("cd6557c", repoDir = exampleRepoDir)
 #' 
 #' # and can be loaded as a value from it's abbreviation
-#' newModel  <- loadFromLocalRepo("cd6557c", repoDir = exampleRepoDir, returns = TRUE)
+#' newModel  <- loadFromLocalRepo("cd6557c", repoDir = exampleRepoDir, value = TRUE)
 #' # note that "model" was not deleted
 #' 
 #' #
@@ -142,7 +143,7 @@
 #'  
 #' loadFromGithubRepo( VARmd5hash, user="pbiecek", repo="archivist")
 #' loadFromGithubRepo( NAMEmd5hash, user="pbiecek", repo="archivist")
-#' NewObjects <- loadFromGithubRepo( CLASSmd5hash, user="pbiecek", repo="archivist", returns = TRUE )
+#' NewObjects <- loadFromGithubRepo( CLASSmd5hash, user="pbiecek", repo="archivist", value = TRUE )
 #' loadFromGithubRepo( DATEmd5hash, user="pbiecek", repo="archivist")
 #' 
 #' 
@@ -157,9 +158,9 @@
 #' @family archivist
 #' @rdname loadFromLocalRepo
 #' @export
-loadFromLocalRepo <- function( md5hash, repoDir, returns = FALSE ){
+loadFromLocalRepo <- function( md5hash, repoDir, value = FALSE ){
   stopifnot( is.character( c( md5hash, repoDir ) ) )
-  stopifnot( is.logical( returns ))
+  stopifnot( is.logical( value ))
   
   # check if repoDir has "/" at the end and add it if not
   if ( regexpr( pattern = ".$", text = repoDir ) != "/" ) {
@@ -180,7 +181,7 @@ loadFromLocalRepo <- function( md5hash, repoDir, returns = FALSE ){
   }
   
   # using sapply in case abbreviation mode found more than 1 md5hash
-  if ( !returns ) {
+  if ( !value ) {
     sapply( md5hash, function(x) {
       load( file = paste0( repoDir, "gallery/", x, ".rda" ), envir = .GlobalEnv )
     } )
@@ -205,9 +206,9 @@ loadFromLocalRepo <- function( md5hash, repoDir, returns = FALSE ){
 
 #' @rdname loadFromLocalRepo
 #' @export
-loadFromGithubRepo <- function( md5hash, repo, user, branch = "master" , returns = FALSE ){
+loadFromGithubRepo <- function( md5hash, repo, user, branch = "master" , value = FALSE ){
   stopifnot( is.character( c( md5hash, repo, user, branch ) ) )
-  stopifnot( is.logical( returns ))
+  stopifnot( is.logical( value ))
   
   # what if abbreviation was given
   if ( nchar( md5hash ) < 32 ){
@@ -239,7 +240,7 @@ loadFromGithubRepo <- function( md5hash, repo, user, branch = "master" , returns
   }
   
   # load objecs from Repository
-  if ( !returns ){
+  if ( !value ){
     library(RCurl)
     options(RCurlOptions = list(cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl")))
     
