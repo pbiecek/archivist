@@ -212,14 +212,15 @@ loadFromGithubRepo <- function( md5hash, repo, user, branch = "master" , returns
   # what if abbreviation was given
   if ( nchar( md5hash ) < 32 ){
     # database is needed to be downloaded
-    URLdb <- paste0( "https://raw.githubusercontent.com/", user, "/", repo, 
+    URLdb <- paste0( .GithubURL, user, "/", repo, 
                      "/", branch, "/backpack.db") 
     library( RCurl )
     db <- getBinaryURL( URLdb, ssl.verifypeer = FALSE )
-    writeBin( db, "load.db")
+    Temp <- tempfile()
+    writeBin( db, Temp)
     
     sqlite <- dbDriver( "SQLite" )
-    conn <- dbConnect( sqlite, "load.db" )
+    conn <- dbConnect( sqlite, Temp )
     
     md5hashList <- dbGetQuery( conn,
                                paste0( "SELECT artifact FROM tag" ) )
@@ -233,9 +234,8 @@ loadFromGithubRepo <- function( md5hash, repo, user, branch = "master" , returns
     dbUnloadDriver( sqlite ) 
     
     # when tags are collected, delete downloaded database
-    file.remove( paste0( repoDir, "backpack.db" ) )
-    repoDir <- NULL
-    
+    file.remove( paste0( repoDir, Temp ) )
+        
   }
   
   # load objecs from Repository
@@ -275,25 +275,41 @@ loadFromGithubRepo <- function( md5hash, repo, user, branch = "master" , returns
       writeBin( tmpobjectS[[i]], tfS[i] )
     }
     # in case there existed an object in GlobalEnv this function will not delete him
+#     .nameEnv <- new.env()
+#     name <- character( length = length( md5hash ) )
+#     for( i in 1:length( md5hash ) ){
+#       name[i] <- load( file =  tfS[i] , envir = .nameEnv ) 
+#     }    
+#     NotDelete <- sapply( name , exists, envir = .GlobalEnv)
+#     
+#     sapply( tfS, function(x){
+#       load( file = x, envir = .GlobalEnv ) } )
+#     
+#     objects <- sapply( name , function(y){ 
+#       get(x= y, envir = .GlobalEnv ) } ) 
+#     
+#     sapply( tfS, unlink )
+#     tmpobjectS <- NULL
+#     
+#     rm( list = name[!NotDelete], envir = .GlobalEnv)
+#     
+#     return( objects )
+    
     .nameEnv <- new.env()
     name <- character( length = length( md5hash ) )
-    for( i in 1:length( md5hash ) ){
-      name[i] <- load( file =  tfS[i] , envir = .nameEnv ) 
-    }    
-    NotDelete <- sapply( name , exists, envir = .GlobalEnv)
+    for( i in seq_along( md5hash ) ) {
+      name[i] <- load( file =  tfS[i] , 
+                       envir = .nameEnv ) 
+    }
+    if (length(name) == 1) {
+      return(as.list(.nameEnv)[[1]])
+    } else {
+      return(as.list(.nameEnv))
     
-    sapply( tfS, function(x){
-      load( file = x, envir = .GlobalEnv ) } )
     
-    objects <- sapply( name , function(y){ 
-      get(x= y, envir = .GlobalEnv ) } ) 
     
-    sapply( tfS, unlink )
-    tmpobjectS <- NULL
     
-    rm( list = name[!NotDelete], envir = .GlobalEnv)
-    
-    return( objects )
     
   }
+}
 }

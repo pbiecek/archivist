@@ -138,15 +138,15 @@ searchInLocalRepo <- function( tag, repoDir ){
   
   # extracts md5hash
   if ( length( tag ) == 1 ){
-    md5hashES <- dbGetQuery( conn,
+    md5hashES <- unique( dbGetQuery( conn,
                              paste0( "SELECT artifact FROM tag WHERE tag = ",
-                                     "'", tag, "'" ) )
+                                     "'", tag, "'" ) ) )
   }
   if ( length( tag ) == 2 ){
-    md5hashES <- dbGetQuery( conn,
+    md5hashES <- unique( dbGetQuery( conn,
                              paste0( "SELECT artifact FROM tag WHERE createdDate >",
                                      "'", as.Date(tag[[1]])-1, "'", " AND createdDate <",
-                                     "'", as.Date(tag[[2]])+1, "'"))
+                                     "'", as.Date(tag[[2]])+1, "'") ) )
   }
   
   
@@ -165,33 +165,34 @@ searchInGithubRepo <- function( tag, repo, user, branch = "master" ){
   stopifnot( is.character( tag ) | is.list( tag ) )
   
   # first download database
-  URLdb <- paste0( "https://raw.githubusercontent.com/", user, "/", repo, 
+  URLdb <- paste0( .GithubURL, user, "/", repo, 
                                                            "/", branch, "/backpack.db") 
   library( RCurl )
   db <- getBinaryURL( URLdb, ssl.verifypeer = FALSE )
-  writeBin( db, "search.db")
+  Temp <- tempfile()
+  writeBin( db, Temp)
   
   sqlite <- dbDriver( "SQLite" )
-  conn <- dbConnect( sqlite, "search.db" )
+  conn <- dbConnect( sqlite, Temp )
   
   # extracts md5hash
   if ( length( tag ) == 1 ){
-    md5hashES <- dbGetQuery( conn,
+    md5hashES <- unique( dbGetQuery( conn,
                              paste0( "SELECT artifact FROM tag WHERE tag = ",
-                                     "'", tag, "'" ) )
+                                     "'", tag, "'" ) ) )
   }
   if ( length( tag ) == 2 ){
-    md5hashES <- dbGetQuery( conn,
+    md5hashES <- unique( dbGetQuery( conn,
                              paste0( "SELECT artifact FROM tag WHERE createdDate >",
                                      "'", as.Date(tag[[1]])-1, "'", " AND createdDate <",
-                                     "'", as.Date(tag[[2]])+1, "'"))
+                                     "'", as.Date(tag[[2]])+1, "'") ) )
   }
   
   
   # deletes connection and driver
   dbDisconnect( conn )
   dbUnloadDriver( sqlite ) 
-  file.remove( "search.db" )
+  file.remove( Temp )
   return( as.character( md5hashES[, 1] ) ) 
   
   }

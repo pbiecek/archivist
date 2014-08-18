@@ -170,14 +170,15 @@ summaryGithubRepo <- function( method = "md5hashes", repo, user, branch = "maste
   stopifnot( is.character( c( method, repo, user, branch ) ) )
   
   # database is needed to be downloaded
-  URLdb <- paste0( "https://raw.githubusercontent.com/", user, "/", repo, 
+  URLdb <- paste0( .GithubURL, user, "/", repo, 
                    "/", branch, "/backpack.db") 
   library( RCurl )
   db <- getBinaryURL( URLdb, ssl.verifypeer = FALSE )
-  writeBin( db, "summary.db")
+  Temp <- tempfile()
+  writeBin( db, Temp)
   
   sqlite <- dbDriver( "SQLite" )
-  conn <- dbConnect( sqlite, "summary.db" )
+  conn <- dbConnect( sqlite, Temp )
   
   # now perform summary
   if ( method == "md5hashes" )
@@ -192,7 +193,7 @@ summaryGithubRepo <- function( method = "md5hashes", repo, user, branch = "maste
   dbUnloadDriver( sqlite ) 
   
   # when summary is returned, delete downloaded database
-  file.remove( "summary.db" ) 
+  file.remove( Temp ) 
   
   return( value )
 

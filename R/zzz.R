@@ -3,6 +3,8 @@
 }
 .ArchivistEnv <- new.env()
 
+.GithubURL <- "https://raw.githubusercontent.com/"
+
 # .onDetach <- function(libpath) {
 #   if (".backpack" %in% ls(.ArchivistEnv)) {
 #     tmp <- get(".backpack", envir = .ArchivistEnv)
