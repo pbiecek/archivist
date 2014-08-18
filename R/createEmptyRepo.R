@@ -59,8 +59,8 @@ createEmptyRepo <- function( repoDir ){
   }
   
   # create connection
-  sqlite    <- dbDriver( "SQLite" )
-  backpack <- dbConnect( sqlite, paste0( repoDir, "backpack.db" ) )
+  #backpack <- dbConnect( get("sqlite", envir=.ArchivistEnv ), paste0( repoDir, "backpack.db" ) )
+  backpack <- getConnectionToDB(repoDir)
   
   # create tables
   artifact <- data.frame(md5hash = "",
@@ -82,7 +82,6 @@ createEmptyRepo <- function( repoDir ){
   dbGetQuery(backpack, "delete from tag")
   
   dbDisconnect( backpack )
-  dbUnloadDriver( sqlite )
   
   
   # if gallery folder does not exist - make it
@@ -93,8 +92,8 @@ createEmptyRepo <- function( repoDir ){
 
 addArtifact <- function( md5hash, name, dir ){
   # creates connection and driver
-  sqlite <- dbDriver( "SQLite" )
-  conn <- dbConnect( sqlite, paste0( dir, "/backpack.db" ) )
+  conn <- getConnectionToDB(dir)
+  #conn <- dbConnect( get("sqlite", envir=.ArchivistEnv ), paste0( dir, "/backpack.db" ) )
   
   # send insert
   dbGetQuery( conn,
@@ -102,14 +101,14 @@ addArtifact <- function( md5hash, name, dir ){
                       "('", md5hash, "', '", name, "', '", as.character( now() ), "')" ) )
   # deletes connection and driver
   dbDisconnect( conn )
-  dbUnloadDriver( sqlite )  
 }
 
 addTag <- function( tag, md5hash, createdDate = now(), dir ){
   # creates connection and driver
   #sqlite <- dbDriver( "SQLite" )
   #conn <- dbConnect( sqlite, paste0( dir, "/backpack.db" ) )
-  conn <- dbConnect( get( "sqlite", envir = .ArchivistEnv ), paste0( dir, "/backpack.db" ) )
+#  conn <- dbConnect( get( "sqlite", envir = .ArchivistEnv ), paste0( dir, "/backpack.db" ) )
+  conn <- getConnectionToDB(dir)
   # send insert
   dbGetQuery( conn,
               paste0("insert into tag (artifact, tag, createdDate) values ",
@@ -120,8 +119,8 @@ addTag <- function( tag, md5hash, createdDate = now(), dir ){
   
 }
 
-connectWithDB <- function( repoDir ){
-    conn <- dbConnect( .sqlite, paste0( repoDir, "backpack.db" ) )
+getConnectionToDB <- function( repoDir ){
+    conn <- dbConnect( get( "sqlite", envir = .ArchivistEnv ), paste0( repoDir, "backpack.db" ) )
     return( conn )
 }
   

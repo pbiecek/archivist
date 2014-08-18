@@ -1,16 +1,16 @@
-.onAttach <- function(...) {
-  packageStartupMessage( "\n Welcome to the archivist package (ver 0.1)." )
-}
 .ArchivistEnv <- new.env()
 
+.onAttach <- function(...) {
+  packageStartupMessage( "\n Welcome to the archivist package (ver 0.1)." )
+  assign( x = "sqlite", value = dbDriver( "SQLite" ), envir = .ArchivistEnv )
+}
+
 .GithubURL <- "https://raw.githubusercontent.com/"
-library( "RSQLite" )
-assign( x = "sqlite", value = dbDriver( "SQLite" ), envir = .ArchivistEnv )
 
 .onDetach <- function( libpath ){
-  rm(.ArchivistEnv)
-  rm(.GithubURL)
-  rm(.sqlite)
+  dbUnloadDriver(get( "sqlite", envir = .ArchivistEnv )) 
+#  rm(.ArchivistEnv)
+#  rm(.GithubURL)
 }
 # .onDetach <- function(libpath) {
 #   if (".backpack" %in% ls(.ArchivistEnv)) {
