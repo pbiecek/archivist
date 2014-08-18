@@ -4,14 +4,14 @@
 \alias{searchInLocalRepo}
 \title{Search for an Object in a Repository Using \code{Tags}}
 \usage{
-searchInLocalRepo(tag, dir)
+searchInLocalRepo(tag, repoDir)
 
 searchInGithubRepo(tag, repo, user, branch = "master")
 }
 \arguments{
 \item{tag}{A character denoting a Tag to be searched for in the Repository. It is also possible to specify \code{tag} as a list of length 2 with \code{dataFrom} and \code{dataTo}; see details.}
 
-\item{dir}{A character denoting an existing directory in which objects will be searched.}
+\item{repoDir}{A character denoting an existing repoDirectory in which objects will be searched.}
 
 \item{repo}{Only if working with a Github repository. A character containing a name of a Github repository on which the Repository is archived.}
 
@@ -69,28 +69,28 @@ fannyx <- fanny(x, 2)
 
 # creating example Repository - that examples will work
 
-exampleDir <- tempdir()
-createEmptyRepo(dir = exampleDir)
-saveToRepo(myplot123, dir=exampleDir)
-saveToRepo(iris, dir=exampleDir)
-saveToRepo(model, dir=exampleDir)
-saveToRepo(agn1, dir=exampleDir)
-saveToRepo(fannyx, dir=exampleDir)
+exampleRepoDir <- tempdir()
+createEmptyRepo(repoDir = exampleRepoDir)
+saveToRepo(myplot123, repoDir=exampleRepoDir)
+saveToRepo(iris, repoDir=exampleRepoDir)
+saveToRepo(model, repoDir=exampleRepoDir)
+saveToRepo(agn1, repoDir=exampleRepoDir)
+saveToRepo(fannyx, repoDir=exampleRepoDir)
 
 # let's see how the Repository look like: summary
 
-summaryLocalRepo(method = "md5hashes", dir = exampleDir)
-summaryLocalRepo(method = "tags", dir = exampleDir)
+summaryLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
+summaryLocalRepo(method = "tags", repoDir = exampleRepoDir)
 
 # search examples
 
 # tag search
-searchInLocalRepo( "class:ggplot", dir = exampleDir )
-searchInLocalRepo( "name:myplot123", dir = exampleDir )
-searchInLocalRepo( "varname:Sepal.Width", dir = exampleDir )
-searchInLocalRepo( "class:lm", dir = exampleDir )
-searchInLocalRepo( "coefname:Petal.Length", dir = exampleDir )
-searchInLocalRepo( "ac:07977555", dir = exampleDir )
+searchInLocalRepo( "class:ggplot", repoDir = exampleRepoDir )
+searchInLocalRepo( "name:myplot123", repoDir = exampleRepoDir )
+searchInLocalRepo( "varname:Sepal.Width", repoDir = exampleRepoDir )
+searchInLocalRepo( "class:lm", repoDir = exampleRepoDir )
+searchInLocalRepo( "coefname:Petal.Length", repoDir = exampleRepoDir )
+searchInLocalRepo( "ac:07977555", repoDir = exampleRepoDir )
 
 # Github version
 summaryGithubRepo( user="pbiecek", repo="archivist" )
@@ -102,7 +102,7 @@ searchInGithubRepo( "date:2014-08-17 13:44:47", user="pbiecek", repo="archivist"
 
 # objects archivised between 2 different days
 searchInLocalRepo( tag = list( dateFrom = Sys.Date()-1, dateTo = Sys.Date()+1),
-dir = exampleDir )
+repoDir = exampleRepoDir )
 
 # also on Github
 
@@ -112,16 +112,16 @@ user="pbiecek", repo="archivist", branch="master" )
 
 # objects from Today
 searchInLocalRepo( tag = list( dateFrom=Sys.Date(), dateTo=Sys.Date() ),
-dir = exampleDir )
+repoDir = exampleRepoDir )
 
 # removing all files generated to this function's examples
-x <- list.files( paste0( exampleDir, "/gallery/" ) )
+x <- list.files( paste0( exampleRepoDir, "/gallery/" ) )
 sapply( x , function(x ){
-     file.remove( paste0( exampleDir, "/gallery/", x ) )
+     file.remove( paste0( exampleRepoDir, "/gallery/", x ) )
    })
-file.remove( paste0( exampleDir, "/backpack.db" ) )
+file.remove( paste0( exampleRepoDir, "/backpack.db" ) )
 
-rm( exampleDir )
+rm( exampleRepoDir )
 }
 \author{
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}

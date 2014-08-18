@@ -3,20 +3,20 @@
 #' @title Save an Object into a Repository 
 #'
 #' @description
-#' \code{saveToRepo} function saves desired objects to the local \link{Repository} in a given directory.
+#' \code{saveToRepo} function saves desired objects to the local \link{Repository} in a given repoDirectory.
 #' 
 #' 
 #' @details
-#' \code{saveToRepo} function saves desired objects to the local Repository in a given directory.
+#' \code{saveToRepo} function saves desired objects to the local Repository in a given repoDirectory.
 #' Objects are saved in the local Repository, which is a SQLite database named \code{backpack}. 
 #' After every \code{saveToRepo} call the database is refreshed, so the object is available immediately in the database.
-#' Every object is archived in a \code{md5hash.rda} file. This file will be saved in a folder (under \code{dir} directory) named 
+#' Every object is archived in a \code{md5hash.rda} file. This file will be saved in a folder (under \code{repoDir} repoDirectory) named 
 #' \code{gallery}. For every object, \code{md5hash} is a unique string of length 32 that comes out as a result of 
 #' \code{digest{digest}} function, which uses a cryptographical MD5 hash algorithm.
 #' 
 #' By default, a miniature of an object and (if possible) a data set needed to compute this object are extracted. 
-#' They are also going to be saved in a file named by their \code{md5hash} in the \code{gallery} folder that exists in the directory
-#' specified in the \code{dir} argument. Moreover, a specific \code{Tag}-relation is going to be added to the \code{backpack} dataset in case there is a need to load 
+#' They are also going to be saved in a file named by their \code{md5hash} in the \code{gallery} folder that exists in the repoDirectory
+#' specified in the \code{repoDir} argument. Moreover, a specific \code{Tag}-relation is going to be added to the \code{backpack} dataset in case there is a need to load 
 #' the object with it's related data set - see \link{loadFromLocalRepo} or \link{loadFromGithubRepo}. Default settings
 #' may be changed by using the \code{archiveData}, \code{archiveTag} or \code{archiveMiniature} arguments with the
 #' \code{FALSE} value.
@@ -76,7 +76,7 @@
 #' 
 #' @param archiveMiniature A logical value denoting whether to archive a miniature of the \code{object}.
 #' 
-#' @param dir A character denoting an existing directory in which an object will be saved.
+#' @param repoDir A character denoting an existing repoDirectory in which an object will be saved.
 #' 
 #' @param rememberName A logical value. Should not be changed by user. It is a technical parameter.
 #'
@@ -147,77 +147,77 @@
 #' 
 #' # save examples
 #' 
-#' exampleDir <- tempdir()
-#' createEmptyRepo( dir = exampleDir )
-#' saveToRepo( myplot123, dir=exampleDir )
-#' saveToRepo( iris, dir=exampleDir )
-#' saveToRepo( model, dir=exampleDir )
-#' saveToRepo( agn1, dir=exampleDir )
-#' saveToRepo( fannyx, dir=exampleDir )
-#' saveToRepo( lda1, dir=exampleDir )
-#' saveToRepo( qda1, dir=exampleDir )
-#' saveToRepo( glmnet1, dir=exampleDir )
+#' exampleRepoDir <- tempdir()
+#' createEmptyRepo( repoDir = exampleRepoDir )
+#' saveToRepo( myplot123, repoDir=exampleRepoDir )
+#' saveToRepo( iris, repoDir=exampleRepoDir )
+#' saveToRepo( model, repoDir=exampleRepoDir )
+#' saveToRepo( agn1, repoDir=exampleRepoDir )
+#' saveToRepo( fannyx, repoDir=exampleRepoDir )
+#' saveToRepo( lda1, repoDir=exampleRepoDir )
+#' saveToRepo( qda1, repoDir=exampleRepoDir )
+#' saveToRepo( glmnet1, repoDir=exampleRepoDir )
 #' 
 #' # let's see how the Repository look like: summary
 #' 
-#' summaryLocalRepo( method = "md5hashes", dir = exampleDir )
-#' summaryLocalRepo( method = "tags", dir = exampleDir )
+#' summaryLocalRepo( method = "md5hashes", repoDir = exampleRepoDir )
+#' summaryLocalRepo( method = "tags", repoDir = exampleRepoDir )
 #' 
 #' # removing all files generated to this function's examples
-#' x <- list.files( paste0( exampleDir, "/gallery/" ) )
+#' x <- list.files( paste0( exampleRepoDir, "/gallery/" ) )
 #' sapply( x , function(x ){
-#'      file.remove( paste0( exampleDir, "/gallery/", x ) )
+#'      file.remove( paste0( exampleRepoDir, "/gallery/", x ) )
 #'    })
-#' file.remove( paste0( exampleDir, "/backpack.db" ) )
+#' file.remove( paste0( exampleRepoDir, "/backpack.db" ) )
 #' 
-#' rm( exampleDir )
+#' rm( exampleRepoDir )
 #' @family archivist
 #' @rdname saveToRepo
 #' @export
-saveToRepo <- function( object, ..., archiveData = TRUE, 
+saveToRepo <- function( object, repoDir, archiveData = TRUE, 
                         archiveTags = TRUE, 
-                        archiveMiniature = TRUE, dir, rememberName = TRUE ){
-  stopifnot( is.character( dir ), is.logical( c( archiveData, archiveTags, archiveMiniature ) ) )
+                        archiveMiniature = TRUE, rememberName = TRUE, ... ){
+  stopifnot( is.character( repoDir ), is.logical( c( archiveData, archiveTags, archiveMiniature ) ) )
   
   md5hash <- digest( object )
   objectName <- deparse( substitute( object ) )
   
-  # check if dir has "/" at the end and add it if not
-  if ( regexpr( pattern = ".$", text = dir) != "/" ){
-    dir <- paste0(  dir, "/"  )
+  # check if repoDir has "/" at the end and add it if not
+  if ( regexpr( pattern = ".$", text = repoDir) != "/" ){
+    repoDir <- paste0(  repoDir, "/"  )
   }
   
   # save object to .rd file
   if ( rememberName ){
-    save( file = paste0(dir,"gallery/", md5hash, ".rda"), ascii = TRUE, list = objectName,  envir = parent.frame(2))
+    save( file = paste0(repoDir,"gallery/", md5hash, ".rda"), ascii = TRUE, list = objectName,  envir = parent.frame(2))
   }else{ 
     assign( value = object, x = digest( object ), envir = .GlobalEnv )
-    save( file = paste0(dir, "gallery/", md5hash, ".rda"),  ascii=TRUE, list = digest( object ), envir = .GlobalEnv  )
+    save( file = paste0(repoDir, "gallery/", md5hash, ".rda"),  ascii=TRUE, list = digest( object ), envir = .GlobalEnv  )
     
   }
   
   # add entry to database 
   if ( rememberName ){
-  addArtifact( md5hash, name = objectName, dir ) 
+  addArtifact( md5hash, name = objectName, dir = repoDir ) 
   }else{
-  addArtifact( md5hash, name = digest( object ), dir )
+  addArtifact( md5hash, name = digest( object ), dir = repoDir)
   rm( list = digest( object ), envir = .GlobalEnv ) 
   }
   
   # whether to add tags
   if ( archiveTags ) {
     extractedTags <- extractTags( object, objectNameX = objectName )
-    sapply( extractedTags, addTag, md5hash = md5hash, dir = dir )
+    sapply( extractedTags, addTag, md5hash = md5hash, dir = repoDir )
   }
   
   # whether to archive data
   if ( archiveData )
     attr( md5hash, "data" )  <-  extractData( object, parrentMd5hash = md5hash, 
-                                              parentDir = dir )
+                                              parentDir = repoDir )
   
   # whether to archive miniature
   if ( archiveMiniature )
-    extractMiniature( object, md5hash, parentDir = dir ,... )
+    extractMiniature( object, md5hash, parentDir = repoDir ,... )
   
   md5hash
 }
