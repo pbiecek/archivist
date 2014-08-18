@@ -1,9 +1,9 @@
 ##    archivist package for R
 ##
-#' @title Create an Empty Repository in a Given repoDirectory
+#' @title Create an Empty Repository in a Given Directory
 #'
 #' @description
-#' \code{createEmptyRepo} creates an empty \link{Repository} in a given repoDirectory in which archived objects will be stored.
+#' \code{createEmptyRepo} creates an empty \link{Repository} in a given directory in which archived objects will be stored.
 #' 
 #' 
 #' @details
@@ -11,7 +11,7 @@
 #' When working in groups, it is highly recommended to create a Repository on a shared Dropbox/Git folder.
 #' 
 #' All objects desired to be archived are going to be saved in the local Repository, which is an SQLite database stored in a file named \code{backpack}. 
-#' After calling \code{saveToRepo} function, every object will be archived in a \code{md5hash.rda} file. This file will be saved in a folder (under \code{repoDir} repoDirectory) named 
+#' After calling \code{saveToRepo} function, every object will be archived in a \code{md5hash.rda} file. This file will be saved in a folder (under \code{dir} directory) named 
 #' \code{gallery}. For every object, \code{md5hash} is a unique string of length 32 that comes out as a result of 
 #' \code{digest{digest}} function, which uses a cryptographical MD5 hash algorithm.
 #' 
@@ -25,42 +25,39 @@
 #' After every \code{saveToRepo} call the database is refreshed, so an object is available 
 #' immediately in \code{backpack.db} database for other collaborators.
 #' 
-#' @param repoDir A character that specifies the repoDirectory for the Repository to be made.
+#' @param dir A character that specifies the directory for the Repository to be made.
 #' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #'
 #' @examples
-#' examplerepoDir <- tempdir()
-#' createEmptyRepo( repoDir = examplerepoDir )
+#' exampleDir <- tempdir()
+#' createEmptyRepo( dir = exampleDir )
 #'
 #' # check the state of an empty Repository
 #' 
-#' summaryLocalRepo( method = "md5hashes", repoDir = examplerepoDir )
-#' summaryLocalRepo( method = "tags", repoDir = examplerepoDir )
+#' summaryLocalRepo( method = "md5hashes", dir = exampleDir )
+#' summaryLocalRepo( method = "tags", dir = exampleDir )
 #' 
 #' # removing all files generated to this function's examples
-#' file.remove( paste0( examplerepoDir, "/backpack.db" ) )
+#' file.remove( paste0( exampleDir, "/backpack.db" ) )
 #' 
-#' rm( examplerepoDir )
+#' rm( exampleDir )
 #' 
 #' @family archivist
 #' @rdname createEmptyRepo
 #' @export
-createEmptyRepo <- function( repoDir ){
-  stopifnot( is.character( repoDir ) )
+createEmptyRepo <- function( dir ){
+  stopifnot( is.character( dir ) )
   
-  if ( !file.exists( repoDir ) ) 
-    stop( paste0("Directory ", repoDir, " does not exists.") )
-  
-  # check if repoDir has "/" at the end and add it if not
-  if ( regexpr( pattern = ".$", text = repoDir ) != "/" ){
-    repoDir <- paste0(  repoDir, "/"  )
+  # check if dir has "/" at the end and add it if not
+  if ( regexpr( pattern = ".$", text = dir ) != "/" ){
+    dir <- paste0(  dir, "/"  )
   }
   
   # create connection
   sqlite    <- dbDriver( "SQLite" )
-  backpack <- dbConnect( sqlite, paste0( repoDir, "backpack.db" ) )
+  backpack <- dbConnect( sqlite, paste0( dir, "backpack.db" ) )
   
   # create tables
   artifact <- data.frame(md5hash = "",
@@ -86,8 +83,8 @@ createEmptyRepo <- function( repoDir ){
   
   
   # if gallery folder does not exist - make it
-  if ( !file.exists( file.path(repoDir, "gallery") ) ){
-    dir.create(file.path(repoDir, "gallery"), showWarnings = FALSE)
+  if ( !file.exists( file.path(dir, "gallery") ) ){
+    dir.create(file.path(dir, "gallery"), showWarnings = FALSE)
   }
 }
 

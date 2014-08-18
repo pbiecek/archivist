@@ -26,8 +26,8 @@
 #' If one wants to remove all objects created between two dates, it is suggested to
 #' perform:
 #' \itemize{
-#'    \item \code{obj2rm <- searchInLocalRepo( tag = list(dateFrom, dateTo), repoDir = )}
-#'    \item \code{sapply(obj2rm, rmFromRepo, repoDir = )}
+#'    \item \code{obj2rm <- searchInLocalRepo( tag = list(dateFrom, dateTo), dir = )}
+#'    \item \code{sapply(obj2rm, rmFromRepo, dir = )}
 #' }
 #' 
 #' @note
@@ -39,7 +39,7 @@
 #' 
 #' @param md5hash A character assigned to the object as a result of a cryptographical hash function with MD5 algorithm, or it's abbreviation. This object will be removed.
 #' 
-#' @param repoDir A character denoting an existing repoDirectory from which an object will be removed.
+#' @param dir A character denoting an existing directory from which an object will be removed.
 #' 
 #' @param removeData A logical value denoting whether to remove a data with the \code{object} specified by the \code{md5hash}.
 #' Defualt \code{FALSE}.
@@ -83,34 +83,34 @@
 #' 
 #' # creating example Repository - that examples will work
 #' 
-#' exampleRepoDir <- tempdir()
-#' createEmptyRepo(repoDir = exampleRepoDir)
-#' myplo123Md5hash <- saveToRepo(myplot123, repoDir=exampleRepoDir)
-#' irisMd5hash <- saveToRepo(iris, repoDir=exampleRepoDir)
-#' modelMd5hash  <- saveToRepo(model, repoDir=exampleRepoDir)
-#' agn1Md5hash <- saveToRepo(agn1, repoDir=exampleRepoDir)
-#' fannyxMd5hash <- saveToRepo(fannyx, repoDir=exampleRepoDir)
+#' exampleDir <- tempdir()
+#' createEmptyRepo(dir = exampleDir)
+#' myplo123Md5hash <- saveToRepo(myplot123, dir=exampleDir)
+#' irisMd5hash <- saveToRepo(iris, dir=exampleDir)
+#' modelMd5hash  <- saveToRepo(model, dir=exampleDir)
+#' agn1Md5hash <- saveToRepo(agn1, dir=exampleDir)
+#' fannyxMd5hash <- saveToRepo(fannyx, dir=exampleDir)
 #' 
 #' # let's see how the Repository look like: summary
-#' summaryLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
-#' summaryLocalRepo(method = "tags", repoDir = exampleRepoDir)
+#' summaryLocalRepo(method = "md5hashes", dir = exampleDir)
+#' summaryLocalRepo(method = "tags", dir = exampleDir)
 #' 
 #' 
 #' # remove examples
 #' 
-#' rmFromRepo(fannyxMd5hash, repoDir = exampleRepoDir, removeData= TRUE)
+#' rmFromRepo(fannyxMd5hash, dir = exampleDir, removeData= TRUE)
 #' # removeData = TRUE also removes archived data from fannyxMd5hash object
-#' rmFromRepo(irisMd5hash, repoDir = exampleRepoDir)
-#' # not that also files in gallery folder, created in exampleRepoDir 
-#' # repoDirectory are being removed
+#' rmFromRepo(irisMd5hash, dir = exampleDir)
+#' # not that also files in gallery folder, created in exampleDir 
+#' # directory are being removed
 #' 
 #' # let's see how the Repository look like: summary
-#' summaryLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
-#' summaryLocalRepo(method = "tags", repoDir = exampleRepoDir)
+#' summaryLocalRepo(method = "md5hashes", dir = exampleDir)
+#' summaryLocalRepo(method = "tags", dir = exampleDir)
 #' 
 #' # one can have the same object archivised in 3 different names
-#' agn1Md5hash2 <- saveToRepo(agn1, repoDir=exampleRepoDir)
-#' agn1Md5hash3 <- saveToRepo(agn1, repoDir=exampleRepoDir)
+#' agn1Md5hash2 <- saveToRepo(agn1, dir=exampleDir)
+#' agn1Md5hash3 <- saveToRepo(agn1, dir=exampleDir)
 #' 
 #' # md5hashes are the same for that same object (agn1)
 #' agn1Md5hash == agn1Md5hash2
@@ -120,12 +120,12 @@
 #' 
 #' # let's see how the Repository look like: summary
 #' 
-#' summaryLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
-#' summaryLocalRepo(method = "tags", repoDir = exampleRepoDir)
+#' summaryLocalRepo(method = "md5hashes", dir = exampleDir)
+#' summaryLocalRepo(method = "tags", dir = exampleDir)
 #' 
 #' # one easy call removes them all
 #' 
-#' rmFromRepo(agn1Md5hash, repoDir = exampleRepoDir, removeData = TRUE, removeMiniature = TRUE)
+#' rmFromRepo(agn1Md5hash, dir = exampleDir, removeData = TRUE, removeMiniature = TRUE)
 #' # removeMiniature = TRUE removes miniatures from gallery folder
 #' 
 #' # rest of object can be removed e.g. like this
@@ -133,60 +133,60 @@
 #' # from specific date
 #' 
 #' obj2rm <- searchInLocalRepo( tag = list(dateFrom = Sys.Date(), dateTo = Sys.Date()), 
-#'            repoDir = exampleRepoDir )
-#' sapply(obj2rm, rmFromRepo, repoDir = exampleRepoDir)
+#'            dir = exampleDir )
+#' sapply(obj2rm, rmFromRepo, dir = exampleDir)
 #' # above example removed all objects from Today
 #' 
 #' # let's see how the Repository look like: summary
-#' summaryLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
-#' summaryLocalRepo(method = "tags", repoDir = exampleRepoDir)
+#' summaryLocalRepo(method = "md5hashes", dir = exampleDir)
+#' summaryLocalRepo(method = "tags", dir = exampleDir)
 #' 
 #' # one can also remove objects from only specific class
-#' modelMd5hash  <- saveToRepo(model, repoDir=exampleRepoDir)
-#' model2Md5hash  <- saveToRepo(model2, repoDir=exampleRepoDir)
-#' model3Md5hash  <- saveToRepo(model3, repoDir=exampleRepoDir)
-#' summaryLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
-#' objMd5hash <- searchInLocalRepo("class:lm", repoDir = exampleRepoDir)
-#' sapply(objMd5hash, rmFromRepo, repoDir = exampleRepoDir)
-#' summaryLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
+#' modelMd5hash  <- saveToRepo(model, dir=exampleDir)
+#' model2Md5hash  <- saveToRepo(model2, dir=exampleDir)
+#' model3Md5hash  <- saveToRepo(model3, dir=exampleDir)
+#' summaryLocalRepo(method = "md5hashes", dir = exampleDir)
+#' objMd5hash <- searchInLocalRepo("class:lm", dir = exampleDir)
+#' sapply(objMd5hash, rmFromRepo, dir = exampleDir)
+#' summaryLocalRepo(method = "md5hashes", dir = exampleDir)
 #' 
 #' # note that this time data and miniatures were not removed
 #' 
 #' 
 #' # once can remove object specifying only its md5hash abbreviation
-#' fannyxMd5hash <- saveToRepo(fannyx, repoDir=exampleRepoDir)   
-#' summaryLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)     
+#' fannyxMd5hash <- saveToRepo(fannyx, dir=exampleDir)   
+#' summaryLocalRepo(method = "md5hashes", dir = exampleDir)     
 #' # "01785982a662038f720aa85e688f2082"
 #' # so example abbreviation might be : "0178598"
-#' rmFromRepo("0178598", repoDir = exampleRepoDir)
-#' summaryLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
+#' rmFromRepo("0178598", dir = exampleDir)
+#' summaryLocalRepo(method = "md5hashes", dir = exampleDir)
 #' 
 #' 
 #' # removing all files generated to this function's examples
-#' x <- list.files( paste0( exampleRepoDir, "/gallery/" ) )
+#' x <- list.files( paste0( exampleDir, "/gallery/" ) )
 #' sapply( x , function(x ){
-#'      file.remove( paste0( exampleRepoDir, "/gallery/", x ) )
+#'      file.remove( paste0( exampleDir, "/gallery/", x ) )
 #'    })
-#' file.remove( paste0( exampleRepoDir, "/backpack.db" ) )
+#' file.remove( paste0( exampleDir, "/backpack.db" ) )
 #' 
-#' rm( exampleRepoDir )
+#' rm( exampleDir )
 #' 
 #' @family archivist
 #' @rdname rmFromRepo
 #' @export
-rmFromRepo <- function( md5hash, repoDir, removeData = FALSE, removeMiniature = FALSE ){
-  stopifnot( is.character( c( repoDir, md5hash ) ) )
+rmFromRepo <- function( md5hash, dir, removeData = FALSE, removeMiniature = FALSE ){
+  stopifnot( is.character( c( dir, md5hash ) ) )
   stopifnot( is.logical( c( removeData, removeMiniature ) ) )
     
-  # check if repoDir has "/" at the end and add it if not
-  if ( regexpr( pattern = ".$", text = repoDir ) != "/" ){
-    repoDir <- paste0(  repoDir, "/"  )
+  # check if dir has "/" at the end and add it if not
+  if ( regexpr( pattern = ".$", text = dir ) != "/" ){
+    dir <- paste0(  dir, "/"  )
   }
   
   # what if abbreviation was given
   if ( nchar( md5hash ) < 32 ){
     sqlite <- dbDriver( "SQLite" )
-    conn <- dbConnect( sqlite, paste0( repoDir, "backpack.db" ) )
+    conn <- dbConnect( sqlite, paste0( dir, "backpack.db" ) )
     
     md5hashList <- dbGetQuery( conn,
                                paste0( "SELECT artifact FROM tag" ) )
@@ -204,7 +204,7 @@ rmFromRepo <- function( md5hash, repoDir, removeData = FALSE, removeMiniature = 
   
   # creates connection and driver
   sqlite <- dbDriver( "SQLite" )
-  conn <- dbConnect( sqlite, paste0( repoDir, "backpack.db" ) )
+  conn <- dbConnect( sqlite, paste0( dir, "backpack.db" ) )
   # not sure if this will work when abbr mode find more than 1 md5hash  
   #   # send deletes
   #   dbGetQuery( conn,
@@ -246,16 +246,16 @@ rmFromRepo <- function( md5hash, repoDir, removeData = FALSE, removeMiniature = 
   dbUnloadDriver( sqlite ) 
   
   # remove files from gallery folder
-  if ( file.exists( paste0( repoDir, "gallery/", md5hash, ".rda" ) ) )
-    file.remove( paste0( repoDir, "gallery/", md5hash, ".rda" ) )
+  if ( file.exists( paste0( dir, "gallery/", md5hash, ".rda" ) ) )
+    file.remove( paste0( dir, "gallery/", md5hash, ".rda" ) )
   
   # remove the miniature of an object
   if ( removeMiniature ){
-  if ( file.exists( paste0( repoDir, "gallery/", md5hash, ".png" ) ) )
-    file.remove( paste0( repoDir, "gallery/", md5hash, ".png" ) )
+  if ( file.exists( paste0( dir, "gallery/", md5hash, ".png" ) ) )
+    file.remove( paste0( dir, "gallery/", md5hash, ".png" ) )
     
-  if ( file.exists( paste0( repoDir, "gallery/", md5hash, ".txt" ) ) )
-    file.remove( paste0( repoDir, "gallery/", md5hash, ".txt" ) )
+  if ( file.exists( paste0( dir, "gallery/", md5hash, ".txt" ) ) )
+    file.remove( paste0( dir, "gallery/", md5hash, ".txt" ) )
   }
   
 }

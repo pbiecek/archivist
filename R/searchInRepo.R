@@ -23,7 +23,7 @@
 #' 
 #' @param tag A character denoting a Tag to be searched for in the Repository. It is also possible to specify \code{tag} as a list of length 2 with \code{dataFrom} and \code{dataTo}; see details.
 #' 
-#' @param repoDir A character denoting an existing repoDirectory in which objects will be searched.
+#' @param dir A character denoting an existing directory in which objects will be searched.
 #' 
 #' @param repo Only if working with a Github repository. A character containing a name of a Github repository on which the Repository is archived.
 #' 
@@ -66,28 +66,28 @@
 #' 
 #' # creating example Repository - that examples will work
 #' 
-#' exampleRepoDir <- tempdir()
-#' createEmptyRepo(repoDir = exampleRepoDir)
-#' saveToRepo(myplot123, repoDir=exampleRepoDir)
-#' saveToRepo(iris, repoDir=exampleRepoDir)
-#' saveToRepo(model, repoDir=exampleRepoDir)
-#' saveToRepo(agn1, repoDir=exampleRepoDir)
-#' saveToRepo(fannyx, repoDir=exampleRepoDir)
+#' exampleDir <- tempdir()
+#' createEmptyRepo(dir = exampleDir)
+#' saveToRepo(myplot123, dir=exampleDir)
+#' saveToRepo(iris, dir=exampleDir)
+#' saveToRepo(model, dir=exampleDir)
+#' saveToRepo(agn1, dir=exampleDir)
+#' saveToRepo(fannyx, dir=exampleDir)
 #' 
 #' # let's see how the Repository look like: summary
 #' 
-#' summaryLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
-#' summaryLocalRepo(method = "tags", repoDir = exampleRepoDir)
+#' summaryLocalRepo(method = "md5hashes", dir = exampleDir)
+#' summaryLocalRepo(method = "tags", dir = exampleDir)
 #'  
 #' # search examples
 #' 
 #' # tag search
-#' searchInLocalRepo( "class:ggplot", repoDir = exampleRepoDir )
-#' searchInLocalRepo( "name:myplot123", repoDir = exampleRepoDir )
-#' searchInLocalRepo( "varname:Sepal.Width", repoDir = exampleRepoDir )
-#' searchInLocalRepo( "class:lm", repoDir = exampleRepoDir )
-#' searchInLocalRepo( "coefname:Petal.Length", repoDir = exampleRepoDir )
-#' searchInLocalRepo( "ac:07977555", repoDir = exampleRepoDir )
+#' searchInLocalRepo( "class:ggplot", dir = exampleDir )
+#' searchInLocalRepo( "name:myplot123", dir = exampleDir )
+#' searchInLocalRepo( "varname:Sepal.Width", dir = exampleDir )
+#' searchInLocalRepo( "class:lm", dir = exampleDir )
+#' searchInLocalRepo( "coefname:Petal.Length", dir = exampleDir )
+#' searchInLocalRepo( "ac:07977555", dir = exampleDir )
 #' 
 #' # Github version
 #' summaryGithubRepo( user="pbiecek", repo="archivist" )
@@ -99,7 +99,7 @@
 #' 
 #' # objects archivised between 2 different days
 #' searchInLocalRepo( tag = list( dateFrom = Sys.Date()-1, dateTo = Sys.Date()+1), 
-#' repoDir = exampleRepoDir )
+#' dir = exampleDir )
 #' 
 #' # also on Github
 #' 
@@ -109,32 +109,32 @@
 #' 
 #' # objects from Today
 #' searchInLocalRepo( tag = list( dateFrom=Sys.Date(), dateTo=Sys.Date() ), 
-#' repoDir = exampleRepoDir )
+#' dir = exampleDir )
 #' 
 #' # removing all files generated to this function's examples
-#' x <- list.files( paste0( exampleRepoDir, "/gallery/" ) )
+#' x <- list.files( paste0( exampleDir, "/gallery/" ) )
 #' sapply( x , function(x ){
-#'      file.remove( paste0( exampleRepoDir, "/gallery/", x ) )
+#'      file.remove( paste0( exampleDir, "/gallery/", x ) )
 #'    })
-#' file.remove( paste0( exampleRepoDir, "/backpack.db" ) )
+#' file.remove( paste0( exampleDir, "/backpack.db" ) )
 #' 
-#' rm( exampleRepoDir )
+#' rm( exampleDir )
 #' @family archivist
 #' @rdname searchInRepo
 #' @export
-searchInLocalRepo <- function( tag, repoDir ){
-  stopifnot( is.character( repoDir ) )
+searchInLocalRepo <- function( tag, dir ){
+  stopifnot( is.character( dir ) )
   stopifnot( is.character( tag ) | is.list( tag ) )
   
-  # check if repoDir has "/" at the end and add it if not
-  if ( regexpr( pattern = ".$", text = repoDir ) != "/" ){
-    repoDir <- paste0(  repoDir, "/"  )
+  # check if dir has "/" at the end and add it if not
+  if ( regexpr( pattern = ".$", text = dir ) != "/" ){
+    dir <- paste0(  dir, "/"  )
   }
   
   # creates connection and driver
-  repoDirBase <- paste0( repoDir, "backpack.db")
+  dirBase <- paste0( dir, "backpack.db")
   sqlite <- dbDriver( "SQLite" )
-  conn <- dbConnect( sqlite, repoDirBase )
+  conn <- dbConnect( sqlite, dirBase )
   
   # extracts md5hash
   if ( length( tag ) == 1 ){
