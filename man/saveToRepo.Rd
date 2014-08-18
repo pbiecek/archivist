@@ -3,8 +3,8 @@
 \alias{saveToRepo}
 \title{Save an Object into a Repository}
 \usage{
-saveToRepo(object, repoDir, archiveData = TRUE, archiveTags = TRUE,
-  archiveMiniature = TRUE, rememberName = TRUE, ...)
+saveToRepo(object, ..., archiveData = TRUE, archiveTags = TRUE,
+  archiveMiniature = TRUE, dir, rememberName = TRUE)
 }
 \arguments{
 \item{object}{An arbitrary R object to be saved. For supported objects see details.}
@@ -17,7 +17,7 @@ saveToRepo(object, repoDir, archiveData = TRUE, archiveTags = TRUE,
 
 \item{archiveMiniature}{A logical value denoting whether to archive a miniature of the \code{object}.}
 
-\item{repoDir}{A character denoting an existing repoDirectory in which an object will be saved.}
+\item{dir}{A character denoting an existing directory in which an object will be saved.}
 
 \item{rememberName}{A logical value. Should not be changed by user. It is a technical parameter.}
 }
@@ -29,19 +29,19 @@ has an attribute, named \code{data}, that determines \code{md5hash} of the data 
 to compute the object.
 }
 \description{
-\code{saveToRepo} function saves desired objects to the local \link{Repository} in a given repoDirectory.
+\code{saveToRepo} function saves desired objects to the local \link{Repository} in a given directory.
 }
 \details{
-\code{saveToRepo} function saves desired objects to the local Repository in a given repoDirectory.
+\code{saveToRepo} function saves desired objects to the local Repository in a given directory.
 Objects are saved in the local Repository, which is a SQLite database named \code{backpack}.
 After every \code{saveToRepo} call the database is refreshed, so the object is available immediately in the database.
-Every object is archived in a \code{md5hash.rda} file. This file will be saved in a folder (under \code{repoDir} repoDirectory) named
+Every object is archived in a \code{md5hash.rda} file. This file will be saved in a folder (under \code{dir} directory) named
 \code{gallery}. For every object, \code{md5hash} is a unique string of length 32 that comes out as a result of
 \code{digest{digest}} function, which uses a cryptographical MD5 hash algorithm.
 
 By default, a miniature of an object and (if possible) a data set needed to compute this object are extracted.
-They are also going to be saved in a file named by their \code{md5hash} in the \code{gallery} folder that exists in the repoDirectory
-specified in the \code{repoDir} argument. Moreover, a specific \code{Tag}-relation is going to be added to the \code{backpack} dataset in case there is a need to load
+They are also going to be saved in a file named by their \code{md5hash} in the \code{gallery} folder that exists in the directory
+specified in the \code{dir} argument. Moreover, a specific \code{Tag}-relation is going to be added to the \code{backpack} dataset in case there is a need to load
 the object with it's related data set - see \link{loadFromLocalRepo} or \link{loadFromGithubRepo}. Default settings
 may be changed by using the \code{archiveData}, \code{archiveTag} or \code{archiveMiniature} arguments with the
 \code{FALSE} value.
@@ -140,30 +140,30 @@ glmnet1=glmnet(zk,bk)
 
 # save examples
 
-exampleRepoDir <- tempdir()
-createEmptyRepo( repoDir = exampleRepoDir )
-saveToRepo( myplot123, repoDir=exampleRepoDir )
-saveToRepo( iris, repoDir=exampleRepoDir )
-saveToRepo( model, repoDir=exampleRepoDir )
-saveToRepo( agn1, repoDir=exampleRepoDir )
-saveToRepo( fannyx, repoDir=exampleRepoDir )
-saveToRepo( lda1, repoDir=exampleRepoDir )
-saveToRepo( qda1, repoDir=exampleRepoDir )
-saveToRepo( glmnet1, repoDir=exampleRepoDir )
+exampleDir <- tempdir()
+createEmptyRepo( dir = exampleDir )
+saveToRepo( myplot123, dir=exampleDir )
+saveToRepo( iris, dir=exampleDir )
+saveToRepo( model, dir=exampleDir )
+saveToRepo( agn1, dir=exampleDir )
+saveToRepo( fannyx, dir=exampleDir )
+saveToRepo( lda1, dir=exampleDir )
+saveToRepo( qda1, dir=exampleDir )
+saveToRepo( glmnet1, dir=exampleDir )
 
 # let's see how the Repository look like: summary
 
-summaryLocalRepo( method = "md5hashes", repoDir = exampleRepoDir )
-summaryLocalRepo( method = "tags", repoDir = exampleRepoDir )
+summaryLocalRepo( method = "md5hashes", dir = exampleDir )
+summaryLocalRepo( method = "tags", dir = exampleDir )
 
 # removing all files generated to this function's examples
-x <- list.files( paste0( exampleRepoDir, "/gallery/" ) )
+x <- list.files( paste0( exampleDir, "/gallery/" ) )
 sapply( x , function(x ){
-     file.remove( paste0( exampleRepoDir, "/gallery/", x ) )
+     file.remove( paste0( exampleDir, "/gallery/", x ) )
    })
-file.remove( paste0( exampleRepoDir, "/backpack.db" ) )
+file.remove( paste0( exampleDir, "/backpack.db" ) )
 
-rm( exampleRepoDir )
+rm( exampleDir )
 }
 \author{
 Marcin Kosinski , \email{m.p.kosinski@gmail.com}

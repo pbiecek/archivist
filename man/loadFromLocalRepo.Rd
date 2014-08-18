@@ -4,12 +4,12 @@
 \alias{loadFromLocalRepo}
 \title{Load Object Given as a \code{md5hash} from a Repository}
 \usage{
-loadFromLocalRepo(md5hash, repoDir, returns = FALSE)
+loadFromLocalRepo(md5hash, dir, returns = FALSE)
 
 loadFromGithubRepo(md5hash, repo, user, branch = "master", returns = FALSE)
 }
 \arguments{
-\item{repoDir}{A character denoting an existing repoDirectory from which an object will be loaded.}
+\item{dir}{A character denoting an existing directory from which an object will be loaded.}
 
 \item{md5hash}{A character assigned to the object as a result of a cryptographical hash function with MD5 algorithm, or it's abbreviation.}
 
@@ -35,7 +35,7 @@ Important: instead of giving the whole \code{md5hash} character, the user can si
 For example, \code{a09dd} instead of \code{a09ddjdkf9kj33dcjdnfjgos9jd9jkcv}. All objects with the same corresponing \code{md5hash} abbreviation will be loaded from \link{Repository}.
 
 Note that \code{user} and \code{repo} should be used only when working with a Github repository and should be omitted in the local mode.
-\code{repoDir} should only be used when working on a local Repository and should be omitted in the Github mode.
+\code{dir} should only be used when working on a local Repository and should be omitted in the Github mode.
 
 One may notice that \code{loadFromGithubRepo} and \code{loadFromLocalRepo} load objects to the Global
 Environment with their original names. Alternatively,
@@ -79,18 +79,18 @@ fannyx <- fanny(x, 2)
 
 # creating example Repository - that examples will work
 
-exampleRepoDir <- tempdir()
-createEmptyRepo(repoDir = exampleRepoDir)
-myplo123Md5hash <- saveToRepo(myplot123, repoDir=exampleRepoDir)
-irisMd5hash <- saveToRepo(iris, repoDir=exampleRepoDir)
-modelMd5hash  <- saveToRepo(model, repoDir=exampleRepoDir)
-agn1Md5hash <- saveToRepo(agn1, repoDir=exampleRepoDir)
-fannyxMd5hash <- saveToRepo(fannyx, repoDir=exampleRepoDir)
+exampleDir <- tempdir()
+createEmptyRepo(dir = exampleDir)
+myplo123Md5hash <- saveToRepo(myplot123, dir=exampleDir)
+irisMd5hash <- saveToRepo(iris, dir=exampleDir)
+modelMd5hash  <- saveToRepo(model, dir=exampleDir)
+agn1Md5hash <- saveToRepo(agn1, dir=exampleDir)
+fannyxMd5hash <- saveToRepo(fannyx, dir=exampleDir)
 
 # let's see how the Repository look like: summary
 
-summaryLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
-summaryLocalRepo(method = "tags", repoDir = exampleRepoDir)
+summaryLocalRepo(method = "md5hashes", dir = exampleDir)
+summaryLocalRepo(method = "tags", dir = exampleDir)
 
 # load examples
 
@@ -102,33 +102,33 @@ rm(agn1)
 # it those objects were archivised, they can be loaded
 # from Repository, when knowing their tags
 
-loadFromLocalRepo(myplo123Md5hash, repoDir = exampleRepoDir)
-loadFromLocalRepo(irisMd5hash, repoDir = exampleRepoDir)
+loadFromLocalRepo(myplo123Md5hash, dir = exampleDir)
+loadFromLocalRepo(irisMd5hash, dir = exampleDir)
 
 
 # if one can not remembers the object's md5hash but
 # remembers the object's name this object can still be
 # loaded.
 
-modelHash <- searchInLocalRepo( "name:model", repoDir = exampleRepoDir)
-loadFromLocalRepo(modelHash, repoDir = exampleRepoDir)
+modelHash <- searchInLocalRepo( "name:model", dir = exampleDir)
+loadFromLocalRepo(modelHash, dir = exampleDir)
 
 # one can check that object has his own unique md5hash
 modelHash == modelMd5hash
 
 # object can be loadad as a value
 
-newData <- loadFromLocalRepo(irisMd5hash, repoDir = exampleRepoDir, returns = TRUE)
+newData <- loadFromLocalRepo(irisMd5hash, dir = exampleDir, returns = TRUE)
 
 # object can be also loaded from it's abbreviation
-# modelMd5hash <- saveToRepo( model , repoDir=exampleRepoDir)
+# modelMd5hash <- saveToRepo( model , dir=exampleDir)
 rm( model )
 # "cd6557c6163a6f9800f308f343e75e72"
 # so example abbreviation might be : "cd6557c"
-loadFromLocalRepo("cd6557c", repoDir = exampleRepoDir)
+loadFromLocalRepo("cd6557c", dir = exampleDir)
 
 # and can be loaded as a value from it's abbreviation
-newModel  <- loadFromLocalRepo("cd6557c", repoDir = exampleRepoDir, returns = TRUE)
+newModel  <- loadFromLocalRepo("cd6557c", dir = exampleDir, returns = TRUE)
 # note that "model" was not deleted
 
 #
@@ -150,13 +150,13 @@ loadFromGithubRepo( DATEmd5hash, user="pbiecek", repo="archivist")
 
 
 # removing all files generated to this function's examples
-x <- list.files( paste0( exampleRepoDir, "/gallery/" ) )
+x <- list.files( paste0( exampleDir, "/gallery/" ) )
 sapply( x , function(x ){
-     file.remove( paste0( exampleRepoDir, "/gallery/", x ) )
+     file.remove( paste0( exampleDir, "/gallery/", x ) )
    })
-file.remove( paste0( exampleRepoDir, "/backpack.db" ) )
+file.remove( paste0( exampleDir, "/backpack.db" ) )
 
-rm( exampleRepoDir )
+rm( exampleDir )
 }
 \author{
 Marcin Kosinski , \email{m.p.kosinski@gmail.com}
