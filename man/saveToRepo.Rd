@@ -4,7 +4,7 @@
 \title{Save an Object into a Repository}
 \usage{
 saveToRepo(object, repoDir, archiveData = TRUE, archiveTags = TRUE,
-  archiveMiniature = TRUE, rememberName = TRUE, ...)
+  archiveMiniature = TRUE, force = FALSE, rememberName = TRUE, ...)
 }
 \arguments{
 \item{object}{An arbitrary R object to be saved. For supported objects see details.}
@@ -18,6 +18,9 @@ saveToRepo(object, repoDir, archiveData = TRUE, archiveTags = TRUE,
 \item{archiveMiniature}{A logical value denoting whether to archive a miniature of the \code{object}.}
 
 \item{repoDir}{A character denoting an existing directory in which an object will be saved.}
+
+\item{force}{A logical value denoting whether to archive \code{object} if it was already archived in
+a Repository.}
 
 \item{rememberName}{A logical value. Should not be changed by user. It is a technical parameter.}
 }

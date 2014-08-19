@@ -78,6 +78,9 @@
 #' 
 #' @param repoDir A character denoting an existing directory in which an object will be saved.
 #' 
+#' @param force A logical value denoting whether to archive \code{object} if it was already archived in
+#' a Repository.
+#' 
 #' @param rememberName A logical value. Should not be changed by user. It is a technical parameter.
 #'
 #' @seealso
@@ -176,13 +179,28 @@
 #' @export
 saveToRepo <- function( object, repoDir, archiveData = TRUE, 
                         archiveTags = TRUE, 
-                        archiveMiniature = TRUE, rememberName = TRUE, ... ){
+                        archiveMiniature = TRUE, force = FALSE, rememberName = TRUE, ... ){
   stopifnot( is.character( repoDir ), is.logical( c( archiveData, archiveTags, archiveMiniature ) ) )
   
   md5hash <- digest( object )
   objectName <- deparse( substitute( object ) )
   
   repoDir <- checkDirectory( repoDir )
+  
+  # check if that object might have been already archived
+  check <- executeSingleQuery( dir = repoDir ,
+                    paste0( "SELECT * from artifact WHERE md5hash ='", md5hash, "'") )[,1] 
+  
+  if ( length( check ) > 0 & !force ){
+    stop( "This object was already archived. If you want to achive it again, use force = TRUE. \n")
+  } 
+  if ( length( check ) > 0 & force ){
+    if ( rememberName ){
+      cat( "This object was already archived. Another archivisation executed with success. \n")
+    }else{
+      cat( "This object's data was already archived. Another archivisation executed with success. \n")
+    }
+  }
   
   # save object to .rd file
   if ( rememberName ){
@@ -210,7 +228,7 @@ saveToRepo <- function( object, repoDir, archiveData = TRUE,
   # whether to archive data
   if ( archiveData )
     attr( md5hash, "data" )  <-  extractData( object, parrentMd5hash = md5hash, 
-                                              parentDir = repoDir )
+                                              parentDir = repoDir, isForce = force )
   
   # whether to archive miniature
   if ( archiveMiniature )

@@ -54,7 +54,7 @@ createEmptyRepo <- function( repoDir, force = FALSE ){
   stopifnot( is.character( repoDir ) )
   
   if ( !file.exists( repoDir ) & !force ) 
-    stop( paste0("Directory ", repoDir, " does not exist.") )
+    stop( paste0("Directory ", repoDir, " does not exist. Try with force=TRUE.") )
   if ( !file.exists( repoDir ) & force ){
     cat( paste0("Directory ", repoDir, " did not exist. Forced to create a new directory.") )
     repoDir <- checkDirectory( repoDir )
