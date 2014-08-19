@@ -182,10 +182,7 @@ saveToRepo <- function( object, repoDir, archiveData = TRUE,
   md5hash <- digest( object )
   objectName <- deparse( substitute( object ) )
   
-  # check if repoDir has "/" at the end and add it if not
-  if ( regexpr( pattern = ".$", text = repoDir) != "/" ){
-    repoDir <- paste0(  repoDir, "/"  )
-  }
+  repoDir <- checkDirectory( repoDir )
   
   # save object to .rd file
   if ( rememberName ){

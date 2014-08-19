@@ -4,9 +4,9 @@
 \alias{loadFromLocalRepo}
 \title{Load Object Given as a \code{md5hash} from a Repository}
 \usage{
-loadFromLocalRepo(md5hash, repoDir, returns = FALSE)
+loadFromLocalRepo(md5hash, repoDir, value = FALSE)
 
-loadFromGithubRepo(md5hash, repo, user, branch = "master", returns = FALSE)
+loadFromGithubRepo(md5hash, repo, user, branch = "master", value = FALSE)
 }
 \arguments{
 \item{repoDir}{A character denoting an existing directory from which an object will be loaded.}
@@ -20,8 +20,9 @@ loadFromGithubRepo(md5hash, repo, user, branch = "master", returns = FALSE)
 \item{branch}{Only if working with a Github repository. A character containing a name of
 Github Repository's branch on which a Repository is archived. Default \code{branch} is \code{master}.}
 
-\item{returns}{A logical value denoting whether to load an object into the Global Environment
-(that is set by default to \code{FALSE}) or whether to return an object as the result of the function (\code{TRUE}).}
+\item{value}{If \code{FALSE} (default) then artifacts are loaded into the Global Environment with their original names,
+if \code{TRUE} then artifacts are returned as a list of values (if there is more than one artifact)
+or as a single value (if there is only one arfifact that matches md5hash).}
 }
 \description{
 \code{loadFromLocalRepo} loads an object from a local \link{Repository} into the workspace.
@@ -39,7 +40,7 @@ Note that \code{user} and \code{repo} should be used only when working with a Gi
 
 One may notice that \code{loadFromGithubRepo} and \code{loadFromLocalRepo} load objects to the Global
 Environment with their original names. Alternatively,
-a parameter \code{returns = TRUE} might be specified so that the functions return objects as a result so that they
+a parameter \code{value = TRUE} might be specified so that the functions return objects as a result so that they
 can be attributed to new names. Note that, when an abbreviation of \code{md5hash} was given a list of objects corresponding to this
 abbreviation will be loaded.
 }
@@ -118,7 +119,7 @@ modelHash == modelMd5hash
 
 # object can be loadad as a value
 
-newData <- loadFromLocalRepo(irisMd5hash, repoDir = exampleRepoDir, returns = TRUE)
+newData <- loadFromLocalRepo(irisMd5hash, repoDir = exampleRepoDir, value = TRUE)
 
 # object can be also loaded from it's abbreviation
 # modelMd5hash <- saveToRepo( model , repoDir=exampleRepoDir)
@@ -128,7 +129,7 @@ rm( model )
 loadFromLocalRepo("cd6557c", repoDir = exampleRepoDir)
 
 # and can be loaded as a value from it's abbreviation
-newModel  <- loadFromLocalRepo("cd6557c", repoDir = exampleRepoDir, returns = TRUE)
+newModel  <- loadFromLocalRepo("cd6557c", repoDir = exampleRepoDir, value = TRUE)
 # note that "model" was not deleted
 
 #
@@ -139,13 +140,13 @@ newModel  <- loadFromLocalRepo("cd6557c", repoDir = exampleRepoDir, returns = TR
 summaryGithubRepo( user="pbiecek", repo="archivist" )
 
 (VARmd5hash <- searchInGithubRepo( "varname:Sepal.Width", user="pbiecek", repo="archivist" ))
-(NAMEmd5hash <- searchInGithubRepo( "name:model2", user="pbiecek", repo="archivist", branch="master" ))
+(NAMEmd5hash <- searchInGithubRepo( "name:model", user="pbiecek", repo="archivist", branch="master" ))
 (CLASSmd5hash <- searchInGithubRepo( "class:lm", user="pbiecek", repo="archivist", branch="master" ))
 (DATEmd5hash <- searchInGithubRepo( "date:2014-08-17 13:44:47", user="pbiecek", repo="archivist" ))
 
 loadFromGithubRepo( VARmd5hash, user="pbiecek", repo="archivist")
 loadFromGithubRepo( NAMEmd5hash, user="pbiecek", repo="archivist")
-NewObjects <- loadFromGithubRepo( CLASSmd5hash, user="pbiecek", repo="archivist", returns = TRUE )
+NewObjects <- loadFromGithubRepo( CLASSmd5hash, user="pbiecek", repo="archivist", value = TRUE )
 loadFromGithubRepo( DATEmd5hash, user="pbiecek", repo="archivist")
 
 

@@ -53,14 +53,10 @@ createEmptyRepo <- function( repoDir ){
   if ( !file.exists( repoDir ) ) 
     stop( paste0("Directory ", repoDir, " does not exists.") )
   
-  # check if repoDir has "/" at the end and add it if not
-  if ( regexpr( pattern = ".$", text = repoDir ) != "/" ){
-    repoDir <- paste0(  repoDir, "/"  )
-  }
+  repoDir <- checkDirectory( repoDir )
   
   # create connection
-  #backpack <- dbConnect( get("sqlite", envir=.ArchivistEnv ), paste0( repoDir, "backpack.db" ) )
-  backpack <- getConnectionToDB(repoDir)
+  backpack <- getConnectionToDB( repoDir, paste = TRUE )
   
   # create tables
   artifact <- data.frame(md5hash = "",
@@ -107,13 +103,45 @@ addTag <- function( tag, md5hash, createdDate = now(), dir ){
                      "('", md5hash, "', '", tag, "', '", as.character( now() ), "')" ) )
 }
 
-getConnectionToDB <- function( repoDir ){
-    conn <- dbConnect( get( "sqlite", envir = .ArchivistEnv ), paste0( repoDir, "backpack.db" ) )
+# paste was needed because Github version function uses temporary file as database
+# and they do not name this file as backpack.db in repoDir directory
+getConnectionToDB <- function( repoDir, paste ){
+    if ( paste ){
+      conn <- dbConnect( get( "sqlite", envir = .ArchivistEnv ), paste0( repoDir, "backpack.db" ) )
+    }else{
+      conn <- dbConnect( get( "sqlite", envir = .ArchivistEnv ), repoDir )
+    }
     return( conn )
 }
   
-executeSingleQuery <- function(dir, query) {
-  conn <- getConnectionToDB(dir)
-  dbGetQuery( conn, query )
+executeSingleQuery <- function( dir, query, paste = TRUE ) {
+  conn <- getConnectionToDB( dir, paste )
+  res <- dbGetQuery( conn, query )
   dbDisconnect( conn )
+  return( res )
+}
+
+readSingleTable <- function( dir, table, paste = TRUE ){
+  conn <- getConnectionToDB( dir, paste )
+  tabs <- dbReadTable( conn, table )
+  dbDisconnect( conn )
+  return( tabs )
+}
+
+# for Github version funtion tha require to load database
+downloadDB <- function( repo, user, branch ){
+   URLdb <- paste0( get( ".GithubURL", envir = .ArchivistEnv) , user, "/", repo, "/", branch, "/backpack.db") 
+   library( RCurl )
+   db <- getBinaryURL( URLdb, ssl.verifypeer = FALSE )
+   Temp2 <- tempfile()
+   writeBin( db, Temp2)
+   return( Temp2 )
+}
+
+checkDirectory <- function( directory ){
+  # check if repoDir has "/" at the end and add it if not
+  if ( regexpr( pattern = ".$", text = directory ) != "/" ){
+    directory <- paste0(  directory, "/"  )
+  }
+  return( directory )
 }

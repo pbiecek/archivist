@@ -4,9 +4,9 @@
 \alias{summaryLocalRepo}
 \title{View the Summary of a Repository}
 \usage{
-summaryLocalRepo(method = "md5hashes", repoDir)
+summaryLocalRepo(repoDir, method = "md5hashes")
 
-summaryGithubRepo(method = "md5hashes", repo, user, branch = "master")
+summaryGithubRepo(repo, user, branch = "master", method = "md5hashes")
 }
 \arguments{
 \item{method}{A character specifying the method to be used to summarize the Repository. Available methods:

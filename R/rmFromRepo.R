@@ -185,47 +185,24 @@ rmFromRepo <- function( md5hash, repoDir, removeData = FALSE, removeMiniature = 
   stopifnot( is.character( c( repoDir, md5hash ) ) )
   stopifnot( is.logical( c( removeData, removeMiniature ) ) )
     
-  # check if repoDir has "/" at the end and add it if not
-  if ( regexpr( pattern = ".$", text = repoDir ) != "/" ){
-    repoDir <- paste0(  repoDir, "/"  )
-  }
+  repoDir <- checkDirectory( repoDir )
   
   # what if abbreviation was given
   if ( nchar( md5hash ) < 32 ){
-    sqlite <- dbDriver( "SQLite" )
-    conn <- dbConnect( sqlite, paste0( repoDir, "backpack.db" ) )
     
-    md5hashList <- dbGetQuery( conn,
+    md5hashList <- executeSingleQuery( dir = repoDir ,
                                paste0( "SELECT artifact FROM tag" ) )
     md5hashList <- as.character( md5hashList[, 1] )
     md5hash <- unique( grep( 
       pattern = paste0( "^", md5hash ), 
       x = md5hashList, 
       value = TRUE ) )
-    
-    dbDisconnect( conn )
-    dbUnloadDriver( sqlite ) 
-    
   }
-  
-  
-  # creates connection and driver
-  sqlite <- dbDriver( "SQLite" )
-  conn <- dbConnect( sqlite, paste0( repoDir, "backpack.db" ) )
-  # not sure if this will work when abbr mode find more than 1 md5hash  
-  #   # send deletes
-  #   dbGetQuery( conn,
-  #               paste0( "DELETE FROM artifact WHERE ",
-  #                       "md5hash = '", md5hash, "'" ) )
-  #   dbGetQuery( conn,
-  #               paste0( "DELETE FROM tag WHERE ",
-  #                       "artifact = '", md5hash, "'" ) )
-  
-  # thinks this will work when abbr mode find more than 1 md5hash
+
   # send deletes for data 
   if ( removeData ){
     # if there are many objects with the same m5hash (copies) all of them will be deleted
-    dataMd5hash <- unique( dbGetQuery( conn,
+    dataMd5hash <- unique( executeSingleQuery( dir = repoDir ,
                      paste0( "SELECT artifact FROM tag WHERE ",
                              "tag = '", paste0("relationWith:", md5hash), "'" ) ) )
     
@@ -254,18 +231,14 @@ rmFromRepo <- function( md5hash, repoDir, removeData = FALSE, removeMiniature = 
   # remove object from database
   # if there are many objects with the same m5hash (copies) all of them will be deleted
   sapply( md5hash, function(x){
-    dbGetQuery( conn,
+    executeSingleQuery( dir = repoDir ,
                 paste0( "DELETE FROM artifact WHERE ",
                         "md5hash = '", x, "'" ) )} )
   sapply( md5hash, function(x){
-    dbGetQuery( conn,
+    executeSingleQuery( dir = repoDir ,
                 paste0( "DELETE FROM tag WHERE ",
                         "artifact = '", x, "'" ) )} )
-  
-  # deletes connection and driver
-  dbDisconnect( conn )
-  dbUnloadDriver( sqlite ) 
-  
+   
   # remove files from gallery folder
   if ( file.exists( paste0( repoDir, "gallery/", md5hash, ".rda" ) ) )
     file.remove( paste0( repoDir, "gallery/", md5hash, ".rda" ) )

@@ -3,9 +3,9 @@
 .onAttach <- function(...) {
   packageStartupMessage( "\n Welcome to the archivist package (ver 0.1)." )
   assign( x = "sqlite", value = dbDriver( "SQLite" ), envir = .ArchivistEnv )
+  assign( x = ".GithubURL", value = "https://raw.githubusercontent.com/", envir = .ArchivistEnv )
 }
 
-.GithubURL <- "https://raw.githubusercontent.com/"
 
 .onDetach <- function( libpath ){
   dbUnloadDriver(get( "sqlite", envir = .ArchivistEnv )) 

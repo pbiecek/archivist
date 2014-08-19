@@ -136,29 +136,16 @@
 #' @family archivist
 #' @rdname summaryLocalRepo
 #' @export
-summaryLocalRepo <- function( method = "md5hashes", repoDir ){
+summaryLocalRepo <- function( repoDir, method = "md5hashes" ){
   stopifnot( is.character( c( method, repoDir ) ) )
   
-  # check if repoDir has "/" at the end and add it if not
-  if ( regexpr( pattern = ".$", text = repoDir ) != "/" ){
-    repoDir <- paste0(  repoDir, "/"  )
-  }
-  
-  # creates connection and driver
-  repoDirBase <- paste0( repoDir, "backpack.db")
-  sqlite <- dbDriver( "SQLite" )
-  conn <- dbConnect( sqlite, repoDirBase )
+  repoDir <- checkDirectory( repoDir )
   
   if ( method == "md5hashes" )
-    value <- dbReadTable( conn, "artifact" )
+    value <- readSingleTable( repoDir, "artifact" )
   
   if ( method == "tags" )
-    value <- dbReadTable( conn, "tag" )
-  
-  
-  # deletes connection and driver
-  dbDisconnect( conn )
-  dbUnloadDriver( sqlite ) 
+    value <- readSingleTable( repoDir, "tag" )
   
   return( value )
 }
@@ -166,34 +153,17 @@ summaryLocalRepo <- function( method = "md5hashes", repoDir ){
 
 #' @rdname summaryLocalRepo
 #' @export
-summaryGithubRepo <- function( method = "md5hashes", repo, user, branch = "master"){
+summaryGithubRepo <- function( repo, user, branch = "master", method = "md5hashes" ){
   stopifnot( is.character( c( method, repo, user, branch ) ) )
   
   # database is needed to be downloaded
-  URLdb <- paste0( .GithubURL, user, "/", repo, 
-                   "/", branch, "/backpack.db") 
-  library( RCurl )
-  db <- getBinaryURL( URLdb, ssl.verifypeer = FALSE )
-  Temp <- tempfile()
-  writeBin( db, Temp)
+  Temp <- downloadDB( repo, user, branch )
   
-  sqlite <- dbDriver( "SQLite" )
-  conn <- dbConnect( sqlite, Temp )
-  
-  # now perform summary
   if ( method == "md5hashes" )
-    value <- dbReadTable( conn, "artifact" )
+    value <- readSingleTable( Temp, "artifact", paste = FALSE )
   
   if ( method == "tags" )
-    value <- dbReadTable( conn, "tag" )
-  
-  
-  # deletes connection and driver
-  dbDisconnect( conn )
-  dbUnloadDriver( sqlite ) 
-  
-  # when summary is returned, delete downloaded database
-  file.remove( Temp ) 
+    value <- readSingleTable( Temp, "tag", paste = FALSE )
   
   return( value )
 

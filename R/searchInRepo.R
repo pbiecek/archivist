@@ -125,37 +125,22 @@
 searchInLocalRepo <- function( tag, repoDir ){
   stopifnot( is.character( repoDir ) )
   stopifnot( is.character( tag ) | is.list( tag ) )
+  stopifnot( length( tag ) == 1 | length( tag ) == 2 )
   
-  # check if repoDir has "/" at the end and add it if not
-  if ( regexpr( pattern = ".$", text = repoDir ) != "/" ){
-    repoDir <- paste0(  repoDir, "/"  )
-  }
-  
-  # creates connection and driver
-  repoDirBase <- paste0( repoDir, "backpack.db")
-  sqlite <- dbDriver( "SQLite" )
-  conn <- dbConnect( sqlite, repoDirBase )
+  repoDir <- checkDirectory( repoDir )  
   
   # extracts md5hash
   if ( length( tag ) == 1 ){
-    md5hashES <- unique( dbGetQuery( conn,
+    md5hashES <- unique( executeSingleQuery( dir = repoDir,
                              paste0( "SELECT artifact FROM tag WHERE tag = ",
                                      "'", tag, "'" ) ) )
-  }
-  if ( length( tag ) == 2 ){
-    md5hashES <- unique( dbGetQuery( conn,
+  }else{
+    md5hashES <- unique( executeSingleQuery( dir = repoDir,
                              paste0( "SELECT artifact FROM tag WHERE createdDate >",
                                      "'", as.Date(tag[[1]])-1, "'", " AND createdDate <",
-                                     "'", as.Date(tag[[2]])+1, "'") ) )
-  }
-  
-  
-  # deletes connection and driver
-  dbDisconnect( conn )
-  dbUnloadDriver( sqlite ) 
+                                     "'", as.Date(tag[[2]])+1, "'") ) ) }
   
   return( as.character( md5hashES[, 1] ) ) 
-  
 }
 
 #' @rdname searchInRepo
@@ -163,36 +148,21 @@ searchInLocalRepo <- function( tag, repoDir ){
 searchInGithubRepo <- function( tag, repo, user, branch = "master" ){
   stopifnot( is.character( c( repo, user, branch ) ) )
   stopifnot( is.character( tag ) | is.list( tag ) )
+  stopifnot( length( tag ) == 1 | length( tag ) == 2 )
   
   # first download database
-  URLdb <- paste0( .GithubURL, user, "/", repo, 
-                                                           "/", branch, "/backpack.db") 
-  library( RCurl )
-  db <- getBinaryURL( URLdb, ssl.verifypeer = FALSE )
-  Temp <- tempfile()
-  writeBin( db, Temp)
-  
-  sqlite <- dbDriver( "SQLite" )
-  conn <- dbConnect( sqlite, Temp )
-  
+  Temp <- downloadDB( repo, user, branch )
+
   # extracts md5hash
   if ( length( tag ) == 1 ){
-    md5hashES <- unique( dbGetQuery( conn,
+    md5hashES <- unique( executeSingleQuery( dir = Temp, paste = FALSE,
                              paste0( "SELECT artifact FROM tag WHERE tag = ",
                                      "'", tag, "'" ) ) )
-  }
-  if ( length( tag ) == 2 ){
-    md5hashES <- unique( dbGetQuery( conn,
+  }else{
+    md5hashES <- unique( executeSingleQuery( dir = Temp, paste = FALSE,
                              paste0( "SELECT artifact FROM tag WHERE createdDate >",
                                      "'", as.Date(tag[[1]])-1, "'", " AND createdDate <",
-                                     "'", as.Date(tag[[2]])+1, "'") ) )
-  }
-  
-  
-  # deletes connection and driver
-  dbDisconnect( conn )
-  dbUnloadDriver( sqlite ) 
-  file.remove( Temp )
+                                     "'", as.Date(tag[[2]])+1, "'") ) ) }
+
   return( as.character( md5hashES[, 1] ) ) 
-  
-  }
+}

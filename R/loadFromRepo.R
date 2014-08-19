@@ -137,7 +137,7 @@
 #' summaryGithubRepo( user="pbiecek", repo="archivist" )
 #' 
 #' (VARmd5hash <- searchInGithubRepo( "varname:Sepal.Width", user="pbiecek", repo="archivist" ))
-#' (NAMEmd5hash <- searchInGithubRepo( "name:model2", user="pbiecek", repo="archivist", branch="master" ))
+#' (NAMEmd5hash <- searchInGithubRepo( "name:model", user="pbiecek", repo="archivist", branch="master" ))
 #' (CLASSmd5hash <- searchInGithubRepo( "class:lm", user="pbiecek", repo="archivist", branch="master" ))
 #' (DATEmd5hash <- searchInGithubRepo( "date:2014-08-17 13:44:47", user="pbiecek", repo="archivist" ))
 #'  
@@ -162,22 +162,14 @@ loadFromLocalRepo <- function( md5hash, repoDir, value = FALSE ){
   stopifnot( is.character( c( md5hash, repoDir ) ) )
   stopifnot( is.logical( value ))
   
-  # check if repoDir has "/" at the end and add it if not
-  if ( regexpr( pattern = ".$", text = repoDir ) != "/" ) {
-    repoDir <- paste0(  repoDir, "/"  )
-  }
+  repoDir <- checkDirectory( repoDir )
   
   # what if abbreviation was given
   if ( nchar( md5hash ) < 32 ){
-    sqlite <- dbDriver( "SQLite" )
-    conn <- dbConnect( sqlite, paste0( repoDir, "backpack.db" ) )
-    
-    md5hashList <- dbGetQuery( conn,
+        
+    md5hashList <- executeSingleQuery( dir = repoDir ,
                                paste0( "SELECT DISTINCT artifact FROM tag WHERE artifact LIKE '",md5hash,"%'" ) )
     md5hash <- as.character( md5hashList[, 1] )
-    
-    dbDisconnect( conn )
-    dbUnloadDriver( sqlite ) 
   }
   
   # using sapply in case abbreviation mode found more than 1 md5hash
@@ -200,10 +192,6 @@ loadFromLocalRepo <- function( md5hash, repoDir, value = FALSE ){
   }
 }
 
-
-
-
-
 #' @rdname loadFromLocalRepo
 #' @export
 loadFromGithubRepo <- function( md5hash, repo, user, branch = "master" , value = FALSE ){
@@ -213,30 +201,15 @@ loadFromGithubRepo <- function( md5hash, repo, user, branch = "master" , value =
   # what if abbreviation was given
   if ( nchar( md5hash ) < 32 ){
     # database is needed to be downloaded
-    URLdb <- paste0( .GithubURL, user, "/", repo, 
-                     "/", branch, "/backpack.db") 
-    library( RCurl )
-    db <- getBinaryURL( URLdb, ssl.verifypeer = FALSE )
-    Temp <- tempfile()
-    writeBin( db, Temp)
+    Temp <- downloadDB( repo, user, branch )
     
-    sqlite <- dbDriver( "SQLite" )
-    conn <- dbConnect( sqlite, Temp )
-    
-    md5hashList <- dbGetQuery( conn,
+    md5hashList <- executeSingleQuery( dir = Temp,
                                paste0( "SELECT artifact FROM tag" ) )
     md5hashList <- as.character( md5hashList[, 1] )
     md5hash <- unique( grep( 
       pattern = paste0( "^", md5hash ), 
       x = md5hashList, 
       value = TRUE ) )
-    
-    dbDisconnect( conn )
-    dbUnloadDriver( sqlite ) 
-    
-    # when tags are collected, delete downloaded database
-    file.remove( paste0( repoDir, Temp ) )
-        
   }
   
   # load objecs from Repository
@@ -276,26 +249,6 @@ loadFromGithubRepo <- function( md5hash, repo, user, branch = "master" , value =
       writeBin( tmpobjectS[[i]], tfS[i] )
     }
     # in case there existed an object in GlobalEnv this function will not delete him
-#     .nameEnv <- new.env()
-#     name <- character( length = length( md5hash ) )
-#     for( i in 1:length( md5hash ) ){
-#       name[i] <- load( file =  tfS[i] , envir = .nameEnv ) 
-#     }    
-#     NotDelete <- sapply( name , exists, envir = .GlobalEnv)
-#     
-#     sapply( tfS, function(x){
-#       load( file = x, envir = .GlobalEnv ) } )
-#     
-#     objects <- sapply( name , function(y){ 
-#       get(x= y, envir = .GlobalEnv ) } ) 
-#     
-#     sapply( tfS, unlink )
-#     tmpobjectS <- NULL
-#     
-#     rm( list = name[!NotDelete], envir = .GlobalEnv)
-#     
-#     return( objects )
-    
     .nameEnv <- new.env()
     name <- character( length = length( md5hash ) )
     for( i in seq_along( md5hash ) ) {
@@ -306,11 +259,6 @@ loadFromGithubRepo <- function( md5hash, repo, user, branch = "master" , value =
       return(as.list(.nameEnv)[[1]])
     } else {
       return(as.list(.nameEnv))
-    
-    
-    
-    
-    
   }
 }
 }
