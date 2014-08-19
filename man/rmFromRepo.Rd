@@ -3,7 +3,8 @@
 \alias{rmFromRepo}
 \title{Remove an Object Given as \code{md5hash} from a Repository}
 \usage{
-rmFromRepo(md5hash, repoDir, removeData = FALSE, removeMiniature = FALSE)
+rmFromRepo(md5hash, repoDir, removeData = FALSE, removeMiniature = FALSE,
+  force = FALSE)
 }
 \arguments{
 \item{md5hash}{A character assigned to the object as a result of a cryptographical hash function with MD5 algorithm, or it's abbreviation. This object will be removed.}
@@ -14,6 +15,9 @@ rmFromRepo(md5hash, repoDir, removeData = FALSE, removeMiniature = FALSE)
 Defualt \code{FALSE}.}
 
 \item{removeMiniature}{A logical value denoting whether to remove a miniature with the \code{object} specified by the \code{md5hash}.
+Defualt \code{FALSE}.}
+
+\item{force}{A logical value denoting whether to remove data if it is related to more than 1 object.
 Defualt \code{FALSE}.}
 }
 \description{

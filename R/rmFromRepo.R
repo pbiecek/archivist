@@ -53,6 +53,9 @@
 #' @param removeMiniature A logical value denoting whether to remove a miniature with the \code{object} specified by the \code{md5hash}.
 #' Defualt \code{FALSE}.
 #' 
+#' @param force A logical value denoting whether to remove data if it is related to more than 1 object.
+#' Defualt \code{FALSE}.
+#' 
 #' @author
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
 #'
@@ -181,7 +184,8 @@
 #' @family archivist
 #' @rdname rmFromRepo
 #' @export
-rmFromRepo <- function( md5hash, repoDir, removeData = FALSE, removeMiniature = FALSE ){
+rmFromRepo <- function( md5hash, repoDir, removeData = FALSE, 
+                        removeMiniature = FALSE, force = FALSE ){
   stopifnot( is.character( c( repoDir, md5hash ) ) )
   stopifnot( is.logical( c( removeData, removeMiniature ) ) )
     
@@ -202,23 +206,24 @@ rmFromRepo <- function( md5hash, repoDir, removeData = FALSE, removeMiniature = 
   # send deletes for data 
   if ( removeData ){
     # if there are many objects with the same m5hash (copies) all of them will be deleted
-    dataMd5hash <- unique( executeSingleQuery( dir = repoDir ,
+    dataMd5hash <-  executeSingleQuery( dir = repoDir ,
                      paste0( "SELECT artifact FROM tag WHERE ",
-                             "tag = '", paste0("relationWith:", md5hash), "'" ) ) )
+                             "tag = '", paste0("relationWith:", md5hash), "'" ) ) 
     
-    if ( length( dataMd5hash != 1 ) ){
-      stop( "Data related to ", md5hash, " are also in relation with ",
-            paste0( dataMd5hash[ which( dataMd5hash != md5hash ) ], collapse= " " ),
-            " . Archivist will not remove anything. Try again with argument removeData = FALSE to remove object only.")
+    if ( length( dataMd5hash != 1 ) & !force ){
+      stop( "Data related to ", md5hash, " are also in relation with other objects. \n",
+            "To remove try again with argument removeData = FALSE to remove object only or with argument force = TRUE to remove data anyway.")
     }
+    if ( length( dataMd5hash != 1 ) & force )
+      cat( "Data related to more than 1 object was removed from Repository.")
     
     
     sapply( dataMd5hash, function(x){
-      dbGetQuery( conn,
+      executeSingleQuery( dir = repoDir ,
                   paste0( "DELETE FROM artifact WHERE ",
                           "md5hash = '", x, "'" ) )} )
     sapply( dataMd5hash, function(x){
-      dbGetQuery( conn,
+      executeSingleQuery( dir = repoDir ,
                   paste0( "DELETE FROM tag WHERE ",
                           "artifact = '", x, "'" ) )} )
     
