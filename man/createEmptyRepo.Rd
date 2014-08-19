@@ -3,10 +3,13 @@
 \alias{createEmptyRepo}
 \title{Create an Empty Repository in a Given Directory}
 \usage{
-createEmptyRepo(repoDir)
+createEmptyRepo(repoDir, force = FALSE)
 }
 \arguments{
 \item{repoDir}{A character that specifies the directory for the Repository to be made.}
+
+\item{force}{If \code{force = TRUE} function call forces to create \code{repoDir} directory if
+it did not exist. Default set to \code{force = FALSE}.}
 }
 \description{
 \code{createEmptyRepo} creates an empty \link{Repository} in a given directory in which archived objects will be stored.

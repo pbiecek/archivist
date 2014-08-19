@@ -27,6 +27,9 @@
 #' 
 #' @param repoDir A character that specifies the directory for the Repository to be made.
 #' 
+#' @param force If \code{force = TRUE} function call forces to create \code{repoDir} directory if
+#' it did not exist. Default set to \code{force = FALSE}.
+#' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #'
@@ -47,11 +50,16 @@
 #' @family archivist
 #' @rdname createEmptyRepo
 #' @export
-createEmptyRepo <- function( repoDir ){
+createEmptyRepo <- function( repoDir, force = FALSE ){
   stopifnot( is.character( repoDir ) )
   
-  if ( !file.exists( repoDir ) ) 
+  if ( !file.exists( repoDir ) & force ) 
     stop( paste0("Directory ", repoDir, " does not exists.") )
+  if ( !file.exists( repoDir ) & force ){
+    cat( paste0("Directory ", repoDir, " did not exist. Forced to create a new directory.") )
+    repoDir <- checkDirectory( repoDir )
+    dir.create( repoDir )
+  }
   
   repoDir <- checkDirectory( repoDir )
   
