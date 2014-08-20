@@ -1,5 +1,7 @@
-A set of tools for datasets and figures archivisation
+A set of tools for datasets and plots archivisation
 =====================================================
+
+Please see the [archivist wiki](https://github.com/pbiecek/archivist/wiki) for information.
 
 Downloading archivist package:
 ```{Ruby}
@@ -15,3 +17,7 @@ The list of available functions:
 ```{Ruby}
 help(package="archivist")
 ```
+
+Authors of the project:
+> Przemysław Biecek, przemyslaw.biecek@gmail.com
+> Marcin Kosiński, m.p.kosinski@gmail.com
