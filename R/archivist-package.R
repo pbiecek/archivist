@@ -15,9 +15,9 @@
 #' Archivist allows to share artifacts with others, either through shared folder or github.
 #' Archivist allows to look for already created artifacts by using it's class, 
 #'   name, date of the creation or other properties.
-#' Makes it easy to restor such artifacts.
+#' Makes it easy to restore such artifacts.
 #' Archivist allows to check if new artifact is the exact 
-#'   copy that was produces some time ago.
+#'   copy that was produced some time ago.
 #'   That might be usefull either for testing or caching.
 #'
 #' @details
