@@ -10,6 +10,3 @@ script: ./travis-tool.sh run_tests
 
 after_failure:
   - ./travis-tool.sh dump_logs
-
-before_script:
-- ./travis-tool.sh github_package RCurl
