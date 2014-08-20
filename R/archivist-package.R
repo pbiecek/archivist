@@ -20,6 +20,7 @@
 #'   copy that was produced some time ago.
 #'   That might be usefull either for testing or caching.
 #'
+#'
 #' @details
 #' TODO: To be written.
 #'
