@@ -3,7 +3,7 @@
 #' @title Tools for archivisation of R objects
 #'
 #' @description
-#' Data exploration and modeling is a proces in which a lot of data artifacts are produced. 
+#' Data exploration and modelling is a process in which a lot of data artifacts are produced. 
 #' Artifacts like: subsets, data aggregates, plots, statistical models, different
 #' versions of data sets and different versions of results. 
 #' The more projects we work with the more artifacts are produced and the harder it is to manage these artifacts. 
