@@ -21,7 +21,8 @@
 #' saving it to the Repository by using the \link{saveToRepo} function. If the object
 #' is not in the Repository a logical value \code{FALSE} is returned.
 #' 
-#' @param tag A character denoting a Tag to be searched for in the Repository. It is also possible to specify \code{tag} as a list of length 2 with \code{dataFrom} and \code{dataTo}; see details.
+#' @param tag A character denoting a Tag to be searched for in the Repository. It is also possible to specify \code{tag} as a list of 
+#' length 2 with \code{dataFrom} and \code{dataTo}; see details. Needed only when \code{method = "tag"}.
 #' 
 #' @param repoDir A character denoting an existing directory in which objects will be searched.
 #' 
@@ -31,6 +32,15 @@
 #' 
 #' @param branch Only if working with a Github repository. A character containing a name of 
 #' Github repository's branch in which Repository is archived. Default \code{branch} is \code{master}.
+#' 
+#' @param regex A regular expression specifying the beginning of a tag, which will be used to search objects for.
+#' Needed only when \code{method = "tag"}. See examples.
+#' 
+#' @param method One of \code{"tag"} or \code{"regex"} specifying how \code{object} should be searched for.
+#' If \code{method = "tag"} then objects are searched exactly to the corresponding \code{tag} parameter. If
+#' \code{method = "regex"} then objects are searched using \code{regex} paremeter - that method is wider and more flexible 
+#' and, i.e., enables to search for all objects in the \code{Repository}, using \code{regex = "name", method = "regex"}.
+#' 
 #'
 #' @author
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
@@ -122,47 +132,73 @@
 #' @family archivist
 #' @rdname searchInRepo
 #' @export
-searchInLocalRepo <- function( tag, repoDir ){
+searchInLocalRepo <- function( tag, repoDir, regex, method = "tag" ){
   stopifnot( is.character( repoDir ) )
-  stopifnot( is.character( tag ) | is.list( tag ) )
-  stopifnot( length( tag ) == 1 | length( tag ) == 2 )
+  stopifnot( method == "tag" | method == "regex" )
+  if ( method == "tag" ){
+    stopifnot( is.character( tag ) | is.list( tag ) ) 
+    stopifnot( length( tag ) == 1 | length( tag ) == 2 )
+  }else{
+    stopifnot( is.character( regex ) )
+  }
   
   repoDir <- checkDirectory( repoDir )  
   
   # extracts md5hash
-  if ( length( tag ) == 1 ){
-    md5hashES <- unique( executeSingleQuery( dir = repoDir,
-                             paste0( "SELECT artifact FROM tag WHERE tag = ",
-                                     "'", tag, "'" ) ) )
+  if ( method == "tag" ){
+   if ( length( tag ) == 1 ){
+     md5hashES <- unique( executeSingleQuery( dir = repoDir,
+                              paste0( "SELECT DISTINCT artifact FROM tag WHERE tag = ",
+                                      "'", tag, "'" ) ) )
+   }else{
+     ## length tag == 2
+     md5hashES <- unique( executeSingleQuery( dir = repoDir,
+                              paste0( "SELECT DISTINCT artifact FROM tag WHERE createdDate >",
+                                      "'", as.Date(tag[[1]])-1, "'", " AND createdDate <",
+                                      "'", as.Date(tag[[2]])+1, "'") ) ) }
   }else{
+    # method == "regex"
     md5hashES <- unique( executeSingleQuery( dir = repoDir,
-                             paste0( "SELECT artifact FROM tag WHERE createdDate >",
-                                     "'", as.Date(tag[[1]])-1, "'", " AND createdDate <",
-                                     "'", as.Date(tag[[2]])+1, "'") ) ) }
-  
+                                             paste0( "SELECT DISTINCT artifact FROM tag WHERE tag LIKE ",
+                                                     "'", regex, "%'" ) ) )
+  }
   return( as.character( md5hashES[, 1] ) ) 
 }
 
 #' @rdname searchInRepo
 #' @export
-searchInGithubRepo <- function( tag, repo, user, branch = "master" ){
+searchInGithubRepo <- function( tag, repo, user, branch = "master", 
+                                regex, method = "tag" ){
+  stopifnot( method == "tag" | method == "regex" )
   stopifnot( is.character( c( repo, user, branch ) ) )
-  stopifnot( is.character( tag ) | is.list( tag ) )
-  stopifnot( length( tag ) == 1 | length( tag ) == 2 )
+  if ( method == "tag" ){
+    stopifnot( is.character( tag ) | is.list( tag ) )
+    stopifnot( length( tag ) == 1 | length( tag ) == 2 )
+  }else{
+    stopifnot( is.character( regex ) )
+  }
   
   # first download database
   Temp <- downloadDB( repo, user, branch )
 
   # extracts md5hash
-  if ( length( tag ) == 1 ){
-    md5hashES <- unique( executeSingleQuery( dir = Temp, paste = FALSE,
-                             paste0( "SELECT artifact FROM tag WHERE tag = ",
-                                     "'", tag, "'" ) ) )
+  if ( method == "tag" ){
+   if ( length( tag ) == 1 ){
+     md5hashES <- unique( executeSingleQuery( dir = Temp, paste = FALSE,
+                              paste0( "SELECT artifact FROM tag WHERE tag = ",
+                                      "'", tag, "'" ) ) )
+   }else{
+     # length tag == 2
+     md5hashES <- unique( executeSingleQuery( dir = Temp, paste = FALSE,
+                              paste0( "SELECT artifact FROM tag WHERE createdDate >",
+                                      "'", as.Date(tag[[1]])-1, "'", " AND createdDate <",
+                                      "'", as.Date(tag[[2]])+1, "'") ) ) }
   }else{
+    # method = regex
     md5hashES <- unique( executeSingleQuery( dir = Temp, paste = FALSE,
-                             paste0( "SELECT artifact FROM tag WHERE createdDate >",
-                                     "'", as.Date(tag[[1]])-1, "'", " AND createdDate <",
-                                     "'", as.Date(tag[[2]])+1, "'") ) ) }
+                                             paste0( "SELECT DISTINCT artifact FROM tag WHERE tag LIKE ",
+                                                     "'", regex, "%'" ) ) )
+  }
 
   return( as.character( md5hashES[, 1] ) ) 
 }

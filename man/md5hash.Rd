@@ -5,13 +5,14 @@
 \title{md5hash}
 \description{
 \code{Repository} stores specific values of an object, different for
-various object's classes, and objects themselves.
+various object's classes, and objects themselves. Objects are archived with
+a special attribute named \code{md5hash}.
 }
 \details{
 For every object, \code{md5hash} is a unique string of length 32 that comes out as a result of
 \code{digest{digest}} function, which uses a cryptographical MD5 hash algorithm.
-The \code{md5hash} of every object that is archivised to the \link{Repository} is also saved
-to the Repository as this object's \code{Tag} - see \link{Tags}. It enables to distinguish
+The \code{md5hash} of every object, that is archived to the \link{Repository}, is also saved
+to the Repository with this object's \code{Tags} - see \link{Tags}. It enables to distinguish
 objects in Repository and facilitates searching and loading them.
 }
 \seealso{
@@ -26,6 +27,11 @@ Functions returning \code{md5hash} as a value are:
  \item \link{searchInLocalRepo},
  \item \link{searchInGithubRepo},
  \item \link{saveToRepo}.
+}
+Functions returning \code{md5hahes} as a data.frame are:
+\itemize{
+ \item \link{summaryLocalRepo},
+ \item \link{summaryGithubRepo}.
 }
 
 Other archivist: \code{\link{Repository}};

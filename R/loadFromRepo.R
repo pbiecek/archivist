@@ -203,15 +203,11 @@ loadFromGithubRepo <- function( md5hash, repo, user, branch = "master" , value =
     # database is needed to be downloaded
     Temp <- downloadDB( repo, user, branch )
     
-    md5hashList <- executeSingleQuery( dir = Temp,
-                               paste0( "SELECT artifact FROM tag" ) )
+    md5hashList <- executeSingleQuery( dir = Temp, paste = FALSE,
+                                       paste0( "SELECT DISTINCT artifact FROM tag WHERE artifact LIKE '",md5hash,"%'" ) )
     md5hashList <- as.character( md5hashList[, 1] )
-    md5hash <- unique( grep( 
-      pattern = paste0( "^", md5hash ), 
-      x = md5hashList, 
-      value = TRUE ) )
   }
-  
+      
   # load objecs from Repository
   if ( !value ){
     library(RCurl)
