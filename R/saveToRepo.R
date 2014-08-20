@@ -179,7 +179,7 @@
 #' @export
 saveToRepo <- function( object, repoDir, archiveData = TRUE, 
                         archiveTags = TRUE, 
-                        archiveMiniature = TRUE, force = FALSE, rememberName = TRUE, ... ){
+                        archiveMiniature = TRUE, force = TRUE, rememberName = TRUE, ... ){
   stopifnot( is.character( repoDir ), is.logical( c( archiveData, archiveTags, archiveMiniature ) ) )
   
   md5hash <- digest( object )
@@ -196,9 +196,9 @@ saveToRepo <- function( object, repoDir, archiveData = TRUE,
   } 
   if ( length( check ) > 0 & force ){
     if ( rememberName ){
-      cat( "This object was already archived. Another archivisation executed with success. \n")
+      warning( "This object was already archived. Another archivisation executed with success.")
     }else{
-      cat( "This object's data was already archived. Another archivisation executed with success. \n")
+      warning( "This object's data was already archived. Another archivisation executed with success.")
     }
   }
   
