@@ -8,21 +8,22 @@
 #' 
 #' @details
 #' \code{searchInRepo} searches for an object in a Repository using it's \code{Tag} 
-#' (e.g., \code{name}, \code{class} or \code{archiving date}).
-#' For various object classes different \code{Tags} can be searched for. 
-#' See \link{Tags}. If a \code{Tag} is a list of length 2, \code{md5hashes} of all 
+#' (e.g., \code{name}, \code{class} or \code{archiving date}). \code{Tags} are submitted in a \code{pattern}
+#' argument. For various object classes different \code{Tags} can be searched for. 
+#' See \link{Tags}. If a \code{pattern} is a list of length 2, \code{md5hashes} of all 
 #' objects created from date \code{dateFrom} to data \code{dateTo} are returned. The date 
 #' should be formatted according to the YYYY-MM-DD format, e.g., \code{"2014-07-31"}.
 #' 
-#' \code{Tags} should be given according to the format: \code{"TagType:TagTypeValue"} - see examples.
+#' \code{Tags}, submitted in a \code{pattern} argument, should be given according to the format: \code{"TagType:TagTypeValue"} - see examples.
 #'   
 #' @return
 #' \code{searchInRepo} returns a \code{md5hash} character, which is a hash assigned to the object when
 #' saving it to the Repository by using the \link{saveToRepo} function. If the object
 #' is not in the Repository a logical value \code{FALSE} is returned.
 #' 
-#' @param tag A character denoting a Tag to be searched for in the Repository. It is also possible to specify \code{tag} as a list of 
-#' length 2 with \code{dataFrom} and \code{dataTo}; see details. Needed only when \code{method = "tag"}.
+#' @param pattern If \code{fixed = TRUE}: a character denoting a Tag to be searched for in the Repository. It is also possible to specify \code{pattern} as a list of 
+#' length 2 with \code{dataFrom} and \code{dataTo}; see details. If \code{fixed = FALSE}: A regular expression specifying the beginning of a tag, 
+#' which will be used to search objects for.
 #' 
 #' @param repoDir A character denoting an existing directory in which objects will be searched.
 #' 
@@ -33,13 +34,10 @@
 #' @param branch Only if working with a Github repository. A character containing a name of 
 #' Github repository's branch in which Repository is archived. Default \code{branch} is \code{master}.
 #' 
-#' @param regex A regular expression specifying the beginning of a tag, which will be used to search objects for.
-#' Needed only when \code{method = "tag"}. See examples.
-#' 
-#' @param method One of \code{"tag"} or \code{"regex"} specifying how \code{object} should be searched for.
-#' If \code{method = "tag"} then objects are searched exactly to the corresponding \code{tag} parameter. If
-#' \code{method = "regex"} then objects are searched using \code{regex} paremeter - that method is wider and more flexible 
-#' and, i.e., enables to search for all objects in the \code{Repository}, using \code{regex = "name", method = "regex"}.
+#' @param fixed A logical value specifying how \code{objects} should be searched for.
+#' If \code{fixed = TRUE} (default) then objects are searched exactly to the corresponding \code{pattern} parameter. If
+#' \code{fixed = FALSE} then objects are searched using \code{pattern} paremeter as a regular expression - that method is wider and more flexible 
+#' and, i.e., enables to search for all objects in the \code{Repository}, using \code{pattern = "name", fixed = FALSE}.
 #' 
 #'
 #' @author
@@ -108,17 +106,17 @@
 #' # date search
 #' 
 #' # objects archivised between 2 different days
-#' searchInLocalRepo( tag = list( dateFrom = Sys.Date()-1, dateTo = Sys.Date()+1), 
+#' searchInLocalRepo( pattern = list( dateFrom = Sys.Date()-1, dateTo = Sys.Date()+1), 
 #' repoDir = exampleRepoDir )
 #' 
 #' # also on Github
 #' 
-#' searchInGithubRepo( tag = list( dateFrom = "2014-08-16", dateTo = "2014-08-18" ), 
+#' searchInGithubRepo( pattern = list( dateFrom = "2014-08-16", dateTo = "2014-08-18" ), 
 #' user="pbiecek", repo="archivist", branch="master" )
 #' 
 #' 
 #' # objects from Today
-#' searchInLocalRepo( tag = list( dateFrom=Sys.Date(), dateTo=Sys.Date() ), 
+#' searchInLocalRepo( pattern = list( dateFrom=Sys.Date(), dateTo=Sys.Date() ), 
 #' repoDir = exampleRepoDir )
 #' 
 #' # removing all files generated to this function's examples
@@ -132,72 +130,63 @@
 #' @family archivist
 #' @rdname searchInRepo
 #' @export
-searchInLocalRepo <- function( tag, repoDir, regex, method = "tag" ){
-  stopifnot( is.character( repoDir ) )
-  stopifnot( method == "tag" | method == "regex" )
-  if ( method == "tag" ){
-    stopifnot( is.character( tag ) | is.list( tag ) ) 
-    stopifnot( length( tag ) == 1 | length( tag ) == 2 )
-  }else{
-    stopifnot( is.character( regex ) )
-  }
+searchInLocalRepo <- function( pattern, repoDir, fixed = TRUE ){
+  stopifnot( is.character( repoDir ), is.logical( fixed ) )
+  stopifnot( is.character( pattern ) | is.list( pattern ) ) 
+  stopifnot( length( pattern ) == 1 | length( pattern ) == 2 )
   
   repoDir <- checkDirectory( repoDir )  
   
   # extracts md5hash
-  if ( method == "tag" ){
-   if ( length( tag ) == 1 ){
+  if ( fixed ){
+   if ( length( pattern ) == 1 ){
      md5hashES <- unique( executeSingleQuery( dir = repoDir,
                               paste0( "SELECT DISTINCT artifact FROM tag WHERE tag = ",
-                                      "'", tag, "'" ) ) )
+                                      "'", pattern, "'" ) ) )
    }else{
-     ## length tag == 2
+     ## length pattern == 2
      md5hashES <- unique( executeSingleQuery( dir = repoDir,
                               paste0( "SELECT DISTINCT artifact FROM tag WHERE createdDate >",
-                                      "'", as.Date(tag[[1]])-1, "'", " AND createdDate <",
-                                      "'", as.Date(tag[[2]])+1, "'") ) ) }
+                                      "'", as.Date(pattern[[1]])-1, "'", " AND createdDate <",
+                                      "'", as.Date(pattern[[2]])+1, "'") ) ) }
   }else{
-    # method == "regex"
+    # fixed = FALSE
     md5hashES <- unique( executeSingleQuery( dir = repoDir,
                                              paste0( "SELECT DISTINCT artifact FROM tag WHERE tag LIKE ",
-                                                     "'", regex, "%'" ) ) )
+                                                     "'", pattern, "%'" ) ) )
   }
   return( as.character( md5hashES[, 1] ) ) 
 }
 
 #' @rdname searchInRepo
 #' @export
-searchInGithubRepo <- function( tag, repo, user, branch = "master", 
-                                regex, method = "tag" ){
-  stopifnot( method == "tag" | method == "regex" )
-  stopifnot( is.character( c( repo, user, branch ) ) )
-  if ( method == "tag" ){
-    stopifnot( is.character( tag ) | is.list( tag ) )
-    stopifnot( length( tag ) == 1 | length( tag ) == 2 )
-  }else{
-    stopifnot( is.character( regex ) )
-  }
+searchInGithubRepo <- function( pattern, repo, user, branch = "master", fixed = TRUE ){
+
+  stopifnot( is.character( c( repo, user, branch ) ), is.logical( fixed ) )
+  stopifnot( is.character( pattern ) | is.list( pattern ) )
+  stopifnot( length( pattern ) == 1 | length( pattern ) == 2 )
+  
   
   # first download database
   Temp <- downloadDB( repo, user, branch )
 
   # extracts md5hash
-  if ( method == "tag" ){
-   if ( length( tag ) == 1 ){
+  if ( fixed ){
+   if ( length( pattern ) == 1 ){
      md5hashES <- unique( executeSingleQuery( dir = Temp, paste = FALSE,
                               paste0( "SELECT artifact FROM tag WHERE tag = ",
-                                      "'", tag, "'" ) ) )
+                                      "'", pattern, "'" ) ) )
    }else{
-     # length tag == 2
+     # length pattern == 2
      md5hashES <- unique( executeSingleQuery( dir = Temp, paste = FALSE,
                               paste0( "SELECT artifact FROM tag WHERE createdDate >",
-                                      "'", as.Date(tag[[1]])-1, "'", " AND createdDate <",
-                                      "'", as.Date(tag[[2]])+1, "'") ) ) }
+                                      "'", as.Date(pattern[[1]])-1, "'", " AND createdDate <",
+                                      "'", as.Date(pattern[[2]])+1, "'") ) ) }
   }else{
-    # method = regex
+    # fixed FALSE
     md5hashES <- unique( executeSingleQuery( dir = Temp, paste = FALSE,
                                              paste0( "SELECT DISTINCT artifact FROM tag WHERE tag LIKE ",
-                                                     "'", regex, "%'" ) ) )
+                                                     "'", pattern, "%'" ) ) )
   }
 
   return( as.character( md5hashES[, 1] ) ) 
