@@ -4,7 +4,7 @@
 \title{Save an Object into a Repository}
 \usage{
 saveToRepo(object, repoDir, archiveData = TRUE, archiveTags = TRUE,
-  archiveMiniature = TRUE, force = FALSE, rememberName = TRUE, ...)
+  archiveMiniature = TRUE, force = TRUE, rememberName = TRUE, ...)
 }
 \arguments{
 \item{object}{An arbitrary R object to be saved. For supported objects see details.}
@@ -85,9 +85,8 @@ Supported object's classes are (so far):
 To check what \code{Tags} will be extracted for various objects see \link{Tags}.
 }
 \examples{
-\dontrun{
 # objects preparation
-
+\dontrun{
 # data.frame object
 data(iris)
 

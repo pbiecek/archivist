@@ -63,7 +63,7 @@ For more information about \code{Tags} check \link{Tags}.
 }
 \examples{
 # objects preparation
-
+\dontrun{
 # data.frame object
 data(iris)
 
@@ -182,6 +182,7 @@ sapply( x , function(x ){
 file.remove( paste0( exampleRepoDir, "/backpack.db" ) )
 
 rm( exampleRepoDir )
+}
 }
 \author{
 Marcin Kosinski , \email{m.p.kosinski@gmail.com}

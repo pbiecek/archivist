@@ -47,7 +47,7 @@ should be formatted according to the YYYY-MM-DD format, e.g., \code{"2014-07-31"
 }
 \examples{
 # objects preparation
-
+\dontrun{
 # data.frame object
 data(iris)
 
@@ -129,6 +129,7 @@ sapply( x , function(x ){
 file.remove( paste0( exampleRepoDir, "/backpack.db" ) )
 
 rm( exampleRepoDir )
+}
 }
 \author{
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}

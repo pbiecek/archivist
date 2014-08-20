@@ -49,7 +49,7 @@ You can specify one \code{md5hash} (or its abbreviation) per function call.
 }
 \examples{
 # objects preparation
-
+\dontrun{
 # data.frame object
 data(iris)
 
@@ -158,6 +158,7 @@ sapply( x , function(x ){
 file.remove( paste0( exampleRepoDir, "/backpack.db" ) )
 
 rm( exampleRepoDir )
+}
 }
 \author{
 Marcin Kosinski , \email{m.p.kosinski@gmail.com}

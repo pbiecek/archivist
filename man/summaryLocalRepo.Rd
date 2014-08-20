@@ -46,7 +46,7 @@ be obtained. Also there is an extra column with a date of creation the \code{Tag
 }
 \examples{
 # objects preparation
-
+\dontrun{
 # data.frame object
 data(iris)
 
@@ -127,14 +127,13 @@ summaryLocalRepo(method = "tags", repoDir = exampleRepoDir)
 summaryGithubRepo(method = "md5hashes", user = "pbiecek", repo = "archivist")
 summaryGithubRepo(method = "tags", user = "pbiecek", repo = "archivist", branch = "master")
 
-
-
 # removing all files generated to this function's examples
 x <- list.files( paste0( exampleRepoDir, "/gallery/" ) )
 sapply( x , function(x ){
      file.remove( paste0( exampleRepoDir, "/gallery/", x ) )
    })
 file.remove( paste0( exampleRepoDir, "/backpack.db" ) )
+}
 }
 \author{
 Marcin Kosinski , \email{m.p.kosinski@gmail.com}
