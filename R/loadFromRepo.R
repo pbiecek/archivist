@@ -46,7 +46,7 @@
 #' 
 #' @examples
 #' # objects preparation
-#' 
+#' \dontrun{
 #' # data.frame object
 #' data(iris)
 #' 
@@ -155,6 +155,7 @@
 #' file.remove( paste0( exampleRepoDir, "/backpack.db" ) )
 #' 
 #' rm( exampleRepoDir )
+#' }
 #' @family archivist
 #' @rdname loadFromLocalRepo
 #' @export

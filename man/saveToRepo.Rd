@@ -85,6 +85,7 @@ Supported object's classes are (so far):
 To check what \code{Tags} will be extracted for various objects see \link{Tags}.
 }
 \examples{
+\dontrun{
 # objects preparation
 
 # data.frame object
@@ -167,6 +168,7 @@ sapply( x , function(x ){
 file.remove( paste0( exampleRepoDir, "/backpack.db" ) )
 
 rm( exampleRepoDir )
+}
 }
 \author{
 Marcin Kosinski , \email{m.p.kosinski@gmail.com}

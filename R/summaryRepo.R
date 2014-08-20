@@ -44,7 +44,7 @@
 #'
 #' @examples
 #' # objects preparation
-#' 
+#' \dontrun{
 #' # data.frame object
 #' data(iris)
 #' 
@@ -125,14 +125,13 @@
 #' summaryGithubRepo(method = "md5hashes", user = "pbiecek", repo = "archivist")
 #' summaryGithubRepo(method = "tags", user = "pbiecek", repo = "archivist", branch = "master")
 #' 
-#' 
-#' 
 #' # removing all files generated to this function's examples
 #' x <- list.files( paste0( exampleRepoDir, "/gallery/" ) )
 #' sapply( x , function(x ){
 #'      file.remove( paste0( exampleRepoDir, "/gallery/", x ) )
 #'    })
 #' file.remove( paste0( exampleRepoDir, "/backpack.db" ) )
+#' }
 #' @family archivist
 #' @rdname summaryLocalRepo
 #' @export
