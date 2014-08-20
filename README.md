@@ -1,7 +1,7 @@
 A set of tools for datasets and plots archivisation
 =====================================================
 
-<h5> Please see the [archivist wiki](https://github.com/pbiecek/archivist/wiki) for information. </h5>
+<h5> Please see the </h5> [archivist wiki](https://github.com/pbiecek/archivist/wiki) <h5> for information. </h5>
 
 <h5> Downloading archivist package: </h5>
 ```{Ruby}
