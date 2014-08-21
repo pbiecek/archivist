@@ -124,8 +124,8 @@ loadFromLocalRepo( &quot;ff575c261c949d073b2895b05d&quot;,  myRepo)</code></pre>
 
 summaryLocalRepo(myRepo)</code></pre>
 <pre><code>##                            md5hash name         createdDate
-## 1 ff575c261c949d073b2895b05d1097c3 iris 2014-08-21 13:09:00
-## 2 ff575c261c949d073b2895b05d1097c3 iris 2014-08-21 13:09:00</code></pre>
+## 1 ff575c261c949d073b2895b05d1097c3 iris 2014-08-21 17:38:04
+## 2 ff575c261c949d073b2895b05d1097c3 iris 2014-08-21 17:38:04</code></pre>
 <pre class="r"><code>rmFromRepo( &quot;ff575c261c949d073b2895b05d1097c3&quot;, myRepo)
 
 summaryLocalRepo(myRepo)</code></pre>
@@ -180,7 +180,29 @@ head(t1)</code></pre>
 <pre><code>## [1] &quot;1c169ebb5583b12a470d54e30508765e&quot;
 ## attr(,&quot;data&quot;)
 ## [1] &quot;e529c9447db30766e216e8fff7adaf2a&quot;</code></pre>
-<pre class="r"><code>rmFromRepo( ob, myRepo)</code></pre>
+<pre class="r"><code>rmFromRepo( ob, myRepo)
+
+summaryLocalRepo(myRepo)</code></pre>
+<pre><code>##                            md5hash                             name
+## 1 e529c9447db30766e216e8fff7adaf2a e529c9447db30766e216e8fff7adaf2a
+##           createdDate
+## 1 2014-08-21 17:38:05</code></pre>
+<pre class="r"><code>infoLocalRepo(myRepo)</code></pre>
+<pre><code>## $artifactsNumber
+## [1] 0
+## 
+## $classesNumber
+## named list()
+## 
+## $savesPerDay
+## 2014-08-21 
+##          1 
+## 
+## $classesTypes
+## character(0)
+## 
+## attr(,&quot;class&quot;)
+## [1] &quot;repository&quot;</code></pre>
 </div>
 
 
