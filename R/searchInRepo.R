@@ -39,6 +39,7 @@
 #' \code{fixed = FALSE} then objects are searched using \code{pattern} paremeter as a regular expression - that method is wider and more flexible 
 #' and, i.e., enables to search for all objects in the \code{Repository}, using \code{pattern = "name", fixed = FALSE}.
 #' 
+#' @param paste A logical value. Should not be changed by user. It is a technical parameter.
 #'
 #' @author
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
@@ -131,7 +132,7 @@
 #' @family archivist
 #' @rdname searchInRepo
 #' @export
-searchInLocalRepo <- function( pattern, repoDir, fixed = TRUE ){
+searchInLocalRepo <- function( pattern, repoDir, fixed = TRUE, paste = TRUE ){
   stopifnot( is.character( repoDir ), is.logical( fixed ) )
   stopifnot( is.character( pattern ) | is.list( pattern ) ) 
   stopifnot( length( pattern ) == 1 | length( pattern ) == 2 )
@@ -141,12 +142,12 @@ searchInLocalRepo <- function( pattern, repoDir, fixed = TRUE ){
   # extracts md5hash
   if ( fixed ){
    if ( length( pattern ) == 1 ){
-     md5hashES <- unique( executeSingleQuery( dir = repoDir,
+     md5hashES <- unique( executeSingleQuery( dir = repoDir, paste = paste,
                               paste0( "SELECT DISTINCT artifact FROM tag WHERE tag = ",
                                       "'", pattern, "'" ) ) )
    }else{
      ## length pattern == 2
-     md5hashES <- unique( executeSingleQuery( dir = repoDir,
+     md5hashES <- unique( executeSingleQuery( dir = repoDir, paste = paste,
                               paste0( "SELECT DISTINCT artifact FROM tag WHERE createdDate >",
                                       "'", as.Date(pattern[[1]])-1, "'", " AND createdDate <",
                                       "'", as.Date(pattern[[2]])+1, "'") ) ) }

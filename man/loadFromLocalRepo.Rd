@@ -166,7 +166,9 @@ Marcin Kosinski , \email{m.p.kosinski@gmail.com}
 \seealso{
 Other archivist: \code{\link{Repository}};
   \code{\link{Tags}}; \code{\link{archivist-package}};
-  \code{\link{createEmptyRepo}}; \code{\link{md5hash}};
+  \code{\link{createEmptyRepo}};
+  \code{\link{infoGithubRepo}},
+  \code{\link{infoLocalRepo}}; \code{\link{md5hash}};
   \code{\link{rmFromRepo}}; \code{\link{saveToRepo}};
   \code{\link{searchInGithubRepo}},
   \code{\link{searchInLocalRepo}};

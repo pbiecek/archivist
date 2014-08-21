@@ -1,6 +1,6 @@
 ##    archivist package for R
 ##
-#' @title View the Summary of a Repository version2
+#' @title View the Information About a Repository
 #'
 #' @description
 #' TO DO
@@ -24,7 +24,7 @@
 #'
 #' @examples
 #' # objects preparation
-#' 
+#' \dontrun{
 #' # data.frame object
 #' data(iris)
 #' 
@@ -72,34 +72,60 @@
 #' exampleRepoDir <- tempdir()
 #' 
 #' 
-#' 
-summaryLocalRepo2 <- function( repoDir, method ){
-  stopifnot( is.character( c( method, repoDir ) ) )
+#' }
+#' @family archivist
+#' @rdname infoRepo
+#' @export
+infoLocalRepo <- function( repoDir ){
+  stopifnot( is.character( c( repoDir ) ) )
   
+  repoDir <- checkDirectory( repoDir )
   
+  infoRepo( dir = repoDir, paste = TRUE)
   
-  class() <- "repository"
+}
+
+
+
+#' @rdname infoRepo
+#' @export
+infoGithubRepo <- function( repo, user, branch = "master" ){
+  stopifnot( is.character( c( repo, user, branch ) ) )
+  
+  # database is needed to be downloaded
+  Temp <- downloadDB( repo, user, branch )
+  
+  infoRepo( dir = Temp, paste = FALSE )
   
 }
 
 
 
 
-
-print.repository <- function(x, ...)
-{
-#   cat("Call:  ", deparse(x$call),
-#       "\nMedoids:\n");		print(x$medoids, ...)
-#   cat("Objective function:\t ", format(x$objective, ...),"\n",
-#       "Clustering vector: \t", sep=""); str(x$clustering, vec.len = 7)
-#   cat("Cluster sizes:	    \t", x$clusinfo[,1],
-#       "\nBest sample:\n");		print(x$sample, quote = FALSE, ...)
-#   cat("\nAvailable components:\n");	print(names(x), ...)
-#   invisible(x)
-}
-
-summary.repository <- function(object, ...)
-{
-#   class(object) <- "summary.clara"
-#   object
+infoRepo <- function( dir, paste ){
+    # what classes types are there in the Repository
+    classes <- executeSingleQuery( dir = dir , paste = paste,
+                  paste0( "SELECT DISTINCT tag FROM tag WHERE tag LIKE 'class%'" ) )
+    classes <- sub( x = classes, pattern = "class:", replacement="")
+  
+info <- list( artifactsNumber = NULL, classesNumber = NULL, savesPerDay = NULL, classesTypes = classes )
+    
+    # how many different objects are there in the Repository
+    info$arifactsNumber <- sum( searchInLocalRepo( pattern = "name", fixed = FALSE, 
+                                                   paste = paste, repoDir = dir ) )
+    
+    # how many different objects classes are there in the Repository
+    info$classesNumber <- sapply( classes, function(x){
+                          sum( searchInLocalRepo( pattern = paste0("class:", x), 
+                                                  fixed = TRUE, paste = paste, repoDir = dir ) ) })
+    # how many different objects were saved in different days
+    days <- as.Date( executeSingleQuery( dir = dir , paste = paste,
+                                paste0( "SELECT createdDate FROM tag" ) ) )
+    info$savesPerDay <- sapply( days, function(x){
+                                searchInLocalRepo( pattern = list( dateFrom = x, dateTo = x),
+                                                   repoDir = dir ) } )
+    
+  class( info ) <- "repository"
+  
+  return( info )
 }
