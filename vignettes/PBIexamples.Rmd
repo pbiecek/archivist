@@ -1,0 +1,85 @@
+<!--
+%\VignetteEngine{knitr::docco_linear}
+%\VignetteIndexEntry{The archivist examples}
+-->
+
+# Installation
+
+```{r, message=FALSE}
+require(devtools)
+require(dplyr)
+if (!require(archivist)) {
+  install_github("pbiecek/archivist")
+}
+```
+
+# Download plots from GitHub
+
+```{r, message=FALSE}
+
+(allObject <- searchInGithubRepo( list("2005-05-27", now()), 
+                    user = "pbiecek", repo = "graphGallery"))
+
+(plots <- searchInGithubRepo( "class:ggplot", 
+                    user = "pbiecek", repo = "graphGallery"))
+
+#
+# example plots
+loadFromGithubRepo( md5hash = "fcd70d55b874201d2bece12f591a2ec4" , 
+                    user = "pbiecek", repo = "graphGallery", value=TRUE)
+
+loadFromGithubRepo( md5hash = "b6f183dfd0efdc8c33fa89b9038716c5" , 
+                    user = "pbiecek", repo = "graphGallery", value=TRUE)
+
+```
+
+# Manage local repo
+
+```{r, message=FALSE}
+
+myRepo <- tempdir()
+createEmptyRepo( myRepo )
+
+data( iris )
+saveToRepo(iris, myRepo)
+# same object causes warning
+saveToRepo(iris, myRepo)
+
+searchInLocalRepo( pattern = "name:ir",  myRepo, fixed=FALSE)
+searchInLocalRepo( pattern = "name:iris",  myRepo)
+searchInLocalRepo( pattern = "class:data.frame",  myRepo)
+searchInLocalRepo( pattern = c("2012-01-01", "2014-01-01"),  myRepo)
+
+rm( iris )
+loadFromLocalRepo( "ff575c261c949d073b2895b05d",  myRepo)
+iris2 <- loadFromLocalRepo( "ff575c261c949d073b2895b05d",  myRepo, value=TRUE)
+
+summaryLocalRepo(myRepo)
+
+rmFromRepo( "ff575c261c949d073b2895b05d1097c3", myRepo)
+
+summaryLocalRepo(myRepo)
+```
+
+# Let's add a plot
+
+```{r, message=FALSE}
+if (!require(eurostat)) {
+  install_github("rOpenGov/eurostat")
+}
+
+library(ggplot2)
+
+t1 <- get_eurostat("tsdtr420") %>% 
+       filter(geo %in% c("UK", "SK", "FR", "PL", "ES", "PT", "LV"))
+head(t1)
+(pl <- ggplot(t1, aes(x = time, y = value, color=geo, group=geo, shape=geo)) +
+          geom_point(size=4) + 
+          geom_line() + theme_bw() + ggtitle("People killed in road accidents"))
+
+(ob <- saveToRepo(pl, myRepo))
+
+rmFromRepo( ob, myRepo)
+
+```
+
