@@ -154,7 +154,7 @@ Functions using \code{Tags} are \link{searchInLocalRepo} and \link{searchInGithu
 
 Other archivist: \code{\link{Repository}};
   \code{\link{archivist-package}};
-  \code{\link{createEmptyRepo}};
+  \code{\link{createEmptyRepo}}; \code{\link{deleteRepo}};
   \code{\link{infoGithubRepo}},
   \code{\link{infoLocalRepo}};
   \code{\link{loadFromGithubRepo}},

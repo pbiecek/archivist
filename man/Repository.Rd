@@ -27,9 +27,12 @@ Functions using \code{Repository} are:
 Function creating \code{Repository} is:
 \link{createEmptyRepo}.
 
+Function deleting \code{Repository} is:
+\link{deleteRepo}.
+
 Other archivist: \code{\link{Tags}};
   \code{\link{archivist-package}};
-  \code{\link{createEmptyRepo}};
+  \code{\link{createEmptyRepo}}; \code{\link{deleteRepo}};
   \code{\link{infoGithubRepo}},
   \code{\link{infoLocalRepo}};
   \code{\link{loadFromGithubRepo}},

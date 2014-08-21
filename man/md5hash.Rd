@@ -36,7 +36,7 @@ Functions returning \code{md5hahes} as a data.frame are:
 
 Other archivist: \code{\link{Repository}};
   \code{\link{Tags}}; \code{\link{archivist-package}};
-  \code{\link{createEmptyRepo}};
+  \code{\link{createEmptyRepo}}; \code{\link{deleteRepo}};
   \code{\link{infoGithubRepo}},
   \code{\link{infoLocalRepo}};
   \code{\link{loadFromGithubRepo}},

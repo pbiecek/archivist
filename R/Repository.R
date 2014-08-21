@@ -27,6 +27,9 @@
 #' Function creating \code{Repository} is:
 #' \link{createEmptyRepo}.
 #' 
+#' Function deleting \code{Repository} is:
+#' \link{deleteRepo}.
+#' 
 #' @family archivist
 #' @name Repository
 #' @docType class

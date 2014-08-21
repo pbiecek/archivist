@@ -31,7 +31,7 @@ Marcin Kosinski [aut] \email{m.p.kosinski@gmail.com}
 \seealso{
 Other archivist: \code{\link{Repository}};
   \code{\link{Tags}}; \code{\link{createEmptyRepo}};
-  \code{\link{infoGithubRepo}},
+  \code{\link{deleteRepo}}; \code{\link{infoGithubRepo}},
   \code{\link{infoLocalRepo}};
   \code{\link{loadFromGithubRepo}},
   \code{\link{loadFromLocalRepo}}; \code{\link{md5hash}};
