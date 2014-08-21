@@ -9,8 +9,8 @@ searchInLocalRepo(pattern, repoDir, fixed = TRUE, paste = TRUE)
 searchInGithubRepo(pattern, repo, user, branch = "master", fixed = TRUE)
 }
 \arguments{
-\item{pattern}{If \code{fixed = TRUE}: a character denoting a Tag to be searched for in the Repository. It is also possible to specify \code{pattern} as a list of
-length 2 with \code{dataFrom} and \code{dataTo}; see details. If \code{fixed = FALSE}: A regular expression specifying the beginning of a tag,
+\item{pattern}{If \code{fixed = TRUE}: a character denoting a \link{Tag} to be searched for in the Repository. It is also possible to specify \code{pattern} as a list of
+length 2 with \code{dataFrom} and \code{dataTo}; see details. If \code{fixed = FALSE}: A regular expression specifying the beginning of a \link{Tag},
 which will be used to search objects for.}
 
 \item{repoDir}{A character denoting an existing directory in which objects will be searched.}
@@ -139,8 +139,8 @@ Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 \seealso{
 Other archivist: \code{\link{Repository}};
   \code{\link{Tags}}; \code{\link{archivist-package}};
-  \code{\link{createEmptyRepo}}; \code{\link{deleteRepo}};
-  \code{\link{infoGithubRepo}},
+  \code{\link{copyToRepo}}; \code{\link{createEmptyRepo}};
+  \code{\link{deleteRepo}}; \code{\link{infoGithubRepo}},
   \code{\link{infoLocalRepo}};
   \code{\link{loadFromGithubRepo}},
   \code{\link{loadFromLocalRepo}}; \code{\link{md5hash}};

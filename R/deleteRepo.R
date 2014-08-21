@@ -13,7 +13,6 @@
 #'
 #' @param repoDir A character that specifies the directory for the Repository to be deleted.
 #' 
-#' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #'

@@ -32,8 +32,8 @@ Function deleting \code{Repository} is:
 
 Other archivist: \code{\link{Tags}};
   \code{\link{archivist-package}};
-  \code{\link{createEmptyRepo}}; \code{\link{deleteRepo}};
-  \code{\link{infoGithubRepo}},
+  \code{\link{copyToRepo}}; \code{\link{createEmptyRepo}};
+  \code{\link{deleteRepo}}; \code{\link{infoGithubRepo}},
   \code{\link{infoLocalRepo}};
   \code{\link{loadFromGithubRepo}},
   \code{\link{loadFromLocalRepo}}; \code{\link{md5hash}};
