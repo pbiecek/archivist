@@ -137,7 +137,9 @@ searchInLocalRepo <- function( pattern, repoDir, fixed = TRUE, paste = TRUE ){
   stopifnot( is.character( pattern ) | is.list( pattern ) ) 
   stopifnot( length( pattern ) == 1 | length( pattern ) == 2 )
   
-  repoDir <- checkDirectory( repoDir )  
+  # when infoRepo uses searchLocal, it come with paste = FALSE
+  if ( paste ){ 
+    repoDir <- checkDirectory( repoDir )}  
   
   # extracts md5hash
   if ( fixed ){
@@ -145,15 +147,17 @@ searchInLocalRepo <- function( pattern, repoDir, fixed = TRUE, paste = TRUE ){
      md5hashES <- unique( executeSingleQuery( dir = repoDir, paste = paste,
                               paste0( "SELECT DISTINCT artifact FROM tag WHERE tag = ",
                                       "'", pattern, "'" ) ) )
+                                  # when infoRepo uses searchLocal, it come with paste = FALSE
    }else{
      ## length pattern == 2
      md5hashES <- unique( executeSingleQuery( dir = repoDir, paste = paste,
                               paste0( "SELECT DISTINCT artifact FROM tag WHERE createdDate >",
                                       "'", as.Date(pattern[[1]])-1, "'", " AND createdDate <",
                                       "'", as.Date(pattern[[2]])+1, "'") ) ) }
+                                  # when infoRepo uses searchLocal, it come with paste = FALSE
   }else{
     # fixed = FALSE
-    md5hashES <- unique( executeSingleQuery( dir = repoDir,
+    md5hashES <- unique( executeSingleQuery( dir = repoDir, paste = paste,
                                              paste0( "SELECT DISTINCT artifact FROM tag WHERE tag LIKE ",
                                                      "'", pattern, "%'" ) ) )
   }

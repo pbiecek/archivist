@@ -6,7 +6,6 @@
 #' TO DO
 #' @details
 #' TO DO
-#' @param method 
 #' 
 #' @param repoDir A character denoting an existing directory of a Repository for which a summary will be returned.
 #' 
@@ -71,7 +70,9 @@
 #' 
 #' exampleRepoDir <- tempdir()
 #' 
-#' 
+#' x <- infoGithubRepo( user="pbiecek", repo="archivist")
+#' print( x )
+#' plot( x )
 #' }
 #' @family archivist
 #' @rdname infoRepo
@@ -106,26 +107,41 @@ infoRepo <- function( dir, paste ){
     # what classes types are there in the Repository
     classes <- executeSingleQuery( dir = dir , paste = paste,
                   paste0( "SELECT DISTINCT tag FROM tag WHERE tag LIKE 'class%'" ) )
-    classes <- sub( x = classes, pattern = "class:", replacement="")
+    classes <- as.character( apply( classes, 1, function(y) sub( x = y, pattern = "class:", replacement="") ) )
   
 info <- list( artifactsNumber = NULL, classesNumber = NULL, savesPerDay = NULL, classesTypes = classes )
     
     # how many different objects are there in the Repository
-    info$arifactsNumber <- sum( searchInLocalRepo( pattern = "name", fixed = FALSE, 
+    info$artifactsNumber <- length( searchInLocalRepo( pattern = "name", fixed = FALSE, 
                                                    paste = paste, repoDir = dir ) )
     
     # how many different objects classes are there in the Repository
     info$classesNumber <- sapply( classes, function(x){
-                          sum( searchInLocalRepo( pattern = paste0("class:", x), 
+                          length( searchInLocalRepo( pattern = paste0("class:", x), 
                                                   fixed = TRUE, paste = paste, repoDir = dir ) ) })
     # how many different objects were saved in different days
-    days <- as.Date( executeSingleQuery( dir = dir , paste = paste,
-                                paste0( "SELECT createdDate FROM tag" ) ) )
+    days <- unique( as.Date( unlist( executeSingleQuery( dir = dir , paste = paste,
+                                paste0( "SELECT createdDate FROM tag" ) ) ) ) )
     info$savesPerDay <- sapply( days, function(x){
-                                searchInLocalRepo( pattern = list( dateFrom = x, dateTo = x),
-                                                   repoDir = dir ) } )
+                                length( searchInLocalRepo( pattern = list( dateFrom = x, dateTo = x),
+                                                   repoDir = dir, paste = paste ) ) } )
+    names( info$savesPerDay ) <- days
     
   class( info ) <- "repository"
   
   return( info )
 }
+
+
+print.repository <- function( x ){
+  cat("Number of archived artifacts in the Repository: ", x$artifactNumber ,"\n")
+  cat("Number of various classes archived in the Repository: ", x$classesNumber, "\n" )
+  cat("Saves per day in the Repository: ", x$savesPerDay, "\n" )
+  invisible( x )
+}
+
+plot.repository <- function( x, ... ){
+  barplot( x$savesPerDay, ... )
+  # invisible( x )
+}
+

@@ -9,8 +9,6 @@ infoLocalRepo(repoDir)
 infoGithubRepo(repo, user, branch = "master")
 }
 \arguments{
-\item{method}{}
-
 \item{repoDir}{A character denoting an existing directory of a Repository for which a summary will be returned.}
 
 \item{repo}{Only if working with a Github repository. A character containing a name of a Github repository on which the Repository is archived.}
@@ -78,7 +76,9 @@ glmnet1=glmnet(zk,bk)
 
 exampleRepoDir <- tempdir()
 
-
+x <- infoGithubRepo( user="pbiecek", repo="archivist")
+print( x )
+plot( x )
 }
 }
 \author{
