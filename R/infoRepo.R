@@ -109,12 +109,18 @@ infoRepo <- function( dir, paste ){
                   paste0( "SELECT DISTINCT tag FROM tag WHERE tag LIKE 'class%'" ) )
     classes <- as.character( apply( classes, 1, function(y) sub( x = y, pattern = "class:", replacement="") ) )
   
-info <- list( artifactsNumber = NULL, classesNumber = NULL, savesPerDay = NULL, classesTypes = classes )
+info <- list( artifactsNumber = NULL, dataSetsNumber = NULL, classesNumber = NULL, 
+              savesPerDay = NULL, classesTypes = classes )
     
     # how many different objects are there in the Repository
     info$artifactsNumber <- length( searchInLocalRepo( pattern = "name", fixed = FALSE, 
                                                    paste = paste, repoDir = dir ) )
     
+    # how many datasets are there in the Repository
+    info$dataSetsNumber <- length( searchInLocalRepo( pattern = "relationWith", fixed = FALSE, 
+                                                   paste = paste, repoDir = dir ) )
+
+
     # how many different objects classes are there in the Repository
     info$classesNumber <- sapply( classes, function(x){
                           length( searchInLocalRepo( pattern = paste0("class:", x), 
@@ -132,14 +138,17 @@ info <- list( artifactsNumber = NULL, classesNumber = NULL, savesPerDay = NULL, 
   return( info )
 }
 
+# default print for lists looks better
+# print.repository <- function( x ){
+#   cat("Number of archived artifacts in the Repository: ", x$artifactsNumber ,"\n")
+#   
+#   cat("Number of various classes archived in the Repository: ", x[[2]], "\n" )
+#   
+#   cat("Saves per day in the Repository: ", x[[3]], "\n" )
+#   invisible( x )
+# }
 
-print.repository <- function( x ){
-  cat("Number of archived artifacts in the Repository: ", x$artifactNumber ,"\n")
-  cat("Number of various classes archived in the Repository: ", x$classesNumber, "\n" )
-  cat("Saves per day in the Repository: ", x$savesPerDay, "\n" )
-  invisible( x )
-}
-
+#' @export
 plot.repository <- function( x, ... ){
   barplot( x$savesPerDay, ... )
   # invisible( x )
