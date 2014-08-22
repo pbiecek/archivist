@@ -81,5 +81,8 @@ head(t1)
 
 rmFromRepo( ob, myRepo)
 
+summaryLocalRepo(myRepo)
+infoLocalRepo(myRepo)
+
 ```
 
