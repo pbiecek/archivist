@@ -110,10 +110,13 @@ deleteRepo <- function( repoDir ){
   
   repoDir <- checkDirectory( repoDir )
   
-  x <- list.files( paste0( repoDir, "gallery/" ) )
+  x <- list.files( paste0( repoDir , "gallery/" ) )
   sapply( x , function(x ){
        file.remove( paste0( repoDir, "gallery/", x ) )
      })
+  
+  
   file.remove( paste0( repoDir, "backpack.db" ) )
+  unlink( paste0( repoDir, "gallery" ), recursive = TRUE )    
   
 }
