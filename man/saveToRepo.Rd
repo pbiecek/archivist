@@ -180,8 +180,10 @@ The list of supported objects and their tags is available on \code{wikis} on \pk
 
 Other archivist: \code{\link{Repository}};
   \code{\link{Tags}}; \code{\link{archivist-package}};
-  \code{\link{copyToRepo}}; \code{\link{createEmptyRepo}};
-  \code{\link{deleteRepo}}; \code{\link{infoGithubRepo}},
+  \code{\link{copyGithubRepo}},
+  \code{\link{copyLocalRepo}};
+  \code{\link{createEmptyRepo}}; \code{\link{deleteRepo}};
+  \code{\link{infoGithubRepo}},
   \code{\link{infoLocalRepo}};
   \code{\link{loadFromGithubRepo}},
   \code{\link{loadFromLocalRepo}}; \code{\link{md5hash}};

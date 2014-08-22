@@ -8,23 +8,23 @@
 #' 
 #' @details
 #' \code{copyToRepo} copies artifact from one \code{Repository} to another \code{Repository}. It addes new files
-#' to exising \code{gallery} folder in \code{repoTo} \code{Repository}
+#' to exising \code{gallery} folder in \code{repoTo} \code{Repository}. \code{copyLocalRepo} copies local \code{Repository}, where
+#' \code{copyGithubRepo} copies Github \code{Repository}. 
 #'
 #' @param repoFrom A character that specifies the directory of the Repository from which
-#' artifacts will be copied.
+#' artifacts will be copied. Works only on \code{copyLocalRepo}.
 #'
 #' @param repoTo A character that specifies the directory of the Repository in which
 #' artifacts will be copied.
 #' 
-#' @param pattern If \code{fixed = TRUE}: a character denoting a \link{Tag} of artifact to be copied. It is also possible to specify \code{pattern} as a list of 
-#' length 2 with \code{dataFrom} and \code{dataTo}; see details. If \code{fixed = FALSE}: A regular expression specifying the beginning of a \link{Tag} of 
-#' artifact which will be copied. Similar to \link{searchInLocalRepo}.
+#' @param md5hashes A character or character vector containing \code{md5hashes} of artifacts to be copied.
 #' 
-#' @param fixed A logical value specifying how \code{artifacts} should be searched for in \code{repoFrom-Repository} before they will be copied.
-#' If \code{fixed = TRUE} (default) then artifacts are searched exactly to the corresponding \code{pattern} parameter. If
-#' \code{fixed = FALSE} then artifacts are searched using \code{pattern} paremeter as a regular expression - that method is wider and more flexible 
-#' and, i.e., enables to search for all artifacts in the \code{Repository}, using \code{pattern = "name", fixed = FALSE}. Similar to \link{searchInLocalRepo}.
+#' @param repo Only if coping a Github repository. A character containing a name of a Github repository on which the \code{repoFrom}-Repository is archived.
 #' 
+#' @param user Only if coping a Github repository. A character containing a name of a Github user on whose account the \code{repoFrom} is created.
+#' 
+#' @param branch Only if coping with a Github repository. A character containing a name of 
+#' Github Repository's branch on which a \code{repoFrom}-Repository is archived. Default \code{branch} is \code{master}.
 #' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
@@ -93,18 +93,45 @@
 #' @family archivist
 #' @rdname copyToRepo
 #' @export
-copyToRepo <- function( repoFrom, repoTo, pattern, fixed = "TRUE"){
- stopifnot( is.character( c( repoFrom, repoTo, pattern ) ), is.logical( fixed ) )
+copyLocalRepo <- function( repoFrom, repoTo, md5hashes ){
+ stopifnot( is.character( c( repoFrom, repoTo, md5hashes ) ) )
  
- md5hash <- searchInLocalRepo( pattern = pattern, fixed = fixed, repoDir = repoFrom )
- # not vectorized version - watch out for vectorized output from search
- # TODO: make it vectorized
- name <- executeSingleQuery( dir = repoFrom, 
-                             paste0( "SELECT DISTINCT name FROM artifact WHERE md5hash = ",
-                                     "'", md5hash, "'" ) ) 
- loaded <- loadFromLocalRepo( md5hash, repoDir = repoFrom, value =TRUE )
- assign( x = "name", value = "loaded", envir = .ArchivistEnv )
- saveToRepo( get("name", envir = .ArchivistEnv ), repoDir = repoTo ) 
- rm( list = get("name", envir = .ArchivistEnv ), envir = .ArchivistEnv)
+ repoFrom <- checkDirectory( repoFrom )
+ repoTo <- checkDirectory( repoTo )
  
+ copyRepo( repoFrom = repoFrom, repoTo = repoTo, md5hashes = md5hashes )
+}
+
+
+#' @rdname copyToRepo
+#' @export
+copyGithubRepo <- function( repoTo, md5hashes, user, repo, branch="master"){
+  stopifnot( is.character( c( repoTo, user, repo, branch, md5hashes ) ) )
+  
+  repoTo <- checkDirectory( repoTo )
+  
+  Temp <- downloadDB( repo, user, branch )
+  
+  copyRepo( repoFrom = Temp, repoTo = repoTo, md5hashes = md5hashes , local = FALSE )  
+  
+}
+
+
+copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE ){
+  
+  for( i in 1:length( md5hashes ) ){
+    if( local ){
+      value <- loadFromLocalRepo( md5hashes[i], repoDir = repoFrom, values = TRUE, paste )
+      
+    } else {
+      value <- loadFromGithubRepo( md5hashes[i], repoDir = repoFrom, values = TRUE, paste )
+    }
+    name <- executeSingleQuery( dir = repoFrom, paste = local,
+                                paste0( "SELECT DISTINCT name FROM artifact WHERE md5hash = ",
+                                        "'", md5hashes[i], "'" ) )
+    
+    assign(x = "name", value = "value", .ArchivistEnv )
+    saveToRepo( get("name", envir = .ArchivistEnv ), repoDir = repoTo ) 
+    rm( list = get("name", envir = .ArchivistEnv ), envir = .ArchivistEnv)
+  }
 }

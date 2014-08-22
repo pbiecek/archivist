@@ -53,7 +53,8 @@ Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 \seealso{
 Other archivist: \code{\link{Repository}};
   \code{\link{Tags}}; \code{\link{archivist-package}};
-  \code{\link{copyToRepo}}; \code{\link{deleteRepo}};
+  \code{\link{copyGithubRepo}},
+  \code{\link{copyLocalRepo}}; \code{\link{deleteRepo}};
   \code{\link{infoGithubRepo}},
   \code{\link{infoLocalRepo}};
   \code{\link{loadFromGithubRepo}},

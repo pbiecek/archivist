@@ -40,6 +40,7 @@
 #' @param value If \code{FALSE} (default) then artifacts are loaded into the Global Environment with their original names, 
 #' if \code{TRUE} then artifacts are returned as a list of values (if there is more than one artifact)
 #' or as a single value (if there is only one arfifact that matches md5hash).
+#' 
 #'
 #' @author 
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
@@ -168,7 +169,7 @@ loadFromLocalRepo <- function( md5hash, repoDir, value = FALSE ){
   # what if abbreviation was given
   if ( nchar( md5hash ) < 32 ){
         
-    md5hashList <- executeSingleQuery( dir = repoDir ,
+    md5hashList <- executeSingleQuery( dir = repoDir , 
                                paste0( "SELECT DISTINCT artifact FROM tag WHERE artifact LIKE '",md5hash,"%'" ) )
     md5hash <- as.character( md5hashList[, 1] )
   }
