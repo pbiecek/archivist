@@ -13,13 +13,16 @@ Repository: CRAN
 License: GPL-2
 LazyLoad: yes
 LazyData: yes
-Depends: R (>= 3.0.0),
+Depends:
+    R (>= 3.0.0),
     digest,
     RCurl,
     httr,
     rjson,
     RSQLite,
-    lubridate
+    lubridate,
+    jsonlite
 BugReports: https://github.com/pbiecek/archivist/issues
-Suggests: knitr
+Suggests:
+    knitr
 VignetteBuilder: knitr

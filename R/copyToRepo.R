@@ -154,9 +154,21 @@ copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, bra
   } else {
     # if github mode
     # get files list
+    library( httr )
     
-    # TO DO - not finished 
-    #
+    req <- GET( paste0( "https://api.github.com/repos/", user, "/",
+                        repo, "/git/trees/", branch, "?recursive=1" ) )
+    stop_for_status(req)
+    
+    filelist <- unlist(lapply(content(req)$tree, "[", "path"), use.names = F)
+    
+    whichFilesToClone <- grep("gallery/", filelist, value = TRUE, fixed = TRUE)
+    
+    filesToDownload <- as.vector (sapply( hashes, function(x){
+      grep(pattern = x, whichFilesToClone, value = TRUE, fixed = TRUE)
+    } ) ) 
+    
+    # download files to gallery folder
     sapply( filesToDownload, cloneGithubFile, repo = repo, user = user, branch = branch, to = repoTo )
   }
   
@@ -166,7 +178,7 @@ copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, bra
 
 cloneGithubFile <- function( file, repo, user, branch, to ){
     URLfile <- paste0( get( ".GithubURL", envir = .ArchivistEnv) , 
-                       user, "/", repo, "/", branch, "/gallery/", file) 
+                       user, "/", repo, "/", branch, "/", file) 
     library( RCurl )
     fileFromGithub <- getBinaryURL( URLfile, ssl.verifypeer = FALSE )
     file.create( paste0( to, "gallery/", file ) )
