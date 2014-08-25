@@ -9,7 +9,7 @@
 require(devtools)
 require(dplyr)
 if (!require(archivist)) {
-  install_github("pbiecek/archivist")
+  install_github("pbiecek/archivist", build_vignettes=FALSE)
 }
 ```
 
