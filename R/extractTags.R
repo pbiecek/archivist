@@ -22,11 +22,10 @@ extractTags.ggplot <- function( object, objectNameX, ... ) {
   library( ggplot2 )
   labx <- paste0( "labelx:", object$labels$x )
   laby <- paste0( "labely:", object$labels$y )
-  data <- paste0( "data:", paste0( object$data, collapse=" " ) )
   class <- paste0( "class:", class( object )[2] )
   name <- paste0( "name:", objectNameX )
   date <- paste0( "date:", now() )
-  return( c( labx, laby, data, class, name, date ) )
+  return( c( labx, laby, class, name, date ) )
   
 }
 
@@ -65,22 +64,20 @@ extractTags.twins <- function( object, objectNameX, ... ) {
   library( cluster )
   ac <- paste0( "ac:", object$ac)
   merge <- paste0( "merge:", paste0( object$merge, collapse=" " ) )
-  data <- paste0( "data:", paste0( object$data, collapse=" " ) )
   class <- paste0( "class:", class( object )[1] )
   name <- paste0( "name:", objectNameX )
   date <- paste0( "date:", now() )
-  return( c( name, class, date, ac, merge, data ) )
+  return( c( name, class, date, ac, merge ) )
 }
 
 extractTags.partition <- function( object, objectNameX, ... ) {
   library( cluster )
   call <- paste0( "call:", paste0( object$call, collapse=" " ) )
-  data <- paste0( "data:", paste0( object$data, collapse=" " ) )
   objective <- paste0( "objective:", object$objective )
   class <- paste0( "class:", class( object )[1] )
   name <- paste0( "name:", objectNameX )
   date <- paste0( "date:", now() )
-  return( c( name, class, date, call, data, objective ) )
+  return( c( name, class, date, call, objective ) )
 }
 
 extractTags.lda <- function( object, objectNameX, ... ) {
@@ -108,9 +105,7 @@ extractTags.glmnet <- function( object, objectNameX, ... ) {
   name <- paste0( "name:", objectNameX )
   date <- paste0( "date:", now() )
   call <- paste0( "call:", paste0( object$call, collapse=" " ) )
-  beta <- paste0( "beta:", paste0( object$beta, collapse=" " ) )
-  lambda <- paste0( "lambda:", paste0( object$lambda, collapse=" " ) )
-  return( c( name, class, date, call, beta, lambda ) )
+  return( c( name, class, date, call ) )
 }
 
 extractTags.survfit <- function( object, objectNameX, ... ) {

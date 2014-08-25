@@ -27,7 +27,6 @@ Regression Models
      \item class
      \item call
      \item name
-     \item data
      \item date
   }
   }
@@ -37,8 +36,6 @@ Regression Models
      \item name
      \item class
      \item call
-     \item beta
-     \item lambda
   }
   }
   \item{\code{survfit}}{
@@ -60,7 +57,6 @@ Plots
      \item name
      \item class
      \item date
-     \item data
      \item labelx
      \item labely
   }
@@ -84,7 +80,6 @@ Results of Agglomeration Methods
      \item class
      \item ac
      \item merge
-     \item data
   }
   }
   \item{\code{partition which is a result of pam, clara or fanny functions}}{
@@ -93,7 +88,6 @@ Results of Agglomeration Methods
      \item name
      \item class
      \item call
-     \item data
      \item objective
   }
   }
