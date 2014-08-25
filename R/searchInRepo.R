@@ -21,7 +21,7 @@
 #' saving it to the Repository by using the \link{saveToRepo} function. If the object
 #' is not in the Repository a logical value \code{FALSE} is returned.
 #' 
-#' @param pattern If \code{fixed = TRUE}: a character denoting a \link{Tag} to be searched for in the Repository. It is also possible to specify \code{pattern} as a list of 
+#' @param pattern If \code{fixed = TRUE}: a character denoting a \link{Tags} to be searched for in the Repository. It is also possible to specify \code{pattern} as a list of 
 #' length 2 with \code{dataFrom} and \code{dataTo}; see details. If \code{fixed = FALSE}: A regular expression specifying the beginning of a \link{Tag}, 
 #' which will be used to search objects for.
 #' 

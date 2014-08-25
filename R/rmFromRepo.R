@@ -37,7 +37,7 @@
 #' }
 #' 
 #' @note
-#' \code{md5hash} can be a result of the \link{searchInRepo} function proceeded with \code{tag = NAME} argument,
+#' \code{md5hash} can be a result of the \link{searchInLocalRepo} function proceeded with \code{tag = NAME} argument,
 #' where \code{NAME} is a tag that describes the property of the objects to be deleted. 
 #' 
 #' 

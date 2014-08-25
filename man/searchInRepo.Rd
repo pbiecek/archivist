@@ -9,7 +9,7 @@ searchInLocalRepo(pattern, repoDir, fixed = TRUE, realDBname = TRUE)
 searchInGithubRepo(pattern, repo, user, branch = "master", fixed = TRUE)
 }
 \arguments{
-\item{pattern}{If \code{fixed = TRUE}: a character denoting a \link{Tag} to be searched for in the Repository. It is also possible to specify \code{pattern} as a list of
+\item{pattern}{If \code{fixed = TRUE}: a character denoting a \link{Tags} to be searched for in the Repository. It is also possible to specify \code{pattern} as a list of
 length 2 with \code{dataFrom} and \code{dataTo}; see details. If \code{fixed = FALSE}: A regular expression specifying the beginning of a \link{Tag},
 which will be used to search objects for.}
 

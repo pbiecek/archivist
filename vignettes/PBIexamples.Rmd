@@ -34,7 +34,7 @@ loadFromGithubRepo( md5hash = "b6f183dfd0efdc8c33fa89b9038716c5" ,
 ```
 
 # Manage local repo
-
+\dontrun{
 ```{r, message=FALSE}
 
 myRepo <- tempdir()
@@ -85,4 +85,4 @@ summaryLocalRepo(myRepo)
 infoLocalRepo(myRepo)
 
 ```
-
+}

@@ -34,18 +34,20 @@ After every \code{saveToRepo} call the database is refreshed, so an object is av
 immediately in \code{backpack.db} database for other collaborators.
 }
 \examples{
-examplerepoDir <- tempdir()
-createEmptyRepo( repoDir = examplerepoDir )
+\dontrun{
+exampleRepoDir <- tempdir()
+createEmptyRepo( repoDir = exampleRepoDir )
 
 # check the state of an empty Repository
 
-summaryLocalRepo( method = "md5hashes", repoDir = examplerepoDir )
-summaryLocalRepo( method = "tags", repoDir = examplerepoDir )
+summaryLocalRepo( method = "md5hashes", repoDir = exampleRepoDir )
+summaryLocalRepo( method = "tags", repoDir = exampleRepoDir )
 
 # removing all files generated to this function's examples
-file.remove( paste0( examplerepoDir, "/backpack.db" ) )
+file.remove( paste0( exampleRepoDir, "/backpack.db" ) )
 
-rm( examplerepoDir )
+rm( exampleRepoDir )
+}
 }
 \author{
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}
