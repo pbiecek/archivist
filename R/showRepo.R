@@ -1,25 +1,25 @@
 ##    archivist package for R
 ##
-#' @title View the Summary of a Repository 
+#' @title View the Lisf of Artifacts from a Repository 
 #'
 #' @description
-#' \code{summaryLocalRepo} and \code{summaryGithubRepo} functions produce the summary
-#' of a \link{Repository} saved in a given \code{repoDir} (directory). \code{summaryLocalRepo}
-#' shows the summary of the \code{Repository} that exists on the user's computer, whereas \code{summaryGithubRepo}
-#' shows the summary of the \code{Repository} existing on a Github repository.
+#' \code{showLocalRepo} and \code{showGithubRepo} functions produce the \code{data.frame} of the artifacts from
+#' a \link{Repository} saved in a given \code{repoDir} (directory). \code{showLocalRepo}
+#' shows the artifacts from the \code{Repository} that exists on the user's computer, whereas \code{showGithubRepo}
+#' shows the artifacts of the \code{Repository} existing on a Github repository.
 #' 
 #' @details
-#' \code{summaryLocalRepo} and \code{summaryGithubRepo} functions produce the summary
-#' of a \link{Repository} saved in a given \code{repoDir} (directory). \code{summaryLocalRepo}
-#' works on a \code{Repository} that exists on the user's computer, whereas \code{summaryGithubRepo}
-#' shows the summary of the \code{Repository} existing on a Github repository.
+#' \code{showLocalRepo} and \code{showGithubRepo} functions produce the \code{data.frame} of the artifacts from
+#' a \link{Repository} saved in a given \code{repoDir} (directory). \code{showLocalRepo}
+#' shows the artifacts from the \code{Repository} that exists on the user's computer, whereas \code{showGithubRepo}
+#' shows the artifacts of the \code{Repository} existing on a Github repository.
 #' 
 #' Both functions show the current state of a \code{Repository}, inter alia, all archived objects can
 #' be seen with their unique \link{md5hash} or a \code{data.frame} with archived \link{Tags} can 
 #' be obtained. Also there is an extra column with a date of creation the \code{Tag} or the \code{md5hash}.
 #' 
-#' @param method A character specifying the method to be used to summarize the Repository. Available methods: 
-#' \code{md5hashes} (default), \code{tags}. TODO: Extend
+#' @param method A character specifying the method to be used to show the Repository. Available methods: 
+#' \code{md5hashes} (default), \code{tags}.
 #' 
 #' @param repoDir A character denoting an existing directory of a Repository for which a summary will be returned.
 #' 
@@ -36,7 +36,9 @@
 #' \code{md5hashes} is returned.
 #' 
 #' If parameter \code{method} was set as \code{tags} a \code{data.frame} with archived \code{Tags} and archived
-#' objects' \code{md5hash}es is returned.
+#' objects' \code{md5hashes} is returned.
+#' 
+#' To learn more about \code{Tags} or \code{md5hashes} check: \link{Tags} or \link{md5hash}.
 #' 
 #' 
 #' @author 
@@ -95,10 +97,10 @@
 #' saveToRepo(iris, repoDir=exampleRepoDir)
 #' saveToRepo(model, repoDir=exampleRepoDir)
 #'
-#' # summary examples
+#' # show examples
 #'
-#' summaryLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
-#' summaryLocalRepo(method = "tags", repoDir = exampleRepoDir)
+#' showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
+#' showLocalRepo(method = "tags", repoDir = exampleRepoDir)
 #' 
 #' # let's add more md5hashes
 #'
@@ -106,24 +108,24 @@
 #' saveToRepo(lda1, repoDir=exampleRepoDir)
 #' (qda1Md5hash <- saveToRepo(qda1, repoDir=exampleRepoDir))
 #' 
-#' # summary now
+#' # show now
 #' 
-#' summaryLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
-#' summaryLocalRepo(method = "tags", repoDir = exampleRepoDir)
+#' showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
+#' showLocalRepo(method = "tags", repoDir = exampleRepoDir)
 #' 
 #' # what if we remove an object
 #' 
 #' rmFromRepo(qda1Md5hash, repoDir = exampleRepoDir)
 #'
-#' # summary now
+#' # show now
 #' 
-#' summaryLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
-#' summaryLocalRepo(method = "tags", repoDir = exampleRepoDir)
+#' showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
+#' showLocalRepo(method = "tags", repoDir = exampleRepoDir)
 #' 
 #' # GitHub version
 #' 
-#' summaryGithubRepo(method = "md5hashes", user = "pbiecek", repo = "archivist")
-#' summaryGithubRepo(method = "tags", user = "pbiecek", repo = "archivist", branch = "master")
+#' showGithubRepo(method = "md5hashes", user = "pbiecek", repo = "archivist")
+#' showGithubRepo(method = "tags", user = "pbiecek", repo = "archivist", branch = "master")
 #' 
 #' # removing all files generated to this function's examples
 #' x <- list.files( paste0( exampleRepoDir, "/gallery/" ) )
@@ -133,30 +135,30 @@
 #' file.remove( paste0( exampleRepoDir, "/backpack.db" ) )
 #' }
 #' @family archivist
-#' @rdname summaryLocalRepo
+#' @rdname showLocalRepo
 #' @export
-summaryLocalRepo <- function( repoDir, method = "md5hashes" ){
+showLocalRepo <- function( repoDir, method = "md5hashes" ){
   stopifnot( is.character( c( method, repoDir ) ) )
   
   repoDir <- checkDirectory( repoDir )
   
-  summaryRepo( method = method, dir = repoDir )
+  showRepo( method = method, dir = repoDir )
 }
 
 
-#' @rdname summaryLocalRepo
+#' @rdname showLocalRepo
 #' @export
-summaryGithubRepo <- function( repo, user, branch = "master", method = "md5hashes" ){
+showGithubRepo <- function( repo, user, branch = "master", method = "md5hashes" ){
   stopifnot( is.character( c( method, repo, user, branch ) ) )
   
   # database is needed to be downloaded
   Temp <- downloadDB( repo, user, branch )
   
-  summaryRepo( method = method, dir = Temp, local = FALSE )
+  showRepo( method = method, dir = Temp, local = FALSE )
 }
 
 
-summaryRepo <- function( method, local = TRUE, dir ){
+showRepo <- function( method, local = TRUE, dir ){
   
   if ( method == "md5hashes" )
     value <- readSingleTable( repoDir, "artifact", realDBname = local )

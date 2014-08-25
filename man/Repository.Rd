@@ -42,7 +42,6 @@ Other archivist: \code{\link{Tags}};
   \code{\link{rmFromRepo}}; \code{\link{saveToRepo}};
   \code{\link{searchInGithubRepo}},
   \code{\link{searchInLocalRepo}};
-  \code{\link{summaryGithubRepo}},
-  \code{\link{summaryLocalRepo}}
+  \code{\link{showGithubRepo}}, \code{\link{showLocalRepo}}
 }
 
