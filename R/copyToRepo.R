@@ -112,26 +112,97 @@ copyGithubRepo <- function( repoTo, md5hashes, user, repo, branch="master"){
   
   Temp <- downloadDB( repo, user, branch )
   
-  copyRepo( repoFrom = Temp, repoTo = repoTo, md5hashes = md5hashes , local = FALSE )  
+  copyRepo( repoTo = repoTo, repoFrom = Temp, md5hashes = md5hashes , 
+            local = FALSE, user = user, repo = repo, branch = branch )  
   
 }
 
 
-copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE ){
+copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, branch ){
   
-  for( i in 1:length( md5hashes ) ){
-    if( local ){
-      value <- loadFromLocalRepo( md5hashes[i], repoDir = repoFrom, values = TRUE, paste )
-      
-    } else {
-      value <- loadFromGithubRepo( md5hashes[i], repoDir = repoFrom, values = TRUE, paste )
-    }
-    name <- executeSingleQuery( dir = repoFrom, paste = local,
-                                paste0( "SELECT DISTINCT name FROM artifact WHERE md5hash = ",
-                                        "'", md5hashes[i], "'" ) )
+  # clone artifact table
+  toInsertArtifactTable <- executeSingleQuery( dir = repoFrom, paste = local,
+                      paste0( "SELECT FROM artifact WHERE md5hash IN ",
+                             "(", paste0( md5hashes, collapse=","), ")" ) ) 
+  apply( toInsertArtifactTable, 1, function(x){
+    executeSingleQuery( dir = repoTo, 
+                        paste0( "INSERT INTO artifact (md5hash, name, createdDate) VALUES ('",
+                                x[1], ",",
+                                x[2], ",",
+                                x[3], ")'" ) ) } )
+  # clone tag table
+  toInsertTagTable <- executeSingleQuery( dir = repoFrom, paste = local,
+                                               paste0( "SELECT FROM tag WHERE artifact IN ",
+                                                       "('", paste0( md5hashes, collapse="','"), "')" ) ) 
+  apply( toInsertTagTable, 1, function(x){
+    executeSingleQuery( dir = repoTo, 
+                        paste0( "INSERT INTO tag (artifact, tag, createdDate) VALUES ('",
+                                x[1], ",",
+                                x[2], ",",
+                                x[3], ")'" ) ) } )
+  if ( local ){
+  # clone files
+  
+  whichToClone <- as.vector( sapply( md5hashes, function(x){
+    which( x == sub( list.files( "gallery" ), pattern = "\\.[a-z]{3}", 
+                     replacement="" ) ) 
+  } ) )
+  
+  filesToClone <- list.files( "gallery" )[whichToClone]
+  sapply( filesToClone, file.copy, from = repoFrom, to = paste0( repoTo, "gallery/" ),
+          recursive = TRUE )
+  } else {
+    # if github mode
+    # get files list
     
-    assign(x = "name", value = "value", .ArchivistEnv )
-    saveToRepo( get("name", envir = .ArchivistEnv ), repoDir = repoTo ) 
-    rm( list = get("name", envir = .ArchivistEnv ), envir = .ArchivistEnv)
+    # TO DO - not finished 
+    #
+    sapply( filesToDownload, cloneGithubFile, repo = repo, user = user, branch = branch, to = repoTo )
   }
-}
+  
+  }
+
+
+
+cloneGithubFile <- function( file, repo, user, branch, to ){
+    URLfile <- paste0( get( ".GithubURL", envir = .ArchivistEnv) , 
+                       user, "/", repo, "/", branch, "/gallery/", file) 
+    library( RCurl )
+    fileFromGithub <- getBinaryURL( URLfile, ssl.verifypeer = FALSE )
+    file.create( paste0( to, "gallery/", file ) )
+    writeBin( fileFromGithub, paste0( to, "gallery/", file ) )
+    
+  }
+
+
+  
+  
+#   for( i in 1:length( md5hashes ) ){
+#     if( local ){
+#       value <- loadFromLocalRepo( md5hashes[i], repoDir = repoFrom, value = TRUE )
+#       
+#     } else {
+#       value <- loadFromGithubRepo( md5hashes[i], user = user, repo = repo, value = TRUE )
+#     }
+#     name <- unlist( executeSingleQuery( dir = repoFrom, paste = local,
+#                                 paste0( "SELECT DISTINCT name FROM artifact WHERE md5hash = ",
+#                                         "'", md5hashes[i], "'" ) ) )
+#     
+#     assign(x = name, value = value, .ArchivistEnv )
+#     saveToRepo( get(name, envir = .ArchivistEnv ), repoDir = repoTo ) 
+#     rm( list = get(name, envir = .ArchivistEnv ), envir = .ArchivistEnv)
+#   }
+  # error
+#   
+#   Error in save(file = paste0(repoDir, "gallery/", md5hash, ".rda"), ascii = TRUE,  : 
+#                   nie znaleziono obiektu ‘get(name, envir = .ArchivistEnv)’ 
+#                 5 stop(sprintf(ngettext(n, "object %s not found", "objects %s not found"), 
+#                                paste(sQuote(list[!ok]), collapse = ", ")), domain = NA) 
+#                 4 save(file = paste0(repoDir, "gallery/", md5hash, ".rda"), ascii = TRUE, 
+#                        list = objectName, envir = parent.frame(2)) at saveToRepo.R#208
+#                 3 saveToRepo(get(name, envir = .ArchivistEnv), repoDir = repoTo) at copyToRepo.R#135
+#                 2 copyRepo(repoTo = repoTo, repoFrom = Temp, md5hashes = md5hashes, 
+#                            local = FALSE, user = user, repo = repo) at copyToRepo.R#115
+#                 1 copyGithubRepo(repoTo = dirr, md5hashes = hashes, user = "pbiecek", 
+#                                  repo = "archivist")
+  
