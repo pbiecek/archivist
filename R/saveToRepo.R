@@ -83,6 +83,10 @@
 #' 
 #' @param rememberName A logical value. Should not be changed by user. It is a technical parameter.
 #'
+#' @note User can specify his own \code{Tags} to be archived with archived artifact. Simply add 
+#' \code{attribute} named \code{tag} to an artifact, i.e., \code{attr( myplot123, "tag" ) = "dont delete"}. 
+#' For more see examples.
+#' 
 #' @seealso
 #' 
 #' The list of supported objects and their tags is available on \code{wikis} on \pkg{archivist} Github Repository:
@@ -189,7 +193,7 @@ saveToRepo <- function( object, repoDir, archiveData = TRUE,
   repoDir <- checkDirectory( repoDir )
   
   # check if that object might have been already archived
-  check <- executeSingleQuery( dir = repoDir ,
+  check <- executeSingleQuery( dir = repoDir , paste = TRUE,
                     paste0( "SELECT * from artifact WHERE md5hash ='", md5hash, "'") )[,1] 
   
   if ( length( check ) > 0 & !force ){
@@ -223,7 +227,9 @@ saveToRepo <- function( object, repoDir, archiveData = TRUE,
   # whether to add tags
   if ( archiveTags ) {
     extractedTags <- extractTags( object, objectNameX = objectName )
-    sapply( extractedTags, addTag, md5hash = md5hash, dir = repoDir )
+    userTags <- attr( object, "tags" ) 
+    sapply( c( extractedTags, userTags ), addTag, md5hash = md5hash, dir = repoDir )
+    # attr( object, "tags" ) are tags specified by an user
   }
   
   # whether to archive data

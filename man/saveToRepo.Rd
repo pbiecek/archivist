@@ -84,6 +84,11 @@ Supported object's classes are (so far):
 
 To check what \code{Tags} will be extracted for various objects see \link{Tags}.
 }
+\note{
+User can specify his own \code{Tags} to be archived with archived artifact. Simply add
+\code{attribute} named \code{tag} to an artifact, i.e., \code{attr( myplot123, "tag" ) = "dont delete"}.
+For more see examples.
+}
 \examples{
 # objects preparation
 \dontrun{
