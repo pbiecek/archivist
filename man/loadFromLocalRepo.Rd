@@ -29,8 +29,10 @@ or as a single value (if there is only one arfifact that matches md5hash).}
 \code{loadFromGithubRepo} loads an object from a Github \link{Repository} into the workspace.
 }
 \details{
-Functions \code{loadFromLocalRepo} and \code{loadFromGithubRepo} load objects from archivist repositories stored in a local folder or on Github. Both of them take \code{md5hash} as a
-parameter. This \code{md5hash} is a string of length 32, which is a result from \link{saveToRepo} function.
+Functions \code{loadFromLocalRepo} and \code{loadFromGithubRepo} load objects from the archivist Repositories stored in a local folder or on Github. Both of them take \code{md5hash} as a
+parameter, which is a result from \link{saveToRepo} function.
+For every object, \code{md5hash} is a unique string of length 32 that comes out as a result of
+\link[digest]{digest} function, which uses a cryptographical MD5 hash algorithm. For more information see \link{md5hash}.
 
 Important: instead of giving the whole \code{md5hash} character, the user can simply give first few characters of the \code{md5hash}.
 For example, \code{a09dd} instead of \code{a09ddjdkf9kj33dcjdnfjgos9jd9jkcv}. All objects with the same corresponing \code{md5hash} abbreviation will be loaded from \link{Repository}.

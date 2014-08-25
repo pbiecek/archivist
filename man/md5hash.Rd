@@ -10,7 +10,7 @@ a special attribute named \code{md5hash}.
 }
 \details{
 For every object, \code{md5hash} is a unique string of length 32 that comes out as a result of
-\code{digest{digest}} function, which uses a cryptographical MD5 hash algorithm.
+\link[digest]{digest} function, which uses a cryptographical MD5 hash algorithm.
 The \code{md5hash} of every object, that is archived to the \link{Repository}, is also saved
 to the Repository with this object's \code{Tags} - see \link{Tags}. It enables to distinguish
 objects in Repository and facilitates searching and loading them.

@@ -21,7 +21,7 @@ When working in groups, it is highly recommended to create a Repository on a sha
 All objects desired to be archived are going to be saved in the local Repository, which is an SQLite database stored in a file named \code{backpack}.
 After calling \code{saveToRepo} function, every object will be archived in a \code{md5hash.rda} file. This file will be saved in a folder (under \code{repoDir} directory) named
 \code{gallery}. For every object, \code{md5hash} is a unique string of length 32 that comes out as a result of
-\code{digest{digest}} function, which uses a cryptographical MD5 hash algorithm.
+\link[digest]{digest} function, which uses a cryptographical MD5 hash algorithm.
 
 Created \code{backpack} database is a useful and fundamental tool for remembering object's
 \code{name}, \code{class}, \code{archiving date} etc. (that are remembered as \link{Tags}),

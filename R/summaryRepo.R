@@ -3,9 +3,10 @@
 #' @title View the Summary of a Repository
 #'
 #' @description
-#' TO DO
+#' \code{summaryRepo} summaries the current state of a \link{Repository}.
 #' @details
-#' TO DO
+#' \code{summaryRepo} summaries the current state of a \link{Repository}. Recommended to use
+#' \code{print( summaryRepo ) )}. See examples.
 #' 
 #' @param repoDir A character denoting an existing directory of a Repository for which a summary will be returned.
 #' 
@@ -16,7 +17,7 @@
 #' @param branch Only if working with a Github repository. A character containing a name of 
 #' Github Repository's branch on which a Repository is archived. Default \code{branch} is \code{master}.
 #'
-#' @return TODO
+#' @return An object of class \code{repository} which can be printed: \code{print(object)}.
 #' 
 #' @author 
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}

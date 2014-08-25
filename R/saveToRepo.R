@@ -12,7 +12,7 @@
 #' After every \code{saveToRepo} call the database is refreshed, so the object is available immediately in the database.
 #' Every object is archived in a \code{md5hash.rda} file. This file will be saved in a folder (under \code{repoDir} directory) named 
 #' \code{gallery}. For every object, \code{md5hash} is a unique string of length 32 that comes out as a result of 
-#' \code{digest{digest}} function, which uses a cryptographical MD5 hash algorithm.
+#' \link[digest]{digest} function, which uses a cryptographical MD5 hash algorithm.
 #' 
 #' By default, a miniature of an object and (if possible) a data set needed to compute this object are extracted. 
 #' They are also going to be saved in a file named by their \code{md5hash} in the \code{gallery} folder that exists in the directory

@@ -14,7 +14,7 @@ removed and database \code{backpack.db} is deleted.
 }
 \details{
 \code{deleteRepo} deletes an existing \link{Repository} from a given directory, so all objects from \code{gallery} folder are
-removed and database \code{backpack.db} is deleted.#'
+removed and database \code{backpack.db} is deleted.
 }
 \examples{
 # objects preparation

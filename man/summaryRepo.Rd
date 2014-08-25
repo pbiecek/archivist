@@ -19,13 +19,14 @@ summaryGithubRepo(repo, user, branch = "master")
 Github Repository's branch on which a Repository is archived. Default \code{branch} is \code{master}.}
 }
 \value{
-TODO
+An object of class \code{repository} which can be printed: \code{print(object)}.
 }
 \description{
-TO DO
+\code{summaryRepo} summaries the current state of a \link{Repository}.
 }
 \details{
-TO DO
+\code{summaryRepo} summaries the current state of a \link{Repository}. Recommended to use
+\code{print( summaryRepo ) )}. See examples.
 }
 \examples{
 # objects preparation

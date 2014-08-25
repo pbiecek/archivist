@@ -9,7 +9,7 @@
 #' \code{rmFromRepo} removes an object given as \code{md5hash} from a Repository, 
 #' which is a SQLite database named \code{backpack} - created by a \link{createEmptyRepo} call.
 #' For every object, \code{md5hash} is a unique string of length 32 that comes out as a result of 
-#' \code{digest{digest}} function, which uses a cryptographical MD5 hash algorithm.
+#' \link[digest]{digest} function, which uses a cryptographical MD5 hash algorithm.
 #' 
 #' 
 #' Also this function removes a \code{md5hash.rda} file, where \code{md5hash} is the object's hash as above.
