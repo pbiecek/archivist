@@ -57,13 +57,14 @@ Other archivist: \code{\link{Repository}};
   \code{\link{Tags}}; \code{\link{archivist-package}};
   \code{\link{copyGithubRepo}},
   \code{\link{copyLocalRepo}}; \code{\link{deleteRepo}};
-  \code{\link{infoGithubRepo}},
-  \code{\link{infoLocalRepo}};
   \code{\link{loadFromGithubRepo}},
   \code{\link{loadFromLocalRepo}}; \code{\link{md5hash}};
   \code{\link{rmFromRepo}}; \code{\link{saveToRepo}};
   \code{\link{searchInGithubRepo}},
   \code{\link{searchInLocalRepo}};
-  \code{\link{showGithubRepo}}, \code{\link{showLocalRepo}}
+  \code{\link{showGithubRepo}},
+  \code{\link{showLocalRepo}};
+  \code{\link{summaryGithubRepo}},
+  \code{\link{summaryLocalRepo}}
 }
 

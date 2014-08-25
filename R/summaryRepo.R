@@ -1,6 +1,6 @@
 ##    archivist package for R
 ##
-#' @title View the Information About a Repository
+#' @title View the Summary of a Repository
 #'
 #' @description
 #' TO DO
@@ -70,40 +70,40 @@
 #' 
 #' exampleRepoDir <- tempdir()
 #' 
-#' x <- infoGithubRepo( user="pbiecek", repo="archivist")
+#' x <- summaryGithubRepo( user="pbiecek", repo="archivist")
 #' print( x )
 #' plot( x )
 #' }
 #' @family archivist
-#' @rdname infoRepo
+#' @rdname summaryRepo
 #' @export
-infoLocalRepo <- function( repoDir ){
+summaryLocalRepo <- function( repoDir ){
   stopifnot( is.character( c( repoDir ) ) )
   
   repoDir <- checkDirectory( repoDir )
   
-  infoRepo( dir = repoDir, realDBname = TRUE)
+  summaryRepo( dir = repoDir, realDBname = TRUE)
   
 }
 
 
 
-#' @rdname infoRepo
+#' @rdname summaryRepo
 #' @export
-infoGithubRepo <- function( repo, user, branch = "master" ){
+summaryGithubRepo <- function( repo, user, branch = "master" ){
   stopifnot( is.character( c( repo, user, branch ) ) )
   
   # database is needed to be downloaded
   Temp <- downloadDB( repo, user, branch )
   
-  infoRepo( dir = Temp, realDBname = FALSE )
+  summaryRepo( dir = Temp, realDBname = FALSE )
   
 }
 
 
 
 
-infoRepo <- function( dir, realDBname ){
+summaryRepo <- function( dir, realDBname ){
     # what classes types are there in the Repository
     classes <- executeSingleQuery( dir = dir , realDBname = realDBname,
                   paste0( "SELECT DISTINCT tag FROM tag WHERE tag LIKE 'class%'" ) )
@@ -138,15 +138,24 @@ info <- list( artifactsNumber = NULL, dataSetsNumber = NULL, classesNumber = NUL
   return( info )
 }
 
-# default print for lists looks better
-# print.repository <- function( x ){
-#   cat("Number of archived artifacts in the Repository: ", x$artifactsNumber ,"\n")
-#   
-#   cat("Number of various classes archived in the Repository: ", x[[2]], "\n" )
-#   
-#   cat("Saves per day in the Repository: ", x[[3]], "\n" )
-#   invisible( x )
-# }
+#' @export
+print.repository <- function( x ){
+  cat("Number of archived artifacts in the Repository: ", x$artifactsNumber, "\n")
+  cat("Number of archived datasets in the Repository: ", x$dataSetsNumber, "\n") 
+  cat("Number of various classes archived in the Repository: \n ")
+  classes <- data.frame( x$classesNumber )
+  names( classes ) <- "Number"
+  print( classes )
+  
+  cat("Saves per day in the Repository: \n ")
+  saves <- data.frame( x$savesPerDay )
+  names( saves ) <- "Saves"
+  print( saves )
+  
+  
+    
+  invisible( x )
+}
 
 #' @export
 plot.repository <- function( x, ... ){
