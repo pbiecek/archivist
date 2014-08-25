@@ -140,13 +140,7 @@ summaryLocalRepo <- function( repoDir, method = "md5hashes" ){
   
   repoDir <- checkDirectory( repoDir )
   
-  if ( method == "md5hashes" )
-    value <- readSingleTable( repoDir, "artifact" )
-  
-  if ( method == "tags" )
-    value <- readSingleTable( repoDir, "tag" )
-  
-  return( value )
+  summaryRepo( method = method, dir = repoDir )
 }
 
 
@@ -158,13 +152,17 @@ summaryGithubRepo <- function( repo, user, branch = "master", method = "md5hashe
   # database is needed to be downloaded
   Temp <- downloadDB( repo, user, branch )
   
+  summaryRepo( method = method, dir = Temp, local = FALSE )
+}
+
+
+summaryRepo <- function( method, local = TRUE, dir ){
+  
   if ( method == "md5hashes" )
-    value <- readSingleTable( Temp, "artifact", paste = FALSE )
+    value <- readSingleTable( repoDir, "artifact", realDBname = local )
   
   if ( method == "tags" )
-    value <- readSingleTable( Temp, "tag", paste = FALSE )
+    value <- readSingleTable( repoDir, "tag", realDBname = local )
   
   return( value )
-
-  
 }

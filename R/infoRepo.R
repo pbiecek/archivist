@@ -82,7 +82,7 @@ infoLocalRepo <- function( repoDir ){
   
   repoDir <- checkDirectory( repoDir )
   
-  infoRepo( dir = repoDir, paste = TRUE)
+  infoRepo( dir = repoDir, realDBname = TRUE)
   
 }
 
@@ -96,16 +96,16 @@ infoGithubRepo <- function( repo, user, branch = "master" ){
   # database is needed to be downloaded
   Temp <- downloadDB( repo, user, branch )
   
-  infoRepo( dir = Temp, paste = FALSE )
+  infoRepo( dir = Temp, realDBname = FALSE )
   
 }
 
 
 
 
-infoRepo <- function( dir, paste ){
+infoRepo <- function( dir, realDBname ){
     # what classes types are there in the Repository
-    classes <- executeSingleQuery( dir = dir , paste = paste,
+    classes <- executeSingleQuery( dir = dir , realDBname = realDBname,
                   paste0( "SELECT DISTINCT tag FROM tag WHERE tag LIKE 'class%'" ) )
     classes <- as.character( apply( classes, 1, function(y) sub( x = y, pattern = "class:", replacement="") ) )
   
@@ -114,23 +114,23 @@ info <- list( artifactsNumber = NULL, dataSetsNumber = NULL, classesNumber = NUL
     
     # how many different objects are there in the Repository
     info$artifactsNumber <- length( searchInLocalRepo( pattern = "name", fixed = FALSE, 
-                                                   paste = paste, repoDir = dir ) )
+                                                       realDBname = realDBname, repoDir = dir ) )
     
     # how many datasets are there in the Repository
     info$dataSetsNumber <- length( searchInLocalRepo( pattern = "relationWith", fixed = FALSE, 
-                                                   paste = paste, repoDir = dir ) )
+                                                      realDBname = realDBname, repoDir = dir ) )
 
 
     # how many different objects classes are there in the Repository
     info$classesNumber <- sapply( classes, function(x){
                           length( searchInLocalRepo( pattern = paste0("class:", x), 
-                                                  fixed = TRUE, paste = paste, repoDir = dir ) ) })
+                                                  fixed = TRUE, realDBname = realDBname, repoDir = dir ) ) })
     # how many different objects were saved in different days
-    days <- unique( as.Date( unlist( executeSingleQuery( dir = dir , paste = paste,
+    days <- unique( as.Date( unlist( executeSingleQuery( dir = dir , realDBname = realDBname,
                                 paste0( "SELECT createdDate FROM tag" ) ) ) ) )
     info$savesPerDay <- sapply( days, function(x){
                                 length( searchInLocalRepo( pattern = list( dateFrom = x, dateTo = x),
-                                                   repoDir = dir, paste = paste ) ) } )
+                                                   repoDir = dir, realDBname = realDBname ) ) } )
     names( info$savesPerDay ) <- days
     
   class( info ) <- "repository"

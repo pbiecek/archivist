@@ -4,7 +4,7 @@
 \alias{searchInLocalRepo}
 \title{Search for an Object in a Repository Using \code{Tags}}
 \usage{
-searchInLocalRepo(pattern, repoDir, fixed = TRUE, paste = TRUE)
+searchInLocalRepo(pattern, repoDir, fixed = TRUE, realDBname = TRUE)
 
 searchInGithubRepo(pattern, repo, user, branch = "master", fixed = TRUE)
 }
@@ -27,7 +27,7 @@ If \code{fixed = TRUE} (default) then objects are searched exactly to the corres
 \code{fixed = FALSE} then objects are searched using \code{pattern} paremeter as a regular expression - that method is wider and more flexible
 and, i.e., enables to search for all objects in the \code{Repository}, using \code{pattern = "name", fixed = FALSE}.}
 
-\item{paste}{A logical value. Should not be changed by user. It is a technical parameter.}
+\item{realDBname}{A logical value. Should not be changed by user. It is a technical parameter.}
 }
 \value{
 \code{searchInRepo} returns a \code{md5hash} character, which is a hash assigned to the object when

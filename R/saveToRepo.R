@@ -193,7 +193,7 @@ saveToRepo <- function( object, repoDir, archiveData = TRUE,
   repoDir <- checkDirectory( repoDir )
   
   # check if that object might have been already archived
-  check <- executeSingleQuery( dir = repoDir , paste = TRUE,
+  check <- executeSingleQuery( dir = repoDir , realDBname = TRUE,
                     paste0( "SELECT * from artifact WHERE md5hash ='", md5hash, "'") )[,1] 
   
   if ( length( check ) > 0 & !force ){

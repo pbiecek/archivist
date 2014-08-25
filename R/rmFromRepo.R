@@ -194,7 +194,7 @@ rmFromRepo <- function( md5hash, repoDir, removeData = FALSE,
   # what if abbreviation was given
   if ( nchar( md5hash ) < 32 ){
     
-    md5hashList <- executeSingleQuery( dir = repoDir ,
+    md5hashList <- executeSingleQuery( dir = repoDir,
                                paste0( "SELECT artifact FROM tag" ) )
     md5hashList <- as.character( md5hashList[, 1] )
     md5hash <- unique( grep( 
@@ -206,7 +206,7 @@ rmFromRepo <- function( md5hash, repoDir, removeData = FALSE,
   # send deletes for data 
   if ( removeData ){
     # if there are many objects with the same m5hash (copies) all of them will be deleted
-    dataMd5hash <-  executeSingleQuery( dir = repoDir ,
+    dataMd5hash <-  executeSingleQuery( dir = repoDir,
                      paste0( "SELECT artifact FROM tag WHERE ",
                              "tag = '", paste0("relationWith:", md5hash), "'" ) ) 
     
@@ -219,11 +219,11 @@ rmFromRepo <- function( md5hash, repoDir, removeData = FALSE,
     
     
     sapply( dataMd5hash, function(x){
-      executeSingleQuery( dir = repoDir ,
+      executeSingleQuery( dir = repoDir,
                   paste0( "DELETE FROM artifact WHERE ",
                           "md5hash = '", x, "'" ) )} )
     sapply( dataMd5hash, function(x){
-      executeSingleQuery( dir = repoDir ,
+      executeSingleQuery( dir = repoDir,
                   paste0( "DELETE FROM tag WHERE ",
                           "artifact = '", x, "'" ) )} )
     
@@ -236,11 +236,11 @@ rmFromRepo <- function( md5hash, repoDir, removeData = FALSE,
   # remove object from database
   # if there are many objects with the same m5hash (copies) all of them will be deleted
   sapply( md5hash, function(x){
-    executeSingleQuery( dir = repoDir ,
+    executeSingleQuery( dir = repoDir,
                 paste0( "DELETE FROM artifact WHERE ",
                         "md5hash = '", x, "'" ) )} )
   sapply( md5hash, function(x){
-    executeSingleQuery( dir = repoDir ,
+    executeSingleQuery( dir = repoDir,
                 paste0( "DELETE FROM tag WHERE ",
                         "artifact = '", x, "'" ) )} )
    

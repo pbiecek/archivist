@@ -186,10 +186,10 @@ loadFromLocalRepo <- function( md5hash, repoDir, value = FALSE ){
       name[i] <- load( file = paste0( repoDir, "gallery/", md5hash[i], ".rda" ), 
                        envir = .nameEnv ) 
       }
-    if (length(name) == 1) {
-      return(as.list(.nameEnv)[[1]])
+    if ( length( name ) == 1) {
+      return( as.list(.nameEnv)[[1]] )
     } else {
-      return(as.list(.nameEnv))
+      return( as.list(.nameEnv) )
     }
   }
 }
@@ -205,7 +205,7 @@ loadFromGithubRepo <- function( md5hash, repo, user, branch = "master" , value =
     # database is needed to be downloaded
     Temp <- downloadDB( repo, user, branch )
     
-    md5hashList <- executeSingleQuery( dir = Temp, paste = FALSE,
+    md5hashList <- executeSingleQuery( dir = Temp, realDBname = FALSE,
                                        paste0( "SELECT DISTINCT artifact FROM tag WHERE artifact LIKE '",md5hash,"%'" ) )
     md5hashList <- as.character( md5hashList[, 1] )
   }
@@ -213,7 +213,7 @@ loadFromGithubRepo <- function( md5hash, repo, user, branch = "master" , value =
   # load objecs from Repository
   if ( !value ){
     library(RCurl)
-    options(RCurlOptions = list(cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl")))
+    options( RCurlOptions = list( cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl") ) )
     
     # sapply and replicate because of abbreviation mode can find more than 1 md5hash
     tmpobjectS <- lapply( md5hash, function(x){
@@ -235,7 +235,7 @@ loadFromGithubRepo <- function( md5hash, repo, user, branch = "master" , value =
   }else{
     # returns objects as value
     library(RCurl)
-    options(RCurlOptions = list(cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl")))
+    options( RCurlOptions = list(cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl") ) )
     
     # sapply and replicate because of abbreviation mode can find more than 1 md5hash
     tmpobjectS <- lapply( md5hash, function(x){

@@ -64,7 +64,7 @@ createEmptyRepo <- function( repoDir, force = FALSE ){
   repoDir <- checkDirectory( repoDir )
   
   # create connection
-  backpack <- getConnectionToDB( repoDir, paste = TRUE )
+  backpack <- getConnectionToDB( repoDir, realDBname = TRUE )
   
   # create tables
   artifact <- data.frame(md5hash = "",
@@ -78,8 +78,8 @@ createEmptyRepo <- function( repoDir, force = FALSE ){
                     stringsAsFactors = FALSE )
   
   # insert tables into database
-  dbWriteTable( backpack, "artifact",artifact, overwrite = TRUE, row.names = FALSE )
-  dbWriteTable( backpack, "tag",tag, overwrite = TRUE, row.names = FALSE )
+  dbWriteTable( backpack, "artifact", artifact, overwrite = TRUE, row.names = FALSE )
+  dbWriteTable( backpack, "tag", tag, overwrite = TRUE, row.names = FALSE )
   
   
   dbGetQuery(backpack, "delete from artifact")
@@ -88,8 +88,8 @@ createEmptyRepo <- function( repoDir, force = FALSE ){
   dbDisconnect( backpack )
   
   # if gallery folder does not exist - make it
-  if ( !file.exists( file.path(repoDir, "gallery") ) ){
-    dir.create(file.path(repoDir, "gallery"), showWarnings = FALSE)
+  if ( !file.exists( file.path( repoDir, "gallery" ) ) ){
+    dir.create( file.path( repoDir, "gallery" ), showWarnings = FALSE)
   }
 }
 
@@ -102,19 +102,15 @@ addArtifact <- function( md5hash, name, dir ){
 }
 
 addTag <- function( tag, md5hash, createdDate = now(), dir ){
-  # creates connection and driver
-  #sqlite <- dbDriver( "SQLite" )
-  #conn <- dbConnect( sqlite, paste0( dir, "/backpack.db" ) )
-#  conn <- dbConnect( get( "sqlite", envir = .ArchivistEnv ), paste0( dir, "/backpack.db" ) )
-  executeSingleQuery( dir,
+ executeSingleQuery( dir,
               paste0("insert into tag (artifact, tag, createdDate) values ",
                      "('", md5hash, "', '", tag, "', '", as.character( now() ), "')" ) )
 }
 
-# paste was needed because Github version function uses temporary file as database
+# realDBname was needed because Github version function uses temporary file as database
 # and they do not name this file as backpack.db in repoDir directory
-getConnectionToDB <- function( repoDir, paste ){
-    if ( paste ){
+getConnectionToDB <- function( repoDir, realDBname ){
+    if ( realDBname ){
       conn <- dbConnect( get( "sqlite", envir = .ArchivistEnv ), paste0( repoDir, "backpack.db" ) )
     }else{
       conn <- dbConnect( get( "sqlite", envir = .ArchivistEnv ), repoDir )
@@ -122,15 +118,15 @@ getConnectionToDB <- function( repoDir, paste ){
     return( conn )
 }
   
-executeSingleQuery <- function( dir, query, paste = TRUE ) {
-  conn <- getConnectionToDB( dir, paste )
+executeSingleQuery <- function( dir, query, realDBname = TRUE ) {
+  conn <- getConnectionToDB( dir, realDBname )
   res <- dbGetQuery( conn, query )
   dbDisconnect( conn )
   return( res )
 }
 
-readSingleTable <- function( dir, table, paste = TRUE ){
-  conn <- getConnectionToDB( dir, paste )
+readSingleTable <- function( dir, table, realDBname = TRUE ){
+  conn <- getConnectionToDB( dir, realDBname )
   tabs <- dbReadTable( conn, table )
   dbDisconnect( conn )
   return( tabs )

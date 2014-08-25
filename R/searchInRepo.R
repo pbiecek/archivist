@@ -39,7 +39,7 @@
 #' \code{fixed = FALSE} then objects are searched using \code{pattern} paremeter as a regular expression - that method is wider and more flexible 
 #' and, i.e., enables to search for all objects in the \code{Repository}, using \code{pattern = "name", fixed = FALSE}.
 #' 
-#' @param paste A logical value. Should not be changed by user. It is a technical parameter.
+#' @param realDBname A logical value. Should not be changed by user. It is a technical parameter.
 #'
 #' @author
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
@@ -132,32 +132,32 @@
 #' @family archivist
 #' @rdname searchInRepo
 #' @export
-searchInLocalRepo <- function( pattern, repoDir, fixed = TRUE, paste = TRUE ){
+searchInLocalRepo <- function( pattern, repoDir, fixed = TRUE, realDBname = TRUE ){
   stopifnot( is.character( repoDir ), is.logical( fixed ) )
   stopifnot( is.character( pattern ) | is.list( pattern ) ) 
   stopifnot( length( pattern ) == 1 | length( pattern ) == 2 )
   
-  # when infoRepo uses searchLocal, it come with paste = FALSE
-  if ( paste ){ 
+  # when infoRepo uses searchLocal, it come with realDBname = FALSE
+  if ( realDBname ){ 
     repoDir <- checkDirectory( repoDir )}  
   
   # extracts md5hash
   if ( fixed ){
    if ( length( pattern ) == 1 ){
-     md5hashES <- unique( executeSingleQuery( dir = repoDir, paste = paste,
+     md5hashES <- unique( executeSingleQuery( dir = repoDir, realDBname = realDBname,
                               paste0( "SELECT DISTINCT artifact FROM tag WHERE tag = ",
                                       "'", pattern, "'" ) ) )
-                                  # when infoRepo uses searchLocal, it come with paste = FALSE
+                                  # when infoRepo uses searchLocal, it come with realDBname = FALSE
    }else{
      ## length pattern == 2
-     md5hashES <- unique( executeSingleQuery( dir = repoDir, paste = paste,
+     md5hashES <- unique( executeSingleQuery( dir = repoDir, realDBname = realDBname,
                               paste0( "SELECT DISTINCT artifact FROM tag WHERE createdDate >",
                                       "'", as.Date(pattern[[1]])-1, "'", " AND createdDate <",
                                       "'", as.Date(pattern[[2]])+1, "'") ) ) }
-                                  # when infoRepo uses searchLocal, it come with paste = FALSE
+                                  # when infoRepo uses searchLocal, it come with realDBname = FALSE
   }else{
     # fixed = FALSE
-    md5hashES <- unique( executeSingleQuery( dir = repoDir, paste = paste,
+    md5hashES <- unique( executeSingleQuery( dir = repoDir, realDBname = realDBname,
                                              paste0( "SELECT DISTINCT artifact FROM tag WHERE tag LIKE ",
                                                      "'", pattern, "%'" ) ) )
   }
@@ -179,18 +179,18 @@ searchInGithubRepo <- function( pattern, repo, user, branch = "master", fixed = 
   # extracts md5hash
   if ( fixed ){
    if ( length( pattern ) == 1 ){
-     md5hashES <- unique( executeSingleQuery( dir = Temp, paste = FALSE,
+     md5hashES <- unique( executeSingleQuery( dir = Temp, realDBname = FALSE,
                               paste0( "SELECT artifact FROM tag WHERE tag = ",
                                       "'", pattern, "'" ) ) )
    }else{
      # length pattern == 2
-     md5hashES <- unique( executeSingleQuery( dir = Temp, paste = FALSE,
+     md5hashES <- unique( executeSingleQuery( dir = Temp, realDBname = FALSE,
                               paste0( "SELECT artifact FROM tag WHERE createdDate >",
                                       "'", as.Date(pattern[[1]])-1, "'", " AND createdDate <",
                                       "'", as.Date(pattern[[2]])+1, "'") ) ) }
   }else{
     # fixed FALSE
-    md5hashES <- unique( executeSingleQuery( dir = Temp, paste = FALSE,
+    md5hashES <- unique( executeSingleQuery( dir = Temp, realDBname = FALSE,
                                              paste0( "SELECT DISTINCT artifact FROM tag WHERE tag LIKE ",
                                                      "'", pattern, "%'" ) ) )
   }
