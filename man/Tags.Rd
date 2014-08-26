@@ -15,8 +15,8 @@ be searched by \link{searchInLocalRepo} or \link{searchInGithubRepo} functions.
 named \code{relationWith} is created, and specifies with which object this data is related to.
 
 So far supported objects list is presented below. Objects are divided thematically.
-The newest list is also available on \pkg{archivist} \code{wikis} on
-\href{https://github.com/pbiecek/archivist/wiki/archivist-package---Tags}{https://github.com/pbiecek/archivist/wiki/archivist-package---Tags}.
+The newest list is also available on \pkg{archivist} \code{wiki} on
+\href{https://github.com/pbiecek/archivist/wiki/archivist-package---Tags}{{Github}}.
 
 Regression Models
 
@@ -154,8 +154,6 @@ and \code{name1, name2} are \code{Tags} specified by an user.
 \seealso{
 Functions using \code{Tags} are:
  \itemize{
-   \item \link{copyLocalRepo},
-   \item \link{copyGithubRepo},
    \item \link{searchInLocalRepo},
    \item \link{searchInGithubRepo}.
  }

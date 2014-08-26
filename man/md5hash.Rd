@@ -21,6 +21,8 @@ Functions that take \code{md5hash} as a parameter are:
  \item \link{rmFromRepo},
  \item \link{loadFromLocalRepo},
  \item \link{loadFromGithubRepo},
+ \item \link{copyLocalRepo},
+ \item \link{copyGithubRepo}.
 }
 Functions returning \code{md5hash} as a value are:
 \itemize{
@@ -28,11 +30,14 @@ Functions returning \code{md5hash} as a value are:
  \item \link{searchInGithubRepo},
  \item \link{saveToRepo}.
 }
-Functions returning \code{md5hahes} as a data.frame are:
+Functions returning \code{md5hahes} as a \code{data.frame} are:
 \itemize{
- \item \link{summaryLocalRepo},
- \item \link{summaryGithubRepo}.
+ \item \link{showLocalRepo},
+ \item \link{showGithubRepo}.
 }
+
+Learn more about \code{md5hashes} at \pkg{archivist} \code{wiki} webpage on
+\href{https://github.com/pbiecek/archivist/wiki/archivist-package-md5hash}{Github}.
 
 Other archivist: \code{\link{Repository}};
   \code{\link{Tags}}; \code{\link{archivist-package}};

@@ -25,10 +25,22 @@ Functions using \code{Repository} are:
  }
 
 Function creating \code{Repository} is:
-\link{createEmptyRepo}.
+\itemize{
+ \item \link{createEmptyRepo}.
+}
+Functions coping \code{Repository} are:
+\itemize{
+ \item \link{copyLocalRepo},
+ \item \link{copyGithubRepo}.
+}
 
 Function deleting \code{Repository} is:
-\link{deleteRepo}.
+\itemize{
+ \item \link{deleteRepo}.
+}
+
+Learn more about \code{Repository} at \pkg{archivist} \code{wiki} webpage on
+\href{https://github.com/pbiecek/archivist/wiki/archivist-package-Repository}{Github}.
 
 Other archivist: \code{\link{Tags}};
   \code{\link{archivist-package}};
