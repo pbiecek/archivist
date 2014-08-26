@@ -85,6 +85,11 @@ Supported object's classes are (so far):
 To check what \code{Tags} will be extracted for various objects see \link{Tags}.
 }
 \note{
+One can specify his own \code{Tags} for artifacts by setting artifact's attribute
+before call of the \code{saveToRepo} function like this:
+\code{attr(x, "tags" ) = c( "name1", "name2" )}, where \code{x} is artifact
+and \code{name1, name2} are \code{Tags} specified by an user.
+
 User can specify his own \code{Tags} to be archived with archived artifact. Simply add
 \code{attribute} named \code{tag} to an artifact, i.e., \code{attr( myplot123, "tag" ) = "dont delete"}.
 For more see examples.
@@ -180,10 +185,15 @@ saveToRepo( lda1, repoDir=exampleRepoDir, force = FALSE )
 saveToRepo( qda1, repoDir=exampleRepoDir, archiveData = FALSE,
             archiveMiniature = FALSE)
 
+# one can specify his own additional tags to be archived with artifact
+
+attr( model, "tags" ) = c( "do not delete", "my favourite model" )
+saveToRepo( model, repoDir=exampleRepoDir )
+showLocalRepo( "tags", exampleRepoDir )
 
 # removing an example Repository
 
-deleteRepo( exampleDir )
+deleteRepo( exampleRepoDir )
 
 rm( exampleRepoDir )
 }

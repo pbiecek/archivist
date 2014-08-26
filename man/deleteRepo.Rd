@@ -87,19 +87,20 @@ saveToRepo( qda1, repoDir=exampleRepoDir )
 saveToRepo( glmnet1, repoDir=exampleRepoDir )
 
 
-# let's see how the Repository look like: summary
+# let's see how the Repository look like: show
 
-summaryLocalRepo( method = "md5hashes", repoDir = exampleRepoDir )
-summaryLocalRepo( method = "tags", repoDir = exampleRepoDir )
+showLocalRepo( method = "md5hashes", repoDir = exampleRepoDir )
+showLocalRepo( method = "tags", repoDir = exampleRepoDir )
 
 # let's get information about that Repository
 
-infoLocalRepo( repodir = exampleRepoDir )
+summaryLocalRepo( repodir = exampleRepoDir )
 
 # now let's delete the Repository
 
 delete( repoDir = exampleRepoDir )
 
+rm( exampleRepoDir )
 }
 }
 \author{

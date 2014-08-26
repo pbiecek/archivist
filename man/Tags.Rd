@@ -142,8 +142,23 @@ When non of above is specified, tags are corresponded by default
   }
   }
 }
+\note{
+One can specify his own \code{Tags} for artifacts by setting artifact's attribute
+before call of the \code{saveToRepo} function like this:
+\code{attr(x, "tags" ) = c( "name1", "name2" )}, where \code{x} is artifact
+and \code{name1, name2} are \code{Tags} specified by an user.
+}
+\examples{
+# examples
+}
 \seealso{
-Functions using \code{Tags} are \link{searchInLocalRepo} and \link{searchInGithubRepo}.
+Functions using \code{Tags} are:
+ \itemize{
+   \item \link{copyLocalRepo},
+   \item \link{copyGithubRepo},
+   \item \link{searchInLocalRepo},
+   \item \link{searchInGithubRepo}.
+ }
 
 Other archivist: \code{\link{Repository}};
   \code{\link{archivist-package}};

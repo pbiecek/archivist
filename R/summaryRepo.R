@@ -19,6 +19,7 @@
 #'
 #' @return An object of class \code{repository} which can be printed: \code{print(object)}.
 #' 
+#' @note If the same artifact was archived many times it is counted as one artifact or database in \code{print(summaryRepo)}.
 #' @author 
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
 #'
@@ -68,12 +69,47 @@
 #'
 #' # creating example Repository - that examples will work
 #' 
-#' 
 #' exampleRepoDir <- tempdir()
+#' createEmptyRepo(repoDir = exampleRepoDir)
+#' saveToRepo(myplot123, repoDir=exampleRepoDir)
+#' saveToRepo(iris, repoDir=exampleRepoDir)
+#' saveToRepo(model, repoDir=exampleRepoDir)
+#'
+#' # summary examples
+#'
+#' summaryLocalRepo( repoDir = exampleRepoDir )
 #' 
+#' # let's add more artifacts
+#'
+#' saveToRepo(glmnet1, repoDir=exampleRepoDir)
+#' saveToRepo(lda1, repoDir=exampleRepoDir)
+#' (qda1Md5hash <- saveToRepo(qda1, repoDir=exampleRepoDir))
+#' 
+#' # summary now
+#' 
+#' summaryLocalRepo( repoDir = exampleRepoDir ) 
+#' 
+#' # what if we remove an artifact
+#' 
+#' rmFromRepo(qda1Md5hash, repoDir = exampleRepoDir)
+#'
+#' # summary now
+#' 
+#' summaryLocalRepo( repoDir = exampleRepoDir )
+#' 
+#' #
+#' # Github version
+#' #
+#'  
 #' x <- summaryGithubRepo( user="pbiecek", repo="archivist")
 #' print( x )
-#' plot( x )
+#' 
+#' # removing an example Repository
+#' 
+#' deleteRepo( exampleRepoDir )
+#' 
+#' rm( exampleRepoDir )
+#' 
 #' }
 #' @family archivist
 #' @rdname summaryRepo
@@ -147,10 +183,12 @@ print.repository <- function( x ){
   } else {
   cat( "Number of archived artifacts in the Repository: ", x$artifactsNumber, "\n")
   cat( "Number of archived datasets in the Repository: ", x$dataSetsNumber, "\n") 
-  cat( "Number of various classes archived in the Repository: \n ")
-  classes <- data.frame( x$classesNumber )
-  names( classes ) <- "Number"
-  print( classes )
+  if( x$artifactsNumber > 1 ){
+    cat( "Number of various classes archived in the Repository: \n ")
+    classes <- data.frame( x$classesNumber )
+    names( classes ) <- "Number"
+    print( classes )
+  }
   
   cat( "Saves per day in the Repository: \n ")
   saves <- data.frame( x$savesPerDay )

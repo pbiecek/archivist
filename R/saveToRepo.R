@@ -66,6 +66,11 @@
 #' @seealso
 #' For more detailed information check package vignette - url needed.
 #' 
+#' @note One can specify his own \code{Tags} for artifacts by setting artifact's attribute 
+#' before call of the \code{saveToRepo} function like this: 
+#' \code{attr(x, "tags" ) = c( "name1", "name2" )}, where \code{x} is artifact 
+#' and \code{name1, name2} are \code{Tags} specified by an user.
+#' 
 #' @param object An arbitrary R object to be saved. For supported objects see details.
 #' 
 #' @param ... Graphical parameters denoting width and height of a miniature. See details.
@@ -186,10 +191,15 @@
 #' saveToRepo( qda1, repoDir=exampleRepoDir, archiveData = FALSE,
 #'             archiveMiniature = FALSE)
 #' 
+#' # one can specify his own additional tags to be archived with artifact
+#' 
+#' attr( model, "tags" ) = c( "do not delete", "my favourite model" )
+#' saveToRepo( model, repoDir=exampleRepoDir )
+#' showLocalRepo( "tags", exampleRepoDir )
 #' 
 #' # removing an example Repository
 #' 
-#' deleteRepo( exampleDir )
+#' deleteRepo( exampleRepoDir )
 #' 
 #' rm( exampleRepoDir )
 #' }

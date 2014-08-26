@@ -64,7 +64,7 @@ For more information about \code{Tags} check \link{Tags}.
 \examples{
 # objects preparation
 \dontrun{
-# data.frame object
+data.frame object
 data(iris)
 
 # ggplot/gg object
@@ -102,25 +102,33 @@ modelMd5hash  <- saveToRepo(model, repoDir=exampleRepoDir)
 agn1Md5hash <- saveToRepo(agn1, repoDir=exampleRepoDir)
 fannyxMd5hash <- saveToRepo(fannyx, repoDir=exampleRepoDir)
 
-# let's see how the Repository look like: summary
-summaryLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
-summaryLocalRepo(method = "tags", repoDir = exampleRepoDir)
+# let's see how the Repository look like: show
+showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
+showLocalRepo(method = "tags", repoDir = exampleRepoDir)
 
+# let's see how the Repository look like: summary
+summaryLocalRepo( exampleRepoDir )
 
 # remove examples
 
 rmFromRepo(fannyxMd5hash, repoDir = exampleRepoDir, removeData= FALSE)
 # removeData = FALSE provides from removing archived "fannyxMd5hash object"-data from
 # a Repository and gallery
+
 rmFromRepo(irisMd5hash, repoDir = exampleRepoDir)
-# not that also files in gallery folder, created in exampleRepoDir
-# directory are being removed
+# note that also files in gallery folder, created in exampleRepoDir
+# directory will be removed
+
+# let's see how the Repository look like: show
+showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
+showLocalRepo(method = "tags", repoDir = exampleRepoDir)
 
 # let's see how the Repository look like: summary
-summaryLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
-summaryLocalRepo(method = "tags", repoDir = exampleRepoDir)
+summaryLocalRepo( exampleRepoDir )
 
-# one can have the same object archivised in 3 different names
+
+# one can have the same object archived 3 different times
+# there will appear a warning message
 agn1Md5hash2 <- saveToRepo(agn1, repoDir=exampleRepoDir)
 agn1Md5hash3 <- saveToRepo(agn1, repoDir=exampleRepoDir)
 
@@ -128,58 +136,61 @@ agn1Md5hash3 <- saveToRepo(agn1, repoDir=exampleRepoDir)
 agn1Md5hash == agn1Md5hash2
 agn1Md5hash2 == agn1Md5hash3
 
+
+
 # but there are 3 times more rows in Repository database (backpack.db).
 
+# let's see how the Repository look like: show
+showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
+showLocalRepo(method = "tags", repoDir = exampleRepoDir)
+
 # let's see how the Repository look like: summary
+summaryLocalRepo( exampleRepoDir )
 
-summaryLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
-summaryLocalRepo(method = "tags", repoDir = exampleRepoDir)
-
-# one easy call removes them all
-
+# one easy call removes them all but this call will result in error
 rmFromRepo(agn1Md5hash, repoDir = exampleRepoDir, removeData = TRUE, removeMiniature = TRUE)
+
+# soultion to that is
+rmFromRepo(agn1Md5hash, repoDir = exampleRepoDir, removeData = TRUE, removeMiniature = TRUE, force = TRUE)
 # removeMiniature = TRUE removes miniatures from gallery folder
 
-# rest of object can be removed e.g. like this
+# rest of artifacts can be removed e.g. like this
 # looking for dates of creation and then removing all objects
 # from specific date
 
-obj2rm <- searchInLocalRepo( tag = list(dateFrom = Sys.Date(), dateTo = Sys.Date()),
+obj2rm <- searchInLocalRepo( pattern = list(dateFrom = Sys.Date(), dateTo = Sys.Date()),
                              repoDir = exampleRepoDir )
 sapply(obj2rm, rmFromRepo, repoDir = exampleRepoDir)
-# above example removed all objects from Today
+# above example removed all objects from this example
 
-# let's see how the Repository look like: summary
-summaryLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
-summaryLocalRepo(method = "tags", repoDir = exampleRepoDir)
+# let's see how the Repository look like: show
+showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
+showLocalRepo(method = "tags", repoDir = exampleRepoDir)
 
 # one can also remove objects from only specific class
 modelMd5hash  <- saveToRepo(model, repoDir=exampleRepoDir)
 model2Md5hash  <- saveToRepo(model2, repoDir=exampleRepoDir)
 model3Md5hash  <- saveToRepo(model3, repoDir=exampleRepoDir)
-summaryLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
-objMd5hash <- searchInLocalRepo("class:lm", repoDir = exampleRepoDir)
-sapply(objMd5hash, rmFromRepo, repoDir = exampleRepoDir)
-summaryLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
+showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
 
-# note that this time data and miniatures were not removed
+objMd5hash <- searchInLocalRepo("class:lm", repoDir = exampleRepoDir)
+sapply(objMd5hash, rmFromRepo, repoDir = exampleRepoDir, removeData = TRUE, force = TRUE)
+showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
+summaryLocalRepo( exampleRepoDir )
 
 
 # once can remove object specifying only its md5hash abbreviation
-myplo123Md5hash <- saveToRepo(myplot123, repoDir=exampleRepoDir)
-summaryLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
-# "84445ca3cb23ccf2656ff25cc0fcaccd"
-# so example abbreviation might be : "84445ca3"
-rmFromRepo("84445ca3", repoDir = exampleRepoDir)
-summaryLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
+(myplo123Md5hash <- saveToRepo(myplot123, repoDir=exampleRepoDir))
+showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
+# "ff751bb5ba34bbb8a7851958b15f2ef7"
+# so example abbreviation might be : "ff751"
+rmFromRepo("ff751", repoDir = exampleRepoDir)
+summaryLocalRepo( repoDir = exampleRepoDir )
 
 
-# removing all files generated to this function's examples
-x <- list.files( paste0( exampleRepoDir, "/gallery/" ) )
-sapply( x , function(x ){
-  file.remove( paste0( exampleRepoDir, "/gallery/", x ) )
-})
-file.remove( paste0( exampleRepoDir, "/backpack.db" ) )
+# removing an example Repository
+
+deleteRepo( exampleRepoDir )
 
 rm( exampleRepoDir )
 }

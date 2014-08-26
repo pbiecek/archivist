@@ -145,7 +145,7 @@ should be formatted according to the YYYY-MM-DD format, e.g., \code{"2014-07-31"
 
   # removing an example Repository
 
-  deleteRepo( exampleDir )
+  deleteRepo( exampleRepoDir )
 
   rm( exampleRepoDir )
 

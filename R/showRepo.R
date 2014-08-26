@@ -90,7 +90,6 @@
 #'
 #' # creating example Repository - that examples will work
 #' 
-#' 
 #' exampleRepoDir <- tempdir()
 #' createEmptyRepo(repoDir = exampleRepoDir)
 #' saveToRepo(myplot123, repoDir=exampleRepoDir)
@@ -102,7 +101,7 @@
 #' showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
 #' showLocalRepo(method = "tags", repoDir = exampleRepoDir)
 #' 
-#' # let's add more md5hashes
+#' # let's add more artifacts
 #'
 #' saveToRepo(glmnet1, repoDir=exampleRepoDir)
 #' saveToRepo(lda1, repoDir=exampleRepoDir)
@@ -113,7 +112,7 @@
 #' showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
 #' showLocalRepo(method = "tags", repoDir = exampleRepoDir)
 #' 
-#' # what if we remove an object
+#' # what if we remove an artifact
 #' 
 #' rmFromRepo(qda1Md5hash, repoDir = exampleRepoDir)
 #'
@@ -127,12 +126,12 @@
 #' showGithubRepo(method = "md5hashes", user = "pbiecek", repo = "archivist")
 #' showGithubRepo(method = "tags", user = "pbiecek", repo = "archivist", branch = "master")
 #' 
-#' # removing all files generated to this function's examples
-#' x <- list.files( paste0( exampleRepoDir, "/gallery/" ) )
-#' sapply( x , function(x ){
-#'      file.remove( paste0( exampleRepoDir, "/gallery/", x ) )
-#'    })
-#' file.remove( paste0( exampleRepoDir, "/backpack.db" ) )
+#' # removing an example Repository
+#'   
+#' deleteRepo( exampleRepoDir )
+#'   
+#' rm( exampleRepoDir )
+#' 
 #' }
 #' @family archivist
 #' @rdname showLocalRepo
