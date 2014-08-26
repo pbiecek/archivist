@@ -50,87 +50,105 @@ should be formatted according to the YYYY-MM-DD format, e.g., \code{"2014-07-31"
 \examples{
 # objects preparation
 \dontrun{
-# data.frame object
-data(iris)
+  # data.frame object
+  data(iris)
 
-# ggplot/gg object
-library(ggplot2)
-df <- data.frame(gp = factor(rep(letters[1:3], each = 10)),y = rnorm(30))
-library(plyr)
-ds <- ddply(df, .(gp), summarise, mean = mean(y), sd = sd(y))
-myplot123 <- ggplot(df, aes(x = gp, y = y)) +
-  geom_point() +  geom_point(data = ds, aes(y = mean),
-               colour = 'red', size = 3)
+ # ggplot/gg object
+  library(ggplot2)
+  df <- data.frame(gp = factor(rep(letters[1:3], each = 10)),y = rnorm(30))
+  library(plyr)
+  ds <- ddply(df, .(gp), summarise, mean = mean(y), sd = sd(y))
+  myplot123 <- ggplot(df, aes(x = gp, y = y)) +
+    geom_point() +  geom_point(data = ds, aes(y = mean),
+                               colour = 'red', size = 3)
 
-# lm object
-model <- lm(Sepal.Length~ Sepal.Width + Petal.Length + Petal.Width, data= iris)
+  # lm object
+  model <- lm(Sepal.Length~ Sepal.Width + Petal.Length + Petal.Width, data= iris)
 
-# agnes (twins) object
-library(cluster)
-data(votes.repub)
-agn1 <- agnes(votes.repub, metric = "manhattan", stand = TRUE)
+  # agnes (twins) object
+  library(cluster)
+  data(votes.repub)
+  agn1 <- agnes(votes.repub, metric = "manhattan", stand = TRUE)
 
-# fanny (partition) object
-x <- rbind(cbind(rnorm(10, 0, 0.5), rnorm(10, 0, 0.5)),
-         cbind(rnorm(15, 5, 0.5), rnorm(15, 5, 0.5)),
-          cbind(rnorm( 3,3.2,0.5), rnorm( 3,3.2,0.5)))
-fannyx <- fanny(x, 2)
+  # fanny (partition) object
+  x <- rbind(cbind(rnorm(10, 0, 0.5), rnorm(10, 0, 0.5)),
+             cbind(rnorm(15, 5, 0.5), rnorm(15, 5, 0.5)),
+             cbind(rnorm( 3,3.2,0.5), rnorm( 3,3.2,0.5)))
+  fannyx <- fanny(x, 2)
 
-# creating example Repository - that examples will work
+  # creating example Repository - that examples will work
 
-exampleRepoDir <- tempdir()
-createEmptyRepo(repoDir = exampleRepoDir)
-saveToRepo(myplot123, repoDir=exampleRepoDir)
-saveToRepo(iris, repoDir=exampleRepoDir)
-saveToRepo(model, repoDir=exampleRepoDir)
-saveToRepo(agn1, repoDir=exampleRepoDir)
-saveToRepo(fannyx, repoDir=exampleRepoDir)
+  exampleRepoDir <- tempdir()
+  createEmptyRepo(repoDir = exampleRepoDir)
+  saveToRepo(myplot123, repoDir=exampleRepoDir)
+  saveToRepo(iris, repoDir=exampleRepoDir)
+  saveToRepo(model, repoDir=exampleRepoDir)
+  saveToRepo(agn1, repoDir=exampleRepoDir)
+  saveToRepo(fannyx, repoDir=exampleRepoDir)
 
-# let's see how the Repository look like: summary
+  # let's see how the Repository look like: show
 
-summaryLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
-summaryLocalRepo(method = "tags", repoDir = exampleRepoDir)
+  showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
+  showLocalRepo(method = "tags", repoDir = exampleRepoDir)
 
-# search examples
+  # let's see how the Repository look like: summary
 
-# tag search
-searchInLocalRepo( "class:ggplot", repoDir = exampleRepoDir )
-searchInLocalRepo( "name:myplot123", repoDir = exampleRepoDir )
-searchInLocalRepo( "varname:Sepal.Width", repoDir = exampleRepoDir )
-searchInLocalRepo( "class:lm", repoDir = exampleRepoDir )
-searchInLocalRepo( "coefname:Petal.Length", repoDir = exampleRepoDir )
-searchInLocalRepo( "ac:07977555", repoDir = exampleRepoDir )
-
-# Github version
-summaryGithubRepo( user="pbiecek", repo="archivist" )
-searchInGithubRepo( "varname:Sepal.Width", user="pbiecek", repo="archivist" )
-searchInGithubRepo( "class:lm", user="pbiecek", repo="archivist", branch="master" )
-searchInGithubRepo( "date:2014-08-17 13:44:47", user="pbiecek", repo="archivist" )
-
-# date search
-
-# objects archivised between 2 different days
-searchInLocalRepo( pattern = list( dateFrom = Sys.Date()-1, dateTo = Sys.Date()+1),
-repoDir = exampleRepoDir )
-
-# also on Github
-
-searchInGithubRepo( pattern = list( dateFrom = "2014-08-16", dateTo = "2014-08-18" ),
-user="pbiecek", repo="archivist", branch="master" )
+  summaryLocalRepo( exampleRepoDir )
 
 
-# objects from Today
-searchInLocalRepo( pattern = list( dateFrom=Sys.Date(), dateTo=Sys.Date() ),
-repoDir = exampleRepoDir )
+  # search examples
 
-# removing all files generated to this function's examples
-x <- list.files( paste0( exampleRepoDir, "/gallery/" ) )
-sapply( x , function(x ){
-     file.remove( paste0( exampleRepoDir, "/gallery/", x ) )
-   })
-file.remove( paste0( exampleRepoDir, "/backpack.db" ) )
+  # tag search, fixed version
+  searchInLocalRepo( "class:ggplot", repoDir = exampleRepoDir )
+  searchInLocalRepo( "name:myplot123", repoDir = exampleRepoDir )
+  searchInLocalRepo( "varname:Sepal.Width", repoDir = exampleRepoDir )
+  searchInLocalRepo( "class:lm", repoDir = exampleRepoDir )
+  searchInLocalRepo( "coefname:Petal.Length", repoDir = exampleRepoDir )
+  searchInLocalRepo( "ac:0.797755535467609", repoDir = exampleRepoDir )
 
-rm( exampleRepoDir )
+  # tag search, regex version
+
+  searchInLocalRepo( "class", repoDir = exampleRepoDir, fixed = FALSE )
+  searchInLocalRepo( "name", repoDir = exampleRepoDir, fixed = FALSE )
+
+  # Github version
+  # check the state of the Repository
+  summaryGithubRepo( user="pbiecek", repo="archivist" )
+  showGithubRepo( user="pbiecek", repo="archivist" )
+  showGithubRepo( user="pbiecek", repo="archivist", method = "tags" )
+
+  # tag search, fixed version
+  searchInGithubRepo( "varname:Sepal.Width", user="pbiecek", repo="archivist" )
+  searchInGithubRepo( "class:lm", user="pbiecek", repo="archivist", branch="master" )
+  searchInGithubRepo( "name:myplot123", user="pbiecek", repo="archivist" )
+
+  # tag search, regex version
+  searchInGithubRepo( "class", user="pbiecek", repo="archivist",  fixed = FALSE )
+  searchInGithubRepo( "name", user="pbiecek", repo="archivist", fixed = FALSE )
+
+
+  # date search
+
+  # objects archivised between 2 different days
+  searchInLocalRepo( pattern = list( dateFrom = Sys.Date()-1, dateTo = Sys.Date()+1),
+                     repoDir = exampleRepoDir )
+
+  # also on Github
+
+  searchInGithubRepo( pattern = list( dateFrom = "2014-08-25", dateTo = "2014-08-27" ),
+                      user="pbiecek", repo="archivist", branch="master" )
+
+
+  # objects from Today
+  searchInLocalRepo( pattern = list( dateFrom=Sys.Date(), dateTo=Sys.Date() ),
+                     repoDir = exampleRepoDir )
+
+  # removing an example Repository
+
+  deleteRepo( exampleDir )
+
+  rm( exampleRepoDir )
+
 }
 }
 \author{
