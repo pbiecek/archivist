@@ -17,6 +17,8 @@ if (!require(archivist)) {
 
 ```{r, message=FALSE}
 
+summaryGithubRepo("graphGallery", "pbiecek")
+
 (allObject <- searchInGithubRepo( list("2005-05-27", now()), 
                     user = "pbiecek", repo = "graphGallery"))
 
@@ -58,7 +60,9 @@ summaryLocalRepo(myRepo)
 
 rmFromRepo( "ff575c261c949d073b2895b05d1097c3", myRepo)
 
-summaryLocalRepo(myRepo)
+# TO fix
+# summaryLocalRepo(myRepo)
+
 ```
 
 # Let's add a plot
@@ -81,8 +85,7 @@ head(t1)
 
 rmFromRepo( ob, myRepo)
 
-summaryLocalRepo(myRepo)
-infoLocalRepo(myRepo)
+deleteRepo(myRepo)
 
 ```
-}
+

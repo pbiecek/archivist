@@ -60,14 +60,24 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 
 <div id="installation" class="section level1">
 <h1>Installation</h1>
+<p>\dontrun{</p>
 <pre class="r"><code>require(devtools)
 require(dplyr)
 if (!require(archivist)) {
-  install_github(&quot;pbiecek/archivist&quot;)
+  install_github(&quot;pbiecek/archivist&quot;, build_vignettes=FALSE)
 }</code></pre>
 </div>
 <div id="download-plots-from-github" class="section level1">
 <h1>Download plots from GitHub</h1>
+<pre class="r"><code>summaryGithubRepo(&quot;graphGallery&quot;, &quot;pbiecek&quot;)</code></pre>
+<pre><code>## Number of archived artifacts in the Repository:  2 
+## Number of archived datasets in the Repository:  2 
+## Number of various classes archived in the Repository: 
+##         Number
+## ggplot      2
+## Saves per day in the Repository: 
+##             Saves
+## 2014-08-21     4</code></pre>
 <pre class="r"><code>(allObject &lt;- searchInGithubRepo( list(&quot;2005-05-27&quot;, now()), 
                     user = &quot;pbiecek&quot;, repo = &quot;graphGallery&quot;))</code></pre>
 <pre><code>## [1] &quot;b6f183dfd0efdc8c33fa89b9038716c5&quot; &quot;fd4a31d5714bbd856451854c0366983a&quot;
@@ -123,22 +133,26 @@ loadFromLocalRepo( &quot;ff575c261c949d073b2895b05d&quot;,  myRepo)</code></pre>
 <pre class="r"><code>iris2 &lt;- loadFromLocalRepo( &quot;ff575c261c949d073b2895b05d&quot;,  myRepo, value=TRUE)
 
 summaryLocalRepo(myRepo)</code></pre>
-<pre><code>##                            md5hash name         createdDate
-## 1 ff575c261c949d073b2895b05d1097c3 iris 2014-08-21 17:38:04
-## 2 ff575c261c949d073b2895b05d1097c3 iris 2014-08-21 17:38:04</code></pre>
+<pre><code>## Number of archived artifacts in the Repository:  1 
+## Number of archived datasets in the Repository:  0 
+## Number of various classes archived in the Repository: 
+##             Number
+## data.frame      1
+## Saves per day in the Repository: 
+##             Saves
+## 2014-08-26     1</code></pre>
 <pre class="r"><code>rmFromRepo( &quot;ff575c261c949d073b2895b05d1097c3&quot;, myRepo)
 
-summaryLocalRepo(myRepo)</code></pre>
-<pre><code>## [1] md5hash     name        createdDate
-## &lt;0 rows&gt; (or 0-length row.names)</code></pre>
+# TO fix
+# summaryLocalRepo(myRepo)</code></pre>
 </div>
 <div id="lets-add-a-plot" class="section level1">
 <h1>Let’s add a plot</h1>
 <pre class="r"><code>if (!require(eurostat)) {
   install_github(&quot;rOpenGov/eurostat&quot;)
-}</code></pre>
-<pre><code>## Warning: package 'tidyr' was built under R version 3.1.1</code></pre>
-<pre class="r"><code>library(ggplot2)
+}
+
+library(ggplot2)
 
 t1 &lt;- get_eurostat(&quot;tsdtr420&quot;) %&gt;% 
        filter(geo %in% c(&quot;UK&quot;, &quot;SK&quot;, &quot;FR&quot;, &quot;PL&quot;, &quot;ES&quot;, &quot;PT&quot;, &quot;LV&quot;))
@@ -177,32 +191,12 @@ head(t1)</code></pre>
 ## Warning: The shape palette can deal with a maximum of 6 discrete values
 ## because more than 6 becomes difficult to discriminate; you have 7.
 ## Consider specifying shapes manually. if you must have them.</code></pre>
-<pre><code>## [1] &quot;1c169ebb5583b12a470d54e30508765e&quot;
+<pre><code>## [1] &quot;7d99574012549597a4c0e8a04cc83d80&quot;
 ## attr(,&quot;data&quot;)
 ## [1] &quot;e529c9447db30766e216e8fff7adaf2a&quot;</code></pre>
 <pre class="r"><code>rmFromRepo( ob, myRepo)
 
-summaryLocalRepo(myRepo)</code></pre>
-<pre><code>##                            md5hash                             name
-## 1 e529c9447db30766e216e8fff7adaf2a e529c9447db30766e216e8fff7adaf2a
-##           createdDate
-## 1 2014-08-21 17:38:05</code></pre>
-<pre class="r"><code>infoLocalRepo(myRepo)</code></pre>
-<pre><code>## $artifactsNumber
-## [1] 0
-## 
-## $classesNumber
-## named list()
-## 
-## $savesPerDay
-## 2014-08-21 
-##          1 
-## 
-## $classesTypes
-## character(0)
-## 
-## attr(,&quot;class&quot;)
-## [1] &quot;repository&quot;</code></pre>
+deleteRepo(myRepo)</code></pre>
 </div>
 
 
