@@ -63,11 +63,10 @@ extractTags.trellis <- function( object, objectNameX, ... ) {
 extractTags.twins <- function( object, objectNameX, ... ) {
   library( cluster )
   ac <- paste0( "ac:", object$ac)
-  merge <- paste0( "merge:", paste0( object$merge, collapse=" " ) )
   class <- paste0( "class:", class( object )[1] )
   name <- paste0( "name:", objectNameX )
   date <- paste0( "date:", now() )
-  return( c( name, class, date, ac, merge ) )
+  return( c( name, class, date, ac ) )
 }
 
 extractTags.partition <- function( object, objectNameX, ... ) {

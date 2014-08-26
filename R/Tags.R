@@ -79,7 +79,6 @@
 #'      \item name
 #'      \item class
 #'      \item ac
-#'      \item merge
 #'   }
 #'   }
 #'   \item{\code{partition which is a result of pam, clara or fanny functions}}{

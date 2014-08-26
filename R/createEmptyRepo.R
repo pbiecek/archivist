@@ -40,11 +40,17 @@
 #'
 #' # check the state of an empty Repository
 #' 
-#' summaryLocalRepo( method = "md5hashes", repoDir = exampleRepoDir )
-#' summaryLocalRepo( method = "tags", repoDir = exampleRepoDir )
+#' summaryLocalRepo(  repoDir = exampleRepoDir )
+#' showLocalRepo( exampleRepoDir )
 #' 
-#' # removing all files generated to this function's examples
-#' file.remove( paste0( exampleRepoDir, "/backpack.db" ) )
+#' # creating a Repository in non existing directory
+#' 
+#' createEmptyRepo( "xyzdd234", force = TRUE )
+#' 
+#' # removing an example Repositories
+#' 
+#' deleteRepo( exampleDir )
+#' deleteRepo( "xyzdd234" )
 #' 
 #' rm( exampleRepoDir )
 #' }

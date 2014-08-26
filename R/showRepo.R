@@ -161,10 +161,10 @@ showGithubRepo <- function( repo, user, branch = "master", method = "md5hashes" 
 showRepo <- function( method, local = TRUE, dir ){
   
   if ( method == "md5hashes" )
-    value <- readSingleTable( repoDir, "artifact", realDBname = local )
+    value <- readSingleTable( dir, "artifact", realDBname = local )
   
   if ( method == "tags" )
-    value <- readSingleTable( repoDir, "tag", realDBname = local )
+    value <- readSingleTable( dir, "tag", realDBname = local )
   
   return( value )
 }

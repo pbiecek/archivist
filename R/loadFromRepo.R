@@ -88,10 +88,14 @@
 #' agn1Md5hash <- saveToRepo(agn1, repoDir=exampleRepoDir)
 #' fannyxMd5hash <- saveToRepo(fannyx, repoDir=exampleRepoDir)
 #' 
+#' # let's see how the Repository look like: show
+#' 
+#' showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
+#' showLocalRepo(method = "tags", repoDir = exampleRepoDir)
+#' 
 #' # let's see how the Repository look like: summary
 #' 
-#' summaryLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
-#' summaryLocalRepo(method = "tags", repoDir = exampleRepoDir)
+#' summaryLocalRepo( exampleRepoDir )
 #' 
 #' # load examples
 #' 
@@ -100,7 +104,7 @@
 #' rm(iris)
 #' rm(agn1)
 #' 
-#' # it those objects were archivised, they can be loaded
+#' # if those objects were archivised, they can be loaded
 #' # from Repository, when knowing their tags
 #' 
 #' loadFromLocalRepo(myplo123Md5hash, repoDir = exampleRepoDir)
@@ -111,11 +115,11 @@
 #' # remembers the object's name this object can still be
 #' # loaded.
 #' 
-#' modelHash <- searchInLocalRepo( "name:model", repoDir = exampleRepoDir)
-#' loadFromLocalRepo(modelHash, repoDir = exampleRepoDir)
+#' agnesHash <- searchInLocalRepo( "name:agn1", repoDir = exampleRepoDir)
+#' loadFromLocalRepo(agnesHash, repoDir = exampleRepoDir)
 #' 
 #' # one can check that object has his own unique md5hash
-#' modelHash == modelMd5hash
+#' agnesHash == agn1Md5hash
 #' 
 #' # object can be loadad as a value
 #' 
@@ -136,26 +140,27 @@
 #' #GitHub Version
 #' #
 #' 
-#' # check the state of database
+#' # check the state of the Repository
 #' summaryGithubRepo( user="pbiecek", repo="archivist" )
+#' showGithubRepo( user="pbiecek", repo="archivist" )
+#' showGithubRepo( user="pbiecek", repo="archivist", method = "tags" )
 #' 
+#' rm( model )
+#' rm( myplot123 )
+#' rm( qda1 )
 #' (VARmd5hash <- searchInGithubRepo( "varname:Sepal.Width", user="pbiecek", repo="archivist" ))
-#' (NAMEmd5hash <- searchInGithubRepo( "name:model", user="pbiecek", repo="archivist", branch="master" ))
-#' (CLASSmd5hash <- searchInGithubRepo( "class:lm", user="pbiecek", repo="archivist", branch="master" ))
-#' (DATEmd5hash <- searchInGithubRepo( "date:2014-08-17 13:44:47", user="pbiecek", repo="archivist" ))
-#'  
-#' loadFromGithubRepo( VARmd5hash, user="pbiecek", repo="archivist")
-#' loadFromGithubRepo( NAMEmd5hash, user="pbiecek", repo="archivist")
-#' NewObjects <- loadFromGithubRepo( CLASSmd5hash, user="pbiecek", repo="archivist", value = TRUE )
+#' (NAMEmd5hash <- searchInGithubRepo( "name:qda1", user="pbiecek", repo="archivist", branch="master" ))
+#' (CLASSmd5hash <- searchInGithubRepo( "class:ggplot", user="pbiecek", repo="archivist", branch="master" ))
+#' 
+#' 
+#' loadFromGithubRepo( "ff575c261c", user="pbiecek", repo="archivist")
+#' NewObjects <- loadFromGithubRepo( NAMEmd5hash, user="pbiecek", repo="archivist", value = TRUE )
 #' loadFromGithubRepo( DATEmd5hash, user="pbiecek", repo="archivist")
 #' 
 #' 
-#' # removing all files generated to this function's examples
-#' x <- list.files( paste0( exampleRepoDir, "/gallery/" ) )
-#' sapply( x , function(x ){
-#'      file.remove( paste0( exampleRepoDir, "/gallery/", x ) )
-#'    })
-#' file.remove( paste0( exampleRepoDir, "/backpack.db" ) )
+#' # removing an example Repository
+#' 
+#' deleteRepo( exampleDir )
 #' 
 #' rm( exampleRepoDir )
 #' }
@@ -209,40 +214,33 @@ loadFromGithubRepo <- function( md5hash, repo, user, branch = "master" , value =
     
     md5hashList <- executeSingleQuery( dir = Temp, realDBname = FALSE,
                                        paste0( "SELECT DISTINCT artifact FROM tag WHERE artifact LIKE '",md5hash,"%'" ) )
-    md5hashList <- as.character( md5hashList[, 1] )
+    md5hash <- as.character( md5hashList[, 1] )
   }
       
   # load objecs from Repository
   if ( !value ){
     library(RCurl)
-    options( RCurlOptions = list( cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl") ) )
     
     # sapply and replicate because of abbreviation mode can find more than 1 md5hash
     tmpobjectS <- lapply( md5hash, function(x){
-      getBinaryURL( paste0( "https://raw.githubusercontent.com/", user, "/", repo, 
-                            "/", branch, "/gallery/", x, ".rda") ) } )
+      getBinaryURL( paste0( get( x = ".GithubURL", envir = .ArchivistEnv), "/", user, "/", repo, 
+                            "/", branch, "/gallery/", x, ".rda"), ssl.verifypeer = FALSE ) } )
     tfS <- replicate( length( md5hash ), tempfile() )
-    
-    for (i in 1:length(tmpobjectS)){
+        
+    for (i in seq_along( tfS )){
       writeBin( tmpobjectS[[i]], tfS[i] )
-    }
+      load( file = tfS[i] , envir =.GlobalEnv)
+    } 
     
-    
-    
-    sapply( tfS, function(x){
-      load( file = x , envir =.GlobalEnv) } )
-    
-    sapply( tfS, unlink )
-    tmpobjectS <- NULL
+
   }else{
     # returns objects as value
     library(RCurl)
-    options( RCurlOptions = list(cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl") ) )
     
     # sapply and replicate because of abbreviation mode can find more than 1 md5hash
     tmpobjectS <- lapply( md5hash, function(x){
-      getBinaryURL( paste0( "https://raw.githubusercontent.com/", user, "/", repo, 
-                            "/master/gallery/", x, ".rda") )  } )
+      getBinaryURL( paste0( get( x = ".GithubURL", envir = .ArchivistEnv), "/", user, "/", repo, 
+                            "/master/gallery/", x, ".rda"), ssl.verifypeer = FALSE )  } )
     tfS <- replicate( length( md5hash ), tempfile() )
     
     for (i in 1:length(tmpobjectS)){

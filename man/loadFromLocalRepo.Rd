@@ -90,10 +90,14 @@ modelMd5hash  <- saveToRepo(model, repoDir=exampleRepoDir)
 agn1Md5hash <- saveToRepo(agn1, repoDir=exampleRepoDir)
 fannyxMd5hash <- saveToRepo(fannyx, repoDir=exampleRepoDir)
 
+# let's see how the Repository look like: show
+
+showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
+showLocalRepo(method = "tags", repoDir = exampleRepoDir)
+
 # let's see how the Repository look like: summary
 
-summaryLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
-summaryLocalRepo(method = "tags", repoDir = exampleRepoDir)
+summaryLocalRepo( exampleRepoDir )
 
 # load examples
 
@@ -102,7 +106,7 @@ rm(myplot123)
 rm(iris)
 rm(agn1)
 
-# it those objects were archivised, they can be loaded
+# if those objects were archivised, they can be loaded
 # from Repository, when knowing their tags
 
 loadFromLocalRepo(myplo123Md5hash, repoDir = exampleRepoDir)
@@ -113,11 +117,11 @@ loadFromLocalRepo(irisMd5hash, repoDir = exampleRepoDir)
 # remembers the object's name this object can still be
 # loaded.
 
-modelHash <- searchInLocalRepo( "name:model", repoDir = exampleRepoDir)
-loadFromLocalRepo(modelHash, repoDir = exampleRepoDir)
+agnesHash <- searchInLocalRepo( "name:agn1", repoDir = exampleRepoDir)
+loadFromLocalRepo(agnesHash, repoDir = exampleRepoDir)
 
 # one can check that object has his own unique md5hash
-modelHash == modelMd5hash
+agnesHash == agn1Md5hash
 
 # object can be loadad as a value
 
@@ -138,26 +142,27 @@ newModel  <- loadFromLocalRepo("cd6557c", repoDir = exampleRepoDir, value = TRUE
 #GitHub Version
 #
 
-# check the state of database
+# check the state of the Repository
 summaryGithubRepo( user="pbiecek", repo="archivist" )
+showGithubRepo( user="pbiecek", repo="archivist" )
+showGithubRepo( user="pbiecek", repo="archivist", method = "tags" )
 
+rm( model )
+rm( myplot123 )
+rm( qda1 )
 (VARmd5hash <- searchInGithubRepo( "varname:Sepal.Width", user="pbiecek", repo="archivist" ))
-(NAMEmd5hash <- searchInGithubRepo( "name:model", user="pbiecek", repo="archivist", branch="master" ))
-(CLASSmd5hash <- searchInGithubRepo( "class:lm", user="pbiecek", repo="archivist", branch="master" ))
-(DATEmd5hash <- searchInGithubRepo( "date:2014-08-17 13:44:47", user="pbiecek", repo="archivist" ))
+(NAMEmd5hash <- searchInGithubRepo( "name:qda1", user="pbiecek", repo="archivist", branch="master" ))
+(CLASSmd5hash <- searchInGithubRepo( "class:ggplot", user="pbiecek", repo="archivist", branch="master" ))
 
-loadFromGithubRepo( VARmd5hash, user="pbiecek", repo="archivist")
-loadFromGithubRepo( NAMEmd5hash, user="pbiecek", repo="archivist")
-NewObjects <- loadFromGithubRepo( CLASSmd5hash, user="pbiecek", repo="archivist", value = TRUE )
+
+loadFromGithubRepo( "ff575c261c", user="pbiecek", repo="archivist")
+NewObjects <- loadFromGithubRepo( NAMEmd5hash, user="pbiecek", repo="archivist", value = TRUE )
 loadFromGithubRepo( DATEmd5hash, user="pbiecek", repo="archivist")
 
 
-# removing all files generated to this function's examples
-x <- list.files( paste0( exampleRepoDir, "/gallery/" ) )
-sapply( x , function(x ){
-     file.remove( paste0( exampleRepoDir, "/gallery/", x ) )
-   })
-file.remove( paste0( exampleRepoDir, "/backpack.db" ) )
+# removing an example Repository
+
+deleteRepo( exampleDir )
 
 rm( exampleRepoDir )
 }

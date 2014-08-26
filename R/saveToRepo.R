@@ -162,20 +162,34 @@
 #' saveToRepo( agn1, repoDir=exampleRepoDir )
 #' saveToRepo( fannyx, repoDir=exampleRepoDir )
 #' saveToRepo( lda1, repoDir=exampleRepoDir )
-#' saveToRepo( qda1, repoDir=exampleRepoDir )
 #' saveToRepo( glmnet1, repoDir=exampleRepoDir )
+#' 
+#' # let's see how the Repository look like: show
+#' 
+#' showLocalRepo( method = "md5hashes", repoDir = exampleRepoDir )
+#' showLocalRepo( method = "tags", repoDir = exampleRepoDir )
 #' 
 #' # let's see how the Repository look like: summary
 #' 
-#' summaryLocalRepo( method = "md5hashes", repoDir = exampleRepoDir )
-#' summaryLocalRepo( method = "tags", repoDir = exampleRepoDir )
+#' summaryLocalRepo( exampleRepoDir )
 #' 
-#' # removing all files generated to this function's examples
-#' x <- list.files( paste0( exampleRepoDir, "/gallery/" ) )
-#' sapply( x , function(x ){
-#'      file.remove( paste0( exampleRepoDir, "/gallery/", x ) )
-#'    })
-#' file.remove( paste0( exampleRepoDir, "/backpack.db" ) )
+#' # one can archived the same artifact twice, but there is a message
+#' 
+#' saveToRepo( model, repoDir=exampleRepoDir )
+#' 
+#' # in case not to archive the same artifact twice, use
+#' 
+#' saveToRepo( lda1, repoDir=exampleRepoDir, force = FALSE )
+#' 
+#' # one can archive artifact withouth it's database and miniature
+#' 
+#' saveToRepo( qda1, repoDir=exampleRepoDir, archiveData = FALSE,
+#'             archiveMiniature = FALSE)
+#' 
+#' 
+#' # removing an example Repository
+#' 
+#' deleteRepo( exampleDir )
 #' 
 #' rm( exampleRepoDir )
 #' }
