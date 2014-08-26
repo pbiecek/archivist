@@ -141,19 +141,23 @@ info <- list( artifactsNumber = NULL, dataSetsNumber = NULL, classesNumber = NUL
 
 #' @export
 print.repository <- function( x ){
-  cat("Number of archived artifacts in the Repository: ", x$artifactsNumber, "\n")
-  cat("Number of archived datasets in the Repository: ", x$dataSetsNumber, "\n") 
-  cat("Number of various classes archived in the Repository: \n ")
+  
+  if( x$artifactsNumber == 0 & x$dataSetsNumber == 0 ){
+    cat( "Repository is empty." )
+  } else {
+  cat( "Number of archived artifacts in the Repository: ", x$artifactsNumber, "\n")
+  cat( "Number of archived datasets in the Repository: ", x$dataSetsNumber, "\n") 
+  cat( "Number of various classes archived in the Repository: \n ")
   classes <- data.frame( x$classesNumber )
   names( classes ) <- "Number"
   print( classes )
   
-  cat("Saves per day in the Repository: \n ")
+  cat( "Saves per day in the Repository: \n ")
   saves <- data.frame( x$savesPerDay )
   names( saves ) <- "Saves"
   print( saves )
   
-  
+  }
     
   invisible( x )
 }
