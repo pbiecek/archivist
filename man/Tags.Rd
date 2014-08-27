@@ -25,7 +25,6 @@ Regression Models
   \itemize{
      \item coefname
      \item class
-     \item call
      \item name
      \item date
   }
@@ -35,7 +34,6 @@ Regression Models
      \item date
      \item name
      \item class
-     \item call
   }
   }
   \item{\code{survfit}}{
@@ -43,7 +41,6 @@ Regression Models
      \item date
      \item name
      \item class
-     \item call
      \item strata
      \item type
   }
@@ -66,7 +63,6 @@ Plots
      \item date
      \item name
      \item class
-     \item call
   }
   }
 }
@@ -86,7 +82,6 @@ Results of Agglomeration Methods
      \item date
      \item name
      \item class
-     \item call
      \item objective
   }
   }
@@ -95,7 +90,6 @@ Results of Agglomeration Methods
      \item date
      \item name
      \item class
-     \item call
   }
   }
   \item{\code{qda}}{
@@ -103,7 +97,6 @@ Results of Agglomeration Methods
      \item date
      \item name
      \item class
-     \item call
      \item terms
   }
   }
