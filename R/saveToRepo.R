@@ -235,8 +235,8 @@ saveToRepo <- function( object, repoDir, archiveData = TRUE,
   if ( rememberName ){
     save( file = paste0(repoDir,"gallery/", md5hash, ".rda"), ascii = TRUE, list = objectName,  envir = parent.frame(2))
   }else{ 
-    assign( value = object, x = digest( object ), envir = .GlobalEnv )
-    save( file = paste0(repoDir, "gallery/", md5hash, ".rda"),  ascii=TRUE, list = digest( object ), envir = .GlobalEnv  )
+    assign( value = object, x = md5hash, envir = .GlobalEnv )
+    save( file = paste0(repoDir, "gallery/", md5hash, ".rda"),  ascii=TRUE, list = md5hash, envir = .GlobalEnv  )
     
   }
   
@@ -245,7 +245,7 @@ saveToRepo <- function( object, repoDir, archiveData = TRUE,
   addArtifact( md5hash, name = objectName, dir = repoDir ) 
   }else{
   addArtifact( md5hash, name = digest( object ), dir = repoDir)
-  rm( list = digest( object ), envir = .GlobalEnv ) 
+  rm( list = md5hash, envir = .GlobalEnv ) 
   }
   
   # whether to add tags
