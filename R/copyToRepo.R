@@ -4,9 +4,9 @@
 #'
 #' @description
 #' \code{copyToRepo} copies artifact from one \link{Repository} to another \code{Repository}.
-#' Functions \code{copyLocalRepo} and \code{copyGithubRepo} copie objects from the archivist Repositories stored in a local folder or on Github. 
+#' Functions \code{copyLocalRepo} and \code{copyGithubRepo} copy artifacts from the archivist Repositories stored in a local folder or on Github. 
 #' Both of them take \code{md5hash} as a parameter, which is a result from \link{saveToRepo} function.
-#' For every object, \code{md5hash} is a unique string of length 32 that comes out as a result of 
+#' For every artifacts, \code{md5hash} is a unique string of length 32 that comes out as a result of 
 #' \link[digest]{digest} function, which uses a cryptographical MD5 hash algorithm. For more information see \link{md5hash}.
 #' 
 #' @details

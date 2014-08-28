@@ -3,12 +3,12 @@
 #' @title Delete an Existing Repository from Given Directory
 #'
 #' @description
-#' \code{deleteRepo} deletes an existing \link{Repository} from a given directory, so all objects from \code{gallery} folder are
+#' \code{deleteRepo} deletes an existing \link{Repository} from a given directory, so all artifacts from \code{gallery} folder are
 #' removed and database \code{backpack.db} is deleted.
-#' 
+#' objects
 #' 
 #' @details
-#' \code{deleteRepo} deletes an existing \link{Repository} from a given directory, so all objects from \code{gallery} folder are
+#' \code{deleteRepo} deletes an existing \link{Repository} from a given directory, so all artifacts from \code{gallery} folder are
 #' removed and database \code{backpack.db} is deleted. 
 #'
 #' @param repoDir A character that specifies the directory for the Repository to be deleted.

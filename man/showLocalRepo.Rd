@@ -22,11 +22,11 @@ showGithubRepo(repo, user, branch = "master", method = "md5hashes")
 Github Repository's branch on which a Repository is archived. Default \code{branch} is \code{master}.}
 }
 \value{
-If parameter \code{method} was set as \code{md5hashes} a \code{data.frame} with objects' names and archived
+If parameter \code{method} was set as \code{md5hashes} a \code{data.frame} with artifacts' names and archived
 \code{md5hashes} is returned.
 
 If parameter \code{method} was set as \code{tags} a \code{data.frame} with archived \code{Tags} and archived
-objects' \code{md5hashes} is returned.
+artifacts' \code{md5hashes} is returned.
 
 To learn more about \code{Tags} or \code{md5hashes} check: \link{Tags} or \link{md5hash}.
 }
@@ -35,6 +35,7 @@ To learn more about \code{Tags} or \code{md5hashes} check: \link{Tags} or \link{
 a \link{Repository} saved in a given \code{repoDir} (directory). \code{showLocalRepo}
 shows the artifacts from the \code{Repository} that exists on the user's computer, whereas \code{showGithubRepo}
 shows the artifacts of the \code{Repository} existing on a Github repository.
+To learn more about artifacts visit \link[archivist]{archivist-package}.
 }
 \details{
 \code{showLocalRepo} and \code{showGithubRepo} functions produce the \code{data.frame} of the artifacts from
@@ -42,7 +43,7 @@ a \link{Repository} saved in a given \code{repoDir} (directory). \code{showLocal
 shows the artifacts from the \code{Repository} that exists on the user's computer, whereas \code{showGithubRepo}
 shows the artifacts of the \code{Repository} existing on a Github repository.
 
-Both functions show the current state of a \code{Repository}, inter alia, all archived objects can
+Both functions show the current state of a \code{Repository}, inter alia, all archived artifacts can
 be seen with their unique \link{md5hash} or a \code{data.frame} with archived \link{Tags} can
 be obtained. Also there is an extra column with a date of creation the \code{Tag} or the \code{md5hash}.
 }

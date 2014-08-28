@@ -2,18 +2,19 @@
 \name{searchInLocalRepo}
 \alias{searchInGithubRepo}
 \alias{searchInLocalRepo}
-\title{Search for an Object in a Repository Using \code{Tags}}
+\title{Search for an Artifact in a Repository Using \code{Tags}}
 \usage{
 searchInLocalRepo(pattern, repoDir, fixed = TRUE, realDBname = TRUE)
 
 searchInGithubRepo(pattern, repo, user, branch = "master", fixed = TRUE)
 }
 \arguments{
-\item{pattern}{If \code{fixed = TRUE}: a character denoting a \link{Tags} to be searched for in the Repository. It is also possible to specify \code{pattern} as a list of
-length 2 with \code{dataFrom} and \code{dataTo}; see details. If \code{fixed = FALSE}: A regular expression specifying the beginning of a \link{Tag},
-which will be used to search objects for.}
+\item{pattern}{If \code{fixed = TRUE}: a character denoting a \link{Tags} to be searched for in the Repository.
+It is also possible to specify \code{pattern} as a list of
+length 2 with \code{dataFrom} and \code{dataTo}; see details. If \code{fixed = FALSE}: A regular expression
+specifying the beginning of a \link{Tag}, which will be used to search artifacts for.}
 
-\item{repoDir}{A character denoting an existing directory in which objects will be searched.}
+\item{repoDir}{A character denoting an existing directory in which artifacts will be searched.}
 
 \item{repo}{Only if working with a Github repository. A character containing a name of a Github repository on which the Repository is archived.}
 
@@ -22,30 +23,32 @@ which will be used to search objects for.}
 \item{branch}{Only if working with a Github repository. A character containing a name of
 Github repository's branch in which Repository is archived. Default \code{branch} is \code{master}.}
 
-\item{fixed}{A logical value specifying how \code{objects} should be searched for.
-If \code{fixed = TRUE} (default) then objects are searched exactly to the corresponding \code{pattern} parameter. If
-\code{fixed = FALSE} then objects are searched using \code{pattern} paremeter as a regular expression - that method is wider and more flexible
-and, i.e., enables to search for all objects in the \code{Repository}, using \code{pattern = "name", fixed = FALSE}.}
+\item{fixed}{A logical value specifying how \code{artifacts} should be searched for.
+If \code{fixed = TRUE} (default) then artifacts are searched exactly to the corresponding \code{pattern} parameter. If
+\code{fixed = FALSE} then artifacts are searched using \code{pattern} paremeter as a regular expression - that method is wider and more flexible
+and, i.e., enables to search for all artifacts in the \code{Repository}, using \code{pattern = "name", fixed = FALSE}.}
 
 \item{realDBname}{A logical value. Should not be changed by user. It is a technical parameter.}
 }
 \value{
-\code{searchInRepo} returns a \code{md5hash} character, which is a hash assigned to the object when
-saving it to the Repository by using the \link{saveToRepo} function. If the object
+\code{searchInRepo} returns a \code{md5hash} character, which is a hash assigned to the artifact when
+saving it to the Repository by using the \link{saveToRepo} function. If the artifact
 is not in the Repository a logical value \code{FALSE} is returned.
 }
 \description{
-\code{searchInRepo} searches for an object in a \link{Repository} using it's \link{Tags}.
+\code{searchInRepo} searches for an artifact in a \link{Repository} using it's \link{Tags}.
+To learn more about artifacts visit \link[archivist]{archivist-package}.
 }
 \details{
-\code{searchInRepo} searches for an object in a Repository using it's \code{Tag}
+\code{searchInRepo} searches for an artifact in a Repository using it's \code{Tag}
 (e.g., \code{name}, \code{class} or \code{archiving date}). \code{Tags} are submitted in a \code{pattern}
-argument. For various object classes different \code{Tags} can be searched for.
+argument. For various artifact classes different \code{Tags} can be searched for.
 See \link{Tags}. If a \code{pattern} is a list of length 2, \code{md5hashes} of all
-objects created from date \code{dateFrom} to data \code{dateTo} are returned. The date
+artifacts created from date \code{dateFrom} to data \code{dateTo} are returned. The date
 should be formatted according to the YYYY-MM-DD format, e.g., \code{"2014-07-31"}.
 
-\code{Tags}, submitted in a \code{pattern} argument, should be given according to the format: \code{"TagType:TagTypeValue"} - see examples.
+\code{Tags}, submitted in a \code{pattern} argument, should be given according to the
+format: \code{"TagType:TagTypeValue"} - see examples.
 }
 \examples{
 # objects preparation
@@ -135,7 +138,7 @@ should be formatted according to the YYYY-MM-DD format, e.g., \code{"2014-07-31"
 
   # also on Github
 
-  searchInGithubRepo( pattern = list( dateFrom = "2014-08-25", dateTo = "2014-08-27" ),
+  searchInGithubRepo( pattern = list( dateFrom = "2014-08-25", dateTo = "2014-08-30" ),
                       user="pbiecek", repo="archivist", branch="master" )
 
 

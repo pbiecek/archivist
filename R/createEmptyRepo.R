@@ -17,6 +17,8 @@
 #' \code{gallery}. For every artifact, \code{md5hash} is a unique string of length 32 that comes out as a result of 
 #' \link[digest]{digest} function, which uses a cryptographical MD5 hash algorithm.
 #' 
+#' To learn more about artifacts visit \link[archivist]{archivist-package}.
+#' 
 #' Created \code{backpack} database is a useful and fundamental tool for remembering artifact's 
 #' \code{name}, \code{class}, \code{archiving date} etc. (that are remembered as \link{Tags}),
 #' or for keeping artifact's \code{md5hash}.

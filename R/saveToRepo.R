@@ -4,7 +4,7 @@
 #'
 #' @description
 #' \code{saveToRepo} function saves desired artifacts to the local \link{Repository} in a given directory.
-#' 
+#' To learn more about artifacts visit \link[archivist]{archivist-package}.
 #' 
 #' @details
 #' \code{saveToRepo} function saves desired artifacts to the local Repository in a given directory.

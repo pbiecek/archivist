@@ -4,17 +4,19 @@
 \alias{Tags}
 \title{Tags}
 \description{
-\code{Tags} are attributes of an object, i.e., a class, a name, names of object's parts, etc.. The list of object tags vary across object's classes.
+\code{Tags} are attributes of an artifact, i.e., a class, a name, names of artifact's parts, etc..
+The list of artifact tags vary across artifact's classes.
+To learn more about artifacts visit \link[archivist]{archivist-package}.
 }
 \details{
-\code{Tags} are attributes of an object. \code{Tags} can be an object's \code{name}, \code{class} or \code{archiving date}.
-Furthermore, for various object's classes more different \code{Tags} are available and can
+\code{Tags} are attributes of an artifact. \code{Tags} can be an artifact's \code{name}, \code{class} or \code{archiving date}.
+Furthermore, for various artifact's classes more different \code{Tags} are available and can
 be searched by \link{searchInLocalRepo} or \link{searchInGithubRepo} functions.
 
-\code{Tags} are stored in the \link{Repository}. If data is extracted from object a special \code{Tag}
-named \code{relationWith} is created, and specifies with which object this data is related to.
+\code{Tags} are stored in the \link{Repository}. If data is extracted from artifact a special \code{Tag}
+named \code{relationWith} is created, and specifies with which artifact this data is related to.
 
-So far supported objects list is presented below. Objects are divided thematically.
+So far supported artifact list is presented below. Objects are divided thematically.
 The newest list is also available on \pkg{archivist} \code{wiki} on
 \href{https://github.com/pbiecek/archivist/wiki/archivist-package---Tags}{{Github}}.
 

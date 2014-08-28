@@ -1,35 +1,36 @@
 ##    archivist package for R
 ##
-#' @title Remove an Object Given as \code{md5hash} from a Repository
+#' @title Remove an Artifact Given as \code{md5hash} from a Repository
 #'
 #' @description
-#' \code{rmFromRepo} removes an object given as \code{md5hash} from a \link{Repository}.
+#' \code{rmFromRepo} removes an artifact given as \code{md5hash} from a \link{Repository}.
+#' To learn more about artifacts visit \link[archivist]{archivist-package}.
 #'  
 #' @details
-#' \code{rmFromRepo} removes an object given as \code{md5hash} from a Repository, 
+#' \code{rmFromRepo} removes an artifact given as \code{md5hash} from a Repository, 
 #' which is a SQLite database named \code{backpack} - created by a \link{createEmptyRepo} call.
-#' For every object, \code{md5hash} is a unique string of length 32 that comes out as a result of 
+#' For every artifact, \code{md5hash} is a unique string of length 32 that comes out as a result of 
 #' \link[digest]{digest} function, which uses a cryptographical MD5 hash algorithm.
 #' 
 #' 
-#' Also this function removes a \code{md5hash.rda} file, where \code{md5hash} is the object's hash as above.
+#' Also this function removes a \code{md5hash.rda} file, where \code{md5hash} is the artifact's hash as above.
 #' 
-#' 
+#'  
 #' Important: instead of giving the whole \code{md5hash} character, the user can simply give first few characters of the \code{md5hash}.
-#' For example, \code{a09dd} instead of \code{a09ddjdkf9kj33dcjdnfjgos9jd9jkcv}. All objects with the same corresponing \code{md5hash} abbreviation 
+#' For example, \code{a09dd} instead of \code{a09ddjdkf9kj33dcjdnfjgos9jd9jkcv}. All artifacts with the same corresponing \code{md5hash} abbreviation 
 #' will be removed from the \link{Repository} and from the \code{gallery} folder.
 #' 
-#' \code{rmFromRepo} provides functionality that enables to delete miniatures of the objects (.txt or .png files) 
+#' \code{rmFromRepo} provides functionality that enables to delete miniatures of the artifacts (.txt or .png files) 
 #' while removing .rda files. To disable this functionality use \code{removeMiniature = FALSE}. Also, if the
-#'  data from the object were archived, the data will be removed by default but there is a possibility not to 
+#'  data from the artifact were archived, the data will be removed by default but there is a possibility not to 
 #'  delete this data while performing \code{rmFromRepo} - simply use \code{removeData = TRUE}.
 #' 
 #' 
-#' \code{rmFromRepo} provides functionality that enables to delete miniatures of the objects (.txt or .png files) while removing .rda files.
-#' To delete miniature use \code{removeMiniature = TRUE}. Also if the data from the object was archived, there is a possibility to delete this 
-#' data while removing object that uses this data. Simply use \code{removeData = TRUE}.
+#' \code{rmFromRepo} provides functionality that enables to delete miniatures of the artifacts (.txt or .png files) while removing .rda files.
+#' To delete miniature use \code{removeMiniature = TRUE}. Also if the data from the artifact was archived, there is a possibility to delete this 
+#' data while removing artifact that uses this data. Simply use \code{removeData = TRUE}.
 #' 
-#' If one wants to remove all objects created between two dates, it is suggested to
+#' If one wants to remove all artifact created between two dates, it is suggested to
 #' perform:
 #' \itemize{
 #'    \item \code{obj2rm <- searchInLocalRepo( tag = list(dateFrom, dateTo), repoDir = )}
@@ -43,17 +44,17 @@
 #' 
 #' For more information about \code{Tags} check \link{Tags}.
 #' 
-#' @param md5hash A character assigned to the object as a result of a cryptographical hash function with MD5 algorithm, or it's abbreviation. This object will be removed.
+#' @param md5hash A character assigned to the artifact as a result of a cryptographical hash function with MD5 algorithm, or it's abbreviation. This object will be removed.
 #' 
-#' @param repoDir A character denoting an existing directory from which an object will be removed.
+#' @param repoDir A character denoting an existing directory from which an artifact will be removed.
 #' 
-#' @param removeData A logical value denoting whether to remove a data with the \code{object} specified by the \code{md5hash}.
+#' @param removeData A logical value denoting whether to remove a data with the \code{artifact} specified by the \code{md5hash}.
 #' Defualt \code{FALSE}.
 #' 
-#' @param removeMiniature A logical value denoting whether to remove a miniature with the \code{object} specified by the \code{md5hash}.
+#' @param removeMiniature A logical value denoting whether to remove a miniature with the \code{artifact} specified by the \code{md5hash}.
 #' Defualt \code{FALSE}.
 #' 
-#' @param force A logical value denoting whether to remove data if it is related to more than 1 object.
+#' @param force A logical value denoting whether to remove data if it is related to more than 1 artifact.
 #' Defualt \code{FALSE}.
 #' 
 #' @author
