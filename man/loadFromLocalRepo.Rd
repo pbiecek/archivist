@@ -2,16 +2,16 @@
 \name{loadFromLocalRepo}
 \alias{loadFromGithubRepo}
 \alias{loadFromLocalRepo}
-\title{Load Object Given as a \code{md5hash} from a Repository}
+\title{Load Artifact Given as a \code{md5hash} from a Repository}
 \usage{
 loadFromLocalRepo(md5hash, repoDir, value = FALSE)
 
 loadFromGithubRepo(md5hash, repo, user, branch = "master", value = FALSE)
 }
 \arguments{
-\item{repoDir}{A character denoting an existing directory from which an object will be loaded.}
+\item{repoDir}{A character denoting an existing directory from which an artifact will be loaded.}
 
-\item{md5hash}{A character assigned to the object as a result of a cryptographical hash function with MD5 algorithm, or it's abbreviation.}
+\item{md5hash}{A character assigned to the artifact as a result of a cryptographical hash function with MD5 algorithm, or it's abbreviation.}
 
 \item{repo}{Only if working with a Github repository. A character containing a name of a Github repository on which the Repository is archived.}
 
@@ -25,17 +25,19 @@ if \code{TRUE} then artifacts are returned as a list of values (if there is more
 or as a single value (if there is only one arfifact that matches md5hash).}
 }
 \description{
-\code{loadFromLocalRepo} loads an object from a local \link{Repository} into the workspace.
-\code{loadFromGithubRepo} loads an object from a Github \link{Repository} into the workspace.
+\code{loadFromLocalRepo} loads an artifact from a local \link{Repository} into the workspace.
+\code{loadFromGithubRepo} loads an artifact from a Github \link{Repository} into the workspace.
 }
 \details{
-Functions \code{loadFromLocalRepo} and \code{loadFromGithubRepo} load objects from the archivist Repositories stored in a local folder or on Github. Both of them take \code{md5hash} as a
+Functions \code{loadFromLocalRepo} and \code{loadFromGithubRepo} load objects from the archivist Repositories
+stored in a local folder or on Github. Both of them take \code{md5hash} as a
 parameter, which is a result from \link{saveToRepo} function.
-For every object, \code{md5hash} is a unique string of length 32 that comes out as a result of
+For every artifact, \code{md5hash} is a unique string of length 32 that comes out as a result of
 \link[digest]{digest} function, which uses a cryptographical MD5 hash algorithm. For more information see \link{md5hash}.
 
 Important: instead of giving the whole \code{md5hash} character, the user can simply give first few characters of the \code{md5hash}.
-For example, \code{a09dd} instead of \code{a09ddjdkf9kj33dcjdnfjgos9jd9jkcv}. All objects with the same corresponing \code{md5hash} abbreviation will be loaded from \link{Repository}.
+For example, \code{a09dd} instead of \code{a09ddjdkf9kj33dcjdnfjgos9jd9jkcv}. All objects with the same corresponing \code{md5hash}
+abbreviation will be loaded from \link{Repository}.
 
 Note that \code{user} and \code{repo} should be used only when working with a Github repository and should be omitted in the local mode.
 \code{repoDir} should only be used when working on a local Repository and should be omitted in the Github mode.
@@ -101,7 +103,7 @@ summaryLocalRepo( exampleRepoDir )
 
 # load examples
 
-# first let's remove object from Global Environment
+# first let's remove objects from Global Environment
 rm(myplot123)
 rm(iris)
 rm(agn1)

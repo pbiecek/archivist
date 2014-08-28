@@ -1,45 +1,49 @@
 ##    archivist package for R
 ##
-#' @title Save an Object into a Repository 
+#' @title Save an Artifact into a Repository 
 #'
 #' @description
-#' \code{saveToRepo} function saves desired objects to the local \link{Repository} in a given directory.
+#' \code{saveToRepo} function saves desired artifacts to the local \link{Repository} in a given directory.
 #' 
 #' 
 #' @details
-#' \code{saveToRepo} function saves desired objects to the local Repository in a given directory.
-#' Objects are saved in the local Repository, which is a SQLite database named \code{backpack}. 
-#' After every \code{saveToRepo} call the database is refreshed, so the object is available immediately in the database.
-#' Every object is archived in a \code{md5hash.rda} file. This file will be saved in a folder (under \code{repoDir} directory) named 
-#' \code{gallery}. For every object, \code{md5hash} is a unique string of length 32 that comes out as a result of 
+#' \code{saveToRepo} function saves desired artifacts to the local Repository in a given directory.
+#' Artifacts are saved in the local Repository, which is a SQLite database named \code{backpack}. 
+#' After every \code{saveToRepo} call the database is refreshed, so the artifact is available 
+#' immediately in the database for other collaborators.
+#' Every artifact is archived in a \code{md5hash.rda} file. This file will be saved in a folder 
+#' (under \code{repoDir} directory) named \code{gallery}. For every artifact, \code{md5hash} is a 
+#' unique string of length 32 that comes out as a result of 
 #' \link[digest]{digest} function, which uses a cryptographical MD5 hash algorithm.
 #' 
-#' By default, a miniature of an object and (if possible) a data set needed to compute this object are extracted. 
-#' They are also going to be saved in a file named by their \code{md5hash} in the \code{gallery} folder that exists in the directory
-#' specified in the \code{repoDir} argument. Moreover, a specific \code{Tag}-relation is going to be added to the \code{backpack} dataset in case there is a need to load 
-#' the object with it's related data set - see \link{loadFromLocalRepo} or \link{loadFromGithubRepo}. Default settings
+#' By default, a miniature of an artifact and (if possible) a data set needed to compute this artifact are extracted. 
+#' They are also going to be saved in a file named by their \code{md5hash} in the \code{gallery} folder 
+#' that exists in the directory specified in the \code{repoDir} argument. Moreover, a specific \code{Tag}-relation 
+#' is going to be added to the \code{backpack} dataset in case there is a need to load 
+#' the artifact with it's related data set - see \link{loadFromLocalRepo} or \link{loadFromGithubRepo}. Default settings
 #' may be changed by using the \code{archiveData}, \code{archiveTag} or \code{archiveMiniature} arguments with the
 #' \code{FALSE} value.
 #' 
-#' \code{Tags} are object's attributes, different for various object's classes. For more detailed 
+#' \code{Tags} are artifact's attributes, different for various artifact's classes. For more detailed 
 #' information check \link{Tags}
 #' 
-#' Archived object can be searched in the \code{backpack} dataset by using the
-#' \link{searchInLocalRepo} or \link{searchInGithubRepo} functions. Objects can be searched by their \link{Tags}, 
+#' Archived artifact can be searched in the \code{backpack} dataset by using the
+#' \link{searchInLocalRepo} or \link{searchInGithubRepo} functions. Artifacts can be searched by their \link{Tags}, 
 #' \code{names}, \code{classes} or \code{archiving date}.
 #' 
 #' Graphical parameters.
 #' 
-#' If the object is of class \code{data.frame} or \code{archiveData = TRUE}, it is possible to specify 
+#' If the artifact is of class \code{data.frame} or \code{archiveData = TRUE}, it is possible to specify 
 #' how many rows of that data should be archived by adding the argument \code{firstRows} with the n
-#' specified number of rows. Note that, the date can be extracted only from the objects that are supported by the package; see \href{https://github.com/pbiecek/archivist/issues/5}{https://github.com/pbiecek/archivist/issues/5}
+#' specified number of rows. Note that, the date can be extracted only from the artifacts that are supported by 
+#' the \pkg{archivist} package; see \link{Tags}.
 #' 
-#' If the object is of class \code{lattice} or \code{ggplot}, and
+#' If the artifact is of class \code{lattice} or \code{ggplot}, and
 #' \code{archiveMiniature = TRUE}, then it is 
 #' possible to set the miniature's \code{width} and \code{height} parameters. By default they are set to
 #' \code{width = 800}, \code{height = 600}.
 #' 
-#' Supported object's classes are (so far): 
+#' Supported artifact's classes are (so far): 
 #' \itemize{
 #'  \item \code{lm},
 #'  \item \code{data.frame},
@@ -54,48 +58,45 @@
 #'  \item \code{survfit}.
 #'  }
 #'  
-#' To check what \code{Tags} will be extracted for various objects see \link{Tags}.
+#' To check what \code{Tags} will be extracted for various artifacts see \link{Tags}.
 #' 
 #' @return
 #' As a result of this function a character string is returned, which determines
-#' the \code{md5hash} of the object that was used in the \code{saveToRepo} function. If  
+#' the \code{md5hash} of the artifact that was used in the \code{saveToRepo} function. If  
 #' \code{archiveData} was \code{TRUE}, the result also
 #' has an attribute, named \code{data}, that determines \code{md5hash} of the data needed
-#' to compute the object.
+#' to compute the artifact.
 #' 
 #' @seealso
-#' For more detailed information check package vignette - url needed.
+#' For more detailed information check \pkg{archivist} package vignette.
 #' 
 #' @note One can specify his own \code{Tags} for artifacts by setting artifact's attribute 
 #' before call of the \code{saveToRepo} function like this: 
 #' \code{attr(x, "tags" ) = c( "name1", "name2" )}, where \code{x} is artifact 
 #' and \code{name1, name2} are \code{Tags} specified by an user.
 #' 
-#' @param object An arbitrary R object to be saved. For supported objects see details.
+#' @param artifact An arbitrary R artifact to be saved. For supported artifacts see details.
 #' 
 #' @param ... Graphical parameters denoting width and height of a miniature. See details.
 #' 
-#' @param archiveData A logical value denoting whether to archive the data from the \code{object}.
+#' @param archiveData A logical value denoting whether to archive the data from the \code{artifact}.
 #' 
-#' @param archiveTags A logical value denoting whether to archive tags from the \code{object}.
+#' @param archiveTags A logical value denoting whether to archive tags from the \code{artifact}.
 #' 
-#' @param archiveMiniature A logical value denoting whether to archive a miniature of the \code{object}.
+#' @param archiveMiniature A logical value denoting whether to archive a miniature of the \code{artifact}.
 #' 
-#' @param repoDir A character denoting an existing directory in which an object will be saved.
+#' @param repoDir A character denoting an existing directory in which an artifact will be saved.
 #' 
-#' @param force A logical value denoting whether to archive \code{object} if it was already archived in
+#' @param force A logical value denoting whether to archive \code{artifact} if it was already archived in
 #' a Repository.
 #' 
-#' @param rememberName A logical value. Should not be changed by user. It is a technical parameter.
+#' @param rememberName A logical value. Should not be changed by an user. It is a technical parameter.
 #'
-#' @note User can specify his own \code{Tags} to be archived with archived artifact. Simply add 
-#' \code{attribute} named \code{tag} to an artifact, i.e., \code{attr( myplot123, "tag" ) = "dont delete"}. 
-#' For more see examples.
 #' 
 #' @seealso
 #' 
-#' The list of supported objects and their tags is available on \code{wikis} on \pkg{archivist} Github Repository:
-#' \href{https://github.com/pbiecek/archivist/wiki/archivist-package---Tags}{https://github.com/pbiecek/archivist/wiki/archivist-package---Tags}.
+#' The list of supported artifacts and their tags is available on \code{wiki} on \pkg{archivist} 
+#' \href{https://github.com/pbiecek/archivist/wiki/archivist-package---Tags}{Github Repository}.
 #' 
 #' @author 
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
@@ -206,36 +207,36 @@
 #' @family archivist
 #' @rdname saveToRepo
 #' @export
-saveToRepo <- function( object, repoDir, archiveData = TRUE, 
+saveToRepo <- function( artifact, repoDir, archiveData = TRUE, 
                         archiveTags = TRUE, 
                         archiveMiniature = TRUE, force = TRUE, rememberName = TRUE, ... ){
   stopifnot( is.character( repoDir ), is.logical( c( archiveData, archiveTags, archiveMiniature ) ) )
   
-  md5hash <- digest( object )
-  objectName <- deparse( substitute( object ) )
+  md5hash <- digest( artifact )
+  objectName <- deparse( substitute( artifact ) )
   
   repoDir <- checkDirectory( repoDir )
   
-  # check if that object might have been already archived
+  # check if that artifact might have been already archived
   check <- executeSingleQuery( dir = repoDir , realDBname = TRUE,
                     paste0( "SELECT * from artifact WHERE md5hash ='", md5hash, "'") )[,1] 
   
   if ( length( check ) > 0 & !force ){
-    stop( "This object was already archived. If you want to achive it again, use force = TRUE. \n")
+    stop( "This artifact was already archived. If you want to achive it again, use force = TRUE. \n")
   } 
   if ( length( check ) > 0 & force ){
     if ( rememberName ){
-      warning( "This object was already archived. Another archivisation executed with success.")
+      warning( "This artifact was already archived. Another archivisation executed with success.")
     }else{
-      warning( "This object's data was already archived. Another archivisation executed with success.")
+      warning( "This artifact's data was already archived. Another archivisation executed with success.")
     }
   }
   
-  # save object to .rd file
+  # save artifact to .rd file
   if ( rememberName ){
     save( file = paste0(repoDir,"gallery/", md5hash, ".rda"), ascii = TRUE, list = objectName,  envir = parent.frame(2))
   }else{ 
-    assign( value = object, x = md5hash, envir = .GlobalEnv )
+    assign( value = artifact, x = md5hash, envir = .GlobalEnv )
     save( file = paste0(repoDir, "gallery/", md5hash, ".rda"),  ascii=TRUE, list = md5hash, envir = .GlobalEnv  )
     
   }
@@ -244,26 +245,26 @@ saveToRepo <- function( object, repoDir, archiveData = TRUE,
   if ( rememberName ){
   addArtifact( md5hash, name = objectName, dir = repoDir ) 
   }else{
-  addArtifact( md5hash, name = digest( object ), dir = repoDir)
+  addArtifact( md5hash, name = digest( artifact ), dir = repoDir)
   rm( list = md5hash, envir = .GlobalEnv ) 
   }
   
   # whether to add tags
   if ( archiveTags ) {
-    extractedTags <- extractTags( object, objectNameX = objectName )
-    userTags <- attr( object, "tags" ) 
+    extractedTags <- extractTags( artifact, objectNameX = objectName )
+    userTags <- attr( artifact, "tags" ) 
     sapply( c( extractedTags, userTags ), addTag, md5hash = md5hash, dir = repoDir )
-    # attr( object, "tags" ) are tags specified by an user
+    # attr( artifact, "tags" ) are tags specified by an user
   }
   
   # whether to archive data
   if ( archiveData )
-    attr( md5hash, "data" )  <-  extractData( object, parrentMd5hash = md5hash, 
+    attr( md5hash, "data" )  <-  extractData( artifact, parrentMd5hash = md5hash, 
                                               parentDir = repoDir, isForce = force )
   
   # whether to archive miniature
   if ( archiveMiniature )
-    extractMiniature( object, md5hash, parentDir = repoDir ,... )
+    extractMiniature( artifact, md5hash, parentDir = repoDir ,... )
   
   md5hash
 }

@@ -22,7 +22,8 @@ Archivist allows to check if new artifact is the exact
   That might be usefull either for testing or caching.
 }
 \details{
-TODO: To be written.
+For more detailed information visit \pkg{archivist} \code{wiki} on
+\href{https://github.com/pbiecek/archivist/wiki}{Github}.
 }
 \author{
 Przemyslaw Biecek [aut, cre] \email{przemyslaw.biecek@gmail.com} \cr
