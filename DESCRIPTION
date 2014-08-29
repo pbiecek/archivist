@@ -1,5 +1,5 @@
 Package: archivist
-Version: 0.1
+Version: 1.0
 Type: Package
 Title: Tools for datasets and figures archivisation.
 Authors@R: c(
@@ -14,10 +14,6 @@ License: GPL-2
 LazyLoad: yes
 LazyData: yes
 Depends: R (>= 3.0.0),
-    digest,
-    RCurl,
-    httr,
-    rjson,
     RSQLite,
     lubridate,
     jsonlite
