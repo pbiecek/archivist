@@ -151,7 +151,7 @@ data(iris)
 exampleRepoDir <- tempdir()
 createEmptyRepo(repoDir = exampleRepoDir)
 saveToRepo( iris, repoDir=exampleRepoDir )
-shoLocalRepo( exampleRepoDir, "tags" )
+showLocalRepo( exampleRepoDir, "tags" )
 deleteRepo( exampleRepoDir )
 
 # ggplot/gg object
@@ -165,7 +165,7 @@ myplot123 <- ggplot(df, aes(x = gp, y = y)) +
 exampleRepoDir <- tempdir()
 createEmptyRepo( repoDir = exampleRepoDir )
 saveToRepo( myplot123, repoDir=exampleRepoDir )
-shoLocalRepo( exampleRepoDir, "tags" )
+showLocalRepo( exampleRepoDir, "tags" )
 deleteRepo( exampleRepoDir )
 
 # lm object
@@ -174,17 +174,17 @@ model <- lm(Sepal.Length~ Sepal.Width + Petal.Length + Petal.Width,
 exampleRepoDir <- tempdir()
 createEmptyRepo( repoDir = exampleRepoDir )
 saveToRepo( model, repoDir=exampleRepoDir )
-shoLocalRepo( exampleRepoDir, "tags" )
+showLocalRepo( exampleRepoDir, "tags" )
 deleteRepo( exampleRepoDir )
 
-agnes (twins) object
+# agnes (twins) object
 library(cluster)
 data(votes.repub)
 agn1 <- agnes(votes.repub, metric = "manhattan", stand = TRUE)
-#' exampleRepoDir <- tempdir()
+exampleRepoDir <- tempdir()
 createEmptyRepo( repoDir = exampleRepoDir )
 saveToRepo( agn1, repoDir=exampleRepoDir )
-shoLocalRepo( exampleRepoDir, "tags" )
+showLocalRepo( exampleRepoDir, "tags" )
 deleteRepo( exampleRepoDir )
 
 # fanny (partition) object
@@ -195,7 +195,7 @@ fannyx <- fanny(x, 2)
 exampleRepoDir <- tempdir()
 createEmptyRepo( repoDir = exampleRepoDir )
 saveToRepo( fannyx, repoDir=exampleRepoDir )
-shoLocalRepo( exampleRepoDir, "tags" )
+showLocalRepo( exampleRepoDir, "tags" )
 deleteRepo( exampleRepoDir )
 
 # lda object
@@ -212,7 +212,7 @@ lda1 <- lda(Sp ~ ., Iris, prior = c(1,1,1)/3, subset = train)
 exampleRepoDir <- tempdir()
 createEmptyRepo( repoDir = exampleRepoDir )
 saveToRepo( lda1, repoDir=exampleRepoDir )
-shoLocalRepo( exampleRepoDir, "tags" )
+showLocalRepo( exampleRepoDir, "tags" )
 deleteRepo( exampleRepoDir )
 
 # qda object
@@ -223,7 +223,7 @@ qda1 <- qda(train, cl)
 exampleRepoDir <- tempdir()
 createEmptyRepo( repoDir = exampleRepoDir )
 saveToRepo( qda1, repoDir=exampleRepoDir )
-shoLocalRepo( exampleRepoDir, "tags" )
+showLocalRepo( exampleRepoDir, "tags" )
 deleteRepo( exampleRepoDir )
 
 
@@ -236,7 +236,7 @@ glmnet1=glmnet(zk,bk)
 #' exampleRepoDir <- tempdir()
 createEmptyRepo( repoDir = exampleRepoDir )
 saveToRepo( glmnet1, repoDir=exampleRepoDir )
-shoLocalRepo( exampleRepoDir, "tags" )
+showLocalRepo( exampleRepoDir, "tags" )
 deleteRepo( exampleRepoDir )
 
 
