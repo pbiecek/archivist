@@ -31,6 +31,9 @@
 #' Marcin Kosinski [aut] \email{m.p.kosinski@@gmail.com}
 #' 
 #' 
+#' @import RSQLite
+#' @import jsonlite
+#' @import lubridate
 #' @family archivist
 #' @name archivist-package
 #' @docType package
