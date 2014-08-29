@@ -218,6 +218,8 @@ loadFromGithubRepo <- function( md5hash, repo, user, branch = "master" , value =
     md5hashList <- executeSingleQuery( dir = Temp, realDBname = FALSE,
                                        paste0( "SELECT DISTINCT artifact FROM tag WHERE artifact LIKE '",md5hash,"%'" ) )
     md5hash <- as.character( md5hashList[, 1] )
+    
+    file.remove( Temp )
   }
       
   # load artifacts from Repository

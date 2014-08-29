@@ -215,6 +215,6 @@ searchInGithubRepo <- function( pattern, repo, user, branch = "master", fixed = 
                                              paste0( "SELECT DISTINCT artifact FROM tag WHERE tag LIKE ",
                                                      "'", pattern, "%'" ) ) )
   }
-
+  file.remove( Temp )
   return( as.character( md5hashES[, 1] ) ) 
 }
