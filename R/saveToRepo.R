@@ -234,7 +234,7 @@ saveToRepo <- function( artifact, repoDir, archiveData = TRUE,
   
   # save artifact to .rd file
   if ( rememberName ){
-    save( file = paste0(repoDir,"gallery/", md5hash, ".rda"), ascii = TRUE, list = objectName,  envir = parent.frame(2))
+    save( file = paste0(repoDir,"gallery/", md5hash, ".rda"), ascii = TRUE, list = objectName,  envir = parent.frame(1))
   }else{ 
     assign( value = artifact, x = md5hash, envir = .GlobalEnv )
     save( file = paste0(repoDir, "gallery/", md5hash, ".rda"),  ascii=TRUE, list = md5hash, envir = .GlobalEnv  )
