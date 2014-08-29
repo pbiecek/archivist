@@ -119,7 +119,8 @@ copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, bra
     # if github mode
     # get files list
     library( httr )
-    
+    library(RCurl)
+    options(RCurlOptions = list(cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl")))
     req <- GET( paste0( "https://api.github.com/repos/", user, "/",
                         repo, "/git/trees/", branch, "?recursive=1" ) )
     stop_for_status(req)
@@ -128,7 +129,7 @@ copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, bra
     
     whichFilesToClone <- grep("gallery/", filelist, value = TRUE, fixed = TRUE)
     
-    filesToDownload <- as.vector (sapply( hashes, function(x){
+    filesToDownload <- as.vector (sapply( md5hashes, function(x){
       grep(pattern = x, whichFilesToClone, value = TRUE, fixed = TRUE)
     } ) ) 
     

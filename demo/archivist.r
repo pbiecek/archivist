@@ -7,26 +7,35 @@ library("archivist")
 # create a local Repository, which is a SQLite
 # database named backpack.
 #
-createEmptyRepo( dir = getwd() )
+# exampleRepoDir <- getwd()
+exampleRepoDir <- tempdir()
+createEmptyRepo( repoDir = exampleRepoDir )
 invisible(readline())
 
 # 
-# archivist has his own built-in database 
+# archivist has his own example database 
+# that is stored on a Github repository,
 # for demo and examples purpose.
 # 
-# this database is situated in directory where
-# archivist package was installed, in folder
-# named "exampledata".
+# this Github repository is available
+# under link:
+# https://github.com/pbiecek/archivist
 #
-# demoDir <- paste0(path.package("archivist"), "/exampledata/")
-# OR
-#
-demoDir <- getwd()
 
 #
-# there is also an example Github database.
+# you can copy this data base to your
+# personal computer.
 #
-demoGitDir <- c( user = "pbiecek", repo = "archivist" )
+
+md5hashes1 <- searchInGithubRepo( pattern= "name", user = "pbiecek", repo = "archivist", fixed = FALSE )
+
+# this code searches for artifacts in a Repository stored on a Github repository
+# and nowe let's copy those artifacts to our Local Repository
+exampleRepoDir2 <- tempdir()
+createEmptyRepo( exampleRepoDir2 )
+copyGithubRepo( repoTo = exampleRepoDir2,  md5hashes1,
+                user= "pbiecek", repo = "archivist")
+
 invisible(readline())
 
 #
@@ -34,21 +43,21 @@ invisible(readline())
 #
 data( iris )
 
-saveToRepo( object = iris, dir = demoDir)
+saveToRepo( artifact = iris, repoDir = exampleRepoDir )
 
 #
-# as we can see, the object's md5hash was returned
+# as we can see, the artifact's md5hash was returned
 # wchich means saving operation executes properly.
 #
 invisible(readline())
 #
-# if one forgots the object's md5hash it can be
+# if one forgots the artifact's md5hash it can be
 # easily checked in database.
 #
 # one can check with what md5hash iris
 # data were saved to the Repository.
 #
-(iris_md5hash  <- searchInLocalRepo( tag = "name:iris", dir = demoDir))
+(iris_md5hash  <- searchInLocalRepo( pattern = "name:iris", repoDir = exampleRepoDir ))
 invisible(readline())
 #
 # one might check how does loading an object process
@@ -58,66 +67,69 @@ invisible(readline())
 # it's going to be loaded.
 #
 rm( iris )
-loadFromLocalRepo( md5hash = "ff575c261c949d073b2895b05d1097c3", dir = demoDir)
+loadFromLocalRepo( md5hash = "ff575c261c949d073b2895b05d1097c3", repoDir = exampleRepoDir)
 invisible(readline())
 #
 # it also works for md5hash abbreviation.
 #
 data( swiss , package = "datasets")
-(swiss_md5hash <- saveToRepo( object = swiss, dir = demoDir))
-rm( swiss ) # note that md5hash get be get strictly from saveToRepo
-swiss_md5hash_abbreviation <- "dhcj7s" # need to be fixed on real hash
-loadFromLocalRepo( md5hash = swiss_md5hash_abbreviation, dir = demoDir)
+(swiss_md5hash <- saveToRepo( swiss, repoDir = exampleRepoDir))
+# 4c43fa8a4d8f0cbf65353e397f37338c
+rm( swiss ) # note that md5hash will be get strictly from saveToRepo
+swiss_md5hash_abbreviation <- "4c43fa8a4" #
+loadFromLocalRepo( md5hash = swiss_md5hash_abbreviation, repoDir = exampleRepoDir)
 invisible(readline())
 #
 # note that md5hash can be get strictly from saveToRepo
 # but only at first call of this function.
 #
-# every time you'll call that function on the same object
+# every time you'll call that function on the same artifacts
 # a new record will be created in backpack database with
-# the same object and with the same md5hash.
+# the same artifact and with the same md5hash.
 #
-# only creation time of object will be different.
+# only createdDate of object will be different.
+#
+showLocalRepo(repoDir = exampleRepoDir)
 #
 # so we higly recommend to recover md5hashes from 
 # searchInLocalRepo.
 # 
 invisible(readline())
 #
-# if one is not interested anymore in archivizing
-# a specific object, then the object might be 
+# if one is not interested anymore in archiving
+# a specific artifact, then the it might be 
 # removed from a database.
 #
-rmFromRepo( md5hash = swiss_md5hash, dir = demoDir)
+rmFromRepo( md5hash = swiss_md5hash, repoDir = exampleRepoDir)
 
 
 #
 # note that this function removes a \code{md5hash.rda} file 
-# from folder named gallery in directory set as demoDir,
-# where \code{md5hash} is object's hash as above.
+# from folder named gallery in directory set as repoDir,
+# where \code{md5hash} is artifact's hash as above.
 #
-# so object will not be able to restore anymore.
+# so artifact will not be available to be restored anymore.
 #
 invisible(readline())
 
 #
-# if one wanted to seek for an object in Repository, it is 
+# if one wanted to seek for an artifact in Repository, it is 
 # advantageous to use searchInLocalRepo or searchInGithubRepo 
 # functions, depending on what type of Repository user is 
 # working with.
 #
-# search funtions take an object's Tag as an argument.
+# search funtions take an artifact's Tag as an argument.
 #
-# every call return an object's md5hash.
+# every call return an artifact's md5hash.
 #
-searchInLocalRepo( tag = "name:myDataXYZ",  dir = demoDir)
+searchInLocalRepo( pattern = "name:iris",  repoDir = exampleRepoDir )
 invisible(readline())
-searchInLocalRepo( tag = list( dataFrom = "2005-05-27", dataTo = "2005-07-07"), 
-                   dir = demoDir)
+searchInLocalRepo( pattern = list( dataFrom = Sys.Date()-1, dataTo = Sys.Date()+1), 
+                   repoDir = exampleRepoDir)
 invisible(readline())
-searchInLocalRepo( tag = "class:ggplot",    dir = demoDir)
+searchInLocalRepo( pattern = "class:data.frame", repoDir = exampleRepoDir)
 invisible(readline())
-searchInLocalRepo( tag = "date:2005-05-27", dir = demoDir)
+searchInLocalRepo( pattern = Sys.Date(), repoDir = exampleRepoDir)
 invisible(readline())
 
 
@@ -125,12 +137,13 @@ invisible(readline())
 # if one works with Github Repository, it is suggested to use
 # expresions as below.
 #
-searchInGithubRepo( tag = "name:marvelData",  user = "USER", repo = "REPO")
+showGithubRepo(user = "pbiecek", repo = "archivist")
+searchInGithubRepo( pattern = "name:myplot123",  user = "pbiecek", repo = "archivist")
 invisible(readline())
-searchInGithubRepo( tag = "class:data.frame", user = "USER", repo = "REPO")
+searchInGithubRepo( pattern = "class:twins", user = "pbiecek", repo = "archivist")
 invisible(readline())
-searchInGithubRepo( tag = "md5hash:37d8chs9jdj2jxnd0k2jdncjdh4ew23", 
-                    user = "USER", repo = "REPO")
+searchInGithubRepo( pattern = "class", 
+                    user = "pbiecek", repo = "archivist", fixed = FALSE)
 invisible(readline())
 
 
@@ -139,33 +152,33 @@ invisible(readline())
 # be conducted on a Github Repository.
 # 
 # thus one can search from Github Repository, there
-# is also a possibility of loading objects from
+# is also a possibility of loading artifacts from
 # Github Repository.
 #
-loadFromGithubRepo( md5hash = "jd7fhcndkwid8fhcbs9d0ckdhen31" , 
-                    user = "pbiecek", repo = "graphGallery")
+loadFromGithubRepo( md5hash = "53a9f3aa4235e111524dda17aad2ee3a" , 
+                    user = "pbiecek", repo = "archivist" )
 invisible(readline())
-loadFromGithubRepo( md5hash = "jdkcndjamsnzjdifockdmsnadkdk3" , 
-                    user = "pbiecek", repo = "graphGallery")
+loadFromGithubRepo( md5hash = "958de09ed5e088cd44e6fb486874c914" , 
+                    user = "pbiecek", repo = "archivist" )
 invisible(readline())
-loadFromGithubRepo( md5hash = "ff78cu" , 
-                    user = "pbiecek", repo = "graphGallery")
+loadFromGithubRepo( md5hash = "7a761a2a" , 
+                    user = "pbiecek", repo = "archivist" )
 # load with abbreviation
 invisible(readline())
 #
 # one may notice that loadFromGithubRepo and
-# loadFromLocalRepo load objects to the Global
+# loadFromLocalRepo load artifacts to the Global
 # Environment with it's original name.
 #
 # if one is not satisfied with that solution,
-# a parameter returns = TRUE might be specified
-# so that functions return object as a result that
+# a parameter value = TRUE might be specified
+# so that functions return artifact as a result that
 # can be attributed to a new name.
 #
-exampleName1 <- loadFromGithubRepo( md5hash = "k09xd" , returns = TRUE,
-                                    user = "pbiecek", repo = "graphGallery")
-exampleName2 <- loadFromLocalRepo( md5hash = "838d9dhcjajskdlfoeuajsjckdiehjd2", 
-                                   dir = demoDir, returns = TRUE )
+exampleName1 <- loadFromGithubRepo( md5hash = "692fce39df7" , value = TRUE,
+                                    user = "pbiecek", repo = "archivist")
+exampleName2 <- loadFromLocalRepo( md5hash = "692fce39df755d1cfec32991e50f61e0", 
+                                   repoDir = exampleRepoDir, value = TRUE )
 invisible(readline())
 #
 # VECTORIZED OPERATIONS 
@@ -178,28 +191,28 @@ invisible(readline())
 # in case one wants to remove many files, e.g. from one date to another, 
 # it is suggested to first perform searchIn....Repo and then a function from *apply
 # family.
-obj2rm <- searchInLocalRepo( tag = list( dataFrom = "2005-05-27", 
-                                         dataTo = "2005-07-07"), 
-                             dir = demoDir )
-sapply( obj2rm, rmFromRepo, dir = demoDir )
+obj2rm <- searchInLocalRepo( pattern = list( dataFrom = Sys.Date()-1, 
+                                         dataTo = Sys.Date()+1), 
+                             repoDir = exampleRepoDir )
+sapply( obj2rm, rmFromRepo, repoDir = exampleRepoDir )
 invisible(readline())
 #
-# similarly when one wants to load more than one object,
+# similarly when one wants to load more than one artifact,
 # again *apply family is recommended (?apply, ?sapply).
 #
-# above is an example of loading all objects from the
-# repository which class is ggplot.
+# below is an example of loading all the artifacts from the
+# Repository which class is ggplot.
 #
-obj2load <- searchInGithubRepo( tag = "class:ggplot", 
-                                user = "pbiecek", repo = "graphGallery")
-sapply( obj2load, loadFromGithubRepo, returns = FALSE,
-        user = "pbiecek", repo = "graphGallery") 
+obj2load <- searchInGithubRepo( pattern = "class:ggplot", 
+                                user = "pbiecek", repo = "archivist")
+sapply( obj2load, loadFromGithubRepo, value = FALSE,
+        user = "pbiecek", repo = "archivist") 
 invisible(readline())
 #
-# this can be repeated if many objects are desired to 
-# be archivised at one call.
+# this can be repeated if many artifacts are desired to 
+# be archived at one call.
 #
-# above is an exmaple of saving 3 different ggplots 
+# below is an exmaple of saving 3 different ggplots 
 #
 df <- data.frame(gp = factor(rep(letters[1:3], each = 10)),
                  y = rnorm(30))
@@ -223,30 +236,30 @@ plotGreen <- ggplot(df, aes(x = gp, y = y)) +
 
 sappl(c(plotRed, plotBlue, plotGreen), saveToRepo, width = 4000, 
       height = 3200, archiveData = FALSE, archiveMiniature = TRUE,
-      dir = demoDir)
-# as a result md5hash of every object is returned
+      repoDir = exampleRepoDir )
+# as a result md5hash of every artifact is returned
 invisible(readline())
 #
 # even search operations can be applied to *apply's family
 # function.
 #
-# if one wants to search for md5hashes of objects that are
+# if one wants to search for md5hashes of artifacts that are
 # data.frames or matrixes he can simply type:
 example_tags <- c( "class:data.frame", "class:matrix")
 (MATRIX_and_FRAMES_md5hashes <- sapply(example_tags, 
-                                searchInLocalRepo, dir = demoDir))
+                                searchInLocalRepo, repoDir = exampleRepoDir ))
 # and apply to uniqe function to avoid repetitions
 MATRIX_and_FRAMES_md5hashes <- unique(MATRIX_and_FRAMES_md5hashes)
 invisible(readline())
 #
-# moreover if one wants to search for objects with 2 
+# moreover if one wants to search for artifactss with 2 
 # conditions, then also *apply family is suggested.
 #
-example_tags_conditions <- list( condition1 = "md5hash:hcgd6",
-                                 condition2 = "date:2005-07-07")  
+example_tags_conditions <- list( condition1 = "20f40f15",
+                                 condition2 = "date:2014-08-27 20:52:22")  
 TWO_condition_md5hashes <- lapply( example_tags_conditions, searchInGithubRepo, 
-       user = "pbiecek", repo = "graphGallery")
-# and the use intersection of sets containing 
+       user = "pbiecek", repo = "archivist")
+# and then use intersection of sets containing 
 # md5hashes of first and second condition
 intersected_condition_md5hashes <- intersect( TWO_condition_md5hashes[[1]],
           TWO_condition_md5hashes[[2]] )
