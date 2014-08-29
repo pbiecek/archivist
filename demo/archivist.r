@@ -129,7 +129,7 @@ searchInLocalRepo( pattern = list( dataFrom = Sys.Date()-1, dataTo = Sys.Date()+
 invisible(readline())
 searchInLocalRepo( pattern = "class:data.frame", repoDir = exampleRepoDir)
 invisible(readline())
-searchInLocalRepo( pattern = Sys.Date(), repoDir = exampleRepoDir)
+searchInLocalRepo( pattern = as.character(Sys.Date()), repoDir = exampleRepoDir)
 invisible(readline())
 
 
@@ -219,6 +219,8 @@ df <- data.frame(gp = factor(rep(letters[1:3], each = 10)),
 library(plyr)
 ds <- ddply(df, .(gp), summarise, mean = mean(y), sd = sd(y))
 
+if (require(ggplot2)) {
+
 plotRed <- ggplot(df, aes(x = gp, y = y)) +
   geom_point() +
   geom_point(data = ds, aes(y = mean),
@@ -234,9 +236,11 @@ plotGreen <- ggplot(df, aes(x = gp, y = y)) +
   geom_point(data = ds, aes(y = mean),
              colour = 'green', size = 3)
 
-sappl(c(plotRed, plotBlue, plotGreen), saveToRepo, width = 4000, 
+sapply(list(plotRed, plotBlue, plotGreen), saveToRepo, width = 4000, 
       height = 3200, archiveData = FALSE, archiveMiniature = TRUE,
-      repoDir = exampleRepoDir )
+      repoDir = exampleRepoDir, rememberName = FALSE)
+}
+
 # as a result md5hash of every artifact is returned
 invisible(readline())
 #
