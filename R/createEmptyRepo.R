@@ -149,7 +149,8 @@ downloadDB <- function( repo, user, branch ){
    library( RCurl )
    db <- getBinaryURL( URLdb, ssl.verifypeer = FALSE )
    Temp2 <- tempfile()
-   writeBin( db, Temp2)
+   file.create( Temp2 )
+   writeBin( db, Temp2 )
    return( Temp2 )
 }
 

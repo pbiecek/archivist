@@ -27,13 +27,13 @@ invisible(readline())
 # personal computer.
 #
 
-md5hashes1 <- searchInGithubRepo( pattern= "name", user = "pbiecek", repo = "archivist", fixed = FALSE )
-
+md5hashes1 <- searchInGithubRepo( pattern= "relation", user = "pbiecek", repo = "archivist", fixed = FALSE )
+md5hashes2 <- searchInGithubRepo( pattern= "name", user = "pbiecek", repo = "archivist", fixed = FALSE )
 # this code searches for artifacts in a Repository stored on a Github repository
 # and nowe let's copy those artifacts to our Local Repository
 exampleRepoDir2 <- tempdir()
 createEmptyRepo( exampleRepoDir2 )
-copyGithubRepo( repoTo = exampleRepoDir2,  md5hashes1,
+copyGithubRepo( repoTo = exampleRepoDir2,  c( md5hashes1, md5hashes2 ),
                 user= "pbiecek", repo = "archivist")
 
 invisible(readline())

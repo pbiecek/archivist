@@ -78,6 +78,7 @@ copyGithubRepo <- function( repoTo, md5hashes, user, repo, branch="master"){
   
   copyRepo( repoTo = repoTo, repoFrom = Temp, md5hashes = md5hashes , 
             local = FALSE, user = user, repo = repo, branch = branch )  
+  file.remove(Temp)
   
 }
 
@@ -88,12 +89,13 @@ copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, bra
   toInsertArtifactTable <- executeSingleQuery( dir = repoFrom, realDBname = local,
                       paste0( "SELECT * FROM artifact WHERE md5hash IN ",
                              "('", paste0( md5hashes, collapse="','"), "')" ) ) 
+  
   apply( toInsertArtifactTable, 1, function(x){
-    executeSingleQuery( dir = repoTo, 
-                        paste0( "INSERT INTO artifact (md5hash, name, createdDate) VALUES ('",
-                                x[1], "','",
-                                x[2], "','",
-                                x[3], "')" ) ) } )
+         executeSingleQuery( dir = repoTo, 
+                              paste0( "INSERT INTO artifact (md5hash, name, createdDate) VALUES ('",
+                              x[1], "','",
+                              x[2], "','",
+                              x[3], "')" ) ) } )
   # clone tag table
   toInsertTagTable <- executeSingleQuery( dir = repoFrom, realDBname = local,
                                                paste0( "SELECT * FROM tag WHERE artifact IN ",
@@ -129,12 +131,12 @@ copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, bra
     
     whichFilesToClone <- grep("gallery/", filelist, value = TRUE, fixed = TRUE)
     
-    filesToDownload <- as.vector (sapply( md5hashes, function(x){
+    filesToDownload <- unlist(as.vector(sapply( md5hashes, function(x){
       grep(pattern = x, whichFilesToClone, value = TRUE, fixed = TRUE)
-    } ) ) 
+    } ) ) )
     
     # download files to gallery folder
-    sapply( filesToDownload, cloneGithubFile, repo = repo, user = user, branch = branch, to = repoTo )
+    lapply( filesToDownload, cloneGithubFile, repo = repo, user = user, branch = branch, to = repoTo )
   }
   
   }

@@ -112,6 +112,6 @@ cacheRepo <- tempdir()
 createEmptyRepo( cacheRepo )
 
 # in progress, waiting for #30
-## cache(cacheRepo, lm, data=iris, Petal.Length~Species)
+cache(cacheRepo, lm, data=iris, Petal.Length~Species)
 
 ```
