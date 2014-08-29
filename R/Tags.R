@@ -240,12 +240,70 @@
 #' zk=matrix(rnorm(100*20),100,20)
 #' bk=rnorm(100)
 #' glmnet1=glmnet(zk,bk)
-#' #' exampleRepoDir <- tempdir()
+#' exampleRepoDir <- tempdir()
 #' createEmptyRepo( repoDir = exampleRepoDir )
 #' saveToRepo( glmnet1, repoDir=exampleRepoDir )
 #' showLocalRepo( exampleRepoDir, "tags" )
 #' deleteRepo( exampleRepoDir )
 #' 
+#' # trellis object
+#' require(stats)
+#' 
+#' ## Tonga Trench Earthquakes
+#' 
+#' Depth <- equal.count(quakes$depth, number=8, overlap=.1)
+#' xyplot(lat ~ long | Depth, data = quakes)
+#' update(trellis.last.object(),
+#'        strip = strip.custom(strip.names = TRUE, strip.levels = TRUE),
+#'        par.strip.text = list(cex = 0.75),
+#'        aspect = "iso")
+#' 
+#' ## Examples with data from `Visualizing Data' (Cleveland, 1993) obtained
+#' ## from http://cm.bell-labs.com/cm/ms/departments/sia/wsc/
+#' 
+#' EE <- equal.count(ethanol$E, number=9, overlap=1/4)
+#' 
+#' ## Constructing panel functions on the fly; prepanel
+#' trellis.plot <- xyplot(NOx ~ C | EE, data = ethanol,
+#'                        prepanel = function(x, y) prepanel.loess(x, y, span = 1),
+#'                        xlab = "Compression Ratio", ylab = "NOx (micrograms/J)",
+#'                        panel = function(x, y) {
+#'                          panel.grid(h = -1, v = 2)
+#'                          panel.xyplot(x, y)
+#'                          panel.loess(x, y, span=1)
+#'                        },
+#'                        aspect = "xy")
+#' exampleRepoDir <- tempdir()
+#' createEmptyRepo( repoDir = exampleRepoDir )
+#' saveToRepo( trellis.plot, repoDir=exampleRepoDir )
+#' showLocalRepo( exampleRepoDir, "tags" )
+#' deleteRepo( exampleRepoDir )
+#' 
+#' # htest object
+#' 
+#' x <- c(1.83,  0.50,  1.62,  2.48, 1.68, 1.88, 1.55, 3.06, 1.30)
+#' y <- c(0.878, 0.647, 0.598, 2.05, 1.06, 1.29, 1.06, 3.14, 1.29)
+#' this.test <- wilcox.test(x, y, paired = TRUE, alternative = "greater")
+#' exampleRepoDir <- tempdir()
+#' createEmptyRepo( repoDir = exampleRepoDir )
+#' saveToRepo( this.test, repoDir=exampleRepoDir )
+#' showLocalRepo( exampleRepoDir, "tags" )
+#' deleteRepo( exampleRepoDir )
+#' 
+#' # survfit object
+#' 
+#' # Create the simplest test data set 
+#' test1 <- list(time=c(4,3,1,1,2,2,3), 
+#'               status=c(1,1,1,0,1,1,0), 
+#'              x=c(0,2,1,1,1,0,0), 
+#'              sex=c(0,0,0,0,1,1,1)) 
+#' # Fit a stratified model 
+#' myFit <-  survfit( coxph(Surv(time, status) ~ x + strata(sex), test1), data = test1  )
+#' exampleRepoDir <- tempdir()
+#' createEmptyRepo( repoDir = exampleRepoDir )
+#' saveToRepo( myFit , repoDir=exampleRepoDir )
+#' showLocalRepo( exampleRepoDir, "tags" )[,-3]
+#' deleteRepo( exampleRepoDir )
 #' 
 #' rm( exampleRepoDir )
 #' }

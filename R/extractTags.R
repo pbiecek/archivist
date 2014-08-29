@@ -103,7 +103,7 @@ extractTags.glmnet <- function( object, objectNameX, ... ) {
 
 extractTags.survfit <- function( object, objectNameX, ... ) {
   library( survival )
-  class <- paste0( "class:", class( object )[1] )
+  class <- paste0( "class:", class( object )[2] )
   name <- paste0( "name:", objectNameX )
   date <- paste0( "date:", now() )
   strata <- paste0( "strata:", object$strata )
