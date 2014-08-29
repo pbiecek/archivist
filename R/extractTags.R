@@ -19,7 +19,6 @@ extractTags.data.frame <- function( object, objectNameX, ... ) {
 }
 
 extractTags.ggplot <- function( object, objectNameX, ... ) {
-  library( ggplot2 )
   labx <- paste0( "labelx:", object$labels$x )
   laby <- paste0( "labely:", object$labels$y )
   class <- paste0( "class:", class( object )[2] )
@@ -39,7 +38,6 @@ extractTags.lm <- function( object, objectNameX, ... ) {
 }
 
 extractTags.htest <- function( object, objectNameX, ... ) {
-  library( stats )
   alt <- paste0( "alternative:", object$alternative )
   method <- paste0( "method:", object$method )
   class <- paste0( "class:", class( object )[1] )
@@ -50,7 +48,6 @@ extractTags.htest <- function( object, objectNameX, ... ) {
 }
 
 extractTags.trellis <- function( object, objectNameX, ... ) {
-  library( lattice )
   class <- paste0( "class:", class( object )[1] )
   name <- paste0( "name:", objectNameX )
   date <- paste0( "date:", now() )
@@ -59,7 +56,6 @@ extractTags.trellis <- function( object, objectNameX, ... ) {
 }
 
 extractTags.twins <- function( object, objectNameX, ... ) {
-  library( cluster )
   ac <- paste0( "ac:", object$ac)
   class <- paste0( "class:", class( object )[1] )
   name <- paste0( "name:", objectNameX )
@@ -68,7 +64,6 @@ extractTags.twins <- function( object, objectNameX, ... ) {
 }
 
 extractTags.partition <- function( object, objectNameX, ... ) {
-  library( cluster )
   objective <- paste0( "objective:", object$objective )
   class <- paste0( "class:", class( object )[1] )
   name <- paste0( "name:", objectNameX )
@@ -77,7 +72,6 @@ extractTags.partition <- function( object, objectNameX, ... ) {
 }
 
 extractTags.lda <- function( object, objectNameX, ... ) {
-  library( MASS )
   class <- paste0( "class:", class( object )[1] )
   name <- paste0( "name:", objectNameX )
   date <- paste0( "date:", now() )
@@ -85,7 +79,6 @@ extractTags.lda <- function( object, objectNameX, ... ) {
 }
 
 extractTags.qda <- function( object, objectNameX, ... ) {
-  library( MASS )
   class <- paste0( "class:", class( object )[1] )
   name <- paste0( "name:", objectNameX )
   date <- paste0( "date:", now() )
@@ -94,7 +87,6 @@ extractTags.qda <- function( object, objectNameX, ... ) {
 }
 
 extractTags.glmnet <- function( object, objectNameX, ... ) {
-  library( glmnet )
   class <- paste0( "class:", class( object )[1] )
   name <- paste0( "name:", objectNameX )
   date <- paste0( "date:", now() )
@@ -102,7 +94,6 @@ extractTags.glmnet <- function( object, objectNameX, ... ) {
 }
 
 extractTags.survfit <- function( object, objectNameX, ... ) {
-  library( survival )
   class <- paste0( "class:", class( object )[2] )
   name <- paste0( "name:", objectNameX )
   date <- paste0( "date:", now() )

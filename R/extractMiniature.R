@@ -13,9 +13,8 @@ extractMiniature.data.frame <- function( object, md5hash, parentDir, ..., firstR
 }
 
 extractMiniature.ggplot <- function( object, md5hash, parentDir, ..., width = 800, height = 600 ){
-  library( ggplot2 )
   png( paste0( parentDir, "gallery/", md5hash, ".png" ), width, height )
-  print( object )
+  plot( object )
   dev.off()
 }
 
@@ -26,21 +25,18 @@ extractMiniature.lm <- function( object, md5hash, parentDir, ... ){
 }
 
 extractMiniature.htest <- function( object, md5hash, parentDir, ... ){
-  library( stats )
   sink( file = paste0(parentDir, "gallery/", md5hash, ".txt" ) )
   print( object )
   sink()
 }
 
 extractMiniature.trellis <- function( object, md5hash, parentDir, ..., width = 800, height = 600 ){
-  library( lattice )
   png( paste0( parentDir, "gallery/", md5hash, ".png" ), width, height )
   print( object )
   dev.off()
 }
 
 extractMiniature.twins <- function( object, md5hash, parentDir, ..., width = 800, height = 600 ){
-  library( cluster )
   png( paste0( parentDir, "gallery/", md5hash, ".png" ), width, height )
   par( mfrow = c( 1, 2 ) )
   plot( object )
@@ -49,7 +45,6 @@ extractMiniature.twins <- function( object, md5hash, parentDir, ..., width = 800
 }
 
 extractMiniature.partition <- function( object, md5hash, parentDir, ...,width = 800, height = 600 ){ 
-  library( cluster )
   png( paste0( parentDir, "gallery/", md5hash, ".png" ), width, height )
   par( mfrow = c( 1, 2 ) )
   plot( object )
@@ -58,28 +53,24 @@ extractMiniature.partition <- function( object, md5hash, parentDir, ...,width = 
 }
 
 extractMiniature.lda <- function( object, md5hash, parentDir, ... ){
-  library( MASS )
   sink( file = paste0(parentDir, "gallery/", md5hash, ".txt" ) )
   print( object ) 
   sink()
 }
 
 extractMiniature.qda <- function( object, md5hash, parentDir, ... ){
-  library( MASS )
   sink( file = paste0(parentDir, "gallery/", md5hash, ".txt" ) )
   print( object ) 
   sink()
 }
 
 extractMiniature.glmnet <- function( object, md5hash, parentDir, ... ){
-  library( glmnet )
   sink( file = paste0(parentDir, "gallery/", md5hash, ".txt" ) )
   print( object ) 
   sink()
 }
 
 extractMiniature.survfit <- function( object, md5hash, parentDir, ... ){
-  library( survival )
   sink( file = paste0(parentDir, "gallery/", md5hash, ".txt" ) )
   print( summary( object ) )
   sink()

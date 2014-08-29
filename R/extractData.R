@@ -6,7 +6,6 @@ extractData.default <- function( object, parrentMd5hash, parentDir, isForce ){
 }
 
 extractData.ggplot <- function( object, parrentMd5hash, parentDir, isForce ){
-  library( ggplot2 )
   extractedDF <- object$data
   md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, repoDir = parentDir, 
                            rememberName = FALSE, archiveTags = FALSE, force = isForce )
@@ -23,7 +22,6 @@ extractData.lm <- function( object, parrentMd5hash, parentDir, isForce ){
 }
 
 extractData.htest <- function( object, parrentMd5hash, parentDir, isForce ){
-  library( stats )
   extractedDF <- get( object$data.name, envir = .GlobalEnv )
   md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, repoDir = parentDir,
                            rememberName = FALSE, archiveTags = FALSE, force = isForce )
@@ -32,7 +30,6 @@ extractData.htest <- function( object, parrentMd5hash, parentDir, isForce ){
 }
 
 extractData.trellis <- function( object, parrentMd5hash, parentDir, isForce ){
-  library( lattice )
   extractedDF <- get( as.character( object$call )[3], envir = .GlobalEnv )
   md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, repoDir = parentDir,
                            rememberName = FALSE, archiveTags = FALSE, force = isForce )
@@ -41,7 +38,7 @@ extractData.trellis <- function( object, parrentMd5hash, parentDir, isForce ){
 }
 
 extractData.twins <- function( object, parrentMd5hash, parentDir, isForce ){
-  library( cluster ) # agnes / diana / mona inherits after twins
+  # agnes / diana / mona inherits after twins
   extractedDF <- object$data
   md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, repoDir = parentDir,
                            rememberName = FALSE, archiveTags = FALSE, force = isForce )
@@ -50,7 +47,7 @@ extractData.twins <- function( object, parrentMd5hash, parentDir, isForce ){
 }
 
 extractData.partition <- function( object, parrentMd5hash, parentDir, isForce ){
-  library( cluster ) # pam / clara / fanny inherits after partition
+  # pam / clara / fanny inherits after partition
   extractedDF <- object$data
   md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, repoDir = parentDir,
                            rememberName = FALSE, archiveTags = FALSE, force = isForce )
@@ -59,7 +56,6 @@ extractData.partition <- function( object, parrentMd5hash, parentDir, isForce ){
 }
 
 extractData.lda <- function( object, parrentMd5hash, parentDir, isForce ){
-  library( MASS ) 
   extractedDF <-  get( as.character( ( object$call ) )[3], envir = .GlobalEnv )
   md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, repoDir = parentDir,
                            rememberName = FALSE, archiveTags = FALSE, force = isForce )
@@ -68,7 +64,6 @@ extractData.lda <- function( object, parrentMd5hash, parentDir, isForce ){
 }
 
 extractData.qda <- function( object, parrentMd5hash, parentDir, isForce ){
-  library( MASS )  
   extractedDF <-  get( as.character( ( object$call ) )[2], envir = .GlobalEnv )
   md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, repoDir = parentDir,
                            rememberName = FALSE, archiveTags = FALSE, force = isForce )
@@ -78,7 +73,7 @@ extractData.qda <- function( object, parrentMd5hash, parentDir, isForce ){
 
 
 extractData.glmnet <- function( object, parrentMd5hash, parentDir, isForce ){
-  library( glmnet ) # elmet / lognet / multnet /foshnet /coxnet /mrelnet 
+  # elmet / lognet / multnet /foshnet /coxnet /mrelnet 
                    # inherits after glmnet
   extractedDF1 <- get( as.character( object$call )[2], envir = .GlobalEnv )
   extractedDF2 <- get( as.character( object$call )[3], envir = .GlobalEnv )
@@ -90,7 +85,6 @@ extractData.glmnet <- function( object, parrentMd5hash, parentDir, isForce ){
 }
 
 extractData.survfit <- function( object, parrentMd5hash, parentDir, isForce ){
-  library( survival ) 
   extractedDF <-  get( as.character( object$call )[3], envir = .GlobalEnv )
   md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, repoDir = parentDir, 
                            rememberName = FALSE, archiveTags = FALSE, force = isForce )

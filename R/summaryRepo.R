@@ -176,7 +176,7 @@ info <- list( artifactsNumber = NULL, dataSetsNumber = NULL, classesNumber = NUL
 }
 
 #' @export
-print.repository <- function( x ){
+print.repository <- function( x, ... ){
   
   if( x$artifactsNumber == 0 & x$dataSetsNumber == 0 ){
     cat( "Repository is empty." )
