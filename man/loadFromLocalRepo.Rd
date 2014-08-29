@@ -153,12 +153,12 @@ showGithubRepo( user="pbiecek", repo="archivist", method = "tags" )
 rm( model )
 rm( myplot123 )
 rm( qda1 )
-(VARmd5hash <- searchInGithubRepo( "varname:Sepal.Width", 
-                      user="pbiecek", repo="archivist" ))
-(NAMEmd5hash <- searchInGithubRepo( "name:qda1", 
-                      user="pbiecek", repo="archivist", branch="master" ))
-(CLASSmd5hash <- searchInGithubRepo( "class:ggplot", 
-                      user="pbiecek", repo="archivist", branch="master" ))
+(VARmd5hash <- searchInGithubRepo( "varname:Sepal.Width",
+                   user="pbiecek", repo="archivist" ))
+(NAMEmd5hash <- searchInGithubRepo( "name:qda1",
+                   user="pbiecek", repo="archivist", branch="master" ))
+(CLASSmd5hash <- searchInGithubRepo( "class:ggplot",
+                   user="pbiecek", repo="archivist", branch="master" ))
 
 
 loadFromGithubRepo( "ff575c261c", user="pbiecek", repo="archivist")

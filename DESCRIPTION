@@ -1,7 +1,8 @@
 Package: archivist
 Version: 1.0
 Type: Package
-Title: Tools for archivisation of R datasets and plots, objects and other artifacts.
+Title: Tools for archivisation of R datasets and plots, objects and other
+    artifacts.
 Authors@R: c(
     person("Przemyslaw", "Biecek", role = c("aut", "cre"),
     email = "przemyslaw.biecek@gmail.com"),
