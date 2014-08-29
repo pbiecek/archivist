@@ -30,10 +30,12 @@
 #' Przemyslaw Biecek [aut, cre] \email{przemyslaw.biecek@@gmail.com} \cr
 #' Marcin Kosinski [aut] \email{m.p.kosinski@@gmail.com}
 #' 
-#' 
+#' @import RCurl
+#' @import httr
 #' @import RSQLite
 #' @import jsonlite
 #' @import lubridate
+#' @import digest
 #' @family archivist
 #' @name archivist-package
 #' @docType package

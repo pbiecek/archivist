@@ -20,7 +20,6 @@ Depends:
     lubridate,
     jsonlite
 Imports:
-    rjson,
     RCurl,
     digest,
     httr

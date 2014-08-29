@@ -83,10 +83,6 @@ copyGithubRepo <- function( repoTo, md5hashes, user, repo, branch="master"){
   
 }
 
-#' @import rjson
-#' @import RCurl
-#' @import digest
-#' @import httr
 copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, branch ){
   
   # clone artifact table
@@ -143,10 +139,6 @@ copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, bra
   
   }
 
-#' @import rjson
-#' @import RCurl
-#' @import digest
-#' @import httr
 cloneGithubFile <- function( file, repo, user, branch, to ){
     URLfile <- paste0( get( ".GithubURL", envir = .ArchivistEnv) , 
                        user, "/", repo, "/", branch, "/", file) 
