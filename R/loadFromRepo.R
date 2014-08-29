@@ -224,7 +224,6 @@ loadFromGithubRepo <- function( md5hash, repo, user, branch = "master" , value =
       
   # load artifacts from Repository
   if ( !value ){
-    library(RCurl)
     
     # sapply and replicate because of abbreviation mode can find more than 1 md5hash
     tmpobjectS <- lapply( md5hash, function(x){
@@ -240,8 +239,7 @@ loadFromGithubRepo <- function( md5hash, repo, user, branch = "master" , value =
 
   }else{
     # returns objects as value
-    library(RCurl)
-    
+
     # sapply and replicate because of abbreviation mode can find more than 1 md5hash
     tmpobjectS <- lapply( md5hash, function(x){
       getBinaryURL( paste0( get( x = ".GithubURL", envir = .ArchivistEnv), "/", user, "/", repo, 
