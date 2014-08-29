@@ -3,3 +3,8 @@
 
 # Travis scripts
 .travis.yml
+
+backpack.db
+buildingVignette.R
+gallery
+README.md
