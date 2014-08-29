@@ -152,7 +152,8 @@ summaryLocalRepo( exampleRepoDir )
 rmFromRepo(agn1Md5hash, repoDir = exampleRepoDir, removeData = TRUE, removeMiniature = TRUE)
 
 # soultion to that is
-rmFromRepo(agn1Md5hash, repoDir = exampleRepoDir, removeData = TRUE, removeMiniature = TRUE, force = TRUE)
+rmFromRepo(agn1Md5hash, repoDir = exampleRepoDir, removeData = TRUE, removeMiniature = TRUE, 
+           force = TRUE)
 # removeMiniature = TRUE removes miniatures from gallery folder
 
 # rest of artifacts can be removed e.g. like this
