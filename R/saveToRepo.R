@@ -233,6 +233,10 @@ saveToRepo <- function( artifact, repoDir, archiveData = TRUE,
   }
   
   # save artifact to .rd file
+  if ( rememberName & !(objectName %in% ls(envir = parent.frame(1)))) {
+    warning( paste0("Object with the name ", objectName, ", not found. Saving without name."))
+    rememberName = FALSE
+  }
   if ( rememberName ){
     save( file = paste0(repoDir,"gallery/", md5hash, ".rda"), ascii = TRUE, list = objectName,  envir = parent.frame(1))
   }else{ 
