@@ -204,6 +204,10 @@ loadFromLocalRepo <- function( md5hash, repoDir, value = FALSE ){
   }
 }
 
+#' @import rjson
+#' @import RCurl
+#' @import digest
+#' @import httr
 #' @rdname loadFromLocalRepo
 #' @export
 loadFromGithubRepo <- function( md5hash, repo, user, branch = "master" , value = FALSE ){

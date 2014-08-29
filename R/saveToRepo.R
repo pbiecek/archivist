@@ -206,6 +206,10 @@
 #' }
 #' @family archivist
 #' @rdname saveToRepo
+#' @import rjson
+#' @import RCurl
+#' @import digest
+#' @import httr
 #' @export
 saveToRepo <- function( artifact, repoDir, archiveData = TRUE, 
                         archiveTags = TRUE, 

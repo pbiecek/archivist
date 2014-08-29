@@ -146,7 +146,6 @@ readSingleTable <- function( dir, table, realDBname = TRUE ){
 # for Github version funtion tha require to load database
 downloadDB <- function( repo, user, branch ){
    URLdb <- paste0( get( ".GithubURL", envir = .ArchivistEnv) , user, "/", repo, "/", branch, "/backpack.db") 
-   library( RCurl )
    db <- getBinaryURL( URLdb, ssl.verifypeer = FALSE )
    Temp2 <- tempfile()
    file.create( Temp2 )
