@@ -120,8 +120,6 @@ copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, bra
   } else {
     # if github mode
     # get files list
-    library( httr )
-    library(RCurl)
     options(RCurlOptions = list(cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl")))
     req <- GET( paste0( "https://api.github.com/repos/", user, "/",
                         repo, "/git/trees/", branch, "?recursive=1" ) )
@@ -146,7 +144,6 @@ copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, bra
 cloneGithubFile <- function( file, repo, user, branch, to ){
     URLfile <- paste0( get( ".GithubURL", envir = .ArchivistEnv) , 
                        user, "/", repo, "/", branch, "/", file) 
-    library( RCurl )
     fileFromGithub <- getBinaryURL( URLfile, ssl.verifypeer = FALSE )
     file.create( paste0( to, file ) )
     writeBin( fileFromGithub, paste0( to, file ) )
