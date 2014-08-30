@@ -240,9 +240,11 @@ saveToRepo <- function( artifact, repoDir, archiveData = TRUE,
   if ( rememberName ){
     save( file = paste0(repoDir,"gallery/", md5hash, ".rda"), ascii = TRUE, list = objectName,  envir = parent.frame(1))
   }else{ 
-    assign( value = artifact, x = md5hash, envir = .GlobalEnv )
-    save( file = paste0(repoDir, "gallery/", md5hash, ".rda"),  ascii=TRUE, list = md5hash, envir = .GlobalEnv  )
-    
+#    assign( value = artifact, x = md5hash, envir = .GlobalEnv )
+#    save( file = paste0(repoDir, "gallery/", md5hash, ".rda"),  ascii=TRUE, list = md5hash, envir = .GlobalEnv  )
+    assign( value = artifact, x = md5hash, envir = .ArchivistEnv )
+    save( file = paste0(repoDir, "gallery/", md5hash, ".rda"),  ascii=TRUE, list = md5hash, envir = .ArchivistEnv  )
+    rm(list = md5hash, envir = .ArchivistEnv)
   }
   
   # add entry to database 
