@@ -1,6 +1,6 @@
 ##    archivist package for R
 ##
-#' @title Tools for archivisation of R objects
+#' @title Tools for storing, restoring and searching for R objects
 #'
 #' @description
 #' Data exploration and modelling is a process in which a lot of data artifacts are produced. 
@@ -14,11 +14,11 @@
 #'   together with their metadata and relations.
 #' Archivist allows to share artifacts with others, either through shared folder or github.
 #' Archivist allows to look for already created artifacts by using it's class, 
-#'   name, date of the creation or other properties.
+#'   name, date of the creation or other attributes, properties or meta-tags.
 #' Makes it easy to restore such artifacts.
 #' Archivist allows to check if new artifact is the exact 
 #'   copy that was produced some time ago.
-#'   That might be usefull either for testing or caching.
+#'   That might be useful either for testing or caching.
 #'   
 #'
 #'
@@ -33,6 +33,7 @@
 #' @import RCurl
 #' @import httr
 #' @import RSQLite
+#' @import DBI
 #' @import jsonlite
 #' @import lubridate
 #' @import digest
