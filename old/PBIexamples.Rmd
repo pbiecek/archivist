@@ -1,0 +1,117 @@
+<!--
+%\VignetteEngine{knitr::docco_linear}
+%\VignetteIndexEntry{The archivist examples}
+-->
+
+# Installation
+\dontrun{
+```{r, message=FALSE}
+require(devtools)
+require(dplyr)
+if (!require(archivist)) {
+  install_github("pbiecek/archivist", build_vignettes=FALSE)
+}
+```
+
+# Download plots from GitHub
+
+```{r, message=FALSE}
+
+summaryGithubRepo("graphGallery", "pbiecek")
+
+(allObject <- searchInGithubRepo( list("2005-05-27", now()), 
+                    user = "pbiecek", repo = "graphGallery"))
+
+(plots <- searchInGithubRepo( "class:ggplot", 
+                    user = "pbiecek", repo = "graphGallery"))
+
+#
+# example plots
+loadFromGithubRepo( md5hash = "fcd70d55b874201d2bece12f591a2ec4" , 
+                    user = "pbiecek", repo = "graphGallery", value=TRUE)
+
+loadFromGithubRepo( md5hash = "b6f183dfd0efdc8c33fa89b9038716c5" , 
+                    user = "pbiecek", repo = "graphGallery", value=TRUE)
+
+```
+
+# Manage local repo
+
+```{r, message=FALSE}
+
+myRepo <- tempdir()
+createEmptyRepo( myRepo )
+
+data( iris )
+saveToRepo(iris, myRepo)
+# same object causes warning
+saveToRepo(iris, myRepo)
+
+searchInLocalRepo( pattern = "name:ir",  myRepo, fixed=FALSE)
+searchInLocalRepo( pattern = "name:iris",  myRepo)
+searchInLocalRepo( pattern = "class:data.frame",  myRepo)
+searchInLocalRepo( pattern = c("2012-01-01", "2014-01-01"),  myRepo)
+
+rm( iris )
+loadFromLocalRepo( "ff575c261c949d073b2895b05d",  myRepo)
+iris2 <- loadFromLocalRepo( "ff575c261c949d073b2895b05d",  myRepo, value=TRUE)
+
+summaryLocalRepo(myRepo)
+
+rmFromRepo( "ff575c261c949d073b2895b05d1097c3", myRepo)
+
+# TO fix
+# summaryLocalRepo(myRepo)
+
+```
+
+# Let's add a plot
+
+```{r, message=FALSE}
+if (!require(eurostat)) {
+  install_github("rOpenGov/eurostat")
+}
+
+library(ggplot2)
+
+t1 <- get_eurostat("tsdtr420") %>% 
+       filter(geo %in% c("UK", "SK", "FR", "PL", "ES", "PT", "LV"))
+head(t1)
+(pl <- ggplot(t1, aes(x = time, y = value, color=geo, group=geo, shape=geo)) +
+          geom_point(size=4) + 
+          geom_line() + theme_bw() + ggtitle("People killed in road accidents"))
+
+(ob <- saveToRepo(pl, myRepo))
+
+rmFromRepo( ob, myRepo)
+
+deleteRepo(myRepo)
+
+```
+
+# Cache
+
+```{r, message=FALSE}
+
+cache <- function(cacheRepo, FUN, ...) {
+  tmpl <- list(...)
+  tmpl$.FUN <- FUN
+  outputHash <- digest(tmpl)
+  isInRepo <- searchInLocalRepo(paste0("cacheId:", outputHash), cacheRepo)
+  if (length(isInRepo) > 0)
+    return(loadFromLocalRepo(isInRepo[1], repoDir = cacheRepo, value = TRUE))
+  
+  output <- do.call(FUN, list(...))
+  attr( output, "tags") <- paste0("cacheId:", outputHash)
+  attr( output, "call") <- ""
+  saveToRepo(output, repoDir = cacheRepo, archiveData = TRUE, archiveMiniature = FALSE, rememberName = FALSE)
+  output
+}
+
+cacheRepo <- tempdir()
+createEmptyRepo( cacheRepo )
+
+# in progress, waiting for #30
+cache(cacheRepo, lm, data=iris, Petal.Length~Species)
+
+```
