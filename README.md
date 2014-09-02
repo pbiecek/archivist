@@ -32,6 +32,8 @@ help(package="archivist")
 
 <a href="https://rawgit.com/pbiecek/archivist/master/vignettes/cacheUseCase.html">Cache with the archivist package</a>
 
+<a href="https://rawgit.com/pbiecek/archivist/master/vignettes/accessibilityUseCase.html">Retrieving all plots with other github repository (example with flights data from Hadley Wickham useR!2014 tutorial)</a>
+
 <a href="https://rawgit.com/MarcinKosinski/Museum/master/chaining.html">Archiving artifacts with their chaining code</a>
 
 
