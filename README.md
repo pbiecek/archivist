@@ -31,7 +31,7 @@ help(package="archivist")
 <h5> The list of use-cases: </h5>
 
 <a href="https://rawgit.com/pbiecek/archivist/master/vignette/cacheUseCase.html">Cache with the archivist package</a>
-
+[Archiving artifacts with their chaining code.](https://rawgit.com/MarcinKosinski/Museum/master/chaining.html)
 
 <h5> Authors of the project: </h5>
 > Przemysław Biecek, przemyslaw.biecek@gmail.com
