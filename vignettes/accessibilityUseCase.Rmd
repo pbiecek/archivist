@@ -5,94 +5,96 @@
 
 # Use case: retrieving partial results
 
-
-
-open science rises new challenges
-one of them is reproducibility
-yet another is accessibility.
-When working with data scientist would like to store and share partial results
-and being able to reproduce results of others we would like to be 100% that we got exactly same results.
-In many cases it is not enough to store partial results as text files because without additional data they are hard to browse
-
-Archivist helps in the accessibility part of open science
-one can store partial results, search in repository of artefact, 
-share artefacts with others or itself,
-add tags and metadata for their artefacts
-
-
-
-
-
-
 The archivist package allows to store, restore and look for R objects in repositories stored on hard disk. There are different strategies that can be used to find an object, through it's name, date of creation of meta data. The package is mainly designed as a repository of artifacts, but it can be used in different use-cases.
 
-Let's see how it can be used as caching engine.
 
-Let's consider a function with few arguments, which evaluation may takes a significant amount of time. If there is a chance that the function will be executed with same parameteres more than just one, it would be desireble to cache results to avoid unncessary evaluations.
+Open science rises new challenges, one of them is reproducibility yet another is availability of results.
 
-Such cache can be easily constructed with the archivist package.
+When working with data scientists should not only be able to reproduce others results 
+but also would like to make sure that they got 100% the same that others.
 
-# Heavyweight function
+Archivist helps in the accessibility part of open science.
+One can store partial results, search in repository of artifact, 
+share artifacts with others or himself.
 
-Let's see an example. The ,,Heavyweight'' function 'getMaxDistribution' summarizes the distribution of maximum from N draw of random variables from distribuition D with the use of R replications.
+Below we are using some artifacts created during useR!2014 tutorial about dplyr given by Hadley Wickham.
 
-```{r, message=FALSE}
+These artifacts are stored on my github repository.
+One can seek for all ggplots, plot them with their md5hashes,
+and choose the one that it's looked for
+.
 
-getMaxDistribution <- function(D = rnorm, N = 10, R = 1000000) {
-  res <- replicate(R, max(D(N)))
-  summary(res)
-}
 
-system.time( getMaxDistribution(rnorm, 10) )
-system.time( getMaxDistribution(rexp, 20) )
-system.time( getMaxDistribution(rnorm, 10) )
+```{r, message=FALSE, warning=FALSE, fig.width=15, fig.height=15}
 
-```
+library(archivist)
+library(grid)
+library(gridExtra)
+library(ggplot2)
 
-Now, let's load the archivist package and prepare a repository for cached objects.
+md5plots <- searchInGithubRepo(pattern = "class:ggplot", repo = "graphGallery", user = "pbiecek", fixed = FALSE)
+plots <- lapply(md5plots, function(pl) 
+  loadFromGithubRepo(md5hash = pl, 
+                   repo = "graphGallery", user = "pbiecek", value = TRUE) + ggtitle(pl))
 
-# Cache preparation
-```{r, message=FALSE}
-require(devtools)
-if (!require(archivist))   install_github("pbiecek/archivist", build_vignettes=FALSE)
+do.call("grid.arrange", c(plots, ncol=round(sqrt(length(md5plots)))))
 
-cache <- function(cacheRepo, FUN, ...) {
-  tmpl <- list(...)
-  tmpl$.FUN <- FUN
-  outputHash <- digest(tmpl)
-  isInRepo <- searchInLocalRepo(paste0("cacheId:", outputHash), cacheRepo)
-  if (length(isInRepo) > 0)
-    return(loadFromLocalRepo(isInRepo[1], repoDir = cacheRepo, value = TRUE))
-  
-  output <- do.call(FUN, list(...))
-  attr( output, "tags") <- paste0("cacheId:", outputHash)
-  attr( output, "call") <- ""
-  saveToRepo(output, repoDir = cacheRepo, archiveData = TRUE, archiveMiniature = FALSE, rememberName = FALSE)
-  output
-}
-
-cacheRepo <- tempdir()
-createEmptyRepo( cacheRepo )
+summaryGithubRepo(repo = "graphGallery", user = "pbiecek")
 
 ```
 
-# How to work with cache
-
-The 'cacheRepo' is a folder with already evaluated function calls. 
-How to use it?
+How artifacts in this database were created.
 
 ```{r, message=FALSE}
-system.time( cache(cacheRepo, getMaxDistribution, rnorm, 10) )
-system.time( cache(cacheRepo, getMaxDistribution, rexp, 10) )
-system.time( cache(cacheRepo, getMaxDistribution, rnorm, 10) )
+# flightsRepo <- "~/GitHub/graphGallery/"
+# 
+# flights %>% 
+#   saveToRepo(flightsRepo)
+# 
+# hourly_delay <- flights %>% 
+#   filter(!is.na(dep_delay)) %>%
+#   group_by(date, hour) %>%
+#   summarise(
+#     delay = mean(dep_delay),
+#     n = n()
+#   ) %>% 
+#   filter(n > 10)
+# 
+# hourly_delay %>% 
+#   saveToRepo(flightsRepo)
+# 
+# flights %>%
+#   group_by(dest) %>%
+#   summarise(arr_delay = mean(arr_delay, na.rm = TRUE), n = n()) %>%
+#   arrange(desc(arr_delay)) %>% 
+#   saveToRepo(flightsRepo)
+# 
+# flights %>% 
+#   group_by(carrier, flight, dest) %>% 
+#   tally(sort = TRUE) %>%
+#   filter(n == 365) %>% 
+#   saveToRepo(flightsRepo)
+# 
+# flights %>% 
+#   group_by(carrier, flight, dest) %>% 
+#   filter(n() == 365) %>% 
+#   saveToRepo(flightsRepo)
+# 
+# per_hour <- flights %>%
+#   filter(cancelled == 0) %>%
+#   mutate(time = hour + minute / 60) %>%
+#   group_by(time) %>%
+#   summarise(arr_delay = mean(arr_delay, na.rm = TRUE), n = n())
+# 
+# per_hour %>% 
+#   saveToRepo(flightsRepo)
+# 
+# qplot(time, arr_delay, data = per_hour) %>% 
+#   saveToRepo(flightsRepo)
+# 
+# (ggplot(filter(per_hour, n > 30), aes(time, arr_delay)) + 
+#   geom_vline(xintercept = 5:24, colour = "white", size = 2) +
+#   geom_point()) %>% 
+#   saveToRepo(flightsRepo)
 
 ```
-
-The second evaluation of 'getMaxDistribution' is much, much faster. Results are just read from disk.
-
-# How the 'cache' function works?
-
-It create a md5 signature of the function FUN and it's arguments and use this signature as a key.
-If such key is present in the cache repository, then the object is just restored.
-If it's not present then the call is evaluated and result is stored.
-Note that, if 'cacheRepo' is a shared folder, then you get a shared cache repository!
