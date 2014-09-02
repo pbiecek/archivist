@@ -30,7 +30,7 @@ help(package="archivist")
 ```
 <h5> The list of use-cases: </h5>
 
-<a href="https://rawgit.com/pbiecek/archivist/master/vignette/cacheUseCase.html">Cache with the archivist package</a>
+<a href="https://rawgit.com/pbiecek/archivist/master/vignettes/cacheUseCase.html">Cache with the archivist package</a>
 
 <a href="https://rawgit.com/MarcinKosinski/Museum/master/chaining.html">Archiving artifacts with their chaining code</a>
 
