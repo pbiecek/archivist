@@ -10,7 +10,8 @@ The **archivist** package is very efficient and advantageous when the archived a
 Below are examples of creating artifacts with a chaining code, that requires using a `%>%` and  a `%.%` operators, offered by **dplyr** package.
 
 Let us prepare a [**Repository**](https://github.com/pbiecek/archivist/wiki/archivist-package-Repository) where archived artifacts will be stored.
-```{r, message=FALSE,comment="", warning=FALSE}
+
+```r
 library(devtools)
 install_github("archivist", "pbiecek")
 library(archivist)
@@ -19,7 +20,8 @@ createEmptyRepo( exampleRepoDir )
 ```
 
 Then one might create artifacts like those below. The code lines are ordered in chaining code, which will be used by `saveToRepo` function to store an artifact and archive it's origin code as a `name` of this artifact.
-```{r, message=FALSE,comment="", warning=FALSE}
+
+```r
 # example 1
 library(dplyr)
 
@@ -35,9 +37,14 @@ hflights %>%
    saveToRepo( exampleRepoDir )  
 ```
 
+```
+[1] "9013563d1069359f9b7d7a49c49b0a1f"
+```
+
 One may see a vast difference in code evalution when using chaining code.
 Here is an example of traditional `R` call and one that uses `chaining code` philosophy.
-```{r, message=FALSE,comment="", warning=FALSE}
+
+```r
 # example 2
 library(Lahman)
 
@@ -45,7 +52,20 @@ library(Lahman)
 players <- group_by(Batting, playerID)
 games <- summarise(players, total = sum(G))
 head(arrange(games, desc(total)), 5)
+```
 
+```
+Source: local data frame [5 x 2]
+
+   playerID total
+1  rosepe01  3562
+2 yastrca01  3308
+3 aaronha01  3298
+4 henderi01  3081
+5  cobbty01  3035
+```
+
+```r
 # Corresponding chaining code
 Batting %.%
    group_by(playerID) %.%
@@ -55,8 +75,13 @@ Batting %.%
    saveToRepo( exampleRepoDir )
 ```
 
+```
+[1] "6defe8a423a1363463a3ed98435c02e8"
+```
+
 Many of various operations can be performed on a single `data.frame` before one consideres to archive this artifacts. The **archivist** guarantees that all of them will be `archived`, which means a code alone will no longer be needed to be stored in a separate file. The `CrimeStatebyState` data set can be downloaded from [here](https://github.com/MarcinKosinski/Museum).
-```{r, message=FALSE,comment="", warning=FALSE}
+
+```r
 # example 3
 crime.by.state <- read.csv("CrimeStatebyState.csv")
 crime.by.state %.%
@@ -69,8 +94,13 @@ crime.by.state %.%
    saveToRepo( exampleRepoDir )
 ```
 
+```
+[1] "09cbff009bfb9b8535f1bb65f5cdec1b"
+```
+
 Dozens of artifacts may now be stored in one, full of links **Repository**.
-```{r, message=FALSE,comment="", warning=FALSE}
+
+```r
 # example 4
 library(ggplot2)
 
@@ -84,9 +114,14 @@ head( 10) %>%
    saveToRepo( exampleRepoDir )
 ```
 
+```
+[1] "6a9d5d46c5c36a0cbe06b4acabcd03e9"
+```
+
 One might save artifact's [md5hash](https://github.com/pbiecek/archivist/wiki/archivist-package-md5hash) in case to check his origin stored in a [Tag](https://github.com/pbiecek/archivist/wiki/archivist-package---Tags)
 named `name`.
-```{r, message=FALSE,comment="", warning=FALSE}
+
+```r
 # example 5
 data(mtcars)
 hash <- mtcars %.% 
@@ -95,26 +130,51 @@ hash <- mtcars %.%
    summarise(avgmpg = mean(mpg), avgwt = mean(wt)) %.%
    filter(avgmpg > 20) %>%
    saveToRepo( exampleRepoDir )
-
 ```
 
 After archiving all desired artifacts created with their chaining code, the summary of the **Repository** might be performed. Below is a single call of stored artifacts' names and the summary of the whole created **Repository** in this use case.
 
-```{r, message=FALSE,comment="", warning=FALSE}
+
+```r
 # summary
 showLocalRepo( exampleRepoDir )[, 2]
-summaryLocalRepo( exampleRepoDir )
+```
 
+```
+[1] "hflights %>% group_by(Year, Month, DayofMonth) %>% select(Year:DayofMonth,     ArrDelay, DepDelay) %>% summarise(arr = mean(ArrDelay, na.rm = TRUE),     dep = mean(DepDelay, na.rm = TRUE)) %>% filter(arr > 30 |     dep > 30)"                              
+[2] "Batting %.% group_by(playerID) %.% summarise(total = sum(G)) %.%     arrange(desc(total)) %.% head(5)"                                                                                                                                                         
+[3] "crime.by.state %.% filter(State == \"New York\", Year == 2005) %.%     arrange(desc(Count)) %.% select(Type.of.Crime, Count) %.%     mutate(Proportion = Count/sum(Count)) %.% group_by(Type.of.Crime) %.%     summarise(num.types = n(), counts = sum(Count))"
+[4] "diamonds %.% group_by(cut, clarity, color) %.% summarize(meancarat = mean(carat,     na.rm = TRUE), ndiamonds = length(carat)) %>% head(10)"                                                                                                                   
+[5] "mtcars %.% group_by(cyl, am) %.% select(mpg, cyl, wt, am) %.%     summarise(avgmpg = mean(mpg), avgwt = mean(wt)) %.% filter(avgmpg >     20)"                                                                                                                 
+```
+
+```r
+summaryLocalRepo( exampleRepoDir )
+```
+
+```
+Number of archived artifacts in the Repository:  5 
+Number of archived datasets in the Repository:  0 
+Number of various classes archived in the Repository: 
+            Number
+grouped_df      3
+tbl_df          2
+Saves per day in the Repository: 
+            Saves
+2014-09-03     5
 ```
 
 One can restore the origin of the artifact created in example 5.
-```{r, message=FALSE,comment="", warning=FALSE}
+
+```r
 returnTag( md5hash = hash, exampleRepoDir )
 ```
 
-```{r, echo=FALSE, results='hide'}
-deleteRepo( exampleRepoDir )
 ```
+[1] "mtcars %.% group_by(cyl, am) %.% select(mpg, cyl, wt, am) %.%     summarise(avgmpg = mean(mpg), avgwt = mean(wt)) %.% filter(avgmpg >     20)"
+```
+
+
 
 
 
