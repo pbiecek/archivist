@@ -13,6 +13,7 @@ Let us prepare a [**Repository**](https://github.com/pbiecek/archivist/wiki/arch
 ```{r, message=FALSE,comment="", warning=FALSE}
 library(devtools)
 install_github("archivist", "pbiecek")
+library(archivist)
 exampleRepoDir <- getwd()
 createEmptyRepo( exampleRepoDir )
 ```
@@ -109,6 +110,10 @@ summaryLocalRepo( exampleRepoDir )
 One can restore the origin of artifact created in example 5.
 ```{r, message=FALSE,comment="", warning=FALSE}
 returnTag( md5hash = hash, exampleRepoDir )
+```
+
+```{r, echo=FALSE, results='hide'}
+deleteRepo( exampleRepoDir )
 ```
 
 
