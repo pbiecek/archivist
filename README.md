@@ -1,7 +1,7 @@
-A set of tools for datasets and plots archivisation
+A set of tools for datasets and plots archiving
 =====================================================
 
-Project is supported by [Travis CI](https://travis-ci.org/).
+Project is supported by [Travis CI](https://travis-ci.org/) and [waffle.io](https://waffle.io/).
 [![Build Status](https://api.travis-ci.org/pbiecek/archivist.png)](https://travis-ci.org/pbiecek/archivist)
 [![Stories in Ready](https://badge.waffle.io/pbiecek/archivist.png?label=READY)](http://waffle.io/pbiecek/archivist)
 
