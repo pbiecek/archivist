@@ -28,13 +28,13 @@ Make sure you have [rtools](http://cran.r-project.org/bin/windows/Rtools/) insta
 ```{Ruby}
 help(package="archivist")
 ```
-<h5> The list of use-cases: </h5>
+<h4> The list of use-cases: </h4>
 
 <a href="https://rawgit.com/pbiecek/archivist/master/vignettes/cacheUseCase.html">Cache with the archivist package</a>
 
 <a href="https://rawgit.com/pbiecek/archivist/master/vignettes/accessibilityUseCase.html">Retrieving all plots with other github repository (example with flights data from Hadley Wickham useR!2014 tutorial)</a>
 
-<a href="https://rawgit.com/MarcinKosinski/Museum/master/chaining.html">Archiving artifacts with their chaining code</a>
+<a href="https://rawgit.com/pbiecek/archivist/master/vignettes/chainingUseCase.html">Archiving artifacts with their chaining code</a>
 
 
 <h5> Authors of the project: </h5>
