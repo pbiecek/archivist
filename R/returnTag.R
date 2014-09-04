@@ -86,7 +86,7 @@ returnTag <- function( md5hash, repoDir, local = TRUE, tag ){
   Tags <- unique( executeSingleQuery( repoDir, realDBname = local,
                       paste0("SELECT DISTINCT tag FROM tag WHERE tag LIKE",
                              "'", tag, "%'", "AND artifact='", md5hash,"'") ) )
-  return( ar.character( Tags[, 1] ) )
+  return( as.character( Tags[, 1] ) )
 }
 
 
