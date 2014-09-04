@@ -315,7 +315,8 @@ Other archivist: \code{\link{Repository}};
   \code{\link{createEmptyRepo}}; \code{\link{deleteRepo}};
   \code{\link{loadFromGithubRepo}},
   \code{\link{loadFromLocalRepo}}; \code{\link{md5hash}};
-  \code{\link{returnTag}}; \code{\link{rmFromRepo}};
+  \code{\link{returnTagGithub}},
+  \code{\link{returnTagLocal}}; \code{\link{rmFromRepo}};
   \code{\link{saveToRepo}};
   \code{\link{searchInGithubRepo}},
   \code{\link{searchInLocalRepo}};
