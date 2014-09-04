@@ -68,7 +68,7 @@ returnTagLocal <- function( md5hash, repoDir, tag ="name"){
   # sub( pattern = paste0(tag, ":"), replacement = "", x = tagToReturn)
   # there are so many kind of tags (proposed by archivist or by an user)
   # that it will be very difficult to remove those "name:" at the beginning
-  returnTag( md5hash, repoDir = Temp, tag = tag )
+  returnTag( md5hash, repoDir = repoDir , tag = tag )
 }
 
 #' @family archivist
