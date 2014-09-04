@@ -83,9 +83,10 @@ returnTagGithub <- function( md5hash, user, repo, branch = "master", tag ="name"
 }
 
 returnTag <- function( md5hash, repoDir, local = TRUE, tag ){
-  executeSingleQuery( repoDir, realDBname = local,
+  Tags <- unique( executeSingleQuery( repoDir, realDBname = local,
                       paste0("SELECT DISTINCT tag FROM tag WHERE tag LIKE",
-                             "'", tag, "%'", "AND artifact='", md5hash,"'") )
+                             "'", tag, "%'", "AND artifact='", md5hash,"'") ) )
+  return( ar.character( Tags[, 1] ) )
 }
 
 
