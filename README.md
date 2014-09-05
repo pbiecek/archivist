@@ -38,6 +38,9 @@ help(package="archivist")
 
 <a href="https://rawgit.com/pbiecek/archivist/master/vignettes/chainingUseCase.html">Archiving artifacts with their chaining code</a>
 
+<a href="https://rawgit.com/pbiecek/archivist/master/vignettes/justGetIT.html">Just get the object</a>
+
+
 
 <h5> Authors of the project: </h5>
 > Przemysław Biecek, przemyslaw.biecek@gmail.com
