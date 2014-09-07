@@ -3,9 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <title>Archiving artifacts with their chaining code</title>
-<link rel="stylesheet" media="all" href="http://jashkenas.github.io/docco/resources/linear/public/stylesheets/normalize.css" />
-<link rel="stylesheet" media="all" href="http://jashkenas.github.io/docco/resources/linear/docco.css" />
-<link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/default.min.css">
+<link rel="stylesheet" media="all" href="https://jashkenas.github.io/docco/resources/linear/public/stylesheets/normalize.css" />
+<link rel="stylesheet" media="all" href="https://jashkenas.github.io/docco/resources/linear/docco.css" />
+<link rel="stylesheet" href="https://yandex.st/highlightjs/8.0/styles/default.min.css">
 <style type="text/css">
 img{display:block;margin:auto;}
 .container{width:920px;}
@@ -13,8 +13,8 @@ img{display:block;margin:auto;}
 .page pre{width:768px;}
 pre, code{font-size:90%;}
 </style>
-<script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
-<script src="http://yandex.st/highlightjs/8.0/languages/r.min.js"></script>
+<script src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+<script src="https://yandex.st/highlightjs/8.0/languages/r.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
 
@@ -114,7 +114,8 @@ crime.by.state %.%
 <pre><code>[1] &quot;09cbff009bfb9b8535f1bb65f5cdec1b&quot;
 </code></pre>
 
-<p>Dozens of artifacts may now be stored in one, full of links <strong>Repository</strong>.</p>
+<p>Dozens of artifacts may now be stored in one, full of links <strong>Repository</strong>. Every of them
+might have additional Tag specified by an user. This will simplify searching for this artifact in the future.</p>
 
 <pre><code class="r"># example 4
 library(ggplot2)
@@ -125,11 +126,12 @@ diamonds %.%
       meancarat = mean(carat, na.rm = TRUE), 
       ndiamonds = length(carat)
    ) %&gt;%
-head( 10) %&gt;%
+   head( 10) %&gt;%
+   `attr&lt;-`(&quot;tags&quot;, &quot;operations on diamonds&quot;) %&gt;%
    saveToRepo( exampleRepoDir )
 </code></pre>
 
-<pre><code>[1] &quot;6a9d5d46c5c36a0cbe06b4acabcd03e9&quot;
+<pre><code>[1] &quot;d68774d04b8b2a2c608cf68216d00cc6&quot;
 </code></pre>
 
 <p>One might save artifact&#39;s <a href="https://github.com/pbiecek/archivist/wiki/archivist-package-md5hash">md5hash</a> in case to check his origin stored in a <a href="https://github.com/pbiecek/archivist/wiki/archivist-package---Tags">Tag</a>
@@ -154,7 +156,7 @@ showLocalRepo( exampleRepoDir )[, 2]
 <pre><code>[1] &quot;hflights %&gt;% group_by(Year, Month, DayofMonth) %&gt;% select(Year:DayofMonth,     ArrDelay, DepDelay) %&gt;% summarise(arr = mean(ArrDelay, na.rm = TRUE),     dep = mean(DepDelay, na.rm = TRUE)) %&gt;% filter(arr &gt; 30 |     dep &gt; 30)&quot;                              
 [2] &quot;Batting %.% group_by(playerID) %.% summarise(total = sum(G)) %.%     arrange(desc(total)) %.% head(5)&quot;                                                                                                                                                         
 [3] &quot;crime.by.state %.% filter(State == \&quot;New York\&quot;, Year == 2005) %.%     arrange(desc(Count)) %.% select(Type.of.Crime, Count) %.%     mutate(Proportion = Count/sum(Count)) %.% group_by(Type.of.Crime) %.%     summarise(num.types = n(), counts = sum(Count))&quot;
-[4] &quot;diamonds %.% group_by(cut, clarity, color) %.% summarize(meancarat = mean(carat,     na.rm = TRUE), ndiamonds = length(carat)) %&gt;% head(10)&quot;                                                                                                                   
+[4] &quot;diamonds %.% group_by(cut, clarity, color) %.% summarize(meancarat = mean(carat,     na.rm = TRUE), ndiamonds = length(carat)) %&gt;% head(10) %&gt;%     `attr&lt;-`(\&quot;tags\&quot;, \&quot;operations on diamonds\&quot;)&quot;                                                            
 [5] &quot;mtcars %.% group_by(cyl, am) %.% select(mpg, cyl, wt, am) %.%     summarise(avgmpg = mean(mpg), avgwt = mean(wt)) %.% filter(avgmpg &gt;     20)&quot;                                                                                                                 
 </code></pre>
 
@@ -166,18 +168,49 @@ Number of archived datasets in the Repository:  0
 Number of various classes archived in the Repository: 
             Number
 grouped_df      3
-tbl_df          2
+tbl_df          5
+tbl             5
+data.frame      5
 Saves per day in the Repository: 
             Saves
-2014-09-03     5
+2014-09-04     5
 </code></pre>
 
 <p>One can restore the origin of the artifact created in example 5.</p>
 
-<pre><code class="r">returnTag( md5hash = hash, exampleRepoDir )
+<pre><code class="r">returnTagLocal( md5hash = hash, exampleRepoDir )
 </code></pre>
 
-<pre><code>[1] &quot;mtcars %.% group_by(cyl, am) %.% select(mpg, cyl, wt, am) %.%     summarise(avgmpg = mean(mpg), avgwt = mean(wt)) %.% filter(avgmpg &gt;     20)&quot;
+<pre><code>[1] &quot;name:mtcars %.% group_by(cyl, am) %.% select(mpg, cyl, wt, am) %.%     summarise(avgmpg = mean(mpg), avgwt = mean(wt)) %.% filter(avgmpg &gt;     20)&quot;
+</code></pre>
+
+<p>There is always a way to restore the origin when one does not remember <code>md5hash</code> but remembers one or more <code>Tags</code> related to the artifact. As was shown in example 4, that artifact had special <code>Tag</code> named <code>operations on diamonds</code>. Easy <code>searchInLocalRepo</code> call can return <code>md5hash</code> of the artifact related to this <code>Tag</code>, and then the origin (saved as <code>name</code> <code>Tag</code>) can be restored.</p>
+
+<pre><code class="r">hash2 &lt;- searchInLocalRepo( pattern = &quot;operations on diamonds&quot;, exampleRepoDir )
+returnTagLocal( md5hash = hash2, exampleRepoDir )
+</code></pre>
+
+<pre><code>[1] &quot;name:diamonds %.% group_by(cut, clarity, color) %.% summarize(meancarat = mean(carat,     na.rm = TRUE), ndiamonds = length(carat)) %&gt;% head(10) %&gt;%     `attr&lt;-`(\&quot;tags\&quot;, \&quot;operations on diamonds\&quot;)&quot;
+</code></pre>
+
+<p>It could also be done with chaining code sequence.</p>
+
+<pre><code class="r">&quot;operations on diamonds&quot; %&gt;%
+  searchInLocalRepo( exampleRepoDir ) %&gt;%
+  returnTagLocal( exampleRepoDir )
+</code></pre>
+
+<pre><code>[1] &quot;name:diamonds %.% group_by(cut, clarity, color) %.% summarize(meancarat = mean(carat,     na.rm = TRUE), ndiamonds = length(carat)) %&gt;% head(10) %&gt;%     `attr&lt;-`(\&quot;tags\&quot;, \&quot;operations on diamonds\&quot;)&quot;
+</code></pre>
+
+<h5> Note. </h5>
+
+<ul>
+<li>Note that the last operator should be <code>%&gt;%</code> instead of <code>%.%</code>, if one urge to store the origin of the artifact.</li>
+<li>The <code>attr&lt;-</code>(&ldquo;tags&rdquo;, &ldquo;operations on diamonds&rdquo;) is the equivalent of <code>attr( &quot;tags&quot;) &lt;- &quot;operations on diamonds&quot;</code> but this form seem to not cooperate with <code>%&gt;%</code> operator. Also the attributes might be set in chaining code using <code>setattr</code> from <code>data.table</code> package.</li>
+</ul>
+
+<pre><code class="r">iris %&gt;% setattr(., &quot;date&quot;, Sys.Date())
 </code></pre>
 
       <div class="fleur">h</div>

@@ -4,13 +4,16 @@
 -->
 
 # Archiving artifacts with their chaining code
+```{r}
+
+```
 
 The **archivist** package is very efficient and advantageous when the archived artifacts were created with a chaining code, offered by [dplyr](https://github.com/hadley/dplyr) package. It is higly useful because the origin of the artifact is archived, what means that the artifact can be easly reproduced and it's origin code is stored for future use.
 
 Below are examples of creating artifacts with a chaining code, that requires using a `%>%` and  a `%.%` operators, offered by **dplyr** package.
 
 Let us prepare a [**Repository**](https://github.com/pbiecek/archivist/wiki/archivist-package-Repository) where archived artifacts will be stored.
-```{r, message=FALSE,comment="", warning=FALSE}
+```{r, message=FALSE,comment="", warning=FALSE, cache=TRUE}
 library(devtools)
 install_github("archivist", "pbiecek")
 library(archivist)
@@ -69,7 +72,8 @@ crime.by.state %.%
    saveToRepo( exampleRepoDir )
 ```
 
-Dozens of artifacts may now be stored in one, full of links **Repository**.
+Dozens of artifacts may now be stored in one, full of links **Repository**. Every of them
+might have additional Tag specified by an user. This will simplify searching for this artifact in the future.
 ```{r, message=FALSE,comment="", warning=FALSE}
 # example 4
 library(ggplot2)
@@ -80,7 +84,8 @@ diamonds %.%
       meancarat = mean(carat, na.rm = TRUE), 
       ndiamonds = length(carat)
    ) %>%
-head( 10) %>%
+   head( 10) %>%
+   `attr<-`("tags", "operations on diamonds") %>%
    saveToRepo( exampleRepoDir )
 ```
 
@@ -109,7 +114,29 @@ summaryLocalRepo( exampleRepoDir )
 
 One can restore the origin of the artifact created in example 5.
 ```{r, message=FALSE,comment="", warning=FALSE}
-returnTag( md5hash = hash, exampleRepoDir )
+returnTagLocal( md5hash = hash, exampleRepoDir )
+```
+
+There is always a way to restore the origin when one does not remember `md5hash` but remembers one or more `Tags` related to the artifact. As was shown in example 4, that artifact had special `Tag` named `operations on diamonds`. Easy `searchInLocalRepo` call can return `md5hash` of the artifact related to this `Tag`, and then the origin (saved as `name` `Tag`) can be restored.
+
+```{r, message=FALSE,comment="", warning=FALSE}
+hash2 <- searchInLocalRepo( pattern = "operations on diamonds", exampleRepoDir )
+returnTagLocal( md5hash = hash2, exampleRepoDir )
+```
+
+It could also be done with chaining code sequence.
+```{r, message=FALSE,comment="", warning=FALSE}
+"operations on diamonds" %>%
+  searchInLocalRepo( exampleRepoDir ) %>%
+  returnTagLocal( exampleRepoDir )
+```
+
+<h5> Note. </h5>
+- Note that the last operator should be `%>%` instead of `%.%`, if one urge to store the origin of the artifact.
+- The `attr<-`("tags", "operations on diamonds") is the equivalent of `attr( "tags") <- "operations on diamonds"` but this form seem to not cooperate with `%>%` operator. Also the attributes might be set in chaining code using `setattr` from `data.table` package.
+
+```{r, eval=FALSE, message=FALSE,comment="", warning=FALSE}
+iris %>% setattr(., "date", Sys.Date())
 ```
 
 ```{r, echo=FALSE, results='hide'}

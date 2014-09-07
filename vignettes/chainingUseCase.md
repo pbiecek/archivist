@@ -5,6 +5,7 @@
 
 # Archiving artifacts with their chaining code
 
+
 The **archivist** package is very efficient and advantageous when the archived artifacts were created with a chaining code, offered by [dplyr](https://github.com/hadley/dplyr) package. It is higly useful because the origin of the artifact is archived, what means that the artifact can be easly reproduced and it's origin code is stored for future use.
 
 Below are examples of creating artifacts with a chaining code, that requires using a `%>%` and  a `%.%` operators, offered by **dplyr** package.
@@ -98,7 +99,8 @@ crime.by.state %.%
 [1] "09cbff009bfb9b8535f1bb65f5cdec1b"
 ```
 
-Dozens of artifacts may now be stored in one, full of links **Repository**.
+Dozens of artifacts may now be stored in one, full of links **Repository**. Every of them
+might have additional Tag specified by an user. This will simplify searching for this artifact in the future.
 
 ```r
 # example 4
@@ -110,12 +112,13 @@ diamonds %.%
       meancarat = mean(carat, na.rm = TRUE), 
       ndiamonds = length(carat)
    ) %>%
-head( 10) %>%
+   head( 10) %>%
+   `attr<-`("tags", "operations on diamonds") %>%
    saveToRepo( exampleRepoDir )
 ```
 
 ```
-[1] "6a9d5d46c5c36a0cbe06b4acabcd03e9"
+[1] "d68774d04b8b2a2c608cf68216d00cc6"
 ```
 
 One might save artifact's [md5hash](https://github.com/pbiecek/archivist/wiki/archivist-package-md5hash) in case to check his origin stored in a [Tag](https://github.com/pbiecek/archivist/wiki/archivist-package---Tags)
@@ -144,7 +147,7 @@ showLocalRepo( exampleRepoDir )[, 2]
 [1] "hflights %>% group_by(Year, Month, DayofMonth) %>% select(Year:DayofMonth,     ArrDelay, DepDelay) %>% summarise(arr = mean(ArrDelay, na.rm = TRUE),     dep = mean(DepDelay, na.rm = TRUE)) %>% filter(arr > 30 |     dep > 30)"                              
 [2] "Batting %.% group_by(playerID) %.% summarise(total = sum(G)) %.%     arrange(desc(total)) %.% head(5)"                                                                                                                                                         
 [3] "crime.by.state %.% filter(State == \"New York\", Year == 2005) %.%     arrange(desc(Count)) %.% select(Type.of.Crime, Count) %.%     mutate(Proportion = Count/sum(Count)) %.% group_by(Type.of.Crime) %.%     summarise(num.types = n(), counts = sum(Count))"
-[4] "diamonds %.% group_by(cut, clarity, color) %.% summarize(meancarat = mean(carat,     na.rm = TRUE), ndiamonds = length(carat)) %>% head(10)"                                                                                                                   
+[4] "diamonds %.% group_by(cut, clarity, color) %.% summarize(meancarat = mean(carat,     na.rm = TRUE), ndiamonds = length(carat)) %>% head(10) %>%     `attr<-`(\"tags\", \"operations on diamonds\")"                                                            
 [5] "mtcars %.% group_by(cyl, am) %.% select(mpg, cyl, wt, am) %.%     summarise(avgmpg = mean(mpg), avgwt = mean(wt)) %.% filter(avgmpg >     20)"                                                                                                                 
 ```
 
@@ -158,20 +161,55 @@ Number of archived datasets in the Repository:  0
 Number of various classes archived in the Repository: 
             Number
 grouped_df      3
-tbl_df          2
+tbl_df          5
+tbl             5
+data.frame      5
 Saves per day in the Repository: 
             Saves
-2014-09-03     5
+2014-09-04     5
 ```
 
 One can restore the origin of the artifact created in example 5.
 
 ```r
-returnTag( md5hash = hash, exampleRepoDir )
+returnTagLocal( md5hash = hash, exampleRepoDir )
 ```
 
 ```
-[1] "mtcars %.% group_by(cyl, am) %.% select(mpg, cyl, wt, am) %.%     summarise(avgmpg = mean(mpg), avgwt = mean(wt)) %.% filter(avgmpg >     20)"
+[1] "name:mtcars %.% group_by(cyl, am) %.% select(mpg, cyl, wt, am) %.%     summarise(avgmpg = mean(mpg), avgwt = mean(wt)) %.% filter(avgmpg >     20)"
+```
+
+There is always a way to restore the origin when one does not remember `md5hash` but remembers one or more `Tags` related to the artifact. As was shown in example 4, that artifact had special `Tag` named `operations on diamonds`. Easy `searchInLocalRepo` call can return `md5hash` of the artifact related to this `Tag`, and then the origin (saved as `name` `Tag`) can be restored.
+
+
+```r
+hash2 <- searchInLocalRepo( pattern = "operations on diamonds", exampleRepoDir )
+returnTagLocal( md5hash = hash2, exampleRepoDir )
+```
+
+```
+[1] "name:diamonds %.% group_by(cut, clarity, color) %.% summarize(meancarat = mean(carat,     na.rm = TRUE), ndiamonds = length(carat)) %>% head(10) %>%     `attr<-`(\"tags\", \"operations on diamonds\")"
+```
+
+It could also be done with chaining code sequence.
+
+```r
+"operations on diamonds" %>%
+  searchInLocalRepo( exampleRepoDir ) %>%
+  returnTagLocal( exampleRepoDir )
+```
+
+```
+[1] "name:diamonds %.% group_by(cut, clarity, color) %.% summarize(meancarat = mean(carat,     na.rm = TRUE), ndiamonds = length(carat)) %>% head(10) %>%     `attr<-`(\"tags\", \"operations on diamonds\")"
+```
+
+<h5> Note. </h5>
+- Note that the last operator should be `%>%` instead of `%.%`, if one urge to store the origin of the artifact.
+- The `attr<-`("tags", "operations on diamonds") is the equivalent of `attr( "tags") <- "operations on diamonds"` but this form seem to not cooperate with `%>%` operator. Also the attributes might be set in chaining code using `setattr` from `data.table` package.
+
+
+```r
+iris %>% setattr(., "date", Sys.Date())
 ```
 
 
