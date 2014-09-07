@@ -206,7 +206,7 @@ data("hflights", package = "hflights")
 hflights \%>\%
   group_by(Year, Month, DayofMonth) \%>\%
   select(Year:DayofMonth, ArrDelay, DepDelay) \%>\%
-  saveToRepo( exampleRepoDir, chain = TRUE )
+  saveToRepo( exampleRepoDir, chain = TRUE ) \%>\%
   # here the artifact is stored but chaining is not finished
   summarise(
     arr = mean(ArrDelay, na.rm = TRUE),

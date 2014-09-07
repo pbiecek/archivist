@@ -211,7 +211,7 @@
 #' hflights %>%
 #'   group_by(Year, Month, DayofMonth) %>%
 #'   select(Year:DayofMonth, ArrDelay, DepDelay) %>%
-#'   saveToRepo( exampleRepoDir, chain = TRUE )
+#'   saveToRepo( exampleRepoDir, chain = TRUE ) %>%
 #'   # here the artifact is stored but chaining is not finished
 #'   summarise(
 #'     arr = mean(ArrDelay, na.rm = TRUE),
@@ -273,12 +273,12 @@ saveToRepo <- function( artifact, repoDir, archiveData = TRUE,
   }
   
   # add entry to database 
-  if ( rememberName ){
+#   if ( rememberName ){
   addArtifact( md5hash, name = objectName, dir = repoDir ) 
-  }else{
-  addArtifact( md5hash, name = digest( artifact ), dir = repoDir)
-  rm( list = md5hash, envir = .GlobalEnv ) 
-  }
+#   }else{
+#   addArtifact( md5hash, name = objectName, dir = repoDir)
+#   # rm( list = md5hash, envir = .ArchivistEnv ) 
+#   }
   
   # whether to add tags
   if ( archiveTags ) {
@@ -306,6 +306,6 @@ saveToRepo <- function( artifact, repoDir, archiveData = TRUE,
   if ( !chain ){
     return( md5hash )
   }else{
-    return( object )
+    return( artifact )
   }
 }
