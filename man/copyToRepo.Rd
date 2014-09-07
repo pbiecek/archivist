@@ -65,11 +65,10 @@ Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 Other archivist: \code{\link{Repository}};
   \code{\link{Tags}}; \code{\link{archivist-package}};
   \code{\link{createEmptyRepo}}; \code{\link{deleteRepo}};
+  \code{\link{getTagsGithub}}, \code{\link{getTagsLocal}};
   \code{\link{loadFromGithubRepo}},
   \code{\link{loadFromLocalRepo}}; \code{\link{md5hash}};
-  \code{\link{returnTagGithub}},
-  \code{\link{returnTagLocal}}; \code{\link{rmFromRepo}};
-  \code{\link{saveToRepo}};
+  \code{\link{rmFromRepo}}; \code{\link{saveToRepo}};
   \code{\link{searchInGithubRepo}},
   \code{\link{searchInLocalRepo}};
   \code{\link{showGithubRepo}},

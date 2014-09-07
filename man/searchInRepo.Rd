@@ -163,11 +163,11 @@ Other archivist: \code{\link{Repository}};
   \code{\link{copyGithubRepo}},
   \code{\link{copyLocalRepo}};
   \code{\link{createEmptyRepo}}; \code{\link{deleteRepo}};
+  \code{\link{getTagsGithub}}, \code{\link{getTagsLocal}};
   \code{\link{loadFromGithubRepo}},
   \code{\link{loadFromLocalRepo}}; \code{\link{md5hash}};
-  \code{\link{returnTagGithub}},
-  \code{\link{returnTagLocal}}; \code{\link{rmFromRepo}};
-  \code{\link{saveToRepo}}; \code{\link{showGithubRepo}},
+  \code{\link{rmFromRepo}}; \code{\link{saveToRepo}};
+  \code{\link{showGithubRepo}},
   \code{\link{showLocalRepo}};
   \code{\link{summaryGithubRepo}},
   \code{\link{summaryLocalRepo}}

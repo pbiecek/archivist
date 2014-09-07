@@ -3,15 +3,15 @@
 #' @title Return a \code{Tag} Corresponding to \code{md5hash}
 #'
 #' @description
-#' \code{returnTagLocal} and \code{returnTagGithub} return a \code{Tag} (see \link{Tags}) related to \link{md5hash} 
+#' \code{getTagsLocal} and \code{getTagsGithub} return a \code{Tag} (see \link{Tags}) related to \link{md5hash} 
 #' of an artifact. To learn more about artifacts visit \link[archivist]{archivist-package}.
 #' 
 #' @details
-#' \code{returnTagLocal} and \code{returnTagGithub} return (see \link{Tags}) related to \link{md5hash} 
+#' \code{getTagsLocal} and \code{getTagsGithub} return (see \link{Tags}) related to \link{md5hash} 
 #' of an artifact. To learn more about artifacts visit \link[archivist]{archivist-package}.
 #'  
-#' @return The returned value is a \code{Tag} (see \link{Tags}) related to \link{md5hash} 
-#' of an artifact, which is a character.
+#' @return The character is returned, which is a \code{Tag} (see \link{Tags}) related to \link{md5hash} 
+#' of an artifact.
 #'
 #' @param repoDir A character denoting an existing directory in 
 #' which an artifact is stored.
@@ -45,12 +45,12 @@
 #'  filter(avgmpg > 20) %>%
 #'  saveToRepo( exampleRepoDir )
 #'  
-#' returnTagLocal( md5hash = hash, exampleRepoDir )
+#' getTagsLocal( md5hash = hash, exampleRepoDir )
 #' 
 #' deleteRepo( exampleRepoDir ) 
 #' rm( exampleRepoDir ) 
 #' 
-#' returnTagGithub( "3db63bc63b8defaf42c0bde19160f242", 
+#' getTagsGithub( "3db63bc63b8defaf42c0bde19160f242", 
 #'    user="pbiecek", repo="archivist")
 #' 
 #' }
@@ -59,9 +59,9 @@
 #' 
 #' 
 #' @family archivist
-#' @rdname returnTag
+#' @rdname getTags
 #' @export
-returnTagLocal <- function( md5hash, repoDir, tag ="name"){
+getTagsLocal <- function( md5hash, repoDir, tag ="name"){
   stopifnot( is.character( c( md5hash, repoDir, tag ) ) )
   repoDir <- checkDirectory( repoDir )  
 
@@ -72,9 +72,9 @@ returnTagLocal <- function( md5hash, repoDir, tag ="name"){
 }
 
 #' @family archivist
-#' @rdname returnTag
+#' @rdname getTags
 #' @export
-returnTagGithub <- function( md5hash, user, repo, branch = "master", tag ="name"){
+getTagsGithub <- function( md5hash, user, repo, branch = "master", tag ="name"){
   stopifnot( is.character( c( md5hash, user, repo, branch, tag ) ) )
   
   # first download database
