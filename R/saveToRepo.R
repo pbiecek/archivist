@@ -91,6 +91,10 @@
 #' a Repository.
 #' 
 #' @param rememberName A logical value. Should not be changed by an user. It is a technical parameter.
+#' 
+#' @param chain A logical value. Should the result be (default \code{chain = FALSE}) the \code{md5hash} 
+#' of an stored artifact or should the result be the input artifact (\code{chain = TRUE}), so that chaining code 
+#' can be used. See examples.
 #'
 #' 
 #' @seealso
@@ -200,6 +204,26 @@
 #' 
 #' # removing an example Repository
 #' 
+#' # saveToRepo in chaining code
+#' library(dplyr)
+#' 
+#' data("hflights", package = "hflights")
+#' hflights %>%
+#'   group_by(Year, Month, DayofMonth) %>%
+#'   select(Year:DayofMonth, ArrDelay, DepDelay) %>%
+#'   saveToRepo( exampleRepoDir, chain = TRUE )
+#'   # here the artifact is stored but chaining is not finished
+#'   summarise(
+#'     arr = mean(ArrDelay, na.rm = TRUE),
+#'     dep = mean(DepDelay, na.rm = TRUE)
+#'   ) %>%
+#'   filter(arr > 30 | dep > 30) %>%
+#'   saveToRepo( exampleRepoDir )
+#'   # chaining code is finished and after last operation the 
+#'   # artifact is stored
+#' 
+#' 
+#' 
 #' deleteRepo( exampleRepoDir )
 #' 
 #' rm( exampleRepoDir )
@@ -209,7 +233,8 @@
 #' @export
 saveToRepo <- function( artifact, repoDir, archiveData = TRUE, 
                         archiveTags = TRUE, 
-                        archiveMiniature = TRUE, force = TRUE, rememberName = TRUE, ... ){
+                        archiveMiniature = TRUE, force = TRUE, rememberName = TRUE, 
+                        chain = FALSE, ... ){
   stopifnot( is.character( repoDir ), is.logical( c( archiveData, archiveTags, archiveMiniature ) ) )
   
   md5hash <- digest( artifact )
@@ -263,14 +288,24 @@ saveToRepo <- function( artifact, repoDir, archiveData = TRUE,
     # attr( artifact, "tags" ) are tags specified by an user
   }
   
-  # whether to archive data
-  if ( archiveData )
+  # whether to archive data 
+  # if chaining code is used, the "data" attr is not needed
+  if ( archiveData & !chain ){
     attr( md5hash, "data" )  <-  extractData( artifact, parrentMd5hash = md5hash, 
                                               parentDir = repoDir, isForce = force )
+  }
+  if ( archiveData & chain ){
+    extractData( artifact, parrentMd5hash = md5hash, 
+                 parentDir = repoDir, isForce = force )
+  }
   
   # whether to archive miniature
   if ( archiveMiniature )
     extractMiniature( artifact, md5hash, parentDir = repoDir ,... )
-  
-  md5hash
+  # whether to return md5hash or an artifact if chaining code is used
+  if ( !chain ){
+    return( md5hash )
+  }else{
+    return( object )
+  }
 }
