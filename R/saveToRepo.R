@@ -235,7 +235,8 @@ saveToRepo <- function( artifact, repoDir, archiveData = TRUE,
                         archiveTags = TRUE, 
                         archiveMiniature = TRUE, force = TRUE, rememberName = TRUE, 
                         chain = FALSE, ... ){
-  stopifnot( is.character( repoDir ), is.logical( c( archiveData, archiveTags, archiveMiniature ) ) )
+  stopifnot( is.character( repoDir ), is.logical( c( archiveData, archiveTags, archiveMiniature, 
+                                                     chain, rememberName ) ) )
   
   md5hash <- digest( artifact )
   objectName <- deparse( substitute( artifact ) )
@@ -273,12 +274,12 @@ saveToRepo <- function( artifact, repoDir, archiveData = TRUE,
   }
   
   # add entry to database 
-#   if ( rememberName ){
+   if ( rememberName ){
   addArtifact( md5hash, name = objectName, dir = repoDir ) 
-#   }else{
-#   addArtifact( md5hash, name = objectName, dir = repoDir)
+   }else{
+   addArtifact( md5hash, name = md5hash , dir = repoDir)
 #   # rm( list = md5hash, envir = .ArchivistEnv ) 
-#   }
+   }
   
   # whether to add tags
   if ( archiveTags ) {
