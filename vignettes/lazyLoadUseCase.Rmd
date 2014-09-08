@@ -1,0 +1,19 @@
+<!--
+%\VignetteEngine{knitr::docco_classic}
+%\VignetteIndexEntry{Lazy load}
+-->
+
+# Lazy load with **archivist**
+
+Test text.
+
+```{r}
+summary(cars)
+```
+
+Test text.
+Test text.
+Test text.
+
+
+You probably have noticed that you can adjust the widths of the two columns using your cursor. What is more, press `T` on your keyboard, and see what happens.
