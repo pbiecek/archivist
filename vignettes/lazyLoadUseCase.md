@@ -12,7 +12,8 @@ Regular `load()` into Global Environment takes too long or crashes R session? Wa
 **If you stacked with those questions, this use case is a must read for you.**
 
 The **archivist** package is a great solution that helps administrate, archive and restore your [artifacts](https://github.com/pbiecek/archivist/wiki) created in [R](http://cran.r-project.org/) package.
-```{r, eval=FALSE}
+
+```r
 library(devtools)
 install_github("archivist", "pbiecek")
 library(archivist)
@@ -23,20 +24,21 @@ library(tools)
 
 If your `.RData` file is too big and you do not need or do not want to load whole of it, you can simply convert the `.RData` file into a lazy-load database which serializes each entry separately and creates an index. The nice thing is that the loading will be on-demand.
 
-````{r, eval=FALSE}
 
+```r
 file.info("Huge.RData")$size
 # convert .RData -> .rdb/.rdx
 lazyLoad = local({load("Huge.RData"); environment()})
 tools:::makeLazyLoadDB(lazyLoad, "Huge")
-````
+```
 
 Loading the DB then only loads the index but not the contents. The contents are loaded as they are used.
-````{r}
+
+```r
 # lazyLoad("New")
 # ls()
 # x
-````
+```
 
 <img src="ex1.JPG" width="200px" height="200px" />
 
