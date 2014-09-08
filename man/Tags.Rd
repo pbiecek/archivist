@@ -241,7 +241,7 @@ deleteRepo( exampleRepoDir )
 
 # trellis object
 require(stats)
-
+library( lattice)
 ## Tonga Trench Earthquakes
 
 Depth <- equal.count(quakes$depth, number=8, overlap=.1)
@@ -284,7 +284,7 @@ showLocalRepo( exampleRepoDir, "tags" )
 deleteRepo( exampleRepoDir )
 
 # survfit object
-
+library( survival )
 # Create the simplest test data set
 test1 <- list(time=c(4,3,1,1,2,2,3),
               status=c(1,1,1,0,1,1,0),
@@ -296,6 +296,28 @@ exampleRepoDir <- tempdir()
 createEmptyRepo( repoDir = exampleRepoDir )
 saveToRepo( myFit , repoDir=exampleRepoDir )
 showLocalRepo( exampleRepoDir, "tags" )[,-3]
+deleteRepo( exampleRepoDir )
+
+# origin of the artifacts stored as a name - chaining code
+library(dplyr)
+exampleRepoDir <- tempdir()
+createEmptyRepo( repoDir = exampleRepoDir )
+data("hflights", package = "hflights")
+hflights \%>\%
+  group_by(Year, Month, DayofMonth) \%>\%
+  select(Year:DayofMonth, ArrDelay, DepDelay) \%>\%
+  saveToRepo( exampleRepoDir, chain = TRUE )
+  # here the artifact is stored but chaining is not finished
+  summarise(
+    arr = mean(ArrDelay, na.rm = TRUE),
+    dep = mean(DepDelay, na.rm = TRUE)
+  ) \%>\%
+  filter(arr > 30 | dep > 30) \%>\%
+  saveToRepo( exampleRepoDir ) \%>\%
+  # chaining code is finished and after last operation the
+  # artifact is stored
+showLocalRepo( exampleRepoDir, "tags" )[,-3]
+showLocalRepo( exampleRepoDir )
 deleteRepo( exampleRepoDir )
 
 rm( exampleRepoDir )
@@ -313,11 +335,10 @@ Other archivist: \code{\link{Repository}};
   \code{\link{copyGithubRepo}},
   \code{\link{copyLocalRepo}};
   \code{\link{createEmptyRepo}}; \code{\link{deleteRepo}};
+  \code{\link{getTagsGithub}}, \code{\link{getTagsLocal}};
   \code{\link{loadFromGithubRepo}},
   \code{\link{loadFromLocalRepo}}; \code{\link{md5hash}};
-  \code{\link{returnTagGithub}},
-  \code{\link{returnTagLocal}}; \code{\link{rmFromRepo}};
-  \code{\link{saveToRepo}};
+  \code{\link{rmFromRepo}}; \code{\link{saveToRepo}};
   \code{\link{searchInGithubRepo}},
   \code{\link{searchInLocalRepo}};
   \code{\link{showGithubRepo}},

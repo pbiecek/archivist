@@ -1,0 +1,13 @@
+Call: survfit(formula = coxph(Surv(time, status) ~ x + strata(sex), 
+    test1), data = test1)
+
+                sex=0 
+ time n.risk n.event survival std.err lower 95% CI upper 95% CI
+    1      4       1    0.844   0.164      0.57707            1
+    3      2       1    0.627   0.296      0.24861            1
+    4      1       1    0.106   0.207      0.00236            1
+
+                sex=1 
+        time       n.risk      n.event     survival      std.err lower 95% CI upper 95% CI 
+      2.0000       3.0000       2.0000       0.3337       0.2765       0.0658       1.0000 
+

@@ -22,8 +22,10 @@ extractData.lm <- function( object, parrentMd5hash, parentDir, isForce ){
 }
 
 extractData.htest <- function( object, parrentMd5hash, parentDir, isForce ){
-  extractedDF <- get( object$data.name, envir = .GlobalEnv )
-  md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, repoDir = parentDir,
+  extractedDF1 <- get( strsplit(object$data.name, " and ")[[1]][1], envir = .GlobalEnv )
+  extractedDF2 <- get( strsplit(object$data.name, " and ")[[1]][2], envir = .GlobalEnv )
+  md5hashDF <- saveToRepo( c( extractedDF1, extractedDF2 ), 
+                           archiveData = FALSE, repoDir = parentDir,
                            rememberName = FALSE, archiveTags = FALSE, force = isForce )
   addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
   return( md5hashDF )

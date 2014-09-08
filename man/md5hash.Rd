@@ -45,11 +45,10 @@ Other archivist: \code{\link{Repository}};
   \code{\link{copyGithubRepo}},
   \code{\link{copyLocalRepo}};
   \code{\link{createEmptyRepo}}; \code{\link{deleteRepo}};
+  \code{\link{getTagsGithub}}, \code{\link{getTagsLocal}};
   \code{\link{loadFromGithubRepo}},
   \code{\link{loadFromLocalRepo}};
-  \code{\link{returnTagGithub}},
-  \code{\link{returnTagLocal}}; \code{\link{rmFromRepo}};
-  \code{\link{saveToRepo}};
+  \code{\link{rmFromRepo}}; \code{\link{saveToRepo}};
   \code{\link{searchInGithubRepo}},
   \code{\link{searchInLocalRepo}};
   \code{\link{showGithubRepo}},

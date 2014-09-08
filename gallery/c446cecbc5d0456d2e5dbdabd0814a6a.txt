@@ -1,0 +1,10 @@
+Source: local data frame [6 x 5]
+Groups: Year, Month, DayofMonth
+
+     Year Month DayofMonth ArrDelay DepDelay
+5424 2011     1          1      -10        0
+5425 2011     1          2       -9        1
+5426 2011     1          3       -8       -8
+5427 2011     1          4        3        3
+5428 2011     1          5       -3        5
+5429 2011     1          6       -7       -1
