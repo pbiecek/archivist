@@ -9,7 +9,7 @@
 #' 
 #' Archivist helps to store and manage artifacts created in R.
 #' 
-#' Archivist allows you to store selected artifacts as a binary files
+#' Archivist allows you to store selected artifacts as binary files
 #'   together with their metadata and relations.
 #' Archivist allows you to share artifacts with others, either through a shared folder or github.
 #' Archivist allows you to look for already created artifacts by using its class, 
