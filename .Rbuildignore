@@ -5,6 +5,7 @@
 .travis.yml
 
 backpack.db
+buildingDB.R
 buildingVignette.R
 gallery
 README.md
