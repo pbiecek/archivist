@@ -30,9 +30,9 @@ pre, code{font-size:90%;}
 
 <h1>Archiving artifacts with their chaining code</h1>
 
-<p>The <strong>archivist</strong> package is very efficient and advantageous when the archived artifacts were created with a chaining code, offered by <a href="https://github.com/hadley/dplyr">dplyr</a> package. It is higly useful because the origin of the artifact is archived, what means that the artifact can be easly reproduced and it&#39;s origin code is stored for future use.</p>
+<p>The <strong>archivist</strong> package is very efficient and advantageous when the archived artifacts were created with a chaining code offered by the <a href="https://github.com/hadley/dplyr">dplyr</a> package. It is higly useful because the origin of the artifact is archived, which means that the artifact can be easly reproduced and it&#39;s origin code is stored for future use.</p>
 
-<p>Below are examples of creating artifacts with a chaining code, that requires using a <code>%&gt;%</code> and  a <code>%.%</code> operators, offered by <strong>dplyr</strong> package.</p>
+<p>Below are examples of creating artifacts with a chaining code, that requires using a <code>%&gt;%</code> and  a <code>%.%</code> operators, offered by the <strong>dplyr</strong> package.</p>
 
 <p>Let us prepare a <a href="https://github.com/pbiecek/archivist/wiki/archivist-package-Repository"><strong>Repository</strong></a> where archived artifacts will be stored.</p>
 
@@ -43,7 +43,7 @@ exampleRepoDir &lt;- getwd()
 createEmptyRepo( exampleRepoDir )
 </code></pre>
 
-<p>Then one might create artifacts like those below. The code lines are ordered in chaining code, which will be used by <code>saveToRepo</code> function to store an artifact and archive it&#39;s origin code as a <code>name</code> of this artifact.</p>
+<p>Then one might create artifacts like those below. The code lines are ordered in chaining code, which will be used by the <code>saveToRepo</code> function to store an artifact and archive it&#39;s origin code as a <code>name</code> of this artifact.</p>
 
 <pre><code class="r"># example 1
 library(dplyr)
@@ -64,7 +64,7 @@ hflights %&gt;%
 </code></pre>
 
 <p>One may see a vast difference in code evalution when using chaining code.
-Here is an example of traditional <code>R</code> call and one that uses <code>chaining code</code> philosophy.</p>
+Here is an example of a traditional <code>R</code> call and one that uses the <code>chaining code</code> philosophy.</p>
 
 <pre><code class="r"># example 2
 library(Lahman)
@@ -97,7 +97,8 @@ Batting %.%
 <pre><code>[1] &quot;6defe8a423a1363463a3ed98435c02e8&quot;
 </code></pre>
 
-<p>Many of various operations can be performed on a single <code>data.frame</code> before one consideres to archive this artifacts. The <strong>archivist</strong> guarantees that all of them will be <code>archived</code>, which means a code alone will no longer be needed to be stored in a separate file. The <code>CrimeStatebyState</code> data set can be downloaded from <a href="https://github.com/MarcinKosinski/Museum">here</a>.</p>
+<p>Many of various operations can be performed on a single <code>data.frame</code> before one consideres to archive these artifacts. <strong>Archivist</strong> guarantees that all of them will be <code>archived</code>, which means a code alone will no longer be needed to be stored in a separate file. Also an artifact may be saved during operations are performed and used in further code evaluations. This can be done when
+argument \code{chain = TRUE} in <code>saveToRepo</code> is specified.</p>
 
 <pre><code class="r"># example 3
 crime.by.state &lt;- read.csv(&quot;CrimeStatebyState.csv&quot;)
@@ -105,7 +106,8 @@ crime.by.state %.%
    filter(State==&quot;New York&quot;, Year==2005) %.%
    arrange(desc(Count)) %.%
    select(Type.of.Crime, Count) %.%
-   mutate(Proportion=Count/sum(Count)) %.%
+   mutate(Proportion=Count/sum(Count)) %&gt;%
+   saveToRepo( exampleRepoDir, chain = TRUE) %&gt;%
    group_by(Type.of.Crime) %.%
    summarise(num.types = n(), counts = sum(Count)) %&gt;%
    saveToRepo( exampleRepoDir )
@@ -114,8 +116,10 @@ crime.by.state %.%
 <pre><code>[1] &quot;09cbff009bfb9b8535f1bb65f5cdec1b&quot;
 </code></pre>
 
-<p>Dozens of artifacts may now be stored in one, full of links <strong>Repository</strong>. Every of them
-might have additional Tag specified by an user. This will simplify searching for this artifact in the future.</p>
+<p>The <code>CrimeStatebyState</code> data set can be downloaded from <a href="https://github.com/MarcinKosinski/Museum">here</a>.</p>
+
+<p>Dozens of artifacts may now be stored in one <strong>Repository</strong>. Every artifact
+may have an additional Tag specified by an user. This will simplify searching for this artifact in the future.</p>
 
 <pre><code class="r"># example 4
 library(ggplot2)
@@ -134,7 +138,7 @@ diamonds %.%
 <pre><code>[1] &quot;d68774d04b8b2a2c608cf68216d00cc6&quot;
 </code></pre>
 
-<p>One might save artifact&#39;s <a href="https://github.com/pbiecek/archivist/wiki/archivist-package-md5hash">md5hash</a> in case to check his origin stored in a <a href="https://github.com/pbiecek/archivist/wiki/archivist-package---Tags">Tag</a>
+<p>One can also save artifact&#39;s <a href="https://github.com/pbiecek/archivist/wiki/archivist-package-md5hash">md5hash</a> if there is a need check its origin, which is stored in a <a href="https://github.com/pbiecek/archivist/wiki/archivist-package---Tags">Tag</a>
 named <code>name</code>.</p>
 
 <pre><code class="r"># example 5
@@ -147,67 +151,72 @@ hash &lt;- mtcars %.%
    saveToRepo( exampleRepoDir )
 </code></pre>
 
+<h3>Summary of the Repository</h3>
+
 <p>After archiving all desired artifacts created with their chaining code, the summary of the <strong>Repository</strong> might be performed. Below is a single call of stored artifacts&#39; names and the summary of the whole created <strong>Repository</strong> in this use case.</p>
 
 <pre><code class="r"># summary
 showLocalRepo( exampleRepoDir )[, 2]
 </code></pre>
 
-<pre><code>[1] &quot;hflights %&gt;% group_by(Year, Month, DayofMonth) %&gt;% select(Year:DayofMonth,     ArrDelay, DepDelay) %&gt;% summarise(arr = mean(ArrDelay, na.rm = TRUE),     dep = mean(DepDelay, na.rm = TRUE)) %&gt;% filter(arr &gt; 30 |     dep &gt; 30)&quot;                              
-[2] &quot;Batting %.% group_by(playerID) %.% summarise(total = sum(G)) %.%     arrange(desc(total)) %.% head(5)&quot;                                                                                                                                                         
-[3] &quot;crime.by.state %.% filter(State == \&quot;New York\&quot;, Year == 2005) %.%     arrange(desc(Count)) %.% select(Type.of.Crime, Count) %.%     mutate(Proportion = Count/sum(Count)) %.% group_by(Type.of.Crime) %.%     summarise(num.types = n(), counts = sum(Count))&quot;
-[4] &quot;diamonds %.% group_by(cut, clarity, color) %.% summarize(meancarat = mean(carat,     na.rm = TRUE), ndiamonds = length(carat)) %&gt;% head(10) %&gt;%     `attr&lt;-`(\&quot;tags\&quot;, \&quot;operations on diamonds\&quot;)&quot;                                                            
-[5] &quot;mtcars %.% group_by(cyl, am) %.% select(mpg, cyl, wt, am) %.%     summarise(avgmpg = mean(mpg), avgwt = mean(wt)) %.% filter(avgmpg &gt;     20)&quot;                                                                                                                 
+<pre><code>[1] &quot;hflights %&gt;% group_by(Year, Month, DayofMonth) %&gt;% select(Year:DayofMonth,     ArrDelay, DepDelay) %&gt;% summarise(arr = mean(ArrDelay, na.rm = TRUE),     dep = mean(DepDelay, na.rm = TRUE)) %&gt;% filter(arr &gt; 30 |     dep &gt; 30)&quot;                                                                               
+[2] &quot;Batting %.% group_by(playerID) %.% summarise(total = sum(G)) %.%     arrange(desc(total)) %.% head(5)&quot;                                                                                                                                                                                                          
+[3] &quot;crime.by.state %.% filter(State == \&quot;New York\&quot;, Year == 2005) %.%     arrange(desc(Count)) %.% select(Type.of.Crime, Count) %.%     mutate(Proportion = Count/sum(Count))&quot;                                                                                                                                     
+[4] &quot;crime.by.state %.% filter(State == \&quot;New York\&quot;, Year == 2005) %.%     arrange(desc(Count)) %.% select(Type.of.Crime, Count) %.%     mutate(Proportion = Count/sum(Count)) %&gt;% saveToRepo(exampleRepoDir,     chain = TRUE) %&gt;% group_by(Type.of.Crime) %.% summarise(num.types = n(),     counts = sum(Count))&quot;
+[5] &quot;diamonds %.% group_by(cut, clarity, color) %.% summarize(meancarat = mean(carat,     na.rm = TRUE), ndiamonds = length(carat)) %&gt;% head(10) %&gt;%     `attr&lt;-`(\&quot;tags\&quot;, \&quot;operations on diamonds\&quot;)&quot;                                                                                                             
+[6] &quot;mtcars %.% group_by(cyl, am) %.% select(mpg, cyl, wt, am) %.%     summarise(avgmpg = mean(mpg), avgwt = mean(wt)) %.% filter(avgmpg &gt;     20)&quot;                                                                                                                                                                  
 </code></pre>
 
 <pre><code class="r">summaryLocalRepo( exampleRepoDir )
 </code></pre>
 
-<pre><code>Number of archived artifacts in the Repository:  5 
+<pre><code>Number of archived artifacts in the Repository:  6 
 Number of archived datasets in the Repository:  0 
 Number of various classes archived in the Repository: 
             Number
 grouped_df      3
 tbl_df          5
 tbl             5
-data.frame      5
+data.frame      6
 Saves per day in the Repository: 
             Saves
-2014-09-04     5
+2014-09-08     6
 </code></pre>
+
+<h3>Restoring origin code</h3>
 
 <p>One can restore the origin of the artifact created in example 5.</p>
 
-<pre><code class="r">returnTagLocal( md5hash = hash, exampleRepoDir )
+<pre><code class="r">getTagsLocal( md5hash = hash, exampleRepoDir )
 </code></pre>
 
 <pre><code>[1] &quot;name:mtcars %.% group_by(cyl, am) %.% select(mpg, cyl, wt, am) %.%     summarise(avgmpg = mean(mpg), avgwt = mean(wt)) %.% filter(avgmpg &gt;     20)&quot;
 </code></pre>
 
-<p>There is always a way to restore the origin when one does not remember <code>md5hash</code> but remembers one or more <code>Tags</code> related to the artifact. As was shown in example 4, that artifact had special <code>Tag</code> named <code>operations on diamonds</code>. Easy <code>searchInLocalRepo</code> call can return <code>md5hash</code> of the artifact related to this <code>Tag</code>, and then the origin (saved as <code>name</code> <code>Tag</code>) can be restored.</p>
+<p>There is always a way to restore the origin code when one does not remember <code>md5hash</code> but remembers one or more <code>Tags</code> related to the artifact. As was shown in example 4, that artifact had special <code>Tag</code> named <code>operations on diamonds</code>. An easy <code>searchInLocalRepo</code> call can return <code>md5hash</code> of the artifact related to this <code>Tag</code>, so that now the origin code (saved as <code>name</code> <code>Tag</code>) can be restored.</p>
 
 <pre><code class="r">hash2 &lt;- searchInLocalRepo( pattern = &quot;operations on diamonds&quot;, exampleRepoDir )
-returnTagLocal( md5hash = hash2, exampleRepoDir )
+getTagsLocal( md5hash = hash2, exampleRepoDir )
 </code></pre>
 
 <pre><code>[1] &quot;name:diamonds %.% group_by(cut, clarity, color) %.% summarize(meancarat = mean(carat,     na.rm = TRUE), ndiamonds = length(carat)) %&gt;% head(10) %&gt;%     `attr&lt;-`(\&quot;tags\&quot;, \&quot;operations on diamonds\&quot;)&quot;
 </code></pre>
 
-<p>It could also be done with chaining code sequence.</p>
+<p>The above result can also be achieved with a chaining code sequence.</p>
 
 <pre><code class="r">&quot;operations on diamonds&quot; %&gt;%
   searchInLocalRepo( exampleRepoDir ) %&gt;%
-  returnTagLocal( exampleRepoDir )
+  getTagsLocal( exampleRepoDir )
 </code></pre>
 
 <pre><code>[1] &quot;name:diamonds %.% group_by(cut, clarity, color) %.% summarize(meancarat = mean(carat,     na.rm = TRUE), ndiamonds = length(carat)) %&gt;% head(10) %&gt;%     `attr&lt;-`(\&quot;tags\&quot;, \&quot;operations on diamonds\&quot;)&quot;
 </code></pre>
 
-<h5> Note. </h5>
+<h3>Note</h3>
 
 <ul>
-<li>Note that the last operator should be <code>%&gt;%</code> instead of <code>%.%</code>, if one urge to store the origin of the artifact.</li>
-<li>The <code>attr&lt;-</code>(&ldquo;tags&rdquo;, &ldquo;operations on diamonds&rdquo;) is the equivalent of <code>attr( &quot;tags&quot;) &lt;- &quot;operations on diamonds&quot;</code> but this form seem to not cooperate with <code>%&gt;%</code> operator. Also the attributes might be set in chaining code using <code>setattr</code> from <code>data.table</code> package.</li>
+<li>Note that the last operator should be <code>%&gt;%</code> instead of <code>%.%</code>, if one needs to store the origin code of the artifact.</li>
+<li>The <code>attr&lt;-</code>(&ldquo;tags&rdquo;, &ldquo;operations on diamonds&rdquo;) is the equivalent of <code>attr( &quot;tags&quot;) &lt;- &quot;operations on diamonds&quot;</code> but this form seems to not cooperate with the <code>%&gt;%</code> operator. Also the attributes may be set in the chaining code using <code>setattr</code> from the <code>data.table</code> package.</li>
 </ul>
 
 <pre><code class="r">iris %&gt;% setattr(., &quot;date&quot;, Sys.Date())
