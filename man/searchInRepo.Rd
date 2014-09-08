@@ -143,7 +143,7 @@ format: \code{"TagType:TagTypeValue"} - see examples.
 
   # also on Github
 
-  searchInGithubRepo( pattern = list( dateFrom = "2014-08-25", dateTo = "2014-08-30" ),
+  searchInGithubRepo( pattern = list( dateFrom = "2014-09-01", dateTo = "2014-09-30" ),
                       user="pbiecek", repo="archivist", branch="master" )
 
 
