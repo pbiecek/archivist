@@ -5,21 +5,22 @@
 \title{Tools for storing, restoring and searching for R objects}
 \description{
 Data exploration and modelling is a process in which a lot of data artifacts are produced.
-Artifacts like: subsets, data aggregates, plots, statistical models, different
-versions of data sets and different versions of results.
+Artifacts like: subsets, data aggregates, plots, statistical models, different  versions of data sets and different versions of results.
 The more projects we work with the more artifacts are produced and the harder it is to manage these artifacts.
 
 Archivist helps to store and manage artifacts created in R.
 
-Archivist allows you to store selected artifacts as a binary files
+Archivist allows you to store selected artifacts as binary files
   together with their metadata and relations.
-Archivist allows to share artifacts with others, either through shared folder or github.
-Archivist allows to look for already created artifacts by using it's class,
-  name, date of the creation or other attributes, properties or meta-tags.
-Makes it easy to restore such artifacts.
-Archivist allows to check if new artifact is the exact
-  copy that was produced some time ago.
-  That might be useful either for testing or caching.
+Archivist allows you to share artifacts with others, either through a shared folder or github.
+Archivist allows you to look for already created artifacts by using its class,
+ name, date of creation or other properties.
+It also facilitates restoring such artifacts.
+Archivist allows to check if a new artifact is the exact
+ copy of the one that was produced some time ago.
+ This might be useful either for testing or caching.
+
+The list of main use cases is available here \href{https://github.com/pbiecek/archivist}{https://github.com/pbiecek/archivist}.
 }
 \details{
 For more detailed information visit \pkg{archivist} \code{wiki} on

@@ -313,14 +313,14 @@
 #' hflights %>%
 #'   group_by(Year, Month, DayofMonth) %>%
 #'   select(Year:DayofMonth, ArrDelay, DepDelay) %>%
-#'   saveToRepo( exampleRepoDir, chain = TRUE )
+#'   saveToRepo( exampleRepoDir, chain = TRUE ) %>%
 #'   # here the artifact is stored but chaining is not finished
 #'   summarise(
 #'     arr = mean(ArrDelay, na.rm = TRUE),
 #'     dep = mean(DepDelay, na.rm = TRUE)
 #'   ) %>%
 #'   filter(arr > 30 | dep > 30) %>%
-#'   saveToRepo( exampleRepoDir ) %>%
+#'   saveToRepo( exampleRepoDir ) 
 #'   # chaining code is finished and after last operation the 
 #'   # artifact is stored
 #' showLocalRepo( exampleRepoDir, "tags" )[,-3]
