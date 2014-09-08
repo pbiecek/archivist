@@ -19,6 +19,8 @@
 #'  copy of the one that was produced some time ago.
 #'  This might be useful either for testing or caching.
 #'
+#' The list of main use cases is available here \href{https://github.com/pbiecek/archivist}{https://github.com/pbiecek/archivist}.
+#'
 #'
 #' @details
 #' For more detailed information visit \pkg{archivist} \code{wiki} on 
