@@ -42,6 +42,10 @@
 #' \code{fixed = FALSE} then artifacts are searched using \code{pattern} paremeter as a regular expression - that method is wider and more flexible 
 #' and, i.e., enables to search for all artifacts in the \code{Repository}, using \code{pattern = "name", fixed = FALSE}.
 #' 
+#' @param repoDirGit Only if working with a Github repository. A character containing a name of a directory on Github repository 
+#' on which the Repository is stored. If the Repository is stored in main folder on Github repository, this should be set 
+#' to \code{repoDirGit = FALSE} as default.
+#' 
 #' @param realDBname A logical value. Should not be changed by user. It is a technical parameter.
 #'
 #' @author
@@ -187,15 +191,21 @@ searchInLocalRepo <- function( pattern, repoDir, fixed = TRUE, realDBname = TRUE
 
 #' @rdname searchInRepo
 #' @export
-searchInGithubRepo <- function( pattern, repo, user, branch = "master", fixed = TRUE ){
+searchInGithubRepo <- function( pattern, repo, user, branch = "master", repoDirGit = FALSE,
+                                fixed = TRUE ){
 
   stopifnot( is.character( c( repo, user, branch ) ), is.logical( fixed ) )
   stopifnot( is.character( pattern ) | is.list( pattern ) )
   stopifnot( length( pattern ) == 1 | length( pattern ) == 2 )
-  
+  stopifnot( is.logical( repoDirGit ) | is.character( repoDirGit ) )
+  if( is.logical( repoDirGit ) ){
+    if ( repoDirGit ){
+      stop( "repoDirGit may be only FALSE or a character. See documentation." )
+    }
+  } 
   
   # first download database
-  Temp <- downloadDB( repo, user, branch )
+  Temp <- downloadDB( repo, user, branch, repoDirGit )
 
   # extracts md5hash
   if ( fixed ){

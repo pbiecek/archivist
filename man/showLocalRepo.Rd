@@ -6,7 +6,8 @@
 \usage{
 showLocalRepo(repoDir, method = "md5hashes")
 
-showGithubRepo(repo, user, branch = "master", method = "md5hashes")
+showGithubRepo(repo, user, branch = "master", repoDirGit = FALSE,
+  method = "md5hashes")
 }
 \arguments{
 \item{method}{A character specifying the method to be used to show the Repository. Available methods:
@@ -20,6 +21,10 @@ showGithubRepo(repo, user, branch = "master", method = "md5hashes")
 
 \item{branch}{Only if working with a Github repository. A character containing a name of
 Github Repository's branch on which a Repository is archived. Default \code{branch} is \code{master}.}
+
+\item{repoDirGit}{Only if working with a Github repository. A character containing a name of a directory on Github repository
+on which the Repository is stored. If the Repository is stored in main folder on Github repository, this should be set
+to \code{repoDirGit = FALSE} as default.}
 }
 \value{
 If parameter \code{method} was set as \code{md5hashes} a \code{data.frame} with artifacts' names and archived

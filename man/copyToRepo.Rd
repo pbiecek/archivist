@@ -6,7 +6,8 @@
 \usage{
 copyLocalRepo(repoFrom, repoTo, md5hashes)
 
-copyGithubRepo(repoTo, md5hashes, user, repo, branch = "master")
+copyGithubRepo(repoTo, md5hashes, user, repo, branch = "master",
+  repoDirGit = FALSE)
 }
 \arguments{
 \item{repoFrom}{A character that specifies the directory of the Repository from which
@@ -23,6 +24,10 @@ artifacts will be copied.}
 
 \item{branch}{Only if coping with a Github repository. A character containing a name of
 Github Repository's branch on which a \code{repoFrom}-Repository is archived. Default \code{branch} is \code{master}.}
+
+\item{repoDirGit}{Only if working with a Github repository. A character containing a name of a directory on Github repository
+on which the Repository is stored. If the Repository is stored in main folder on Github repository, this should be set
+to \code{repoDirGit = FALSE} as default.}
 }
 \description{
 \code{copyToRepo} copies artifact from one \link{Repository} to another \code{Repository}.

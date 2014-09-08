@@ -6,7 +6,8 @@
 \usage{
 searchInLocalRepo(pattern, repoDir, fixed = TRUE, realDBname = TRUE)
 
-searchInGithubRepo(pattern, repo, user, branch = "master", fixed = TRUE)
+searchInGithubRepo(pattern, repo, user, branch = "master",
+  repoDirGit = FALSE, fixed = TRUE)
 }
 \arguments{
 \item{pattern}{If \code{fixed = TRUE}: a character denoting a \link{Tags} to be searched for in the Repository.
@@ -27,6 +28,10 @@ Github repository's branch in which Repository is archived. Default \code{branch
 If \code{fixed = TRUE} (default) then artifacts are searched exactly to the corresponding \code{pattern} parameter. If
 \code{fixed = FALSE} then artifacts are searched using \code{pattern} paremeter as a regular expression - that method is wider and more flexible
 and, i.e., enables to search for all artifacts in the \code{Repository}, using \code{pattern = "name", fixed = FALSE}.}
+
+\item{repoDirGit}{Only if working with a Github repository. A character containing a name of a directory on Github repository
+on which the Repository is stored. If the Repository is stored in main folder on Github repository, this should be set
+to \code{repoDirGit = FALSE} as default.}
 
 \item{realDBname}{A logical value. Should not be changed by user. It is a technical parameter.}
 }

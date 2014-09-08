@@ -39,7 +39,11 @@
 #' @param user Only if working with a Github repository. A character containing a name of a Github user on whose account the \code{repo} is created.
 #' 
 #' @param branch Only if working with a Github repository. A character containing a name of 
-#' Github Repository's branch on which a Repository is archived. Default \code{branch} is \code{master}.
+#' Github Repository's branch on which the Repository is archived. Default \code{branch} is \code{master}.
+#' 
+#' @param repoDirGit Only if working with a Github repository. A character containing a name of a directory on Github repository 
+#' on which the Repository is stored. If the Repository is stored in main folder on Github repository, this should be set 
+#' to \code{repoDirGit = FALSE} as default.
 #' 
 #' @param value If \code{FALSE} (default) then artifacts are loaded into the Global Environment with their original names, 
 #' if \code{TRUE} then artifacts are returned as a list of values (if there is more than one artifact)
@@ -209,14 +213,22 @@ loadFromLocalRepo <- function( md5hash, repoDir, value = FALSE ){
 
 #' @rdname loadFromLocalRepo
 #' @export
-loadFromGithubRepo <- function( md5hash, repo, user, branch = "master" , value = FALSE ){
+loadFromGithubRepo <- function( md5hash, repo, user, branch = "master", repoDirGit = FALSE, value = FALSE ){
   stopifnot( is.character( c( md5hash, repo, user, branch ) ) )
   stopifnot( is.logical( value ))
+  stopifnot( is.logical( repoDirGit ) | is.character( repoDirGit ) )
+  #
+  if( is.logical( repoDirGit ) ){
+    if ( repoDirGit ){
+      stop( "repoDirGit may be only FALSE or a character. See documentation." )
+    }
+  }
+  
   
   # what if abbreviation was given
   if ( nchar( md5hash ) < 32 ){
     # database is needed to be downloaded
-    Temp <- downloadDB( repo, user, branch )
+    Temp <- downloadDB( repo, user, branch, repoDirGit )
     
     md5hashList <- executeSingleQuery( dir = Temp, realDBname = FALSE,
                                        paste0( "SELECT DISTINCT artifact FROM tag WHERE artifact LIKE '",md5hash,"%'" ) )
@@ -229,9 +241,16 @@ loadFromGithubRepo <- function( md5hash, repo, user, branch = "master" , value =
   if ( !value ){
     
     # sapply and replicate because of abbreviation mode can find more than 1 md5hash
+    if( is.character( repoDirGit )){
     tmpobjectS <- lapply( md5hash, function(x){
-      getBinaryURL( paste0( get( x = ".GithubURL", envir = .ArchivistEnv), "/", user, "/", repo, 
-                            "/", branch, "/gallery/", x, ".rda"), ssl.verifypeer = FALSE ) } )
+      getBinaryURL( paste0( get( x = ".GithubURL", envir = .ArchivistEnv), "/", user, "/", repo, "/",
+                            branch, "/", repoDirGit, "/gallery/", x, ".rda"), ssl.verifypeer = FALSE )  } )
+    }
+    if( is.logical( repoDirGit )){
+      tmpobjectS <- lapply( md5hash, function(x){
+        getBinaryURL( paste0( get( x = ".GithubURL", envir = .ArchivistEnv), "/", user, "/", repo, "/",
+                              branch, "/gallery/", x, ".rda"), ssl.verifypeer = FALSE )  } )  
+    }
     tfS <- replicate( length( md5hash ), tempfile() )
         
     for (i in seq_along( tfS )){
@@ -244,9 +263,16 @@ loadFromGithubRepo <- function( md5hash, repo, user, branch = "master" , value =
     # returns objects as value
 
     # sapply and replicate because of abbreviation mode can find more than 1 md5hash
-    tmpobjectS <- lapply( md5hash, function(x){
-      getBinaryURL( paste0( get( x = ".GithubURL", envir = .ArchivistEnv), "/", user, "/", repo, 
-                            "/master/gallery/", x, ".rda"), ssl.verifypeer = FALSE )  } )
+    if( is.character( repoDirGit )){
+      tmpobjectS <- lapply( md5hash, function(x){
+        getBinaryURL( paste0( get( x = ".GithubURL", envir = .ArchivistEnv), "/", user, "/", repo, "/",
+                              branch, "/", repoDirGit, "/gallery/", x, ".rda"), ssl.verifypeer = FALSE )  } )
+    }
+    if( is.logical( repoDirGit )){
+      tmpobjectS <- lapply( md5hash, function(x){
+        getBinaryURL( paste0( get( x = ".GithubURL", envir = .ArchivistEnv), "/", user, "/", repo, "/",
+                              branch, "/gallery/", x, ".rda"), ssl.verifypeer = FALSE )  } )  
+    }
     tfS <- replicate( length( md5hash ), tempfile() )
     
     for (i in 1:length(tmpobjectS)){

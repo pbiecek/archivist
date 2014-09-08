@@ -6,7 +6,8 @@
 \usage{
 getTagsLocal(md5hash, repoDir, tag = "name")
 
-getTagsGithub(md5hash, user, repo, branch = "master", tag = "name")
+getTagsGithub(md5hash, user, repo, branch = "master", repoDirGit = FALSE,
+  tag = "name")
 }
 \arguments{
 \item{repoDir}{A character denoting an existing directory in
@@ -23,6 +24,10 @@ of artifacts which \code{Tag} is desired to be returned.}
 
 \item{branch}{Only if working with a Github repository. A character containing a name of
 Github repository's branch in which Repository is archived. Default \code{branch} is \code{master}.}
+
+\item{repoDirGit}{Only if working with a Github repository. A character containing a name of a directory on Github repository
+on which the Repository is stored. If the Repository is stored in main folder on Github repository, this should be set
+to \code{repoDirGit = FALSE} as default.}
 }
 \value{
 The character is returned, which is a \code{Tag} (see \link{Tags}) related to \link{md5hash}

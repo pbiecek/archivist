@@ -28,6 +28,10 @@
 #' 
 #' @param branch Only if coping with a Github repository. A character containing a name of 
 #' Github Repository's branch on which a \code{repoFrom}-Repository is archived. Default \code{branch} is \code{master}.
+#'
+#' @param repoDirGit Only if working with a Github repository. A character containing a name of a directory on Github repository 
+#' on which the Repository is stored. If the Repository is stored in main folder on Github repository, this should be set 
+#' to \code{repoDirGit = FALSE} as default.
 #' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
@@ -70,20 +74,27 @@ copyLocalRepo <- function( repoFrom, repoTo, md5hashes ){
 
 #' @rdname copyToRepo
 #' @export
-copyGithubRepo <- function( repoTo, md5hashes, user, repo, branch="master"){
+copyGithubRepo <- function( repoTo, md5hashes, user, repo, branch="master", 
+                            repoDirGit = FALSE){
   stopifnot( is.character( c( repoTo, user, repo, branch, md5hashes ) ) )
+  stopifnot( is.logical( repoDirGit ) | is.character( repoDirGit ) )
+  if( is.logical( repoDirGit ) ){
+    if ( repoDirGit ){
+      stop( "repoDirGit may be only FALSE or a character. See documentation." )
+    }
+  } 
   
   repoTo <- checkDirectory( repoTo )
   
-  Temp <- downloadDB( repo, user, branch )
+  Temp <- downloadDB( repo, user, branch, repoDirGit )
   
   copyRepo( repoTo = repoTo, repoFrom = Temp, md5hashes = md5hashes , 
-            local = FALSE, user = user, repo = repo, branch = branch )  
+            local = FALSE, user = user, repo = repo, branch = branch, repoDirGit = repoDirGit )  
   file.remove(Temp)
   
 }
 
-copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, branch ){
+copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, branch, repoDirGit ){
   
   # clone artifact table
   toInsertArtifactTable <- executeSingleQuery( dir = repoFrom, realDBname = local,
@@ -121,62 +132,47 @@ copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, bra
     # if github mode
     # get files list
     options(RCurlOptions = list(cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl")))
+
     req <- GET( paste0( "https://api.github.com/repos/", user, "/",
                         repo, "/git/trees/", branch, "?recursive=1" ) )
+
     stop_for_status(req)
     
     filelist <- unlist(lapply(content(req)$tree, "[", "path"), use.names = F)
     
-    whichFilesToClone <- grep("gallery/", filelist, value = TRUE, fixed = TRUE)
+    if( is.logical( repoDirGit ) ){
+      whichFilesToClone <- grep("gallery/", filelist, value = TRUE, fixed = TRUE)
+    }else{
+      whichFilesToClone <- grep(paste0(repoDirGit,"/gallery/"), filelist, 
+                                value = TRUE, fixed = TRUE)
+    }
     
     filesToDownload <- unlist(as.vector(sapply( md5hashes, function(x){
       grep(pattern = x, whichFilesToClone, value = TRUE, fixed = TRUE)
     } ) ) )
     
     # download files to gallery folder
-    lapply( filesToDownload, cloneGithubFile, repo = repo, user = user, branch = branch, to = repoTo )
+    lapply( filesToDownload, cloneGithubFile, repo = repo, user = user, branch = branch, 
+            to = repoTo, repoDirGit )
   }
   
   }
 
-cloneGithubFile <- function( file, repo, user, branch, to ){
+cloneGithubFile <- function( file, repo, user, branch, to, repoDirGit ){
+    if( is.logical( repoDirGit ) ){
     URLfile <- paste0( get( ".GithubURL", envir = .ArchivistEnv) , 
                        user, "/", repo, "/", branch, "/", file) 
+    }
+    if( is.character( repoDirGit ) ){
+      URLfile <- paste0( get( ".GithubURL", envir = .ArchivistEnv) , 
+                         user, "/", repo, "/", branch, "/", repoDirGit, "/", file) 
+    }
+    
     fileFromGithub <- getBinaryURL( URLfile, ssl.verifypeer = FALSE )
     file.create( paste0( to, file ) )
     writeBin( fileFromGithub, paste0( to, file ) )
+    #files contains "gallery/" in it's name
     
   }
 
 
-  
-  
-#   for( i in 1:length( md5hashes ) ){
-#     if( local ){
-#       value <- loadFromLocalRepo( md5hashes[i], repoDir = repoFrom, value = TRUE )
-#       
-#     } else {
-#       value <- loadFromGithubRepo( md5hashes[i], user = user, repo = repo, value = TRUE )
-#     }
-#     name <- unlist( executeSingleQuery( dir = repoFrom, paste = local,
-#                                 paste0( "SELECT DISTINCT name FROM artifact WHERE md5hash = ",
-#                                         "'", md5hashes[i], "'" ) ) )
-#     
-#     assign(x = name, value = value, .ArchivistEnv )
-#     saveToRepo( get(name, envir = .ArchivistEnv ), repoDir = repoTo ) 
-#     rm( list = get(name, envir = .ArchivistEnv ), envir = .ArchivistEnv)
-#   }
-  # error
-#   
-#   Error in save(file = paste0(repoDir, "gallery/", md5hash, ".rda"), ascii = TRUE,  : 
-#                   nie znaleziono obiektu ‘get(name, envir = .ArchivistEnv)’ 
-#                 5 stop(sprintf(ngettext(n, "object %s not found", "objects %s not found"), 
-#                                paste(sQuote(list[!ok]), collapse = ", ")), domain = NA) 
-#                 4 save(file = paste0(repoDir, "gallery/", md5hash, ".rda"), ascii = TRUE, 
-#                        list = objectName, envir = parent.frame(2)) at saveToRepo.R#208
-#                 3 saveToRepo(get(name, envir = .ArchivistEnv), repoDir = repoTo) at copyToRepo.R#135
-#                 2 copyRepo(repoTo = repoTo, repoFrom = Temp, md5hashes = md5hashes, 
-#                            local = FALSE, user = user, repo = repo) at copyToRepo.R#115
-#                 1 copyGithubRepo(repoTo = dirr, md5hashes = hashes, user = "pbiecek", 
-#                                  repo = "archivist")
-  

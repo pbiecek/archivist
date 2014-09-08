@@ -16,6 +16,10 @@
 #' 
 #' @param branch Only if working with a Github repository. A character containing a name of 
 #' Github Repository's branch on which a Repository is archived. Default \code{branch} is \code{master}.
+#' 
+#' @param repoDirGit Only if working with a Github repository. A character containing a name of a directory on Github repository 
+#' on which the Repository is stored. If the Repository is stored in main folder on Github repository, this should be set 
+#' to \code{repoDirGit = FALSE} as default.
 #'
 #' @return An object of class \code{repository} which can be printed: \code{print(object)}.
 #' 
@@ -127,11 +131,16 @@ summaryLocalRepo <- function( repoDir ){
 
 #' @rdname summaryRepo
 #' @export
-summaryGithubRepo <- function( repo, user, branch = "master" ){
+summaryGithubRepo <- function( repo, user, branch = "master", repoDirGit = FALSE ){
   stopifnot( is.character( c( repo, user, branch ) ) )
-  
+  stopifnot( is.logical( repoDirGit ) | is.character( repoDirGit ) )
+  if( is.logical( repoDirGit ) ){
+    if ( repoDirGit ){
+      stop( "repoDirGit may be only FALSE or a character. See documentation." )
+    }
+  } 
   # database is needed to be downloaded
-  Temp <- downloadDB( repo, user, branch )
+  Temp <- downloadDB( repo, user, branch, repoDirGit )
   
   summaryRepo( dir = Temp, realDBname = FALSE )
   

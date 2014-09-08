@@ -27,6 +27,10 @@
 #' 
 #' @param branch Only if working with a Github repository. A character containing a name of 
 #' Github repository's branch in which Repository is archived. Default \code{branch} is \code{master}.
+#'
+#' @param repoDirGit Only if working with a Github repository. A character containing a name of a directory on Github repository 
+#' on which the Repository is stored. If the Repository is stored in main folder on Github repository, this should be set 
+#' to \code{repoDirGit = FALSE} as default.
 #' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
@@ -74,11 +78,17 @@ getTagsLocal <- function( md5hash, repoDir, tag ="name"){
 #' @family archivist
 #' @rdname getTags
 #' @export
-getTagsGithub <- function( md5hash, user, repo, branch = "master", tag ="name"){
+getTagsGithub <- function( md5hash, user, repo, branch = "master", repoDirGit = FALSE,
+                           tag ="name"){
   stopifnot( is.character( c( md5hash, user, repo, branch, tag ) ) )
-  
+  stopifnot( is.logical( repoDirGit ) | is.character( repoDirGit ) )
+  if( is.logical( repoDirGit ) ){
+    if ( repoDirGit ){
+      stop( "repoDirGit may be only FALSE or a character. See documentation." )
+    }
+  } 
   # first download database
-  Temp <- downloadDB( repo, user, branch )
+  Temp <- downloadDB( repo, user, branch, repoDirGit )
   returnTag( md5hash, repoDir = Temp, local = FALSE, tag = tag )
 }
 

@@ -31,6 +31,10 @@
 #' @param branch Only if working with a Github repository. A character containing a name of 
 #' Github Repository's branch on which a Repository is archived. Default \code{branch} is \code{master}.
 #'
+#' @param repoDirGit Only if working with a Github repository. A character containing a name of a directory on Github repository 
+#' on which the Repository is stored. If the Repository is stored in main folder on Github repository, this should be set 
+#' to \code{repoDirGit = FALSE} as default.
+#' 
 #' @return
 #' 
 #' If parameter \code{method} was set as \code{md5hashes} a \code{data.frame} with artifacts' names and archived
@@ -148,11 +152,17 @@ showLocalRepo <- function( repoDir, method = "md5hashes" ){
 
 #' @rdname showLocalRepo
 #' @export
-showGithubRepo <- function( repo, user, branch = "master", method = "md5hashes" ){
+showGithubRepo <- function( repo, user, branch = "master", repoDirGit = FALSE,
+                            method = "md5hashes" ){
   stopifnot( is.character( c( method, repo, user, branch ) ) )
-  
+  stopifnot( is.logical( repoDirGit ) | is.character( repoDirGit ) )
+  if( is.logical( repoDirGit ) ){
+    if ( repoDirGit ){
+      stop( "repoDirGit may be only FALSE or a character. See documentation." )
+    }
+  }
   # database is needed to be downloaded
-  Temp <- downloadDB( repo, user, branch )
+  Temp <- downloadDB( repo, user, branch, repoDirGit )
   
   showRepo( method = method, dir = Temp, local = FALSE )
 }

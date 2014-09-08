@@ -6,7 +6,7 @@
 \usage{
 summaryLocalRepo(repoDir)
 
-summaryGithubRepo(repo, user, branch = "master")
+summaryGithubRepo(repo, user, branch = "master", repoDirGit = FALSE)
 }
 \arguments{
 \item{repoDir}{A character denoting an existing directory of a Repository for which a summary will be returned.}
@@ -17,6 +17,10 @@ summaryGithubRepo(repo, user, branch = "master")
 
 \item{branch}{Only if working with a Github repository. A character containing a name of
 Github Repository's branch on which a Repository is archived. Default \code{branch} is \code{master}.}
+
+\item{repoDirGit}{Only if working with a Github repository. A character containing a name of a directory on Github repository
+on which the Repository is stored. If the Repository is stored in main folder on Github repository, this should be set
+to \code{repoDirGit = FALSE} as default.}
 }
 \value{
 An object of class \code{repository} which can be printed: \code{print(object)}.
