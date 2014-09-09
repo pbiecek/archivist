@@ -27,6 +27,13 @@ If your `.RData` file is too big and you do not need or do not want to load whol
 
 ```r
 file.info("Huge.RData")$size
+```
+
+```
+[1] 6040159
+```
+
+```r
 # convert .RData -> .rdb/.rdx
 lazyLoad = local({load("Huge.RData"); environment()})
 tools:::makeLazyLoadDB(lazyLoad, "Huge")
@@ -35,10 +42,59 @@ tools:::makeLazyLoadDB(lazyLoad, "Huge")
 Loading the DB then only loads the index but not the contents. The contents are loaded as they are used.
 
 ```r
-# lazyLoad("New")
-# ls()
-# x
+lazyLoad("Huge")
 ```
+
+```
+NULL
+```
+
+```r
+ls()[1:5] ## there is a great number of objects
+```
+
+```
+[1] "cache"          "cacheRepo"      "crime.by.state" "exampleRepoDir"
+[5] "games"         
+```
+
+Now you can create your own local **archivist**-like [Repository](https://github.com/pbiecek/archivist/wiki/archivist-package-Repository) which will make maintainig artifacts as easy as possible.
+
+```r
+DIRectory <- getwd()
+createEmptyRepo( DIRectory )
+```
+Then objects from `Huge.RData` file may be archived into **Repository** created in `DIRectory` directory.
+
+```r
+sapply( ls(), function(x){
+  y <- get(x, envir = lazyLoad)
+  saveToRepo(y, repoDir = DIRectory ) } )[1:5]
+```
+
+```
+Error: nie znaleziono obiektu 'DIRectory'
+```
+
+You can check the summary of **Repository** using `summaryLocalRepo()` function.
+
+```r
+summaryLocalRepo( DIRectory )
+```
+
+```
+Number of archived artifacts in the Repository:  3 
+Number of archived datasets in the Repository:  0 
+Number of various classes archived in the Repository: 
+            Number
+function        1
+character       1
+data.frame      1
+Saves per day in the Repository: 
+            Saves
+2014-09-09     3
+```
+
 
 <img src="ex1.JPG" width="200px" height="200px" />
 

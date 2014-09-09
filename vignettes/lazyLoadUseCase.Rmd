@@ -12,7 +12,7 @@ Regular `load()` into Global Environment takes too long or crashes R session? Wa
 **If you stacked with those questions, this use case is a must read for you.**
 
 The **archivist** package is a great solution that helps administrate, archive and restore your [artifacts](https://github.com/pbiecek/archivist/wiki) created in [R](http://cran.r-project.org/) package.
-```{r, eval=FALSE}
+```{r, cache=TRUE, message=FALSE, comment=""}
 library(devtools)
 install_github("archivist", "pbiecek")
 library(archivist)
@@ -23,7 +23,7 @@ library(tools)
 
 If your `.RData` file is too big and you do not need or do not want to load whole of it, you can simply convert the `.RData` file into a lazy-load database which serializes each entry separately and creates an index. The nice thing is that the loading will be on-demand.
 
-````{r, eval=FALSE}
+````{r, cache=TRUE, message=FALSE, comment=""}
 
 file.info("Huge.RData")$size
 # convert .RData -> .rdb/.rdx
@@ -32,11 +32,28 @@ tools:::makeLazyLoadDB(lazyLoad, "Huge")
 ````
 
 Loading the DB then only loads the index but not the contents. The contents are loaded as they are used.
-````{r}
-# lazyLoad("New")
-# ls()
-# x
+````{r, message=FALSE, comment=""}
+lazyLoad("Huge")
+ls()[1:5] ## there is a great number of objects
 ````
+
+Now you can create your own local **archivist**-like [Repository](https://github.com/pbiecek/archivist/wiki/archivist-package-Repository) which will make maintainig artifacts as easy as possible.
+```{r, message=FALSE, comment=""}
+DIRectory <- getwd()
+createEmptyRepo( DIRectory )
+```
+Then objects from `Huge.RData` file may be archived into **Repository** created in `DIRectory` directory.
+```{r, message=FALSE, comment="", warning=FALSE}
+sapply( ls(), function(x){
+  y <- get(x, envir = lazyLoad)
+  saveToRepo(y, repoDir = DIRectory ) } )[1:5]
+```
+
+You can check the summary of **Repository** using `summaryLocalRepo()` function.
+```{r, comment=""}
+summaryLocalRepo( DIRectory )
+```
+
 
 <img src="ex1.JPG" width="200px" height="200px" />
 
