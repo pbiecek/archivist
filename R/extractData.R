@@ -58,11 +58,15 @@ extractData.partition <- function( object, parrentMd5hash, parentDir, isForce ){
 }
 
 extractData.lda <- function( object, parrentMd5hash, parentDir, isForce ){
+  if (exists(as.character( ( object$call ) )[3], envir = parent.frame(1) )){
   extractedDF <-  get( as.character( ( object$call ) )[3], envir = parent.frame(1) )
   md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, repoDir = parentDir,
                            rememberName = FALSE, archiveTags = FALSE, force = isForce )
   addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
   return( md5hashDF )
+  }else{
+   warning(paste0("Could not archive data.")) 
+  }
 }
 
 extractData.qda <- function( object, parrentMd5hash, parentDir, isForce ){
