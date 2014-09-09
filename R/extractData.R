@@ -22,6 +22,8 @@ extractData.lm <- function( object, parrentMd5hash, parentDir, isForce ){
 }
 
 extractData.htest <- function( object, parrentMd5hash, parentDir, isForce ){
+  if (exists(strsplit(object$data.name, " and ")[[1]][1], envir = parent.frame(1)) &
+        exists(strsplit(object$data.name, " and ")[[1]][2], envir = parent.frame(1)) ){
   extractedDF1 <- get( strsplit(object$data.name, " and ")[[1]][1], envir = parent.frame(1) )
   extractedDF2 <- get( strsplit(object$data.name, " and ")[[1]][2], envir = parent.frame(1) )
   md5hashDF <- saveToRepo( c( extractedDF1, extractedDF2 ), 
@@ -29,14 +31,21 @@ extractData.htest <- function( object, parrentMd5hash, parentDir, isForce ){
                            rememberName = FALSE, archiveTags = FALSE, force = isForce )
   addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
   return( md5hashDF )
+  }else{
+    warning(paste0("Could not archive data.")) 
+  }
 }
 
 extractData.trellis <- function( object, parrentMd5hash, parentDir, isForce ){
+  if (exists(as.character( ( object$call ) )[3], envir = parent.frame(1) )){
   extractedDF <- get( as.character( object$call )[3], envir = parent.frame(1) )
   md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, repoDir = parentDir,
                            rememberName = FALSE, archiveTags = FALSE, force = isForce )
   addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
   return( md5hashDF )
+  }else{
+    warning(paste0("Could not archive data.")) 
+  }
 }
 
 extractData.twins <- function( object, parrentMd5hash, parentDir, isForce ){
@@ -70,17 +79,23 @@ extractData.lda <- function( object, parrentMd5hash, parentDir, isForce ){
 }
 
 extractData.qda <- function( object, parrentMd5hash, parentDir, isForce ){
+  if (exists(as.character( ( object$call ) )[2], envir = parent.frame(1) )){
   extractedDF <-  get( as.character( ( object$call ) )[2], envir = parent.frame(1) )
   md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, repoDir = parentDir,
                            rememberName = FALSE, archiveTags = FALSE, force = isForce )
   addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
   return( md5hashDF )
+  }else{
+    warning(paste0("Could not archive data.")) 
+  }
 }
 
 
 extractData.glmnet <- function( object, parrentMd5hash, parentDir, isForce ){
   # elmet / lognet / multnet /foshnet /coxnet /mrelnet 
                    # inherits after glmnet
+  if (exists(as.character( ( object$call ) )[3], envir = parent.frame(1) ) & 
+        exists(as.character( ( object$call ) )[2], envir = parent.frame(1) )){
   extractedDF1 <- get( as.character( object$call )[2], envir = parent.frame(1) )
   extractedDF2 <- get( as.character( object$call )[3], envir = parent.frame(1) )
   md5hashDF <- saveToRepo( c( extractedDF1, extractedDF1 ), archiveData = FALSE, 
@@ -88,14 +103,21 @@ extractData.glmnet <- function( object, parrentMd5hash, parentDir, isForce ){
                            force = isForce )
   addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
   return( md5hashDF )
+  }else{
+    warning(paste0("Could not archive data.")) 
+  }
 }
 
 extractData.survfit <- function( object, parrentMd5hash, parentDir, isForce ){
+  if (exists(as.character( ( object$call ) )[3], envir = parent.frame(1) )){
   extractedDF <-  get( as.character( object$call )[3], envir = parent.frame(1) )
   md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, repoDir = parentDir, 
                            rememberName = FALSE, archiveTags = FALSE, force = isForce )
   addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
   return( md5hashDF )
+  }else{
+    warning(paste0("Could not archive data.")) 
+  }
 }
 
 

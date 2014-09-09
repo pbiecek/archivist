@@ -6,7 +6,7 @@
 # Lazy load with **archivist**
 > You can adjust the widths of the two columns using your cursor. What is more, press `T` on your keyboard, and see what happens.
 
-<img src="fig1.jpg" width="200px" height="200px" align="right" />
+<img src="fig11.jpg" width="250px" height="180px" align="right" />
 Having problem with a too big `.Rdata` file? Interested only in a few objects from a huge `.Rdata` file?
 Regular `load()` into Global Environment takes too long or crashes R session? Want to load or copy an object you don't remember name? Maintaing environment with thousands of objects became perplexing and troublesome  
 
@@ -30,10 +30,9 @@ tools:::makeLazyLoadDB(lazyLoad, "Huge")
 ````
 
 Loading the database then only loads the index but not the contents. The contents are loaded as they are used.
-````{r, message=FALSE, comment=""}
+````{r, message=FALSE, comment="", results='hide'}
 lazyLoad("Huge")
-length(ls()) ## there is a great number of objects
-objNames <- ls()
+objNames <- ls() ## 234 objects
 ````
 
 Now you can create your own local **archivist**-like [Repository](https://github.com/pbiecek/archivist/wiki/archivist-package-Repository) which will make maintainig artifacts as easy as possible.
@@ -55,7 +54,7 @@ lapply( as.list(objNames[-208]), function(x){
 ```
 
 You can check the summary of **Repository** using `summaryLocalRepo()` function.
-```{r, comment="", cache=TRUE}
+```{r, comment=""}
 summaryLocalRepo( DIRectory )
 ```
 
