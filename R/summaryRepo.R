@@ -113,6 +113,11 @@
 #' deleteRepo( exampleRepoDir )
 #' 
 #' rm( exampleRepoDir )
+#'
+#' # many archivist-like Repositories on one Github repository
+#'   
+#' summaryGithubRepo(user="MarcinKosinski", repo="Museum", 
+#' branch="master", repoDirGit="ex2" )
 #' 
 #' }
 #' @family archivist

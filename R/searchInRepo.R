@@ -153,6 +153,14 @@
 #'   
 #'   rm( exampleRepoDir )
 #'   
+#'   # many archivist-like Repositories on one Github repository
+#'   
+#'   searchInGithubRepo( pattern = "name", user="MarcinKosinski", repo="Museum", 
+#'   branch="master", repoDirGit="ex1", fixed = FALSE )
+#'
+#'   searchInGithubRepo( pattern = "name", user="MarcinKosinski", repo="Museum", 
+#'                    branch="master", repoDirGit="ex2", fixed = FALSE )
+#'   
 #' }
 #' @family archivist
 #' @rdname searchInRepo

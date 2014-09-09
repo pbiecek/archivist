@@ -60,6 +60,14 @@ deleteRepo( exampleRepoDir )
 
 rm( exampleRepoDir )
 
+# many archivist-like Repositories on one Github repository
+
+dir <- paste0(getwd(), "/ex1")
+createEmptyRepo( dir )
+copyGithubRepo(repoTo = dir , md5hashes = "ff575c261c949d073b2895b05d1097c3",
+              user="MarcinKosinski", repo="Museum",
+              branch="master", repoDirGit="ex2")
+deleteRepo( dir )
 
 }
 }

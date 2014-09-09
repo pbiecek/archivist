@@ -297,7 +297,7 @@ searchInGithubRepo( pattern = "name", user="MarcinKosinski", repo="Museum",
                     branch="master", repoDirGit="ex2", fixed = FALSE )
 
 getTagsGithub("ff575c261c949d073b2895b05d1097c3", user="MarcinKosinski", 
-              repo="Museum", branch="master", repoDirGit="ex1",)
+              repo="Museum", branch="master", repoDirGit="ex1")
 
 # when repository is in the main folder repoDirGit should not be specified
 searchInGithubRepo( pattern = "name", user="pbiecek", repo="archivist", 
@@ -306,4 +306,12 @@ searchInGithubRepo( pattern = "name", user="pbiecek", repo="archivist",
 getTagsGithub("a250f9167c377e0de3b6bf85bfcf4e5a", user="pbiecek", 
               repo="archivist")
 
+dir <- paste0(getwd(), "/ex1")
+createEmptyRepo( dir )
+copyGithubRepo(repoTo = dir , md5hashes = "ff575c261c949d073b2895b05d1097c3",
+               user="MarcinKosinski", repo="Museum", 
+               branch="master", repoDirGit="ex2")
+deleteRepo( dir )
 
+summaryGithubRepo(user="MarcinKosinski", repo="Museum", 
+                  branch="master", repoDirGit="ex2" )

@@ -140,6 +140,13 @@ deleteRepo( exampleRepoDir )
 
 rm( exampleRepoDir )
 
+# many archivist-like Repositories on one Github repository
+
+showGithubRepo( user="MarcinKosinski", repo="Museum", branch="master",
+repoDirGit="ex1")
+showGithubRepo( user="MarcinKosinski", repo="Museum", branch="master",
+                repoDirGit="ex2")
+
 }
 }
 \author{

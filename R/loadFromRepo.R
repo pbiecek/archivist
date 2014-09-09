@@ -173,9 +173,19 @@
 #' deleteRepo( exampleRepoDir )
 #' 
 #' rm( exampleRepoDir )
+#' 
+#' # many archivist-like Repositories on one Github repository
+#' 
+#' loadFromGithubRepo( "ff575c261c949d073b2895b05d1097c3", 
+#' user="MarcinKosinski", repo="Museum", branch="master", repoDirGit="ex2")
+#' 
+#' 
+#' loadFromGithubRepo( "ff575c261c949d073b2895b05d1097c3", 
+#'                     user="MarcinKosinski", repo="Museum", branch="master",
+#'                     repoDirGit="ex1")
 #' }
 #' @family archivist
-#' @rdname loadFromLocalRepo
+#' @rdname loadFromRepo
 #' @export
 loadFromLocalRepo <- function( md5hash, repoDir, value = FALSE ){
   stopifnot( is.character( c( md5hash, repoDir ) ) )
@@ -211,7 +221,7 @@ loadFromLocalRepo <- function( md5hash, repoDir, value = FALSE ){
   }
 }
 
-#' @rdname loadFromLocalRepo
+#' @rdname loadFromRepo
 #' @export
 loadFromGithubRepo <- function( md5hash, repo, user, branch = "master", repoDirGit = FALSE, value = FALSE ){
   stopifnot( is.character( c( md5hash, repo, user, branch ) ) )

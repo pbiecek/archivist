@@ -55,6 +55,14 @@
 #' 
 #' rm( exampleRepoDir )
 #' 
+#' # many archivist-like Repositories on one Github repository
+#' 
+#' dir <- paste0(getwd(), "/ex1")
+#' createEmptyRepo( dir )
+#' copyGithubRepo(repoTo = dir , md5hashes = "ff575c261c949d073b2895b05d1097c3",
+#'               user="MarcinKosinski", repo="Museum", 
+#'               branch="master", repoDirGit="ex2")
+#' deleteRepo( dir )
 #' 
 #' }
 #' 
@@ -142,6 +150,10 @@ copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, bra
     
     if( is.logical( repoDirGit ) ){
       whichFilesToClone <- grep("gallery/", filelist, value = TRUE, fixed = TRUE)
+      needTidy <- strsplit(whichFilesToClone, "gallery/")
+      whichFilesToClone <- unlist(lapply(needTidy, function(x){
+        paste0("gallery/", x[2])
+      }))
     }else{
       whichFilesToClone <- grep(paste0(repoDirGit,"/gallery/"), filelist, 
                                 value = TRUE, fixed = TRUE)
@@ -149,7 +161,7 @@ copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, bra
     
     filesToDownload <- unlist(as.vector(sapply( md5hashes, function(x){
       grep(pattern = x, whichFilesToClone, value = TRUE, fixed = TRUE)
-    } ) ) )
+    } ) ) ) #choose proper files from whole file list -whichFilesToClone
     
     # download files to gallery folder
     lapply( filesToDownload, cloneGithubFile, repo = repo, user = user, branch = branch, 
@@ -159,19 +171,19 @@ copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, bra
   }
 
 cloneGithubFile <- function( file, repo, user, branch, to, repoDirGit ){
-    if( is.logical( repoDirGit ) ){
+
     URLfile <- paste0( get( ".GithubURL", envir = .ArchivistEnv) , 
                        user, "/", repo, "/", branch, "/", file) 
-    }
-    if( is.character( repoDirGit ) ){
-      URLfile <- paste0( get( ".GithubURL", envir = .ArchivistEnv) , 
-                         user, "/", repo, "/", branch, "/", repoDirGit, "/", file) 
+    # tidy
+    if ( is.character( repoDirGit ) ){
+      file <- paste0( "gallery/", strsplit(file, "gallery/")[[1]][2] )
     }
     
     fileFromGithub <- getBinaryURL( URLfile, ssl.verifypeer = FALSE )
+    
     file.create( paste0( to, file ) )
     writeBin( fileFromGithub, paste0( to, file ) )
-    #files contains "gallery/" in it's name
+    #files contain "gallery/" in it's name
     
   }
 

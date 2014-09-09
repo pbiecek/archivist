@@ -137,9 +137,16 @@
 #'   
 #' rm( exampleRepoDir )
 #' 
+#' # many archivist-like Repositories on one Github repository
+#' 
+#' showGithubRepo( user="MarcinKosinski", repo="Museum", branch="master",
+#' repoDirGit="ex1")
+#' showGithubRepo( user="MarcinKosinski", repo="Museum", branch="master",
+#'                 repoDirGit="ex2")
+#' 
 #' }
 #' @family archivist
-#' @rdname showLocalRepo
+#' @rdname showRepo
 #' @export
 showLocalRepo <- function( repoDir, method = "md5hashes" ){
   stopifnot( is.character( c( method, repoDir ) ) )
@@ -150,7 +157,7 @@ showLocalRepo <- function( repoDir, method = "md5hashes" ){
 }
 
 
-#' @rdname showLocalRepo
+#' @rdname showRepo
 #' @export
 showGithubRepo <- function( repo, user, branch = "master", repoDirGit = FALSE,
                             method = "md5hashes" ){
