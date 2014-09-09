@@ -7,7 +7,7 @@
 > You can adjust the widths of the two columns using your cursor. What is more, press `T` on your keyboard, and see what happens.
 
 Having problem with a too big `.Rdata` file? Interested only in a few objects from a huge `.Rdata` file?
-Regular `load()` into Global Environment takes too long or crashes R session? Want to load or copy an object you don't remember name?
+Regular `load()` into Global Environment takes too long or crashes R session? Want to load or copy an object you don't remember name? <img src="fig1.jpg" width="200px" height="200px" />
 
 **If you stacked with those questions, this use case is a must read for you.**
 
@@ -55,7 +55,7 @@ summaryLocalRepo( DIRectory )
 ```
 
 
-<img src="ex1.JPG" width="200px" height="200px" />
+
 
 
 
