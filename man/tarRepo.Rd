@@ -10,7 +10,7 @@ tarLocalRepo(repoDir)
 will be tarred.}
 }
 \description{
-\code{tarLocalRepo}
+\code{tarLocalRepo} ...
 }
 \details{
 \code{tarLocalRepo}
