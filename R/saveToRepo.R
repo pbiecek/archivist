@@ -91,7 +91,7 @@
 #'    \item \code{saveToRepo( z, repoDir )}
 #' }
 #' Example: here data set will be archived.
-#' #' \itemize{
+#' \itemize{
 #'    \item \code{train2 <- train[,-8]}
 #'    \item \code{z <- lda(Sp ~ ., Iris, prior = c(1,1,1)/3, subset = train2)}
 #'    \item \code{saveToRepo( z, repoDir )}
