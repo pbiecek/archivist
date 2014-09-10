@@ -144,6 +144,7 @@ Other archivist: \code{\link{Repository}};
   \code{\link{rmFromRepo}}; \code{\link{saveToRepo}};
   \code{\link{searchInGithubRepo}},
   \code{\link{searchInLocalRepo}};
-  \code{\link{showGithubRepo}}, \code{\link{showLocalRepo}}
+  \code{\link{showGithubRepo}},
+  \code{\link{showLocalRepo}}; \code{\link{tarLocalRepo}}
 }
 
