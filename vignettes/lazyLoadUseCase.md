@@ -75,7 +75,7 @@ As a result we got [md5hashes](https://github.com/pbiecek/archivist/wiki/archivi
 ```
 [1] "32ac7871f2b4875c9122a7d9f339f78b"
 ```
-After we got one `md5hash` corresponding to the artfiact we are interested in, we can load it using
+<img src="fig5.jpg" width="250px" height="220px" align="right" /> After we got one `md5hash` corresponding to the artfiact we are interested in, we can load it using
 `loadFromLocalRepo()` function.
 
 ```r

@@ -66,7 +66,7 @@ As a result we got [md5hashes](https://github.com/pbiecek/archivist/wiki/archivi
 ```{r, comment=""}
 (hash <- intersect(hashes1, hashes2))
 ```
-After we got one `md5hash` corresponding to the artfiact we are interested in, we can load it using
+<img src="fig5.jpg" width="250px" height="220px" align="right" /> After we got one `md5hash` corresponding to the artfiact we are interested in, we can load it using
 `loadFromLocalRepo()` function.
 ```{r,  comment=""}
 myData <- loadFromLocalRepo( hash, DIRectory, value = TRUE )
