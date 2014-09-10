@@ -32,8 +32,8 @@ extractData.htest <- function( object, parrentMd5hash, parentDir, isForce ){
   addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
   return( md5hashDF )
   }else{
-    warning(paste0("Could not find data ",strsplit(object$data.name, " and ")[[1]][1], envir = parent.frame(1),
-            " or ", strsplit(object$data.name, " and ")[[1]][1], envir = parent.frame(2),
+    warning(paste0("Could not find data ", strsplit(object$data.name, " and ")[[1]][1],
+            " or ", strsplit(object$data.name, " and ")[[1]][2], 
             ". Dataset was not archived."))
   }
 }
@@ -46,7 +46,7 @@ extractData.trellis <- function( object, parrentMd5hash, parentDir, isForce ){
   addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
   return( md5hashDF )
   }else{
-    warning(paste0("Could not find data ", as.character( ( object$call ) )[3], envir = parent.frame(1) ,
+    warning(paste0("Could not find data ", as.character( ( object$call ) )[3], 
     ". Dataset was not archived."))
   }
 }
@@ -77,7 +77,7 @@ extractData.lda <- function( object, parrentMd5hash, parentDir, isForce ){
   addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
   return( md5hashDF )
   }else{
-   warning(paste0("Could not find data ", as.character( ( object$call ) )[3], envir = parent.frame(1),
+   warning(paste0("Could not find data ", as.character( ( object$call ) )[3], 
                   ". Dataset was not archived.")) 
   }
 }
@@ -90,7 +90,7 @@ extractData.qda <- function( object, parrentMd5hash, parentDir, isForce ){
   addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
   return( md5hashDF )
   }else{
-    warning(paste0("Could not find data ", as.character( ( object$call ) )[2], envir = parent.frame(1),
+    warning(paste0("Could not find data ", as.character( ( object$call ) )[2], 
                    ". Dataset was not archived."))  
   }
 }
@@ -109,8 +109,8 @@ extractData.glmnet <- function( object, parrentMd5hash, parentDir, isForce ){
   addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
   return( md5hashDF )
   }else{
-    warning(paste0("Could not find data ", as.character( ( object$call ) )[3], envir = parent.frame(1),
-                   " or ", as.character( ( object$call ) )[2], envir = parent.frame(1),
+    warning(paste0("Could not find data ", as.character( ( object$call ) )[3], 
+                   " or ", as.character( ( object$call ) )[2], 
                    ". Dataset was not archived.")) 
   }
 }
@@ -123,7 +123,7 @@ extractData.survfit <- function( object, parrentMd5hash, parentDir, isForce ){
   addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
   return( md5hashDF )
   }else{
-    warning(paste0("Could not find data ", as.character( ( object$call ) )[3], envir = parent.frame(1),
+    warning(paste0("Could not find data ", as.character( ( object$call ) )[3], 
                    ". Dataset was not archived."))  
   }
 }
