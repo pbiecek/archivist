@@ -55,11 +55,10 @@ Then objects from `Huge.RData` file may be archived into **Repository** created 
 lapply( as.list(objNames), function(x){
   y <- get( x, envir = lazyLoad )
   attr(y, "tags") <- paste0("realName: ", x)
-  saveToRepo( y, repoDir = DIRectory )
-  } )
+  saveToRepo( y, repoDir = DIRectory )} )
 ```
 
-<img src="fig2.jpg" width="250px" height="180px" align="left" /> Now if you are interested in a specific artifact but you only remeber that its `class` was `data.frame` and its name started with letters `ir` then it is possible to search for that artifact using `searchInLocalRepo()` function. 
+<img src="fig22.jpg" width="200px" height="200px" align="left" /> Now if you are interested in a specific artifact but the only thing you remeber about it is its `class` was `data.frame` and its name started with letters `ir` then it is possible to search for that artifact using `searchInLocalRepo()` function. 
 
 ```r
 hashes1 <- searchInLocalRepo( "class:data.frame", DIRectory)
@@ -75,7 +74,7 @@ As a result we got [md5hashes](https://github.com/pbiecek/archivist/wiki/archivi
 ```
 [1] "32ac7871f2b4875c9122a7d9f339f78b"
 ```
-After we got one `md5hash` corresponding to the `artfiact` we are interested in, we can load it using
+After we got one `md5hash` corresponding to the artfiact we are interested in, we can load it using
 `loadFromLocalRepo()` function.
 
 ```r
@@ -92,6 +91,15 @@ summary(myData[,-5])
  3rd Qu.:6.40   3rd Qu.:3.30   3rd Qu.:5.10   3rd Qu.:1.8  
  Max.   :7.90   Max.   :4.40   Max.   :6.90   Max.   :2.5  
 ```
+One can always check the `realName` tag of that artifact with `getTagsLocal()` function.
+
+```r
+getTagsLocal(hash, DIRectory, "realName")
+```
+
+```
+[1] "realName: iris"
+```
 If only specific artifacts from previously created **Repository** in `DIRectory` directory are needed in future, they may be copied to a new **Repository** in new directory. New, smaller **Repository** will use less memory and may be easier to send to contributors when working in groups. Here is an exmaple of coping artifacts only from selected classes. Because `DIRectory2` directory did not exist, the parameter `force=TRUE` was needed to force creating empty **Reposiotry**.
 
 ```r
@@ -102,6 +110,8 @@ DIRectory2 <- (paste0( DIRectory, "/ex"))
 createEmptyRepo( DIRectory2, force = TRUE )
 copyLocalRepo( DIRectory, DIRectory2, hashes)
 ```
+
+
 You can even `tar` your **Repository** with `tarLocalRepo()` function and send it to anybody you want.
 
 ```r
