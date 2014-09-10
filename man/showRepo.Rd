@@ -166,6 +166,6 @@ Other archivist: \code{\link{Repository}};
   \code{\link{searchInLocalRepo}};
   \code{\link{summaryGithubRepo}},
   \code{\link{summaryLocalRepo}};
-  \code{\link{tarLocalRepo}}
+  \code{\link{tarGithubRepo}}, \code{\link{tarLocalRepo}}
 }
 

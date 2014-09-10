@@ -58,6 +58,6 @@ Other archivist: \code{\link{Tags}};
   \code{\link{showLocalRepo}};
   \code{\link{summaryGithubRepo}},
   \code{\link{summaryLocalRepo}};
-  \code{\link{tarLocalRepo}}
+  \code{\link{tarGithubRepo}}, \code{\link{tarLocalRepo}}
 }
 
