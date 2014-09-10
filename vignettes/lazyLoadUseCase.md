@@ -112,14 +112,13 @@ createEmptyRepo( DIRectory2, force = TRUE )
 copyLocalRepo( DIRectory, DIRectory2, hashes)
 ```
 
-
-You can even `tar` your **Repository** with `tarLocalRepo()` function and send it to anybody you want.
+ You can even `tar` your **Repository** with `tarLocalRepo()` function and send it to anybody you want.
 
 ```r
 tarLocalRepo( DIRectory2 )
 ```
 
-You can check the summary of **Repository** using `summaryLocalRepo()` function. As you can see, some of the `coxph` artifacts have addtional class. 
+You can check the summary of **Repository** using `summaryLocalRepo()` function. As you can see, some of the `coxph` artifacts have addtional class. <img src="fig4.jpg" width="290px" height="200px" align="right" /> 
 
 ```r
 summaryLocalRepo( DIRectory2 )
