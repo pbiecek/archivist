@@ -130,14 +130,15 @@ copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, bra
   if ( local ){
   # clone files
   
-  whichToClone <- as.vector( sapply( md5hashes, function(x){
+  whichToClone <- unlist( sapply( md5hashes, function(x){
     which( x == sub( list.files( "gallery" ), pattern = "\\.[a-z]{3}", 
                      replacement="" ) ) 
   } ) )
   
   filesToClone <- list.files( "gallery" )[whichToClone]
-  sapply( filesToClone, file.copy, from = repoFrom, to = paste0( repoTo, "gallery/" ),
-          recursive = TRUE )
+  sapply( filesToClone, function(x){
+    file.copy( from = paste0(repoFrom, "gallery/",x), to = paste0( repoTo, "gallery/" ),
+          recursive = TRUE )})
   } else {
     # if github mode
     # get files list

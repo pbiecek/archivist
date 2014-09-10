@@ -159,7 +159,7 @@ downloadDB <- function( repo, user, branch, repoDirGit ){
 
 checkDirectory <- function( directory ){
   # check if repoDir has "/" at the end and add it if not
-  if ( regexpr( pattern = ".$", text = directory ) != "/" ){
+    if ( !grepl("/$", x = directory , perl=TRUE) ){
     directory <- paste0(  directory, "/"  )
   }
   return( directory )

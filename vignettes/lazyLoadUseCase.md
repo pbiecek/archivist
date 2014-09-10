@@ -6,19 +6,22 @@
 # Lazy load with **archivist**
 > You can adjust the widths of the two columns using your cursor. What is more, press `T` on your keyboard, and see what happens.
 
-<img src="fig11.jpg" width="250px" height="180px" align="right" />
+<img src="fig111.jpg" width="250px" height="180px" align="right" />
 Having problem with a too big `.Rdata` file? Interested only in a few objects from a huge `.Rdata` file?
 Regular `load()` into Global Environment takes too long or crashes R session? Want to load or copy an object you don't remember name? Maintaing environment with thousands of objects became perplexing and troublesome  
 
+```r
+library(devtools)
+if (!require(archivist)){
+  install_github("archivist", "pbiecek")
+  require(archivist)
+  }
+library(tools)
+```
 **If you stacked with those questions, this use case is a must read for you.**
 
 The **archivist** package is a great solution that helps administrate, archive and restore your [artifacts](https://github.com/pbiecek/archivist/wiki) created in [R](http://cran.r-project.org/) package.
 
-```r
-library(devtools)
-if (!require(archivist)) install_github("archivist", "pbiecek")
-library(tools)
-```
 
 ## Combining **archivist** and lazy load may be miraculous
 
@@ -35,7 +38,7 @@ Loading the database then only loads the index but not the contents. The content
 
 ```r
 lazyLoad("Huge")
-objNames <- ls() ## 234 objects
+objNames <- ls() #232 objects
 ```
 
 Now you can create your own local **archivist**-like [Repository](https://github.com/pbiecek/archivist/wiki/archivist-package-Repository) which will make maintainig artifacts as easy as possible.
@@ -49,70 +52,91 @@ Then objects from `Huge.RData` file may be archived into **Repository** created 
 
 
 ```r
-lapply( as.list(objNames[-208]), function(x){
+lapply( as.list(objNames), function(x){
   y <- get( x, envir = lazyLoad )
   attr(y, "tags") <- paste0("realName: ", x)
   saveToRepo( y, repoDir = DIRectory )
-  } )[1:2]
+  } )
 ```
 
-```
-[[1]]
-[1] "7754f8ec2eca40cba05e22a71e933c28"
-
-[[2]]
-[1] "ea36e8ee461e2e87477a27face48de21"
-```
-
-You can check the summary of **Repository** using `summaryLocalRepo()` function.
+<img src="fig2.jpg" width="250px" height="180px" align="left" /> Now if you are interested in a specific artifact but you only remeber that its `class` was `data.frame` and its name started with letters `ir` then it is possible to search for that artifact using `searchInLocalRepo()` function. 
 
 ```r
-summaryLocalRepo( DIRectory )
+hashes1 <- searchInLocalRepo( "class:data.frame", DIRectory)
+hashes2 <- searchInLocalRepo( "realName: ir", DIRectory, 
+                               fixed = FALSE)
+```
+As a result we got [md5hashes](https://github.com/pbiecek/archivist/wiki/archivist-package-md5hash) of artifacts which class was `data.frame` (`hashes1`) and `md5hashes` of artifacts which names (stored in `tag` named `realName`) starts with `ir`. Now we can proceed intersection on those two vectors of characters.
+
+```r
+(hash <- intersect(hashes1, hashes2))
 ```
 
 ```
-Number of archived artifacts in the Repository:  233 
-Number of archived datasets in the Repository:  11 
+[1] "32ac7871f2b4875c9122a7d9f339f78b"
+```
+After we got one `md5hash` corresponding to the `artfiact` we are interested in, we can load it using
+`loadFromLocalRepo()` function.
+
+```r
+myData <- loadFromLocalRepo( hash, DIRectory, value = TRUE )
+summary(myData[,-5])
+```
+
+```
+  Sepal.Length   Sepal.Width    Petal.Length   Petal.Width 
+ Min.   :4.30   Min.   :2.00   Min.   :1.00   Min.   :0.1  
+ 1st Qu.:5.10   1st Qu.:2.80   1st Qu.:1.60   1st Qu.:0.3  
+ Median :5.80   Median :3.00   Median :4.35   Median :1.3  
+ Mean   :5.84   Mean   :3.06   Mean   :3.76   Mean   :1.2  
+ 3rd Qu.:6.40   3rd Qu.:3.30   3rd Qu.:5.10   3rd Qu.:1.8  
+ Max.   :7.90   Max.   :4.40   Max.   :6.90   Max.   :2.5  
+```
+If only specific artifacts from previously created **Repository** in `DIRectory` directory are needed in future, they may be copied to a new **Repository** in new directory. New, smaller **Repository** will use less memory and may be easier to send to contributors when working in groups. Here is an exmaple of coping artifacts only from selected classes. Because `DIRectory2` directory did not exist, the parameter `force=TRUE` was needed to force creating empty **Reposiotry**.
+
+```r
+hashes <- unlist(sapply(c("class:coxph", "class:function",
+                   "class:data.frame"), searchInLocalRepo, 
+                 repoDir = DIRectory))
+DIRectory2 <- (paste0( DIRectory, "/ex"))
+createEmptyRepo( DIRectory2, force = TRUE )
+copyLocalRepo( DIRectory, DIRectory2, hashes)
+```
+You can even `tar` your **Repository** with `tarLocalRepo()` function and send it to anybody you want.
+
+```r
+tarLocalRepo( DIRectory2 )
+```
+
+You can check the summary of **Repository** using `summaryLocalRepo()` function. As you can see, some of the `coxph` artifacts have addtional class. 
+
+```r
+summaryLocalRepo( DIRectory2 )
+```
+
+```
+Number of archived artifacts in the Repository:  81 
+Number of archived datasets in the Repository:  0 
 Number of various classes archived in the Repository: 
-               Number
-character          8
-data.frame        51
-function          19
-performance        3
-coxph             11
-cox.zph            3
-numeric           43
-survfitms          1
-survfit            4
-matrix             7
-cuminc             2
-integer           18
-glm                2
-lm                 4
-list              20
-coxph.penal        4
-coxph.null         1
-kmeans             1
-logical            7
-factor             5
-environment        1
-loess              3
-lda                2
-svm.formula        1
-svm                1
-agnes              2
-twins              2
-prcomp             3
-prediction         1
-smooth.spline      3
-table              2
-survdiff           2
-gg                 7
-ggplot             7
+             Number
+data.frame      51
+function        19
+coxph           11
+coxph.penal      4
+coxph.null       1
 Saves per day in the Repository: 
             Saves
-2014-09-09   244
+2014-09-10    81
 ```
+When **Repository** is no longer necessary we may simply delete it with `deleteRepo()` function.
+
+
+```r
+deleteRepo( DIRectory )
+deleteRepo( DIRectory2 )
+```
+
+
 
 
 

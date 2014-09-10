@@ -6,24 +6,27 @@
 # Lazy load with **archivist**
 > You can adjust the widths of the two columns using your cursor. What is more, press `T` on your keyboard, and see what happens.
 
-<img src="fig11.jpg" width="250px" height="180px" align="right" />
+<img src="fig111.jpg" width="250px" height="180px" align="right" />
 Having problem with a too big `.Rdata` file? Interested only in a few objects from a huge `.Rdata` file?
 Regular `load()` into Global Environment takes too long or crashes R session? Want to load or copy an object you don't remember name? Maintaing environment with thousands of objects became perplexing and troublesome  
-
+```{r, message=FALSE, comment=""}
+library(devtools)
+if (!require(archivist)){
+  install_github("archivist", "pbiecek")
+  require(archivist)
+  }
+library(tools)
+```
 **If you stacked with those questions, this use case is a must read for you.**
 
 The **archivist** package is a great solution that helps administrate, archive and restore your [artifacts](https://github.com/pbiecek/archivist/wiki) created in [R](http://cran.r-project.org/) package.
-```{r, cache=TRUE, message=FALSE, comment=""}
-library(devtools)
-if (!require(archivist)) install_github("archivist", "pbiecek")
-library(tools)
-```
+
 
 ## Combining **archivist** and lazy load may be miraculous
 
 If your `.RData` file is too big and you do not need or do not want to load whole of it, you can simply convert the `.RData` file into a lazy-load database which serializes each entry separately and creates an index. The nice thing is that the loading will be on-demand.
 
-````{r, cache=TRUE, message=FALSE, comment=""}
+````{r, message=FALSE, comment=""}
 # convert .RData -> .rdb/.rdx
 lazyLoad = local({load("Huge.RData"); environment()})
 tools:::makeLazyLoadDB(lazyLoad, "Huge")
@@ -32,7 +35,7 @@ tools:::makeLazyLoadDB(lazyLoad, "Huge")
 Loading the database then only loads the index but not the contents. The contents are loaded as they are used.
 ````{r, message=FALSE, comment="", results='hide'}
 lazyLoad("Huge")
-objNames <- ls() ## 234 objects
+objNames <- ls() #232 objects
 ````
 
 Now you can create your own local **archivist**-like [Repository](https://github.com/pbiecek/archivist/wiki/archivist-package-Repository) which will make maintainig artifacts as easy as possible.
@@ -45,18 +48,60 @@ Then objects from `Huge.RData` file may be archived into **Repository** created 
 library(cluster)
 ```
 
-```{r, message=FALSE, comment="", warning=FALSE}
-lapply( as.list(objNames[-208]), function(x){
+```{r, message=FALSE, comment="", warning=FALSE, results='hide'}
+lapply( as.list(objNames), function(x){
   y <- get( x, envir = lazyLoad )
   attr(y, "tags") <- paste0("realName: ", x)
   saveToRepo( y, repoDir = DIRectory )
-  } )[1:2]
+  } )
 ```
 
-You can check the summary of **Repository** using `summaryLocalRepo()` function.
+<img src="fig2.jpg" width="250px" height="180px" align="left" /> Now if you are interested in a specific artifact but you only remeber that its `class` was `data.frame` and its name started with letters `ir` then it is possible to search for that artifact using `searchInLocalRepo()` function. 
 ```{r, comment=""}
-summaryLocalRepo( DIRectory )
+hashes1 <- searchInLocalRepo( "class:data.frame", DIRectory)
+hashes2 <- searchInLocalRepo( "realName: ir", DIRectory, 
+                               fixed = FALSE)
 ```
+As a result we got [md5hashes](https://github.com/pbiecek/archivist/wiki/archivist-package-md5hash) of artifacts which class was `data.frame` (`hashes1`) and `md5hashes` of artifacts which names (stored in `tag` named `realName`) starts with `ir`. Now we can proceed intersection on those two vectors of characters.
+```{r, comment=""}
+(hash <- intersect(hashes1, hashes2))
+```
+After we got one `md5hash` corresponding to the `artfiact` we are interested in, we can load it using
+`loadFromLocalRepo()` function.
+```{r,  comment=""}
+myData <- loadFromLocalRepo( hash, DIRectory, value = TRUE )
+summary(myData[,-5])
+```
+If only specific artifacts from previously created **Repository** in `DIRectory` directory are needed in future, they may be copied to a new **Repository** in new directory. New, smaller **Repository** will use less memory and may be easier to send to contributors when working in groups. Here is an exmaple of coping artifacts only from selected classes. Because `DIRectory2` directory did not exist, the parameter `force=TRUE` was needed to force creating empty **Reposiotry**.
+```{r, results='hide'}
+hashes <- unlist(sapply(c("class:coxph", "class:function",
+                   "class:data.frame"), searchInLocalRepo, 
+                 repoDir = DIRectory))
+DIRectory2 <- (paste0( DIRectory, "/ex"))
+createEmptyRepo( DIRectory2, force = TRUE )
+copyLocalRepo( DIRectory, DIRectory2, hashes)
+```
+You can even `tar` your **Repository** with `tarLocalRepo()` function and send it to anybody you want.
+```{r, eval=FALSE}
+tarLocalRepo( DIRectory2 )
+```
+
+You can check the summary of **Repository** using `summaryLocalRepo()` function. As you can see, some of the `coxph` artifacts have addtional class. 
+```{r, comment=""}
+summaryLocalRepo( DIRectory2 )
+```
+When **Repository** is no longer necessary we may simply delete it with `deleteRepo()` function.
+
+```{r, results='hide'}
+deleteRepo( DIRectory )
+deleteRepo( DIRectory2 )
+```
+```{r, echo=FALSE, results='hide'}
+file.remove("Huge.rdb")
+file.remove("Huge.rdx")
+file.remove("ex")
+```
+
 
 
 
