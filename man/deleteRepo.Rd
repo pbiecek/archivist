@@ -11,7 +11,6 @@ deleteRepo(repoDir)
 \description{
 \code{deleteRepo} deletes an existing \link{Repository} from a given directory, so all artifacts from \code{gallery} folder are
 removed and database \code{backpack.db} is deleted.
-objects
 }
 \details{
 \code{deleteRepo} deletes an existing \link{Repository} from a given directory, so all artifacts from \code{gallery} folder are

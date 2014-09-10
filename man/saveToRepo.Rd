@@ -99,6 +99,23 @@ One can specify his own \code{Tags} for artifacts by setting artifact's attribut
 before call of the \code{saveToRepo} function like this:
 \code{attr(x, "tags" ) = c( "name1", "name2" )}, where \code{x} is artifact
 and \code{name1, name2} are \code{Tags} specified by an user.
+
+Important: if one want to archive data from arftifacts that class is one of:
+\code{survfit, glmnet, qda, lda, trellis, htest}, and this dataset set is transformed only in
+the artifact's formula the \code{saveToRepo} will not archive this dataset. \code{saveToRepo}
+only archives datasets that already exists in any of R environments.
+
+Example: here data set will not be archived.
+\itemize{
+   \item \code{z <- lda(Sp ~ ., Iris, prior = c(1,1,1)/3, subset = train[,-8])}
+   \item \code{saveToRepo( z, repoDir )}
+}
+Example: here data set will be archived.
+\itemize{
+   \item \code{train2 <- train[,-8]}
+   \item \code{z <- lda(Sp ~ ., Iris, prior = c(1,1,1)/3, subset = train2)}
+   \item \code{saveToRepo( z, repoDir )}
+}
 }
 \examples{
 # objects preparation
@@ -228,8 +245,8 @@ rm( exampleRepoDir )
 Marcin Kosinski , \email{m.p.kosinski@gmail.com}
 }
 \seealso{
-For more detailed information check \pkg{archivist} package vignette.
-
+For more detailed information check the \pkg{archivist} package
+\href{https://github.com/pbiecek/archivist#-the-list-of-use-cases-}{Use Cases}.
 The list of supported artifacts and their tags is available on \code{wiki} on \pkg{archivist}
 \href{https://github.com/pbiecek/archivist/wiki/archivist-package---Tags}{Github Repository}.
 

@@ -30,16 +30,17 @@ on which the Repository is stored. If the Repository is stored in main folder on
 to \code{repoDirGit = FALSE} as default.}
 }
 \description{
-\code{copyToRepo} copies artifact from one \link{Repository} to another \code{Repository}.
-Functions \code{copyLocalRepo} and \code{copyGithubRepo} copy artifacts from the archivist Repositories stored in a local folder or on Github.
+\code{copyRepo} copies artifact from one \code{Repository} to another \code{Repository}. It adds new files
+to exising \code{gallery} folder in \code{repoTo} \code{Repository}. \code{copyLocalRepo} copies local \code{Repository}, where
+\code{copyGithubRepo} copies Github \code{Repository}.
+}
+\details{
+\code{copyRepo} copies artifact from one \link{Repository} to another \code{Repository}.
+Functions \code{copyLocalRepo} and \code{copyGithubRepo} copy artifacts from the archivist Repositories stored in a local folder or
+on a Github.
 Both of them take \code{md5hash} as a parameter, which is a result from \link{saveToRepo} function.
 For every artifacts, \code{md5hash} is a unique string of length 32 that comes out as a result of
 \link[digest]{digest} function, which uses a cryptographical MD5 hash algorithm. For more information see \link{md5hash}.
-}
-\details{
-\code{copyToRepo} copies artifact from one \code{Repository} to another \code{Repository}. It addes new files
-to exising \code{gallery} folder in \code{repoTo} \code{Repository}. \code{copyLocalRepo} copies local \code{Repository}, where
-\code{copyGithubRepo} copies Github \code{Repository}.
 }
 \examples{
 \dontrun{
