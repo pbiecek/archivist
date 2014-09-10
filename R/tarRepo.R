@@ -107,4 +107,5 @@ tarGithubRepo <- function( repoTo, user, repo, branch = "master", repoDirGit = F
               paste0( Temp, "gallery/", list.files( paste0(repoTo, "gallery/") ) ) )
   
   tar( paste0( repoTo, "repository.tar"), files)
+  file.remove( Temp )
 }
