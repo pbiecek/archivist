@@ -40,7 +40,7 @@ help(package="archivist")
 
 <a href="https://rawgit.com/pbiecek/archivist/master/vignettes/justGetIT.html">Just get the object</a>
 
-[Lazy load with **archivist** (1 figures is missed)](https://rawgit.com/pbiecek/archivist/master/vignettes/lazyLoadUseCase.html)
+[Lazy load with **archivist** (1 figure is missed)](https://rawgit.com/pbiecek/archivist/master/vignettes/lazyLoadUseCase.html)
 
 <h5> Authors of the project: </h5>
 > Przemysław Biecek, przemyslaw.biecek@gmail.com

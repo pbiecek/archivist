@@ -101,15 +101,18 @@ getTagsLocal(hash, DIRectory, "realName")
 ```
 [1] "realName: iris"
 ```
-If only specific artifacts from previously created **Repository** in `DIRectory` directory are needed in future, they may be copied to a new **Repository** in new directory. New, smaller **Repository** will use less memory and may be easier to send to contributors when working in groups. Here is an exmaple of coping artifacts only from selected classes. Because `DIRectory2` directory did not exist, the parameter `force=TRUE` was needed to force creating empty **Reposiotry**.
+If only specific artifacts from previously created **Repository** in `DIRectory` directory are needed in future, they may be copied to a new **Repository** in new directory. New, smaller **Repository** will use less memory and may be easier to send to contributors when working in groups. Here is an exmaple of coping artifacts only from selected classes. Because `DIRectory2` directory did not exist, the parameter `force=TRUE` was needed to force creating empty **Reposiotry**. Vector `hashesR` contains `md5hashes` or artifacts that are in relation with other artifacts, which mean they are datasets used to compute other artifacts. Special paramater `fixed = TRUE` specifies to search in `tags` that starts with letters `relation`.
 
 ```r
 hashes <- unlist(sapply(c("class:coxph", "class:function",
                    "class:data.frame"), searchInLocalRepo, 
                  repoDir = DIRectory))
+hashesR <- searchInLocalRepo( "relation", 
+              repoDir = DIRectory, fixed = FALSE)
 DIRectory2 <- (paste0( DIRectory, "/ex"))
 createEmptyRepo( DIRectory2, force = TRUE )
-copyLocalRepo( DIRectory, DIRectory2, hashes)
+copyLocalRepo( DIRectory, DIRectory2, 
+               c( hashes, hashesR ) )
 ```
 
  You can even `tar` your **Repository** with `tarLocalRepo()` function and send it to anybody you want.
@@ -118,7 +121,7 @@ copyLocalRepo( DIRectory, DIRectory2, hashes)
 tarLocalRepo( DIRectory2 )
 ```
 
-You can check the summary of **Repository** using `summaryLocalRepo()` function. As you can see, some of the `coxph` artifacts have addtional class. <img src="fig4.jpg" width="290px" height="200px" align="right" /> 
+You can check the summary of **Repository** using `summaryLocalRepo()` function. As you can see, some of the `coxph` artifacts have addtional class. <img src="fig4.jpg" width="290px" height="200px" align="right" /> There are also 8 datasets. Those are artifacts needed to compute other artifacts and archived additionaly in `saveToRepo()` call with default parameter `archiveData = TRUE`.
 
 ```r
 summaryLocalRepo( DIRectory2 )
@@ -126,7 +129,7 @@ summaryLocalRepo( DIRectory2 )
 
 ```
 Number of archived artifacts in the Repository:  81 
-Number of archived datasets in the Repository:  0 
+Number of archived datasets in the Repository:  8 
 Number of various classes archived in the Repository: 
              Number
 data.frame      51
@@ -136,7 +139,7 @@ coxph.penal      4
 coxph.null       1
 Saves per day in the Repository: 
             Saves
-2014-09-10    81
+2014-09-10    89
 ```
 When **Repository** is no longer necessary we may simply delete it with `deleteRepo()` function.
 
