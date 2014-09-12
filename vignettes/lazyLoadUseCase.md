@@ -4,11 +4,11 @@
 -->
 
 # Lazy load with **archivist**
-> You can adjust the widths of the two columns using your cursor. What is more, press `T` on your keyboard, and see what happens.
+> You can adjust the widths of the two columns using your cursor. Furthermore, press `T` on your keyboard, and see what happens.
 
 <img src="fig111.jpg" width="250px" height="180px" align="right" />
-Having problem with a too big `.Rdata` file? Interested only in a few objects from a huge `.Rdata` file?
-Regular `load()` into Global Environment takes too long or crashes R session? Want to load or copy an object you don't remember name? Maintaing environment with thousands of objects became perplexing and troublesome  
+Too big `.Rdata` file causing problems? Interested in few objects from a huge `.Rdata` file?
+Regular `load()` into Global Environment takes too long or crashes R session? Want to load or copy an object with unknown name? Maintaing environment with thousands of objects became perplexing and troublesome?
 
 ```r
 library(devtools)
@@ -18,14 +18,14 @@ if (!require(archivist)){
   }
 library(tools)
 ```
-**If you stacked with those questions, this use case is a must read for you.**
+**If stacked with any of the above applies, this use case is a must read for you.**
 
-The **archivist** package is a great solution that helps administrate, archive and restore your [artifacts](https://github.com/pbiecek/archivist/wiki) created in [R](http://cran.r-project.org/) package.
+The **archivist** package is a great solution that helps administer, archive and restore your [artifacts](https://github.com/pbiecek/archivist/wiki) created in [R](http://cran.r-project.org/) package.
 
 
 ## Combining **archivist** and lazy load may be miraculous
 
-<img src="fig3.jpg" width="290px" height="180px" align="left" /> If your `.RData` file is too big and you do not need or do not want to load whole of it, you can simply convert the `.RData` file into a lazy-load database which serializes each entry separately and creates an index. The nice thing is that the loading will be on-demand.
+<img src="fig3.jpg" width="290px" height="180px" align="left" /> If your `.RData` file is too big and you do not need or do not want to load the whole of it, you can simply convert the `.RData` file into a lazy-load database which serializes each entry separately and creates an index. The nice thing is that the loading will be on-demand.
 
 
 ```r
@@ -48,7 +48,7 @@ Now you can create your own local **archivist**-like [Repository](https://github
 DIRectory <- getwd()
 createEmptyRepo( DIRectory )
 ```
-Then objects from `Huge.RData` file may be archived into **Repository** created in `DIRectory` directory. The attribute `tags` (see [Tags](https://github.com/pbiecek/archivist/wiki/archivist-package---Tags)) spicified as `realName` is added to the every  artifact before `saveToRepo()` call, in case to remeber its name in **Repository**.
+Then objects from the `Huge.RData` file may be archived into **Repository** created in `DIRectory` directory. The attribute `tags` (see [Tags](https://github.com/pbiecek/archivist/wiki/archivist-package---Tags)) specified as `realName` is added to every  artifact before the `saveToRepo()` call, in order to remember its name in the **Repository**.
 
 
 
@@ -59,14 +59,14 @@ lapply( as.list(objNames), function(x){
   saveToRepo( y, repoDir = DIRectory )} )
 ```
 
-<img src="fig22.jpg" width="200px" height="200px" align="left" /> Now if you are interested in a specific artifact but the only thing you remeber about it is its `class` was `data.frame` and its name started with letters `ir` then it is possible to search for that artifact using `searchInLocalRepo()` function. 
+<img src="fig22.jpg" width="200px" height="200px" align="left" /> Now if you are interested in a specific artifact but the only thing you remember about it is its `class` was `data.frame` and its name started with letters `ir` then it is possible to search for that artifact using the `searchInLocalRepo()` function. 
 
 ```r
 hashes1 <- searchInLocalRepo( "class:data.frame", DIRectory)
 hashes2 <- searchInLocalRepo( "realName: ir", DIRectory, 
                                fixed = FALSE)
 ```
-As a result we got [md5hashes](https://github.com/pbiecek/archivist/wiki/archivist-package-md5hash) of artifacts which class was `data.frame` (`hashes1`) and `md5hashes` of artifacts which names (stored in `tag` named `realName`) starts with `ir`. Now we can proceed intersection on those two vectors of characters.
+As a result we got [md5hashes](https://github.com/pbiecek/archivist/wiki/archivist-package-md5hash) of artifacts which class was `data.frame` (`hashes1`) and `md5hashes` of artifacts which names (stored in `tag` named `realName`) starts with `ir`. Now we can proceed with an intersection on those two vectors of characters.
 
 ```r
 (hash <- intersect(hashes1, hashes2))
@@ -75,8 +75,7 @@ As a result we got [md5hashes](https://github.com/pbiecek/archivist/wiki/archivi
 ```
 [1] "32ac7871f2b4875c9122a7d9f339f78b"
 ```
-<img src="fig5.jpg" width="250px" height="220px" align="right" /> After we got one `md5hash` corresponding to the artfiact we are interested in, we can load it using
-`loadFromLocalRepo()` function.
+<img src="fig5.jpg" width="250px" height="220px" align="right" /> After we got one `md5hash` corresponding to the artfiact we are interested in, we can load it using the `loadFromLocalRepo()` function.
 
 ```r
 myData <- loadFromLocalRepo( hash, DIRectory, value = TRUE )
@@ -92,7 +91,7 @@ summary(myData[,-5])
  3rd Qu.:6.40   3rd Qu.:3.30   3rd Qu.:5.10   3rd Qu.:1.8  
  Max.   :7.90   Max.   :4.40   Max.   :6.90   Max.   :2.5  
 ```
-One can always check the `realName` tag of that artifact with `getTagsLocal()` function.
+One can always check the `realName` tag of that artifact with the `getTagsLocal()` function.
 
 ```r
 getTagsLocal(hash, DIRectory, "realName")
@@ -101,7 +100,7 @@ getTagsLocal(hash, DIRectory, "realName")
 ```
 [1] "realName: iris"
 ```
-If only specific artifacts from previously created **Repository** in `DIRectory` directory are needed in future, they may be copied to a new **Repository** in new directory. New, smaller **Repository** will use less memory and may be easier to send to contributors when working in groups. Here is an exmaple of coping artifacts only from selected classes. Because `DIRectory2` directory did not exist, the parameter `force=TRUE` was needed to force creating empty **Reposiotry**. Vector `hashesR` contains `md5hashes` or artifacts that are in relation with other artifacts, which mean they are datasets used to compute other artifacts. Special paramater `fixed = TRUE` specifies to search in `tags` that starts with letters `relation`.
+If only specific artifacts from previously created **Repository** in `DIRectory` directory are needed in future, they may be copied to a new **Repository** in new directory. New, smaller **Repository** will use less memory and may be easier to send to contributors when working in groups. Here is an example of copying artifacts only from selected classes. Because `DIRectory2` directory did not exist, the parameter `force=TRUE` was needed to force creating empty **Repository**. Vector `hashesR` contains `md5hashes` or artifacts that are related to other artifacts, which mean they are datasets used to compute other artifacts. The special parameter `fixed = TRUE` specifies to search in `tags` that start with letters `relation`.
 
 ```r
 hashes <- unlist(sapply(c("class:coxph", "class:function",
@@ -121,7 +120,7 @@ copyLocalRepo( DIRectory, DIRectory2,
 tarLocalRepo( DIRectory2 )
 ```
 
-You can check the summary of **Repository** using `summaryLocalRepo()` function. As you can see, some of the `coxph` artifacts have addtional class. <img src="fig4.jpg" width="290px" height="200px" align="right" /> There are also 8 datasets. Those are artifacts needed to compute other artifacts and archived additionaly in `saveToRepo()` call with default parameter `archiveData = TRUE`.
+You can check the summary of **Repository** using the `summaryLocalRepo()` function. As you can see, some of the `coxph` artifacts have an addtional class. <img src="fig4.jpg" width="290px" height="200px" align="right" /> There are also 8 datasets. Those are artifacts needed to compute other artifacts and archived additionaly in the `saveToRepo()` call with default parameter `archiveData = TRUE`.
 
 ```r
 summaryLocalRepo( DIRectory2 )
@@ -139,7 +138,7 @@ coxph.penal      4
 coxph.null       1
 Saves per day in the Repository: 
             Saves
-2014-09-10    89
+2014-09-12    89
 ```
 When **Repository** is no longer necessary we may simply delete it with `deleteRepo()` function.
 
@@ -148,7 +147,6 @@ When **Repository** is no longer necessary we may simply delete it with `deleteR
 deleteRepo( DIRectory )
 deleteRepo( DIRectory2 )
 ```
-
 
 
 
