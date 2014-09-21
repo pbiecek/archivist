@@ -1,7 +1,7 @@
 Package: archivist
 Version: 1.1
 Type: Package
-Title: Tools for storing, restoring and searching for R objects
+Title: Tools for Storing, Restoring and Searching for R Objects
 Authors@R: c(
     person("Przemyslaw", "Biecek", role = c("aut", "cre"),
     email = "przemyslaw.biecek@gmail.com"),
