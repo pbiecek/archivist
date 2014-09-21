@@ -4,6 +4,9 @@
 # Travis scripts
 .travis.yml
 
+# OsX data
+.DS_Store
+
 backpack.db
 archiwum.png
 buildingDB.R
