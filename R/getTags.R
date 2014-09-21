@@ -1,6 +1,6 @@
 ##    archivist package for R
 ##
-#' @title Return a \code{Tag} Corresponding to \code{md5hash}
+#' @title Return a Tag Corresponding to md5hash
 #'
 #' @description
 #' \code{getTagsLocal} and \code{getTagsGithub} return a \code{Tag} (see \link{Tags}) related to \link{md5hash} 
@@ -57,14 +57,12 @@
 #' getTagsGithub( "3db63bc63b8defaf42c0bde19160f242", 
 #'    user="pbiecek", repo="archivist")
 #' 
-#' }
-#' 
 #' # many archivist-like Repositories on one Github repository
 #' 
 #' getTagsGithub("ff575c261c949d073b2895b05d1097c3", user="MarcinKosinski", 
 #' repo="Museum", branch="master", repoDirGit="ex1")
 #' 
-#' 
+#' }
 #' 
 #' @family archivist
 #' @rdname getTags

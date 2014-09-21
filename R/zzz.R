@@ -9,18 +9,7 @@
 
 .onDetach <- function( libpath ){
   dbUnloadDriver(get( "sqlite", envir = .ArchivistEnv )) 
-#  rm(.ArchivistEnv)
-#  rm(.GithubURL)
 }
-# .onDetach <- function(libpath) {
-#   if (".backpack" %in% ls(.ArchivistEnv)) {
-#     tmp <- get(".backpack", envir = .ArchivistEnv)
-#     if (!is.null(tmp)) {
-#       dbDisconnect(tmp)
-#       assign(".backpack", NULL, envir = .ArchivistEnv)
-#     }
-#   } 
-# }
 
 ## no S4 methodology here; speedup :
 .noGenerics <- TRUE

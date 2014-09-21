@@ -6,6 +6,7 @@
 
 # OsX data
 .DS_Store
+inst
 
 backpack.db
 archiwum.png

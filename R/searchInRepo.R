@@ -1,6 +1,6 @@
 ##    archivist package for R
 ##
-#' @title Search for an Artifact in a Repository Using \code{Tags}
+#' @title Search for an Artifact in a Repository Using Tags
 #'
 #' @description
 #' \code{searchInRepo} searches for an artifact in a \link{Repository} using it's \link{Tags}.

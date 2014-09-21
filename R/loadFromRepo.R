@@ -1,6 +1,6 @@
 ##    archivist package for R
 ##
-#' @title Load Artifact Given as a \code{md5hash} from a Repository
+#' @title Load Artifact Given as a md5hash from a Repository
 #'
 #' @description
 #' \code{loadFromLocalRepo} loads an artifact from a local \link{Repository} into the workspace.

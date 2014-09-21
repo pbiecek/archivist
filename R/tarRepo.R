@@ -8,7 +8,6 @@
 #' \code{tarLocalRepo} and \code{tarGithubRepo} create a tar archive from an existing \link{Repository}.
 #' \code{tarLocalRepo} tars local \code{Repository}, \code{tarGithubRepo} tars \code{Repository} 
 #' stored on Github.
-#' 
 #'
 #' @param repoDir A character that specifies the directory of the Repository which
 #' will be tarred.
@@ -68,9 +67,9 @@
 #' repo="Museum", branch="master", repoDirGit="ex1" )
 #' 
 #' tarGithubRepo( user="pbiecek, repo="archivist, repoTo = getwd( ) )
-#'  
 #' 
 #' }
+#' 
 #' @family archivist
 #' @rdname tarRepo
 #' @export

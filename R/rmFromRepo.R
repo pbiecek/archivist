@@ -1,6 +1,6 @@
 ##    archivist package for R
 ##
-#' @title Remove an Artifact Given as \code{md5hash} from a Repository
+#' @title Remove an Artifact Given as md5hash from a Repository
 #'
 #' @description
 #' \code{rmFromRepo} removes an artifact given as \code{md5hash} from a \link{Repository}.
