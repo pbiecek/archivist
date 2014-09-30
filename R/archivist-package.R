@@ -1,6 +1,6 @@
 ##    archivist package for R
 ##
-#' @title Tools for storing, restoring and searching for R objects
+#' @title Tools for Storing, Restoring and Searching for R Objects
 #'
 #' @description
 #' Data exploration and modelling is a process in which a lot of data artifacts are produced. 

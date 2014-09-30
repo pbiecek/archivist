@@ -236,3 +236,15 @@ searchInGithubRepo <- function( pattern, repo, user, branch = "master", repoDirG
   file.remove( Temp )
   return( as.character( md5hashES[, 1] ) ) 
 }
+
+#' @rdname searchInRepo
+#' @export
+multiSearchInLocalRepo <- function( patterns, repoDir, fixed = TRUE, intersect = TRUE ){
+  stopifnot( is.logical( intersect ) )
+  md5hs <- lapply(patterns, function(pattern) unique(searchInLocalRepo(pattern, repoDir=repoDir, fixed=fixed) ))
+  if (intersect) {
+    return(names(which(table(unlist(md5hs)) == length(md5hs))))
+  } 
+  # union
+  unique(unlist(md5hs))
+}
