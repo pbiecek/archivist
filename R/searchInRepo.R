@@ -239,12 +239,29 @@ searchInGithubRepo <- function( pattern, repo, user, branch = "master", repoDirG
 
 #' @rdname searchInRepo
 #' @export
-multiSearchInLocalRepo <- function( patterns, repoDir, fixed = TRUE, intersect = TRUE ){
-  stopifnot( is.logical( intersect ) )
-  md5hs <- lapply(patterns, function(pattern) unique(searchInLocalRepo(pattern, repoDir=repoDir, fixed=fixed) ))
+multiSearchInLocalRepo <- function( patterns, repoDir, fixed = TRUE, intersect = TRUE, realDBname = TRUE ){
+  stopifnot( is.logical( intersect ) )      
+             
+  md5hs <- lapply(patterns, function(pattern) unique(searchInLocalRepo(pattern, repoDir=repoDir, fixed=fixed, realDBname = realDBname) ))
   if (intersect) {
     return(names(which(table(unlist(md5hs)) == length(md5hs))))
   } 
   # union
   unique(unlist(md5hs))
 }
+
+
+
+#' @rdname searchInRepo
+#' @export
+multiSearchInGithubRepo <- function( patterns, repo, user, branch = "master", repoDirGit = FALSE, 
+                                     fixed = TRUE, intersect = TRUE ){
+  stopifnot( is.logical(  intersect ) )
+
+  
+  Temp <- downloadDB( repo, user, branch, repoDirGit )
+  m <- multiSearchInLocalRepo( patterns, repoDir = Temp, fixed=fixed, intersect=intersect, realDBname = FALSE)
+  file.remove( Temp )
+  return( m )
+}
+
