@@ -3,12 +3,12 @@
 #' @title Shiny Based Live Search for an Artifact in a Repository Using Tags 
 #'
 #' @description
-#' \code{shinySeachInLocalRepo} searches for an artifact in a \link{Repository} using it's \link{Tags}.
+#' \code{shinySearchInLocalRepo} searches for an artifact in a \link{Repository} using it's \link{Tags}.
 #' An shiny base application is generated in the fly with an text input field.
 #' To learn more about artifacts visit \link[archivist]{archivist-package}.
 #' 
 #' @details
-#' \code{shinySeachInLocalRepo} searches for an artifact in a Repository using it's \code{Tag} 
+#' \code{shinySearchInLocalRepo} searches for an artifact in a Repository using it's \code{Tag} 
 #' (e.g., \code{name}, \code{class} or \code{archiving date}). \code{Tags} are submitted in a 
 #' text input in a shiny application. Many tags may be specified, they should be comma separated.
 #' 
@@ -16,7 +16,7 @@
 #' format: \code{"TagType:TagTypeValue"} - see examples.
 #'   
 #' @return
-#' \code{shinySeachInLocalRepo} runs a shiny application.
+#' \code{shinySearchInLocalRepo} runs a shiny application.
 #' 
 #' @param repoDir A character denoting an existing directory in which artifacts will be searched.
 #' 
@@ -28,12 +28,12 @@
 #' @examples
 #' \dontrun{
 #'   # assuming that there is a 'repo' dir with a valid archivist repository
-#'   shinySeachInLocalRepo( dir = 'repo' )
+#'   shinySearchInLocalRepo( dir = 'repo' )
 #' }
 #' @family archivist
-#' @rdname shinySeachInRepo
+#' @rdname shinySearchInRepo
 #' @export
-shinySeachInLocalRepo <- function( repoDir, host = '0.0.0.0' ){
+shinySearchInLocalRepo <- function( repoDir, host = '0.0.0.0' ){
   stopifnot( is.character( repoDir ) )
 
   runApp(list(

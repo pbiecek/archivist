@@ -286,7 +286,7 @@ Other archivist: \code{\link{Repository}};
 \code{\link{multiSearchInLocalRepo}},
 \code{\link{searchInGithubRepo}},
 \code{\link{searchInLocalRepo}}; \code{\link{rmFromRepo}};
-\code{\link{shinySeachInLocalRepo}};
+\code{\link{shinySearchInLocalRepo}};
 \code{\link{showGithubRepo}}, \code{\link{showLocalRepo}};
 \code{\link{summaryGithubRepo}},
 \code{\link{summaryLocalRepo}};
