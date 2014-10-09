@@ -17,17 +17,24 @@ shinySearchInLocalRepo(repoDir, host = "0.0.0.0")
 }
 \description{
 \code{shinySearchInLocalRepo} searches for an artifact in a
-\link{Repository} using it's \link{Tags}. An shiny base
-application is generated in the fly with an text input
-field. To learn more about artifacts visit
-\link[archivist]{archivist-package}.
+\link{Repository} using \link{Tags}. To create an
+application one needs to point the name of artifacts
+repository. The application is generated on the fly. Right
+now two controllers are exposed. A text input field and a
+slider. Tags that are typed into text field are used for
+searching in repository. Object that have same tags are
+then presented on right panel. These object might be also
+downloaded just by click. To learn more about artifacts
+visit \link[archivist]{archivist-package}.
 }
 \details{
-\code{shinySearchInLocalRepo} searches for an artifact in a
-Repository using it's \code{Tag} (e.g., \code{name},
+\code{shinySearchInLocalRepo} searches for artifacts in a
+Repository using their's \code{Tag} (e.g., \code{name},
 \code{class} or \code{archiving date}). \code{Tags} are
 submitted in a text input in a shiny application. Many tags
-may be specified, they should be comma separated.
+may be specified, they should be comma separated. User can
+specify more tags when artifact is created, tags like
+phase, project, author etc.
 
 \code{Tags}, submitted in the text field, should be given
 according to the format: \code{"TagType:TagTypeValue"} -
