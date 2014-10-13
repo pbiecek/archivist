@@ -46,3 +46,8 @@ help(package="archivist")
 > Przemysław Biecek, przemyslaw.biecek@gmail.com
 >
 > Marcin Kosiński, m.p.kosinski@gmail.com
+
+
+<h5> Archivist web page: </h5>
+> http://pbiecek.github.io/archivist/
+>
