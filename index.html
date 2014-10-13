@@ -1,71 +1,138 @@
 <!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Archivist by pbiecek</title>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1>Archivist</h1>
-        <p>A set of tools for datasets and plots archiving</p>
+  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen">
+  <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/script.js"></script>
 
-        <p class="view"><a href="https://github.com/pbiecek/archivist">View the Project on GitHub <small>pbiecek/archivist</small></a></p>
+  <title>Archivist</title>
+  <meta name="description" content="tools for datasets and plots archivisation ">
 
+  <meta name="viewport" content="width=device-width,initial-scale=1">
 
-        <ul>
-          <li><a href="https://github.com/pbiecek/archivist/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/pbiecek/archivist/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/pbiecek/archivist">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+</head>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<body>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+  <div class="wrapper">
+    <header>
+      <h1 class="title">Archivist</h1>
+    </header>
+    <div id="container">
+      <p class="tagline">tools for datasets and plots archivisation </p>
+      <div id="main" role="main">
+        <div class="download-bar">
+        <div class="inner">
+          <a href="https://github.com/MarcinKosinski/archivist/tarball/master" class="download-button tar"><span>Download</span></a>
+          <a href="https://github.com/MarcinKosinski/archivist/zipball/master" class="download-button zip"><span>Download</span></a>
+          <a href="https://github.com/MarcinKosinski/archivist" class="code">View Archivist on GitHub</a>
+        </div>
+        <span class="blc"></span><span class="trc"></span>
+        </div>
+        <article class="markdown-body">
+          <h1>
+<a name="a-set-of-tools-for-datasets-and-plots-archiving" class="anchor" href="#a-set-of-tools-for-datasets-and-plots-archiving"><span class="octicon octicon-link"></span></a>A set of tools for datasets and plots archiving</h1>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>Welcome to the <strong>archivist</strong> package website!</p>
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<p>Data exploration and modelling is a process in which a lot of data artifacts are produced. Artifacts like: subsets, data aggregates, plots, statistical models, different versions of data sets and different versions of results. The more projects we work with the more artifacts are produced and the harder it is to manage these artifacts.</p>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>Archivist helps to store and manage artifacts created in R.
+<img src="https://raw.githubusercontent.com/pbiecek/archivist/master/archiwum.png" alt="Overview of archivist package"></p>
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+<p>Archivist allows you to store selected artifacts as binary files together with their metadata and relations. Archivist allows you to share artifacts with others, either through a shared folder or github. Archivist allows you to look for already created artifacts by using its class, name, date of creation or other properties. It also facilitates restoring such artifacts. Archivist allows to check if a new artifact is the exact copy of the one that was produced some time ago. This might be useful either for testing or caching.</p>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<p>Archivist is a set of tools for datasets and plots archiving.</p>
 
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<p>For more information see:</p>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<ul>
+<li>
+<a href="https://github.com/pbiecek/archivist/wiki/archivist-package---Tags">Tags</a>,</li>
+<li>
+<a href="https://github.com/pbiecek/archivist/wiki/archivist-package-Repository">Repository</a>,</li>
+<li>
+<a href="https://github.com/pbiecek/archivist/wiki/archivist-package-md5hash">md5hash</a>.</li>
+</ul><p>Project is supported by <a href="https://travis-ci.org/">Travis CI</a> and <a href="https://waffle.io/">waffle.io</a>.</p>
 
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+<h4>
+<a name="-the-list-of-use-cases-" class="anchor" href="#-the-list-of-use-cases-"><span class="octicon octicon-link"></span></a> The list of use-cases: </h4>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/pbiecek">pbiecek</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
+<ul>
+<li><a href="https://rawgit.com/pbiecek/archivist/master/vignettes/cacheUseCase.html">Cache with the archivist package</a></li>
+<li><a href="https://rawgit.com/pbiecek/archivist/master/vignettes/accessibilityUseCase.html">Retrieving all plots with other github repository (example with flights data from Hadley Wickham useR!2014 tutorial)</a></li>
+<li><a href="https://rawgit.com/pbiecek/archivist/master/vignettes/chainingUseCase.html">Archiving artifacts with their chaining code</a></li>
+<li><a href="https://rawgit.com/pbiecek/archivist/master/vignettes/justGetIT.html">Just get the object</a></li>
+<li><a href="https://rawgit.com/pbiecek/archivist/master/vignettes/lazyLoadUseCase.html">Lazy load with <strong>archivist</strong></a></li>
+</ul><h5>
+<a name="-installing-archivist-package-" class="anchor" href="#-installing-archivist-package-"><span class="octicon octicon-link"></span></a> Installing archivist package: </h5>
+
+<p>To get started, install the latest version of <strong>archivist</strong> from CRAN:</p>
+
+<div class="highlight highlight-Ruby"><pre><span class="n">install</span><span class="o">.</span><span class="n">packages</span><span class="p">(</span><span class="s2">"archivist"</span><span class="p">)</span>
+</pre></div>
+
+<p>or use:</p>
+
+<div class="highlight highlight-Ruby"><pre><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">require</span><span class="p">(</span><span class="n">devtools</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">install</span><span class="o">.</span><span class="n">packages</span><span class="p">(</span><span class="s2">"devtools"</span><span class="p">)</span>
+    <span class="nb">require</span><span class="p">(</span><span class="n">devtools</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="n">install_github</span><span class="p">(</span><span class="s2">"pbiecek/archivist"</span><span class="p">)</span>
+</pre></div>
+
+<p>Make sure you have <a href="http://cran.r-project.org/bin/windows/Rtools/">rtools</a> installed on your computer.</p>
+
+<h5>
+<a name="-the-list-of-available-functions-" class="anchor" href="#-the-list-of-available-functions-"><span class="octicon octicon-link"></span></a> The list of available functions: </h5>
+
+<div class="highlight highlight-Ruby"><pre><span class="n">help</span><span class="p">(</span><span class="n">package</span><span class="o">=</span><span class="s2">"archivist"</span><span class="p">)</span>
+</pre></div>
+
+<h5>
+<a name="-authors-of-the-project-" class="anchor" href="#-authors-of-the-project-"><span class="octicon octicon-link"></span></a> Authors of the project: </h5>
+
+<blockquote>
+<p>Przemysław Biecek, <a href="mailto:przemyslaw.biecek@gmail.com">przemyslaw.biecek@gmail.com</a></p>
+
+<p>Marcin Kosiński, <a href="mailto:m.p.kosinski@gmail.com">m.p.kosinski@gmail.com</a></p>
+</blockquote>
+        </article>
+      </div>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
-  </body>
+    <footer>
+      <div class="owner">
+      <p><a href="https://github.com/MarcinKosinski" class="avatar"><img src="https://avatars3.githubusercontent.com/u/6773454?v=2&amp;s=60" width="48" height="48"></a> <a href="https://github.com/MarcinKosinski">MarcinKosinski</a> maintains <a href="https://github.com/MarcinKosinski/archivist">Archivist</a></p>
+
+
+      </div>
+      <div class="creds">
+        <small>This page generated using <a href="http://pages.github.com/">GitHub Pages</a><br>theme by <a href="https://twitter.com/jonrohan/">Jon Rohan</a></small>
+      </div>
+    </footer>
+  </div>
+  <div class="current-section">
+    <a href="#top">Scroll to top</a>
+    <a href="https://github.com/MarcinKosinski/archivist/tarball/master" class="tar">tar</a><a href="https://github.com/MarcinKosinski/archivist/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
+    <p class="name"></p>
+  </div>
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-55072490-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+</body>
 </html>
