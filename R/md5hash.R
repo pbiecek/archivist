@@ -23,12 +23,17 @@
 #'  \item \link{loadFromLocalRepo}, 
 #'  \item \link{loadFromGithubRepo},
 #'  \item \link{copyLocalRepo}, 
-#'  \item \link{copyGithubRepo}.
+#'  \item \link{copyGithubRepo},
+#' \item \link{getTagsGithub},
+#' \item \link{getTagsLocal}.
 #' }
 #' Functions returning \code{md5hash} as a value are:
 #'\itemize{  
 #'  \item \link{searchInLocalRepo},
 #'  \item \link{searchInGithubRepo},
+#'  \item \link{multiSearchInLocalRepo},
+#'  \item \link{multiSearchInGithubRepo},
+#' \item \link{shinySearchInLocalRepo},
 #'  \item \link{saveToRepo}.
 #' }
 #' Functions returning \code{md5hahes} as a \code{data.frame} are:
