@@ -33,9 +33,9 @@
 #' \dontrun{
 #' cacheRepo <- tempdir()
 #' createEmptyRepo( cacheRepo )
-#' fun <- function(n) {replicate(n, lm(Sepal.Length~Species, iris))}
-#' system.time( cache(cacheRepo, fun, 1000) )
-#' system.time( cache(cacheRepo, fun, 1000) )
+#' fun <- function(n) {replicate(n, summary(lm(Sepal.Length~Species, iris))$r.squared)}
+#' system.time( res <- cache(cacheRepo, fun, 10000) )
+#' system.time( res <- cache(cacheRepo, fun, 10000) )
 #' 
 #' deleteRepo( cacheRepo )
 #' rm( cacheRepo )
