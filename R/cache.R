@@ -5,15 +5,18 @@
 #' @description
 #' \code{cache} function stores all results of function calls in local \link{Repository}.
 #' All results are stored together with md5 hashes of the function calls.
-#' If function has been called with same arguments earlier, then results can be loaded from repository.
+#' If function has been called with same arguments as in the past, then results can be loaded from repository.
 #' 
 #' @details
 #' \code{cache} function stores all results of function calls in local \link{Repository} 
 #' specified by the \code{cacheRepo} argument.
 #' The md5 hash of \code{FUN} and it's arguments is added as an tag to the repository.
+#’ Note that cache is a good solution if objects are not that big but calculations are time consuming. 
+#' If objects are big and calculations are easy, then disk input-output operations may take more time 
+#' than calculations itself.
 #' 
 #' @return
-#' Result of funcion call with added additional argument - md5 hash of function call.
+#' Result of function call with added additional argument - md5 hash of function call.
 #' 
 #' @seealso
 #'  For more detailed information check the \pkg{archivist} package 
