@@ -44,7 +44,7 @@
 #' rm( cacheRepo )
 #' }
 #' @family archivist
-#' @rdname cache.Rd
+#' @rdname cache
 #' @export
 cache <- function(cacheRepo, FUN, ...) {
   tmpl <- list(...)
