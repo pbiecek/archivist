@@ -253,7 +253,7 @@ Functions using \code{Tags} are: \itemize{ \item
 }
 
 Other archivist: \code{\link{Repository}};
-\code{\link{archivist-package}};
+\code{\link{archivist-package}}; \code{\link{cache}};
 \code{\link{copyGithubRepo}}, \code{\link{copyLocalRepo}};
 \code{\link{createEmptyRepo}}; \code{\link{deleteRepo}};
 \code{\link{getTagsGithub}}, \code{\link{getTagsLocal}};

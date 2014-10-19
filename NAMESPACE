@@ -2,6 +2,7 @@
 
 S3method(plot,repository)
 S3method(print,repository)
+export(cache)
 export(copyGithubRepo)
 export(copyLocalRepo)
 export(createEmptyRepo)

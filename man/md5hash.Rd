@@ -25,10 +25,14 @@ loading them.
 Functions that take \code{md5hash} as a parameter are:
 \itemize{ \item \link{rmFromRepo}, \item
 \link{loadFromLocalRepo}, \item \link{loadFromGithubRepo},
-\item \link{copyLocalRepo}, \item \link{copyGithubRepo}. }
+\item \link{copyLocalRepo}, \item \link{copyGithubRepo},
+\item \link{getTagsGithub}, \item \link{getTagsLocal}. }
 Functions returning \code{md5hash} as a value are:
 \itemize{ \item \link{searchInLocalRepo}, \item
-\link{searchInGithubRepo}, \item \link{saveToRepo}. }
+\link{searchInGithubRepo}, \item
+\link{multiSearchInLocalRepo}, \item
+\link{multiSearchInGithubRepo}, \item
+\link{shinySearchInLocalRepo}, \item \link{saveToRepo}. }
 Functions returning \code{md5hahes} as a \code{data.frame}
 are: \itemize{ \item \link{showLocalRepo}, \item
 \link{showGithubRepo}. }
@@ -39,9 +43,10 @@ Learn more about \code{md5hashes} at \pkg{archivist}
 
 Other archivist: \code{\link{Repository}};
 \code{\link{Tags}}; \code{\link{archivist-package}};
-\code{\link{copyGithubRepo}}, \code{\link{copyLocalRepo}};
-\code{\link{createEmptyRepo}}; \code{\link{deleteRepo}};
-\code{\link{getTagsGithub}}, \code{\link{getTagsLocal}};
+\code{\link{cache}}; \code{\link{copyGithubRepo}},
+\code{\link{copyLocalRepo}}; \code{\link{createEmptyRepo}};
+\code{\link{deleteRepo}}; \code{\link{getTagsGithub}},
+\code{\link{getTagsLocal}};
 \code{\link{loadFromGithubRepo}},
 \code{\link{loadFromLocalRepo}};
 \code{\link{multiSearchInGithubRepo}},
