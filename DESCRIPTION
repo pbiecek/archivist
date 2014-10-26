@@ -30,8 +30,7 @@ Depends:
     RSQLite,
     DBI,
     shiny,
-    lubridate,
-    jsonlite
+    lubridate
 Imports:
     RCurl,
     digest,

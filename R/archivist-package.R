@@ -35,7 +35,6 @@
 #' @import RSQLite
 #' @import DBI
 #' @import shiny
-#' @import jsonlite
 #' @import lubridate
 #' @import digest
 #' @family archivist
