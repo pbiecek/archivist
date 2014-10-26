@@ -28,6 +28,12 @@
 #' length 2 with \code{dataFrom} and \code{dataTo}; see details. If \code{fixed = FALSE}: A regular expression 
 #' specifying the beginning of a \link{Tags}, which will be used to search artifacts for.
 #' 
+#' @param patterns A vector of queries to repository. If \code{intersect = TRUE} only artifacts that 
+#' match all conditions are returned. If \code{intersect = FALSE} then artifacts that match any contition
+#' are returned.
+#' 
+#' @param intersect A logical value. See \code{patterns} for more details.
+#' 
 #' @param repoDir A character denoting an existing directory in which artifacts will be searched.
 #' 
 #' @param repo Only if working with a Github repository. A character containing a name of a Github repository on which the Repository is archived.

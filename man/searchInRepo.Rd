@@ -61,6 +61,14 @@ multiSearchInGithubRepo(patterns, repo, user, branch = "master",
   If the Repository is stored in main folder on Github
   repository, this should be set to \code{repoDirGit =
   FALSE} as default.}
+
+  \item{patterns}{A vector of queries to repository. If
+  \code{intersect = TRUE} only artifacts that match all
+  conditions are returned. If \code{intersect = FALSE} then
+  artifacts that match any contition are returned.}
+
+  \item{intersect}{A logical value. See \code{patterns} for
+  more details.}
 }
 \value{
 \code{searchInRepo} returns a \code{md5hash} character,
