@@ -1,30 +1,41 @@
 ##
-#' @title Create a Tar Archive From an Existing Repository
+#' @title Create a zip Archive From an Existing Repository
 #' 
 #' @description
-#' \code{tarLocalRepo} and \code{tarGithubRepo} create a tar archive from an existing \link{Repository}.
+#' \code{zipLocalRepo} and \code{zipGithubRepo} create a zip archive from an existing \link{Repository}.
+#' 
+#' 
+#' 
+#' If the function does not work, it might be a reason of Rtools that are not installed. 
+#' To solve this problem follow those \href{http://cran.r-project.org/web/packages/openxlsx/vignettes/Introduction.pdf}{Instructions.}
+#' 
+#' @note
+#' If the function does not work, it might be a reason of Rtools that are not installed. 
+#' To solve this problem follow those \href{http://cran.r-project.org/web/packages/openxlsx/vignettes/Introduction.pdf}{Instructions.}
+#' 
 #' 
 #' @details
-#' \code{tarLocalRepo} and \code{tarGithubRepo} create a tar archive from an existing \link{Repository}.
-#' \code{tarLocalRepo} tars local \code{Repository}, \code{tarGithubRepo} tars \code{Repository} 
+#' \code{zipLocalRepo} and \code{zipGithubRepo} create a zip archive from an existing \link{Repository}.
+#' \code{zipLocalRepo} zips local \code{Repository}, \code{zipGithubRepo} zips \code{Repository} 
 #' stored on Github.
 #'
 #' @param repoDir A character that specifies the directory of the Repository which
-#' will be tarred.
+#' will be zipped.
 #'
-#' @param repo Only if working with a Github repository. A character containing a name of a Github repository on which the Repository to be tarred is archived.
+#' @param repo Only if working with a Github repository. A character containing a name of a Github repository on which the Repository to be zipped is archived.
 #' 
 #' @param user Only if working with a Github repository. A character containing a name of a Github user on whose account the \code{repo} is created.
 #' 
 #' @param branch Only if working with a Github repository. A character containing a name of 
-#' Github repository's branch in which Repository to be tarred is archived. Default \code{branch} is \code{master}.
+#' Github repository's branch in which Repository to be zipped is archived. Default \code{branch} is \code{master}.
 #' 
 #' @param repoDirGit Only if working with a Github repository. A character containing a name of a directory on Github repository 
-#' on which the Repository to be tarred is stored. If the Repository is stored in main folder on Github repository, this should be set 
+#' on which the Repository to be zipped is stored. If the Repository is stored in main folder on Github repository, this should be set 
 #' to \code{repoDirGit = FALSE} as default.
 #' 
-#' @param repoTo Only if working with a Github repository. A characterthat specifies the directory in which
-#' will be created tar archive from \code{Repository} stored on Github.
+#' @param repoTo A character that specifies the directory in which
+#' will be created zip archive from \code{Repository} stored in \code{repoDir} or Github directory.
+#' By default set to working directory (\code{getwd()})/
 #' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
@@ -55,7 +66,9 @@
 #' saveToRepo( iris, repoDir=exampleRepoDir )
 #' saveToRepo( model, repoDir=exampleRepoDir )
 #' 
-#' tarLocalRepo( exampleRepoDir )
+#' 
+#'  
+#' zipLocalRepo( exampleRepoDir )
 #' 
 #' deleteRepo( exampleRepoDir )
 #' 
@@ -63,31 +76,33 @@
 #' 
 #' # Github version
 #' 
-#' tarGithubRepo( user="MarcinKosinski", 
+#' zipGithubRepo( user="MarcinKosinski", 
 #' repo="Museum", branch="master", repoDirGit="ex1" )
 #' 
-#' tarGithubRepo( user="pbiecek, repo="archivist, repoTo = getwd( ) )
+#' zipGithubRepo( user="pbiecek", repo="archivist", repoTo = getwd( ) )
 #' 
 #' }
 #' 
 #' @family archivist
-#' @rdname tarRepo
+#' @rdname zipRepo
 #' @export
-tarLocalRepo <- function( repoDir ){
+zipLocalRepo <- function( repoDir, repoTo = getwd() ){
   stopifnot( is.character( repoDir ))
   
   repoDir <- checkDirectory( repoDir )
+  repoTo <- checkDirectory( repoTo )
 
   files <- c( paste0( repoDir, "backpack.db"), 
               paste0( repoDir, "gallery/", list.files( paste0(repoDir, "gallery/") ) ) )
-  tar( paste0(repoDir, "repository.zip"), files)
+  zip( paste0( repoTo, "repository.zip"), files)
 
 }
 
 #' @family archivist
-#' @rdname tarRepo
+#' @rdname zipRepo
 #' @export
-tarGithubRepo <- function( repoTo, user, repo, branch = "master", repoDirGit = FALSE){
+zipGithubRepo <- function( repoTo = getwd(), user, repo, branch = "master", 
+                           repoDirGit = FALSE){
   stopifnot( is.character( c( repoTo, repo, user, branch ) ) )
   stopifnot( is.logical( repoDirGit ) | is.character( repoDirGit ) )
   if( is.logical( repoDirGit ) ){
@@ -105,6 +120,6 @@ tarGithubRepo <- function( repoTo, user, repo, branch = "master", repoDirGit = F
   files <- c( paste0( Temp, "backpack.db"), 
               paste0( Temp, "gallery/", list.files( paste0(repoTo, "gallery/") ) ) )
   
-  tar( paste0( repoTo, "repository.tar"), files)
+  zip( paste0( repoTo, "repository.zip"), files)
   file.remove( Temp )
 }
