@@ -110,18 +110,20 @@ zipGithubRepo <- function( repoTo = getwd(), user, repo, branch = "master",
       stop( "repoDirGit may be only FALSE or a character. See documentation." )
     }
   }
-  
-  repoTo <- checkDirectory( repoTo )
-  # first download database
-  Temp_name <- downloadDB( repo, user, branch, repoDirGit )
-  
-  Temp <- checkDirectory( Temp_name )
 
-  files <- c( paste0( Temp, "backpack.db"), 
-              paste0( Temp, "gallery/", list.files( paste0(repoTo, "gallery/") ) ) )
+  # clone Github repo
+  tempRepoTo <- tempdir()
+  tempRepoTo <- checkDirectory( tempRepoTo )
+  createEmptyRepo( tempRepoTo, force = TRUE )
+  hashes <- searchInGithubRepo( pattern="", user=user, repo=repo, branch = branch, repoDirGit = repoDirGit, fixed=FALSE )
+  copyGithubRepo(repoTo = tempRepoTo , md5hashes = hashes,
+                 user=user, repo=repo, branch = branch, repoDirGit = repoDirGit)
+  # list of files
+  files <- c( paste0( tempRepoTo, "backpack.db"), 
+              list.files( paste0(tempRepoTo, "gallery"), full.names=TRUE ))
+
+  repoTo <- checkDirectory( repoTo )
+  zip( paste0( repoTo, "repository.zip"), files=files)
   
-  
-  
-  zip( paste0( repoTo, "repository.zip"), files)
-  file.remove( Temp_name )
+  deleteRepo( tempRepoTo )
 }
