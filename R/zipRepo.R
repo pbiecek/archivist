@@ -42,7 +42,7 @@
 #' An attempt to override will produce an error.
 #' 
 #' @author 
-#' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
+#' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}, Przemyslaw Biecek
 #'
 #' @examples
 #' # objects preparation
@@ -93,9 +93,13 @@
 zipLocalRepo <- function( repoDir, repoTo = getwd() , zipname="repository.zip"){
   stopifnot( is.character( repoDir ))
   
-  repoDir <- checkDirectory( repoDir )
   repoTo <- checkDirectory( repoTo )
+  if (file.exists(paste0(repoTo, zipname))) {
+    stop(paste0("The file ", repoTo, zipname), " allready exists")
+  }
 
+  repoDir <- checkDirectory( repoDir )
+  
   files <- c( paste0( repoDir, "backpack.db"), 
               paste0( repoDir, "gallery/", list.files( paste0(repoDir, "gallery/") ) ) )
   zip( paste0( repoTo, zipname), files)
@@ -114,7 +118,11 @@ zipGithubRepo <- function( repoTo = getwd(), user, repo, branch = "master",
       stop( "repoDirGit may be only FALSE or a character. See documentation." )
     }
   }
-
+  repoTo <- checkDirectory( repoTo )
+  if (file.exists(paste0(repoTo, zipname))) {
+    stop(paste0("The file ", repoTo, zipname), " allready exists")
+  }
+  
   # clone Github repo
   tempRepoTo <- tempdir()
   tempRepoTo <- checkDirectory( tempRepoTo )
@@ -126,7 +134,6 @@ zipGithubRepo <- function( repoTo = getwd(), user, repo, branch = "master",
   files <- c( paste0( tempRepoTo, "backpack.db"), 
               list.files( paste0(tempRepoTo, "gallery"), full.names=TRUE ))
 
-  repoTo <- checkDirectory( repoTo )
   zip( paste0( repoTo, zipname), files=files)
   
   deleteRepo( tempRepoTo )
