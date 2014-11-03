@@ -37,6 +37,10 @@
 #' will be created zip archive from \code{Repository} stored in \code{repoDir} or Github directory.
 #' By default set to working directory (\code{getwd()})/
 #' 
+#' @param zipname A character that specifies name of zipped repository.
+#' It is assumed that this file does not exist or does not contain backpack.db file.
+#' An attempt to override will produce an error.
+#' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #'
@@ -86,7 +90,7 @@
 #' @family archivist
 #' @rdname zipRepo
 #' @export
-zipLocalRepo <- function( repoDir, repoTo = getwd() ){
+zipLocalRepo <- function( repoDir, repoTo = getwd() , zipname="repository.zip"){
   stopifnot( is.character( repoDir ))
   
   repoDir <- checkDirectory( repoDir )
@@ -94,7 +98,7 @@ zipLocalRepo <- function( repoDir, repoTo = getwd() ){
 
   files <- c( paste0( repoDir, "backpack.db"), 
               paste0( repoDir, "gallery/", list.files( paste0(repoDir, "gallery/") ) ) )
-  zip( paste0( repoTo, "repository.zip"), files)
+  zip( paste0( repoTo, zipname), files)
 
 }
 
@@ -102,7 +106,7 @@ zipLocalRepo <- function( repoDir, repoTo = getwd() ){
 #' @rdname zipRepo
 #' @export
 zipGithubRepo <- function( repoTo = getwd(), user, repo, branch = "master", 
-                           repoDirGit = FALSE){
+                           repoDirGit = FALSE, zipname = "repository.zip"){
   stopifnot( is.character( c( repoTo, repo, user, branch ) ) )
   stopifnot( is.logical( repoDirGit ) | is.character( repoDirGit ) )
   if( is.logical( repoDirGit ) ){
@@ -123,7 +127,7 @@ zipGithubRepo <- function( repoTo = getwd(), user, repo, branch = "master",
               list.files( paste0(tempRepoTo, "gallery"), full.names=TRUE ))
 
   repoTo <- checkDirectory( repoTo )
-  zip( paste0( repoTo, "repository.zip"), files=files)
+  zip( paste0( repoTo, zipname), files=files)
   
   deleteRepo( tempRepoTo )
 }
