@@ -113,13 +113,15 @@ zipGithubRepo <- function( repoTo = getwd(), user, repo, branch = "master",
   
   repoTo <- checkDirectory( repoTo )
   # first download database
-  Temp <- downloadDB( repo, user, branch, repoDirGit )
+  Temp_name <- downloadDB( repo, user, branch, repoDirGit )
   
-  Temp <- checkDirectory( Temp )
+  Temp <- checkDirectory( Temp_name )
 
   files <- c( paste0( Temp, "backpack.db"), 
               paste0( Temp, "gallery/", list.files( paste0(repoTo, "gallery/") ) ) )
   
+  
+  
   zip( paste0( repoTo, "repository.zip"), files)
-  file.remove( Temp )
+  file.remove( Temp_name )
 }
