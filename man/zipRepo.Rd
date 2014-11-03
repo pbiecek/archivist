@@ -4,10 +4,10 @@
 \alias{zipLocalRepo}
 \title{Create a zip Archive From an Existing Repository}
 \usage{
-zipLocalRepo(repoDir, repoTo = getwd())
+zipLocalRepo(repoDir, repoTo = getwd(), zipname = "repository.zip")
 
 zipGithubRepo(repoTo = getwd(), user, repo, branch = "master",
-  repoDirGit = FALSE)
+  repoDirGit = FALSE, zipname = "repository.zip")
 }
 \arguments{
   \item{repoDir}{A character that specifies the directory
@@ -37,6 +37,11 @@ zipGithubRepo(repoTo = getwd(), user, repo, branch = "master",
   which will be created zip archive from \code{Repository}
   stored in \code{repoDir} or Github directory. By default
   set to working directory (\code{getwd()})/}
+
+  \item{zipname}{A character that specifies name of zipped
+  repository. It is assumed that this file does not exist
+  or does not contain backpack.db file. An attempt to
+  override will produce an error.}
 }
 \description{
 \code{zipLocalRepo} and \code{zipGithubRepo} create a zip
@@ -104,15 +109,16 @@ zipGithubRepo( user="pbiecek", repo="archivist", repoTo = getwd( ) )
 }
 }
 \author{
-Marcin Kosinski, \email{m.p.kosinski@gmail.com}
+Marcin Kosinski, \email{m.p.kosinski@gmail.com}, Przemyslaw
+Biecek
 }
 \seealso{
 Other archivist: \code{\link{Repository}};
-\code{\link{Tags}}; \code{\link{archivist-package}};
-\code{\link{cache}}; \code{\link{copyGithubRepo}},
-\code{\link{copyLocalRepo}}; \code{\link{createEmptyRepo}};
-\code{\link{deleteRepo}}; \code{\link{getTagsGithub}},
-\code{\link{getTagsLocal}};
+\code{\link{Tags}}; \code{\link{addTagsRepo}};
+\code{\link{archivist-package}}; \code{\link{cache}};
+\code{\link{copyGithubRepo}}, \code{\link{copyLocalRepo}};
+\code{\link{createEmptyRepo}}; \code{\link{deleteRepo}};
+\code{\link{getTagsGithub}}, \code{\link{getTagsLocal}};
 \code{\link{loadFromGithubRepo}},
 \code{\link{loadFromLocalRepo}}; \code{\link{md5hash}};
 \code{\link{multiSearchInGithubRepo}},
@@ -126,11 +132,11 @@ Other archivist: \code{\link{Repository}};
 \code{\link{summaryLocalRepo}}
 
 Other archivist: \code{\link{Repository}};
-\code{\link{Tags}}; \code{\link{archivist-package}};
-\code{\link{cache}}; \code{\link{copyGithubRepo}},
-\code{\link{copyLocalRepo}}; \code{\link{createEmptyRepo}};
-\code{\link{deleteRepo}}; \code{\link{getTagsGithub}},
-\code{\link{getTagsLocal}};
+\code{\link{Tags}}; \code{\link{addTagsRepo}};
+\code{\link{archivist-package}}; \code{\link{cache}};
+\code{\link{copyGithubRepo}}, \code{\link{copyLocalRepo}};
+\code{\link{createEmptyRepo}}; \code{\link{deleteRepo}};
+\code{\link{getTagsGithub}}, \code{\link{getTagsLocal}};
 \code{\link{loadFromGithubRepo}},
 \code{\link{loadFromLocalRepo}}; \code{\link{md5hash}};
 \code{\link{multiSearchInGithubRepo}},

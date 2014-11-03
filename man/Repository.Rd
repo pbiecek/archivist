@@ -36,10 +36,11 @@ Learn more about \code{Repository} at \pkg{archivist}
 \href{https://github.com/pbiecek/archivist/wiki/archivist-package-Repository}{Github}.
 
 Other archivist: \code{\link{Tags}};
-\code{\link{archivist-package}}; \code{\link{cache}};
-\code{\link{copyGithubRepo}}, \code{\link{copyLocalRepo}};
-\code{\link{createEmptyRepo}}; \code{\link{deleteRepo}};
-\code{\link{getTagsGithub}}, \code{\link{getTagsLocal}};
+\code{\link{addTagsRepo}}; \code{\link{archivist-package}};
+\code{\link{cache}}; \code{\link{copyGithubRepo}},
+\code{\link{copyLocalRepo}}; \code{\link{createEmptyRepo}};
+\code{\link{deleteRepo}}; \code{\link{getTagsGithub}},
+\code{\link{getTagsLocal}};
 \code{\link{loadFromGithubRepo}},
 \code{\link{loadFromLocalRepo}}; \code{\link{md5hash}};
 \code{\link{multiSearchInGithubRepo}},

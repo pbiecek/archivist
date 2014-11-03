@@ -89,10 +89,11 @@ Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 }
 \seealso{
 Other archivist: \code{\link{Repository}};
-\code{\link{Tags}}; \code{\link{archivist-package}};
-\code{\link{cache}}; \code{\link{copyGithubRepo}},
-\code{\link{copyLocalRepo}}; \code{\link{createEmptyRepo}};
-\code{\link{deleteRepo}}; \code{\link{loadFromGithubRepo}},
+\code{\link{Tags}}; \code{\link{addTagsRepo}};
+\code{\link{archivist-package}}; \code{\link{cache}};
+\code{\link{copyGithubRepo}}, \code{\link{copyLocalRepo}};
+\code{\link{createEmptyRepo}}; \code{\link{deleteRepo}};
+\code{\link{loadFromGithubRepo}},
 \code{\link{loadFromLocalRepo}}; \code{\link{md5hash}};
 \code{\link{multiSearchInGithubRepo}},
 \code{\link{multiSearchInLocalRepo}},
@@ -106,10 +107,11 @@ Other archivist: \code{\link{Repository}};
 \code{\link{zipGithubRepo}}, \code{\link{zipLocalRepo}}
 
 Other archivist: \code{\link{Repository}};
-\code{\link{Tags}}; \code{\link{archivist-package}};
-\code{\link{cache}}; \code{\link{copyGithubRepo}},
-\code{\link{copyLocalRepo}}; \code{\link{createEmptyRepo}};
-\code{\link{deleteRepo}}; \code{\link{loadFromGithubRepo}},
+\code{\link{Tags}}; \code{\link{addTagsRepo}};
+\code{\link{archivist-package}}; \code{\link{cache}};
+\code{\link{copyGithubRepo}}, \code{\link{copyLocalRepo}};
+\code{\link{createEmptyRepo}}; \code{\link{deleteRepo}};
+\code{\link{loadFromGithubRepo}},
 \code{\link{loadFromLocalRepo}}; \code{\link{md5hash}};
 \code{\link{multiSearchInGithubRepo}},
 \code{\link{multiSearchInLocalRepo}},
