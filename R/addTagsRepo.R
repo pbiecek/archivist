@@ -67,33 +67,20 @@ addTagsRepo <- function( md5hashes, repoDir, FUN = NULL, tags = NULL){
   
   if( !is.null(tags) ){ #applying only simple tags to given md5hashes
     helpfulDF <- data.frame( md5hashes, tags)
-    apply( helpfulDF, 1, function(row){
-      addTag( tag = row[2], md5hash = row[1], dir = repoDir )
-    })
   }else{ #applying tags after evaluations on artifacts correspoding to given md5hashes
     
-    # load artifacts into new env
-    .nameEnv <- new.env()
-    sapply( md5hashes, function(x) {
-      load( file = paste0( repoDir, "gallery/", x, ".rda" ), envir = .nameEnv )
-    } )
-    names <- ls( envir = .nameEnv )
-    
+    # load artifacts into new env and
     # create tags for those artifacts
-    tags <- sapply( names, function(artif){
-      FUN( get(artif, envir = .nameEnv) )
-    })
-    
-    # create a data frame containing md5hashes and a tags in each row
-    hashes <- sapply( names, function(x){
-      searchInLocalRepo( paste0("name:", x), repoDir )
-    })
-    
-    helpfulDF <- data.frame( hashes, tags )
-    apply( helpfulDF, 1, function(row){
-      addTag( tag = row[2], md5hash = row[1], dir = repoDir )
-    })
-    
+    .nameEnv <- new.env()
+    tags <- lapply( md5hashes, function(x) {
+      load( file = paste0( repoDir, "gallery/", x, ".rda" ), envir = .nameEnv )
+      c(x, FUN( get(artif, envir = .nameEnv) ))
+    } )
+    helpfulDF <- data.frame( md5hashes = sapply(tags, `[`, 1), 
+                             tags = sapply(tags, `[`, 2))
   }
+  apply( helpfulDF, 1, function(row){
+    addTag( tag = row[2], md5hash = row[1], dir = repoDir )
+  })
   invisible(NULL)
 }
