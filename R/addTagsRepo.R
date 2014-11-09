@@ -43,10 +43,18 @@
 #' # Takes all objects of lm class from repository, 
 #' # extracts R2 for them and stores as R2: tags
 #' 
-#' md5hashes <- searchInLocalRepo(repoDir, “class:lm”)
-#' addTag(md5hashes, repoDir, function(x) paste0(“R2:”,summary(x)$r.square))
+#' exampleRepoDir <- tempdir()
+#' createEmptyRepo(exampleRepoDir, force=TRUE)
+#' m1 <- lm(Sepal.Length~Species, iris)
+#' saveToRepo(m1, exampleRepoDir)
+#' m1 <- lm(Sepal.Width~Species, iris)
+#' saveToRepo(m1, exampleRepoDir)
+#' getTagsLocal("da1bcaf68752c146903f700c1a458438", exampleRepoDir)
+#' md5hashes <- searchInLocalRepo(repoDir=exampleRepoDir, "class:lm")
+#' addTagsRepo(md5hashes, exampleRepoDir, function(x) paste0("R2:",summary(x)$r.square))
+#' getTagsLocal("da1bcaf68752c146903f700c1a458438", exampleRepoDir)
+#' deleteRepo(exampleRepoDir)
 #' }
-#' 
 #' 
 #' @family archivist
 #' @rdname addTagsRepo
