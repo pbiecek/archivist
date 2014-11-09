@@ -24,7 +24,7 @@
 #' 
 #' @param tags A character vector that specifies what tag should be added to which artifact that
 #' corresponds to given \code{md5hash}. Can be specified only one of: \code{FUN} 
-#' or \code{tags}. Should have lenght 1 or the same as lenght of \code{md5hashes} param.
+#' or \code{tags}. Should have length 1 or the same as length of \code{md5hashes} param.
 #' 
 #' @param repoDir A character that specifies the directory of the Repository into which
 #' new \code{Tags} will be added.
@@ -72,7 +72,7 @@ addTagsRepo <- function( md5hashes, repoDir, FUN = NULL, tags = NULL){
     })
   }else{ #applying tags after evaluations on artifacts correspoding to given md5hashes
     
-    # load arfticats into new env
+    # load artifacts into new env
     .nameEnv <- new.env()
     sapply( md5hashes, function(x) {
       load( file = paste0( repoDir, "gallery/", x, ".rda" ), envir = .nameEnv )
@@ -84,7 +84,7 @@ addTagsRepo <- function( md5hashes, repoDir, FUN = NULL, tags = NULL){
       FUN( get(artif, envir = .nameEnv) )
     })
     
-    # create a data frame containg md5hash and a tags in each row
+    # create a data frame containing md5hashes and a tags in each row
     hashes <- sapply( names, function(x){
       searchInLocalRepo( paste0("name:", x), repoDir )
     })
