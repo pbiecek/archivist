@@ -75,20 +75,21 @@ addTagsRepo <- function( md5hashes, repoDir, FUN = NULL, tags = NULL){
   
   if( !is.null(tags) ){ #applying only simple tags to given md5hashes
     helpfulDF <- data.frame( md5hashes, tags)
+    apply( helpfulDF, 1, function(row){
+      addTag( tag = row[2], md5hash = row[1], dir = repoDir )
+    })
   }else{ #applying tags after evaluations on artifacts correspoding to given md5hashes
     
     # load artifacts into new env and
     # create tags for those artifacts
-    .nameEnv <- new.env()
-    tags <- lapply( md5hashes, function(x) {
+    helpfulDF <- lapply( md5hashes, function(x) {
       tmpObj <- loadFromLocalRepo(x, repoDir = repoDir, value = TRUE)
-      c(x, FUN( tmpObj ))
+      tags <- FUN( tmpObj )
+      # FUN may returns different number of tags for differnt objects
+      sapply(tags, addTag, md5hash = x, dir = repoDir )
+      c(x, tags)
     } )
-    helpfulDF <- data.frame( md5hashes = sapply(tags, `[`, 1), 
-                             tags = sapply(tags, `[`, 2))
   }
-  apply( helpfulDF, 1, function(row){
-    addTag( tag = row[2], md5hash = row[1], dir = repoDir )
-  })
-  invisible(NULL)
+  
+  invisible(helpfulDF)
 }
