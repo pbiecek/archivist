@@ -74,7 +74,7 @@ addTagsRepo <- function( md5hashes, repoDir, FUN = NULL, tags = NULL){
     
     # load arfticats into new env
     .nameEnv <- new.env()
-    sapply( md5hash, function(x) {
+    sapply( md5hashes, function(x) {
       load( file = paste0( repoDir, "gallery/", x, ".rda" ), envir = .nameEnv )
     } )
     names <- ls( envir = .nameEnv )
@@ -89,7 +89,7 @@ addTagsRepo <- function( md5hashes, repoDir, FUN = NULL, tags = NULL){
       searchInLocalRepo( paste0("name:", x), repoDir )
     })
     
-    helpful_DF <- data.frame( hashes, tags )
+    helpfulDF <- data.frame( hashes, tags )
     apply( helpfulDF, 1, function(row){
       addTag( tag = row[2], md5hash = row[1], dir = repoDir )
     })
