@@ -7,17 +7,9 @@
 #' 
 #' @details
 #' \describe{
-#' \item{Problem:}{
-#'  \itemize{
-#'    \item after an artifact is added there is no way to add/update it's tags 
-#'    sometimes one discover, that it would be nice to have additional properties exposed as tags
-#' }
-#' }
-#' \item{Proposed solution:}{
-#' \itemize{ 
-#'  \item addTag(md5hashes, repoDir, FUN, tags)  function, that will take list of md5hashes if user specifies tags, then these tags will be added to all md5hashes if user specifies FUN, then FUN will be executed on each md5hash object, FUN returns a character vector (=new tags), new tags are added to database
-#' }
-#' }
+#'  The addTagsRepo() function adds new tags to artifacts that are already stored in repository. 
+#'  One can add new tags explicitly with ‘tags’ argument, 
+#'  Or by passing a function that extracts tags from selected objects.
 #' }
 #'
 #' @param md5hashes To which corresponding artifacts should \code{Tags} be added. 
@@ -33,9 +25,11 @@
 #' \code{Tags} as a result that will be added to the local Repository. Can be specified only one of: \code{FUN} 
 #' or \code{tags}.
 #'
+#' @param ... Other arguments that will be passed to FUN.
+#'
 #' 
 #' @author 
-#' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
+#' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}, Przemyslaw Biecek, \email{przemyslaw.biecek@@gmail.com}
 #'
 #' @examples
 #' \dontrun{
@@ -49,17 +43,19 @@
 #' saveToRepo(m1, exampleRepoDir)
 #' m1 <- lm(Sepal.Width~Species, iris)
 #' saveToRepo(m1, exampleRepoDir)
-#' getTagsLocal("da1bcaf68752c146903f700c1a458438", exampleRepoDir)
+#' getTagsLocal("da1bcaf68752c146903f700c1a458438", exampleRepoDir, "")
 #' md5hashes <- searchInLocalRepo(repoDir=exampleRepoDir, "class:lm")
+#' addTagsRepo(md5hashes, exampleRepoDir, tags = "test")
 #' addTagsRepo(md5hashes, exampleRepoDir, function(x) paste0("R2:",summary(x)$r.square))
-#' getTagsLocal("da1bcaf68752c146903f700c1a458438", exampleRepoDir)
+#' getTagsLocal("da1bcaf68752c146903f700c1a458438", exampleRepoDir, "")
+#' showLocalRepo(exampleRepoDir)
 #' deleteRepo(exampleRepoDir)
 #' }
 #' 
 #' @family archivist
 #' @rdname addTagsRepo
 #' @export
-addTagsRepo <- function( md5hashes, repoDir, FUN = NULL, tags = NULL){
+addTagsRepo <- function( md5hashes, repoDir, FUN = NULL, tags = NULL, ...){
   stopifnot( xor( is.null(FUN), is.null(tags)))
   stopifnot( is.character( c( md5hashes, repoDir ) ) )
   stopifnot( length(md5hashes) > 0 )
@@ -84,8 +80,8 @@ addTagsRepo <- function( md5hashes, repoDir, FUN = NULL, tags = NULL){
     # create tags for those artifacts
     helpfulDF <- lapply( md5hashes, function(x) {
       tmpObj <- loadFromLocalRepo(x, repoDir = repoDir, value = TRUE)
-      tags <- FUN( tmpObj )
-      # FUN may returns different number of tags for differnt objects
+      tags <- FUN( tmpObj, ... )
+      # FUN may returns different number of tags (=more than one) for different objects
       sapply(tags, addTag, md5hash = x, dir = repoDir )
       c(x, tags)
     } )
