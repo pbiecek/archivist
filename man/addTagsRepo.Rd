@@ -3,7 +3,7 @@
 \alias{addTagsRepo}
 \title{Add new Tags to the Existing Repository}
 \usage{
-addTagsRepo(x)
+addTagsRepo(md5hashes, repoDir, FUN = NULL, tags = NULL)
 }
 \arguments{
   \item{md5hashes}{To which corresponding artifacts should

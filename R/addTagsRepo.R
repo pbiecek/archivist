@@ -51,6 +51,49 @@
 #' @family archivist
 #' @rdname addTagsRepo
 #' @export
-addTagsRepo <- function(x){
+addTagsRepo <- function( md5hashes, repoDir, FUN = NULL, tags = NULL){
+  stopifnot( xor( is.null(FUN), is.null(tags)))
+  stopifnot( is.character( c( md5hashes, repoDir ) ) )
+  stopifnot( length(md5hashes) > 0 )
   
+  if ( is.null(FUN) ){ stopifnot( is.character( tags ) ) }
+  if ( is.null(tags) ){ stopifnot( is.function( FUN ) ) }
+  if ( !is.null(tags) ){ stopifnot( 
+    length( md5hashes )%%length( tags ) == 0 | length( tags )%%length( md5hashes ) == 0) }
+  # that a helpful data frame can be computed
+  
+  
+  repoDir <- checkDirectory( repoDir )
+  
+  if( !is.null(tags) ){ #applying only simple tags to given md5hashes
+    helpfulDF <- data.frame( md5hashes, tags)
+    apply( helpfulDF, 1, function(row){
+      addTag( tag = row[2], md5hash = row[1], dir = repoDir )
+    })
+  }else{ #applying tags after evaluations on artifacts correspoding to given md5hashes
+    
+    # load arfticats into new env
+    .nameEnv <- new.env()
+    sapply( md5hash, function(x) {
+      load( file = paste0( repoDir, "gallery/", x, ".rda" ), envir = .nameEnv )
+    } )
+    names <- ls( envir = .nameEnv )
+    
+    # create tags for those artifacts
+    tags <- sapply( names, function(artif){
+      FUN( get(artif, envir = .nameEnv) )
+    })
+    
+    # create a data frame containg md5hash and a tags in each row
+    hashes <- sapply( names, function(x){
+      searchInLocalRepo( paste0("name:", x), repoDir )
+    })
+    
+    helpful_DF <- data.frame( hashes, tags )
+    apply( helpfulDF, 1, function(row){
+      addTag( tag = row[2], md5hash = row[1], dir = repoDir )
+    })
+    
+  }
+  invisible(NULL)
 }
