@@ -82,7 +82,8 @@ addTagsRepo <- function( md5hashes, repoDir, FUN = NULL, tags = NULL){
     .nameEnv <- new.env()
     tags <- lapply( md5hashes, function(x) {
       load( file = paste0( repoDir, "gallery/", x, ".rda" ), envir = .nameEnv )
-      c(x, FUN( get(artif, envir = .nameEnv) ))
+      tmpObj <- get(artif, envir = .nameEnv)
+      c(x, FUN( tmpObj ))
     } )
     helpfulDF <- data.frame( md5hashes = sapply(tags, `[`, 1), 
                              tags = sapply(tags, `[`, 2))
