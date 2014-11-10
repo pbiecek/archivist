@@ -3,14 +3,17 @@
 #' @title Add new Tags to the Existing Repository
 #' 
 #' @description
-#' \code{addTagsRepo} 
+#' \code{addTagsRepo} adds new \link{Tags} to the existing \link{Repository}.
 #' 
 #' @details
-#' \describe{
-#'  The addTagsRepo() function adds new tags to artifacts that are already stored in repository. 
-#'  One can add new tags explicitly with ‘tags’ argument, 
-#'  Or by passing a function that extracts tags from selected objects.
-#' }
+#' The \code{addTagsRepo} function adds new tags to artifacts that are already stored in repository. 
+#'  One can add new \code{tags} explicitly with \code{tags} argument, or by passing a 
+#'  function that extracts \code{tags} from selected artifacts specified by passing their \link{md5hash}.
+#' To learn more about artifacts visit \link[archivist]{archivist-package}.
+#' 
+#' \code{Tags} are attributes of an artifact. \code{Tags} can be an artifact's \code{name}, \code{class} or \code{archiving date}. 
+#' Furthermore, for various artifact's classes more different \code{Tags} are available and can 
+#' be searched in \link{searchInLocalRepo} or \link{searchInGithubRepo} functions. 
 #'
 #' @param md5hashes To which corresponding artifacts should \code{Tags} be added. 
 #' 
@@ -29,7 +32,8 @@
 #'
 #' 
 #' @author 
-#' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}, Przemyslaw Biecek, \email{przemyslaw.biecek@@gmail.com}
+#' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}, 
+#' Przemyslaw Biecek, \email{przemyslaw.biecek@@gmail.com}
 #'
 #' @examples
 #' \dontrun{

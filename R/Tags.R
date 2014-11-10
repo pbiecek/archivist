@@ -11,7 +11,7 @@
 #' 
 #' \code{Tags} are attributes of an artifact. \code{Tags} can be an artifact's \code{name}, \code{class} or \code{archiving date}. 
 #' Furthermore, for various artifact's classes more different \code{Tags} are available and can 
-#' be searched by \link{searchInLocalRepo} or \link{searchInGithubRepo} functions. 
+#' be searched in \link{searchInLocalRepo} or \link{searchInGithubRepo} functions. 
 #' 
 #' \code{Tags} are stored in the \link{Repository}. If data is extracted from artifact a special \code{Tag}
 #' named \code{relationWith} is created, and specifies with which artifact this data is related to.
