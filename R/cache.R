@@ -1,11 +1,14 @@
 ##    archivist package for R
 ##
-#' @title Enable Caching of a Function Results with the use of Archivist
+#' @title Enable Caching of a Function Results with the use of Archivist. 
 #'
 #' @description
 #' \code{cache} function stores all results of function calls in local \link{Repository}.
 #' All results are stored together with md5 hashes of the function calls.
 #' If function has been called with same arguments as in the past, then results can be loaded from repository.
+#'
+#' One may specify expiration date for live objects. 
+#' It may be useful for objects that can be changed externally (like queries to database).
 #' 
 #' @details
 #' \code{cache} function stores all results of function calls in local \link{Repository} 
@@ -28,6 +31,8 @@
 #' 
 #' @param ... Arguments for function \code{FUN}.
 #' 
+#' @param notOlderThan Restore an artifact from database only if it was created after notOlderThan. 
+#' 
 #' @author 
 #' Przemyslaw Biecek, \email{Przemyslaw.Biecek@@gmail.com}
 #'
@@ -39,6 +44,16 @@
 #' fun <- function(n) {replicate(n, summary(lm(Sepal.Length~Species, iris))$r.squared)}
 #' system.time( res <- cache(cacheRepo, fun, 1000) )
 #' system.time( res <- cache(cacheRepo, fun, 1000) )
+#' 
+#' testFun <- function(x) {cat(x);x}
+#' # will be executed
+#' tmp <- cache(cacheRepo, testFun, "Say hallo!")
+#' # will loaded from repository
+#' tmp <- cache(cacheRepo, testFun, "Say hallo!")
+#' # will be executed, fails with expiration date
+#' tmp <- cache(cacheRepo, testFun, "Say hallo!", notOlderThan = now())
+#' # will be executed, passes with expiration date [within hour]
+#' tmp <- cache(cacheRepo, testFun, "Say hallo!", notOlderThan = now() - hours(1))
 #' 
 #' deleteRepo( cacheRepo )
 #' rm( cacheRepo )
@@ -52,10 +67,10 @@ cache <- function(cacheRepo, FUN, ..., notOlderThan = NULL) {
   outputHash <- digest(tmpl)
   localTags <- showLocalRepo(cacheRepo, "tags")
   isInRepo <- localTags[localTags$tag == paste0("cacheId:", outputHash),,drop=FALSE]
-  if (nrow(isInRepo) > 0) {
+   if (nrow(isInRepo) > 0) {
     lastEntry <- max(isInRepo$createdDate)
     if (is.null(notOlderThan) || (notOlderThan < lastEntry))
-        return(loadFromLocalRepo(isInRepo$artifact[1], repoDir = cacheRepo, value = TRUE))
+        return(loadFromLocalRepo(isInRepo$artifact[which.max(isInRepo$createdDate)], repoDir = cacheRepo, value = TRUE))
   }
   
   output <- do.call(FUN, list(...))
