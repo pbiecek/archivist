@@ -118,6 +118,7 @@
 #' of an stored artifact or should the result be the input artifact (\code{chain = TRUE}), so that chaining code 
 #' can be used. See examples.
 #'
+#' @param silent If TRUE produces no warnings
 #' 
 #' @author 
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
@@ -251,7 +252,7 @@
 saveToRepo <- function( artifact, repoDir, archiveData = TRUE, 
                         archiveTags = TRUE, 
                         archiveMiniature = TRUE, force = TRUE, rememberName = TRUE, 
-                        chain = FALSE, ... ){
+                        chain = FALSE, ... , silent=FALSE){
   stopifnot( is.character( repoDir ), is.logical( c( archiveData, archiveTags, archiveMiniature, 
                                                      chain, rememberName ) ) )
   
@@ -267,7 +268,7 @@ saveToRepo <- function( artifact, repoDir, archiveData = TRUE,
   if ( length( check ) > 0 & !force ){
     stop( "This artifact was already archived. If you want to achive it again, use force = TRUE. \n")
   } 
-  if ( length( check ) > 0 & force ){
+  if ( length( check ) > 0 & force & !silent){
     if ( rememberName ){
       warning( "This artifact was already archived. Another archivisation executed with success.")
     }else{

@@ -78,6 +78,8 @@ cache <- function(cacheRepo, FUN, ..., notOlderThan = NULL) {
   output <- do.call(FUN, list(...))
   attr( output, "tags") <- paste0("cacheId:", outputHash)
   attr( output, "call") <- ""
-  saveToRepo(output, repoDir = cacheRepo, archiveData = TRUE, archiveMiniature = FALSE, rememberName = FALSE)
+  saveToRepo(output, repoDir = cacheRepo, archiveData = TRUE, 
+             archiveMiniature = FALSE, rememberName = FALSE,
+             silent = TRUE)
   output
 }

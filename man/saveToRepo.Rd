@@ -5,7 +5,7 @@
 \usage{
 saveToRepo(artifact, repoDir, archiveData = TRUE, archiveTags = TRUE,
   archiveMiniature = TRUE, force = TRUE, rememberName = TRUE,
-  chain = FALSE, ...)
+  chain = FALSE, ..., silent = FALSE)
 }
 \arguments{
   \item{artifact}{An arbitrary R artifact to be saved. For
@@ -38,6 +38,8 @@ saveToRepo(artifact, repoDir, archiveData = TRUE, archiveTags = TRUE,
 
   \item{...}{Graphical parameters denoting width and height
   of a miniature. See details.}
+
+  \item{silent}{If TRUE produces no warnings}
 }
 \value{
 As a result of this function a character string is
