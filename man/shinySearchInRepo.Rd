@@ -36,6 +36,12 @@ may be specified, they should be comma separated. User can
 specify more tags when artifact is created, tags like
 phase, project, author etc.
 
+In the search query one can add tags started with sort: or
+sort:- then miniatures will be sorted accordingly. For
+exaple sort:class will sort along class tag, while
+sort:-class backward. sort:createdDate will sort along
+createdDate and sort:-createdDate backward.
+
 \code{Tags}, submitted in the text field, should be given
 according to the format: \code{"TagType:TagTypeValue"} -
 see examples.
