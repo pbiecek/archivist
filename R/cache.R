@@ -55,7 +55,7 @@ cache <- function(cacheRepo, FUN, ..., notOlderThan = NULL) {
   if (nrow(isInRepo) > 0) {
     lastEntry <- max(isInRepo$createdDate)
     if (is.null(notOlderThan) || (notOlderThan < lastEntry))
-        return(loadFromLocalRepo(isInRepo[1], repoDir = cacheRepo, value = TRUE))
+        return(loadFromLocalRepo(isInRepo$artifact[1], repoDir = cacheRepo, value = TRUE))
   }
   
   output <- do.call(FUN, list(...))
