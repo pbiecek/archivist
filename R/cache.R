@@ -1,6 +1,6 @@
 ##    archivist package for R
 ##
-#' @title Enable Caching of a Function Results with the use of Archivist. 
+#' @title Enable Caching of a Function Results with the use of Archivist
 #'
 #' @description
 #' \code{cache} function stores all results of function calls in local \link{Repository}.
@@ -69,8 +69,10 @@ cache <- function(cacheRepo, FUN, ..., notOlderThan = NULL) {
   isInRepo <- localTags[localTags$tag == paste0("cacheId:", outputHash),,drop=FALSE]
    if (nrow(isInRepo) > 0) {
     lastEntry <- max(isInRepo$createdDate)
-    if (is.null(notOlderThan) || (notOlderThan < lastEntry))
-        return(loadFromLocalRepo(isInRepo$artifact[which.max(isInRepo$createdDate)], repoDir = cacheRepo, value = TRUE))
+    if (is.null(notOlderThan) || (notOlderThan < lastEntry)){
+      lastOne <- order(isInRepo$createdDate, decreasing = TRUE)[1]
+      return(loadFromLocalRepo(isInRepo$artifact[lastOne], repoDir = cacheRepo, value = TRUE))
+    }
   }
   
   output <- do.call(FUN, list(...))
