@@ -46,13 +46,17 @@
 #' @family archivist
 #' @rdname cache
 #' @export
-cache <- function(cacheRepo, FUN, ...) {
+cache <- function(cacheRepo, FUN, ..., notOlderThan = NULL) {
   tmpl <- list(...)
   tmpl$.FUN <- FUN
   outputHash <- digest(tmpl)
-  isInRepo <- searchInLocalRepo(paste0("cacheId:", outputHash), cacheRepo)
-  if (length(isInRepo) > 0)
-    return(loadFromLocalRepo(isInRepo[1], repoDir = cacheRepo, value = TRUE))
+  localTags <- showLocalRepo(cacheRepo, "tags")
+  isInRepo <- localTags[localTags$tag == paste0("cacheId:", outputHash),,drop=FALSE]
+  if (nrow(isInRepo) > 0) {
+    lastEntry <- max(isInRepo$createdDate)
+    if (is.null(notOlderThan) || (notOlderThan < lastEntry))
+        return(loadFromLocalRepo(isInRepo[1], repoDir = cacheRepo, value = TRUE))
+  }
   
   output <- do.call(FUN, list(...))
   attr( output, "tags") <- paste0("cacheId:", outputHash)
