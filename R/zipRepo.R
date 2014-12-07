@@ -20,7 +20,7 @@
 #' stored on Github.
 #'
 #' @param repoDir A character that specifies the directory of the Repository which
-#' will be zipped.
+#' will be zipped. If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.
 #'
 #' @param repo Only if working with a Github repository. A character containing a name of a Github repository on which the Repository to be zipped is archived.
 #' 
@@ -90,8 +90,8 @@
 #' @family archivist
 #' @rdname zipRepo
 #' @export
-zipLocalRepo <- function( repoDir, repoTo = getwd() , zipname="repository.zip"){
-  stopifnot( is.character( repoDir ))
+zipLocalRepo <- function( repoDir = NULL, repoTo = getwd() , zipname="repository.zip"){
+  stopifnot( is.character( repoDir ) | is.null( repoDir ) )
   
   repoTo <- checkDirectory( repoTo )
   if (file.exists(paste0(repoTo, zipname))) {

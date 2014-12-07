@@ -14,7 +14,7 @@
 #' of an artifact.
 #'
 #' @param repoDir A character denoting an existing directory in 
-#' which an artifact is stored.
+#' which an artifact is stored. If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.
 #' 
 #' @param md5hash A character containing \code{md5hash} 
 #' of artifacts which \code{Tag} is desired to be returned.
@@ -67,9 +67,11 @@
 #' @family archivist
 #' @rdname getTags
 #' @export
-getTagsLocal <- function( md5hash, repoDir, tag ="name"){
-  stopifnot( is.character( c( md5hash, repoDir, tag ) ) )
-  repoDir <- checkDirectory( repoDir )  
+getTagsLocal <- function( md5hash, repoDir = NULL, tag ="name"){
+  stopifnot( is.character( c( md5hash, tag ) ) )
+  stopifnot( is.character( repoDir ) | is.null( repoDir ) )
+  repoDir <- checkDirectory( repoDir ) 
+  
 
   # sub( pattern = paste0(tag, ":"), replacement = "", x = tagToReturn)
   # there are so many kind of tags (proposed by archivist or by an user)

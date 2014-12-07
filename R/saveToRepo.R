@@ -108,6 +108,7 @@
 #' @param archiveMiniature A logical value denoting whether to archive a miniature of the \code{artifact}.
 #' 
 #' @param repoDir A character denoting an existing directory in which an artifact will be saved.
+#' If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.
 #' 
 #' @param force A logical value denoting whether to archive \code{artifact} if it was already archived in
 #' a Repository.
@@ -249,12 +250,13 @@
 #' @family archivist
 #' @rdname saveToRepo
 #' @export
-saveToRepo <- function( artifact, repoDir, archiveData = TRUE, 
+saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE, 
                         archiveTags = TRUE, 
                         archiveMiniature = TRUE, force = TRUE, rememberName = TRUE, 
                         chain = FALSE, ... , silent=FALSE){
-  stopifnot( is.character( repoDir ), is.logical( c( archiveData, archiveTags, archiveMiniature, 
+  stopifnot( is.logical( c( archiveData, archiveTags, archiveMiniature, 
                                                      chain, rememberName ) ) )
+  stopifnot( is.character( repoDir ) | is.null( repoDir ) )
   
   md5hash <- digest( artifact )
   objectName <- deparse( substitute( artifact ) )

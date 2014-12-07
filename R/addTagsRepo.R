@@ -22,7 +22,7 @@
 #' or \code{tags}. Should have length 1 or the same as length of \code{md5hashes} param.
 #' 
 #' @param repoDir A character that specifies the directory of the Repository into which
-#' new \code{Tags} will be added.
+#' new \code{Tags} will be added. If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.
 #' 
 #' @param FUN A function that evaluates on the artifacts for which \code{md5hashes} are given and generates
 #' \code{Tags} as a result that will be added to the local Repository. Can be specified only one of: \code{FUN} 
@@ -59,10 +59,11 @@
 #' @family archivist
 #' @rdname addTagsRepo
 #' @export
-addTagsRepo <- function( md5hashes, repoDir, FUN = NULL, tags = NULL, ...){
+addTagsRepo <- function( md5hashes, repoDir = NULL, FUN = NULL, tags = NULL, ...){
   stopifnot( xor( is.null(FUN), is.null(tags)))
-  stopifnot( is.character( c( md5hashes, repoDir ) ) )
+  stopifnot( is.character( md5hashes ) )
   stopifnot( length(md5hashes) > 0 )
+  stopifnot( is.character( repoDir ) | is.null( repoDir ) )
   
   if ( is.null(FUN) ){ stopifnot( is.character( tags ) ) }
   if ( is.null(tags) ){ stopifnot( is.function( FUN ) ) }

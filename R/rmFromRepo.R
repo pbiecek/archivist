@@ -47,6 +47,7 @@
 #' @param md5hash A character assigned to the artifact as a result of a cryptographical hash function with MD5 algorithm, or it's abbreviation. This object will be removed.
 #' 
 #' @param repoDir A character denoting an existing directory from which an artifact will be removed.
+#' If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.
 #' 
 #' @param removeData A logical value denoting whether to remove a data with the \code{artifact} specified by the \code{md5hash}.
 #' Defualt \code{FALSE}.
@@ -198,9 +199,10 @@
 #' @family archivist
 #' @rdname rmFromRepo
 #' @export
-rmFromRepo <- function( md5hash, repoDir, removeData = FALSE, 
+rmFromRepo <- function( md5hash, repoDir = NULL, removeData = FALSE, 
                         removeMiniature = FALSE, force = FALSE ){
-  stopifnot( is.character( c( repoDir, md5hash ) ) )
+  stopifnot( is.character( md5hash  ) )
+  stopifnot( is.character( repoDir ) | is.null( repoDir ) )
   stopifnot( is.logical( c( removeData, removeMiniature ) ) )
     
   repoDir <- checkDirectory( repoDir )

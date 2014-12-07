@@ -61,7 +61,7 @@
 #' @family archivist
 #' @rdname cache
 #' @export
-cache <- function(cacheRepo, FUN, ..., notOlderThan = NULL) {
+cache <- function( FUN, ..., notOlderThan = NULL, cacheRepo = NULL ) {
   tmpl <- list(...)
   tmpl$.FUN <- FUN
   outputHash <- digest(tmpl)

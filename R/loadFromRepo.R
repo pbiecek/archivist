@@ -31,6 +31,7 @@
 #' You can specify one \code{md5hash} (or its abbreviation) per function call. 
 #' 
 #' @param repoDir A character denoting an existing directory from which an artifact will be loaded.
+#' If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.
 #' 
 #' @param md5hash A character assigned to the artifact as a result of a cryptographical hash function with MD5 algorithm, or it's abbreviation.
 #' 
@@ -187,8 +188,9 @@
 #' @family archivist
 #' @rdname loadFromRepo
 #' @export
-loadFromLocalRepo <- function( md5hash, repoDir, value = FALSE ){
-  stopifnot( is.character( c( md5hash, repoDir ) ) )
+loadFromLocalRepo <- function( md5hash, repoDir = NULL, value = FALSE ){
+  stopifnot( is.character( md5hash ) )
+  stopifnot( is.character( repoDir ) | is.null( repoDir ) )
   stopifnot( is.logical( value ))
   
   repoDir <- checkDirectory( repoDir )

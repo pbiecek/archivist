@@ -35,6 +35,7 @@
 #' @param intersect A logical value. See \code{patterns} for more details.
 #' 
 #' @param repoDir A character denoting an existing directory in which artifacts will be searched.
+#' If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.
 #' 
 #' @param repo Only if working with a Github repository. A character containing a name of a Github repository on which the Repository is archived.
 #' 
@@ -171,8 +172,9 @@
 #' @family archivist
 #' @rdname searchInRepo
 #' @export
-searchInLocalRepo <- function( pattern, repoDir, fixed = TRUE, realDBname = TRUE ){
-  stopifnot( is.character( repoDir ), is.logical( fixed ) )
+searchInLocalRepo <- function( pattern, repoDir = NULL, fixed = TRUE, realDBname = TRUE ){
+  stopifnot( is.character( repoDir ) | is.null( repoDir ) )
+  stopifnot( is.logical( fixed ) )
   stopifnot( is.character( pattern ) | is.list( pattern ) ) 
   stopifnot( length( pattern ) == 1 | length( pattern ) == 2 )
   
@@ -245,7 +247,7 @@ searchInGithubRepo <- function( pattern, repo, user, branch = "master", repoDirG
 
 #' @rdname searchInRepo
 #' @export
-multiSearchInLocalRepo <- function( patterns, repoDir, fixed = TRUE, intersect = TRUE, realDBname = TRUE ){
+multiSearchInLocalRepo <- function( patterns, repoDir = NULL, fixed = TRUE, intersect = TRUE, realDBname = TRUE ){
   stopifnot( is.logical( intersect ) )      
              
   md5hs <- lapply(patterns, function(pattern) unique(searchInLocalRepo(pattern, repoDir=repoDir, fixed=fixed, realDBname = realDBname) ))

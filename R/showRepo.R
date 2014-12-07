@@ -23,6 +23,7 @@
 #' \code{md5hashes} (default), \code{tags}.
 #' 
 #' @param repoDir A character denoting an existing directory of a Repository for which a summary will be returned.
+#' If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.
 #' 
 #' @param repo Only if working with a Github repository. A character containing a name of a Github repository on which the Repository is archived.
 #' 
@@ -148,8 +149,9 @@
 #' @family archivist
 #' @rdname showRepo
 #' @export
-showLocalRepo <- function( repoDir, method = "md5hashes" ){
-  stopifnot( is.character( c( method, repoDir ) ) )
+showLocalRepo <- function( repoDir = NULL, method = "md5hashes" ){
+  stopifnot( is.character( method ) )
+  stopifnot( is.character( repoDir ) | is.null( repoDir ) )
   
   repoDir <- checkDirectory( repoDir )
   

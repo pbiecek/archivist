@@ -29,6 +29,7 @@
 #' \code{shinySearchInLocalRepo} runs a shiny application.
 #' 
 #' @param repoDir A character denoting an existing directory in which artifacts will be searched.
+#' If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.
 #' 
 #' @param host A host IP adress, see the \code{host} argument in \code{shiny::runApp}.
 #' 
@@ -43,8 +44,8 @@
 #' @family archivist
 #' @rdname shinySearchInRepo
 #' @export
-shinySearchInLocalRepo <- function( repoDir, host = '0.0.0.0' ){
-  stopifnot( is.character( repoDir ) )
+shinySearchInLocalRepo <- function( repoDir=NULL, host = '0.0.0.0' ){
+  stopifnot( is.character( repoDir ) | is.null( repoDir ) )
 
   runApp(list(
     ui = shinyUI(fluidPage(
