@@ -124,7 +124,7 @@ Other archivist: \code{\link{Repository}};
 \code{\link{multiSearchInLocalRepo}},
 \code{\link{searchInGithubRepo}},
 \code{\link{searchInLocalRepo}}; \code{\link{rmFromRepo}};
-\code{\link{saveToRepo}}; \code{\link{setGlobalRepo}},
+\code{\link{saveToRepo}}; \code{\link{setGithubRepo}},
 \code{\link{setLocalRepo}};
 \code{\link{shinySearchInLocalRepo}};
 \code{\link{showGithubRepo}}, \code{\link{showLocalRepo}};

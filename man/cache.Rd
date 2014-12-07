@@ -3,7 +3,7 @@
 \alias{cache}
 \title{Enable Caching of a Function Results with the use of Archivist}
 \usage{
-cache(FUN, ..., notOlderThan = NULL, cacheRepo = NULL)
+cache(cacheRepo = NULL, FUN, ..., notOlderThan = NULL)
 }
 \arguments{
   \item{cacheRepo}{An object repository used for storing
@@ -84,7 +84,7 @@ Other archivist: \code{\link{Repository}};
 \code{\link{multiSearchInLocalRepo}},
 \code{\link{searchInGithubRepo}},
 \code{\link{searchInLocalRepo}}; \code{\link{rmFromRepo}};
-\code{\link{saveToRepo}}; \code{\link{setGlobalRepo}},
+\code{\link{saveToRepo}}; \code{\link{setGithubRepo}},
 \code{\link{setLocalRepo}};
 \code{\link{shinySearchInLocalRepo}};
 \code{\link{showGithubRepo}}, \code{\link{showLocalRepo}};

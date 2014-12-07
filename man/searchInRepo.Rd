@@ -226,7 +226,7 @@ Other archivist: \code{\link{Repository}};
 \code{\link{loadFromGithubRepo}},
 \code{\link{loadFromLocalRepo}}; \code{\link{md5hash}};
 \code{\link{rmFromRepo}}; \code{\link{saveToRepo}};
-\code{\link{setGlobalRepo}}, \code{\link{setLocalRepo}};
+\code{\link{setGithubRepo}}, \code{\link{setLocalRepo}};
 \code{\link{shinySearchInLocalRepo}};
 \code{\link{showGithubRepo}}, \code{\link{showLocalRepo}};
 \code{\link{summaryGithubRepo}},

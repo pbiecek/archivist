@@ -3,17 +3,27 @@
 #' @title Set Global Path to Repository
 #'
 #' @description
-#' \code{setLocalRepo} \code{setGlobalRepo} 
-#' To learn more about artifacts visit \link[archivist]{archivist-package}.
+#' \code{setLocalRepo} sets global path to the \link{Repository}. If you are working on 
+#' a Local Repository and are tired of specifying \code{repoDir} argument with every call
+#' of a function that works with the Repository, you can set the path globally using 
+#' \code{setLocalRepo} function and than ommit \code{repoDir} parameter in future calls.
+#' \code{setGithubRepo} similarly sets path to the Github Repository stored on a Github. See examples. 
 #' 
 #' @details
-#' Functions 
+#' \code{setLocalRepo} sets a global path to the \link{Repository}. If you are working on 
+#' a Local Repository and are tired of specifying a \code{repoDir} paremeter with every call
+#' of a function that works with the Repository, you can set the path globally using 
+#' \code{setLocalRepo} function and than ommit the \code{repoDir} parameter in future calls.
+#' \code{setGithubRepo} similarly sets path to the Github Repository stored on a Github. See examples.
 #' 
 #' @seealso
 #' 
 #' \href{https://github.com/pbiecek/archivist/wiki}{https://github.com/pbiecek/archivist/wiki}
 #' 
-#' @param repoDir 
+#' @param repoDir A character denoting an existing directory of a Rpoesiotry that will be used in
+#' functions: \link{saveToRepo}, \link{loadFromLocalRepo}, \link{searchInLocalRepo},
+#' \link{rmFromRepo}, \link{getTagsLocal}, \link{showLocalRepo}, \link{summaryLocalRepo} if in their
+#' calls there will not be specified a \code{repoDir} parameter. 
 #' 
 #' @param repo Only if working with a Github repository. A character containing a name of a Github repository on which the Repository is archived.
 #' 
@@ -73,7 +83,7 @@ setLocalRepo <- function( repoDir ){
 #' @family archivist
 #' @rdname setRepo
 #' @export
-setGlobalRepo <- function( user, repo, branch = "master", 
+setGithubRepo <- function( user, repo, branch = "master", 
                            repoDirGit = NULL){
   stopifnot( is.character( c( repo, user, branch ) ) )
   stopifnot( is.logical( repoDirGit ) | is.character( repoDirGit ) )
