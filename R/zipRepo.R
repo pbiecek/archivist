@@ -117,8 +117,6 @@ zipGithubRepo <- function( repoTo = getwd(), user = NULL, repo = NULL, branch = 
                            repoDirGit = FALSE, zipname = "repository.zip"){
   stopifnot( is.character( c( repoTo, branch ) ) )
 
-  GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
-  
   repoTo <- checkDirectory( repoTo )
   if (file.exists(paste0(repoTo, zipname))) {
     stop(paste0("The file ", repoTo, zipname), " allready exists")
