@@ -22,18 +22,25 @@
 #' 
 #' @param repoDir A character denoting an existing directory of a Rpoesiotry that will be used in
 #' functions: \link{saveToRepo}, \link{loadFromLocalRepo}, \link{searchInLocalRepo},
-#' \link{rmFromRepo}, \link{getTagsLocal}, \link{showLocalRepo}, \link{summaryLocalRepo} if in their
+#' \link{rmFromRepo}, \link{zipLocalRepo}, \link{multiSearchInLocalRepo}, \link{addTagsRepo}, 
+#' \link{shinySearchInLocalRepo}, \link{getTagsLocal}, \link{showLocalRepo}, 
+#' \link{summaryLocalRepo} if in their
 #' calls there will not be specified a \code{repoDir} parameter. 
 #' 
-#' @param repo Only if working with a Github repository. A character containing a name of a Github repository on which the Repository is archived.
-#' 
-#' @param user Only if working with a Github repository. A character containing a name of a Github user on whose account the \code{repo} is created.
-#' 
+#' @param repo Only if working with a Github repository. A character containing a name of a Github repository that will be used in
+#' functions: \link{zipGithubRepo}, \link{loadFromGithubRepo}, \link{searchInGithubRepo}, \link{getTagsGithub}, \link{showGithubRepo}, \link{summaryGithubRepo}, \link{multiSearchInGithubRepo} if in their
+#' calls there will not be specified a \code{repo} parameter. 
+#' @param user Only if working with a Github repository. A character containing a name of a Github user that will be used in
+#' functions: \link{zipGithubRepo}, \link{loadFromGithubRepo}, \link{searchInGithubRepo}, \link{getTagsGithub}, \link{showGithubRepo}, \link{summaryGithubRepo},\link{multiSearchInGithubRepo} if in their
+#' calls there will not be specified a \code{user} parameter.
 #' @param branch Only if working with a Github repository. A character containing a name of 
-#' Github Repository's branch on which the Repository is archived. Default \code{branch} is \code{master}.
-#' 
+#' Github Repository's branch that will be used in
+#' functions: \link{zipGithubRepo}, \link{loadFromGithubRepo}, \link{searchInGithubRepo}, \link{getTagsGithub}, \link{showGithubRepo}, \link{summaryGithubRepo}, \link{multiSearchInGithubRepo} if in their
+#' calls there will not be specified a \code{branch} parameter.
 #' @param repoDirGit Only if working with a Github repository. A character containing a name of a directory on Github repository 
-#' on which the Repository is stored. If the Repository is stored in main folder on Github repository, this should be set 
+#' on which the Repository is stored that will be used in
+#' functions: \link{zipGithubRepo}, \link{loadFromGithubRepo}, \link{searchInGithubRepo}, \link{getTagsGithub}, \link{showGithubRepo}, \link{summaryGithubRepo}, \link{multiSearchInGithubRepo} if in their
+#' calls there will not be specified a \code{repoDirGit} parameter. If the Repository is stored in main folder on Github repository, this should be set 
 #' to \code{repoDirGit = FALSE} as default.
 #' 
 #' 

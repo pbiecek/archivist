@@ -13,29 +13,50 @@ setGithubRepo(user, repo, branch = "master", repoDirGit = NULL)
   of a Rpoesiotry that will be used in functions:
   \link{saveToRepo}, \link{loadFromLocalRepo},
   \link{searchInLocalRepo}, \link{rmFromRepo},
+  \link{zipLocalRepo}, \link{multiSearchInLocalRepo},
+  \link{addTagsRepo}, \link{shinySearchInLocalRepo},
   \link{getTagsLocal}, \link{showLocalRepo},
   \link{summaryLocalRepo} if in their calls there will not
   be specified a \code{repoDir} parameter.}
 
   \item{repo}{Only if working with a Github repository. A
-  character containing a name of a Github repository on
-  which the Repository is archived.}
+  character containing a name of a Github repository that
+  will be used in functions: \link{zipGithubRepo},
+  \link{loadFromGithubRepo}, \link{searchInGithubRepo},
+  \link{getTagsGithub}, \link{showGithubRepo},
+  \link{summaryGithubRepo}, \link{multiSearchInGithubRepo}
+  if in their calls there will not be specified a
+  \code{repo} parameter.}
 
   \item{user}{Only if working with a Github repository. A
-  character containing a name of a Github user on whose
-  account the \code{repo} is created.}
+  character containing a name of a Github user that will be
+  used in functions: \link{zipGithubRepo},
+  \link{loadFromGithubRepo}, \link{searchInGithubRepo},
+  \link{getTagsGithub}, \link{showGithubRepo},
+  \link{summaryGithubRepo},\link{multiSearchInGithubRepo}
+  if in their calls there will not be specified a
+  \code{user} parameter.}
 
   \item{branch}{Only if working with a Github repository. A
   character containing a name of Github Repository's branch
-  on which the Repository is archived. Default
-  \code{branch} is \code{master}.}
+  that will be used in functions: \link{zipGithubRepo},
+  \link{loadFromGithubRepo}, \link{searchInGithubRepo},
+  \link{getTagsGithub}, \link{showGithubRepo},
+  \link{summaryGithubRepo}, \link{multiSearchInGithubRepo}
+  if in their calls there will not be specified a
+  \code{branch} parameter.}
 
   \item{repoDirGit}{Only if working with a Github
   repository. A character containing a name of a directory
-  on Github repository on which the Repository is stored.
-  If the Repository is stored in main folder on Github
-  repository, this should be set to \code{repoDirGit =
-  FALSE} as default.}
+  on Github repository on which the Repository is stored
+  that will be used in functions: \link{zipGithubRepo},
+  \link{loadFromGithubRepo}, \link{searchInGithubRepo},
+  \link{getTagsGithub}, \link{showGithubRepo},
+  \link{summaryGithubRepo}, \link{multiSearchInGithubRepo}
+  if in their calls there will not be specified a
+  \code{repoDirGit} parameter. If the Repository is stored
+  in main folder on Github repository, this should be set
+  to \code{repoDirGit = FALSE} as default.}
 }
 \description{
 \code{setLocalRepo} sets global path to the
