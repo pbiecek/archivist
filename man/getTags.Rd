@@ -6,8 +6,8 @@
 \usage{
 getTagsLocal(md5hash, repoDir = NULL, tag = "name")
 
-getTagsGithub(md5hash, user, repo, branch = "master", repoDirGit = FALSE,
-  tag = "name")
+getTagsGithub(md5hash, user = NULL, repo = NULL, branch = "master",
+  repoDirGit = FALSE, tag = "name")
 }
 \arguments{
   \item{repoDir}{A character denoting an existing directory
@@ -23,11 +23,13 @@ getTagsGithub(md5hash, user, repo, branch = "master", repoDirGit = FALSE,
 
   \item{repo}{Only if working with a Github repository. A
   character containing a name of a Github repository on
-  which the Repository is archived.}
+  which the Repository is archived. By default set to
+  \code{NULL} - see \code{Note}.}
 
   \item{user}{Only if working with a Github repository. A
   character containing a name of a Github user on whose
-  account the \code{repo} is created.}
+  account the \code{repo} is created. By default set to
+  \code{NULL} - see \code{Note}.}
 
   \item{branch}{Only if working with a Github repository. A
   character containing a name of Github repository's branch
@@ -56,6 +58,11 @@ an artifact. To learn more about artifacts visit
 \link{Tags}) related to \link{md5hash} of an artifact. To
 learn more about artifacts visit
 \link[archivist]{archivist-package}.
+}
+\note{
+If \code{repo} and \code{user} are set to \code{NULL} (as
+default) in Github mode then global parameters set in
+\link{setGithubRepo} function are used.
 }
 \examples{
 \dontrun{

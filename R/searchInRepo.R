@@ -38,9 +38,9 @@
 #' If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.
 #' 
 #' @param repo Only if working with a Github repository. A character containing a name of a Github repository on which the Repository is archived.
-#' 
+#' By default set to \code{NULL} - see \code{Note}.
 #' @param user Only if working with a Github repository. A character containing a name of a Github user on whose account the \code{repo} is created.
-#' 
+#' By default set to \code{NULL} - see \code{Note}.
 #' @param branch Only if working with a Github repository. A character containing a name of 
 #' Github repository's branch in which Repository is archived. Default \code{branch} is \code{master}.
 #' 
@@ -55,6 +55,10 @@
 #' 
 #' @param realDBname A logical value. Should not be changed by user. It is a technical parameter.
 #'
+#' @note
+#' If \code{repo} and \code{user} are set to \code{NULL} (as default) in Github mode then global parameters
+#' set in \link{setGithubRepo} function are used.
+#' 
 #' @author
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #'
@@ -167,6 +171,10 @@
 #'
 #'   searchInGithubRepo( pattern = "name", user="MarcinKosinski", repo="Museum", 
 #'                    branch="master", repoDirGit="ex2", fixed = FALSE )
+#'  
+#'  # multi versions
+#'  multiSearchInGithubRepo( patterns=c("varname:Sepal.Width", "class:lm", "name:myplot123"), 
+#'                          user="pbiecek", repo="archivist", intersect = FALSE )                                    
 #'   
 #' }
 #' @family archivist
@@ -207,18 +215,14 @@ searchInLocalRepo <- function( pattern, repoDir = NULL, fixed = TRUE, realDBname
 
 #' @rdname searchInRepo
 #' @export
-searchInGithubRepo <- function( pattern, repo, user, branch = "master", repoDirGit = FALSE,
+searchInGithubRepo <- function( pattern, repo = NULL, user = NULL, branch = "master", repoDirGit = FALSE,
                                 fixed = TRUE ){
 
-  stopifnot( is.character( c( repo, user, branch ) ), is.logical( fixed ) )
+  stopifnot( is.character( branch ), is.logical( fixed ) )
   stopifnot( is.character( pattern ) | is.list( pattern ) )
   stopifnot( length( pattern ) == 1 | length( pattern ) == 2 )
-  stopifnot( is.logical( repoDirGit ) | is.character( repoDirGit ) )
-  if( is.logical( repoDirGit ) ){
-    if ( repoDirGit ){
-      stop( "repoDirGit may be only FALSE or a character. See documentation." )
-    }
-  } 
+
+  GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
   
   # first download database
   Temp <- downloadDB( repo, user, branch, repoDirGit )
@@ -262,13 +266,16 @@ multiSearchInLocalRepo <- function( patterns, repoDir = NULL, fixed = TRUE, inte
 
 #' @rdname searchInRepo
 #' @export
-multiSearchInGithubRepo <- function( patterns, repo, user, branch = "master", repoDirGit = FALSE, 
+multiSearchInGithubRepo <- function( patterns, repo = NULL, user = NULL, 
+                                     branch = "master", repoDirGit = FALSE, 
                                      fixed = TRUE, intersect = TRUE ){
   stopifnot( is.logical(  intersect ) )
 
+  GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
   
   Temp <- downloadDB( repo, user, branch, repoDirGit )
-  m <- multiSearchInLocalRepo( patterns, repoDir = Temp, fixed=fixed, intersect=intersect, realDBname = FALSE)
+  m <- multiSearchInLocalRepo( patterns, repoDir = Temp, fixed=fixed,
+                               intersect=intersect, realDBname = FALSE)
   file.remove( Temp )
   return( m )
 }

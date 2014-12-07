@@ -25,15 +25,19 @@
 #' @param md5hashes A character or character vector containing \code{md5hashes} of artifacts to be copied.
 #' 
 #' @param repo Only if coping a Github repository. A character containing a name of a Github repository on which the \code{repoFrom}-Repository is archived.
-#' 
+#' By default set to \code{NULL} - see \code{Note}.
 #' @param user Only if coping a Github repository. A character containing a name of a Github user on whose account the \code{repoFrom} is created.
-#' 
+#' By default set to \code{NULL} - see \code{Note}.
 #' @param branch Only if coping with a Github repository. A character containing a name of 
 #' Github Repository's branch on which a \code{repoFrom}-Repository is archived. Default \code{branch} is \code{master}.
 #'
 #' @param repoDirGit Only if working with a Github repository. A character containing a name of a directory on Github repository 
 #' on which the Repository is stored. If the Repository is stored in main folder on Github repository, this should be set 
 #' to \code{repoDirGit = FALSE} as default.
+#' 
+#' @note
+#' If \code{repo} and \code{user} are set to \code{NULL} (as default) in Github mode then global parameters
+#' set in \link{setGithubRepo} function are used.
 #' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
@@ -84,15 +88,11 @@ copyLocalRepo <- function( repoFrom, repoTo, md5hashes ){
 
 #' @rdname copyToRepo
 #' @export
-copyGithubRepo <- function( repoTo, md5hashes, user, repo, branch="master", 
+copyGithubRepo <- function( repoTo, md5hashes, user = NULL, repo = NULL, branch="master", 
                             repoDirGit = FALSE){
-  stopifnot( is.character( c( repoTo, user, repo, branch, md5hashes ) ) )
-  stopifnot( is.logical( repoDirGit ) | is.character( repoDirGit ) )
-  if( is.logical( repoDirGit ) ){
-    if ( repoDirGit ){
-      stop( "repoDirGit may be only FALSE or a character. See documentation." )
-    }
-  } 
+  stopifnot( is.character( c( repoTo, branch, md5hashes ) ) )
+
+  GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
   
   repoTo <- checkDirectory( repoTo )
   

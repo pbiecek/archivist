@@ -12,9 +12,9 @@
 #' If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.
 #' 
 #' @param repo Only if working with a Github repository. A character containing a name of a Github repository on which the Repository is archived.
-#' 
+#' By default set to \code{NULL} - see \code{Note}.
 #' @param user Only if working with a Github repository. A character containing a name of a Github user on whose account the \code{repo} is created.
-#' 
+#' By default set to \code{NULL} - see \code{Note}.
 #' @param branch Only if working with a Github repository. A character containing a name of 
 #' Github Repository's branch on which a Repository is archived. Default \code{branch} is \code{master}.
 #' 
@@ -25,6 +25,9 @@
 #' @return An object of class \code{repository} which can be printed: \code{print(object)}.
 #' 
 #' @note If the same artifact was archived many times it is counted as one artifact or database in \code{print(summaryRepo)}.
+#' 
+#' If \code{repo} and \code{user} are set to \code{NULL} (as default) in Github mode then global parameters
+#' set in \link{setGithubRepo} function are used.
 #' @author 
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
 #'
@@ -137,14 +140,11 @@ summaryLocalRepo <- function( repoDir = NULL ){
 
 #' @rdname summaryRepo
 #' @export
-summaryGithubRepo <- function( repo, user, branch = "master", repoDirGit = FALSE ){
-  stopifnot( is.character( c( repo, user, branch ) ) )
-  stopifnot( is.logical( repoDirGit ) | is.character( repoDirGit ) )
-  if( is.logical( repoDirGit ) ){
-    if ( repoDirGit ){
-      stop( "repoDirGit may be only FALSE or a character. See documentation." )
-    }
-  } 
+summaryGithubRepo <- function( repo = NULL, user = NULL, branch = "master", repoDirGit = FALSE ){
+  stopifnot( is.character( branch ) )
+
+  GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
+  
   # database is needed to be downloaded
   Temp <- downloadDB( repo, user, branch, repoDirGit )
   

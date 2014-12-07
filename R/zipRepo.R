@@ -23,9 +23,9 @@
 #' will be zipped. If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.
 #'
 #' @param repo Only if working with a Github repository. A character containing a name of a Github repository on which the Repository to be zipped is archived.
-#' 
+#' By default set to \code{NULL} - see \code{Note}. 
 #' @param user Only if working with a Github repository. A character containing a name of a Github user on whose account the \code{repo} is created.
-#' 
+#' By default set to \code{NULL} - see \code{Note}.
 #' @param branch Only if working with a Github repository. A character containing a name of 
 #' Github repository's branch in which Repository to be zipped is archived. Default \code{branch} is \code{master}.
 #' 
@@ -40,6 +40,10 @@
 #' @param zipname A character that specifies name of zipped repository.
 #' It is assumed that this file does not exist or does not contain backpack.db file.
 #' An attempt to override will produce an error.
+#' 
+#' @note
+#' If \code{repo} and \code{user} are set to \code{NULL} (as default) in Github mode then global parameters
+#' set in \link{setGithubRepo} function are used.
 #' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}, Przemyslaw Biecek
@@ -109,15 +113,12 @@ zipLocalRepo <- function( repoDir = NULL, repoTo = getwd() , zipname="repository
 #' @family archivist
 #' @rdname zipRepo
 #' @export
-zipGithubRepo <- function( repoTo = getwd(), user, repo, branch = "master", 
+zipGithubRepo <- function( repoTo = getwd(), user = NULL, repo = NULL, branch = "master", 
                            repoDirGit = FALSE, zipname = "repository.zip"){
-  stopifnot( is.character( c( repoTo, repo, user, branch ) ) )
-  stopifnot( is.logical( repoDirGit ) | is.character( repoDirGit ) )
-  if( is.logical( repoDirGit ) ){
-    if ( repoDirGit ){
-      stop( "repoDirGit may be only FALSE or a character. See documentation." )
-    }
-  }
+  stopifnot( is.character( c( repoTo, branch ) ) )
+
+  GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
+  
   repoTo <- checkDirectory( repoTo )
   if (file.exists(paste0(repoTo, zipname))) {
     stop(paste0("The file ", repoTo, zipname), " allready exists")

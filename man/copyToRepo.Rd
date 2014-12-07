@@ -6,8 +6,8 @@
 \usage{
 copyLocalRepo(repoFrom, repoTo, md5hashes)
 
-copyGithubRepo(repoTo, md5hashes, user, repo, branch = "master",
-  repoDirGit = FALSE)
+copyGithubRepo(repoTo, md5hashes, user = NULL, repo = NULL,
+  branch = "master", repoDirGit = FALSE)
 }
 \arguments{
   \item{repoFrom}{A character that specifies the directory
@@ -22,11 +22,13 @@ copyGithubRepo(repoTo, md5hashes, user, repo, branch = "master",
 
   \item{repo}{Only if coping a Github repository. A
   character containing a name of a Github repository on
-  which the \code{repoFrom}-Repository is archived.}
+  which the \code{repoFrom}-Repository is archived. By
+  default set to \code{NULL} - see \code{Note}.}
 
   \item{user}{Only if coping a Github repository. A
   character containing a name of a Github user on whose
-  account the \code{repoFrom} is created.}
+  account the \code{repoFrom} is created. By default set to
+  \code{NULL} - see \code{Note}.}
 
   \item{branch}{Only if coping with a Github repository. A
   character containing a name of Github Repository's branch
@@ -59,6 +61,11 @@ string of length 32 that comes out as a result of
 \link[digest]{digest} function, which uses a
 cryptographical MD5 hash algorithm. For more information
 see \link{md5hash}.
+}
+\note{
+If \code{repo} and \code{user} are set to \code{NULL} (as
+default) in Github mode then global parameters set in
+\link{setGithubRepo} function are used.
 }
 \examples{
 \dontrun{

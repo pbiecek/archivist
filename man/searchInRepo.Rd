@@ -9,14 +9,14 @@
 searchInLocalRepo(pattern, repoDir = NULL, fixed = TRUE,
   realDBname = TRUE)
 
-searchInGithubRepo(pattern, repo, user, branch = "master",
+searchInGithubRepo(pattern, repo = NULL, user = NULL, branch = "master",
   repoDirGit = FALSE, fixed = TRUE)
 
 multiSearchInLocalRepo(patterns, repoDir = NULL, fixed = TRUE,
   intersect = TRUE, realDBname = TRUE)
 
-multiSearchInGithubRepo(patterns, repo, user, branch = "master",
-  repoDirGit = FALSE, fixed = TRUE, intersect = TRUE)
+multiSearchInGithubRepo(patterns, repo = NULL, user = NULL,
+  branch = "master", repoDirGit = FALSE, fixed = TRUE, intersect = TRUE)
 }
 \arguments{
   \item{pattern}{If \code{fixed = TRUE}: a character
@@ -42,11 +42,13 @@ multiSearchInGithubRepo(patterns, repo, user, branch = "master",
 
   \item{repo}{Only if working with a Github repository. A
   character containing a name of a Github repository on
-  which the Repository is archived.}
+  which the Repository is archived. By default set to
+  \code{NULL} - see \code{Note}.}
 
   \item{user}{Only if working with a Github repository. A
   character containing a name of a Github user on whose
-  account the \code{repo} is created.}
+  account the \code{repo} is created. By default set to
+  \code{NULL} - see \code{Note}.}
 
   \item{branch}{Only if working with a Github repository. A
   character containing a name of Github repository's branch
@@ -100,6 +102,11 @@ format, e.g., \code{"2014-07-31"}.
 \code{Tags}, submitted in a \code{pattern} argument, should
 be given according to the format:
 \code{"TagType:TagTypeValue"} - see examples.
+}
+\note{
+If \code{repo} and \code{user} are set to \code{NULL} (as
+default) in Github mode then global parameters set in
+\link{setGithubRepo} function are used.
 }
 \examples{
 # objects preparation
@@ -210,6 +217,10 @@ be given according to the format:
 
   searchInGithubRepo( pattern = "name", user="MarcinKosinski", repo="Museum",
                    branch="master", repoDirGit="ex2", fixed = FALSE )
+
+ # multi versions
+ multiSearchInGithubRepo( patterns=c("varname:Sepal.Width", "class:lm", "name:myplot123"),
+                         user="pbiecek", repo="archivist", intersect = FALSE )
 
 }
 }

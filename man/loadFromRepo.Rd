@@ -6,7 +6,7 @@
 \usage{
 loadFromLocalRepo(md5hash, repoDir = NULL, value = FALSE)
 
-loadFromGithubRepo(md5hash, repo, user, branch = "master",
+loadFromGithubRepo(md5hash, repo = NULL, user = NULL, branch = "master",
   repoDirGit = FALSE, value = FALSE)
 }
 \arguments{
@@ -21,11 +21,13 @@ loadFromGithubRepo(md5hash, repo, user, branch = "master",
 
   \item{repo}{Only if working with a Github repository. A
   character containing a name of a Github repository on
-  which the Repository is archived.}
+  which the Repository is archived. By default set to
+  \code{NULL} - see \code{Note}.}
 
   \item{user}{Only if working with a Github repository. A
   character containing a name of a Github user on whose
-  account the \code{repo} is created.}
+  account the \code{repo} is created. By default set to
+  \code{NULL} - see \code{Note}.}
 
   \item{branch}{Only if working with a Github repository. A
   character containing a name of Github Repository's branch
@@ -89,6 +91,10 @@ corresponding to this abbreviation will be loaded.
 \note{
 You can specify one \code{md5hash} (or its abbreviation)
 per function call.
+
+If \code{repo} and \code{user} are set to \code{NULL} (as
+default) in Github mode then global parameters set in
+\link{setGithubRepo} function are used.
 }
 \examples{
 # objects preparation

@@ -6,7 +6,8 @@
 \usage{
 summaryLocalRepo(repoDir = NULL)
 
-summaryGithubRepo(repo, user, branch = "master", repoDirGit = FALSE)
+summaryGithubRepo(repo = NULL, user = NULL, branch = "master",
+  repoDirGit = FALSE)
 }
 \arguments{
   \item{repoDir}{A character denoting an existing directory
@@ -16,11 +17,13 @@ summaryGithubRepo(repo, user, branch = "master", repoDirGit = FALSE)
 
   \item{repo}{Only if working with a Github repository. A
   character containing a name of a Github repository on
-  which the Repository is archived.}
+  which the Repository is archived. By default set to
+  \code{NULL} - see \code{Note}.}
 
   \item{user}{Only if working with a Github repository. A
   character containing a name of a Github user on whose
-  account the \code{repo} is created.}
+  account the \code{repo} is created. By default set to
+  \code{NULL} - see \code{Note}.}
 
   \item{branch}{Only if working with a Github repository. A
   character containing a name of Github Repository's branch
@@ -50,6 +53,10 @@ summaryRepo ) )}. See examples.
 \note{
 If the same artifact was archived many times it is counted
 as one artifact or database in \code{print(summaryRepo)}.
+
+If \code{repo} and \code{user} are set to \code{NULL} (as
+default) in Github mode then global parameters set in
+\link{setGithubRepo} function are used.
 }
 \examples{
 # objects preparation

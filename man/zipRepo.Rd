@@ -6,8 +6,8 @@
 \usage{
 zipLocalRepo(repoDir = NULL, repoTo = getwd(), zipname = "repository.zip")
 
-zipGithubRepo(repoTo = getwd(), user, repo, branch = "master",
-  repoDirGit = FALSE, zipname = "repository.zip")
+zipGithubRepo(repoTo = getwd(), user = NULL, repo = NULL,
+  branch = "master", repoDirGit = FALSE, zipname = "repository.zip")
 }
 \arguments{
   \item{repoDir}{A character that specifies the directory
@@ -17,11 +17,13 @@ zipGithubRepo(repoTo = getwd(), user, repo, branch = "master",
 
   \item{repo}{Only if working with a Github repository. A
   character containing a name of a Github repository on
-  which the Repository to be zipped is archived.}
+  which the Repository to be zipped is archived. By default
+  set to \code{NULL} - see \code{Note}.}
 
   \item{user}{Only if working with a Github repository. A
   character containing a name of a Github user on whose
-  account the \code{repo} is created.}
+  account the \code{repo} is created. By default set to
+  \code{NULL} - see \code{Note}.}
 
   \item{branch}{Only if working with a Github repository. A
   character containing a name of Github repository's branch
@@ -66,6 +68,10 @@ If the function does not work, it might be a reason of
 Rtools that are not installed. To solve this problem follow
 those
 \href{http://cran.r-project.org/web/packages/openxlsx/vignettes/Introduction.pdf}{Instructions.}
+
+If \code{repo} and \code{user} are set to \code{NULL} (as
+default) in Github mode then global parameters set in
+\link{setGithubRepo} function are used.
 }
 \examples{
 # objects preparation

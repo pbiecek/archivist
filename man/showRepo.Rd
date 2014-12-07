@@ -6,8 +6,8 @@
 \usage{
 showLocalRepo(repoDir = NULL, method = "md5hashes")
 
-showGithubRepo(repo, user, branch = "master", repoDirGit = FALSE,
-  method = "md5hashes")
+showGithubRepo(repo = NULL, user = NULL, branch = "master",
+  repoDirGit = FALSE, method = "md5hashes")
 }
 \arguments{
   \item{method}{A character specifying the method to be
@@ -21,11 +21,13 @@ showGithubRepo(repo, user, branch = "master", repoDirGit = FALSE,
 
   \item{repo}{Only if working with a Github repository. A
   character containing a name of a Github repository on
-  which the Repository is archived.}
+  which the Repository is archived. By default set to
+  \code{NULL} - see \code{Note}.}
 
   \item{user}{Only if working with a Github repository. A
   character containing a name of a Github user on whose
-  account the \code{repo} is created.}
+  account the \code{repo} is created. By default set to
+  \code{NULL} - see \code{Note}.}
 
   \item{branch}{Only if working with a Github repository. A
   character containing a name of Github Repository's branch
@@ -77,6 +79,11 @@ be seen with their unique \link{md5hash} or a
 \code{data.frame} with archived \link{Tags} can be
 obtained. Also there is an extra column with a date of
 creation the \code{Tag} or the \code{md5hash}.
+}
+\note{
+If \code{repo} and \code{user} are set to \code{NULL} (as
+default) in Github mode then global parameters set in
+\link{setGithubRepo} function are used.
 }
 \examples{
 # objects preparation

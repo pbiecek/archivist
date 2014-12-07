@@ -26,9 +26,9 @@
 #' If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.
 #' 
 #' @param repo Only if working with a Github repository. A character containing a name of a Github repository on which the Repository is archived.
-#' 
+#' By default set to \code{NULL} - see \code{Note}.
 #' @param user Only if working with a Github repository. A character containing a name of a Github user on whose account the \code{repo} is created.
-#' 
+#' By default set to \code{NULL} - see \code{Note}.
 #' @param branch Only if working with a Github repository. A character containing a name of 
 #' Github Repository's branch on which a Repository is archived. Default \code{branch} is \code{master}.
 #'
@@ -46,6 +46,10 @@
 #' 
 #' To learn more about \code{Tags} or \code{md5hashes} check: \link{Tags} or \link{md5hash}.
 #' 
+#' 
+#' @note
+#' If \code{repo} and \code{user} are set to \code{NULL} (as default) in Github mode then global parameters
+#' set in \link{setGithubRepo} function are used.
 #' 
 #' @author 
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
@@ -161,15 +165,12 @@ showLocalRepo <- function( repoDir = NULL, method = "md5hashes" ){
 
 #' @rdname showRepo
 #' @export
-showGithubRepo <- function( repo, user, branch = "master", repoDirGit = FALSE,
+showGithubRepo <- function( repo = NULL, user = NULL, branch = "master", repoDirGit = FALSE,
                             method = "md5hashes" ){
-  stopifnot( is.character( c( method, repo, user, branch ) ) )
-  stopifnot( is.logical( repoDirGit ) | is.character( repoDirGit ) )
-  if( is.logical( repoDirGit ) ){
-    if ( repoDirGit ){
-      stop( "repoDirGit may be only FALSE or a character. See documentation." )
-    }
-  }
+  stopifnot( is.character( c( method, branch ) ) )
+  
+  GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
+  
   # database is needed to be downloaded
   Temp <- downloadDB( repo, user, branch, repoDirGit )
   

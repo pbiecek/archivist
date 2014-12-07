@@ -28,18 +28,18 @@
 #' calls there will not be specified a \code{repoDir} parameter. 
 #' 
 #' @param repo Only if working with a Github repository. A character containing a name of a Github repository that will be used in
-#' functions: \link{zipGithubRepo}, \link{loadFromGithubRepo}, \link{searchInGithubRepo}, \link{getTagsGithub}, \link{showGithubRepo}, \link{summaryGithubRepo}, \link{multiSearchInGithubRepo} if in their
+#' functions: \link{zipGithubRepo}, \link{loadFromGithubRepo}, \link{searchInGithubRepo}, \link{getTagsGithub}, \link{showGithubRepo}, \link{summaryGithubRepo}, \link{multiSearchInGithubRepo}, \link{copyGithubRepo} if in their
 #' calls there will not be specified a \code{repo} parameter. 
 #' @param user Only if working with a Github repository. A character containing a name of a Github user that will be used in
-#' functions: \link{zipGithubRepo}, \link{loadFromGithubRepo}, \link{searchInGithubRepo}, \link{getTagsGithub}, \link{showGithubRepo}, \link{summaryGithubRepo},\link{multiSearchInGithubRepo} if in their
+#' functions: \link{zipGithubRepo}, \link{loadFromGithubRepo}, \link{searchInGithubRepo}, \link{getTagsGithub}, \link{showGithubRepo}, \link{summaryGithubRepo},\link{multiSearchInGithubRepo}, \link{copyGithubRepo} if in their
 #' calls there will not be specified a \code{user} parameter.
 #' @param branch Only if working with a Github repository. A character containing a name of 
 #' Github Repository's branch that will be used in
-#' functions: \link{zipGithubRepo}, \link{loadFromGithubRepo}, \link{searchInGithubRepo}, \link{getTagsGithub}, \link{showGithubRepo}, \link{summaryGithubRepo}, \link{multiSearchInGithubRepo} if in their
+#' functions: \link{zipGithubRepo}, \link{loadFromGithubRepo}, \link{searchInGithubRepo}, \link{getTagsGithub}, \link{showGithubRepo}, \link{summaryGithubRepo}, \link{multiSearchInGithubRepo}, \link{copyGithubRepo} if in their
 #' calls there will not be specified a \code{branch} parameter.
 #' @param repoDirGit Only if working with a Github repository. A character containing a name of a directory on Github repository 
 #' on which the Repository is stored that will be used in
-#' functions: \link{zipGithubRepo}, \link{loadFromGithubRepo}, \link{searchInGithubRepo}, \link{getTagsGithub}, \link{showGithubRepo}, \link{summaryGithubRepo}, \link{multiSearchInGithubRepo} if in their
+#' functions: \link{zipGithubRepo}, \link{loadFromGithubRepo}, \link{searchInGithubRepo}, \link{getTagsGithub}, \link{showGithubRepo}, \link{summaryGithubRepo}, \link{multiSearchInGithubRepo}, \link{copyGithubRepo} if in their
 #' calls there will not be specified a \code{repoDirGit} parameter. If the Repository is stored in main folder on Github repository, this should be set 
 #' to \code{repoDirGit = FALSE} as default.
 #' 
@@ -72,6 +72,24 @@
 #' 
 #' deleteRepo( exampleRepoDir )
 #' rm( exampleRepoDir )
+#' 
+#' ## Github version
+#' setGithubRepo( user="MarcinKosinski", repo="Museum", branch="master",
+#' repoDirGit="ex1" )
+#' 
+#' loadFromGithubRepo( "ff575c261c949d073b2895b05d1097c3")
+#' this <- loadFromGithubRepo( "ff", value = T)
+#' zipGithubRepo( )
+#' searchInGithubRepo( "name:", fixed= FALSE)
+#' getTagsGithub("ff575c261c949d073b2895b05d1097c3")
+#' 
+#' summaryGithubRepo( )
+#' showGithubRepo( )
+#' 
+#' setGithubRepo( user="pbiecek", repo="archivist" )
+#' 
+#' multiSearchInGithubRepo( patterns=c("varname:Sepal.Width", "class:lm", "name:myplot123"), 
+#'                          intersect = FALSE )
 #'
 #' }
 #' @family archivist
@@ -93,7 +111,7 @@ setLocalRepo <- function( repoDir ){
 setGithubRepo <- function( user, repo, branch = "master", 
                            repoDirGit = NULL){
   stopifnot( is.character( c( repo, user, branch ) ) )
-  stopifnot( is.logical( repoDirGit ) | is.character( repoDirGit ) )
+  stopifnot( is.null( repoDirGit ) | is.character( repoDirGit ) )
   
   assign( ".user", user, envir = .ArchivistEnv )
   assign( ".repo", repo, envir = .ArchivistEnv )
@@ -102,3 +120,38 @@ setGithubRepo <- function( user, repo, branch = "master",
 
   
 }
+
+
+useGithubSetupArguments <- function(){
+  assign( "repo", get( ".repo", envir = .ArchivistEnv ), envir = parent.frame(2) )
+  assign( "user", get( ".user", envir = .ArchivistEnv ), envir = parent.frame(2) )
+  assign( "branch", get( ".branch", envir = .ArchivistEnv ), envir = parent.frame(2) )
+  assign( "repoDirGit", get( ".repoDirGit", envir = .ArchivistEnv ), envir = parent.frame(2) )
+}
+
+
+GithubCheck <- function( repo, user, repoDirGit ){
+  stopifnot( is.logical( repoDirGit ) | is.character( repoDirGit ) )
+  stopifnot( is.null( repo ) | is.character( repo ) )
+  stopifnot( is.null( user ) | is.character( user ) )
+  #
+  if( is.logical( repoDirGit ) ){
+    if ( repoDirGit ){
+      stop( "repoDirGit may be only FALSE or a character. See documentation." )
+    }
+  }
+  
+  if ( xor( is.null( user ), is.null( repo ) ) ){
+    stop( "Both or none of user and repo should be NULL. See documentation." )
+  }
+  
+  if ( is.null( c( repo, user ) ) ){
+    useGithubSetupArguments( ) 
+  }
+  
+  
+}
+
+
+
+
