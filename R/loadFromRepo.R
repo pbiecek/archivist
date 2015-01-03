@@ -253,12 +253,12 @@ loadFromGithubRepo <- function( md5hash, repo = NULL, user = NULL, branch = "mas
     # sapply and replicate because of abbreviation mode can find more than 1 md5hash
     if( is.character( repoDirGit )){
     tmpobjectS <- lapply( md5hash, function(x){
-      getBinaryURL( paste0( get( x = ".GithubURL", envir = .ArchivistEnv), "/", user, "/", repo, "/",
+      getBinaryURL( paste0( get( x = ".GithubURL", envir = .ArchivistEnv), user, "/", repo, "/",
                             branch, "/", repoDirGit, "/gallery/", x, ".rda"), ssl.verifypeer = FALSE )  } )
     }
     if( is.logical( repoDirGit )){
       tmpobjectS <- lapply( md5hash, function(x){
-        getBinaryURL( paste0( get( x = ".GithubURL", envir = .ArchivistEnv), "/", user, "/", repo, "/",
+        getBinaryURL( paste0( get( x = ".GithubURL", envir = .ArchivistEnv), user, "/", repo, "/",
                               branch, "/gallery/", x, ".rda"), ssl.verifypeer = FALSE )  } )  
     }
     tfS <- replicate( length( md5hash ), tempfile() )
@@ -275,12 +275,12 @@ loadFromGithubRepo <- function( md5hash, repo = NULL, user = NULL, branch = "mas
     # sapply and replicate because of abbreviation mode can find more than 1 md5hash
     if( is.character( repoDirGit )){
       tmpobjectS <- lapply( md5hash, function(x){
-        getBinaryURL( paste0( get( x = ".GithubURL", envir = .ArchivistEnv), "/", user, "/", repo, "/",
+        getBinaryURL( paste0( get( x = ".GithubURL", envir = .ArchivistEnv), user, "/", repo, "/",
                               branch, "/", repoDirGit, "/gallery/", x, ".rda"), ssl.verifypeer = FALSE )  } )
     }
     if( is.logical( repoDirGit )){
       tmpobjectS <- lapply( md5hash, function(x){
-        getBinaryURL( paste0( get( x = ".GithubURL", envir = .ArchivistEnv), "/", user, "/", repo, "/",
+        getBinaryURL( paste0( get( x = ".GithubURL", envir = .ArchivistEnv), user, "/", repo, "/",
                               branch, "/gallery/", x, ".rda"), ssl.verifypeer = FALSE )  } )  
     }
     tfS <- replicate( length( md5hash ), tempfile() )
