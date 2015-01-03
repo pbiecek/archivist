@@ -119,7 +119,9 @@
 #' of an stored artifact or should the result be the input artifact (\code{chain = TRUE}), so that chaining code 
 #' can be used. See examples.
 #'
-#' @param silent If TRUE produces no warnings
+#' @param silent If TRUE produces no warnings.
+#' 
+#' @param ascii A logical value. An \code{ascii} argument is passed to \link{save} function.
 #' 
 #' @author 
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
@@ -253,7 +255,7 @@
 saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE, 
                         archiveTags = TRUE, 
                         archiveMiniature = TRUE, force = TRUE, rememberName = TRUE, 
-                        chain = FALSE, ... , silent=FALSE){
+                        chain = FALSE, ... , silent=FALSE, ascii = TRUE){
   stopifnot( is.logical( c( archiveData, archiveTags, archiveMiniature, 
                                                      chain, rememberName ) ) )
   stopifnot( is.character( repoDir ) | is.null( repoDir ) )
@@ -284,12 +286,12 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
     rememberName = FALSE
   }
   if ( rememberName ){
-    save( file = paste0(repoDir,"gallery/", md5hash, ".rda"), ascii = TRUE, list = objectName,  envir = parent.frame(1))
+    save( file = paste0(repoDir,"gallery/", md5hash, ".rda"), ascii = ascii, list = objectName,  envir = parent.frame(1))
   }else{ 
 #    assign( value = artifact, x = md5hash, envir = .GlobalEnv )
 #    save( file = paste0(repoDir, "gallery/", md5hash, ".rda"),  ascii=TRUE, list = md5hash, envir = .GlobalEnv  )
     assign( value = artifact, x = md5hash, envir = .ArchivistEnv )
-    save( file = paste0(repoDir, "gallery/", md5hash, ".rda"),  ascii=TRUE, list = md5hash, envir = .ArchivistEnv  )
+    save( file = paste0(repoDir, "gallery/", md5hash, ".rda"),  ascii=ascii, list = md5hash, envir = .ArchivistEnv  )
     rm(list = md5hash, envir = .ArchivistEnv)
   }
   
@@ -313,11 +315,11 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
   # if chaining code is used, the "data" attr is not needed
   if ( archiveData & !chain ){
     attr( md5hash, "data" )  <-  extractData( artifact, parrentMd5hash = md5hash, 
-                                              parentDir = repoDir, isForce = force )
+                                              parentDir = repoDir, isForce = force, ASCII = ascii )
   }
   if ( archiveData & chain ){
     extractData( artifact, parrentMd5hash = md5hash, 
-                 parentDir = repoDir, isForce = force )
+                 parentDir = repoDir, isForce = force, ASCII = ascii )
   }
   
   # whether to archive miniature
