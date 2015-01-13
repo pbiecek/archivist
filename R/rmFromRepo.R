@@ -226,11 +226,11 @@ rmFromRepo <- function( md5hash, repoDir = NULL, removeData = FALSE,
                      paste0( "SELECT artifact FROM tag WHERE ",
                              "tag = '", paste0("relationWith:", md5hash), "'" ) ) 
     
-    if ( length( dataMd5hash != 1 ) & !force ){
+    if ( length( dataMd5hash ) !=  1  & !force ){
       stop( "Data related to ", md5hash, " are also in relation with other artifacts. \n",
             "To remove try again with argument removeData = FALSE to remove artifact only or with argument force = TRUE to remove data anyway.")
     }
-    if ( length( dataMd5hash != 1 ) & force )
+    if ( length( dataMd5hash ) != 1  & force )
       cat( "Data related to more than 1 artifact was removed from Repository.")
     
     
