@@ -38,6 +38,11 @@
 #' }
 #' 
 #' @note
+#' 
+#' To accelerate the speed of removing many objects, you can set \code{many} parameter to
+#' \code{TRUE} and pass a vector of artifacts' \code{md5hashes} to a \code{md5hash} parameter to remove many
+#' artifacts with one single function call. By default, \code{many} parameter is set to \code{FALSE}.
+#' 
 #' \code{md5hash} can be a result of the \link{searchInLocalRepo} function proceeded with \code{tag = NAME} argument,
 #' where \code{NAME} is a tag that describes the property of the objects to be deleted. 
 #' 
@@ -57,6 +62,10 @@
 #' 
 #' @param force A logical value denoting whether to remove data if it is related to more than 1 artifact.
 #' Defualt \code{FALSE}.
+#' 
+#' @param many A logical value. To accelerate the speed of removing many objects, you can set this parameter to
+#' \code{TRUE} and pass a vector of artifacts' \code{md5hashes} to a \code{md5hash} parameter to remove many
+#' artifacts with one single function call. By default, set to \code{FALSE}.
 #' 
 #' @author
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
@@ -194,18 +203,133 @@
 #' 
 #' deleteRepo( exampleRepoDir )
 #' 
+#' 
+#' ######
+#' ######
+#' REMOVING MANY ARTIFACTS
+#' ######
+#' ######
+#' 
+#' # lm object
+#' model <- lm(Sepal.Length~ Sepal.Width + Petal.Length + Petal.Width, data= iris)
+#' 
+#' # agnes (twins) object
+#' library(cluster)
+#' data(votes.repub)
+#' agn1 <- agnes(votes.repub, metric = "manhattan", stand = TRUE)
+#' 
+#' # fanny (partition) object
+#' x <- rbind(cbind(rnorm(10, 0, 0.5), rnorm(10, 0, 0.5)),
+#'            cbind(rnorm(15, 5, 0.5), rnorm(15, 5, 0.5)),
+#'            cbind(rnorm( 3,3.2,0.5), rnorm( 3,3.2,0.5)))
+#' fannyx <- fanny(x, 2)
+#' 
+#' # lda object
+#' library(MASS)
+#' 
+#' Iris <- data.frame(rbind(iris3[,,1], iris3[,,2], iris3[,,3]),
+#'                   Sp = rep(c("s","c","v"), rep(50,3)))
+#' train <- c(8,83,115,118,146,82,76,9,70,139,85,59,78,143,68,
+#'            134,148,12,141,101,144,114,41,95,61,128,2,42,37,
+#'            29,77,20,44,98,74,32,27,11,49,52,111,55,48,33,38,
+#'            113,126,24,104,3,66,81,31,39,26,123,18,108,73,50,
+#'            56,54,65,135,84,112,131,60,102,14,120,117,53,138,5)
+#' lda1 <- lda(Sp ~ ., Iris, prior = c(1,1,1)/3, subset = train)
+#' 
+#' # qda object
+#' tr <- c(7,38,47,43,20,37,44,22,46,49,50,19,4,32,12,29,27,34,2,1,17,13,3,35,36)
+#' train <- rbind(iris3[tr,,1], iris3[tr,,2], iris3[tr,,3])
+#' cl <- factor(c(rep("s",25), rep("c",25), rep("v",25)))
+#' qda1 <- qda(train, cl)
+#' 
+#' # glmnet object
+#' library( glmnet )
+#' 
+#' zk=matrix(rnorm(100*20),100,20)
+#' bk=rnorm(100)
+#' glmnet1=glmnet(zk,bk)
+#' 
+#' 
+#' # creating example Repository - that examples will work
+#' 
+#' # need few artifacts to remove
+#' 
+#' exampleRepoDir <- tempdir()
+#' createEmptyRepo( repoDir = exampleRepoDir )
+#' saveToRepo( iris, repoDir=exampleRepoDir )
+#' saveToRepo( model, repoDir=exampleRepoDir )
+#' saveToRepo( agn1, repoDir=exampleRepoDir )
+#' saveToRepo( fannyx, repoDir=exampleRepoDir )
+#' saveToRepo( lda1, repoDir=exampleRepoDir )
+#' saveToRepo( glmnet1, repoDir=exampleRepoDir )
+#' 
+#' 
+#' allUniqueMd5hashes <- unique(showLocalRepo(exampleRepoDir)[,1])
+#' allUniqueMd5hashes
+#' rmFromRepo(allUniqueMd5hashes, many = TRUE, repoDir = exampleRepoDir)
+#' unique(showLocalRepo(exampleRepoDir)[,1])
+#' 
+#' 
 #' rm( exampleRepoDir )
 #' }
 #' @family archivist
 #' @rdname rmFromRepo
 #' @export
 rmFromRepo <- function( md5hash, repoDir = NULL, removeData = FALSE, 
-                        removeMiniature = FALSE, force = FALSE ){
+                        removeMiniature = FALSE, force = FALSE, many = FALSE ){
   stopifnot( is.character( md5hash  ) )
   stopifnot( is.character( repoDir ) | is.null( repoDir ) )
-  stopifnot( is.logical( c( removeData, removeMiniature ) ) )
+  stopifnot( is.logical( c( removeData, removeMiniature, many ) ) )
     
   repoDir <- checkDirectory( repoDir )
+  
+  # what if many md5hashes are passed to be deleted?
+  
+  if ( many ){
+    
+    
+    executeSingleQuery( dir = repoDir,
+                        paste0( "DELETE FROM artifact WHERE ",
+                                "md5hash IN ('", paste0( md5hash, collapse = "','" ), "')")
+                      )
+                        
+    executeSingleQuery( dir = repoDir,
+                        paste0( "DELETE FROM tag WHERE ",
+                                "artifact IN ('", paste0( md5hash, collapse = "','" ), "')")
+                      )      
+    
+    # remove files from gallery folder
+    sapply( md5hash, function( md5hashSingle ) {
+    if ( file.exists( paste0( repoDir, "gallery/", md5hashSingle, ".rda" ) ) )
+      file.remove( paste0( repoDir, "gallery/", md5hashSingle, ".rda" ) )
+    } )
+    
+    
+    # remove the miniature of an object
+    if ( removeMiniature ){
+      sapply( md5hash, function( md5hashSingle ) {
+        if ( file.exists( paste0( repoDir, "gallery/", md5hashSingle, ".png" ) ) )
+          file.remove( paste0( repoDir, "gallery/", md5hashSingle, ".png" ) )
+        
+        if ( file.exists( paste0( repoDir, "gallery/", md5hashSingle, ".txt" ) ) )
+          file.remove( paste0( repoDir, "gallery/", md5hashSingle, ".txt" ) )
+      } )
+    }
+    
+    # send deletes for data 
+    if ( removeData ){
+      dataMd5hash <-  executeSingleQuery( dir = repoDir,
+                                          paste0( "SELECT artifact FROM tag WHERE ",
+                                                  "tag IN ('", paste0("relationWith:", md5hash, collapse="','"), "')" ) )
+      
+      executeSingleQuery( dir = repoDir,
+                          paste0( "DELETE FROM artifact WHERE ",
+                                  "md5hash IN ('", paste0( dataMd5hash, collapse = "','" ), "')")
+      )
+      
+    }
+                        
+  }else{  
   
   # what if abbreviation was given
   if ( nchar( md5hash ) < 32 ){
@@ -272,5 +396,5 @@ rmFromRepo <- function( md5hash, repoDir = NULL, removeData = FALSE,
   if ( file.exists( paste0( repoDir, "gallery/", md5hash, ".txt" ) ) )
     file.remove( paste0( repoDir, "gallery/", md5hash, ".txt" ) )
   }
-  
+} 
 }
