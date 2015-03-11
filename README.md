@@ -36,7 +36,7 @@ help(package="archivist")
 
 <a href="https://rawgit.com/pbiecek/archivist/master/vignettes/accessibilityUseCase.html">Retrieving all plots with other github repository (example with flights data from Hadley Wickham useR!2014 tutorial)</a>
 
-<a href="https://rawgit.com/pbiecek/archivist/master/vignettes/chainingUseCase.html">Archiving artifacts with their chaining code [not supported anymore with new version of the magrittr package]</a>
+<a href="https://rawgit.com/pbiecek/archivist/master/vignettes/chainingUseCase.html">Archiving artifacts with their chaining code [not supported anymore with the newest version of the magrittr package]</a>
 
 <a href="https://rawgit.com/pbiecek/archivist/master/vignettes/justGetIT.html">Just get the object</a>
 
