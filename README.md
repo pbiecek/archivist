@@ -11,7 +11,7 @@ Project is supported by [Travis CI](https://travis-ci.org/) and [waffle.io](http
 ### Please see the  [archivist wiki](https://github.com/pbiecek/archivist/wiki) for information. 
 
 
-<h5> Installing archivist package: </h5>
+<h5> Installation of the archivist package: </h5>
 To get started, install the latest version of **archivist** from CRAN:
 ```{Ruby}
 install.packages("archivist")
