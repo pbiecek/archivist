@@ -43,11 +43,12 @@ Learn more about \code{md5hashes} at \pkg{archivist}
 \href{https://github.com/pbiecek/archivist/wiki/archivist-package-md5hash}{Github}.
 
 Other archivist: \code{\link{Repository}};
-\code{\link{Tags}}; \code{\link{addTagsRepo}};
-\code{\link{archivist-package}}; \code{\link{cache}};
-\code{\link{copyGithubRepo}}, \code{\link{copyLocalRepo}};
-\code{\link{createEmptyRepo}}; \code{\link{deleteRepo}};
-\code{\link{getTagsGithub}}, \code{\link{getTagsLocal}};
+\code{\link{Tags}}; \code{\link{\%a\%}};
+\code{\link{addTagsRepo}}; \code{\link{archivist-package}};
+\code{\link{cache}}; \code{\link{copyGithubRepo}},
+\code{\link{copyLocalRepo}}; \code{\link{createEmptyRepo}};
+\code{\link{deleteRepo}}; \code{\link{getTagsGithub}},
+\code{\link{getTagsLocal}};
 \code{\link{loadFromGithubRepo}},
 \code{\link{loadFromLocalRepo}};
 \code{\link{multiSearchInGithubRepo}},

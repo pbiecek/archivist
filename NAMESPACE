@@ -2,6 +2,7 @@
 
 S3method(plot,repository)
 S3method(print,repository)
+export("%a%")
 export(addTagsRepo)
 export(cache)
 export(copyGithubRepo)

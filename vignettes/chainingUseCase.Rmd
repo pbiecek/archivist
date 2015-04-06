@@ -27,14 +27,14 @@ Then one might create artifacts like those below. The code lines are ordered in 
 library(dplyr)
 
 data("hflights", package = "hflights")
-hflights %>%
-   group_by(Year, Month, DayofMonth) %>%
-   select(Year:DayofMonth, ArrDelay, DepDelay) %>%
+hflights %a%
+   group_by(Year, Month, DayofMonth) %a%
+   select(Year:DayofMonth, ArrDelay, DepDelay) %a%
    summarise(
       arr = mean(ArrDelay, na.rm = TRUE),
       dep = mean(DepDelay, na.rm = TRUE)
-   ) %>%
-   filter(arr > 30 | dep > 30) %>%
+   ) %a%
+   filter(arr > 30 | dep > 30) %a%
    saveToRepo( exampleRepoDir )  
 ```
 

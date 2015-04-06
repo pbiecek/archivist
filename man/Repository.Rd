@@ -36,7 +36,7 @@ Learn more about \code{Repository} at \pkg{archivist}
 \code{wiki} webpage on
 \href{https://github.com/pbiecek/archivist/wiki/archivist-package-Repository}{Github}.
 
-Other archivist: \code{\link{Tags}};
+Other archivist: \code{\link{Tags}}; \code{\link{\%a\%}};
 \code{\link{addTagsRepo}}; \code{\link{archivist-package}};
 \code{\link{cache}}; \code{\link{copyGithubRepo}},
 \code{\link{copyLocalRepo}}; \code{\link{createEmptyRepo}};
