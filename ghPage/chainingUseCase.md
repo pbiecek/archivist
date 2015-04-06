@@ -1,33 +1,21 @@
----
-title: "Archiving artifacts with their chaining code"
-author: "Marcin Kosinski"
-date: "April 1, 2015"
-output:
-  html_document:
-    theme: readable
-    highlight: espresso
-    fig_width: 17
-    fig_height: 10
-    toc: true
-    toc_depth: 3
----    
+# Archiving artifacts with their chaining code
+April 6, 2015  
 
 # Overview
-```{r, echo=FALSE}
-library(knitr)
-opts_chunk$set(comment="", message=FALSE, warning = FALSE, tidy.opts=list(keep.blank.line=TRUE, width.cutoff=150),options(width=150), cache=TRUE)
-```
+
+
 
 The **archivist** package is very efficient and advantageous when the archived artifacts were created with a chaining code offered by the [magrittr](http://cran.r-project.org/web/packages/magrittr/index.html) package. It is higly useful because the origin of the artifact is archived, which means that the artifact can be easly reproduced and it's origin code is stored for future use. 
 
 Below are examples of creating artifacts with a chaining code, that requires using a `%>%` and  a `%.%` operators, offered by the **magrittr** and the **dplyr** package.
 
-Since the version 1.5 of the **magrittr** package changed functionality of a mentioned pipe operator `%>%`, we copied functionality from version 1.0.1 and added old operator to the **archivist** package as `%a%` operator.
+Since the version 1.5 of the **magrittr** package changed functionality of a mentioned pipe operator `%>%`, we copied (in version 1.3 of the **archivist**) functionality from version 1.0.1 and added old operator to the **archivist** package as `%a%` operator.
 
 
 
 Let us prepare a [**Repository**](https://github.com/pbiecek/archivist/wiki/archivist-package-Repository) where archived artifacts will be stored.
-```{r}
+
+```r
 library(devtools)
 install_github("pbiecek/archivist")
 library(archivist)
@@ -38,7 +26,8 @@ createEmptyRepo( exampleRepoDir )
 # Chaining code
 
 Then one might create artifacts like those below. The code lines are ordered in chaining code, which will be used by the `saveToRepo` function to store an artifact and archive it's origin code as a `name` of this artifact.
-```{r}
+
+```r
 # example 1
 library(dplyr)
 
@@ -54,9 +43,14 @@ hflights %a%
    saveToRepo( exampleRepoDir )  
 ```
 
+```
+[1] "9013563d1069359f9b7d7a49c49b0a1f"
+```
+
 One may see a vast difference in code evalution when using chaining code.
 Here is an example of a traditional `R` call and one that uses the `chaining code` philosophy.
-```{r}
+
+```r
 # example 2
 library(Lahman)
 
@@ -64,7 +58,20 @@ library(Lahman)
 players <- group_by(Batting, playerID)
 games <- summarise(players, total = sum(G))
 head(arrange(games, desc(total)), 5)
+```
 
+```
+Source: local data frame [5 x 2]
+
+   playerID total
+1  rosepe01  3562
+2 yastrca01  3308
+3 aaronha01  3298
+4 henderi01  3081
+5  cobbty01  3035
+```
+
+```r
 # Corresponding chaining code
 Batting %a%
    group_by(playerID) %a%
@@ -74,10 +81,15 @@ Batting %a%
    saveToRepo( repoDir = exampleRepoDir )
 ```
 
+```
+[1] "b5ba48251904ce231c382594cdc75bb2"
+```
+
 # `setLocalRepo`
 
 To simplify the code one can set globally the path to **Repository** using code as below. Now one no longer need to specify the `repoDir` parameter with every call.
-```{r}
+
+```r
 setLocalRepo( exampleRepoDir )
 ```
 
@@ -86,7 +98,8 @@ setLocalRepo( exampleRepoDir )
 
 Many of various operations can be performed on a single `data.frame` before one consideres to archive these artifacts. **Archivist** guarantees that all of them will be `archived`, which means a code alone will no longer be needed to be stored in a separate file. Also an artifact may be saved during operations are performed and used in further code evaluations. This can be done when
 argument \code{chain = TRUE} in `saveToRepo` is specified.
-```{r}
+
+```r
 # example 3
 crime.by.state <- read.csv("CrimeStatebyState.csv")
 crime.by.state %a%
@@ -100,18 +113,23 @@ crime.by.state %a%
    saveToRepo( )
 ```
 
+```
+[1] "09cbff009bfb9b8535f1bb65f5cdec1b"
+```
+
 The `CrimeStatebyState` data set can be downloaded from [https://github.com/MarcinKosinski/Museum](https://github.com/MarcinKosinski/Museum) or by using this code:
-```{r}
+
+```r
 loadFromGithubRepo("3374db20ecaf2fa0d070d4cb87879326",
                    repo = "Museum",
                    user = "MarcinKosinski")
-
 ```
 
 
 Dozens of artifacts may now be stored in one **Repository**. Every artifact
 may have an additional Tag specified by an user. This will simplify searching for this artifact in the future.
-```{r}
+
+```r
 # example 4
 library(ggplot2)
 
@@ -126,9 +144,14 @@ diamonds %a%
    saveToRepo( )
 ```
 
+```
+[1] "3615c813f901b5ffc735a457b87befa7"
+```
+
 One can also save artifact's [md5hash](https://github.com/pbiecek/archivist/wiki/archivist-package-md5hash) if there is a need check its origin, which is stored in a [Tag](https://github.com/pbiecek/archivist/wiki/archivist-package---Tags)
 named `name`.
-```{r}
+
+```r
 # example 5
 data(mtcars)
 hash <- mtcars %a% 
@@ -137,52 +160,91 @@ hash <- mtcars %a%
    summarise(avgmpg = mean(mpg), avgwt = mean(wt)) %a%
    filter(avgmpg > 20) %a%
    saveToRepo( )
-
 ```
 
 # Summary of the Repository
 After archiving all desired artifacts created with their chaining code, the summary of the **Repository** might be performed. Below is a single call of stored artifacts' names and the summary of the whole created **Repository** in this use case.
 
-```{r}
+
+```r
 # summary
 showLocalRepo( )[, 2]
-summaryLocalRepo( )
+```
 
+```
+[1] "hflights %a% group_by(Year, Month, DayofMonth) %a% select(Year:DayofMonth,     ArrDelay, DepDelay) %a% summarise(arr = mean(ArrDelay, na.rm = TRUE),     dep = mean(DepDelay, na.rm = TRUE)) %a% filter(arr > 30 |     dep > 30)"                                                                               
+[2] "Batting %a% group_by(playerID) %a% summarise(total = sum(G)) %a%     arrange(desc(total)) %a% head(5)"                                                                                                                                                                                                          
+[3] "crime.by.state %a% filter(State == \"New York\", Year == 2005) %a%     arrange(desc(Count)) %a% select(Type.of.Crime, Count) %a%     mutate(Proportion = Count/sum(Count))"                                                                                                                                     
+[4] "crime.by.state %a% filter(State == \"New York\", Year == 2005) %a%     arrange(desc(Count)) %a% select(Type.of.Crime, Count) %a%     mutate(Proportion = Count/sum(Count)) %a% saveToRepo(exampleRepoDir,     chain = TRUE) %a% group_by(Type.of.Crime) %a% summarise(num.types = n(),     counts = sum(Count))"
+[5] "diamonds %a% group_by(cut, clarity, color) %a% summarize(meancarat = mean(carat,     na.rm = TRUE), ndiamonds = length(carat)) %a% head(10) %a%     `attr<-`(\"tags\", \"operations on diamonds\")"                                                                                                             
+[6] "mtcars %a% group_by(cyl, am) %a% select(mpg, cyl, wt, am) %a%     summarise(avgmpg = mean(mpg), avgwt = mean(wt)) %a% filter(avgmpg >     20)"                                                                                                                                                                  
+```
+
+```r
+summaryLocalRepo( )
+```
+
+```
+Number of archived artifacts in the Repository:  6 
+Number of archived datasets in the Repository:  0 
+Number of various classes archived in the Repository: 
+            Number
+grouped_df      3
+tbl_df          5
+tbl             4
+data.frame      6
+Saves per day in the Repository: 
+            Saves
+2015-04-06     6
 ```
 
 # Restoring origin code
 One can restore the origin of the artifact created in example 5.
-```{r}
+
+```r
 getTagsLocal( md5hash = hash )
+```
+
+```
+[1] "name:mtcars %a% group_by(cyl, am) %a% select(mpg, cyl, wt, am) %a%     summarise(avgmpg = mean(mpg), avgwt = mean(wt)) %a% filter(avgmpg >     20)"
 ```
 
 There is always a way to restore the origin code when one does not remember `md5hash` but remembers one or more `Tags` related to the artifact. As was shown in example 4, that artifact had special `Tag` named `operations on diamonds`. An easy `searchInLocalRepo` call can return `md5hash` of the artifact related to this `Tag`, so that now the origin code (saved as `name` `Tag`) can be restored.
 
-```{r}
+
+```r
 hash2 <- searchInLocalRepo( pattern = "operations on diamonds" )
 getTagsLocal( md5hash = hash2 )
 ```
 
+```
+[1] "name:diamonds %a% group_by(cut, clarity, color) %a% summarize(meancarat = mean(carat,     na.rm = TRUE), ndiamonds = length(carat)) %a% head(10) %a%     `attr<-`(\"tags\", \"operations on diamonds\")"
+```
+
 The above result can also be achieved with a chaining code sequence.
-```{r, message=FALSE,comment="", warning=FALSE}
+
+```r
 "operations on diamonds" %>%
   searchInLocalRepo( ) %>%
   getTagsLocal( )
+```
+
+```
+[1] "name:diamonds %a% group_by(cut, clarity, color) %a% summarize(meancarat = mean(carat,     na.rm = TRUE), ndiamonds = length(carat)) %a% head(10) %a%     `attr<-`(\"tags\", \"operations on diamonds\")"
 ```
 
 # Note
 - Note that the last operator should be `%a%` instead of `%>%`, if one needs to store the origin code of the artifact.
 - The `attr<-`("tags", "operations on diamonds") is the equivalent of `attr( "tags") <- "operations on diamonds"` but this form seems to not cooperate with the `%>%` or `%a%` operators. Also the attributes may be set in the chaining code using `setattr` from the `data.table` package.
 
-```{r, eval=FALSE, message=FALSE,comment="", warning=FALSE}
+
+```r
 library(data.table)
 iris %>% setattr(., "date", Sys.Date())
 ```
 
 
-```{r, echo=FALSE, results='hide'}
-deleteRepo( exampleRepoDir )
-```
+
 
 
 

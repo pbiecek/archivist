@@ -15,3 +15,8 @@ buildingVignette.R
 gallery
 README.md
 archiwum.png
+ghPage
+old
+cache
+*_cache
+_cache

@@ -1,9 +1,7 @@
-<!--
-%\VignetteEngine{knitr::docco_linear}
-%\VignetteIndexEntry{Archivist as an accessibility engine}
--->
-
 # Use case: retrieving partial results
+April 6, 2015  
+
+# Archivist as an accessibility engine
 
 The archivist package allows to store, restore and look for R objects in repositories stored on hard disk. There are different strategies that can be used to find an object, through it's name, date of creation of meta data. The package is mainly designed as a repository of artifacts, but it can be used in different use-cases.
 
@@ -25,8 +23,8 @@ and choose the one that it's looked for
 .
 
 
-```{r, message=FALSE, warning=FALSE, fig.width=15, fig.height=15}
 
+```r
 library(archivist)
 library(grid)
 library(gridExtra)
@@ -38,14 +36,34 @@ plots <- lapply(md5plots, function(pl)
                    repo = "graphGallery", user = "pbiecek", value = TRUE) + ggtitle(pl))
 
 do.call("grid.arrange", c(plots, ncol=round(sqrt(length(md5plots)))))
+```
 
+<img src="accessibilityUseCase_files/figure-html/unnamed-chunk-2-1.png" title="" alt="" style="display: block; margin: auto;" />
+
+```r
 summaryGithubRepo(repo = "graphGallery", user = "pbiecek")
+```
 
+```
+Number of archived artifacts in the Repository:  12 
+Number of archived datasets in the Repository:  4 
+Number of various classes archived in the Repository: 
+            Number
+ggplot          4
+tbl_df          3
+grouped_df      3
+area            1
+proto           1
+Saves per day in the Repository: 
+            Saves
+2014-08-21     4
+2014-09-03    11
 ```
 
 How artifacts in this database were created.
 
-```{r, message=FALSE}
+
+```r
 # flightsRepo <- "~/GitHub/graphGallery/"
 # 
 # flights %>% 
@@ -96,5 +114,4 @@ How artifacts in this database were created.
 #   geom_vline(xintercept = 5:24, colour = "white", size = 2) +
 #   geom_point()) %>% 
 #   saveToRepo(flightsRepo)
-
 ```
