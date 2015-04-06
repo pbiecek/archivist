@@ -11,7 +11,7 @@ Project is supported by [Travis CI](https://travis-ci.org/) and [waffle.io](http
 ### Please see the  [archivist wiki](https://github.com/pbiecek/archivist/wiki) for information. 
 
 
-<h5> Installing archivist package: </h5>
+<h5> Installation of the archivist package: </h5>
 To get started, install the latest version of **archivist** from CRAN:
 ```{Ruby}
 install.packages("archivist")
@@ -30,17 +30,8 @@ Make sure you have [rtools](http://cran.r-project.org/bin/windows/Rtools/) insta
 ```{Ruby}
 help(package="archivist")
 ```
-<h4> The list of use-cases: </h4>
+<h4> The list of use-cases: is available on archivist webpage http://pbiecek.github.io/archivist/</h4>
 
-<a href="https://rawgit.com/pbiecek/archivist/master/vignettes/cacheUseCase.html">Cache with the archivist package</a>
-
-<a href="https://rawgit.com/pbiecek/archivist/master/vignettes/accessibilityUseCase.html">Retrieving all plots with other github repository (example with flights data from Hadley Wickham useR!2014 tutorial)</a>
-
-<a href="https://rawgit.com/pbiecek/archivist/master/vignettes/chainingUseCase.html">Archiving artifacts with their chaining code</a>
-
-<a href="https://rawgit.com/pbiecek/archivist/master/vignettes/justGetIT.html">Just get the object</a>
-
-[Lazy load with **archivist**](https://rawgit.com/pbiecek/archivist/master/vignettes/lazyLoadUseCase.html)
 
 <h5> Authors of the project: </h5>
 > Przemysław Biecek, przemyslaw.biecek@gmail.com
