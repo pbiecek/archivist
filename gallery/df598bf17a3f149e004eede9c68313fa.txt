@@ -1,7 +1,0 @@
-
-	Wilcoxon signed rank test
-
-data:  x and y
-V = 40, p-value = 0.01953
-alternative hypothesis: true location shift is greater than 0
-

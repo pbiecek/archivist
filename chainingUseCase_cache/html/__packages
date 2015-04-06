@@ -1,0 +1,11 @@
+base
+knitr
+devtools
+DBI
+RSQLite
+shiny
+lubridate
+archivist
+dplyr
+Lahman
+ggplot2

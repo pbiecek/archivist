@@ -1,0 +1,18 @@
+{
+    "contents" : "<div class=\"navbar navbar-default navbar-fixed-top\" role=\"navigation\">\n  <div class=\"container\">\n  <div class=\"navbar-header\">\n  <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#navbar\">\n  <span class=\"icon-bar\"></span>\n  <span class=\"icon-bar\"></span>\n  <span class=\"icon-bar\"></span>\n  </button>\n  <a class=\"navbar-brand\" href=\"/\">TP53 vs MDM2 in BRCA</a>\n  </div>\n  <div id=\"navbar\" class=\"navbar-collapse collapse\">\n  <ul class=\"nav navbar-nav\">\n  \n  <li class=\"dropdown\">\n  <a href=\"authoring\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\">Data Analysis <span class=\"caret\"></span></a>\n  <ul class=\"dropdown-menu\" role=\"menu\">\n  <li class=\"dropdown-header\">Archivist</li>\n  <li><a href=\"https://github.com/pbiecek/archivist/tarball/master\">Download tar</a></li>\n  <li><a href=\"https://github.com/pbiecek/archivist/zipball/master\"></a>Download zip</a></li>\n  <li><a href=\"https://github.com/pbiecek/archivist\">View on GitHub</a></li>\n\n  </ul>\n  \n  \n   <li class=\"dropdown\">\n   <a href=\"authoring\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\">Special Functions<span class=\"caret\"></span></a>\n   <ul class=\"dropdown-menu\" role=\"menu\">\n      <li class=\"dropdown-header\">Dividing</li>\n  <li><a href=\"functions.html\">TP53 & MDM2</a></li>\n  </ul>\n  \n  \n   <li class=\"dropdown\">\n   <a href=\"authoring\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\">Cox Model<span class=\"caret\"></span></a>\n   <ul class=\"dropdown-menu\" role=\"menu\">\n      <li><a href=\"coxModel.html\">Survival Analysis</a></li>\n  </ul>\n  </ul>\n  </div><!--/.nav-collapse -->\n  </div><!--/.container -->\n  </div><!--/.navbar -->",
+    "created" : 1428313034710.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2709534270",
+    "id" : "998A8CDA",
+    "lastKnownWriteTime" : 1428313321,
+    "path" : "D:/GitHub/archivist/include/before_body.html",
+    "project_path" : "include/before_body.html",
+    "properties" : {
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "type" : "html"
+}
