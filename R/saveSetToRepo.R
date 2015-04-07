@@ -61,10 +61,31 @@
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
 #' 
 #' @examples
-#' # objects preparation
+#' 
 #' \dontrun{
 #' 
+#' # objects preparation
+#' library(ggplot2)
+#' library(ggthemes)
+#' library(archivist)
+#' createEmptyRepo( "SETS" )
+#' setLocalRepo( "SETS" )
+#' data(iris)
 #' 
+#' plotArtifact <- ggplot( iris, aes(x = Sepal.Length, y = Species)) +
+#'   geom_point()+
+#'   theme_wsj()
+#' 
+#' plotData <- iris
+#' plotFunctions <- list( ggplot, geom_point, theme_wsj)
+#' 
+#' # storing
+#' saveSetToRepo( artifact = plotArtifact,
+#'    data = plotData,
+#'    functions = plotFunctions)
+#'    
+#' # show method for set   
+#' showLocalRepo(method = "sets")
 #' }
 #' @family archivist
 #' @rdname saveSetToRepo
