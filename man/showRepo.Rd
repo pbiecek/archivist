@@ -18,7 +18,8 @@ showGithubRepo(repo = NULL, user = NULL, branch = "master",
 
   \item{method}{A character specifying the method to be
   used to show the Repository. Available methods:
-  \code{md5hashes} (default), \code{tags}.}
+  \code{md5hashes} (default), \code{tags} and \code{sets} -
+  see \link{saveSetToRepo}.}
 
   \item{repo}{Only if working with a Github repository. A
   character containing a name of a Github repository on
@@ -168,6 +169,28 @@ showLocalRepo(method = "tags", repoDir = exampleRepoDir)
 showGithubRepo(method = "md5hashes", user = "pbiecek", repo = "archivist")
 showGithubRepo(method = "tags", user = "pbiecek", repo = "archivist", branch = "master")
 
+
+
+# sets method
+setLocalRepo( exampleRepoDir )
+library(ggplot2)
+library(ggthemes)
+
+data(iris)
+
+plotArtifact <- ggplot( iris, aes(x = Sepal.Length, y = Species)) +
+  geom_point()+
+  theme_wsj()
+
+plotData <- iris
+plotFunctions <- list( ggplot, geom_point, theme_wsj)
+
+saveSetToRepo( artifact = plotArtifact,
+               data = plotData,
+               functions = plotFunctions )
+showLocalRepo( method = "sets" )
+
+
 # removing an example Repository
 
 deleteRepo( exampleRepoDir )
@@ -200,8 +223,8 @@ Other archivist: \code{\link{Repository}};
 \code{\link{multiSearchInLocalRepo}},
 \code{\link{searchInGithubRepo}},
 \code{\link{searchInLocalRepo}}; \code{\link{rmFromRepo}};
-\code{\link{saveToRepo}}; \code{\link{setGithubRepo}},
-\code{\link{setLocalRepo}};
+\code{\link{saveSetToRepo}}; \code{\link{saveToRepo}};
+\code{\link{setGithubRepo}}, \code{\link{setLocalRepo}};
 \code{\link{shinySearchInLocalRepo}};
 \code{\link{summaryGithubRepo}},
 \code{\link{summaryLocalRepo}};

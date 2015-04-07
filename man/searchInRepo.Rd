@@ -238,8 +238,9 @@ Other archivist: \code{\link{Repository}};
 \code{\link{getTagsLocal}};
 \code{\link{loadFromGithubRepo}},
 \code{\link{loadFromLocalRepo}}; \code{\link{md5hash}};
-\code{\link{rmFromRepo}}; \code{\link{saveToRepo}};
-\code{\link{setGithubRepo}}, \code{\link{setLocalRepo}};
+\code{\link{rmFromRepo}}; \code{\link{saveSetToRepo}};
+\code{\link{saveToRepo}}; \code{\link{setGithubRepo}},
+\code{\link{setLocalRepo}};
 \code{\link{shinySearchInLocalRepo}};
 \code{\link{showGithubRepo}}, \code{\link{showLocalRepo}};
 \code{\link{summaryGithubRepo}},

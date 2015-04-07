@@ -20,7 +20,7 @@
 #' be obtained. Also there is an extra column with a date of creation the \code{Tag} or the \code{md5hash}.
 #' 
 #' @param method A character specifying the method to be used to show the Repository. Available methods: 
-#' \code{md5hashes} (default), \code{tags}.
+#' \code{md5hashes} (default), \code{tags} and \code{sets} - see \link{saveSetToRepo}.
 #' 
 #' @param repoDir A character denoting an existing directory of a Repository for which a summary will be returned.
 #' If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.
@@ -136,6 +136,28 @@
 #' showGithubRepo(method = "md5hashes", user = "pbiecek", repo = "archivist")
 #' showGithubRepo(method = "tags", user = "pbiecek", repo = "archivist", branch = "master")
 #' 
+#' 
+#' 
+#' # sets method
+#' setLocalRepo( exampleRepoDir )
+#' library(ggplot2)
+#' library(ggthemes)
+#' 
+#' data(iris)
+#' 
+#' plotArtifact <- ggplot( iris, aes(x = Sepal.Length, y = Species)) +
+#'   geom_point()+
+#'   theme_wsj()
+#' 
+#' plotData <- iris
+#' plotFunctions <- list( ggplot, geom_point, theme_wsj)
+#' 
+#' saveSetToRepo( artifact = plotArtifact,
+#'                data = plotData,
+#'                functions = plotFunctions )
+#' showLocalRepo( method = "sets" )
+#' 
+#' 
 #' # removing an example Repository
 #'   
 #' deleteRepo( exampleRepoDir )
@@ -185,6 +207,13 @@ showRepo <- function( method, local = TRUE, dir ){
   
   if ( method == "tags" )
     value <- readSingleTable( dir, "tag", realDBname = local )
+  
+  if ( method == "sets" ){
+    value <- readSingleTable( dir, "tag", realDBname = local ) 
+      onlySetsNumber <- grep( "set", value$tag )
+      onlySetsHashes <- value[onlySetsNumber, "artifact"]
+    value <- value[ value$artifact %in% onlySetsHashes, ]
+  }
   
   return( value )
 }
