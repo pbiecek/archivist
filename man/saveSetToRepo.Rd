@@ -84,10 +84,30 @@ all objects came originally from one set. This additional
 tag helps to restore a set from a \code{Repository}
 }
 \examples{
-# objects preparation
 \dontrun{
 
+# objects preparation
+library(ggplot2)
+library(ggthemes)
+library(archivist)
+createEmptyRepo( "SETS" )
+setLocalRepo( "SETS" )
+data(iris)
 
+plotArtifact <- ggplot( iris, aes(x = Sepal.Length, y = Species)) +
+  geom_point()+
+  theme_wsj()
+
+plotData <- iris
+plotFunctions <- list( ggplot, geom_point, theme_wsj)
+
+# storing
+saveSetToRepo( artifact = plotArtifact,
+   data = plotData,
+   functions = plotFunctions)
+
+# show method for set
+showLocalRepo(method = "sets")
 }
 }
 \author{

@@ -229,16 +229,16 @@
 #' library(dplyr)
 #' 
 #' data("hflights", package = "hflights")
-#' hflights %>%
-#'   group_by(Year, Month, DayofMonth) %>%
-#'   select(Year:DayofMonth, ArrDelay, DepDelay) %>%
-#'   saveToRepo( exampleRepoDir, chain = TRUE ) %>%
+#' hflights %a%
+#'   group_by(Year, Month, DayofMonth) %a%
+#'   select(Year:DayofMonth, ArrDelay, DepDelay) %a%
+#'   saveToRepo( exampleRepoDir, chain = TRUE ) %a%
 #'   # here the artifact is stored but chaining is not finished
 #'   summarise(
 #'     arr = mean(ArrDelay, na.rm = TRUE),
 #'     dep = mean(DepDelay, na.rm = TRUE)
-#'   ) %>%
-#'   filter(arr > 30 | dep > 30) %>%
+#'   ) %a%
+#'   filter(arr > 30 | dep > 30) %a%
 #'   saveToRepo( exampleRepoDir )
 #'   # chaining code is finished and after last operation the 
 #'   # artifact is stored
