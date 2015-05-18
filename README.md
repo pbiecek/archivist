@@ -1,3 +1,7 @@
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/archivist)](http://cran.r-project.org/web/packages/archivist)
+[![Downloads](http://cranlogs.r-pkg.org/badges/archivist)](http://cran.rstudio.com/package=archivist)
+
+
 A set of tools for datasets and plots archiving
 =====================================================
 
