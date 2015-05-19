@@ -1,6 +1,7 @@
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/archivist)](http://cran.r-project.org/web/packages/archivist)
 [![Downloads](http://cranlogs.r-pkg.org/badges/archivist)](http://cran.rstudio.com/package=archivist)
-
+[![Build Status](https://api.travis-ci.org/pbiecek/archivist.png)](https://travis-ci.org/pbiecek/archivist)
+[![Stories in Ready](https://badge.waffle.io/pbiecek/archivist.png?label=READY)](http://waffle.io/pbiecek/archivist)
 
 A set of tools for datasets and plots archiving
 =====================================================
@@ -8,8 +9,7 @@ A set of tools for datasets and plots archiving
 ![Overview of archivist package](https://raw.githubusercontent.com/pbiecek/archivist/master/archiwum.png)
 
 Project is supported by [Travis CI](https://travis-ci.org/) and [waffle.io](https://waffle.io/).
-[![Build Status](https://api.travis-ci.org/pbiecek/archivist.png)](https://travis-ci.org/pbiecek/archivist)
-[![Stories in Ready](https://badge.waffle.io/pbiecek/archivist.png?label=READY)](http://waffle.io/pbiecek/archivist)
+
 
 
 ### Please see the  [archivist wiki](https://github.com/pbiecek/archivist/wiki) for information. 
