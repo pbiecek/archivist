@@ -35,5 +35,5 @@ Imports:
     RCurl,
     digest,
     httr
-Roxygen: list(wrap = TRUE)
+#Roxygen: list(wrap = TRUE)
 BugReports: https://github.com/pbiecek/archivist/issues
