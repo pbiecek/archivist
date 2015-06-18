@@ -7,6 +7,8 @@
 #' A copied pipe operator \link[magrittr]{\%>\%} from magrittr package version 1.0.1.
 #' Enables archiving artifacts with their chaining code - see examples and vignettes.
 #' 
+#' @param lhs A dataset and function to apply to it.
+#' @param rhs A dataset and function to apply to it.
 #' 
 #' @examples 
 #' \dontrun{

@@ -6,6 +6,11 @@
 \usage{
 lhs \%a\% rhs
 }
+\arguments{
+\item{lhs}{A dataset and function to apply to it.}
+
+\item{rhs}{A dataset and function to apply to it.}
+}
 \description{
 A copied pipe operator \link[magrittr]{\%>\%} from magrittr package version 1.0.1.
 Enables archiving artifacts with their chaining code - see examples and vignettes.
