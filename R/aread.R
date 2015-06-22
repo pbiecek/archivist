@@ -29,8 +29,8 @@ aread <- function( md5hash){
   stopifnot( is.character( md5hash ) )
   
   # at least 3 elements
-  elements <- strsplit(md5hash, "/")
-  stopifnot( length(elements) < 3 )
+  elements <- strsplit(md5hash, "/")[[1]]
+  stopifnot( length(elements) >= 3 )
 
   loadFromGithubRepo(md5hash = elements[length(elements)], 
                            repo=paste(elements[2:(length(elements)-1)], sep="/"), 
