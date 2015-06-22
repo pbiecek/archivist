@@ -7,7 +7,7 @@
 #' \link{loadFromGithubRepo}.
 #' 
 #' @details
-#' Functions \code{aread} read artifact (by the \code{md5hash}) from GitHub Repository.
+#' Function \code{aread} read artifact (by the \code{md5hash}) from GitHub Repository.
 #' It uses the function \link{loadFromGithubRepo} with different paramter's specification.
 #' 
 #' @param md5hash A character with at least trhee components, GitHub user name, GitHub repository and name of the artifact assigned to the artifact as a result of a cryptographical hash function with MD5 algorithm, or it's abbreviation.
