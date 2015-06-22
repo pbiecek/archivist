@@ -285,7 +285,7 @@ loadFromGithubRepo <- function( md5hash, repo = NULL, user = NULL, branch = "mas
     }
     tfS <- replicate( length( md5hash ), tempfile() )
     
-    for (i in 1:length(tmpobjectS)){
+    for (i in seq_along(tmpobjectS)){
       writeBin( tmpobjectS[[i]], tfS[i] )
     }
     # in case there existed an object in GlobalEnv this function will not delete him
