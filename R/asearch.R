@@ -44,5 +44,9 @@ asearch <- function( repo, patterns){
   oblist <- multiSearchInGithubRepo(user = elements[1], repo=paste(elements[-1], collapse = "/"), 
                                  patterns = patterns,
                                  intersect = TRUE)
-  lapply(paste0(repo, "/", oblist), aread)
+  res <- list()
+  if (length(oblist)>0) {
+     res <- lapply(paste0(repo, "/", oblist), aread)
+  } 
+  res
 }

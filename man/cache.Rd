@@ -68,7 +68,7 @@ Other archivist: \code{\link{Repository}};
   \code{\link{Tags}}; \code{\link{\%a\%}};
   \code{\link{addTagsRepo}};
   \code{\link{archivist-package}}; \code{\link{aread}};
-  \code{\link{copyGithubRepo}},
+  \code{\link{asearch}}; \code{\link{copyGithubRepo}},
   \code{\link{copyLocalRepo}};
   \code{\link{createEmptyRepo}}; \code{\link{deleteRepo}};
   \code{\link{getTagsGithub}}, \code{\link{getTagsLocal}};

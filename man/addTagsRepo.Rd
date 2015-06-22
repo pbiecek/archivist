@@ -64,7 +64,8 @@ Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
 Other archivist: \code{\link{Repository}};
   \code{\link{Tags}}; \code{\link{\%a\%}};
   \code{\link{archivist-package}}; \code{\link{aread}};
-  \code{\link{cache}}; \code{\link{copyGithubRepo}},
+  \code{\link{asearch}}; \code{\link{cache}};
+  \code{\link{copyGithubRepo}},
   \code{\link{copyLocalRepo}};
   \code{\link{createEmptyRepo}}; \code{\link{deleteRepo}};
   \code{\link{getTagsGithub}}, \code{\link{getTagsLocal}};

@@ -47,7 +47,8 @@ Learn more about \code{Repository} at \pkg{archivist} \code{wiki} webpage on
 Other archivist: \code{\link{Tags}}; \code{\link{\%a\%}};
   \code{\link{addTagsRepo}};
   \code{\link{archivist-package}}; \code{\link{aread}};
-  \code{\link{cache}}; \code{\link{copyGithubRepo}},
+  \code{\link{asearch}}; \code{\link{cache}};
+  \code{\link{copyGithubRepo}},
   \code{\link{copyLocalRepo}};
   \code{\link{createEmptyRepo}}; \code{\link{deleteRepo}};
   \code{\link{getTagsGithub}}, \code{\link{getTagsLocal}};
