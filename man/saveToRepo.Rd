@@ -6,7 +6,8 @@
 \usage{
 saveToRepo(artifact, repoDir = NULL, archiveData = TRUE,
   archiveTags = TRUE, archiveMiniature = TRUE, force = TRUE,
-  rememberName = TRUE, chain = FALSE, ..., silent = FALSE, ascii = TRUE)
+  rememberName = TRUE, chain = FALSE, ..., userTags = c(),
+  silent = FALSE, ascii = TRUE)
 }
 \arguments{
 \item{artifact}{An arbitrary R artifact to be saved. For supported artifacts see details.}
@@ -30,6 +31,8 @@ of an stored artifact or should the result be the input artifact (\code{chain = 
 can be used. See examples.}
 
 \item{...}{Graphical parameters denoting width and height of a miniature. See details.}
+
+\item{userTags}{A character vector with tags. These tags will be added to the repository along the artifact.}
 
 \item{silent}{If TRUE produces no warnings.}
 
