@@ -94,7 +94,7 @@ saveSetToRepo <- function( artifact, data, functions = list(),
                                       repoDir = NULL, 
                                       archiveData = TRUE, archiveTags = TRUE, archiveMiniature = TRUE, 
                                       force = TRUE, rememberName = TRUE, 
-                                      chain = FALSE, ... , silent=FALSE, ascii = TRUE){
+                                      chain = FALSE, ... , silent=FALSE, ascii = FALSE){
   stopifnot( is.list( functions ) )
   
   

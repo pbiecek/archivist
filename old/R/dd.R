@@ -26,9 +26,9 @@ dd <- function(object,  ..., archiveData = TRUE, rememberName = TRUE) {
   
   # serialize the object with it's original name
   if (rememberName){
-    save(file = paste0(writeDir, md5hash, "/object.rda"), ascii=TRUE, list=objectName,  envir = parent.frame(2))
+    save(file = paste0(writeDir, md5hash, "/object.rda"), ascii=FALSE, list=objectName,  envir = parent.frame(2))
     }else{
-    save(object, file = paste0(writeDir, md5hash, "/object.rda"), ascii=TRUE)
+    save(object, file = paste0(writeDir, md5hash, "/object.rda"), ascii=FALSE)
   }
   # add serialize instructions
   cat(file = paste0(writeDir, md5hash, "/load.R"), ddrescueInstructions(object, md5hash) )
