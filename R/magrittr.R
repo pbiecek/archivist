@@ -58,15 +58,14 @@
       stop("RHS should be a symbol, a call, or a function.")
     
     # In remaining cases, LHS will be evaluated and stored in a new environment.
-    env <- new.env(parent = parent.frame())
+    env <- parent.frame()
     
     # Find an appropriate name to use for evaluation:
     #   deparse(lhs) is useful for preserving the call
     #   but is not always feasible, in which case __LHS is used.
     #   It is also necessary to restrict the size of the name
     #   for a few special cases.
-    nm <- paste(deparse(lhs), collapse = "")
-    nm <- if (nchar(nm) < 9900 && (is.call(lhs) || is.name(lhs))) nm else "__LHS"
+    nm <- "__LHS"
     
     # carry out assignment.
     env[[nm]] <- eval(lhs, env)
@@ -107,12 +106,9 @@
           # Otherwise insert in first position
           e <- as.call(c(rhs[[1]], as.name(nm), as.list(rhs[-1])))
         }
-        
       }
-      
       res <- withVisible(eval(e, env))
     }
-    
     # here saveToRepo res
     # if no local repository is set then rise a warning
     if (!exists( ".repoDir", envir = .ArchivistEnv )) {
@@ -121,11 +117,11 @@
       # for the output save both RHS as an object
       # and LHS as an instruction
       tag_rhs <- paste0("RHS:",rhs_name)
-      tag_lhs <- paste0("LHS:",saveToRepo(env[[nm]], archiveData = FALSE))
+      tag_lhs <- paste0("LHS:",saveToRepo(env[[nm]], archiveData = FALSE, rememberName = FALSE))
       # save the result
       res_val <- res$value
-      saveToRepo(res_val, archiveData = FALSE, userTags = c(tag_lhs, tag_rhs))
+      saveToRepo(res_val, archiveData = FALSE, userTags = c(tag_lhs, tag_rhs), rememberName = FALSE)
     }
     
-    if (res$visible) res$value else invisible(res$value)
+    res$value
   }
