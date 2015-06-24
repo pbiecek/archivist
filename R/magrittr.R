@@ -124,7 +124,8 @@
       lhs_val <- env[[nm]]
       tag_lhs <- paste0("LHS:",saveToRepo(lhs_val, archiveData = FALSE))
       # save the result
-      saveToRepo(res, archiveData = FALSE, userTags = c(tag_lhs, tag_rhs))
+      res_val <- res$value
+      saveToRepo(res_val, archiveData = FALSE, userTags = c(tag_lhs, tag_rhs))
     }
     
     if (res$visible) res$value else invisible(res$value)
