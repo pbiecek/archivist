@@ -107,6 +107,8 @@
 #' 
 #' @param archiveMiniature A logical value denoting whether to archive a miniature of the \code{artifact}.
 #' 
+#' @param userTags A character vector with tags. These tags will be added to the repository along the artifact.
+#' 
 #' @param repoDir A character denoting an existing directory in which an artifact will be saved.
 #' If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.
 #' 
@@ -255,7 +257,7 @@
 saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE, 
                         archiveTags = TRUE, 
                         archiveMiniature = TRUE, force = TRUE, rememberName = TRUE, 
-                        chain = FALSE, ... , silent=FALSE, ascii = TRUE){
+                        chain = FALSE, ... , userTags = c(), silent=FALSE, ascii = TRUE){
   stopifnot( is.logical( c( archiveData, archiveTags, archiveMiniature, 
                                                      chain, rememberName ) ) )
   stopifnot( is.character( repoDir ) | is.null( repoDir ) )
@@ -306,8 +308,8 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
   # whether to add tags
   if ( archiveTags ) {
     extractedTags <- extractTags( artifact, objectNameX = objectName )
-    userTags <- attr( artifact, "tags" ) 
-    sapply( c( extractedTags, userTags ), addTag, md5hash = md5hash, dir = repoDir )
+    derivedTags <- attr( artifact, "tags" ) 
+    sapply( c( extractedTags, userTags, derivedTags), addTag, md5hash = md5hash, dir = repoDir )
     # attr( artifact, "tags" ) are tags specified by an user
   }
   
