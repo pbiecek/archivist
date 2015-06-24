@@ -7,7 +7,7 @@
 saveSetToRepo(artifact, data, functions = list(), repoDir = NULL,
   archiveData = TRUE, archiveTags = TRUE, archiveMiniature = TRUE,
   force = TRUE, rememberName = TRUE, chain = FALSE, ..., silent = FALSE,
-  ascii = TRUE)
+  ascii = FALSE)
 }
 \arguments{
 \item{artifact}{An arbitrary R artifact to be saved. For supported artifacts see details.}
