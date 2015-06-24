@@ -12,8 +12,12 @@ lhs \%a\% rhs
 \item{rhs}{A dataset and function to apply to it.}
 }
 \description{
-A copied pipe operator \link[magrittr]{\%>\%} from magrittr package version 1.0.1.
+An extended pipe operator \link[magrittr]{\%>\%} from magrittr package version 1.0.1.
 Enables archiving artifacts with their chaining code - see examples and vignettes.
+
+The extension works as following, the result of %a% operator is archived together
+with lhs (as an artifact) and rhs (as a tag). This allows to present a history of
+an artifact. This option works only if a default repo is set.
 }
 \examples{
 \dontrun{
