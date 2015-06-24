@@ -4,8 +4,12 @@
 #' @title magrittr - a forward-pipe operator for R
 #'
 #' @description
-#' A copied pipe operator \link[magrittr]{\%>\%} from magrittr package version 1.0.1.
+#' An extended pipe operator \link[magrittr]{\%>\%} from magrittr package version 1.0.1.
 #' Enables archiving artifacts with their chaining code - see examples and vignettes.
+#' 
+#' The extension works as following, the result of %a% operator is archived together 
+#' with lhs (as an artifact) and rhs (as a tag). This allows to present a history of
+#' an artifact. This option works only if a default repo is set.
 #' 
 #' @param lhs A dataset and function to apply to it.
 #' @param rhs A dataset and function to apply to it.
@@ -40,11 +44,11 @@
 `%a%` <-
   function(lhs, rhs)
   {
-    
     # Capture unevaluated arguments
     lhs <- substitute(lhs)
     rhs <- substitute(rhs)
-    
+    rhs_name <- paste(deparse(rhs), collapse = "")
+
     # Should rhs be evaluated first due to parentheses?
     if (is.call(rhs) && identical(rhs[[1]], quote(`(`)))
       rhs <- eval(rhs, parent.frame(), parent.frame())
@@ -107,6 +111,20 @@
       }
       
       res <- withVisible(eval(e, env))
+    }
+    
+    # here saveToRepo res
+    # if no local repository is set then rise a warning
+    if (!exists( ".repoDir", envir = .ArchivistEnv )) {
+      warning("Default local repo is not set. Resuts are not archivised.")
+    } else {
+      # for the output save both RHS as an object
+      # and LHS as an instruction
+      tag_rhs <- paste0("RHS:",rhs_name)
+      lhs_val <- env[[nm]]
+      tag_lhs <- paste0("LHS:",saveToRepo(lhs_val, archiveData = FALSE))
+      # save the result
+      saveToRepo(res, archiveData = FALSE, userTags = c(tag_lhs, tag_rhs))
     }
     
     if (res$visible) res$value else invisible(res$value)
