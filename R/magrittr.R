@@ -48,7 +48,8 @@
     lhs <- substitute(lhs)
     rhs <- substitute(rhs)
     rhs_name <- paste(deparse(rhs), collapse = "")
-
+    lhs_name <- paste(deparse(lhs), collapse = "")
+    
     # Should rhs be evaluated first due to parentheses?
     if (is.call(rhs) && identical(rhs[[1]], quote(`(`)))
       rhs <- eval(rhs, parent.frame(), parent.frame())
@@ -117,7 +118,7 @@
       # for the output save both RHS as an object
       # and LHS as an instruction
       tag_rhs <- paste0("RHS:",rhs_name)
-      tag_lhs <- paste0("LHS:",saveToRepo(env[[nm]], archiveData = FALSE, rememberName = FALSE))
+      tag_lhs <- paste0("LHS:",saveToRepo(env[[nm]], archiveData = FALSE, userTags = paste0("name:",lhs_name), rememberName = FALSE))
       # save the result
       res_val <- res$value
       saveToRepo(res_val, archiveData = FALSE, userTags = c(tag_lhs, tag_rhs), rememberName = FALSE)
