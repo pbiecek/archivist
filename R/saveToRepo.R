@@ -308,6 +308,10 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
   # whether to add tags
   if ( archiveTags ) {
     extractedTags <- extractTags( artifact, objectNameX = objectName )
+    # remove name from tags
+    if (!rememberName) {
+      extractedTags <- extractedTags[!grepl(extractedTags, pattern="^name:")]
+    }
     derivedTags <- attr( artifact, "tags" ) 
     sapply( c( extractedTags, userTags, derivedTags), addTag, md5hash = md5hash, dir = repoDir )
     # attr( artifact, "tags" ) are tags specified by an user
