@@ -16,12 +16,12 @@ contain all tags are returned.}
 This function returns list of artifacts (by value).
 }
 \description{
-\code{asearch} search for artifacts that contain all specified Tags
+\code{asearch} searches for artifacts that contain all specified Tags
 and reads all of them from a Github \link{Repository}. It's a wrapper around
 \link{multiSearchInGithubRepo} and \link{loadFromGithubRepo}.
 }
 \details{
-Function \code{asearch} read all artifacts that contain given list of tags
+Function \code{asearch} reads all artifacts that contain given list of tags
 from GitHub Repository.
 It uses the function \link{loadFromGithubRepo} and
 \link{multiSearchInGithubRepo} but has shorter name and
@@ -41,7 +41,8 @@ Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
 \seealso{
 Other archivist: \code{\link{Repository}};
   \code{\link{Tags}}; \code{\link{\%a\%}};
-  \code{\link{addTagsRepo}};
+  \code{\link{addTagsRepo}}; \code{\link{ahistory}},
+  \code{\link{print.ahistory}};
   \code{\link{archivist-package}}; \code{\link{aread}};
   \code{\link{cache}}; \code{\link{copyGithubRepo}},
   \code{\link{copyLocalRepo}};

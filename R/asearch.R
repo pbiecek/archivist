@@ -3,12 +3,12 @@
 #' @title Read Artifacts Given as a List of Tags
 #'
 #' @description
-#' \code{asearch} search for artifacts that contain all specified Tags 
+#' \code{asearch} searches for artifacts that contain all specified Tags 
 #' and reads all of them from a Github \link{Repository}. It's a wrapper around 
 #' \link{multiSearchInGithubRepo} and \link{loadFromGithubRepo}.
 #' 
 #' @details
-#' Function \code{asearch} read all artifacts that contain given list of tags
+#' Function \code{asearch} reads all artifacts that contain given list of tags
 #' from GitHub Repository.
 #' It uses the function \link{loadFromGithubRepo} and
 #' \link{multiSearchInGithubRepo} but has shorter name and
