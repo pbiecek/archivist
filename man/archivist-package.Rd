@@ -34,7 +34,8 @@ Marcin Kosinski [aut] \email{m.p.kosinski@gmail.com}
 \seealso{
 Other archivist: \code{\link{Repository}};
   \code{\link{Tags}}; \code{\link{\%a\%}};
-  \code{\link{addTagsRepo}}; \code{\link{aread}};
+  \code{\link{addTagsRepo}}; \code{\link{ahistory}},
+  \code{\link{print.ahistory}}; \code{\link{aread}};
   \code{\link{asearch}}; \code{\link{cache}};
   \code{\link{copyGithubRepo}},
   \code{\link{copyLocalRepo}};

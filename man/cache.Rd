@@ -66,7 +66,8 @@ For more detailed information check the \pkg{archivist} package
 
 Other archivist: \code{\link{Repository}};
   \code{\link{Tags}}; \code{\link{\%a\%}};
-  \code{\link{addTagsRepo}};
+  \code{\link{addTagsRepo}}; \code{\link{ahistory}},
+  \code{\link{print.ahistory}};
   \code{\link{archivist-package}}; \code{\link{aread}};
   \code{\link{asearch}}; \code{\link{copyGithubRepo}},
   \code{\link{copyLocalRepo}};
