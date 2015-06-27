@@ -99,7 +99,11 @@ shinySearchInLocalRepo <- function( repoDir=NULL, host = '0.0.0.0' ){
         
         addResourcePath(
           prefix="repo", 
-          directoryPath=paste0(getwd(),"/",repoDir))
+          # if it's absolute path, do not add anything
+          directoryPath=ifelse(substr(repoDir,1,1) == "/",
+                               repoDir,
+                               paste0(getwd(),"/",repoDir))
+          )
         
         res <- ""
         if (length(md5s) > 0) {
