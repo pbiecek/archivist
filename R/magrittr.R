@@ -36,7 +36,6 @@
 #'   saveToRepo( exampleRepoDir )
 #' showLocalRepo(getwd())
 #' 
-#' 
 #' }
 #' @family archivist
 #' @rdname magrittr
