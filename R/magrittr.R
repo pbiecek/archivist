@@ -48,8 +48,7 @@
     rhs <- substitute(rhs)
     rhs_name <- paste(deparse(rhs), collapse = "")
     lhs_name <- paste(deparse(lhs), collapse = "")
-    cat(lhs_name, " - ", rhs_name, "\n")
-    
+
     # Should rhs be evaluated first due to parentheses?
     if (is.call(rhs) && identical(rhs[[1]], quote(`(`)))
       rhs <- eval(rhs, parent.frame(), parent.frame())
