@@ -37,6 +37,14 @@
 #' @import shiny
 #' @import lubridate
 #' @import digest
+#' @importFrom utils head
+#' @importFrom utils zip
+#' @importFrom grDevices png
+#' @importFrom grDevices dev.off
+#' @importFrom graphics plot
+#' @importFrom graphics par
+#' @importFrom graphics barplot
+#' @importFrom graphics par
 #' @family archivist
 #' @name archivist-package
 #' @docType package
