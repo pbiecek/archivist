@@ -27,12 +27,17 @@
 #' @export
 aread <- function( md5hash){
   stopifnot( is.character( md5hash ) )
-  
-  # at least 3 elements
-  elements <- strsplit(md5hash, "/")[[1]]
-  stopifnot( length(elements) >= 3 )
 
-  loadFromGithubRepo(md5hash = elements[length(elements)], 
-                           repo=paste(elements[2:(length(elements)-1)], sep="/"), 
-                           user = elements[1], value = TRUE)
+  # work for vectors  
+  res <- list()
+  for (md5h in md5hash) {
+    # at least 3 elements
+    elements <- strsplit(md5h, "/")[[1]]
+    stopifnot( length(elements) >= 3 )
+    
+    res[[md5h]] <- loadFromGithubRepo(md5hash = elements[length(elements)], 
+                         repo=paste(elements[2:(length(elements)-1)], sep="/"), 
+                         user = elements[1], value = TRUE)
+  }
+  if (length(res) == 1) return(res[[1]]) else res
 }
