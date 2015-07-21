@@ -48,16 +48,10 @@ getArchivistOptions <- function(key) {
 #' @family archivist
 #' @rdname archivistOptions
 #' @export
-`aoptions<-` <- function(key, value) {
+aoptions <- function(key, value=NULL) {
   stopifnot( is.character( key ) )
-  .ArchivistEnv[[key]] <- value
-  value
-}
-
-#' @family archivist
-#' @rdname archivistOptions
-#' @export
-aoptions <- function(key) {
-  stopifnot( is.character( key ) )
+  if (!is.null(value)) {
+    .ArchivistEnv[[key]] <- value
+  } 
   .ArchivistEnv[[key]]
 }
