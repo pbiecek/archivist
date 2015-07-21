@@ -37,6 +37,9 @@ setArchivistOptions <- function(key, value) {
   value
 }
 
+#' @family archivist
+#' @rdname archivistOptions
+#' @export
 getArchivistOptions <- function(key) {
   stopifnot( is.character( key ) )
   .ArchivistEnv[[key]]

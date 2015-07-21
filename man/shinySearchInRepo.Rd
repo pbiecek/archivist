@@ -57,6 +57,8 @@ Other archivist: \code{\link{Repository}};
   \code{\link{copyGithubRepo}},
   \code{\link{copyLocalRepo}};
   \code{\link{createEmptyRepo}}; \code{\link{deleteRepo}};
+  \code{\link{getArchivistOptions}},
+  \code{\link{setArchivistOptions}};
   \code{\link{getTagsGithub}}, \code{\link{getTagsLocal}};
   \code{\link{loadFromGithubRepo}},
   \code{\link{loadFromLocalRepo}}; \code{\link{md5hash}};
@@ -65,10 +67,8 @@ Other archivist: \code{\link{Repository}};
   \code{\link{searchInGithubRepo}},
   \code{\link{searchInLocalRepo}};
   \code{\link{rmFromRepo}}; \code{\link{saveSetToRepo}};
-  \code{\link{saveToRepo}};
-  \code{\link{setArchivistOptions}};
-  \code{\link{setGithubRepo}}, \code{\link{setLocalRepo}};
-  \code{\link{showGithubRepo}},
+  \code{\link{saveToRepo}}; \code{\link{setGithubRepo}},
+  \code{\link{setLocalRepo}}; \code{\link{showGithubRepo}},
   \code{\link{showLocalRepo}};
   \code{\link{summaryGithubRepo}},
   \code{\link{summaryLocalRepo}};
