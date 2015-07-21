@@ -35,13 +35,14 @@ Marcin Kosinski [aut] \email{m.p.kosinski@gmail.com}
 Other archivist: \code{\link{Repository}};
   \code{\link{Tags}}; \code{\link{\%a\%}};
   \code{\link{addTagsRepo}}; \code{\link{ahistory}},
-  \code{\link{print.ahistory}}; \code{\link{aread}};
+  \code{\link{print.ahistory}}; \code{\link{aoptions}},
+  \code{\link{aoptions<-}},
+  \code{\link{getArchivistOptions}},
+  \code{\link{setArchivistOptions}}; \code{\link{aread}};
   \code{\link{asearch}}; \code{\link{cache}};
   \code{\link{copyGithubRepo}},
   \code{\link{copyLocalRepo}};
   \code{\link{createEmptyRepo}}; \code{\link{deleteRepo}};
-  \code{\link{getArchivistOptions}},
-  \code{\link{setArchivistOptions}};
   \code{\link{getTagsGithub}}, \code{\link{getTagsLocal}};
   \code{\link{loadFromGithubRepo}},
   \code{\link{loadFromLocalRepo}}; \code{\link{md5hash}};
