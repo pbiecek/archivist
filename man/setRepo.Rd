@@ -118,6 +118,7 @@ Other archivist: \code{\link{Repository}};
   \code{\link{searchInLocalRepo}};
   \code{\link{rmFromRepo}}; \code{\link{saveSetToRepo}};
   \code{\link{saveToRepo}};
+  \code{\link{setArchivistOptions}};
   \code{\link{shinySearchInLocalRepo}};
   \code{\link{showGithubRepo}},
   \code{\link{showLocalRepo}};
@@ -143,6 +144,7 @@ Other archivist: \code{\link{Repository}};
   \code{\link{searchInLocalRepo}};
   \code{\link{rmFromRepo}}; \code{\link{saveSetToRepo}};
   \code{\link{saveToRepo}};
+  \code{\link{setArchivistOptions}};
   \code{\link{shinySearchInLocalRepo}};
   \code{\link{showGithubRepo}},
   \code{\link{showLocalRepo}};

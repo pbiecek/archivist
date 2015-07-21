@@ -296,6 +296,7 @@ Other archivist: \code{\link{Repository}};
   \code{\link{searchInGithubRepo}},
   \code{\link{searchInLocalRepo}};
   \code{\link{saveSetToRepo}}; \code{\link{saveToRepo}};
+  \code{\link{setArchivistOptions}};
   \code{\link{setGithubRepo}}, \code{\link{setLocalRepo}};
   \code{\link{shinySearchInLocalRepo}};
   \code{\link{showGithubRepo}},

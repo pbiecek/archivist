@@ -7,7 +7,7 @@
 saveToRepo(artifact, repoDir = NULL, archiveData = TRUE,
   archiveTags = TRUE, archiveMiniature = TRUE, force = TRUE,
   rememberName = TRUE, chain = FALSE, ..., userTags = c(),
-  silent = FALSE, ascii = FALSE)
+  silent = getArchivistOptions("silent"), ascii = FALSE)
 }
 \arguments{
 \item{artifact}{An arbitrary R artifact to be saved. For supported artifacts see details.}
@@ -276,6 +276,7 @@ Other archivist: \code{\link{Repository}};
   \code{\link{searchInGithubRepo}},
   \code{\link{searchInLocalRepo}};
   \code{\link{rmFromRepo}}; \code{\link{saveSetToRepo}};
+  \code{\link{setArchivistOptions}};
   \code{\link{setGithubRepo}}, \code{\link{setLocalRepo}};
   \code{\link{shinySearchInLocalRepo}};
   \code{\link{showGithubRepo}},

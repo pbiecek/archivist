@@ -65,8 +65,10 @@ Other archivist: \code{\link{Repository}};
   \code{\link{searchInGithubRepo}},
   \code{\link{searchInLocalRepo}};
   \code{\link{rmFromRepo}}; \code{\link{saveSetToRepo}};
-  \code{\link{saveToRepo}}; \code{\link{setGithubRepo}},
-  \code{\link{setLocalRepo}}; \code{\link{showGithubRepo}},
+  \code{\link{saveToRepo}};
+  \code{\link{setArchivistOptions}};
+  \code{\link{setGithubRepo}}, \code{\link{setLocalRepo}};
+  \code{\link{showGithubRepo}},
   \code{\link{showLocalRepo}};
   \code{\link{summaryGithubRepo}},
   \code{\link{summaryLocalRepo}};
