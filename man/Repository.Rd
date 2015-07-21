@@ -46,10 +46,7 @@ Learn more about \code{Repository} at \pkg{archivist} \code{wiki} webpage on
 
 Other archivist: \code{\link{Tags}}; \code{\link{\%a\%}};
   \code{\link{addTagsRepo}}; \code{\link{ahistory}},
-  \code{\link{print.ahistory}}; \code{\link{aoptions}},
-  \code{\link{aoptions<-}},
-  \code{\link{getArchivistOptions}},
-  \code{\link{setArchivistOptions}};
+  \code{\link{print.ahistory}}; \code{\link{aoptions}};
   \code{\link{archivist-package}}; \code{\link{aread}};
   \code{\link{asearch}}; \code{\link{cache}};
   \code{\link{copyGithubRepo}},
