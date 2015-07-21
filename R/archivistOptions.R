@@ -17,7 +17,7 @@
 #' 
 #' @param key Name of the parameter.
 #' 
-#' @param value New value of the 'key' parameter.
+#' @param value New value for the 'key' parameter.
 #' 
 #' @author 
 #' Przemysław Biecek, \email{przemyslaw.biecek@@gmail.com}

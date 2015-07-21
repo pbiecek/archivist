@@ -9,7 +9,7 @@ setArchivistOptions(key, value)
 \arguments{
 \item{key}{Name of the parameter.}
 
-\item{value}{New value of the 'key' parameter.}
+\item{value}{New value for the 'key' parameter.}
 }
 \value{
 Both functions return value that corresponds to a selected key.
