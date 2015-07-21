@@ -3,17 +3,18 @@
 #' @title Default options for Archivist
 #'
 #' @description
-#' \code{setArchivistOptions} and \code{getArchivistOptions} set and get default options
-#' for many \code{archivist} functions.
+#' The function \code{aoptions} sets and gets default options
+#' for other \code{archivist} functions.
 #' 
 #' @details
-#' \code{setArchivistOptions} function sets a parameter that will be stored in internal environment.
-#' \code{getArchivistOptions} returns value of given parameter.
-#' Both functions are used for setting default values for parameters in archivist functions.
+#' The function \code{aoptions} with two arguments sets default values 
+#' of arguments for other \code{archivist} functions (stored in an internal environment).
+#' The function \code{aoptions} with one argument returns value of given parameter.
+#' It is used for setting default values for parameters in archivist functions.
 #' Currently works for arguments: silent
-
+#' 
 #' @return
-#' Both functions return value that corresponds to a selected key.
+#' The function returns value that corresponds to a selected key.
 #' 
 #' @param key Name of the parameter.
 #' 
@@ -26,25 +27,10 @@
 #' # objects preparation
 #' \dontrun{
 #' # turn off warnings in saveToRepo()
-#' setArchivistOptions("silent", FALSE)
+#' aoptions("silent", FALSE)
+#' aoptions("silent")
 #' }
-#' @family archivist
-#' @rdname archivistOptions
-#' @export
-setArchivistOptions <- function(key, value) {
-  stopifnot( is.character( key ) )
-  .ArchivistEnv[[key]] <- value
-  value
-}
-
-#' @family archivist
-#' @rdname archivistOptions
-#' @export
-getArchivistOptions <- function(key) {
-  stopifnot( is.character( key ) )
-  .ArchivistEnv[[key]]
-}
-
+#' 
 #' @family archivist
 #' @rdname archivistOptions
 #' @export
