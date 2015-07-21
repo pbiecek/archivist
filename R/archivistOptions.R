@@ -3,7 +3,7 @@
 #' @title Default options for Archivist
 #'
 #' @description
-#' \code{setArchivistOptions} and \code{getArchivistOptions} set and get default opitions
+#' \code{setArchivistOptions} and \code{getArchivistOptions} set and get default options
 #' for many \code{archivist} functions.
 #' 
 #' @details
@@ -41,6 +41,23 @@ setArchivistOptions <- function(key, value) {
 #' @rdname archivistOptions
 #' @export
 getArchivistOptions <- function(key) {
+  stopifnot( is.character( key ) )
+  .ArchivistEnv[[key]]
+}
+
+#' @family archivist
+#' @rdname archivistOptions
+#' @export
+`aoptions<-` <- function(key, value) {
+  stopifnot( is.character( key ) )
+  .ArchivistEnv[[key]] <- value
+  value
+}
+
+#' @family archivist
+#' @rdname archivistOptions
+#' @export
+aoptions <- function(key) {
   stopifnot( is.character( key ) )
   .ArchivistEnv[[key]]
 }
