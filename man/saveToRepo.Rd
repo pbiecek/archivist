@@ -7,7 +7,7 @@
 saveToRepo(artifact, repoDir = NULL, archiveData = TRUE,
   archiveTags = TRUE, archiveMiniature = TRUE, force = TRUE,
   rememberName = TRUE, chain = FALSE, ..., userTags = c(),
-  silent = getArchivistOptions("silent"), ascii = FALSE)
+  silent = aoptions("silent"), ascii = FALSE)
 }
 \arguments{
 \item{artifact}{An arbitrary R artifact to be saved. For supported artifacts see details.}
