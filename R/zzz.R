@@ -1,14 +1,14 @@
 .ArchivistEnv <- new.env()
 
-.ArchivistEnv$silent <- FALSE
-
 .onAttach <- function(...) {
   packageStartupMessage( "\n Welcome to the archivist package (ver 1.5)." )
+  .ArchivistEnv$silent <- FALSE
 }
 
 .onLoad <- function(...) {
   assign( x = "sqlite", value = dbDriver( "SQLite" ), envir = .ArchivistEnv )
   assign( x = ".GithubURL", value = "https://raw.githubusercontent.com/", envir = .ArchivistEnv )
+  .ArchivistEnv$silent <- FALSE
 }
 
 onUnload <- function( libpath ){
