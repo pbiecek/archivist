@@ -34,6 +34,8 @@
 #' @param force If \code{force = TRUE} function call forces to create \code{repoDir} directory if
 #' it did not exist. Default set to \code{force = TRUE}.
 #' 
+#' @param default If \code{default = TRUE} then \code{repoDir} is set as default local repository.
+#' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #'
@@ -61,7 +63,7 @@
 #' @family archivist
 #' @rdname createEmptyRepo
 #' @export
-createEmptyRepo <- function( repoDir, force = TRUE ){
+createEmptyRepo <- function( repoDir, force = TRUE, default = FALSE){
   stopifnot( is.character( repoDir ) )
   
   if ( !file.exists( repoDir ) & !force ) 
@@ -98,6 +100,10 @@ createEmptyRepo <- function( repoDir, force = TRUE ){
   
   dbDisconnect( backpack )
   
+  if (default) {
+    setLocalRepo(repoDir)
+  }
+   
   # if gallery folder does not exist - make it
   if ( !file.exists( file.path( repoDir, "gallery" ) ) ){
     dir.create( file.path( repoDir, "gallery" ), showWarnings = FALSE)
