@@ -34,7 +34,7 @@ aoptions("silent")
 }
 }
 \author{
-Przemysław Biecek, \email{przemyslaw.biecek@gmail.com}
+Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
 }
 \seealso{
 Other archivist: \code{\link{Repository}};

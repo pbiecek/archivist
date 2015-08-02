@@ -21,7 +21,7 @@
 #' @param value New value for the 'key' parameter.
 #' 
 #' @author 
-#' Przemysław Biecek, \email{przemyslaw.biecek@@gmail.com}
+#' Przemyslaw Biecek, \email{przemyslaw.biecek@@gmail.com}
 #'
 #' @examples
 #' # objects preparation
