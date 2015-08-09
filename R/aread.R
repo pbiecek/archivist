@@ -36,7 +36,7 @@ aread <- function( md5hash){
     stopifnot( length(elements) >= 3 )
     
     res[[md5h]] <- loadFromGithubRepo(md5hash = elements[length(elements)], 
-                         repo=paste(elements[2:(length(elements)-1)], sep="/"), 
+                         repo=paste(elements[2:(length(elements)-1)], collapse="/"), 
                          user = elements[1], value = TRUE)
   }
   if (length(res) == 1) return(res[[1]]) else res
