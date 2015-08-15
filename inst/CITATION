@@ -1,4 +1,4 @@
-citHeader("To cite bgmm in publications use:")
+citHeader("To cite archivist in publications use:")
 
 citEntry(entry = "Manual",
   title        = "{archivist}: An {R} Package for Managing, Recording and Restoring Data Analysis Results",
