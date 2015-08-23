@@ -1,7 +1,7 @@
 .ArchivistEnv <- new.env()
 
 .onAttach <- function(...) {
-  packageStartupMessage( "\n Welcome to the archivist package (ver 1.6)." )
+   packageStartupMessage("Welcome to the archivist (version: ", utils::packageVersion("archivist"), ").")
   .ArchivistEnv$silent <- FALSE
 }
 
