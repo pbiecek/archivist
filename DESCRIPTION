@@ -27,6 +27,5 @@ LazyLoad: yes
 LazyData: yes
 Depends: R (>= 3.0.0),
 Imports: RCurl, digest, httr, DBI, lubridate, RSQLite
-Suggests: shiny,
-    testthat
+Suggests: shiny, testthat, devtools
 BugReports: https://github.com/pbiecek/archivist/issues
