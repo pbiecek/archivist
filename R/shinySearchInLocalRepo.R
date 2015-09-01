@@ -57,8 +57,8 @@ shinySearchInLocalRepo <- function( repoDir=NULL, host = '0.0.0.0' ){
 
   shiny::runApp(list(
     ui = shiny::shinyUI(shiny::fluidPage(
-      tags$head(
-        tags$style(shiny::HTML("div.span4 {
+      shiny::tags$head(
+        shiny::tags$style(shiny::HTML("div.span4 {
                         width: 300px!important;
 }"))),
     
