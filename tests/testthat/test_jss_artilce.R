@@ -82,9 +82,9 @@ test_that("copying from other repositories and showRepo", {
 
 
 test_that("saveToRepo funcion works with regular parameters", {
-  library("ggplot2")
   repo <- "new_repo"
-  pl <- qplot(Sepal.Length, Petal.Length, data = iris)
+  invisible(createEmptyRepo(repoDir = repo))
+  pl <- plot(iris$Sepal.Length, iris$Petal.Length)
   saveToRepo(pl, repoDir = repo) -> hash
   
   expect_equal(hash %in% showLocalRepo(repoDir = repo, "tags")[, "artifact"], TRUE)
