@@ -32,7 +32,6 @@
 #' 
 #' @importFrom RCurl getBinaryURL
 #' @import httr
-#' @import devtools
 #' @importFrom DBI dbWriteTable
 #' @importFrom DBI dbGetQuery
 #' @importFrom DBI dbDisconnect
