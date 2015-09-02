@@ -33,6 +33,7 @@
 #' 
 #' @family archivist
 #' @rdname archivistOptions
+#' @aliases aoptions
 #' @export
 aoptions <- function(key, value=NULL) {
   stopifnot( is.character( key ) )

@@ -38,6 +38,12 @@ sort:createdDate will sort along createdDate and sort:-createdDate backward.
 \code{Tags}, submitted in the text field, should be given according to the
 format: \code{"TagType:TagTypeValue"} - see examples.
 }
+\section{shiny}{
+
+
+This function use tools from the fantastic shiny
+package, so you'll need to make sure to have that installed.
+}
 \examples{
 \dontrun{
   # assuming that there is a 'repo' dir with a valid archivist repository
