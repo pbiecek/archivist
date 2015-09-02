@@ -1,29 +1,25 @@
-test_that("2+2 is 4",{
-  expect_equal(2+2,4)
+test_that("aread downloads files", {
+  aread("pbiecek/graphGallery/2166dfbd3a7a68a91a2f8e6df1a44111") -> ddl_ggplot
+  aread("pbiecek/graphGallery/2166d") -> ddl_ggplot_abrv
+  
+  expect_is(ddl_ggplot, "gg")
+  expect_is(ddl_ggplot, "ggplot")
+  expect_output(str(ddl_ggplot), "List of 2")
+  expect_equal(ddl_ggplot$labels$x, "Sepal.Length")
+  
+  expect_is(ddl_ggplot_abrv, "gg")
+  expect_is(ddl_ggplot_abrv, "ggplot")
+  expect_output(str(ddl_ggplot_abrv), "List of 2")
+  expect_equal(ddl_ggplot_abrv$labels$y, "Petal.Length")
+  
+  
+  model <- aread("pbiecek/graphGallery/2a6e492cb6982f230e48cf46023e2e4f")
+  expect_is(model, "lm")
+  expect_output(str(model), "List of 13")
+  expect_equal(names(model$coefficients)[2], "Sepal.Length")
+  expect_equal(dim(model$model), c(150, 3))
+  
 })
-
-# test_that("aread downloads files", {
-#   aread("pbiecek/graphGallery/2166dfbd3a7a68a91a2f8e6df1a44111") -> ddl_ggplot
-#   aread("pbiecek/graphGallery/2166d") -> ddl_ggplot_abrv
-#   
-#   expect_is(ddl_ggplot, "gg")
-#   expect_is(ddl_ggplot, "ggplot")
-#   expect_output(str(ddl_ggplot), "List of 2")
-#   expect_equal(ddl_ggplot$labels$x, "Sepal.Length")
-#   
-#   expect_is(ddl_ggplot_abrv, "gg")
-#   expect_is(ddl_ggplot_abrv, "ggplot")
-#   expect_output(str(ddl_ggplot_abrv), "List of 2")
-#   expect_equal(ddl_ggplot_abrv$labels$y, "Petal.Length")
-#   
-#   
-#   model <- aread("pbiecek/graphGallery/2a6e492cb6982f230e48cf46023e2e4f")
-#   expect_is(model, "lm")
-#   expect_output(str(model), "List of 13")
-#   expect_equal(names(model$coefficients)[2], "Sepal.Length")
-#   expect_equal(dim(model$model), c(150, 3))
-#   
-# })
 # 
 # 
 # test_that("asearch works properly", {
