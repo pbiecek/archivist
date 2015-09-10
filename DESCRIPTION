@@ -25,14 +25,7 @@ Repository: CRAN
 License: GPL-2
 LazyLoad: yes
 LazyData: yes
-Depends:
-    R (>= 3.0.0),
-    RSQLite,
-    DBI,
-    shiny,
-    lubridate
-Imports:
-    RCurl,
-    digest,
-    httr
+Depends: R (>= 3.0.0),
+Imports: RCurl, digest, httr, DBI, lubridate, RSQLite
+Suggests: shiny, testthat, ggplot2
 BugReports: https://github.com/pbiecek/archivist/issues
