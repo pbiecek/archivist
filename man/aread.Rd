@@ -7,7 +7,11 @@
 aread(md5hash)
 }
 \arguments{
-\item{md5hash}{A character with at least trhee components, GitHub user name, GitHub repository and name of the artifact assigned to the artifact as a result of a cryptographical hash function with MD5 algorithm, or it's abbreviation.}
+\item{md5hash}{One from following:
+
+A character with at least three components sepearated with '/': GitHub user name, GitHub repository and name of the artifact (MD5 hash) or it's abbreviation.
+
+A MD5 hash of object in current local default directory or it's abbreviation.}
 }
 \description{
 \code{aread} reads an artifact from a Github \link{Repository}. It's a wrapper around
@@ -19,7 +23,10 @@ It uses the function \link{loadFromGithubRepo} with different paramter's specifi
 }
 \examples{
 \dontrun{
-# read the object
+# read the object from local directory
+setLocalRepo(system.file("graphGallery", package = "archivist"))
+pl <- aread("2166dfbd3a7a68a91a2f8e6df1a44111")
+# read the object from GitHub
 pl <- aread("pbiecek/graphGallery/2166dfbd3a7a68a91a2f8e6df1a44111")
 # plot it
 pl

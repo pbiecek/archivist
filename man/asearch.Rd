@@ -4,10 +4,14 @@
 \alias{asearch}
 \title{Read Artifacts Given as a List of Tags}
 \usage{
-asearch(repo, patterns)
+asearch(repo = NULL, patterns)
 }
 \arguments{
-\item{repo}{A character with GitHub user name and GitHub repository name separated by `/`.}
+\item{repo}{One of following:
+
+A character with GitHub user name and GitHub repository name separated by `/`.
+
+NULL in this case search will be performed in the default repo.}
 
 \item{patterns}{A character vector of tags. Only artifacts that
 contain all tags are returned.}
