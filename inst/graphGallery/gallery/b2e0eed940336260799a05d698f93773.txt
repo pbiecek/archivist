@@ -1,0 +1,7 @@
+        source       date            candidate support daysToElections
+2         CBOS 2015-02-16 Bronisław Komorowski    63.0             -83
+3         CBOS 2015-03-02 Bronisław Komorowski    49.0             -69
+4         CBOS 2015-03-11 Bronisław Komorowski    52.0             -60
+5         CBOS 2015-03-20 Bronisław Komorowski    48.0             -51
+6         CBOS 2015-04-22 Bronisław Komorowski    43.0             -18
+9 Dobra Opinia 2015-04-10 Bronisław Komorowski    48.3             -30

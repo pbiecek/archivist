@@ -1,0 +1,7 @@
+  date       count lang page              rank month  title            
+1 2013-01-12 464   pl   Andrzej_Sapkowski 1366 201301 Andrzej_Sapkowski
+2 2013-01-13 538   pl   Andrzej_Sapkowski 1366 201301 Andrzej_Sapkowski
+3 2013-01-10 536   pl   Andrzej_Sapkowski 1366 201301 Andrzej_Sapkowski
+4 2013-01-11 457   pl   Andrzej_Sapkowski 1366 201301 Andrzej_Sapkowski
+5 2013-01-16 540   pl   Andrzej_Sapkowski 1366 201301 Andrzej_Sapkowski
+6 2013-01-17 541   pl   Andrzej_Sapkowski 1366 201301 Andrzej_Sapkowski

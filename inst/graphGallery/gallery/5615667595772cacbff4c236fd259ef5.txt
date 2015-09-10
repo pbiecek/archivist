@@ -1,0 +1,7 @@
+  zrodlo       Data             kandydat poparcie
+2   CBOS 2015-02-16 Bronisław.Komorowski       63
+3   CBOS 2015-03-02 Bronisław.Komorowski       49
+4   CBOS 2015-03-11 Bronisław.Komorowski       52
+5   CBOS 2015-03-20 Bronisław.Komorowski       48
+6   CBOS 2015-04-22 Bronisław.Komorowski       43
+7   CBOS 2015-05-20 Bronisław.Komorowski       44

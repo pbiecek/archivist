@@ -1,0 +1,7 @@
+  sex geo time value
+1   T  ES 1999  5738
+2   T  FR 1999  8487
+3   T  LV 1999    NA
+4   T  PL 1999    NA
+5   T  PT 1999  1995
+6   T  SK 1999    NA

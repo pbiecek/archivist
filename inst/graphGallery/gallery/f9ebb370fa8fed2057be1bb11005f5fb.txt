@@ -1,0 +1,9 @@
+Source: local data frame [6 x 14]
+
+        date hour minute  dep  arr dep_delay arr_delay carrier flight dest  plane cancelled time dist
+1 2011-01-01   14      0 1400 1500         0       -10      AA    428  DFW N576AA         0   40  224
+2 2011-01-02   14      1 1401 1501         1        -9      AA    428  DFW N557AA         0   45  224
+3 2011-01-03   13     52 1352 1502        -8        -8      AA    428  DFW N541AA         0   48  224
+4 2011-01-04   14      3 1403 1513         3         3      AA    428  DFW N403AA         0   39  224
+5 2011-01-05   14      5 1405 1507         5        -3      AA    428  DFW N492AA         0   44  224
+6 2011-01-06   13     59 1359 1503        -1        -7      AA    428  DFW N262AA         0   45  224

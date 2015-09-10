@@ -1,0 +1,7 @@
+  month                              name       gendre   rate rate2
+1     1   The Wolf of Wall Street (2013)  Biograficzny 7,7/10   7.7
+2     1        Casse-tête chinois (2013)        Dramat 6,5/10   6.5
+3     1 Walking with Dinosaurs 3D (2013)      Animacja 5,8/10   5.8
+4     1              Nymphomaniac (2013)        Dramat 6,1/10   6.1
+5     1                  47 Ronin (2013)       Fantasy 6,3/10   6.3
+6     1                   Wkręceni (2014)      Komedia 5,6/10   5.6

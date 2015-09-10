@@ -1,0 +1,20 @@
+
+Call:
+lm(formula = Petal.Length ~ Species, data = iris)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-1.260 -0.258  0.038  0.240  1.348 
+
+Coefficients:
+                  Estimate Std. Error t value Pr(>|t|)    
+(Intercept)        1.46200    0.06086   24.02   <2e-16 ***
+Speciesversicolor  2.79800    0.08607   32.51   <2e-16 ***
+Speciesvirginica   4.09000    0.08607   47.52   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.4303 on 147 degrees of freedom
+Multiple R-squared:  0.9414,	Adjusted R-squared:  0.9406 
+F-statistic:  1180 on 2 and 147 DF,  p-value: < 2.2e-16
+
