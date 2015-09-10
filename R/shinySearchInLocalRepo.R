@@ -36,6 +36,11 @@
 #' @author
 #' Przemyslaw Biecek, \email{przemyslaw.biecek@@gmail.com}
 #'
+#' @section shiny:
+#'
+#' This function use tools from the fantastic shiny
+#' package, so you'll need to make sure to have that installed.
+#'
 #' @examples
 #' \dontrun{
 #'   # assuming that there is a 'repo' dir with a valid archivist repository
@@ -45,27 +50,30 @@
 #' @rdname shinySearchInRepo
 #' @export
 shinySearchInLocalRepo <- function( repoDir=NULL, host = '0.0.0.0' ){
+  if (!requireNamespace("shiny", quietly = TRUE)) {
+    stop("shiny package required for shinySearchInLocalRepo function")
+  }
   stopifnot( is.character( repoDir ) | is.null( repoDir ) )
 
-  runApp(list(
-    ui = shinyUI(fluidPage(
-      tags$head(
-        tags$style(HTML("div.span4 {
+  shiny::runApp(list(
+    ui = shiny::shinyUI(shiny::fluidPage(
+      shiny::tags$head(
+        shiny::tags$style(shiny::HTML("div.span4 {
                         width: 300px!important;
 }"))),
     
-      titlePanel(paste0("Live search in the ",repoDir)),
-      sidebarLayout(
-        sidebarPanel(
-          textInput("search","Comma separated tags",value = "class:ggplot"),
-          sliderInput("width", "Image width", min=100, max=800, value=400)),
-        mainPanel(
-          uiOutput("plot")
+      shiny::titlePanel(paste0("Live search in the ",repoDir)),
+      shiny::sidebarLayout(
+        shiny::sidebarPanel(
+          shiny::textInput("search","Comma separated tags",value = "class:ggplot"),
+          shiny::sliderInput("width", "Image width", min=100, max=800, value=400)),
+        shiny::mainPanel(
+          shiny::uiOutput("plot")
         )
       )
         )),
     server = function(input, output) {
-      output$plot <- renderUI({ 
+      output$plot <- shiny::renderUI({ 
         tags <- strsplit(input$search, split=" *, *")[[1]]
         sortTags <- grep(tags, pattern="^sort:")
         # tags with sort: key should be removed from search
@@ -97,7 +105,7 @@ shinySearchInLocalRepo <- function( repoDir=NULL, host = '0.0.0.0' ){
           }
         }
         
-        addResourcePath(
+        shiny::addResourcePath(
           prefix="repo", 
           # if it's absolute path, do not add anything
           directoryPath=ifelse(substr(repoDir,1,1) == "/",
@@ -112,7 +120,7 @@ shinySearchInLocalRepo <- function( repoDir=NULL, host = '0.0.0.0' ){
             collapse="")
         } 
         
-        HTML(res)
+        shiny::HTML(res)
       })
     }
   ), host = host)

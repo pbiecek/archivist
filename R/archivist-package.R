@@ -30,21 +30,19 @@
 #' Przemyslaw Biecek [aut, cre] \email{przemyslaw.biecek@@gmail.com} \cr
 #' Marcin Kosinski [aut] \email{m.p.kosinski@@gmail.com}
 #' 
-#' @import RCurl
+#' @importFrom RCurl getBinaryURL
 #' @import httr
-#' @import RSQLite
-#' @import DBI
-#' @import shiny
-#' @import lubridate
-#' @import digest
-#' @importFrom utils head
-#' @importFrom utils zip
-#' @importFrom grDevices png
-#' @importFrom grDevices dev.off
-#' @importFrom graphics plot
-#' @importFrom graphics par
-#' @importFrom graphics barplot
-#' @importFrom graphics par
+#' @importFrom DBI dbWriteTable
+#' @importFrom DBI dbGetQuery
+#' @importFrom DBI dbDisconnect
+#' @importFrom DBI dbConnect
+#' @importFrom DBI dbReadTable
+#' @importFrom DBI dbDriver
+#' @importFrom DBI dbUnloadDriver
+#' @importClassesFrom RSQLite SQLiteDriver
+#' @importFrom RSQLite SQLite
+#' @importFrom lubridate now
+#' @importFrom digest digest
 #' @family archivist
 #' @name archivist-package
 #' @docType package
