@@ -12,7 +12,8 @@
 #' 
 #' @param md5hash One from following:
 #' 
-#' A character with at least three components sepearated with '/': GitHub user name, GitHub repository and name of the artifact (MD5 hash) or it's abbreviation
+#' A character with at least three components sepearated with '/': GitHub user name, GitHub repository and name of the artifact (MD5 hash) or it's abbreviation.
+#' 
 #' A MD5 hash of object in current local default directory or it's abbreviation.
 #' 
 #' @author 
