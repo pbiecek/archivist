@@ -2,6 +2,7 @@ archivist 1.7
 ----------------------------------------------------------------
 
 * Added graphGallery for self-contained examples
+* aread allows for single MD5 hash (which will be read from the default repo)
 
 
 archivist 1.6
