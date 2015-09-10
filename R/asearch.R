@@ -38,19 +38,18 @@
 #' @family archivist
 #' @rdname asearch
 #' @export
-asearch <- function( repo = NULL, patterns){
+asearch <- function( patterns, repo = NULL){
   stopifnot( is.character( repo ) | is.null(repo) )
   stopifnot( is.character( patterns ) )
 
+  res <- list()
   if (is.null(repo)) {
     # use default repo
     oblist <- multiSearchInLocalRepo(patterns = patterns,
                                       intersect = TRUE)
-    res <- list()
     if (length(oblist)>0) {
       res <- lapply(oblist, aread)
     } 
-    
   } else {
     # at least 3 elements
     # it's GitHub Repo
@@ -60,7 +59,6 @@ asearch <- function( repo = NULL, patterns){
     oblist <- multiSearchInGithubRepo(user = elements[1], repo=paste(elements[-1], collapse = "/"), 
                                       patterns = patterns,
                                       intersect = TRUE)
-    res <- list()
     if (length(oblist)>0) {
       res <- lapply(paste0(repo, "/", oblist), aread)
     } 
