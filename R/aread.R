@@ -39,7 +39,7 @@ aread <- function( md5hash){
   for (md5h in md5hash) {
     # at least 3 elements
     elements <- strsplit(md5h, "/")[[1]]
-    stopifnot( length(elements) >= 3 | length(elements) == 3)
+    stopifnot( length(elements) >= 3 | length(elements) == 1)
     if (length(elements) == 1) {
       # local directory
       res[[md5h]] <- loadFromLocalRepo(md5hash = elements, value = TRUE)
