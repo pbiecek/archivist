@@ -1,0 +1,10 @@
+Source: local data frame [6 x 14]
+Groups: carrier, flight, dest
+
+        date hour minute  dep  arr dep_delay arr_delay carrier flight dest  plane cancelled time dist
+1 2011-01-01   17     56 1756 2112         1        -3      AA   1294  MIA N3DGAA         0  113  964
+2 2011-01-02   18     23 1823 2132        28        17      AA   1294  MIA N3CCAA         0  112  964
+3 2011-01-03   17     55 1755 2106         0        -9      AA   1294  MIA N3ARAA         0  112  964
+4 2011-01-04   17     57 1757 2122         2         7      AA   1294  MIA N3DFAA         0  108  964
+5 2011-01-05   17     51 1751 2100        -4       -15      AA   1294  MIA N3BDAA         0  107  964
+6 2011-01-06   17     46 1746 2120        -9         5      AA   1294  MIA N3CMAA         0  106  964

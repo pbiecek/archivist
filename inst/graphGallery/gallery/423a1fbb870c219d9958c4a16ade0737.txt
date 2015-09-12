@@ -1,0 +1,10 @@
+Source: local data frame [6 x 4]
+Groups: carrier, flight
+
+  carrier flight dest   n
+1      AA   1294  MIA 365
+2      AS    731  SEA 365
+3      CO      1  HNL 365
+4      CO     62  EWR 365
+5      CO     89  EWR 365
+6      CO    106  EWR 365
