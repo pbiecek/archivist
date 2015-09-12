@@ -254,12 +254,12 @@ loadFromGithubRepo <- function( md5hash, repo = NULL, user = NULL, branch = "mas
     if( is.character( repoDirGit )){
     tmpobjectS <- lapply( md5hash, function(x){
       getBinaryURL( paste0( get( x = ".GithubURL", envir = .ArchivistEnv), user, "/", repo, "/",
-                            branch, "/", repoDirGit, "/gallery/", x, ".rda"), ssl.verifypeer = FALSE )  } )
+                            branch, "/", repoDirGit, "/gallery/", x, ".rda") )  } )
     }
     if( is.logical( repoDirGit )){
       tmpobjectS <- lapply( md5hash, function(x){
         getBinaryURL( paste0( get( x = ".GithubURL", envir = .ArchivistEnv), user, "/", repo, "/",
-                              branch, "/gallery/", x, ".rda"), ssl.verifypeer = FALSE )  } )  
+                              branch, "/gallery/", x, ".rda") )  } )  
     }
     tfS <- replicate( length( md5hash ), tempfile() )
         
@@ -276,12 +276,12 @@ loadFromGithubRepo <- function( md5hash, repo = NULL, user = NULL, branch = "mas
     if( is.character( repoDirGit )){
       tmpobjectS <- lapply( md5hash, function(x){
         getBinaryURL( paste0( get( x = ".GithubURL", envir = .ArchivistEnv), user, "/", repo, "/",
-                              branch, "/", repoDirGit, "/gallery/", x, ".rda"), ssl.verifypeer = FALSE )  } )
+                              branch, "/", repoDirGit, "/gallery/", x, ".rda") )  } )
     }
     if( is.logical( repoDirGit )){
       tmpobjectS <- lapply( md5hash, function(x){
         getBinaryURL( paste0( get( x = ".GithubURL", envir = .ArchivistEnv), user, "/", repo, "/",
-                              branch, "/gallery/", x, ".rda"), ssl.verifypeer = FALSE )  } )  
+                              branch, "/gallery/", x, ".rda") )  } )  
     }
     tfS <- replicate( length( md5hash ), tempfile() )
     

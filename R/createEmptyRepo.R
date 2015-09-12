@@ -156,7 +156,7 @@ downloadDB <- function( repo, user, branch, repoDirGit ){
    }else{
      URLdb <- paste0( get( ".GithubURL", envir = .ArchivistEnv) , user, "/", repo, "/", branch, "/", repoDirGit, "/backpack.db") 
    }
-   db <- getBinaryURL( URLdb, ssl.verifypeer = FALSE )
+   db <- getBinaryURL( URLdb )
    Temp2 <- tempfile()
    file.create( Temp2 )
    writeBin( db, Temp2 )

@@ -182,7 +182,7 @@ cloneGithubFile <- function( file, repo, user, branch, to, repoDirGit ){
       file <- paste0( "gallery/", strsplit(file, "gallery/")[[1]][2] )
     }
     
-    fileFromGithub <- getBinaryURL( URLfile, ssl.verifypeer = FALSE )
+    fileFromGithub <- getBinaryURL( URLfile )
     
     file.create( paste0( to, file ) )
     writeBin( fileFromGithub, paste0( to, file ) )
