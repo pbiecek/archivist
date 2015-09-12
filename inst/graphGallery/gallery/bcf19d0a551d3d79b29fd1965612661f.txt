@@ -1,0 +1,9 @@
+Source: local data frame [6 x 3]
+
+  dest arr_delay    n
+1  ANC  26.08065  125
+2  CID  17.80049  410
+3  DSM  15.95110  647
+4  SFO  14.89036 2818
+5  BPT  14.33333    3
+6  GRR  13.71729  677
