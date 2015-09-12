@@ -1,0 +1,20 @@
+
+Call:
+lm(formula = Sepal.Length ~ Species, data = iris)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.6880 -0.3285 -0.0060  0.3120  1.3120 
+
+Coefficients:
+                  Estimate Std. Error t value Pr(>|t|)    
+(Intercept)         5.0060     0.0728  68.762  < 2e-16 ***
+Speciesversicolor   0.9300     0.1030   9.033 8.77e-16 ***
+Speciesvirginica    1.5820     0.1030  15.366  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.5148 on 147 degrees of freedom
+Multiple R-squared:  0.6187,	Adjusted R-squared:  0.6135 
+F-statistic: 119.3 on 2 and 147 DF,  p-value: < 2.2e-16
+
