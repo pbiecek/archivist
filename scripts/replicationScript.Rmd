@@ -1,0 +1,247 @@
+---
+title: "archivist: An R Package for Managing, Recording and Restoring Data Analysis Results"
+author: "Replication script"
+output: html_document
+---
+
+# Intro
+
+This is the replication script for 'archivist: An R Package for Managing, Recording and Restoring Data Analysis Results' (Przemyslaw Biecek, Marcin Kosinski) submitted to JSS. 
+
+First, make sure that `archivist` is installed.
+
+```{r}
+if (!require(archivist)) {
+  install.packages("archivist")
+  library(archivist)
+}
+```
+
+# Section 2.1
+
+Creation of hooks to R objects.
+Following lines download R objects from remote repository.
+
+```{r}
+archivist::aread("pbiecek/graphGallery/2166dfbd3a7a68a91a2f8e6df1a44111")
+archivist::aread("pbiecek/graphGallery/2166d")
+
+setLocalRepo(system.file("graphGallery", package = "archivist"))
+archivist::aread("2166dfbd3a7a68a91a2f8e6df1a44111")
+archivist::aread("2166d")
+
+model <- archivist::aread("pbiecek/graphGallery/2a6e492cb6982f230e48cf46023e2e4f")
+summary(model)
+```
+
+Or from local repository.
+
+```{r}
+setLocalRepo(system.file("graphGallery", package = "archivist"))
+archivist::aread("2166dfbd3a7a68a91a2f8e6df1a44111")
+archivist::aread("2166d")
+```
+
+
+
+# Section 2.2
+
+Retrieval of a list of R objects with given tags.
+
+Following lines search within remote repositories and download objects with given properties.
+
+```{r}
+models <- asearch("pbiecek/graphGallery", patterns = c("class:lm", "coefname:Sepal.Length"))
+
+lapply(models, coef)
+```
+
+And from a local repository.
+
+```{r}
+models <- asearch(patterns = c("class:lm", "coefname:Sepal.Length"))
+
+lapply(models, coef)
+```
+
+```{r}
+## from global
+#plots <- asearch("pbiecek/graphGallery", 
+#    patterns = c("class:gg", "labelx:Sepal.Length"))
+
+# from local
+plots <- asearch(patterns = c("class:gg", "labelx:Sepal.Length"))
+
+library("gridExtra")
+do.call(grid.arrange,  plots)
+```
+
+# Section 2.3
+
+Retrieval of the object's pedigree.
+
+
+```{r}
+library("dplyr")
+library("archivist")
+createEmptyRepo("tmp_archivist")
+setLocalRepo(repoDir = "tmp_archivist")
+
+iris %a%
+   filter(Sepal.Length < 6) %a%
+   lm(Petal.Length~Species, data=.) %a%
+   summary() -> tmp
+
+ahistory(tmp)
+
+ahistory(md5hash = "050e41ec3bc40b3004bc6bdd356acae7")
+```
+
+# Section 3.1
+
+Repository management.
+
+Creation of a new empty repository.
+
+```{r}
+# local path
+repo <- "new_repo"
+# global path
+repo <- "/Users/pbiecek/GitHub/new_repo"
+createEmptyRepo(repoDir = repo)
+```
+
+Deletion of an existing repository
+
+
+```{r}
+repo <- "/Users/pbiecek/GitHub/new_repo"
+deleteRepo(repoDir = repo)
+```
+
+
+Copying artifacts from other repositories.
+
+```{r}
+repo <- "new_repo"
+createEmptyRepo(repoDir = repo)
+copyGithubRepo( repoTo = repo, md5hashes= "2166dfbd3a7a68a91a2f8e6df1a44111", 
+                   user="pbiecek", repo="graphGallery" )
+```
+
+Showing repository statistics
+
+
+```{r}
+showLocalRepo(repoDir = repo, method = "tags")
+```
+
+```{r}
+summaryGithubRepo(user="pbiecek", repo="graphGallery") 
+```
+
+Setting default repository
+
+```{r}
+setGithubRepo(user = "pbiecek", repo = "graphGallery")
+setLocalRepo(repoDir = "/Users/pbiecek/GitHub/graphGallery/")
+
+saveToRepo(iris)
+```
+
+
+# Section 3.2
+
+Artifact management
+
+Saving an R object into a repository
+
+```{r}
+library("ggplot2")
+repo <- "new_repo"
+pl <- qplot(Sepal.Length, Petal.Length, data = iris)
+saveToRepo(pl, repoDir = repo)
+
+showLocalRepo(repoDir = repo, "tags")
+
+#deleteRepo("new_repo")
+```
+
+
+Serialization of an object creation event into repository
+
+```{r}
+library("dplyr")
+iris %a%
+   filter(Sepal.Length < 6) %a%
+   lm(Petal.Length~Species, data=.) %a%
+   summary() -> tmp
+
+ahistory(tmp)
+ahistory(md5hash = "050e41ec3bc40b3004bc6bdd356acae7")
+```
+
+Loading an object from repository, remote, local or in a package.
+
+```{r}
+pl2 <- loadFromGithubRepo("92ada1", repo="graphGallery", user="pbiecek", 
+                             value=TRUE)
+pl3 <- loadFromLocalRepo("92ada1", repo, value=TRUE)
+
+archivist::aread("pbiecek/graphGallery/2166d")
+
+setLocalRepo(system.file("graphGallery", package = "archivist"))
+
+pl3 <- loadFromLocalRepo("92ada1", value=TRUE)
+
+archivist::aread("2166d")
+```
+
+```{r}
+model <- aread("pbiecek/graphGallery/2a6e492cb6982f230e48cf46023e2e4f")
+digest::digest(model)
+
+model <- aread("2a6e492cb6982f230e48cf46023e2e4f")
+digest::digest(model)
+```
+
+Removal of an object from repository
+
+```{r}
+rmFromRepo("92ada1e052d4d963e5787bfc9c4b506c", repoDir = repo)
+
+obj2rm <- searchInLocalRepo(list(dateFrom = "2010-01-01", dateTo = Sys.Date()-30), repoDir = repo)
+
+rmFromRepo(obj2rm, repoDir = repo, many = TRUE)
+```
+
+Search for an artifact
+
+Search in a local/GitHub repository
+
+```{r}
+searchInGithubRepo(pattern="class:gg", user="pbiecek", repo="graphGallery")
+
+searchInGithubRepo(pattern = list( dateFrom = "2014-09-01", 
+                                      dateTo = "2014-09-30" ),
+                          user="pbiecek", repo="graphGallery")
+
+multiSearchInGithubRepo(pattern=c("class:gg", "labelx:Sepal.Length"),
+                           user="pbiecek", repo="graphGallery")	
+```
+
+Delete
+
+```{r}
+deleteRepo("new_repo")
+```
+
+
+# R Session
+
+```{r}
+library(devtools)
+session_info()
+```
+
+
