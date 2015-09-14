@@ -10,6 +10,7 @@ archivist 1.7
 * Removed unnecessary dependencies - now archivst is free of dependencies.
 * shiny package is in Suggests so you
 should load that package before running shinySearchInLocalRepo function.
+* Move `saveSetToRepo` with a new function `loadSetFromRepo` to the `github.com/pbiecek/archivist2` repository.
 
 archivist 1.6
 ----------------------------------------------------------------

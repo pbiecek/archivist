@@ -20,7 +20,7 @@
 #' be obtained. Also there is an extra column with a date of creation the \code{Tag} or the \code{md5hash}.
 #' 
 #' @param method A character specifying the method to be used to show the Repository. Available methods: 
-#' \code{md5hashes} (default), \code{tags} and \code{sets} - see \link{saveSetToRepo}.
+#' \code{md5hashes} (default), \code{tags} and \code{sets} - see \href{https://github.com/pbiecek/archivist2}{archivist2::saveSetToRepo}.
 #' 
 #' @param repoDir A character denoting an existing directory of a Repository for which a summary will be returned.
 #' If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.
@@ -152,7 +152,8 @@
 #' plotData <- iris
 #' plotFunctions <- list( ggplot, geom_point, theme_wsj)
 #' 
-#' saveSetToRepo( artifact = plotArtifact,
+#' # https://github.com/pbiecek/archivist2
+#' archivist2::saveSetToRepo( artifact = plotArtifact,
 #'                data = plotData,
 #'                functions = plotFunctions )
 #' showLocalRepo( method = "sets" )
