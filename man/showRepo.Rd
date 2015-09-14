@@ -15,7 +15,7 @@ showGithubRepo(repo = NULL, user = NULL, branch = "master",
 If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.}
 
 \item{method}{A character specifying the method to be used to show the Repository. Available methods:
-\code{md5hashes} (default), \code{tags} and \code{sets} - see \link{saveSetToRepo}.}
+\code{md5hashes} (default), \code{tags} and \code{sets} - see \href{https://github.com/pbiecek/archivist2}{archivist2::saveSetToRepo}.}
 
 \item{repo}{Only if working with a Github repository. A character containing a name of a Github repository on which the Repository is archived.
 By default set to \code{NULL} - see \code{Note}.}
@@ -158,7 +158,8 @@ plotArtifact <- ggplot( iris, aes(x = Sepal.Length, y = Species)) +
 plotData <- iris
 plotFunctions <- list( ggplot, geom_point, theme_wsj)
 
-saveSetToRepo( artifact = plotArtifact,
+# https://github.com/pbiecek/archivist2
+archivist2::saveSetToRepo( artifact = plotArtifact,
                data = plotData,
                functions = plotFunctions )
 showLocalRepo( method = "sets" )
@@ -199,9 +200,8 @@ Other archivist: \code{\link{Repository}};
   \code{\link{multiSearchInLocalRepo}},
   \code{\link{searchInGithubRepo}},
   \code{\link{searchInLocalRepo}};
-  \code{\link{rmFromRepo}}; \code{\link{saveSetToRepo}};
-  \code{\link{saveToRepo}}; \code{\link{setGithubRepo}},
-  \code{\link{setLocalRepo}};
+  \code{\link{rmFromRepo}}; \code{\link{saveToRepo}};
+  \code{\link{setGithubRepo}}, \code{\link{setLocalRepo}};
   \code{\link{shinySearchInLocalRepo}};
   \code{\link{summaryGithubRepo}},
   \code{\link{summaryLocalRepo}};
