@@ -104,14 +104,14 @@ Creation of a new empty repository.
 repo <- "/Users/pbiecek/GitHub/new_repo"
 # local path
 repo <- "new_repo"
-createEmptyRepo(repoDir = repo)
+createEmptyRepo(repoDir = repo, default = TRUE)
 ```
 
 Deletion of an existing repository
 
 
 ```{r}
-repo <- "/Users/pbiecek/GitHub/new_repo"
+repo <- "new_repo"
 deleteRepo(repoDir = repo)
 ```
 
@@ -121,8 +121,8 @@ Copying artifacts from other repositories.
 ```{r}
 repo <- "new_repo"
 createEmptyRepo(repoDir = repo)
-copyGithubRepo( repoTo = repo, md5hashes= "2166dfbd3a7a68a91a2f8e6df1a44111", 
-                   user="pbiecek", repo="graphGallery" )
+copyGithubRepo(repoTo = repo, md5hashes= "2166dfbd3a7a68a91a2f8e6df1a44111", 
+         user = "pbiecek", repo = "graphGallery")
 ```
 
 Showing repository statistics
