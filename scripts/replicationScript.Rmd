@@ -240,8 +240,7 @@ deleteRepo("new_repo")
 # R Session
 
 ```{r}
-library(devtools)
-session_info()
+sessionInfo()
 ```
 
 
