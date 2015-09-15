@@ -25,21 +25,18 @@ Following lines download R objects from remote repository.
 ```{r}
 archivist::aread("pbiecek/graphGallery/2166dfbd3a7a68a91a2f8e6df1a44111")
 archivist::aread("pbiecek/graphGallery/2166d")
-
-setLocalRepo(system.file("graphGallery", package = "archivist"))
-archivist::aread("2166dfbd3a7a68a91a2f8e6df1a44111")
-archivist::aread("2166d")
-
-model <- archivist::aread("pbiecek/graphGallery/2a6e492cb6982f230e48cf46023e2e4f")
-summary(model)
 ```
 
-Or from local repository.
+These instructions retrieve R objects from graphGallery directory attached to the archivist package.
 
 ```{r}
 setLocalRepo(system.file("graphGallery", package = "archivist"))
+# plot
 archivist::aread("2166dfbd3a7a68a91a2f8e6df1a44111")
-archivist::aread("2166d")
+
+# regression model
+model <- archivist::aread("2a6e492cb6982f230e48cf46023e2e4f")
+summary(model)
 ```
 
 
@@ -56,7 +53,7 @@ models <- asearch("pbiecek/graphGallery", patterns = c("class:lm", "coefname:Sep
 lapply(models, coef)
 ```
 
-And from a local repository.
+And from the local repository.
 
 ```{r}
 models <- asearch(patterns = c("class:lm", "coefname:Sepal.Length"))
@@ -71,6 +68,7 @@ lapply(models, coef)
 
 # from local
 plots <- asearch(patterns = c("class:gg", "labelx:Sepal.Length"))
+length(plots)
 
 library("gridExtra")
 do.call(grid.arrange,  plots)
@@ -82,10 +80,8 @@ Retrieval of the object's pedigree.
 
 
 ```{r}
-library("dplyr")
 library("archivist")
-createEmptyRepo("tmp_archivist")
-setLocalRepo(repoDir = "tmp_archivist")
+createEmptyRepo("tmp_archivist", default = TRUE)
 
 iris %a%
    filter(Sepal.Length < 6) %a%
@@ -104,10 +100,10 @@ Repository management.
 Creation of a new empty repository.
 
 ```{r}
-# local path
-repo <- "new_repo"
 # global path
 repo <- "/Users/pbiecek/GitHub/new_repo"
+# local path
+repo <- "new_repo"
 createEmptyRepo(repoDir = repo)
 ```
 
