@@ -100,7 +100,7 @@ setLocalRepo <- function( repoDir ){
   
   repoDir <- checkDirectory( repoDir )
   
-  aoptions("repoDir", repoDir)
+  invisible(aoptions("repoDir", repoDir))
   
 #  assign( ".repoDir", repoDir, envir = .ArchivistEnv )
   
