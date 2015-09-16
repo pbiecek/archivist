@@ -44,7 +44,7 @@
 #' @examples
 #' \dontrun{
 #'   # assuming that there is a 'repo' dir with a valid archivist repository
-#'   shinySearchInLocalRepo( dir = 'repo' )
+#'   shinySearchInLocalRepo( repoDir = 'repo' )
 #' }
 #' @family archivist
 #' @rdname shinySearchInRepo

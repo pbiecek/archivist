@@ -70,7 +70,7 @@
 #' showLocalRepo( )
 #' summaryLocalRepo( )
 #' 
-#' deleteRepo( exampleRepoDir )
+#' deleteRepo( exampleRepoDir, TRUE)
 #' rm( exampleRepoDir )
 #' 
 #' ## Github version

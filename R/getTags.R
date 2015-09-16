@@ -55,7 +55,7 @@
 #'  
 #' getTagsLocal( md5hash = hash, exampleRepoDir )
 #' 
-#' deleteRepo( exampleRepoDir ) 
+#' deleteRepo( exampleRepoDir, TRUE) 
 #' rm( exampleRepoDir ) 
 #' 
 #' getTagsGithub( "3db63bc63b8defaf42c0bde19160f242", 

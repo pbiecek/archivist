@@ -174,7 +174,7 @@
 #' 
 #' # removing an example Repository
 #' 
-#' deleteRepo( exampleRepoDir )
+#' deleteRepo( exampleRepoDir, TRUE)
 #' 
 #' rm( exampleRepoDir )
 #' 

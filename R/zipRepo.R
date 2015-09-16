@@ -78,7 +78,7 @@
 #'  
 #' zipLocalRepo( exampleRepoDir )
 #' 
-#' deleteRepo( exampleRepoDir )
+#' deleteRepo( exampleRepoDir, TRUE)
 #' 
 #' rm( exampleRepoDir )
 #' 
