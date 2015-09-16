@@ -11,11 +11,11 @@
 #' All artifacts created with operator %a% are archivised with 
 #' detailed information  about it's source (both call and md5hash of the input).
 #' The function \code{ahistory} reads all artifacts that 
-#' precede \code{obj} and create a description of the input flow. 
+#' precede \code{artifact} and create a description of the input flow. 
 #' The generic \code{print.ahistory} function plots the history in a human readable  way.
 #' 
-#' @param obj An object for which history should be derived. Will be converted  into md5hash.
-#' @param md5hash  If \code{obj} is not specified then \code{md5hash} is used.
+#' @param artifact An artifact for which history should be derived. Will be converted  into md5hash.
+#' @param md5hash  If \code{artifact} is not specified then \code{md5hash} is used.
 #' @param repoDir  A character denoting an existing directory in which an artifact will be saved.
 #' If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.
 #' @param x  A character vector of tags. 
@@ -32,20 +32,20 @@
 #' iris %a%
 #'   filter(Sepal.Length < 6) %a%
 #'   lm(Petal.Length~Species, data=.) %a%
-#'   summary() -> obj
-#' # read the object history
-#'  asearch(obj)
+#'   summary() -> artifact
+#' # read the artifact history
+#'  asearch(artifact)
 #' }
 #' @family archivist
 #' @rdname ahistory
 #' @export
 
-ahistory <- function(obj = NULL, md5hash = NULL, repoDir = NULL) {
-  # if obj is set then calculate md5hash for it
-  if (!is.null(obj)) 
-    md5hash = digest(obj)
+ahistory <- function(artifact = NULL, md5hash = NULL, repoDir = NULL) {
+  # if artifact is set then calculate md5hash for it
+  if (!is.null(artifact)) 
+    md5hash = digest(artifact)
   if (is.null(md5hash)) 
-    stop("Either obj or md5hash has to be set")
+    stop("Either artifact or md5hash has to be set")
   
   res_names <- c()
   res_md5 <- md5hash
@@ -83,7 +83,7 @@ ahistory <- function(obj = NULL, md5hash = NULL, repoDir = NULL) {
 
 print.ahistory <- function(x, ...) {
   x[,2] <- paste0(x[,2], sapply(max(nchar(x[,2])) + 1 - nchar(x[,2]), 
-                                function(j) paste(rep(" ", j),collapse="")))
+                                function(j) paste(rep(" ", j), collapse="")))
   for (i in nrow(x):1) {
     if (i < nrow(x)) cat("-> ") else cat("   ")
     cat(x[i,2], " [", x[i,1], "]\n", sep = "")
