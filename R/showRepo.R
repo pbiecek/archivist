@@ -152,16 +152,9 @@
 #' plotData <- iris
 #' plotFunctions <- list( ggplot, geom_point, theme_wsj)
 #' 
-#' # https://github.com/pbiecek/archivist2
-#' archivist2::saveSetToRepo( artifact = plotArtifact,
-#'                data = plotData,
-#'                functions = plotFunctions )
-#' showLocalRepo( method = "sets" )
-#' 
-#' 
 #' # removing an example Repository
 #'   
-#' deleteRepo( exampleRepoDir )
+#' deleteRepo( exampleRepoDir, TRUE )
 #'   
 #' rm( exampleRepoDir )
 #' 

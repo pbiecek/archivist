@@ -1,6 +1,6 @@
 ##    archivist package for R
 ##
-#' @title Default options for Archivist
+#' @title Default Options for Archivist
 #'
 #' @description
 #' The function \code{aoptions} sets and gets default options

@@ -71,7 +71,7 @@ rmFromRepo( "4c43f" )
 showLocalRepo( )
 summaryLocalRepo( )
 
-deleteRepo( exampleRepoDir )
+deleteRepo( exampleRepoDir, TRUE)
 rm( exampleRepoDir )
 
 ## Github version

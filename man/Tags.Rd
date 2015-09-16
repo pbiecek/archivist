@@ -176,7 +176,7 @@ exampleRepoDir <- tempdir()
 createEmptyRepo( repoDir = exampleRepoDir )
 saveToRepo( model, repoDir=exampleRepoDir )
 showLocalRepo( exampleRepoDir, "tags" )
-deleteRepo( exampleRepoDir )
+deleteRepo( exampleRepoDir, TRUE )
 
 # agnes (twins) object
 library(cluster)
@@ -186,7 +186,7 @@ exampleRepoDir <- tempdir()
 createEmptyRepo( repoDir = exampleRepoDir )
 saveToRepo( agn1, repoDir=exampleRepoDir )
 showLocalRepo( exampleRepoDir, "tags" )
-deleteRepo( exampleRepoDir )
+deleteRepo( exampleRepoDir, TRUE )
 
 # fanny (partition) object
 x <- rbind(cbind(rnorm(10, 0, 0.5), rnorm(10, 0, 0.5)),
@@ -197,7 +197,7 @@ exampleRepoDir <- tempdir()
 createEmptyRepo( repoDir = exampleRepoDir )
 saveToRepo( fannyx, repoDir=exampleRepoDir )
 showLocalRepo( exampleRepoDir, "tags" )
-deleteRepo( exampleRepoDir )
+deleteRepo( exampleRepoDir, TRUE )
 
 # lda object
 library(MASS)
@@ -214,7 +214,7 @@ exampleRepoDir <- tempdir()
 createEmptyRepo( repoDir = exampleRepoDir )
 saveToRepo( lda1, repoDir=exampleRepoDir )
 showLocalRepo( exampleRepoDir, "tags" )
-deleteRepo( exampleRepoDir )
+deleteRepo( exampleRepoDir, TRUE )
 
 # qda object
 tr <- c(7,38,47,43,20,37,44,22,46,49,50,19,4,32,12,29,27,34,2,1,17,13,3,35,36)
@@ -225,7 +225,7 @@ exampleRepoDir <- tempdir()
 createEmptyRepo( repoDir = exampleRepoDir )
 saveToRepo( qda1, repoDir=exampleRepoDir )
 showLocalRepo( exampleRepoDir, "tags" )
-deleteRepo( exampleRepoDir )
+deleteRepo( exampleRepoDir, TRUE )
 
 
 # glmnet object
@@ -238,7 +238,7 @@ exampleRepoDir <- tempdir()
 createEmptyRepo( repoDir = exampleRepoDir )
 saveToRepo( glmnet1, repoDir=exampleRepoDir )
 showLocalRepo( exampleRepoDir, "tags" )
-deleteRepo( exampleRepoDir )
+deleteRepo( exampleRepoDir, TRUE )
 
 # trellis object
 require(stats)
@@ -271,7 +271,7 @@ exampleRepoDir <- tempdir()
 createEmptyRepo( repoDir = exampleRepoDir )
 saveToRepo( trellis.plot, repoDir=exampleRepoDir )
 showLocalRepo( exampleRepoDir, "tags" )
-deleteRepo( exampleRepoDir )
+deleteRepo( exampleRepoDir, TRUE )
 
 # htest object
 
@@ -282,7 +282,7 @@ exampleRepoDir <- tempdir()
 createEmptyRepo( repoDir = exampleRepoDir )
 saveToRepo( this.test, repoDir=exampleRepoDir )
 showLocalRepo( exampleRepoDir, "tags" )
-deleteRepo( exampleRepoDir )
+deleteRepo( exampleRepoDir, TRUE )
 
 # survfit object
 library( survival )
@@ -297,7 +297,7 @@ exampleRepoDir <- tempdir()
 createEmptyRepo( repoDir = exampleRepoDir )
 saveToRepo( myFit , repoDir=exampleRepoDir )
 showLocalRepo( exampleRepoDir, "tags" )[,-3]
-deleteRepo( exampleRepoDir )
+deleteRepo( exampleRepoDir, TRUE)
 
 # origin of the artifacts stored as a name - chaining code
 library(dplyr)
@@ -319,7 +319,7 @@ hflights \%>\%
   # artifact is stored
 showLocalRepo( exampleRepoDir, "tags" )[,-3]
 showLocalRepo( exampleRepoDir )
-deleteRepo( exampleRepoDir )
+deleteRepo( exampleRepoDir, TRUE)
 
 rm( exampleRepoDir )
 }

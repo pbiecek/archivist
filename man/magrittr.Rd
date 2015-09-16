@@ -2,7 +2,7 @@
 % Please edit documentation in R/magrittr.R
 \name{\%a\%}
 \alias{\%a\%}
-\title{magrittr - a forward-pipe operator for R}
+\title{magrittr - a Forward-Pipe Operator for R}
 \usage{
 lhs \%a\% rhs
 }

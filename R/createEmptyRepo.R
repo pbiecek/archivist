@@ -55,8 +55,8 @@
 #' 
 #' # removing an example Repositories
 #' 
-#' deleteRepo( exampleRepoDir )
-#' deleteRepo( "xyzdd234" )
+#' deleteRepo( exampleRepoDir, TRUE)
+#' deleteRepo( "xyzdd234", TRUE)
 #' 
 #' rm( exampleRepoDir )
 #' }

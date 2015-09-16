@@ -3,9 +3,9 @@
 #' @title View the Summary of a Repository
 #'
 #' @description
-#' \code{summaryRepo} summaries the current state of a \link{Repository}.
+#' \code{summaryRepo} summarizes the current state of a \link{Repository}.
 #' @details
-#' \code{summaryRepo} summaries the current state of a \link{Repository}. Recommended to use
+#' \code{summaryRepo} summarizes the current state of a \link{Repository}. Recommended to use
 #' \code{print( summaryRepo ) )}. See examples.
 #' 
 #' @param repoDir A character denoting an existing directory of a Repository for which a summary will be returned.
@@ -114,7 +114,7 @@
 #' 
 #' # removing an example Repository
 #' 
-#' deleteRepo( exampleRepoDir )
+#' deleteRepo( exampleRepoDir, TRUE)
 #' 
 #' rm( exampleRepoDir )
 #'

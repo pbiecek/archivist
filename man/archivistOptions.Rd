@@ -2,7 +2,7 @@
 % Please edit documentation in R/archivistOptions.R
 \name{aoptions}
 \alias{aoptions}
-\title{Default options for Archivist}
+\title{Default Options for Archivist}
 \usage{
 aoptions(key, value = NULL)
 }

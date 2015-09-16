@@ -31,10 +31,10 @@ to \code{repoDirGit = FALSE} as default.}
 An object of class \code{repository} which can be printed: \code{print(object)}.
 }
 \description{
-\code{summaryRepo} summaries the current state of a \link{Repository}.
+\code{summaryRepo} summarizes the current state of a \link{Repository}.
 }
 \details{
-\code{summaryRepo} summaries the current state of a \link{Repository}. Recommended to use
+\code{summaryRepo} summarizes the current state of a \link{Repository}. Recommended to use
 \code{print( summaryRepo ) )}. See examples.
 }
 \note{
@@ -126,7 +126,7 @@ print( x )
 
 # removing an example Repository
 
-deleteRepo( exampleRepoDir )
+deleteRepo( exampleRepoDir, TRUE)
 
 rm( exampleRepoDir )
 

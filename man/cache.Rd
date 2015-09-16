@@ -53,7 +53,7 @@ tmp <- cache(cacheRepo, testFun, "Say hallo!", notOlderThan = now())
 # will be executed, passes with expiration date [within hour]
 tmp <- cache(cacheRepo, testFun, "Say hallo!", notOlderThan = now() - hours(1))
 
-deleteRepo( cacheRepo )
+deleteRepo( cacheRepo, TRUE)
 rm( cacheRepo )
 }
 }

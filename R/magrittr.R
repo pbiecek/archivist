@@ -1,7 +1,7 @@
 ##    code copied from http://cran.r-project.org/web/packages/magrittr/
 ##    package binaries - version 1.0.1
 ##
-#' @title magrittr - a forward-pipe operator for R
+#' @title magrittr - a Forward-Pipe Operator for R
 #'
 #' @description
 #' An extended pipe operator \link[magrittr]{\%>\%} from magrittr package version 1.0.1.

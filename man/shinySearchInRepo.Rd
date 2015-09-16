@@ -47,7 +47,7 @@ package, so you'll need to make sure to have that installed.
 \examples{
 \dontrun{
   # assuming that there is a 'repo' dir with a valid archivist repository
-  shinySearchInLocalRepo( dir = 'repo' )
+  shinySearchInLocalRepo( repoDir = 'repo' )
 }
 }
 \author{

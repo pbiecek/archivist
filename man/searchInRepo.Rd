@@ -176,7 +176,7 @@ set in \link{setGithubRepo} function are used.
 
   # removing an example Repository
 
-  deleteRepo( exampleRepoDir )
+  deleteRepo( exampleRepoDir, TRUE)
 
   rm( exampleRepoDir )
 
