@@ -1,12 +1,12 @@
 test_that("setLocalRepo sets repo", {
   setLocalRepo(repoDir = "tmp_archivist")
-  expect_equal(get(".repoDir", envir = .ArchivistEnv), "tmp_archivist/")
+  expect_equal(aoptions("repoDir"), "tmp_archivist/")
   
   setGithubRepo("MarcinKosinski", "archivist", "master", "clone123")
-  expect_equal(get(".user", envir = .ArchivistEnv), "MarcinKosinski")
-  expect_equal(get(".repo", envir = .ArchivistEnv), "archivist")
-  expect_equal(get(".branch", envir = .ArchivistEnv), "master")
-  expect_equal(get(".repoDirGit", envir = .ArchivistEnv), "clone123")
+  expect_equal(aoptions("user"), "MarcinKosinski")
+  expect_equal(aoptions("repo"), "archivist")
+  expect_equal(aoptions("branch"), "master")
+  expect_equal(aoptions("repoDirGit"), "clone123")
 })
 
 test_that(".ArchivistEnv exists", {
