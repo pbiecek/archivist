@@ -166,11 +166,11 @@ downloadDB <- function( repo, user, branch, repoDirGit ){
 checkDirectory <- function( directory ){
   # check if global repository was specified by setLocalRepo
   if ( is.null(directory) ){
-    
-    directory <- get(  ".repoDir", envir = .ArchivistEnv )    
+
+    directory <- aoptions("repoDir")
+
   }else{
-  
-  
+
   # check if repoDir has "/" at the end and add it if not
     if ( !grepl("/$", x = directory , perl=TRUE) ){
     directory <- paste0(  directory, "/"  )

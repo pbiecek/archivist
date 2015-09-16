@@ -100,7 +100,9 @@ setLocalRepo <- function( repoDir ){
   
   repoDir <- checkDirectory( repoDir )
   
-  assign( ".repoDir", repoDir, envir = .ArchivistEnv )
+  aoptions("repoDir", repoDir)
+  
+#  assign( ".repoDir", repoDir, envir = .ArchivistEnv )
   
 }
 
@@ -113,20 +115,29 @@ setGithubRepo <- function( user, repo, branch = "master",
   stopifnot( is.character( c( repo, user, branch ) ) )
   stopifnot( is.null( repoDirGit ) | is.character( repoDirGit ) )
   
-  assign( ".user", user, envir = .ArchivistEnv )
-  assign( ".repo", repo, envir = .ArchivistEnv )
-  assign( ".branch", branch, envir = .ArchivistEnv )
-  assign( ".repoDirGit", repoDirGit , envir = .ArchivistEnv )
-
+  aoptions("user", user)
+  aoptions("repo", repo)
+  aoptions("branch", branch)
+  aoptions("repoDirGit", repoDirGit)
+  
+#   assign( ".user", user, envir = .ArchivistEnv )
+#   assign( ".repo", repo, envir = .ArchivistEnv )
+#   assign( ".branch", branch, envir = .ArchivistEnv )
+#   assign( ".repoDirGit", repoDirGit , envir = .ArchivistEnv )
   
 }
 
 
 useGithubSetupArguments <- function(){
-  assign( "repo", get( ".repo", envir = .ArchivistEnv ), envir = parent.frame(2) )
-  assign( "user", get( ".user", envir = .ArchivistEnv ), envir = parent.frame(2) )
-  assign( "branch", get( ".branch", envir = .ArchivistEnv ), envir = parent.frame(2) )
-  assign( "repoDirGit", get( ".repoDirGit", envir = .ArchivistEnv ), envir = parent.frame(2) )
+#   assign( "repo", get( ".repo", envir = .ArchivistEnv ), envir = parent.frame(2) )
+#   assign( "user", get( ".user", envir = .ArchivistEnv ), envir = parent.frame(2) )
+#   assign( "branch", get( ".branch", envir = .ArchivistEnv ), envir = parent.frame(2) )
+#   assign( "repoDirGit", get( ".repoDirGit", envir = .ArchivistEnv ), envir = parent.frame(2) )
+
+  assign( "repo", aoptions("repo"), envir = parent.frame(2) )
+  assign( "user", aoptions("user"), envir = parent.frame(2) )
+  assign( "branch", aoptions("branch"), envir = parent.frame(2) )
+  assign( "repoDirGit", aoptions("repoDirGit"), envir = parent.frame(2) )
 }
 
 
@@ -149,9 +160,6 @@ GithubCheck <- function( repo, user, repoDirGit ){
     useGithubSetupArguments( ) 
   }
   
-  
 }
-
-
 
 
