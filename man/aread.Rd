@@ -26,6 +26,8 @@ It uses the function \link{loadFromGithubRepo} with different paramter's specifi
 # read the object from local directory
 setLocalRepo(system.file("graphGallery", package = "archivist"))
 pl <- aread("2166dfbd3a7a68a91a2f8e6df1a44111")
+# plot it
+pl
 # read the object from GitHub
 pl <- aread("pbiecek/graphGallery/2166dfbd3a7a68a91a2f8e6df1a44111")
 # plot it
