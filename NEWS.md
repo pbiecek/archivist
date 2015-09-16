@@ -5,6 +5,7 @@ archivist 1.7
 * Added graphGallery for self-contained examples
 * aread allows for single MD5 hash (which will be read from the default repo)
 * asearch allows for only patterns (will be searched in local repo)
+* ahistory has now 'artifact' argument instead of 'obj'
 
 * Added tests.
 * Removed unnecessary dependencies - now archivst is free of dependencies.
