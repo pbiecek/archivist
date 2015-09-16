@@ -8,7 +8,7 @@ archivist 1.7
 * ahistory has now 'artifact' argument instead of 'obj'
 
 * Added tests.
-* Removed unnecessary dependencies - now archivst is free of dependencies.
+* Removed unnecessary dependencies - now archivist is free of dependencies.
 * shiny package is in Suggests so you
 should load that package before running shinySearchInLocalRepo function.
 * Move `saveSetToRepo` with a new function `loadSetFromRepo` to the `github.com/pbiecek/archivist2` repository.
