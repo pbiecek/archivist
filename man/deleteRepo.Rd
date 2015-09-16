@@ -97,11 +97,11 @@ showLocalRepo( method = "tags", repoDir = exampleRepoDir )
 
 # let's get information about that Repository
 
-summaryLocalRepo( repodir = exampleRepoDir )
+summaryLocalRepo( repoDir = exampleRepoDir )
 
 # now let's delete the Repository
 
-delete( repoDir = exampleRepoDir )
+deleteRepo( repoDir = exampleRepoDir)
 
 rm( exampleRepoDir )
 }
