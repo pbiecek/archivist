@@ -24,7 +24,6 @@ Following lines download R objects from remote repository.
 
 ```{r}
 archivist::aread("pbiecek/graphGallery/2166dfbd3a7a68a91a2f8e6df1a44111")
-archivist::aread("pbiecek/graphGallery/2166d")
 ```
 
 These instructions retrieve R objects from graphGallery directory attached to the archivist package.
@@ -33,6 +32,7 @@ These instructions retrieve R objects from graphGallery directory attached to th
 setLocalRepo(system.file("graphGallery", package = "archivist"))
 # plot
 archivist::aread("2166dfbd3a7a68a91a2f8e6df1a44111")
+archivist::aread("2166d")
 
 # regression model
 model <- archivist::aread("2a6e492cb6982f230e48cf46023e2e4f")
@@ -79,8 +79,9 @@ do.call(grid.arrange,  plots)
 Retrieval of the object's pedigree.
 
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library("archivist")
+library("dplyr")
 createEmptyRepo("tmp_archivist", default = TRUE)
 
 iris %a%
@@ -133,15 +134,21 @@ showLocalRepo(repoDir = repo, method = "tags")
 ```
 
 ```{r}
-summaryGithubRepo(user="pbiecek", repo="graphGallery") 
+summaryLocalRepo(repoDir = 
+    system.file("graphGallery", package = "archivist")) 
 ```
 
 Setting default repository
 
 ```{r}
 setGithubRepo(user = "pbiecek", repo = "graphGallery")
-setLocalRepo(repoDir = "/Users/pbiecek/GitHub/graphGallery/")
+setLocalRepo(repoDir = system.file("graphGallery", package = "archivist"))
+```
 
+Saving to the default repository.
+
+```{r}
+setLocalRepo(repoDir = repo)
 saveToRepo(iris)
 ```
 
@@ -160,7 +167,7 @@ saveToRepo(pl, repoDir = repo)
 
 showLocalRepo(repoDir = repo, "tags")
 
-#deleteRepo("new_repo")
+# deleteRepo(repo)
 ```
 
 
@@ -180,11 +187,11 @@ ahistory(md5hash = "050e41ec3bc40b3004bc6bdd356acae7")
 Loading an object from repository, remote, local or in a package.
 
 ```{r}
-pl2 <- loadFromGithubRepo("92ada1", repo="graphGallery", user="pbiecek", 
+pl2 <- loadFromGithubRepo("92ada1e052d4d963e5787bfc9c4b506c", repo="graphGallery", user="pbiecek", 
                              value=TRUE)
-pl3 <- loadFromLocalRepo("92ada1", repo, value=TRUE)
+pl3 <- loadFromLocalRepo("92ada1", system.file("graphGallery", package = "archivist"), value=TRUE)
 
-archivist::aread("pbiecek/graphGallery/2166d")
+archivist::aread("pbiecek/graphGallery/2166dfbd3a7a68a91a2f8e6df1a44111")
 
 setLocalRepo(system.file("graphGallery", package = "archivist"))
 
@@ -194,9 +201,7 @@ archivist::aread("2166d")
 ```
 
 ```{r}
-model <- aread("pbiecek/graphGallery/2a6e492cb6982f230e48cf46023e2e4f")
-digest::digest(model)
-
+setLocalRepo(system.file("graphGallery", package = "archivist"))
 model <- aread("2a6e492cb6982f230e48cf46023e2e4f")
 digest::digest(model)
 ```
@@ -205,25 +210,38 @@ Removal of an object from repository
 
 ```{r}
 rmFromRepo("92ada1e052d4d963e5787bfc9c4b506c", repoDir = repo)
+```
 
+Remove all older than 30 days
+
+```{r}
 obj2rm <- searchInLocalRepo(list(dateFrom = "2010-01-01", dateTo = Sys.Date()-30), repoDir = repo)
 
 rmFromRepo(obj2rm, repoDir = repo, many = TRUE)
 ```
 
-Search for an artifact
 
+Search for an artifact
 Search in a local/GitHub repository
 
 ```{r}
-searchInGithubRepo(pattern="class:gg", user="pbiecek", repo="graphGallery")
+searchInLocalRepo(pattern = "class:gg", 
+    repoDir = system.file("graphGallery", package = "archivist"))
 
-searchInGithubRepo(pattern = list( dateFrom = "2014-09-01", 
-                                      dateTo = "2014-09-30" ),
-                          user="pbiecek", repo="graphGallery")
+searchInLocalRepo(pattern = list(dateFrom = "2014-09-01",
+    dateTo = "2014-09-30" ), 
+    repoDir = system.file("graphGallery", package = "archivist"))
 
-multiSearchInGithubRepo(pattern=c("class:gg", "labelx:Sepal.Length"),
-                           user="pbiecek", repo="graphGallery")	
+
+multiSearchInLocalRepo(pattern=c("class:gg", "labelx:Sepal.Length"),
+         repoDir = system.file("graphGallery", package = "archivist"))	
+```
+
+Interactive search
+
+```{r, eval=FALSE}
+arepo <- system.file("graphGallery", package = "archivist")
+shinySearchInLocalRepo(arepo)
 ```
 
 Delete
