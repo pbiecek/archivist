@@ -84,6 +84,8 @@ library("archivist")
 library("dplyr")
 createEmptyRepo("tmp_archivist", default = TRUE)
 
+data(iris)
+
 iris %a%
    filter(Sepal.Length < 6) %a%
    lm(Petal.Length~Species, data=.) %a%
