@@ -12,6 +12,7 @@
 #' removed and database \code{backpack.db} is deleted. 
 #'
 #' @param repoDir A character that specifies the directory for the Repository to be deleted.
+#' @param deleteRoot A logical value that specifies if the repository root directory shall be deleted.
 #' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
@@ -106,7 +107,7 @@
 #' @family archivist
 #' @rdname deleteRepo
 #' @export
-deleteRepo <- function( repoDir ){
+deleteRepo <- function(repoDir, deleteRoot = FALSE){
   stopifnot( is.character( repoDir ) )
   
   repoDir <- checkDirectory( repoDir )
@@ -119,5 +120,9 @@ deleteRepo <- function( repoDir ){
   
   file.remove( paste0( repoDir, "backpack.db" ) )
   unlink( paste0( repoDir, "gallery" ), recursive = TRUE )    
+  
+  if (deleteRoot) {
+    unlink( repoDir, recursive = TRUE )    
+  }
   
 }

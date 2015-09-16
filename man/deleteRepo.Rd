@@ -4,10 +4,12 @@
 \alias{deleteRepo}
 \title{Delete an Existing Repository from Given Directory}
 \usage{
-deleteRepo(repoDir)
+deleteRepo(repoDir, deleteRoot = FALSE)
 }
 \arguments{
 \item{repoDir}{A character that specifies the directory for the Repository to be deleted.}
+
+\item{deleteRoot}{A logical value that specifies if the repository root directory shall be deleted.}
 }
 \description{
 \code{deleteRepo} deletes an existing \link{Repository} from a given directory, so all artifacts from \code{gallery} folder are
