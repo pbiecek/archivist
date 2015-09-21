@@ -111,7 +111,7 @@
     }
     # here saveToRepo res
     # if no local repository is set then rise a warning
-    if (!exists( ".repoDir", envir = .ArchivistEnv )) {
+    if (!exists( "repoDir", envir = .ArchivistEnv )) {
       warning("Default local repo is not set. Resuts are not archivised.")
     } else {
       # for the output save both RHS as an object
