@@ -58,8 +58,14 @@ ahistory <- function(artifact = NULL, md5hash = NULL, repoDir = NULL) {
     } else {
       # if not RHS then maybe name
       tmp <- grep(tags, pattern="^name:", value = TRUE)
-      if (length(tmp) > 0) 
+      if (length(tmp) > 0) {
         res_names[ind] <- substr(tmp[1],6,nchar(tmp[1]))
+      } else {
+       # that's should not happen
+        df <- data.frame(md5hash = res_md5, call = rep("", length(res_md5)), stringsAsFactors = FALSE)
+        class(df) = c("ahistory", "data.frame")
+        return(df)
+      }
     }
     md5hash <- grep(tags, pattern="^LHS:", value = TRUE)
     if (length(md5hash) > 0) {
