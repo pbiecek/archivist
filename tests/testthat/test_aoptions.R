@@ -6,13 +6,13 @@ test_that("test aoptions", {
   invisible(aoptions("silent", TRUE))
   data(iris)
   #iris %a% head()
-  
+
    iris %a%
         dplyr::filter(Sepal.Length < 16) %a%
         lm(Petal.Length~Species, data=.) %a%
         summary() -> obj
    
-  ahistory(obj)[1,2] -> smry
+  ahistory(md5hash = digest::digest(obj))[1,2] -> smry
   expect_equal(smry, "summary()")
   
 })
