@@ -1,15 +1,18 @@
 # test aoptions
-test_that("aread downloads files", {
+test_that("test aoptions", {
   
   createEmptyRepo("test1111", default = TRUE)
+#  setLocalRepo("test1111")
+  invisible(aoptions("silent", TRUE))
   data(iris)
-  iris %a%
-       filter(Sepal.Length < 6) %a%
-       lm(Petal.Length~Species, data=.) %a%
-       summary() -> obj 
-  ahistory(obj)[1,2] -> smry
-  deleteRepo("test1111")
-  expect_equal(, "summary()")
+  #iris %a% head()
   
-}
-)
+   iris %a%
+        dplyr::filter(Sepal.Length < 16) %a%
+        lm(Petal.Length~Species, data=.) %a%
+        summary() -> obj
+   
+  ahistory(obj)[1,2] -> smry
+  expect_equal(smry, "summary()")
+  
+})
