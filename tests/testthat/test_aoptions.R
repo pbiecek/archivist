@@ -14,6 +14,8 @@ test_that("test aoptions", {
 
   ahistory(obj)[1,2] -> smry
   ahistory(md5hash = "d550755d93b74707aa11a479656390a4")[1,2] -> smry
+  # temporary 
+  #  expect_equal(smry, "")
   expect_equal(smry, "summary()")
   
 })
