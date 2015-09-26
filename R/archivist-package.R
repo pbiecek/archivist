@@ -43,6 +43,14 @@
 #' @importFrom RSQLite SQLite
 #' @importFrom lubridate now
 #' @importFrom digest digest
+#' @importFrom grDevices dev.off
+#' @importFrom grDevices png
+#' @importFrom graphics barplot
+#' @importFrom graphics par
+#' @importFrom graphics plot
+#' @importFrom utils head
+#' @importFrom utils zip
+#'
 #' @family archivist
 #' @name archivist-package
 #' @docType package
