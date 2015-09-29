@@ -138,8 +138,8 @@ getConnectionToDB <- function( repoDir, realDBname ){
   
 executeSingleQuery <- function( dir, query, realDBname = TRUE ) {
   conn <- getConnectionToDB( dir, realDBname )
+  on.exit( dbDisconnect( conn ) )
   res <- dbGetQuery( conn, query )
-  dbDisconnect( conn )
   return( res )
 }
 

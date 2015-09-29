@@ -1,9 +1,10 @@
-archivist 1.7.0.1
+archivist 1.8
 ----------------------------------------------------------------
 
 * `checkDirectory` function is now immune to directories that don't exist. This made
 `showLocalRepo` function working properly when passed an argument to the directory
-that did not exist.
+that do not exist.
+* Changed `dbDisconnect( conn )` call to the `on.exit(dbDisconnect( conn ))` in `executeSingleQuery` function to prevent a situation in which during an error inside a function (which might be produced), the connection stays open, when it shouldn`t.
 
 
 archivist 1.7
