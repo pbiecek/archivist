@@ -70,11 +70,11 @@ createEmptyRepo <- function( repoDir, force = TRUE, default = FALSE){
     stop( paste0("Directory ", repoDir, " does not exist. Try with force=TRUE.") )
   if ( !file.exists( repoDir ) & force ){
     cat( paste0("Directory ", repoDir, " did not exist. Forced to create a new directory.") )
-    repoDir <- checkDirectory( repoDir )
+    repoDir <- checkDirectory( repoDir, create = TRUE )
     dir.create( repoDir )
   }
   
-  repoDir <- checkDirectory( repoDir )
+  repoDir <- checkDirectory( repoDir, create = TRUE )
   
   # create connection
   backpack <- getConnectionToDB( repoDir, realDBname = TRUE )
@@ -100,14 +100,15 @@ createEmptyRepo <- function( repoDir, force = TRUE, default = FALSE){
   
   dbDisconnect( backpack )
   
-  if (default) {
-    setLocalRepo(repoDir)
-  }
-   
   # if gallery folder does not exist - make it
   if ( !file.exists( file.path( repoDir, "gallery" ) ) ){
     dir.create( file.path( repoDir, "gallery" ), showWarnings = FALSE)
   }
+  
+  if (default) {
+    setLocalRepo(repoDir)
+  }
+   
 }
 
 addArtifact <- function( md5hash, name, dir ){
@@ -163,18 +164,32 @@ downloadDB <- function( repo, user, branch, repoDirGit ){
    return( Temp2 )
 }
 
-checkDirectory <- function( directory ){
+checkDirectory <- function( directory, create = FALSE ){
   # check if global repository was specified by setLocalRepo
   if ( is.null(directory) ){
 
     directory <- aoptions("repoDir")
-
-  }else{
-
-  # check if repoDir has "/" at the end and add it if not
-    if ( !grepl("/$", x = directory , perl=TRUE) ){
-    directory <- paste0(  directory, "/"  )
   }
+  # check whether it is second call of checkDirectory 
+  # (e.g CreatEmptyRepo + default = TRUE)
+  if ( grepl("/$", x = directory , perl=TRUE) ){
+    directory <- gsub(pattern = ".$", replacement = "",
+                      x = directory, perl = TRUE)
+  }
+  # check property of directory
+  if ( !create ){
+    # check whether repository exists
+    if ( !file.exists( directory ) ){
+      stop( paste0( "There is no such repository as ", directory ) )
+    }
+    # check if repository is proper (has backpack.db and gallery)
+    if ( !all( c("backpack.db", "gallery") %in% list.files(directory) ) ){
+      stop( paste0( directory, " is not a proper repository. There is neither backpack.db or gallery." ) )
+    }
+  }
+  # check if repoDir has "/" at the end and add it if not
+  if ( !grepl("/$", x = directory , perl=TRUE) ){
+    directory <- paste0(  directory, "/"  )
   }
   return( directory )
 }

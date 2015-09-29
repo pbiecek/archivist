@@ -1,3 +1,11 @@
+archivist 1.7.0.1
+----------------------------------------------------------------
+
+* `checkDirectory` function is now immune to directories that don't exist. This made
+`showLocalRepo` function working properly when passed an argument to the directory
+that did not exist.
+
+
 archivist 1.7
 ----------------------------------------------------------------
 

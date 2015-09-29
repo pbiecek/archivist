@@ -1,4 +1,5 @@
 test_that("setLocalRepo sets repo", {
+  createEmptyRepo("tmp_archivist")
   setLocalRepo(repoDir = "tmp_archivist")
   expect_equal(aoptions("repoDir"), "tmp_archivist/")
   
