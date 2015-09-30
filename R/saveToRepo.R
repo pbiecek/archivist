@@ -125,6 +125,8 @@
 #' 
 #' @param ascii A logical value. An \code{ascii} argument is passed to \link{save} function.
 #' 
+#' @param format A character of length 1. In which format save artifacts in \code{gallery}. By defaul set to \code{rda}.
+#' 
 #' @author 
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
 #'
@@ -258,10 +260,11 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
                         archiveTags = TRUE, 
                         archiveMiniature = TRUE, force = TRUE, rememberName = TRUE, 
                         chain = FALSE, ... , userTags = c(), 
-                        silent=aoptions("silent"), ascii = FALSE) {
+                        silent=aoptions("silent"), ascii = FALSE, format = aoptions("format")) {
   stopifnot( is.logical( c( archiveData, archiveTags, archiveMiniature, 
-                                                     chain, rememberName ) ) )
+                                                     chain, rememberName, ascii ) ) )
   stopifnot( is.character( repoDir ) | is.null( repoDir ) )
+  stopifnot( is.character( format ) & length( format ) == 1 )
   
   md5hash <- digest( artifact )
   objectName <- deparse( substitute( artifact ) )
@@ -289,12 +292,12 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
     rememberName = FALSE
   }
   if ( rememberName ){
-    save( file = paste0(repoDir,"gallery/", md5hash, ".rda"), ascii = ascii, list = objectName,  envir = parent.frame(1))
+    save( file = paste0(repoDir,"gallery/", md5hash, ".", format), ascii = ascii, list = objectName,  envir = parent.frame(1))
   }else{ 
 #    assign( value = artifact, x = md5hash, envir = .GlobalEnv )
 #    save( file = paste0(repoDir, "gallery/", md5hash, ".rda"),  ascii=TRUE, list = md5hash, envir = .GlobalEnv  )
     assign( value = artifact, x = md5hash, envir = .ArchivistEnv )
-    save( file = paste0(repoDir, "gallery/", md5hash, ".rda"),  ascii=ascii, list = md5hash, envir = .ArchivistEnv  )
+    save( file = paste0(repoDir, "gallery/", md5hash, ".", format),  ascii=ascii, list = md5hash, envir = .ArchivistEnv  )
     rm(list = md5hash, envir = .ArchivistEnv)
   }
   

@@ -7,7 +7,7 @@
 saveToRepo(artifact, repoDir = NULL, archiveData = TRUE,
   archiveTags = TRUE, archiveMiniature = TRUE, force = TRUE,
   rememberName = TRUE, chain = FALSE, ..., userTags = c(),
-  silent = aoptions("silent"), ascii = FALSE)
+  silent = aoptions("silent"), ascii = FALSE, format = aoptions("format"))
 }
 \arguments{
 \item{artifact}{An arbitrary R artifact to be saved. For supported artifacts see details.}
@@ -37,6 +37,8 @@ can be used. See examples.}
 \item{silent}{If TRUE produces no warnings.}
 
 \item{ascii}{A logical value. An \code{ascii} argument is passed to \link{save} function.}
+
+\item{format}{A character of length 1. In which format save artifacts in \code{gallery}. By defaul set to \code{rda}.}
 }
 \value{
 As a result of this function a character string is returned, which determines
