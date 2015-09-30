@@ -5,6 +5,7 @@ archivist 1.8
 `showLocalRepo` function working properly when passed an argument to the directory
 that do not exist.
 * Changed `dbDisconnect( conn )` call to the `on.exit(dbDisconnect( conn ))` in `executeSingleQuery` function to prevent a situation in which during an error inside a function (which might be produced), the connection stays open, when it shouldn`t.
+* Added new `format` parameter so now `saveToRepo` and `%a%` can archive artifacts in every format, e.g. rdb/rdx. In future there are plans to rebuild `loadFrom*Repo` functions to load also `rdb/rdx` formats.
 
 
 archivist 1.7
