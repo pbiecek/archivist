@@ -90,7 +90,7 @@
       if (is.symbol(rhs)) {
         
         if (!exists(deparse(rhs), parent.frame(), mode = "function"))
-          stop("RHS appears to be a function name, but it cannot be found.")
+          stop("RHS appears to be a function name, but it can not be found.")
         e <- call(as.character(rhs), as.name(nm)) # (1)
         
       } else {
@@ -112,7 +112,7 @@
     # here saveToRepo res
     # if no local repository is set then rise a warning
     if (!exists( "repoDir", envir = .ArchivistEnv )) {
-      warning("Default local repo is not set. Resuts are not archivised.")
+      warning("Default local repo is not set. Results are not archived.")
     } else {
       # for the output save both RHS as an object
       # and LHS as an instruction
