@@ -97,7 +97,7 @@
 zipLocalRepo <- function( repoDir = NULL, repoTo = getwd() , zipname="repository.zip"){
   stopifnot( is.character( repoDir ) | is.null( repoDir ) )
   
-  repoTo <- checkDirectory( repoTo )
+  repoTo <- checkDirectory2( repoTo )
   if (file.exists(paste0(repoTo, zipname))) {
     stop(paste0("The file ", repoTo, zipname), " allready exists")
   }
@@ -117,7 +117,7 @@ zipGithubRepo <- function( repoTo = getwd(), user = NULL, repo = NULL, branch = 
                            repoDirGit = FALSE, zipname = "repository.zip"){
   stopifnot( is.character( c( repoTo, branch ) ) )
 
-  repoTo <- checkDirectory( repoTo )
+  repoTo <- checkDirectory2( repoTo )
   if (file.exists(paste0(repoTo, zipname))) {
     stop(paste0("The file ", repoTo, zipname), " allready exists")
   }
