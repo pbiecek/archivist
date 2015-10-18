@@ -94,7 +94,7 @@ copyGithubRepo <- function( repoTo, md5hashes, user = NULL, repo = NULL, branch=
 
   GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
   
-  repoTo <- checkDirectory( repoTo )
+  repoTo <- checkDirectory2( repoTo )
   
   Temp <- downloadDB( repo, user, branch, repoDirGit )
   
