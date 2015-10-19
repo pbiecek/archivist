@@ -38,7 +38,10 @@ can be used. See examples.}
 
 \item{ascii}{A logical value. An \code{ascii} argument is passed to \link{save} function.}
 
-\item{format}{A character of length 1. In which format save artifacts in \code{gallery}. By defaul set to \code{rda}.}
+\item{format}{A character of length 1. In which format save artifacts in \code{gallery}. By defaul set to \code{rda},
+ possible also \code{rdx} (to save in rdb/rdx format).}
+
+\item{...}{Further arguments passed to \code{getFromNamespace(x = "makeLazyLoadDB", "tools")}.}
 }
 \value{
 As a result of this function a character string is returned, which determines
@@ -245,6 +248,10 @@ hflights \%a\%
   # chaining code is finished and after last operation the
   # artifact is stored
 
+
+
+## save in rdb/rdx format
+saveToRepo(iris, format = "rdx")
 
 
 deleteRepo( exampleRepoDir, TRUE)
