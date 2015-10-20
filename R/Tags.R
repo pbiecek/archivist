@@ -11,12 +11,12 @@
 #' 
 #' \code{Tags} are attributes of an artifact. \code{Tags} can be an artifact's \code{name}, \code{class} or \code{archiving date}. 
 #' Furthermore, for various artifact's classes more different \code{Tags} are available and can 
-#' be searched in \link{searchInLocalRepo} or \link{searchInGithubRepo} functions. 
+#' be searched by \link{searchInLocalRepo} or \link{searchInGithubRepo} functions. 
 #' 
-#' \code{Tags} are stored in the \link{Repository}. If data is extracted from artifact a special \code{Tag}
-#' named \code{relationWith} is created and specifies with which artifact this data is related to.
+#' \code{Tags} are stored in the \link{Repository}. If data is extracted from an artifact then a special \code{Tag},
+#' named \code{relationWith} is created. It specifies with which artifact this data is related to.
 #' 
-#' So far supported artifact list is presented below. Objects are divided thematically.
+#' The list of supported artifacts is presented below. Objects are divided thematically.
 #' The newest list is also available on \pkg{archivist} \code{wiki} on 
 #' \href{https://github.com/pbiecek/archivist/wiki/archivist-package---Tags}{{Github}}.
 #' 
@@ -117,7 +117,7 @@
 #'   }
 #' }
 #' 
-#' When non of above is specified, tags are corresponded by default
+#' When none of above is specified, tags are assigned by default
 #' 
 #' \describe{
 #'   \item{\code{default}}{
@@ -144,10 +144,10 @@
 #'    \item \link{searchInGithubRepo}. 
 #'  }
 #' 
-#' @note One can specify his own \code{Tags} for artifacts by setting artifact's attribute 
-#' before call of the \code{saveToRepo} function like this: 
+#' @note In the following way one can specify his own \code{Tags} for artifacts, by setting artifact's attribute 
+#' before call of the \code{saveToRepo} function: 
 #' \code{attr(x, "tags" ) = c( "name1", "name2" )}, where \code{x} is artifact 
-#' and \code{name1, name2} are \code{Tags} specified by an user.
+#' and \code{name1, name2} are \code{Tags} specified by a user.
 #' 
 #' @examples
 #' 
@@ -263,7 +263,7 @@
 #' 
 #' EE <- equal.count(ethanol$E, number=9, overlap=1/4)
 #' 
-#' ## Constructing panel functions on the fly; prepanel
+#' ## Constructing panel functions on the run; prepanel
 #' trellis.plot <- xyplot(NOx ~ C | EE, data = ethanol,
 #'                        prepanel = function(x, y) prepanel.loess(x, y, span = 1),
 #'                        xlab = "Compression Ratio", ylab = "NOx (micrograms/J)",
