@@ -17,7 +17,7 @@ be searched by \link{searchInLocalRepo} or \link{searchInGithubRepo} functions.
 \code{Tags} are stored in the \link{Repository}. If data is extracted from an artifact then a special \code{Tag},
 named \code{relationWith} is created. It specifies with which artifact this data is related to.
 
-So far supported artifact list is presented below. Objects are divided thematically.
+The list of supported artifacts is presented below. Objects are divided thematically.
 The newest list is also available on \pkg{archivist} \code{wiki} on
 \href{https://github.com/pbiecek/archivist/wiki/archivist-package---Tags}{{Github}}.
 
@@ -118,7 +118,7 @@ Statistical Tests
   }
 }
 
-When none of above is specified, tags are corresponded by default
+When none of above is specified, tags are assigned by default
 
 \describe{
   \item{\code{default}}{
@@ -257,7 +257,7 @@ update(trellis.last.object(),
 
 EE <- equal.count(ethanol$E, number=9, overlap=1/4)
 
-## Constructing panel functions on the fly; prepanel
+## Constructing panel functions on the run; prepanel
 trellis.plot <- xyplot(NOx ~ C | EE, data = ethanol,
                        prepanel = function(x, y) prepanel.loess(x, y, span = 1),
                        xlab = "Compression Ratio", ylab = "NOx (micrograms/J)",
