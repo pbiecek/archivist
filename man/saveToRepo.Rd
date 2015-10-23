@@ -24,15 +24,15 @@ If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{s
 \item{force}{A logical value denoting whether to archive \code{artifact} if it was already archived in
 a Repository.}
 
-\item{rememberName}{A logical value. Should not be changed by an user. It is a technical parameter.}
+\item{rememberName}{A logical value. Should not be changed by a user. It is a technical parameter.}
 
 \item{chain}{A logical value. Should the result be (default \code{chain = FALSE}) the \code{md5hash}
-of an stored artifact or should the result be the input artifact (\code{chain = TRUE}), so that chaining code
-can be used. See examples.}
+of a stored artifact or should the result be an input artifact (\code{chain = TRUE}), so that chaining code
+can be used? See examples.}
 
 \item{...}{Graphical parameters denoting width and height of a miniature. See details.}
 
-\item{userTags}{A character vector with tags. These tags will be added to the repository along the artifact.}
+\item{userTags}{A character vector with tags. These tags will be added to the repository along with the artifact.}
 
 \item{silent}{If TRUE produces no warnings.}
 
@@ -45,9 +45,8 @@ can be used. See examples.}
 }
 \value{
 As a result of this function a character string is returned, which determines
-the \code{md5hash} of the artifact that was used in the \code{saveToRepo} function. If
-\code{archiveData} was \code{TRUE}, the result also
-has an attribute, named \code{data}, that determines \code{md5hash} of the data needed
+the \code{md5hash} of the artifact that was used in the \code{saveToRepo} function. If \code{archiveData} is \code{TRUE}, the result will also
+have an attribute, named \code{data}, that determines \code{md5hash} of the data needed
 to compute the artifact.
 }
 \description{
@@ -59,9 +58,9 @@ To learn more about artifacts visit \link[archivist]{archivist-package}.
 Artifacts are saved in the local Repository, which is a SQLite database named \code{backpack}.
 After every \code{saveToRepo} call the database is refreshed, so the artifact is available
 immediately in the database for other collaborators.
-Every artifact is archived in a \code{md5hash.rda} file. This file will be saved in a folder
+Each artifact is archived in a \code{md5hash.rda} file. This file will be saved in a folder
 (under \code{repoDir} directory) named \code{gallery}. For every artifact, \code{md5hash} is a
-unique string of length 32 that comes out as a result of
+unique string of length 32 that is produced by
 \link[digest]{digest} function, which uses a cryptographical MD5 hash algorithm.
 
 By default, a miniature of an artifact and (if possible) a data set needed to compute this artifact are extracted.
@@ -106,25 +105,25 @@ Supported artifact's classes are (so far):
  \item \code{survfit}.
  }
 
-To check what \code{Tags} will be extracted for various artifacts see \link{Tags}.
+To check what \code{Tags} will be extracted from various artifacts see \link{Tags}.
 }
 \note{
 One can specify his own \code{Tags} for artifacts by setting artifact's attribute
 before call of the \code{saveToRepo} function like this:
 \code{attr(x, "tags" ) = c( "name1", "name2" )}, where \code{x} is artifact
-and \code{name1, name2} are \code{Tags} specified by an user.
+and \code{name1, name2} are \code{Tags} specified by a user.
 
-Important: if one want to archive data from arftifacts that class is one of:
-\code{survfit, glmnet, qda, lda, trellis, htest}, and this dataset set is transformed only in
+Important: if one wants to archive data from arftifacts which is one of:
+\code{survfit, glmnet, qda, lda, trellis, htest} class and this dataset set is transformed only in
 the artifact's formula the \code{saveToRepo} will not archive this dataset. \code{saveToRepo}
 only archives datasets that already exists in any of R environments.
 
-Example: here data set will not be archived.
+Example: The data set will not be archived here.
 \itemize{
    \item \code{z <- lda(Sp ~ ., Iris, prior = c(1,1,1)/3, subset = train[,-8])}
    \item \code{saveToRepo( z, repoDir )}
 }
-Example: here data set will be archived.
+Example: The data set will be archived here.
 \itemize{
    \item \code{train2 <- train[,-8]}
    \item \code{z <- lda(Sp ~ ., Iris, prior = c(1,1,1)/3, subset = train2)}
@@ -200,20 +199,20 @@ saveToRepo( fannyx, repoDir=exampleRepoDir )
 saveToRepo( lda1, repoDir=exampleRepoDir )
 saveToRepo( glmnet1, repoDir=exampleRepoDir )
 
-# let's see how the Repository look like: show
+# let's see how the Repository looks like: show
 
 showLocalRepo( method = "md5hashes", repoDir = exampleRepoDir )
 showLocalRepo( method = "tags", repoDir = exampleRepoDir )
 
-# let's see how the Repository look like: summary
+# let's see how the Repository looks like: summary
 
 summaryLocalRepo( exampleRepoDir )
 
-# one can archived the same artifact twice, but there is a message
+# one could archive the same artifact twice, but there is a message
 
 saveToRepo( model, repoDir=exampleRepoDir )
 
-# in case not to archive the same artifact twice, use
+# in order not to archive the same artifact twice, use
 
 saveToRepo( lda1, repoDir=exampleRepoDir, force = FALSE )
 
@@ -222,7 +221,7 @@ saveToRepo( lda1, repoDir=exampleRepoDir, force = FALSE )
 saveToRepo( qda1, repoDir=exampleRepoDir, archiveData = FALSE,
             archiveMiniature = FALSE)
 
-# one can specify his own additional tags to be archived with artifact
+# one can specify his own additional tags which are to be archived with artifact
 
 attr( model, "tags" ) = c( "do not delete", "my favourite model" )
 saveToRepo( model, repoDir=exampleRepoDir )

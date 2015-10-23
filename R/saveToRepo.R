@@ -11,9 +11,9 @@
 #' Artifacts are saved in the local Repository, which is a SQLite database named \code{backpack}. 
 #' After every \code{saveToRepo} call the database is refreshed, so the artifact is available 
 #' immediately in the database for other collaborators.
-#' Every artifact is archived in a \code{md5hash.rda} file. This file will be saved in a folder 
+#' Each artifact is archived in a \code{md5hash.rda} file. This file will be saved in a folder 
 #' (under \code{repoDir} directory) named \code{gallery}. For every artifact, \code{md5hash} is a 
-#' unique string of length 32 that comes out as a result of 
+#' unique string of length 32 that is produced by 
 #' \link[digest]{digest} function, which uses a cryptographical MD5 hash algorithm.
 #' 
 #' By default, a miniature of an artifact and (if possible) a data set needed to compute this artifact are extracted. 
