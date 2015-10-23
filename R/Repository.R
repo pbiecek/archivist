@@ -4,13 +4,13 @@
 #'
 #' @description
 #' \code{Repository} stores specific values of an artifact, different for 
-#' various artifact's classes, and artifacts themselves.
+#' various artifact's classes and artifacts themselves.
 #' To learn more about artifacts visit \link[archivist]{archivist-package}.
 #' 
 #' @details
 #' 
-#' \code{Repository} is folder with an SQLite database stored in a file named \code{backpack}
-#' and a subdirectory named \code{gallery} with collection of artifact saved as \code{.rda} files.
+#' \code{Repository} is a folder with an SQLite database stored in a file named \code{backpack}
+#' and a subdirectory named \code{gallery} which collects artifacts saved as \code{.rda} files.
 #' 
 #' @seealso 
 #' Functions using \code{Repository} are:
