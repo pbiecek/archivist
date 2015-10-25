@@ -3,11 +3,15 @@
 \name{ahistory}
 \alias{ahistory}
 \alias{print.ahistory}
+\alias{print.ahistoryKable}
 \title{Show Artifact's History}
 \usage{
-ahistory(artifact = NULL, md5hash = NULL, repoDir = NULL)
+ahistory(artifact = NULL, md5hash = NULL, repoDir = NULL,
+  aformat = "regular")
 
 \method{print}{ahistory}(x, ...)
+
+\method{print}{ahistoryKable}(x, ...)
 }
 \arguments{
 \item{artifact}{An artifact for which history should be derived. Will be converted  into md5hash.}
@@ -17,9 +21,12 @@ ahistory(artifact = NULL, md5hash = NULL, repoDir = NULL)
 \item{repoDir}{A character denoting an existing directory in which an artifact will be saved.
 If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.}
 
-\item{x}{A character vector of tags.}
+\item{aformat}{A character denoting whether to print history in a \code{"regular"} (default) way or like in a \code{"kable"} function.
+See Notes.}
 
-\item{...}{A character vector of tags.}
+\item{x}{An object of class \code{ahistory} or {ahistoryKable}, which are 2 possible outputs from \code{ahistory} function.}
+
+\item{...}{Further parameters passed to \link[knitr]{kable} function. Used when \code{aformat = "kable"}.}
 }
 \value{
 This function returns data frame with two columns - names of calls and md5hashes of partial results.
@@ -27,30 +34,68 @@ This function returns data frame with two columns - names of calls and md5hashes
 \description{
 \code{ahistory} extracts artifact's history and creates a data frame with
 history of calls and md5hashes of partial results. The overloaded
-\code{print.ahistory} function prints this history in a concise way.
+\code{print.ahistory} function prints this history in a concise way. The overloaded
+\code{print.ahistoryKable} function prints this history in the same way as \link[knitr]{kable}.
 }
 \details{
-All artifacts created with operator %a% are archivised with
+All artifacts created with operator \link[archivist]{\%a\%} are archivised with
 detailed information  about it's source (both call and md5hash of the input).
 The function \code{ahistory} reads all artifacts that
 precede \code{artifact} and create a description of the input flow.
 The generic \code{print.ahistory} function plots the history in a human readable  way.
 }
+\note{
+There are provided functions (\code{print.ahistory} and \code{print.ahistoryKable}) to print the artifact's history.
+History can be printed in a \code{regular} way which is friendy for the console output or in a \code{kable} format which
+prints the artifact's history in a way in which \link[knitr]{kable} function would. This is convenient when one prints history
+in \code{.Rmd} files using \link[rmarkdown]{rmarkdown}
+}
 \examples{
 \dontrun{
+
+createEmptyRepo("ahistory_check", default = TRUE)
+aoptions("silent", TRUE)
 library(dplyr)
 iris \%a\%
-  filter(Sepal.Length < 6) \%a\%
-  lm(Petal.Length~Species, data=.) \%a\%
-  summary() -> artifact
-# read the artifact history
- asearch(artifact)
+filter(Sepal.Length < 6) \%a\%
+ lm(Petal.Length~Species, data=.) \%a\%
+ summary() -> artifact
+
+ahistory(artifact)
+ahistory(artifact, aformat = "kable")
+print(ahistory(artifact, aformat = "kable"), format = "latex")
+vignette(topic="Pedigree_Retrieval", package = "archivist")
+
 }
 }
 \author{
 Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
 }
 \seealso{
+Other archivist: \code{\link{Repository}};
+  \code{\link{Tags}}; \code{\link{\%a\%}};
+  \code{\link{addTagsRepo}}; \code{\link{aoptions}};
+  \code{\link{archivist-package}}; \code{\link{aread}};
+  \code{\link{asearch}}; \code{\link{cache}};
+  \code{\link{copyGithubRepo}},
+  \code{\link{copyLocalRepo}};
+  \code{\link{createEmptyRepo}}; \code{\link{deleteRepo}};
+  \code{\link{getTagsGithub}}, \code{\link{getTagsLocal}};
+  \code{\link{loadFromGithubRepo}},
+  \code{\link{loadFromLocalRepo}}; \code{\link{md5hash}};
+  \code{\link{multiSearchInGithubRepo}},
+  \code{\link{multiSearchInLocalRepo}},
+  \code{\link{searchInGithubRepo}},
+  \code{\link{searchInLocalRepo}};
+  \code{\link{rmFromRepo}}; \code{\link{saveToRepo}};
+  \code{\link{setGithubRepo}}, \code{\link{setLocalRepo}};
+  \code{\link{shinySearchInLocalRepo}};
+  \code{\link{showGithubRepo}},
+  \code{\link{showLocalRepo}};
+  \code{\link{summaryGithubRepo}},
+  \code{\link{summaryLocalRepo}};
+  \code{\link{zipGithubRepo}}, \code{\link{zipLocalRepo}}
+
 Other archivist: \code{\link{Repository}};
   \code{\link{Tags}}; \code{\link{\%a\%}};
   \code{\link{addTagsRepo}}; \code{\link{aoptions}};
