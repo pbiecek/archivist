@@ -28,7 +28,7 @@ a Repository.}
 
 \item{chain}{A logical value. Should the result be (default \code{chain = FALSE}) the \code{md5hash}
 of a stored artifact or should the result be an input artifact (\code{chain = TRUE}), so that chaining code
-can be used? See examples.}
+can be used. See examples.}
 
 \item{...}{Graphical parameters denoting width and height of a miniature. See details.}
 
@@ -44,9 +44,10 @@ can be used? See examples.}
 \item{...}{Further arguments passed to \code{getFromNamespace(x = "makeLazyLoadDB", "tools")}.}
 }
 \value{
-As a result of this function a character string is returned, which determines
-the \code{md5hash} of the artifact that was used in the \code{saveToRepo} function. If \code{archiveData} is \code{TRUE}, the result will also
-have an attribute, named \code{data}, that determines \code{md5hash} of the data needed
+As a result of calling this function a character string is returned, which determines
+the \code{md5hash} of the artifact. If
+\code{archiveData} is \code{TRUE}, the result will also
+have an attribute, named \code{data}, which determines \code{md5hash} of the data needed
 to compute the artifact.
 }
 \description{
@@ -59,7 +60,7 @@ Artifacts are saved in the local Repository, which is a SQLite database named \c
 After every \code{saveToRepo} call the database is refreshed, so the artifact is available
 immediately in the database for other collaborators.
 Each artifact is archived in a \code{md5hash.rda} file. This file will be saved in a folder
-(under \code{repoDir} directory) named \code{gallery}. For every artifact, \code{md5hash} is a
+(under \code{repoDir} directory) named \code{gallery}. For each artifact, \code{md5hash} is a
 unique string of length 32 that is produced by
 \link[digest]{digest} function, which uses a cryptographical MD5 hash algorithm.
 
@@ -81,8 +82,9 @@ Archived artifact can be searched in the \code{backpack} dataset by using the
 Graphical parameters.
 
 If the artifact is of class \code{data.frame} or \code{archiveData = TRUE}, it is possible to specify
-how many rows of that data should be archived by adding the argument \code{firstRows} with the n
-specified number of rows. Note that, the date can be extracted only from the artifacts that are supported by
+how many rows of that data should be archived by adding the argument \code{firstRows} with the
+n specified number of rows.
+Note that, the data can be extracted only from the artifacts that are supported by
 the \pkg{archivist} package; see \link{Tags}.
 
 If the artifact is of class \code{lattice} or \code{ggplot}, and
@@ -108,15 +110,15 @@ Supported artifact's classes are (so far):
 To check what \code{Tags} will be extracted from various artifacts see \link{Tags}.
 }
 \note{
-One can specify his own \code{Tags} for artifacts by setting artifact's attribute
-before call of the \code{saveToRepo} function like this:
-\code{attr(x, "tags" ) = c( "name1", "name2" )}, where \code{x} is artifact
+In the following way one can specify his own \code{Tags} for artifacts by setting artifact's attribute
+before call of the \code{saveToRepo} function:
+\code{attr(x, "tags" ) = c( "name1", "name2" )}, where \code{x} is an artifact
 and \code{name1, name2} are \code{Tags} specified by a user.
 
-Important: if one wants to archive data from arftifacts which is one of:
-\code{survfit, glmnet, qda, lda, trellis, htest} class and this dataset set is transformed only in
-the artifact's formula the \code{saveToRepo} will not archive this dataset. \code{saveToRepo}
-only archives datasets that already exists in any of R environments.
+Important: if one wants to archive data from artifacts which is one of:
+\code{survfit, glmnet, qda, lda, trellis, htest} class, and this dataset is transformed within
+the artifact's formula then \code{saveToRepo} will not archive this dataset. \code{saveToRepo}
+only archives datasets that already exist in any of R environments.
 
 Example: The data set will not be archived here.
 \itemize{
@@ -131,8 +133,9 @@ Example: The data set will be archived here.
 }
 }
 \examples{
-# objects preparation
 \dontrun{
+# objects preparation
+
 # data.frame object
 data(iris)
 
@@ -185,7 +188,7 @@ bk=rnorm(100)
 glmnet1=glmnet(zk,bk)
 
 
-# creating example Repository - that examples will work
+# creating example Repository - on which examples will work
 
 # save examples
 
@@ -208,7 +211,7 @@ showLocalRepo( method = "tags", repoDir = exampleRepoDir )
 
 summaryLocalRepo( exampleRepoDir )
 
-# one could archive the same artifact twice, but there is a message
+# one can archive the same artifact twice, but there is a message
 
 saveToRepo( model, repoDir=exampleRepoDir )
 
@@ -216,7 +219,7 @@ saveToRepo( model, repoDir=exampleRepoDir )
 
 saveToRepo( lda1, repoDir=exampleRepoDir, force = FALSE )
 
-# one can archive artifact withouth it's database and miniature
+# one can archive artifact without it's database and miniature
 
 saveToRepo( qda1, repoDir=exampleRepoDir, archiveData = FALSE,
             archiveMiniature = FALSE)
@@ -225,9 +228,8 @@ saveToRepo( qda1, repoDir=exampleRepoDir, archiveData = FALSE,
 
 attr( model, "tags" ) = c( "do not delete", "my favourite model" )
 saveToRepo( model, repoDir=exampleRepoDir )
-showLocalRepo( "tags", exampleRepoDir )
+showLocalRepo( method = "tags", repoDir = exampleRepoDir )
 
-# removing an example Repository
 
 # saveToRepo in chaining code
 library(dplyr)
@@ -237,7 +239,7 @@ hflights \%a\%
   group_by(Year, Month, DayofMonth) \%a\%
   select(Year:DayofMonth, ArrDelay, DepDelay) \%a\%
   saveToRepo( exampleRepoDir, chain = TRUE ) \%a\%
-  # here the artifact is stored but chaining is not finished
+  # the artifact is stored here but chaining is not finished
   summarise(
     arr = mean(ArrDelay, na.rm = TRUE),
     dep = mean(DepDelay, na.rm = TRUE)
@@ -250,9 +252,9 @@ hflights \%a\%
 
 
 ## save in rdb/rdx format
-saveToRepo(iris, format = "rdx")
+saveToRepo(iris, format = "rdx", repoDir = exampleRepoDir)
 
-
+# removing an example Repository
 deleteRepo( exampleRepoDir, TRUE)
 
 rm( exampleRepoDir )
