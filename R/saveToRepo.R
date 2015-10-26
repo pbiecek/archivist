@@ -31,7 +31,7 @@
 #' \link{searchInLocalRepo} or \link{searchInGithubRepo} functions. Artifacts can be searched by their \link{Tags}, 
 #' \code{names}, \code{classes} or \code{archiving date}.
 #' 
-#' Graphical parameters.
+#' \code{firstRows} parameter.
 #' 
 #' If the artifact is of class \code{data.frame} or user set \code{archiveData = TRUE} for artifact that stores data within it,
 #'  it is possible to specify 
@@ -40,6 +40,8 @@
 #' n corresponding to the number of rows (as in \link{head}).
 #' Note that, the data can be extracted only from the artifacts that are supported by 
 #' the \pkg{archivist} package; see \link{Tags}.
+#' 
+#' Graphical parameters.
 #' 
 #' If the artifact is of class \code{lattice} or \code{ggplot}, and
 #' \code{archiveMiniature = TRUE}, then it is 
