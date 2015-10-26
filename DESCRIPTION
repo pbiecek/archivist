@@ -1,5 +1,5 @@
 Package: archivist
-Version: 1.8.3
+Version: 1.8.4
 Type: Package
 Title: Tools for Storing, Restoring and Searching for R Objects
 Authors@R: c(
@@ -25,7 +25,7 @@ Repository: CRAN
 License: GPL-2
 LazyLoad: yes
 LazyData: yes
-Depends: R (>= 3.0.0),
+Depends: R (>= 3.0.0)
 Imports: RCurl, digest, httr, DBI, lubridate, RSQLite
 Suggests: shiny, testthat, ggplot2, dplyr
 BugReports: https://github.com/pbiecek/archivist/issues

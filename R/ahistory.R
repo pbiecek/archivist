@@ -5,10 +5,11 @@
 #' @description
 #' \code{ahistory} extracts artifact's history and creates a data frame with  
 #' history of calls and md5hashes of partial results. The overloaded 
-#' \code{print.ahistory} function prints this history in a concise way.
+#' \code{print.ahistory} function prints this history in a concise way. The overloaded
+#' \code{print.ahistoryKable} function prints this history in the same way as \link[knitr]{kable}.
 #' 
 #' @details
-#' All artifacts created with operator %a% are archivised with 
+#' All artifacts created with operator \link[archivist]{\%a\%} are archivised with 
 #' detailed information  about it's source (both call and md5hash of the input).
 #' The function \code{ahistory} reads all artifacts that 
 #' precede \code{artifact} and create a description of the input flow. 
@@ -18,34 +19,50 @@
 #' @param md5hash  If \code{artifact} is not specified then \code{md5hash} is used.
 #' @param repoDir  A character denoting an existing directory in which an artifact will be saved.
 #' If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.
-#' @param x  A character vector of tags. 
-#' @param ...  A character vector of tags. 
+#' @param x  An object of class \code{ahistory} or {ahistoryKable}, which are 2 possible outputs from \code{ahistory} function. 
+#' @param ...  Further parameters passed to \link[knitr]{kable} function. Used when \code{aformat = "kable"}.
+#' @param aformat A character denoting whether to print history in a \code{"regular"} (default) way or like in a \code{"kable"} function.
+#' See Notes.
 #' 
 #' @return This function returns data frame with two columns - names of calls and md5hashes of partial results.
+#' 
+#' @note There are provided functions (\code{print.ahistory} and \code{print.ahistoryKable}) to print the artifact's history. 
+#' History can be printed in a \code{regular} way which is friendy for the console output or in a \code{kable} format which 
+#' prints the artifact's history in a way in which \link[knitr]{kable} function would. This is convenient when one prints history
+#' in \code{.Rmd} files using \link[rmarkdown]{rmarkdown}
 #' 
 #' @author 
 #' Przemyslaw Biecek, \email{przemyslaw.biecek@@gmail.com}
 #' 
 #' @examples
 #' \dontrun{
+#' 
+#' createEmptyRepo("ahistory_check", default = TRUE)
+#' aoptions("silent", TRUE)
 #' library(dplyr)
 #' iris %a%
-#'   filter(Sepal.Length < 6) %a%
-#'   lm(Petal.Length~Species, data=.) %a%
-#'   summary() -> artifact
-#' # read the artifact history
-#'  asearch(artifact)
+#' filter(Sepal.Length < 6) %a%
+#'  lm(Petal.Length~Species, data=.) %a%
+#'  summary() -> artifact
+#'  
+#' ahistory(artifact)
+#' ahistory(artifact, aformat = "kable")  
+#' print(ahistory(artifact, aformat = "kable"), format = "latex")
+#' vignette(topic="Pedigree_Retrieval", package = "archivist")
+#' 
 #' }
 #' @family archivist
 #' @rdname ahistory
 #' @export
 
-ahistory <- function(artifact = NULL, md5hash = NULL, repoDir = NULL) {
+ahistory <- function(artifact = NULL, md5hash = NULL, repoDir = NULL, aformat = "regular") {
   # if artifact is set then calculate md5hash for it
   if (!is.null(artifact)) 
     md5hash = digest(artifact)
   if (is.null(md5hash)) 
     stop("Either artifact or md5hash has to be set")
+  
+  stopifnot(length(aformat) ==1 & aformat %in% c("regular", "kable"))
   
   res_names <- c()
   res_md5 <- md5hash
@@ -63,7 +80,11 @@ ahistory <- function(artifact = NULL, md5hash = NULL, repoDir = NULL) {
       } else {
        # that's should not happen
         df <- data.frame(md5hash = res_md5, call = rep("", length(res_md5)), stringsAsFactors = FALSE)
-        class(df) = c("ahistory", "data.frame")
+        if (aformat == "kable") {
+          class(df) = c("ahistoryKable", "data.frame")  
+        } else {
+          class(df) = c("ahistory", "data.frame")  
+        }
         return(df)
       }
     }
@@ -79,7 +100,12 @@ ahistory <- function(artifact = NULL, md5hash = NULL, repoDir = NULL) {
     res_names[max(length(res_md5), length(res_names))+1] = ""
   }
   df <- data.frame(md5hash = res_md5, call = res_names, stringsAsFactors = FALSE)
-  class(df) = c("ahistory", "data.frame")
+  if (aformat == "kable") {
+    class(df) = c("ahistoryKable", "data.frame")  
+  } else {
+    class(df) = c("ahistory", "data.frame")  
+  }
+  
   df
 }
 
@@ -94,4 +120,15 @@ print.ahistory <- function(x, ...) {
     if (i < nrow(x)) cat("-> ") else cat("   ")
     cat(x[i,2], " [", x[i,1], "]\n", sep = "")
   }
+}
+
+#' @family archivist
+#' @rdname ahistory
+#' @export
+
+print.ahistoryKable <- function(x, ...){
+  if (!requireNamespace("knitr", quietly = TRUE)) {
+    stop("knitr package required for archivist:::print.ahistoryKable function")
+  }
+  cat(knitr::kable(x[nrow(x):1, 2:1], ...), sep="\n")
 }
