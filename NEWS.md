@@ -8,6 +8,7 @@ that do not exist.
 * Added new `format` parameter so now `saveToRepo` and `%a%` can archive artifacts in `rdb/rdx` format. In future there are plans to rebuild `loadFrom*Repo` functions to load also `rdb/rdx` formats.
 * `%a%` operator does react on `default = TRUE` in `createEmpyRepo` function.
 * `print.ahistory` function can now print outputs of the artifact's history as the `knitr::kable` would.
+* Examples for `searchInGithubRepo` now works for `user='pbiecek'` and `repo='archivist` parameters as we added new backpack.db file. The previous one was almost empty (for 7 months).
 
 
 archivist 1.7
