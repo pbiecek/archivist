@@ -11,11 +11,11 @@ a special attribute named \code{md5hash}.
 To learn more about artifacts visit \link[archivist]{archivist-package}.
 }
 \details{
-For every artifact, \code{md5hash} is a unique string of length 32 that comes out as a result of
-\link[digest]{digest} function, which uses a cryptographical MD5 hash algorithm.
-The \code{md5hash} of every artifact, that is archived to the \link{Repository}, is also saved
-to the Repository with this artifact's \code{Tags} - see \link{Tags}. It enables to distinguish
-artifacts in Repository and facilitates searching and loading them.
+For each artifact, \code{md5hash} is a unique string of length 32 that is produced by
+\link[digest]{digest} function which uses a cryptographical MD5 hash algorithm.
+The \code{md5hash} of each artifact, that is archived in the \link{Repository}, is also saved
+on the Repository along with the artifact's \code{Tags} - see \link{Tags}. It enables to distinguish
+artifacts in the Repository and facilitates searching and loading them.
 }
 \seealso{
 Functions that take \code{md5hash} as a parameter are:
@@ -37,7 +37,7 @@ Functions returning \code{md5hash} as a value are:
 \item \link{shinySearchInLocalRepo},
  \item \link{saveToRepo}.
 }
-Functions returning \code{md5hahes} as a \code{data.frame} are:
+Functions returning \code{md5hashes} as a \code{data.frame} are:
 \itemize{
  \item \link{showLocalRepo},
  \item \link{showGithubRepo}.
