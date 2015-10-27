@@ -79,13 +79,17 @@ Archived artifact can be searched in the \code{backpack} dataset by using the
 \link{searchInLocalRepo} or \link{searchInGithubRepo} functions. Artifacts can be searched by their \link{Tags},
 \code{names}, \code{classes} or \code{archiving date}.
 
-Graphical parameters.
+\code{firstRows} parameter.
 
-If the artifact is of class \code{data.frame} or \code{archiveData = TRUE}, it is possible to specify
-how many rows of that data should be archived by adding the argument \code{firstRows} with the
-n specified number of rows.
+If the artifact is of class \code{data.frame} or user set \code{archiveData = TRUE} for artifact that stores data within it,
+ it is possible to specify
+how many rows of that data (or that \code{data.frame}) should be archived in a \code{miniature}.
+ This can be done by adding the argument \code{firstRows} with the
+n corresponding to the number of rows (as in \link{head}).
 Note that, the data can be extracted only from the artifacts that are supported by
 the \pkg{archivist} package; see \link{Tags}.
+
+Graphical parameters.
 
 If the artifact is of class \code{lattice} or \code{ggplot}, and
 \code{archiveMiniature = TRUE}, then it is
@@ -113,7 +117,11 @@ To check what \code{Tags} will be extracted from various artifacts see \link{Tag
 In the following way one can specify his own \code{Tags} for artifacts by setting artifact's attribute
 before call of the \code{saveToRepo} function:
 \code{attr(x, "tags" ) = c( "name1", "name2" )}, where \code{x} is an artifact
-and \code{name1, name2} are \code{Tags} specified by a user.
+and \code{name1, name2} are \code{Tags} specified by a user. It can be also done in a new, simpler way by
+ using \code{userTags} parameter like this:
+ \itemize{
+   \item \code{saveToRepo(model, repoDir, userTags = c("my_model", "do not delet"))}.
+ }
 
 Important: if one wants to archive data from artifacts which is one of:
 \code{survfit, glmnet, qda, lda, trellis, htest} class, and this dataset is transformed within
@@ -230,24 +238,28 @@ attr( model, "tags" ) = c( "do not delete", "my favourite model" )
 saveToRepo( model, repoDir=exampleRepoDir )
 showLocalRepo( method = "tags", repoDir = exampleRepoDir )
 
+# or one can do it even easier
+saveToRepo( model, repoDir = exampleRepoDir,
+            userTags = c( "do not delete", "my favourite model" ) )
 
 # saveToRepo in chaining code
 library(dplyr)
 
+# chaining code
+exampleRepoDir <- tempdir()
+createEmptyRepo(exampleRepoDir, default = TRUE)
+library(dplyr)
+invisible(aoptions("silent", TRUE))
 data("hflights", package = "hflights")
 hflights \%a\%
   group_by(Year, Month, DayofMonth) \%a\%
   select(Year:DayofMonth, ArrDelay, DepDelay) \%a\%
-  saveToRepo( exampleRepoDir, chain = TRUE ) \%a\%
-  # the artifact is stored here but chaining is not finished
   summarise(
     arr = mean(ArrDelay, na.rm = TRUE),
     dep = mean(DepDelay, na.rm = TRUE)
   ) \%a\%
-  filter(arr > 30 | dep > 30) \%a\%
-  saveToRepo( exampleRepoDir )
-  # chaining code is finished and after last operation the
-  # artifact is stored
+  filter(arr > 30 | dep > 30) -> x
+showLocalRepo() # Repository was globally set in aoptions
 
 
 
