@@ -10,12 +10,12 @@
 #' @details
 #' Functions \code{loadFromLocalRepo} and \code{loadFromGithubRepo} load artifacts from the archivist Repositories 
 #' stored in a local folder or on Github. Both of them take \code{md5hash} as a
-#' parameter, which is a result from \link{saveToRepo} function.
-#' For every artifact, \code{md5hash} is a unique string of length 32 that comes out as a result of 
+#' parameter, which is a result of \link{saveToRepo} function.
+#' For each artifact, \code{md5hash} is a unique string of length 32 that is produced by
 #' \link[digest]{digest} function, which uses a cryptographical MD5 hash algorithm. For more information see \link{md5hash}.
 #' 
 #' Important: instead of giving the whole \code{md5hash} character, the user can simply give first few characters of the \code{md5hash}.
-#' For example, \code{a09dd} instead of \code{a09ddjdkf9kj33dcjdnfjgos9jd9jkcv}. All artifacts with the same corresponing \code{md5hash} 
+#' For example, \code{a09dd} instead of \code{a09ddjdkf9kj33dcjdnfjgos9jd9jkcv}. All artifacts with the same \code{md5hash} 
 #' abbreviation will be loaded from \link{Repository}.
 #' 
 #' Note that \code{user} and \code{repo} should be used only when working with a Github repository and should be omitted in the local mode. 
@@ -23,8 +23,8 @@
 #' 
 #' One may notice that \code{loadFromGithubRepo} and \code{loadFromLocalRepo} load artifacts to the Global
 #' Environment with their original names. Alternatively,
-#' a parameter \code{value = TRUE} might be specified so that the functions return artifacts as a result so that they
-#' can be attributed to new names. Note that, when an abbreviation of \code{md5hash} was given a list of artifacts corresponding to this
+#' a parameter \code{value = TRUE} can be specified so that these functions may return artifacts as a value. As a result loaded artifacts
+#' can be attributed to new names. Note that, when an abbreviation of \code{md5hash} was given then a list of artifacts corresponding to this
 #' abbreviation will be loaded.
 #' 
 #' @note
@@ -38,14 +38,14 @@
 #' 
 #' @param md5hash A character assigned to the artifact as a result of a cryptographical hash function with MD5 algorithm, or it's abbreviation.
 #' 
-#' @param repo Only if working with a Github repository. A character containing a name of a Github repository on which the Repository is archived.
+#' @param repo While working with a Github repository. A character containing a name of a Github repository on which the Repository is archived.
 #' By default set to \code{NULL} - see \code{Note}.
-#' @param user Only if working with a Github repository. A character containing a name of a Github user on whose account the \code{repo} is created.
+#' @param user While working with a Github repository. A character containing a name of a Github user on whose account the \code{repo} is created.
 #' By default set to \code{NULL} - see \code{Note}. 
-#' @param branch Only if working with a Github repository. A character containing a name of 
+#' @param branch While working with a Github repository. A character containing a name of 
 #' Github Repository's branch on which the Repository is archived. Default \code{branch} is \code{master}.
 #' 
-#' @param repoDirGit Only if working with a Github repository. A character containing a name of a directory on Github repository 
+#' @param repoDirGit While working with a Github repository. A character containing a name of a directory on Github repository 
 #' on which the Repository is stored. If the Repository is stored in main folder on Github repository, this should be set 
 #' to \code{repoDirGit = FALSE} as default.
 #' 
@@ -53,14 +53,14 @@
 #' if \code{TRUE} then artifacts are returned as a list of values (if there is more than one artifact)
 #' or as a single value (if there is only one arfifact that matches md5hash).
 #' 
-#' 
-#'
 #' @author 
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
-#' 
+#'  
 #' @examples
-#' # objects preparation
+#' 
 #' \dontrun{
+#' # objects preparation
+#' 
 #' # data.frame object
 #' data(iris)
 #' 
@@ -89,7 +89,7 @@
 #'            cbind(rnorm( 3,3.2,0.5), rnorm( 3,3.2,0.5)))
 #' fannyx <- fanny(x, 2)
 #' 
-#' # creating example Repository - that examples will work
+#' # creating example Repository - on which examples will work
 #' 
 #' exampleRepoDir <- tempdir()
 #' createEmptyRepo(repoDir = exampleRepoDir)
@@ -99,12 +99,12 @@
 #' agn1Md5hash <- saveToRepo(agn1, repoDir=exampleRepoDir)
 #' fannyxMd5hash <- saveToRepo(fannyx, repoDir=exampleRepoDir)
 #' 
-#' # let's see how the Repository look like: show
+#' # let's see how the Repository looks like: show
 #' 
 #' showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
 #' showLocalRepo(method = "tags", repoDir = exampleRepoDir)
 #' 
-#' # let's see how the Repository look like: summary
+#' # let's see how the Repository looks like: summary
 #' 
 #' summaryLocalRepo( exampleRepoDir )
 #' 
@@ -116,14 +116,14 @@
 #' rm(agn1)
 #' 
 #' # if those objects were archivised, they can be loaded
-#' # from Repository, when knowing their tags
+#' # from Repository, when knowing their md5hash
 #' 
 #' loadFromLocalRepo(myplo123Md5hash, repoDir = exampleRepoDir)
 #' loadFromLocalRepo(irisMd5hash, repoDir = exampleRepoDir)
 #' 
 #' 
-#' # if one can not remembers the object's md5hash but
-#' # remembers the object's name this object can still be
+#' # if one doesn't remember the object's md5hash but
+#' # remembers the object's name, this object can still be
 #' # loaded.
 #' 
 #' agnesHash <- searchInLocalRepo( "name:agn1", repoDir = exampleRepoDir)
@@ -169,8 +169,31 @@
 #' 
 #' loadFromGithubRepo( "ff575c261c", user="pbiecek", repo="archivist")
 #' NewObjects <- loadFromGithubRepo( NAMEmd5hash, user="pbiecek", repo="archivist", value = TRUE )
-#' loadFromGithubRepo( DATEmd5hash, user="pbiecek", repo="archivist")
+#' loadFromGithubRepo( CLASSmd5hash, user="pbiecek", repo="archivist")
 #' 
+#' 
+#' ## Loading artifacts from the repository which is built in the archivist package 
+#' ## and saving them on the example repository
+#' 
+#' # Creating an example Repository - on which artifacts loaded from the archivist package repository
+#' # will be saved
+#' exampleRepoDir <- tempdir()
+#' createEmptyRepo(repoDir = exampleRepoDir)
+#' 
+#' # Directory of the archivist package repository
+#' repo_archivist <- system.file("graphGallery", package = "archivist") 
+#' # We are checking what kind of objects are stored in the archivist package repository
+#' summaryLocalRepo(repoDir = repo_archivist)
+#' # Let's say that we are interested in an artifact of class ggplot.
+#' GGPLOTmd5hash <- searchInLocalRepo(pattern = "class:ggplot", repoDir = repo_archivist) # There are eight of them
+#' # We load the first one by its value (parameter value = TRUE) and assign it to the plot variable.
+#' plot <- loadFromLocalRepo(GGPLOTmd5hash[1], repoDir = repo_archivist, value = TRUE)
+#' 
+#' # Finally, we may save the artifact on the example Repository.
+#' # Note that md5hash is different from the one which is stored in the archivist package repository.
+#' saveToRepo(plot, repoDir = exampleRepoDir) 
+#' # Making sure that the artifact is stored on the example repository
+#' showLocalRepo(repoDir = exampleRepoDir, method = "tags")
 #' 
 #' # removing an example Repository
 #' 

@@ -9,7 +9,8 @@ that do not exist.
 * `%a%` operator does react on `default = TRUE` in `createEmpyRepo` function.
 * `print.ahistory` function can now print outputs of the artifact's history as the `knitr::kable` would.
 * Examples for `searchInGithubRepo` now works for `user='pbiecek'` and `repo='archivist` parameters as we added new backpack.db file. The previous one was almost empty (for 7 months).
-
+* Alterations in the text of `loadFromrepo` function
+* Additional example in `loadFromRepo` function - Loading artifacts from the repository which is built in the archivist package and saving them on the example repository
 
 archivist 1.7
 ----------------------------------------------------------------
