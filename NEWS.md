@@ -11,6 +11,7 @@ that do not exist.
 * Examples for `searchInGithubRepo` now works for `user='pbiecek'` and `repo='archivist` parameters as we added new backpack.db file. The previous one was almost empty (for 7 months).
 * Alterations in the text of `loadFromrepo` function
 * Additional example in `loadFromRepo` function - Loading artifacts from the repository which is built in the archivist package and saving them on the example repository
+* Alterations in the text of `summaryRepo` function
 
 archivist 1.7
 ----------------------------------------------------------------
