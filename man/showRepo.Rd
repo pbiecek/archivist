@@ -3,7 +3,7 @@
 \name{showLocalRepo}
 \alias{showGithubRepo}
 \alias{showLocalRepo}
-\title{View the Lisf of Artifacts from a Repository}
+\title{View the Lisf of Artifacts from the Repository}
 \usage{
 showLocalRepo(repoDir = NULL, method = "md5hashes")
 
@@ -11,58 +11,62 @@ showGithubRepo(repo = NULL, user = NULL, branch = "master",
   repoDirGit = FALSE, method = "md5hashes")
 }
 \arguments{
-\item{repoDir}{A character denoting an existing directory of a Repository for which a summary will be returned.
+\item{repoDir}{A character denoting an existing directory of the Repository for which metadata will be returned.
 If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.}
 
-\item{method}{A character specifying the method to be used to show the Repository. Available methods:
+\item{method}{A character specifying a method to be used to show the Repository. Available methods:
 \code{md5hashes} (default), \code{tags} and \code{sets} - see \href{https://github.com/pbiecek/archivist2}{archivist2::saveSetToRepo}.}
 
-\item{repo}{Only if working with a Github repository. A character containing a name of a Github repository on which the Repository is archived.
+\item{repo}{While working with the Github repository. A character containing a name of the Github repository on which the Repository is stored.
 By default set to \code{NULL} - see \code{Note}.}
 
-\item{user}{Only if working with a Github repository. A character containing a name of a Github user on whose account the \code{repo} is created.
+\item{user}{While working with the Github repository. A character containing a name of the Github user on whose account the \code{repo} is created.
 By default set to \code{NULL} - see \code{Note}.}
 
-\item{branch}{Only if working with a Github repository. A character containing a name of
-Github Repository's branch on which a Repository is archived. Default \code{branch} is \code{master}.}
+\item{branch}{While working with the Github repository. A character containing a name of
+the Github Repository's branch on which the Repository is stored. Default \code{branch} is \code{master}.}
 
-\item{repoDirGit}{Only if working with a Github repository. A character containing a name of a directory on Github repository
-on which the Repository is stored. If the Repository is stored in main folder on Github repository, this should be set
+\item{repoDirGit}{While working with the Github repository. A character containing a name of a directory on the Github repository
+on which the Repository is stored. If the Repository is stored in the main folder of the Github repository, this should be set
 to \code{repoDirGit = FALSE} as default.}
 }
 \value{
-If parameter \code{method} was set as \code{md5hashes} a \code{data.frame} with artifacts' names and archived
-\code{md5hashes} is returned.
+If parameter \code{method} is set as \code{md5hashes} then a \code{data.frame} with artifacts' names and
+artifacts'\code{md5hashes} will be returned.
 
-If parameter \code{method} was set as \code{tags} a \code{data.frame} with archived \code{Tags} and archived
-artifacts' \code{md5hashes} is returned.
+If parameter \code{method} is set as \code{tags} then a \code{data.frame} with \code{Tags} and
+artifacts' \code{md5hashes} will be returned.
+
+Also in both cases a \code{data.frame} contains an extra column with the date of creation
+of the \code{Tag} or \code{md5hash}.
 
 To learn more about \code{Tags} or \code{md5hashes} check: \link{Tags} or \link{md5hash}.
 }
 \description{
 \code{showLocalRepo} and \code{showGithubRepo} functions produce the \code{data.frame} of the artifacts from
-a \link{Repository} saved in a given \code{repoDir} (directory). \code{showLocalRepo}
-shows the artifacts from the \code{Repository} that exists on the user's computer, whereas \code{showGithubRepo}
-shows the artifacts of the \code{Repository} existing on a Github repository.
+the \link{Repository} saved in a given \code{repoDir} (directory). \code{showLocalRepo}
+shows the artifacts from the \code{Repository} that exists on the user's computer whereas \code{showGithubRepo}
+shows the artifacts of the \code{Repository} existing on the Github repository.
 To learn more about artifacts visit \link[archivist]{archivist-package}.
 }
 \details{
 \code{showLocalRepo} and \code{showGithubRepo} functions produce the \code{data.frame} of the artifacts from
 a \link{Repository} saved in a given \code{repoDir} (directory). \code{showLocalRepo}
-shows the artifacts from the \code{Repository} that exists on the user's computer, whereas \code{showGithubRepo}
-shows the artifacts of the \code{Repository} existing on a Github repository.
+shows the artifacts from the \code{Repository} that exists on the user's computer whereas \code{showGithubRepo}
+shows the artifacts of the \code{Repository} existing on the Github repository.
 
 Both functions show the current state of a \code{Repository}, inter alia, all archived artifacts can
 be seen with their unique \link{md5hash} or a \code{data.frame} with archived \link{Tags} can
-be obtained. Also there is an extra column with a date of creation the \code{Tag} or the \code{md5hash}.
+be obtained.
 }
 \note{
-If \code{repo} and \code{user} are set to \code{NULL} (as default) in Github mode then global parameters
+If \code{repo} and \code{user} are set to \code{NULL} (as default) in the Github mode then global parameters
 set in \link{setGithubRepo} function are used.
 }
 \examples{
-# objects preparation
 \dontrun{
+# objects preparation
+
 # data.frame object
 data(iris)
 
@@ -104,7 +108,7 @@ zk=matrix(rnorm(100*20),100,20)
 bk=rnorm(100)
 glmnet1=glmnet(zk,bk)
 
-# creating example Repository - that examples will work
+# creating example Repository - on which examples will work
 
 exampleRepoDir <- tempdir()
 createEmptyRepo(repoDir = exampleRepoDir)
