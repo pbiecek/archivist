@@ -1,39 +1,43 @@
 ##    archivist package for R
 ##
-#' @title View the Summary of a Repository
+#' @title View the Summary of the Repository
 #'
 #' @description
-#' \code{summaryRepo} summarizes the current state of a \link{Repository}.
+#' \code{summaryRepo} summarizes the current state of the \link{Repository}.
+#' 
 #' @details
 #' \code{summaryRepo} summarizes the current state of a \link{Repository}. Recommended to use
 #' \code{print( summaryRepo ) )}. See examples.
 #' 
-#' @param repoDir A character denoting an existing directory of a Repository for which a summary will be returned.
+#' @param repoDir A character denoting an existing directory of the Repository for which a summary will be returned.
 #' If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.
 #' 
-#' @param repo Only if working with a Github repository. A character containing a name of a Github repository on which the Repository is archived.
+#' @param repo While working with the Github repository. A character containing a name of the Github repository on which the Repository is stored.
 #' By default set to \code{NULL} - see \code{Note}.
-#' @param user Only if working with a Github repository. A character containing a name of a Github user on whose account the \code{repo} is created.
-#' By default set to \code{NULL} - see \code{Note}.
-#' @param branch Only if working with a Github repository. A character containing a name of 
-#' Github Repository's branch on which a Repository is archived. Default \code{branch} is \code{master}.
 #' 
-#' @param repoDirGit Only if working with a Github repository. A character containing a name of a directory on Github repository 
-#' on which the Repository is stored. If the Repository is stored in main folder on Github repository, this should be set 
+#' @param user While working with the Github repository. A character containing a name of the Github user on whose account the \code{repo} is created.
+#' By default set to \code{NULL} - see \code{Note}.
+#'
+#' @param branch While working with the Github repository. A character containing a name of 
+#' the Github Repository's branch on which the Repository is stored. Default \code{branch} is \code{master}.
+#' 
+#' @param repoDirGit While working with the Github repository. A character containing a name of a directory on the Github repository 
+#' on which the Repository is stored. If the Repository is stored in the main folder of the Github repository, this should be set 
 #' to \code{repoDirGit = FALSE} as default.
 #'
 #' @return An object of class \code{repository} which can be printed: \code{print(object)}.
 #' 
-#' @note If the same artifact was archived many times it is counted as one artifact or database in \code{print(summaryRepo)}.
+#' @note If the same artifact was archived many times then it is counted as one artifact or database in \code{print(summaryRepo)}.
 #' 
-#' If \code{repo} and \code{user} are set to \code{NULL} (as default) in Github mode then global parameters
+#' If \code{repo} and \code{user} are set to \code{NULL} (as default) in the Github mode then global parameters
 #' set in \link{setGithubRepo} function are used.
 #' @author 
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
 #'
 #' @examples
-#' # objects preparation
 #' \dontrun{
+#' # objects preparation
+#' 
 #' # data.frame object
 #' data(iris)
 #' 
@@ -75,7 +79,7 @@
 #' bk=rnorm(100)
 #' glmnet1=glmnet(zk,bk)
 #'
-#' # creating example Repository - that examples will work
+#' # creating example Repository - on which examples will work
 #' 
 #' exampleRepoDir <- tempdir()
 #' createEmptyRepo(repoDir = exampleRepoDir)
