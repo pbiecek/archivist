@@ -48,7 +48,7 @@
 #'  \item \link{copyLocalRepo},
 #'  \item \link{copyGithubRepo}.
 #' }
-#' Functions creating a zip archive from an existing \code{Repository}
+#' Functions creating a zip archive from an existing \code{Repository} are:
 #' \itemize{
 #'  \item \link{zipLocalRepo},
 #'  \item \link{zipGithubRepo}.
