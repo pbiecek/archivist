@@ -16,31 +16,41 @@ and a subdirectory named \code{gallery} which collects artifacts saved as \code{
 \seealso{
 Functions using \code{Repository} are:
 \itemize{
- \item \link{saveToRepo},
- \item \link{rmFromRepo},
+ \item \link{addTagsRepo},
+ \item \link{ahistory}
+ \item \link{aread}
+ \item \link{asearch}
+ \item \link{cache}
  \item \link{loadFromLocalRepo},
  \item \link{loadFromGithubRepo},
+ \item \link{rmFromRepo},
+ \item \link{saveToRepo},
  \item \link{searchInLocalRepo},
  \item \link{searchInGithubRepo},
+ \item \link{shinySearchInLocalRepo}
+ \item \link{showLocalRepo}
+ \item \link{showGithubRepo}
  \item \link{summaryLocalRepo},
  \item \link{summaryGithubRepo}.
  }
-
 Function creating \code{Repository} is:
 \itemize{
  \item \link{createEmptyRepo}.
+}
+Function deleting \code{Repository} is:
+\itemize{
+ \item \link{deleteRepo}.
 }
 Functions coping \code{Repository} are:
 \itemize{
  \item \link{copyLocalRepo},
  \item \link{copyGithubRepo}.
 }
-
-Function deleting \code{Repository} is:
+Functions setting global path to the \code{Repository} are:
 \itemize{
- \item \link{deleteRepo}.
+ \item \link{setLocalRepo},
+ \item \link{setGithubRepo}.
 }
-
 Learn more about \code{Repository} at \pkg{archivist} \code{wiki} webpage on
 \href{https://github.com/pbiecek/archivist/wiki/archivist-package-Repository}{Github}.
 
