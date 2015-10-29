@@ -5,7 +5,7 @@
 \alias{multiSearchInLocalRepo}
 \alias{searchInGithubRepo}
 \alias{searchInLocalRepo}
-\title{Search for an Artifact in a Repository Using Tags}
+\title{Search for an Artifact in the Repository Using Tags}
 \usage{
 searchInLocalRepo(pattern, repoDir = NULL, fixed = TRUE,
   realDBname = TRUE)
@@ -20,68 +20,72 @@ multiSearchInGithubRepo(patterns, repo = NULL, user = NULL,
   branch = "master", repoDirGit = FALSE, fixed = TRUE, intersect = TRUE)
 }
 \arguments{
-\item{pattern}{If \code{fixed = TRUE}: a character denoting a \link{Tags} to be searched for in the Repository.
+\item{pattern}{If \code{fixed = TRUE}: a character denoting a \link{Tag} which is to be searched for in the Repository.
 It is also possible to specify \code{pattern} as a list of
-length 2 with \code{dataFrom} and \code{dataTo}; see details. If \code{fixed = FALSE}: A regular expression
-specifying the beginning of a \link{Tags}, which will be used to search artifacts for.}
+length 2 with \code{dateFrom} and \code{dateTo}; see details. If \code{fixed = FALSE}: a regular expression
+specifying the beginning of a \link{Tag}, which will be used to search for artifacts.}
 
-\item{repoDir}{A character denoting an existing directory in which artifacts will be searched.
+\item{repoDir}{A character denoting an existing directory in which artifacts will be searched for.
 If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.}
 
 \item{fixed}{A logical value specifying how \code{artifacts} should be searched for.
-If \code{fixed = TRUE} (default) then artifacts are searched exactly to the corresponding \code{pattern} parameter. If
-\code{fixed = FALSE} then artifacts are searched using \code{pattern} paremeter as a regular expression - that method is wider and more flexible
-and, i.e., enables to search for all artifacts in the \code{Repository}, using \code{pattern = "name", fixed = FALSE}.}
+If \code{fixed = TRUE} (default) then artifacts are searched for by using \code{pattern = "Tag"} argument.
+If \code{fixed = FALSE} then artifacts are searched for by using \code{pattern = "regular expression"} argument.
+The latter is wider and more flexible method, e.g.,
+using \code{pattern = "name", fixed = FALSE} arguments enables to search for all artifacts in the \code{Repository}.}
 
 \item{realDBname}{A logical value. Should not be changed by user. It is a technical parameter.}
 
-\item{repo}{Only if working with a Github repository. A character containing a name of a Github repository on which the Repository is archived.
+\item{repo}{While working with the Github repository. A character containing a name of the Github repository on which the Repository is stored.
 By default set to \code{NULL} - see \code{Note}.}
 
-\item{user}{Only if working with a Github repository. A character containing a name of a Github user on whose account the \code{repo} is created.
+\item{user}{While working with the Github repository. A character containing a name of the Github user on whose account the \code{repo} is created.
 By default set to \code{NULL} - see \code{Note}.}
 
-\item{branch}{Only if working with a Github repository. A character containing a name of
-Github repository's branch in which Repository is archived. Default \code{branch} is \code{master}.}
+\item{branch}{While working with the Github repository. A character containing a name of
+the Github Repository's branch on which the Repository is stored. Default \code{branch} is \code{master}.}
 
-\item{repoDirGit}{Only if working with a Github repository. A character containing a name of a directory on Github repository
-on which the Repository is stored. If the Repository is stored in main folder on Github repository, this should be set
+\item{repoDirGit}{While working with the Github repository. A character containing a name of a directory on the Github repository
+on which the Repository is stored. If the Repository is stored in the main folder of the Github repository, this should be set
 to \code{repoDirGit = FALSE} as default.}
 
-\item{patterns}{A vector of queries to repository. If \code{intersect = TRUE} only artifacts that
-match all conditions are returned. If \code{intersect = FALSE} then artifacts that match any contition
+\item{patterns}{A character vector of \code{patterns}(see \code{pattern}) to find artifacts in the Repository.
+If \code{intersect = TRUE} then artifacts that
+match all conditions are returned. If \code{intersect = FALSE} then artifacts that match any condition
 are returned.}
 
 \item{intersect}{A logical value. See \code{patterns} for more details.}
 }
 \value{
-\code{searchInRepo} returns a \code{md5hash} character, which is a hash assigned to the artifact when
-saving it to the Repository by using the \link{saveToRepo} function. If the artifact
-is not in the Repository a logical value \code{FALSE} is returned.
+\code{searchInRepo} returns character vector of \code{md5hashes} of artifacts that were searched for.
+Those are hashes assigned to artifacts while they were saved in the Repository
+by the \link{saveToRepo} function. If the artifact
+is not in the Repository then a logical value \code{FALSE} is returned.
 }
 \description{
-\code{searchInRepo} searches for an artifact in a \link{Repository} using it's \link{Tags}.
+\code{searchInRepo} searches for an artifact in the \link{Repository} using it's \link{Tags}.
 To learn more about artifacts visit \link[archivist]{archivist-package}.
 }
 \details{
-\code{searchInRepo} searches for an artifact in a Repository using it's \code{Tag}
-(e.g., \code{name}, \code{class} or \code{archiving date}). \code{Tags} are submitted in a \code{pattern}
-argument. For various artifact classes different \code{Tags} can be searched for.
-See \link{Tags}. If a \code{pattern} is a list of length 2, \code{md5hashes} of all
-artifacts created from date \code{dateFrom} to data \code{dateTo} are returned. The date
+\code{searchInRepo} searches for an artifact in the Repository using it's \code{Tag}
+(e.g., \code{name}, \code{class} or \code{archiving date}). \code{Tags} are used in a \code{pattern}
+parameter. For various artifact classes different \code{Tags} can be searched for.
+See \link{Tags}. If a \code{pattern} is a list of length 2 then \code{md5hashes} of all
+artifacts created from date \code{dateFrom} to date \code{dateTo} are returned. The date
 should be formatted according to the YYYY-MM-DD format, e.g., \code{"2014-07-31"}.
 
-\code{Tags}, submitted in a \code{pattern} argument, should be given according to the
-format: \code{"TagType:TagTypeValue"} - see examples.
+\code{Tags}, used in a \code{pattern} parameter, should be determined according to the
+format: \code{"TagType:TagValue"} - see examples.
 }
 \note{
-If \code{repo} and \code{user} are set to \code{NULL} (as default) in Github mode then global parameters
+If \code{repo} and \code{user} are set to \code{NULL} (as default) in the Github mode then global parameters
 set in \link{setGithubRepo} function are used.
 }
 \examples{
-# objects preparation
 \dontrun{
-  # data.frame object
+# objects preparation
+
+ # data.frame object
   data(iris)
 
  # ggplot/gg object
@@ -107,7 +111,7 @@ set in \link{setGithubRepo} function are used.
              cbind(rnorm( 3,3.2,0.5), rnorm( 3,3.2,0.5)))
   fannyx <- fanny(x, 2)
 
-  # creating example Repository - that examples will work
+  # creating example Repository - on which examples will work
 
   exampleRepoDir <- tempdir()
   createEmptyRepo(repoDir = exampleRepoDir)
@@ -117,12 +121,12 @@ set in \link{setGithubRepo} function are used.
   saveToRepo(agn1, repoDir=exampleRepoDir)
   saveToRepo(fannyx, repoDir=exampleRepoDir)
 
-  # let's see how the Repository look like: show
+  # let's see how the Repository looks like: show
 
   showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
   showLocalRepo(method = "tags", repoDir = exampleRepoDir)
 
-  # let's see how the Repository look like: summary
+  # let's see how the Repository looks like: summary
 
   summaryLocalRepo( exampleRepoDir )
 
@@ -166,12 +170,12 @@ set in \link{setGithubRepo} function are used.
 
   # also on Github
 
-  searchInGithubRepo( pattern = list( dateFrom = "2014-09-01", dateTo = "2014-09-30" ),
+  searchInGithubRepo( pattern = list( dateFrom = "2015-10-01", dateTo = "2015-10-30" ),
                       user="pbiecek", repo="archivist", branch="master" )
 
 
   # objects from Today
-  searchInLocalRepo( pattern = list( dateFrom=Sys.Date(), dateTo=Sys.Date() ),
+  searchInLocalRepo( pattern = list( dateFrom = Sys.Date(), dateTo = Sys.Date() ),
                      repoDir = exampleRepoDir )
 
   # removing an example Repository
