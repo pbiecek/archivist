@@ -175,24 +175,33 @@
 #' ## Loading artifacts from the repository which is built in the archivist package 
 #' ## and saving them on the example repository
 #' 
-#' # Creating an example Repository - on which artifacts loaded from the archivist package repository
-#' # will be saved
+#' # Creating an example Repository - on which artifacts loaded from the
+#' # archivist package repository will be saved
 #' exampleRepoDir <- tempdir()
 #' createEmptyRepo(repoDir = exampleRepoDir)
 #' 
 #' # Directory of the archivist package repository
 #' repo_archivist <- system.file("graphGallery", package = "archivist") 
-#' # We are checking what kind of objects are stored in the archivist package repository
+#' 
+#' # We are checking what kind of objects
+#' # are stored in the archivist package repository
 #' summaryLocalRepo(repoDir = repo_archivist)
-#' # Let's say that we are interested in an artifact of class ggplot.
+#' 
+#' # Let's say that we are interested in 
+#' # an artifact of class ggplot.
 #' GGPLOTmd5hash <- searchInLocalRepo(pattern = "class:ggplot",
-#'  repoDir = repo_archivist) # There are eight of them
-#' # We load the first one by its value (parameter value = TRUE) and assign it to the plot variable.
-#' plot <- loadFromLocalRepo(GGPLOTmd5hash[1], repoDir = repo_archivist, value = TRUE)
+#'                                    repoDir = repo_archivist) 
+#' # There are eight of them.
+#' # We load the first one by its value (parameter value = TRUE)
+#' # and assign it to the p variable.
+#' p <- loadFromLocalRepo(GGPLOTmd5hash[1], repoDir = repo_archivist,
+#'                        value = TRUE)
 #' 
 #' # Finally, we may save the artifact on the example Repository.
-#' # Note that md5hash is different from the one which is stored in the archivist package repository.
-#' saveToRepo(plot, repoDir = exampleRepoDir) 
+#' # Note that md5hash is different from the one which is stored in
+#' # the archivist package repository.
+#' saveToRepo(p, repoDir = exampleRepoDir) 
+#' 
 #' # Making sure that the artifact is stored on the example repository
 #' showLocalRepo(repoDir = exampleRepoDir, method = "tags")
 #' 
