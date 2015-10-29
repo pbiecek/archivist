@@ -280,7 +280,7 @@ multiSearchInGithubRepo <- function( patterns, repo = NULL, user = NULL,
   GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
   
   Temp <- downloadDB( repo, user, branch, repoDirGit )
-  on.exitr(file.remove( Temp ))
+  on.exit(file.remove( Temp ))
   m <- multiSearchInLocalRepo( patterns, repoDir = Temp, fixed=fixed,
                                intersect=intersect, realDBname = FALSE)
   return( m )
