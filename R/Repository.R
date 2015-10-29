@@ -16,19 +16,22 @@
 #' Functions using \code{Repository} are:
 #' \itemize{
 #'  \item \link{addTagsRepo},
-#'  \item \link{ahistory}
-#'  \item \link{aread}
-#'  \item \link{asearch}
-#'  \item \link{cache}
+#'  \item \link{ahistory},
+#'  \item \link{aread},
+#'  \item \link{asearch},
+#'  \item \link{cache},
+#'  \item \link{getTags},
 #'  \item \link{loadFromLocalRepo}, 
 #'  \item \link{loadFromGithubRepo},
+#'  \item \link{multiSearchInLocalRepo},
+#'  \item \link{multiSearchInGithubRepo},
 #'  \item \link{rmFromRepo},
 #'  \item \link{saveToRepo},
 #'  \item \link{searchInLocalRepo},
 #'  \item \link{searchInGithubRepo}, 
-#'  \item \link{shinySearchInLocalRepo}
-#'  \item \link{showLocalRepo}
-#'  \item \link{showGithubRepo}
+#'  \item \link{shinySearchInLocalRepo},
+#'  \item \link{showLocalRepo},
+#'  \item \link{showGithubRepo},
 #'  \item \link{summaryLocalRepo},
 #'  \item \link{summaryGithubRepo}.  
 #'  }
@@ -44,6 +47,11 @@
 #' \itemize{
 #'  \item \link{copyLocalRepo},
 #'  \item \link{copyGithubRepo}.
+#' }
+#' Functions creating a zip archive from an existing \code{Repository} are:
+#' \itemize{
+#'  \item \link{zipLocalRepo},
+#'  \item \link{zipGithubRepo}.
 #' }
 #' Functions setting global path to the \code{Repository} are:
 #' \itemize{
