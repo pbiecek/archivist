@@ -52,12 +52,20 @@
 #' 
 #' # creating a Repository in non existing directory
 #' 
-#' createEmptyRepo( "xyzdd234", force = TRUE )
+#' createEmptyRepo( "xyzdd234") # force = TRUE is default argument
+#'
+#' # creating a default local Repository in non existing directory
 #' 
-#' # removing an example Repositories
+#' createEmptyRepo("def", default = TRUE) 
+#' data(iris)
+#' saveToRepo(iris) # We don't have to specify repoDir parameter
+#' showLocalRepo() # because repoDir="def" is default 
+#'
+#'  # removing an example Repositories
 #' 
 #' deleteRepo( exampleRepoDir, TRUE)
 #' deleteRepo( "xyzdd234", TRUE)
+#' deleteRepo("def", TRUE)
 #' 
 #' rm( exampleRepoDir )
 #' }
