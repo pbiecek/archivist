@@ -6,7 +6,7 @@ r_packages:
  - httr
  - DBI
  - lubridate
- - data.shiny
+ - shiny
  - RSQLite
  - testthat
  - ggplot2
