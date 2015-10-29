@@ -2,42 +2,43 @@
 % Please edit documentation in R/createEmptyRepo.R
 \name{createEmptyRepo}
 \alias{createEmptyRepo}
-\title{Create an Empty Repository in a Given Directory}
+\title{Create an Empty Repository in the Given Directory}
 \usage{
 createEmptyRepo(repoDir, force = TRUE, default = FALSE)
 }
 \arguments{
-\item{repoDir}{A character that specifies the directory for the Repository to be made.}
+\item{repoDir}{A character that specifies the directory for the Repository which is to be made.}
 
-\item{force}{If \code{force = TRUE} function call forces to create \code{repoDir} directory if
-it did not exist. Default set to \code{force = TRUE}.}
+\item{force}{If \code{force = TRUE} and \code{repoDir} parameter specifies the directory that doesn't exist,
+then function call will force to create new \code{repoDir} directory.
+Default set to \code{force = TRUE}.}
 
 \item{default}{If \code{default = TRUE} then \code{repoDir} is set as default local repository.}
 }
 \description{
-\code{createEmptyRepo} creates an empty \link{Repository} in a given directory in which archived artifacts will be stored.
+\code{createEmptyRepo} creates an empty \link{Repository} in the given directory in which archived artifacts will be stored.
 }
 \details{
 At least one Repository must be initialized before using other functions from the \pkg{archivist} package.
-When working in groups, it is highly recommended to create a Repository on a shared Dropbox/Git folder.
+While working in groups, it is highly recommended to create a Repository on a shared Dropbox/Git folder.
 
-All artifacts desired to be archived are going to be saved in the local Repository, which is an SQLite
+All artifacts which are desired to be archived are going to be saved in the local Repository, which is an SQLite
 database stored in a file named \code{backpack}.
-After calling \code{saveToRepo} function, every artifact will be archived in a \code{md5hash.rda} file.
+After calling \code{saveToRepo} function, each artifact will be archived in a \code{md5hash.rda} file.
 This file will be saved in a folder (under \code{repoDir} directory) named
-\code{gallery}. For every artifact, \code{md5hash} is a unique string of length 32 that comes out as a result of
+\code{gallery}. For every artifact, \code{md5hash} is a unique string of length 32 that is produced by
 \link[digest]{digest} function, which uses a cryptographical MD5 hash algorithm.
 
 To learn more about artifacts visit \link[archivist]{archivist-package}.
 
 Created \code{backpack} database is a useful and fundamental tool for remembering artifact's
-\code{name}, \code{class}, \code{archiving date} etc. (that are remembered as \link{Tags}),
+\code{name}, \code{class}, \code{archiving date} etc. (the so called \link{Tags})
 or for keeping artifact's \code{md5hash}.
 
 Besides the \code{backpack} database, \code{gallery} folder is created in which all
 artifacts will be archived.
 
-After every \code{saveToRepo} call the database is refreshed, so an artifact is available
+After every \code{saveToRepo} call the database is refreshed. As a result, the artifact is available
 immediately in \code{backpack.db} database for other collaborators.
 }
 \examples{
