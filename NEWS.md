@@ -9,7 +9,7 @@ that do not exist.
 * `print.ahistory` function can now print outputs of the artifact's history as the `knitr::kable` would.
 * Examples for `searchInGithubRepo` now works for `user='pbiecek'` and `repo='archivist` parameters as we added new backpack.db file. The previous one was almost empty (for 7 months).
 * Additional example in `loadFromRepo` function - Loading artifacts from the repository which is built in the archivist package and saving them on the example repository.
-* Alterations in the text of: `?Tags`, `?Repository`, `?md5hash`, `archivist-package`, `?saveToRepo`, `loadFromRepo`, `summaryRepo`, `showRepo`, `?searchInRepo` documentation pages.
+* Alterations in the text of: `?Tags`, `?Repository`, `?md5hash`, `archivist-package`, `?saveToRepo`, `loadFromRepo`, `summaryRepo`, `showRepo`, `?searchInRepo` and `?createEmptyRepo` documentation pages.
 * Adding missing functions which are used in the archivist package now to `?Repository` documentation page.
 
 archivist 1.7
