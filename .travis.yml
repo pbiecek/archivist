@@ -11,4 +11,5 @@ r_packages:
  - testthat
  - ggplot2
  - dplyr
+ - knitr
 sudo: required
