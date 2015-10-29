@@ -50,6 +50,7 @@
 #' @importFrom graphics plot
 #' @importFrom utils head
 #' @importFrom utils zip
+#' @importFrom knitr kable
 #'
 #' @family archivist
 #' @name archivist-package

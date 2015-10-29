@@ -185,7 +185,8 @@
 #' # We are checking what kind of objects are stored in the archivist package repository
 #' summaryLocalRepo(repoDir = repo_archivist)
 #' # Let's say that we are interested in an artifact of class ggplot.
-#' GGPLOTmd5hash <- searchInLocalRepo(pattern = "class:ggplot", repoDir = repo_archivist) # There are eight of them
+#' GGPLOTmd5hash <- searchInLocalRepo(pattern = "class:ggplot",
+#'  repoDir = repo_archivist) # There are eight of them
 #' # We load the first one by its value (parameter value = TRUE) and assign it to the plot variable.
 #' plot <- loadFromLocalRepo(GGPLOTmd5hash[1], repoDir = repo_archivist, value = TRUE)
 #' 

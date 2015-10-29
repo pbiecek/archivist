@@ -20,10 +20,10 @@ multiSearchInGithubRepo(patterns, repo = NULL, user = NULL,
   branch = "master", repoDirGit = FALSE, fixed = TRUE, intersect = TRUE)
 }
 \arguments{
-\item{pattern}{If \code{fixed = TRUE}: a character denoting a \link{Tag} which is to be searched for in the Repository.
+\item{pattern}{If \code{fixed = TRUE}: a character denoting a \link{Tags} which is to be searched for in the Repository.
 It is also possible to specify \code{pattern} as a list of
 length 2 with \code{dateFrom} and \code{dateTo}; see details. If \code{fixed = FALSE}: a regular expression
-specifying the beginning of a \link{Tag}, which will be used to search for artifacts.}
+specifying the beginning of a \link{Tags}, which will be used to search for artifacts.}
 
 \item{repoDir}{A character denoting an existing directory in which artifacts will be searched for.
 If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.}

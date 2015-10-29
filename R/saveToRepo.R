@@ -108,7 +108,8 @@
 #' 
 #' @param artifact An arbitrary R artifact to be saved. For supported artifacts see details.
 #' 
-#' @param ... Graphical parameters denoting width and height of a miniature. See details.
+#' @param ... Graphical parameters denoting width and height of a miniature. See details. 
+#' Further arguments passed to \link{head}. See Details section about \code{firtsRows} parameter
 #' 
 #' @param archiveData A logical value denoting whether to archive the data from the \code{artifact}.
 #' 
@@ -134,10 +135,6 @@
 #' 
 #' @param ascii A logical value. An \code{ascii} argument is passed to \link{save} function.
 #' 
-#' @param format A character of length 1. In which format save artifacts in \code{gallery}. By defaul set to \code{rda},
-#'  possible also \code{rdx} (to save in rdb/rdx format).
-#'  
-#' @param ... Further arguments passed to \code{getFromNamespace(x = "makeLazyLoadDB", "tools")}.
 #' 
 #' @author 
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
@@ -265,8 +262,6 @@
 #' 
 #' 
 #' 
-#' ## save in rdb/rdx format
-#' saveToRepo(iris, format = "rdx", repoDir = exampleRepoDir)
 #' 
 #' # removing an example Repository
 #' deleteRepo( exampleRepoDir, TRUE)
@@ -280,11 +275,11 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
                         archiveTags = TRUE, 
                         archiveMiniature = TRUE, force = TRUE, rememberName = TRUE, 
                         chain = FALSE, ... , userTags = c(), 
-                        silent=aoptions("silent"), ascii = FALSE, format = aoptions("format")) {
+                        silent=aoptions("silent"), ascii = FALSE) { 
   stopifnot( is.logical( c( archiveData, archiveTags, archiveMiniature, 
                                                      chain, rememberName, ascii ) ) )
   stopifnot( is.character( repoDir ) | is.null( repoDir ) )
-  stopifnot( is.character( format ) & length( format ) == 1 & any(format %in% c("rda", "rdx")) )
+#   stopifnot( is.character( format ) & length( format ) == 1 & any(format %in% c("rda", "rdx")) )
   
   md5hash <- digest( artifact )
   objectName <- deparse( substitute( artifact ) )
@@ -312,20 +307,20 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
     rememberName = FALSE
   }
   if ( rememberName ){
-    if( format == "rda"){
-      save( file = paste0(repoDir,"gallery/", md5hash, ".", format), ascii = ascii, list = objectName,  envir = parent.frame(1))
-    }else{
-      saveToRepo2(artifact, filebase = paste0(repoDir,"gallery/", md5hash), ascii = ascii, ...)
-    }
+#     if( format == "rda"){
+      save( file = paste0(repoDir,"gallery/", md5hash, ".rda"), ascii = ascii, list = objectName,  envir = parent.frame(1))
+#     }else{
+#       saveToRepo2(artifact, filebase = paste0(repoDir,"gallery/", md5hash), ascii = ascii, ...)
+#     }
   }else{ 
 #    assign( value = artifact, x = md5hash, envir = .GlobalEnv )
 #    save( file = paste0(repoDir, "gallery/", md5hash, ".rda"),  ascii=TRUE, list = md5hash, envir = .GlobalEnv  )
     assign( value = artifact, x = md5hash, envir = .ArchivistEnv )
-    if( format == "rda" ){
-      save( file = paste0(repoDir, "gallery/", md5hash, ".", format),  ascii=ascii, list = md5hash, envir = .ArchivistEnv  )
-    }else{
-      saveToRepo2(artifact, filebase = paste0(repoDir,"gallery/", md5hash), ascii = ascii, ...)
-    }
+#     if( format == "rda" ){
+      save( file = paste0(repoDir, "gallery/", md5hash, ".rda"),  ascii=ascii, list = md5hash, envir = .ArchivistEnv  )
+#     }else{
+#       saveToRepo2(artifact, filebase = paste0(repoDir,"gallery/", md5hash), ascii = ascii, ...)
+#     }
     rm(list = md5hash, envir = .ArchivistEnv)
   }
   
@@ -372,93 +367,93 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
 }
 
 
-# getFromNamespace(x = "makeLazyLoadDB", "tools")
-saveToRepo2 <- function (from, filebase, compress = TRUE, ascii = FALSE, variables) 
-{
-  ascii <- as.logical(ascii)
-  if (is.na(ascii)) 
-    stop("'ascii' must be TRUE or FALSE", domain = NA)
-  ascii <- as.integer(ascii)
-  envlist <- function(e) .Internal(getVarsFromFrame(ls(e, all.names = TRUE), 
-                                                    e, FALSE))
-  envtable <- function() {
-    idx <- 0
-    envs <- NULL
-    enames <- character(0L)
-    find <- function(v, keys, vals) {
-      for (i in seq_along(keys)) if (identical(v, keys[[i]])) 
-        return(vals[i])
-      NULL
-    }
-    getname <- function(e) find(e, envs, enames)
-    getenv <- function(n) find(n, enames, envs)
-    insert <- function(e) {
-      idx <<- idx + 1
-      name <- paste("env", idx, sep = "::")
-      envs <<- c(e, envs)
-      enames <<- c(name, enames)
-      name
-    }
-    list(insert = insert, getenv = getenv, getname = getname)
-  }
-  lazyLoadDBinsertValue <- function(value, file, ascii, compress, 
-                                    hook) .Internal(lazyLoadDBinsertValue(value, file, ascii, 
-                                                                          compress, hook))
-  lazyLoadDBinsertListElement <- function(x, i, file, ascii, 
-                                          compress, hook) .Internal(lazyLoadDBinsertValue(x[[i]], 
-                                                                                          file, ascii, compress, hook))
-  lazyLoadDBinsertVariable <- function(n, e, file, ascii, compress, 
-                                       hook) {
-    x <- .Internal(getVarsFromFrame(n, e, FALSE))
-    .Internal(lazyLoadDBinsertValue(x[[1L]], file, ascii, 
-                                    compress, hook))
-  }
-  mapfile <- paste(filebase, "rdx", sep = ".")
-  datafile <- paste(filebase, "rdb", sep = ".")
-  close(file(datafile, "wb"))
-  table <- envtable()
-  varenv <- new.env(hash = TRUE)
-  envenv <- new.env(hash = TRUE)
-  envhook <- function(e) {
-    if (is.environment(e)) {
-      name <- table$getname(e)
-      if (is.null(name)) {
-        name <- table$insert(e)
-        data <- list(bindings = envlist(e), enclos = parent.env(e), 
-                     attributes = attributes(e), isS4 = isS4(e), 
-                     locked = environmentIsLocked(e))
-        key <- lazyLoadDBinsertValue(data, datafile, 
-                                     ascii, compress, envhook)
-        assign(name, key, envir = envenv)
-      }
-      name
-    }
-  }
-  if (is.null(from) || is.environment(from)) {
-    if (!missing(variables)) 
-      vars <- variables
-    else vars <- ls(from, all.names = TRUE)
-  }
-  else if (is.list(from)) {
-    vars <- names(from)
-    if (length(vars) != length(from) || any(!nzchar(vars))) 
-      stop("source list must have names for all elements")
-  }
-  else stop("source must be an environment or a list")
-  for (i in seq_along(vars)) {
-    key <- if (is.null(from) || is.environment(from)) 
-      lazyLoadDBinsertVariable(vars[i], from, datafile, 
-                               ascii, compress, envhook)
-    else lazyLoadDBinsertListElement(from, i, datafile, ascii, 
-                                     compress, envhook)
-    assign(vars[i], key, envir = varenv)
-  }
-  vals <- lapply(vars, get, envir = varenv, inherits = FALSE)
-  names(vals) <- vars
-  rvars <- ls(envenv, all.names = TRUE)
-  rvals <- lapply(rvars, get, envir = envenv, inherits = FALSE)
-  names(rvals) <- rvars
-  val <- list(variables = vals, references = rvals, compressed = compress)
-  saveRDS(val, mapfile)
-}
+# # getFromNamespace(x = "makeLazyLoadDB", "tools")
+# saveToRepo2 <- function (from, filebase, compress = TRUE, ascii = FALSE, variables) 
+# {
+#   ascii <- as.logical(ascii)
+#   if (is.na(ascii)) 
+#     stop("'ascii' must be TRUE or FALSE", domain = NA)
+#   ascii <- as.integer(ascii)
+#   envlist <- function(e) .Internal(getVarsFromFrame(ls(e, all.names = TRUE), 
+#                                                     e, FALSE))
+#   envtable <- function() {
+#     idx <- 0
+#     envs <- NULL
+#     enames <- character(0L)
+#     find <- function(v, keys, vals) {
+#       for (i in seq_along(keys)) if (identical(v, keys[[i]])) 
+#         return(vals[i])
+#       NULL
+#     }
+#     getname <- function(e) find(e, envs, enames)
+#     getenv <- function(n) find(n, enames, envs)
+#     insert <- function(e) {
+#       idx <<- idx + 1
+#       name <- paste("env", idx, sep = "::")
+#       envs <<- c(e, envs)
+#       enames <<- c(name, enames)
+#       name
+#     }
+#     list(insert = insert, getenv = getenv, getname = getname)
+#   }
+#   lazyLoadDBinsertValue <- function(value, file, ascii, compress, 
+#                                     hook) .Internal(lazyLoadDBinsertValue(value, file, ascii, 
+#                                                                           compress, hook))
+#   lazyLoadDBinsertListElement <- function(x, i, file, ascii, 
+#                                           compress, hook) .Internal(lazyLoadDBinsertValue(x[[i]], 
+#                                                                                           file, ascii, compress, hook))
+#   lazyLoadDBinsertVariable <- function(n, e, file, ascii, compress, 
+#                                        hook) {
+#     x <- .Internal(getVarsFromFrame(n, e, FALSE))
+#     .Internal(lazyLoadDBinsertValue(x[[1L]], file, ascii, 
+#                                     compress, hook))
+#   }
+#   mapfile <- paste(filebase, "rdx", sep = ".")
+#   datafile <- paste(filebase, "rdb", sep = ".")
+#   close(file(datafile, "wb"))
+#   table <- envtable()
+#   varenv <- new.env(hash = TRUE)
+#   envenv <- new.env(hash = TRUE)
+#   envhook <- function(e) {
+#     if (is.environment(e)) {
+#       name <- table$getname(e)
+#       if (is.null(name)) {
+#         name <- table$insert(e)
+#         data <- list(bindings = envlist(e), enclos = parent.env(e), 
+#                      attributes = attributes(e), isS4 = isS4(e), 
+#                      locked = environmentIsLocked(e))
+#         key <- lazyLoadDBinsertValue(data, datafile, 
+#                                      ascii, compress, envhook)
+#         assign(name, key, envir = envenv)
+#       }
+#       name
+#     }
+#   }
+#   if (is.null(from) || is.environment(from)) {
+#     if (!missing(variables)) 
+#       vars <- variables
+#     else vars <- ls(from, all.names = TRUE)
+#   }
+#   else if (is.list(from)) {
+#     vars <- names(from)
+#     if (length(vars) != length(from) || any(!nzchar(vars))) 
+#       stop("source list must have names for all elements")
+#   }
+#   else stop("source must be an environment or a list")
+#   for (i in seq_along(vars)) {
+#     key <- if (is.null(from) || is.environment(from)) 
+#       lazyLoadDBinsertVariable(vars[i], from, datafile, 
+#                                ascii, compress, envhook)
+#     else lazyLoadDBinsertListElement(from, i, datafile, ascii, 
+#                                      compress, envhook)
+#     assign(vars[i], key, envir = varenv)
+#   }
+#   vals <- lapply(vars, get, envir = varenv, inherits = FALSE)
+#   names(vals) <- vars
+#   rvars <- ls(envenv, all.names = TRUE)
+#   rvals <- lapply(rvars, get, envir = envenv, inherits = FALSE)
+#   names(rvals) <- rvars
+#   val <- list(variables = vals, references = rvals, compressed = compress)
+#   saveRDS(val, mapfile)
+# }
 

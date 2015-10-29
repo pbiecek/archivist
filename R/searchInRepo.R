@@ -24,10 +24,10 @@
 #' by the \link{saveToRepo} function. If the artifact
 #' is not in the Repository then a logical value \code{FALSE} is returned.
 #' 
-#' @param pattern If \code{fixed = TRUE}: a character denoting a \link{Tag} which is to be searched for in the Repository.
+#' @param pattern If \code{fixed = TRUE}: a character denoting a \link{Tags} which is to be searched for in the Repository.
 #' It is also possible to specify \code{pattern} as a list of 
 #' length 2 with \code{dateFrom} and \code{dateTo}; see details. If \code{fixed = FALSE}: a regular expression 
-#' specifying the beginning of a \link{Tag}, which will be used to search for artifacts.
+#' specifying the beginning of a \link{Tags}, which will be used to search for artifacts.
 #' 
 #' @param patterns A character vector of \code{patterns}(see \code{pattern}) to find artifacts in the Repository.
 #' If \code{intersect = TRUE} then artifacts that 
