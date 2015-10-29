@@ -7,7 +7,7 @@
 saveToRepo(artifact, repoDir = NULL, archiveData = TRUE,
   archiveTags = TRUE, archiveMiniature = TRUE, force = TRUE,
   rememberName = TRUE, chain = FALSE, ..., userTags = c(),
-  silent = aoptions("silent"), ascii = FALSE, format = aoptions("format"))
+  silent = aoptions("silent"), ascii = FALSE)
 }
 \arguments{
 \item{artifact}{An arbitrary R artifact to be saved. For supported artifacts see details.}
@@ -30,18 +30,14 @@ a Repository.}
 of a stored artifact or should the result be an input artifact (\code{chain = TRUE}), so that chaining code
 can be used. See examples.}
 
-\item{...}{Graphical parameters denoting width and height of a miniature. See details.}
+\item{...}{Graphical parameters denoting width and height of a miniature. See details.
+Further arguments passed to \link{head}. See Details section about \code{firtsRows} parameter}
 
 \item{userTags}{A character vector with tags. These tags will be added to the repository along with the artifact.}
 
 \item{silent}{If TRUE produces no warnings.}
 
 \item{ascii}{A logical value. An \code{ascii} argument is passed to \link{save} function.}
-
-\item{format}{A character of length 1. In which format save artifacts in \code{gallery}. By defaul set to \code{rda},
- possible also \code{rdx} (to save in rdb/rdx format).}
-
-\item{...}{Further arguments passed to \code{getFromNamespace(x = "makeLazyLoadDB", "tools")}.}
 }
 \value{
 As a result of calling this function a character string is returned, which determines
@@ -263,8 +259,6 @@ showLocalRepo() # Repository was globally set in aoptions
 
 
 
-## save in rdb/rdx format
-saveToRepo(iris, format = "rdx", repoDir = exampleRepoDir)
 
 # removing an example Repository
 deleteRepo( exampleRepoDir, TRUE)

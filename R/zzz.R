@@ -3,7 +3,6 @@
 .onAttach <- function(...) {
    packageStartupMessage("Welcome to archivist (version: ", utils::packageVersion("archivist"), ").")
   .ArchivistEnv$silent <- FALSE
-  .ArchivistEnv$format <- "rda"
 }
 
 .onLoad <- function(...) {
