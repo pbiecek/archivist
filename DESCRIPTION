@@ -1,5 +1,5 @@
 Package: archivist
-Version: 1.8.5.1
+Version: 1.8.6.0
 Type: Package
 Title: Tools for Storing, Restoring and Searching for R Objects
 Authors@R: c(
@@ -26,6 +26,6 @@ License: GPL-2
 LazyLoad: yes
 LazyData: yes
 Depends: R (>= 3.0.0)
-Imports: RCurl, digest, httr, DBI, lubridate, RSQLite, knitr
+Imports: RCurl, digest, httr, DBI, lubridate, RSQLite, knitr, git2r
 Suggests: shiny, testthat, ggplot2, dplyr
 BugReports: https://github.com/pbiecek/archivist/issues

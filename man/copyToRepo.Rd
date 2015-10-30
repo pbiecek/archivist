@@ -90,9 +90,9 @@ Other archivist: \code{\link{Repository}};
   \code{\link{print.ahistoryKable}};
   \code{\link{aoptions}}; \code{\link{archivist-package}};
   \code{\link{aread}}; \code{\link{asearch}};
-  \code{\link{cache}}; \code{\link{createEmptyRepo}};
-  \code{\link{deleteRepo}}; \code{\link{getTagsGithub}},
-  \code{\link{getTagsLocal}};
+  \code{\link{cache}}; \code{\link{createEmptyGithubRepo}};
+  \code{\link{createEmptyRepo}}; \code{\link{deleteRepo}};
+  \code{\link{getTagsGithub}}, \code{\link{getTagsLocal}};
   \code{\link{loadFromGithubRepo}},
   \code{\link{loadFromLocalRepo}}; \code{\link{md5hash}};
   \code{\link{multiSearchInGithubRepo}},

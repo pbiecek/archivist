@@ -1,6 +1,8 @@
 archivist 1.8
 ----------------------------------------------------------------
 
+* **Archivist Integration With GitHub API**: new functions:
+- it is possible to create new GitHub repository with an empty `archivist`-like `Repository` with `createEmptyGithubRepo` function.
 * `checkDirectory` function is now immune to directories that don't exist. This made
 `showLocalRepo` function working properly when passed an argument to the directory
 that do not exist.
