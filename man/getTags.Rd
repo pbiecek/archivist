@@ -90,6 +90,7 @@ Other archivist: \code{\link{Repository}};
   \code{\link{aread}}; \code{\link{asearch}};
   \code{\link{cache}}; \code{\link{copyGithubRepo}},
   \code{\link{copyLocalRepo}};
+  \code{\link{createEmptyGithubRepo}};
   \code{\link{createEmptyRepo}}; \code{\link{deleteRepo}};
   \code{\link{loadFromGithubRepo}},
   \code{\link{loadFromLocalRepo}}; \code{\link{md5hash}};
@@ -115,6 +116,7 @@ Other archivist: \code{\link{Repository}};
   \code{\link{aread}}; \code{\link{asearch}};
   \code{\link{cache}}; \code{\link{copyGithubRepo}},
   \code{\link{copyLocalRepo}};
+  \code{\link{createEmptyGithubRepo}};
   \code{\link{createEmptyRepo}}; \code{\link{deleteRepo}};
   \code{\link{loadFromGithubRepo}},
   \code{\link{loadFromLocalRepo}}; \code{\link{md5hash}};

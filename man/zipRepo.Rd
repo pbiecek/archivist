@@ -111,6 +111,7 @@ Other archivist: \code{\link{Repository}};
   \code{\link{aread}}; \code{\link{asearch}};
   \code{\link{cache}}; \code{\link{copyGithubRepo}},
   \code{\link{copyLocalRepo}};
+  \code{\link{createEmptyGithubRepo}};
   \code{\link{createEmptyRepo}}; \code{\link{deleteRepo}};
   \code{\link{getTagsGithub}}, \code{\link{getTagsLocal}};
   \code{\link{loadFromGithubRepo}},
@@ -136,6 +137,7 @@ Other archivist: \code{\link{Repository}};
   \code{\link{aread}}; \code{\link{asearch}};
   \code{\link{cache}}; \code{\link{copyGithubRepo}},
   \code{\link{copyLocalRepo}};
+  \code{\link{createEmptyGithubRepo}};
   \code{\link{createEmptyRepo}}; \code{\link{deleteRepo}};
   \code{\link{getTagsGithub}}, \code{\link{getTagsLocal}};
   \code{\link{loadFromGithubRepo}},
