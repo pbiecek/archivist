@@ -83,10 +83,10 @@
 #' In the following way one can specify his own \code{Tags} for artifacts by setting artifact's attribute 
 #' before call of the \code{saveToRepo} function: 
 #' \code{attr(x, "tags" ) = c( "name1", "name2" )}, where \code{x} is an artifact 
-#' and \code{name1, name2} are \code{Tags} specified by a user. It can be also done in a new, simpler way by
-#'  using \code{userTags} parameter like this: 
+#' and \code{name1, name2} are \code{Tags} specified by a user.
+#' It can be also done in a new, simpler way by using \code{userTags} parameter like this: 
 #'  \itemize{
-#'    \item \code{saveToRepo(model, repoDir, userTags = c("my_model", "do not delet"))}.
+#'    \item \code{saveToRepo(model, repoDir, userTags = c("my_model", "do not delete"))}.
 #'  }
 #' 
 #' Important: if one wants to archive data from artifacts which is one of: 
