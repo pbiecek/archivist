@@ -51,6 +51,11 @@
 #' @importFrom utils head
 #' @importFrom utils zip
 #' @importFrom knitr kable
+#' @importMethodsFrom git2r add
+#' @importMethodsFrom git2r commit
+#' @importMethodsFrom git2r push
+#' @importMethodsFrom git2r init
+#' @importMethodsFrom git2r remote_add
 #'
 #' @family archivist
 #' @name archivist-package
