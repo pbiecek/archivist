@@ -3,20 +3,24 @@
 #' @title Tags 
 #'
 #' @description
-#' \code{Tags} are attributes of an artifact, i.e., a class, a name, names of artifact's parts, etc.. 
+#' \code{Tags} are attributes of an artifact, i.e., a class, a name, names of artifact's parts, etc... 
 #' The list of artifact tags vary across artifact's classes. 
 #' To learn more about artifacts visit \link[archivist]{archivist-package}.
 #' 
 #' @details
 #' 
-#' \code{Tags} are attributes of an artifact. \code{Tags} can be an artifact's \code{name}, \code{class} or \code{archiving date}. 
-#' Furthermore, for various artifact's classes more different \code{Tags} are available and can 
-#' be searched by \link{searchInLocalRepo} or \link{searchInGithubRepo} functions. 
+#' \code{Tags} are attributes of an artifact. They can be the artifact's \code{name},
+#' \code{class} or \code{archiving date}. Furthermore, for various artifact's classes 
+#' more different \code{Tags} are available. 
 #' 
-#' \code{Tags} are stored in the \link{Repository}. If data is extracted from an artifact then a special \code{Tag},
-#' named \code{relationWith} is created. It specifies with which artifact this data is related to.
+#' A \code{Tag} is represented as a string and usually has the following structure
+#' \code{"TagKey:TagValue"}, e.g., \code{"name:iris"}.
 #' 
-#' The list of supported artifacts is presented below. Objects are divided thematically.
+#' \code{Tags} are stored in the \link{Repository}. If data is extracted from an artifact
+#' then a special \code{Tag}, named \code{relationWith} is created.
+#' It specifies with which artifact this data is related to.
+#' 
+#' The list of supported artifacts which are divided thematically is presented below.
 #' The newest list is also available on \pkg{archivist} \code{wiki} on 
 #' \href{https://github.com/pbiecek/archivist/wiki/archivist-package---Tags}{{Github}}.
 #' 
@@ -140,14 +144,23 @@
 #' @seealso 
 #' Functions using \code{Tags} are:
 #'  \itemize{
+#'    \item \link{addTagsRepo}
+#'    \item \link{getTagsLocal}
+#'    \item \link{getTagsGithub}
+#'    \item \link{saveToRepo}
 #'    \item \link{searchInLocalRepo},
 #'    \item \link{searchInGithubRepo}. 
 #'  }
 #' 
-#' @note In the following way one can specify his own \code{Tags} for artifacts, by setting artifact's attribute 
-#' before call of the \code{saveToRepo} function: 
-#' \code{attr(x, "tags" ) = c( "name1", "name2" )}, where \code{x} is artifact 
+#' @note 
+#' In the following way one can specify his own \code{Tags} for artifacts by 
+#' setting artifact's attribute before call of the \code{saveToRepo} function: 
+#' \code{attr(x, "tags" ) = c( "name1", "name2" )}, where \code{x} is an artifact 
 #' and \code{name1, name2} are \code{Tags} specified by a user.
+#' It can be also done in a new, simpler way by using \code{userTags} parameter like this: 
+#'  \itemize{
+#'    \item \code{saveToRepo(model, repoDir, userTags = c("my_model", "do not delete"))}.
+#'  }
 #' 
 #' @examples
 #' 

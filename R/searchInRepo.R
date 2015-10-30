@@ -16,7 +16,7 @@
 #' should be formatted according to the YYYY-MM-DD format, e.g., \code{"2014-07-31"}.
 #' 
 #' \code{Tags}, used in a \code{pattern} parameter, should be determined according to the 
-#' format: \code{"TagType:TagValue"} - see examples.
+#' format: \code{"TagKey:TagValue"} - see examples.
 #'   
 #' @return
 #' \code{searchInRepo} returns character vector of \code{md5hashes} of artifacts that were searched for.

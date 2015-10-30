@@ -75,7 +75,7 @@ artifacts created from date \code{dateFrom} to date \code{dateTo} are returned. 
 should be formatted according to the YYYY-MM-DD format, e.g., \code{"2014-07-31"}.
 
 \code{Tags}, used in a \code{pattern} parameter, should be determined according to the
-format: \code{"TagType:TagValue"} - see examples.
+format: \code{"TagKey:TagValue"} - see examples.
 }
 \note{
 If \code{repo} and \code{user} are set to \code{NULL} (as default) in the Github mode then global parameters
