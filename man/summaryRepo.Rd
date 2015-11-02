@@ -12,7 +12,7 @@ summaryGithubRepo(repo = NULL, user = NULL, branch = "master",
 }
 \arguments{
 \item{repoDir}{A character denoting an existing directory of the Repository for which a summary will be returned.
-If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.}
+If it is set to \code{NULL} (by default), it will use the \code{repoDir} specified in \link{setLocalRepo}.}
 
 \item{repo}{While working with the Github repository. A character containing a name of the Github repository on which the Repository is stored.
 By default set to \code{NULL} - see \code{Note}.}
