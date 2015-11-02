@@ -26,7 +26,7 @@ length 2 with \code{dateFrom} and \code{dateTo}; see details. If \code{fixed = F
 specifying the beginning of a \link{Tags}, which will be used to search for artifacts.}
 
 \item{repoDir}{A character denoting an existing directory in which artifacts will be searched for.
-If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.}
+If it is set to \code{NULL} (by default), it will use the \code{repoDir} specified in \link{setLocalRepo}.}
 
 \item{fixed}{A logical value specifying how \code{artifacts} should be searched for.
 If \code{fixed = TRUE} (default) then artifacts are searched for by using \code{pattern = "Tag"} argument.

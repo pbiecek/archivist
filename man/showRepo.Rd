@@ -12,7 +12,7 @@ showGithubRepo(repo = NULL, user = NULL, branch = "master",
 }
 \arguments{
 \item{repoDir}{A character denoting an existing directory of the Repository for which metadata will be returned.
-If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.}
+If it is set to \code{NULL} (by default), it will use the \code{repoDir} specified in \link{setLocalRepo}.}
 
 \item{method}{A character specifying a method to be used to show the Repository. Available methods:
 \code{md5hashes} (default), \code{tags} and \code{sets} - see \href{https://github.com/pbiecek/archivist2}{archivist2::saveSetToRepo}.}

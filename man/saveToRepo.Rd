@@ -13,7 +13,7 @@ saveToRepo(artifact, repoDir = NULL, archiveData = TRUE,
 \item{artifact}{An arbitrary R artifact to be saved. For supported artifacts see details.}
 
 \item{repoDir}{A character denoting an existing directory in which an artifact will be saved.
-If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.}
+If it is set to \code{NULL} (by default), it will use the \code{repoDir} specified in \link{setLocalRepo}.}
 
 \item{archiveData}{A logical value denoting whether to archive the data from the \code{artifact}.}
 

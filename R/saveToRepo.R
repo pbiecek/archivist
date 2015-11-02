@@ -120,7 +120,7 @@
 #' @param userTags A character vector with tags. These tags will be added to the repository along with the artifact.
 #' 
 #' @param repoDir A character denoting an existing directory in which an artifact will be saved.
-#' If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.
+#' If it is set to \code{NULL} (by default), it will use the \code{repoDir} specified in \link{setLocalRepo}.
 #' 
 #' @param force A logical value denoting whether to archive \code{artifact} if it was already archived in
 #' a Repository.

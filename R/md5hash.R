@@ -24,8 +24,8 @@
 #'  \item \link{copyGithubRepo},
 #'  \item \link{loadFromLocalRepo}, 
 #'  \item \link{loadFromGithubRepo},
-#' \item \link{getTagsGithub},
-#' \item \link{getTagsLocal},
+#'  \item \link{getTagsGithub},
+#'  \item \link{getTagsLocal},
 #'  \item \link{rmFromRepo}.
 #' }
 #' Functions returning \code{md5hash} as a value are:
