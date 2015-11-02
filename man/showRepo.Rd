@@ -186,11 +186,14 @@ Other archivist: \code{\link{Repository}};
   \code{\link{addTagsRepo}}; \code{\link{ahistory}},
   \code{\link{print.ahistory}},
   \code{\link{print.ahistoryKable}};
-  \code{\link{aoptions}}; \code{\link{archivist-package}};
-  \code{\link{aread}}; \code{\link{asearch}};
-  \code{\link{cache}}; \code{\link{copyGithubRepo}},
+  \code{\link{aoptions}};
+  \code{\link{archivist-github-integration}};
+  \code{\link{archivist-package}}; \code{\link{aread}};
+  \code{\link{asearch}}; \code{\link{cache}};
+  \code{\link{copyGithubRepo}},
   \code{\link{copyLocalRepo}};
-  \code{\link{createEmptyGithubRepo}};
+  \code{\link{createEmptyGithubRepo}},
+  \code{\link{createEmptyLocalRepo}},
   \code{\link{createEmptyRepo}}; \code{\link{deleteRepo}};
   \code{\link{getTagsGithub}}, \code{\link{getTagsLocal}};
   \code{\link{loadFromGithubRepo}},
