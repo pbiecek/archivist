@@ -37,7 +37,7 @@
 #' @param intersect A logical value. See \code{patterns} for more details.
 #' 
 #' @param repoDir A character denoting an existing directory in which artifacts will be searched for.
-#' If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.
+#' If it is set to \code{NULL} (by default), it will use the \code{repoDir} specified in \link{setLocalRepo}.
 #' 
 #' @param repo While working with the Github repository. A character containing a name of the Github repository on which the Repository is stored.
 #' By default set to \code{NULL} - see \code{Note}.

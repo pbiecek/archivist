@@ -11,10 +11,10 @@ loadFromGithubRepo(md5hash, repo = NULL, user = NULL, branch = "master",
   repoDirGit = FALSE, value = FALSE)
 }
 \arguments{
-\item{md5hash}{A character assigned to the artifact as a result of a cryptographical hash function with MD5 algorithm, or it's abbreviation.}
+\item{md5hash}{A character assigned to the artifact through the use of a cryptographical hash function with MD5 algorithm, or it's abbreviation.}
 
 \item{repoDir}{A character denoting an existing directory from which an artifact will be loaded.
-If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.}
+If it is set to \code{NULL} (by default), it will use the \code{repoDir} specified in \link{setLocalRepo}.}
 
 \item{value}{If \code{FALSE} (default) then artifacts are loaded into the Global Environment with their original names,
 if \code{TRUE} then artifacts are returned as a list of values (if there is more than one artifact)

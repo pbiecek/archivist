@@ -34,9 +34,9 @@
 #' set in \link{setGithubRepo} function are used.
 #' 
 #' @param repoDir A character denoting an existing directory from which an artifact will be loaded.
-#' If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.
+#' If it is set to \code{NULL} (by default), it will use the \code{repoDir} specified in \link{setLocalRepo}.
 #' 
-#' @param md5hash A character assigned to the artifact as a result of a cryptographical hash function with MD5 algorithm, or it's abbreviation.
+#' @param md5hash A character assigned to the artifact through the use of a cryptographical hash function with MD5 algorithm, or it's abbreviation.
 #' 
 #' @param repo While working with a Github repository. A character containing a name of a Github repository on which the Repository is archived.
 #' By default set to \code{NULL} - see \code{Note}.
