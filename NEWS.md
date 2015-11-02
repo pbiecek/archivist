@@ -45,3 +45,14 @@ archivist 1.5
 ----------------------------------------------------------------
 
 ...should be updated...
+
+archivist 1.4
+----------------------------------------------------------------
+
+...should be updated...
+
+archivist 1.3
+----------------------------------------------------------------
+
+* Added `setLocalRepo` and `setGlobalRepo` functions.
+...should be updated...
