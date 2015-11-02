@@ -46,18 +46,18 @@
 #' @param default If \code{default = TRUE} then \code{repoDir} is set as default local repository.
 #' 
 #' @param repoName While working with a Github repository. A character denoting new GitHub repository name. White spaces will be substitued with a dash.
-#' @param github_token While working with a Github repository. An OAuth GitHub Token created with the \link{oauth2.0_token} function. See \link{archivist-github-integration}
+#' @param github_token While working with a Github repository. An OAuth GitHub Token created with the \link{oauth2.0_token} function. See \link{archivist-github-integration}.
 #' Can be set globally with \code{aoptions("github_token", github_token)}.
 #' @param repoDescription While working with a Github repository. A character specifing the new GitHub repository description.
 #' @param user.name While working with a Github repository. A character denoting GitHub user name. Can be set globally with \code{aoptions("user.name", user.name)}.
-#'  See \link{archivist-github-integration}
-#' @param user.email While working with a Github repository. A character denoting GitHub user email. Can be set globally with \code{aoptions("user.email", user.email)}.
-#' See \link{archivist-github-integration}
+#'  See \link{archivist-github-integration}.
 #' @param user.password While working with a Github repository. A character denoting GitHub user password. Can be set globally with \code{aoptions("user.password", user.password)}.
 #' See \link{archivist-github-integration}.
 #' @param readmeDescription While working with a Github repository. A character of the content of \code{README.md} file. By default a description of \link{Repository}.
 #' Can be set globally with \code{aoptions("readmeDescription", readmeDescription)}. For no \code{README.md} file 
 #' set \code{aoptions("readmeDescription", NULL)}.
+#' @param response A logical value. Should the GitHub API response should be returned.
+#' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #'
@@ -105,7 +105,7 @@
 #' 
 #' createEmptyGithubRepo("Museum")
 #' createEmptyGithubRepo("Museum-Extras", response = TRUE)
-#' createEmptyGithubRepo("Gallery", readme = NULL)
+#' createEmptyGithubRepo("Gallery", readmeDescription = NULL)
 #' createEmptyGithubRepo("Landfill", repoDescription = "My models and stuff") 
 #' }
 #' @family archivist
@@ -118,7 +118,7 @@ createEmptyRepo <- function( repoDir, force = TRUE, default = FALSE,
                              #user.email = aoptions("user.email"),
                              user.password = aoptions("user.password"),
                              repoDescription = aoptions("repoDescription"),
-                             readme = aoptions("readmeDescription"),
+                             readmeDescription = aoptions("readmeDescription"),
                              response = aoptions("response"),
                              type = "local"){
   stopifnot(is.character(type) & length(type) ==1 & type %in% c("local", "github"))
@@ -130,7 +130,7 @@ createEmptyRepo <- function( repoDir, force = TRUE, default = FALSE,
                           user.name = user.name,
                           user.password = user.password,
                           repoDescription = repoDescription,
-                          readme = readme,
+                          readmeDescription = readmeDescription,
                           response = response)
   }
   
@@ -194,7 +194,7 @@ createEmptyGithubRepo <- function(repoName,
                                   #user.email = aoptions("user.email"),
                                   user.password = aoptions("user.password"),
                                   repoDescription = aoptions("repoDescription"),
-                                  readme = aoptions("readmeDescription"),
+                                  readmeDescription = aoptions("readmeDescription"),
                                   response = aoptions("response")){
   stopifnot(is.character(repoName) & length(repoName) ==1)
   stopifnot(is.character(repoDescription) & length(repoDescription) ==1)
@@ -202,8 +202,8 @@ createEmptyGithubRepo <- function(repoName,
   stopifnot(is.character(user.name) & length(user.name)==1)
   #stopifnot(is.character(user.email) & length(user.email)==1)
   stopifnot(is.character(user.password) & length(user.password)==1)
-  stopifnot((is.character(readme) & length(readme)==1) |
-              is.null(readme))
+  stopifnot((is.character(readmeDescription) & length(readmeDescription)==1) |
+              is.null(readmeDescription))
   
   repoName <- gsub(pattern = " ", "-", repoName)
   
@@ -235,7 +235,7 @@ createEmptyGithubRepo <- function(repoName,
   createEmptyRepo(repoDir = path)
   file.create(file.path(path, "gallery", ".gitkeep"))
   # git add
-  if (!is.null(readme)){
+  if (!is.null(readmeDescription)){
     file.create(file.path(path, "README.md"))
     writeLines(aoptions("readmeDescription"), file.path(path, "README.md"))
     add(repo, c("backpack.db", "gallery/", "README.md"))
@@ -254,7 +254,7 @@ createEmptyGithubRepo <- function(repoName,
   
   # GitHub authorization
   # to perform pull and push operations
-  cred <- cred_user_pass(user.name,
+  cred <- git2r::cred_user_pass(user.name,
                          user.password)
   
   # push archivist-like Repository to GitHub repository

@@ -11,8 +11,8 @@ createEmptyRepo(repoDir, force = TRUE, default = FALSE, repoName,
   user.name = aoptions("user.name"),
   user.password = aoptions("user.password"),
   repoDescription = aoptions("repoDescription"),
-  readme = aoptions("readmeDescription"), response = aoptions("response"),
-  type = "local")
+  readmeDescription = aoptions("readmeDescription"),
+  response = aoptions("response"), type = "local")
 
 createEmptyLocalRepo(repoDir, force = TRUE, default = FALSE)
 
@@ -20,7 +20,8 @@ createEmptyGithubRepo(repoName, github_token = aoptions("github_token"),
   user.name = aoptions("user.name"),
   user.password = aoptions("user.password"),
   repoDescription = aoptions("repoDescription"),
-  readme = aoptions("readmeDescription"), response = aoptions("response"))
+  readmeDescription = aoptions("readmeDescription"),
+  response = aoptions("response"))
 }
 \arguments{
 \item{repoDir}{A character that specifies the directory for the Repository which is to be made.}
@@ -33,25 +34,24 @@ Default set to \code{force = TRUE}.}
 
 \item{repoName}{While working with a Github repository. A character denoting new GitHub repository name. White spaces will be substitued with a dash.}
 
-\item{github_token}{While working with a Github repository. An OAuth GitHub Token created with the \link{oauth2.0_token} function. See \link{archivist-github-integration}
+\item{github_token}{While working with a Github repository. An OAuth GitHub Token created with the \link{oauth2.0_token} function. See \link{archivist-github-integration}.
 Can be set globally with \code{aoptions("github_token", github_token)}.}
 
 \item{user.name}{While working with a Github repository. A character denoting GitHub user name. Can be set globally with \code{aoptions("user.name", user.name)}.
-See \link{archivist-github-integration}}
+See \link{archivist-github-integration}.}
 
 \item{user.password}{While working with a Github repository. A character denoting GitHub user password. Can be set globally with \code{aoptions("user.password", user.password)}.
 See \link{archivist-github-integration}.}
 
 \item{repoDescription}{While working with a Github repository. A character specifing the new GitHub repository description.}
 
-\item{type}{A character. Whether to use \code{Local} or \code{Github} version while using \code{createEmptyRepo} wrapper.}
-
-\item{user.email}{While working with a Github repository. A character denoting GitHub user email. Can be set globally with \code{aoptions("user.email", user.email)}.
-See \link{archivist-github-integration}}
-
 \item{readmeDescription}{While working with a Github repository. A character of the content of \code{README.md} file. By default a description of \link{Repository}.
 Can be set globally with \code{aoptions("readmeDescription", readmeDescription)}. For no \code{README.md} file
 set \code{aoptions("readmeDescription", NULL)}.}
+
+\item{response}{A logical value. Should the GitHub API response should be returned.}
+
+\item{type}{A character. Whether to use \code{Local} or \code{Github} version while using \code{createEmptyRepo} wrapper.}
 }
 \description{
 \code{createEmptyLocalRepo} creates an empty \link{Repository} in the given directory in which archived artifacts will be stored.
@@ -129,7 +129,7 @@ aoptions("user.password", user.password)
 
 createEmptyGithubRepo("Museum")
 createEmptyGithubRepo("Museum-Extras", response = TRUE)
-createEmptyGithubRepo("Gallery", readme = NULL)
+createEmptyGithubRepo("Gallery", readmeDescription = NULL)
 createEmptyGithubRepo("Landfill", repoDescription = "My models and stuff")
 }
 }
