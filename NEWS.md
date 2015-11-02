@@ -54,5 +54,5 @@ archivist 1.4
 archivist 1.3
 ----------------------------------------------------------------
 
-* Added `setLocalRepo` and `setGlobalRepo` functions.
+* Added `setLocalRepo` and `setGithubRepo` functions.
 ...should be updated...
