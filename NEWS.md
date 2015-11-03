@@ -24,8 +24,8 @@ that do not exist.
 	3. Additional examples to better understand usage of archivist package functions:
 		1. in `loadFromRepo` function - Loading artifacts from the repository which is built in the archivist package and saving them on the example repository.
 		2. in `createEmptyRepo` function - creating a default local Repository in non existing directory.
-    3. in `rmFromRepo` function - removing artifacts with `many = TRUE` argument
-    4. in `deleteRepo` function - using `deleteRoot = TRUE` argument 
+    		3. in `rmFromRepo` function - removing artifacts with `many = TRUE` argument
+    		4. in `deleteRepo` function - using `deleteRoot = TRUE` argument 
 	4. Alterations in the text of: `?Tags`, `?Repository`, `?md5hash`, `archivist-package`, 
   `?saveToRepo`, `loadFromRepo`, `summaryRepo`, `showRepo`, `?searchInRepo`, `?createEmptyRepo`,
   `?rmFromRepo`, `?deleteRepo` documentation pages.
