@@ -2,26 +2,25 @@
 % Please edit documentation in R/deleteRepo.R
 \name{deleteRepo}
 \alias{deleteRepo}
-\title{Delete an Existing Repository from Given Directory}
+\title{Delete the Existing Repository from the Given Directory}
 \usage{
 deleteRepo(repoDir, deleteRoot = FALSE)
 }
 \arguments{
-\item{repoDir}{A character that specifies the directory for the Repository to be deleted.}
+\item{repoDir}{A character that specifies the directory for the Repository
+which is to be deleted.}
 
-\item{deleteRoot}{A logical value that specifies if the repository root directory shall be deleted.}
+\item{deleteRoot}{A logical value that specifies if the repository root directory
+should be deleted.}
 }
 \description{
-\code{deleteRepo} deletes an existing \link{Repository} from a given directory, so all artifacts from \code{gallery} folder are
-removed and database \code{backpack.db} is deleted.
-}
-\details{
-\code{deleteRepo} deletes an existing \link{Repository} from a given directory, so all artifacts from \code{gallery} folder are
-removed and database \code{backpack.db} is deleted.
+\code{deleteRepo} deletes the existing \link{Repository} from the given directory.
+As a result all artifacts from \code{gallery} folder are removed and database \code{backpack.db}
+is deleted.
 }
 \examples{
-# objects preparation
 \dontrun{
+# objects preparation
 # data.frame object
 data(iris)
 
@@ -74,7 +73,7 @@ bk=rnorm(100)
 glmnet1=glmnet(zk,bk)
 
 
-# creating example Repository - that examples will work
+# creating example Repository - on which examples will work
 
 # save examples
 
@@ -90,7 +89,7 @@ saveToRepo( qda1, repoDir=exampleRepoDir )
 saveToRepo( glmnet1, repoDir=exampleRepoDir )
 
 
-# let's see how the Repository look like: show
+# let's see how the Repository looks like: show
 
 showLocalRepo( method = "md5hashes", repoDir = exampleRepoDir )
 showLocalRepo( method = "tags", repoDir = exampleRepoDir )
@@ -104,6 +103,30 @@ summaryLocalRepo( repoDir = exampleRepoDir )
 deleteRepo( repoDir = exampleRepoDir)
 
 rm( exampleRepoDir )
+
+## Using deleteRoot = TRUE argument
+
+# First we create default Repository on our computer
+createEmptyRepo( repoDir = "defRepo", force = TRUE, default = TRUE )
+saveToRepo( myplot123)
+saveToRepo( iris)
+saveToRepo( model)
+
+# Let's see how the Repository looks like: show
+
+showLocalRepo( method = "md5hashes")
+showLocalRepo( method = "tags")
+
+# Let's get information about that Repository
+
+summaryLocalRepo()
+
+# Now let's delete the Repository and it's root folder by using
+# deleteRoot = TRUE argument
+
+deleteRepo(repoDir = "defRepo", deleteRoot = TRUE)
+# defRepo was completely deleted indeed! We may notice it on our computer.
+
 }
 }
 \author{
