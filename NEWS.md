@@ -22,8 +22,8 @@ that do not exist.
 archivist 1.7
 ----------------------------------------------------------------
 	
-	* The order of parameters in asearch has changed!
-	* Added graphGallery for self-contained examples
+* The order of parameters in asearch has changed!
+* Added graphGallery for self-contained examples
 * aread allows for single MD5 hash (which will be read from the default repo)
 * asearch allows for only patterns (will be searched in local repo)
 * ahistory has now 'artifact' argument instead of 'obj'
@@ -37,7 +37,7 @@ should load that package before running shinySearchInLocalRepo function.
 archivist 1.6
 ----------------------------------------------------------------
 	
-	* Fix in aread(), now subdirectories are handled properly
+* Fix in aread(), now subdirectories are handled properly
 * aoption() handles default values for archivist parameters
 * createEmptyRepo() takes 'default' argument. If set to TRUE, then the new empty repo becomes the default one.
 * Added CITATION
@@ -56,5 +56,5 @@ archivist 1.4
 archivist 1.3
 ----------------------------------------------------------------
 	
-	* Added `setLocalRepo` and `setGithubRepo` functions.
+* Added `setLocalRepo` and `setGithubRepo` functions.
 ...should be updated...
