@@ -1,78 +1,70 @@
 ##    archivist package for R
 ##
-#' @title Remove an Artifact Given as md5hash from a Repository
+#' @title Remove an Artifact Given as a md5hash from the Repository
 #'
 #' @description
-#' \code{rmFromRepo} removes an artifact given as \code{md5hash} from a \link{Repository}.
+#' \code{rmFromRepo} removes an artifact given as a \code{md5hash} from the \link{Repository}.
 #' To learn more about artifacts visit \link[archivist]{archivist-package}.
 #'  
 #' @details
-#' \code{rmFromRepo} removes an artifact given as \code{md5hash} from a Repository, 
-#' which is a SQLite database named \code{backpack} - created by a \link{createEmptyRepo} call.
-#' For every artifact, \code{md5hash} is a unique string of length 32 that comes out as a result of 
-#' \link[digest]{digest} function, which uses a cryptographical MD5 hash algorithm.
+#' \code{rmFromRepo} removes an artifact given as a \link{md5hash} from the \link{Repository}.
+#' To be more precise, an artifact is removed 
+#' both from \code{backpack.db} file(the SQLite database)and \code{gallery} subdirectory,
+#' where the artifacts are stored as \code{md5hash.rda} files.
+#'   
+#' Important: instead of giving the whole \code{md5hash} character, a user
+#' can simply give its first few characters. For example, \code{"a09dd"} 
+#' instead of \code{"a09ddjdkf9kj33dcjdnfjgos9jd9jkcv"}.
+#' All artifacts with the same \code{md5hash} abbreviation  will be removed 
+#' from the \code{Repository}.
 #' 
-#' 
-#' Also this function removes a \code{md5hash.rda} file, where \code{md5hash} is the artifact's hash as above.
-#' 
-#'  
-#' Important: instead of giving the whole \code{md5hash} character, the user can simply give first few characters of the \code{md5hash}.
-#' For example, \code{a09dd} instead of \code{a09ddjdkf9kj33dcjdnfjgos9jd9jkcv}. All artifacts with the same corresponing \code{md5hash} abbreviation 
-#' will be removed from the \link{Repository} and from the \code{gallery} folder.
-#' 
-#' \code{rmFromRepo} provides functionality that enables to delete miniatures of the artifacts (.txt or .png files) 
-#' while removing .rda files. To disable this functionality use \code{removeMiniature = FALSE}. Also, if the
-#'  data from the artifact were archived, the data will be removed by default but there is a possibility not to 
-#'  delete this data while performing \code{rmFromRepo} - simply use \code{removeData = TRUE}.
-#' 
-#' 
-#' \code{rmFromRepo} provides functionality that enables to delete miniatures of the artifacts (.txt or .png files) while removing .rda files.
-#' To delete miniature use \code{removeMiniature = TRUE}. Also if the data from the artifact was archived, there is a possibility to delete this 
-#' data while removing artifact that uses this data. Simply use \code{removeData = TRUE}.
-#' 
-#' If one wants to remove all artifact created between two dates, it is suggested to
+#' \code{rmFromRepo} provides functionality that enables us to delete miniatures
+#' of the artifacts (.txt or .png files) while removing .rda files.
+#' To delete miniature of the artifact use \code{removeMiniature = TRUE} argument.
+#' Moreover, if the data from the artifact is archived then there is a possibility 
+#' to delete this data while removing the artifact. Simply use \code{removeData = TRUE} argument.
+#'   
+#' If one wants to remove all artifacts created between two dates, it is suggested to
 #' perform:
 #' \itemize{
 #'    \item \code{obj2rm <- searchInLocalRepo( tag = list(dateFrom, dateTo), repoDir = )}
 #'    \item \code{sapply(obj2rm, rmFromRepo, repoDir = )}
 #' }
 #' 
-#' @note
-#' 
-#' To accelerate the speed of removing many objects, you can set \code{many} parameter to
-#' \code{TRUE} and pass a vector of artifacts' \code{md5hashes} to a \code{md5hash} parameter to remove many
-#' artifacts with one single function call. By default, \code{many} parameter is set to \code{FALSE}.
-#' 
-#' \code{md5hash} can be a result of the \link{searchInLocalRepo} function proceeded with \code{tag = NAME} argument,
-#' where \code{NAME} is a tag that describes the property of the objects to be deleted. 
-#' 
+#' @note 
+#' \code{md5hash} can be a result of the \link{searchInLocalRepo} function called
+#' by \code{tag = NAME} argument, where \code{NAME} is a tag that describes
+#' the property of the artifacts to be deleted. 
 #' 
 #' For more information about \code{Tags} check \link{Tags}.
 #' 
-#' @param md5hash A character assigned to the artifact as a result of a cryptographical hash function with MD5 algorithm, or it's abbreviation. This object will be removed.
+#' @param md5hash A character assigned to the artifact through the use of a
+#' cryptographical hash function with MD5 algorithm, or it's abbreviation.
+#' This object will be removed.
 #' 
-#' @param repoDir A character denoting an existing directory from which an artifact will be removed.
-#' If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.
+#' @param repoDir A character denoting an existing directory from which an 
+#' artifact will be removed. If it is set to \code{NULL} (by default), it  will
+#' use the \code{repoDir} specified in \link{setLocalRepo}.
 #' 
-#' @param removeData A logical value denoting whether to remove a data with the \code{artifact} specified by the \code{md5hash}.
+#' @param removeData A logical value denoting whether to remove data along with
+#' the \code{artifact} specified by the \code{md5hash}. Defualt \code{FALSE}.
+#' 
+#' @param removeMiniature A logical value denoting whether to remove a miniature
+#' along with the \code{artifact} specified by the \code{md5hash}. Defualt \code{FALSE}.
+#' 
+#' @param force A logical value denoting whether to remove data related to more than one artifact.
 #' Defualt \code{FALSE}.
 #' 
-#' @param removeMiniature A logical value denoting whether to remove a miniature with the \code{artifact} specified by the \code{md5hash}.
-#' Defualt \code{FALSE}.
-#' 
-#' @param force A logical value denoting whether to remove data if it is related to more than 1 artifact.
-#' Defualt \code{FALSE}.
-#' 
-#' @param many A logical value. To accelerate the speed of removing many objects, you can set this parameter to
-#' \code{TRUE} and pass a vector of artifacts' \code{md5hashes} to a \code{md5hash} parameter to remove many
-#' artifacts with one single function call. By default, set to \code{FALSE}.
+#' @param many A logical value. To accelerate the speed of removing many objects,
+#' you can set this parameter to \code{TRUE} and pass a vector of artifacts' \code{md5hashes}
+#' to a \code{md5hash} parameter. By default, set to \code{FALSE}.
 #' 
 #' @author
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
 #'
 #' @examples
-#' # objects preparation
 #' \dontrun{
+#' # objects preparation
 #' data.frame object
 #' data(iris)
 #' 
@@ -101,7 +93,7 @@
 #'            cbind(rnorm( 3,3.2,0.5), rnorm( 3,3.2,0.5)))
 #' fannyx <- fanny(x, 2)
 #' 
-#' # creating example Repository - that examples will work
+#' # creating example Repository - on which examples will work
 #' 
 #' exampleRepoDir <- tempdir()
 #' createEmptyRepo(repoDir = exampleRepoDir)
@@ -111,50 +103,49 @@
 #' agn1Md5hash <- saveToRepo(agn1, repoDir=exampleRepoDir)
 #' fannyxMd5hash <- saveToRepo(fannyx, repoDir=exampleRepoDir)
 #' 
-#' # let's see how the Repository look like: show
+#' # let's see how the Repository looks like: show
 #' showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
 #' showLocalRepo(method = "tags", repoDir = exampleRepoDir)
 #' 
-#' # let's see how the Repository look like: summary
+#' # let's see how the Repository looks like: summary
 #' summaryLocalRepo( exampleRepoDir )
 #' 
 #' # remove examples
 #' 
-#' rmFromRepo(fannyxMd5hash, repoDir = exampleRepoDir, removeData= FALSE)
-#' # removeData = FALSE provides from removing archived "fannyxMd5hash object"-data from 
-#' # a Repository and gallery
-#' 
+#' rmFromRepo(fannyxMd5hash, repoDir = exampleRepoDir)
+#' # removeData = FALSE default argument provides from removing archived
+#' # fannyxMd5hash object's data from the Repository and the gallery
 #' rmFromRepo(irisMd5hash, repoDir = exampleRepoDir)
-#' # note that also files in gallery folder, created in exampleRepoDir
-#' # directory will be removed
-#' 
-#' # let's see how the Repository look like: show
+#'  
+#' # let's see how the Repository looks like: show
 #' showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
 #' showLocalRepo(method = "tags", repoDir = exampleRepoDir)
 #' 
-#' # let's see how the Repository look like: summary
+#' # let's see how the Repository looks like: summary
 #' summaryLocalRepo( exampleRepoDir )
 #' 
 #' 
-#' # one can have the same object archived 3 different times
+#' # one can have the same object archived three different times,
 #' # there will appear a warning message
 #' agn1Md5hash2 <- saveToRepo(agn1, repoDir=exampleRepoDir)
 #' agn1Md5hash3 <- saveToRepo(agn1, repoDir=exampleRepoDir)
 #' 
-#' # md5hashes are the same for that same object (agn1)
+#' # md5hashes are the same for the same object (agn1)
 #' agn1Md5hash == agn1Md5hash2
 #' agn1Md5hash2 == agn1Md5hash3
 #' 
+#' # but in the Repository database (backpack.db)
+#' # there are three identical rows describing the object
+#' # as well as three identical rows describing object's data.
 #' 
-#' 
-#' # but there are 3 times more rows in Repository database (backpack.db).
-#' 
-#' # let's see how the Repository look like: show
+#' # let's see how the Repository looks like: show
 #' showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
 #' showLocalRepo(method = "tags", repoDir = exampleRepoDir)
 #' 
-#' # let's see how the Repository look like: summary
+#' # let's see how the Repository looks like: summary
 #' summaryLocalRepo( exampleRepoDir )
+#' # in spite of multiplying object's appearance in database it is
+#  # still considered as one object - the number of saves hasn't changed
 #' 
 #' # one easy call removes them all but this call will result in error
 #' rmFromRepo(agn1Md5hash, repoDir = exampleRepoDir, removeData = TRUE, 
@@ -163,22 +154,22 @@
 #' # soultion to that is
 #' rmFromRepo(agn1Md5hash, repoDir = exampleRepoDir, removeData = TRUE, 
 #'             removeMiniature = TRUE, force = TRUE)
-#' # removeMiniature = TRUE removes miniatures from gallery folder
+#' # removeMiniature = TRUE removes miniatures from the gallery folder
 #' 
-#' # rest of artifacts can be removed e.g. like this
+#' # rest of the artifacts can be removed for example by
 #' # looking for dates of creation and then removing all objects
-#' # from specific date
+#' # created in a specific period of time
 #' 
 #' obj2rm <- searchInLocalRepo( pattern = list(dateFrom = Sys.Date(), dateTo = Sys.Date()),
 #'                              repoDir = exampleRepoDir )
 #' sapply(obj2rm, rmFromRepo, repoDir = exampleRepoDir)
-#' # above example removed all objects from this example
+#' # above function call removed all objects which were created in these examples
 #' 
-#' # let's see how the Repository look like: show
+#' # let's see how the Repository looks like: show
 #' showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
 #' showLocalRepo(method = "tags", repoDir = exampleRepoDir)
 #' 
-#' # one can also remove objects from only specific class
+#' # one can also delete objects of a specific class
 #' modelMd5hash  <- saveToRepo(model, repoDir=exampleRepoDir)
 #' model2Md5hash  <- saveToRepo(model2, repoDir=exampleRepoDir)
 #' model3Md5hash  <- saveToRepo(model3, repoDir=exampleRepoDir)
@@ -190,12 +181,17 @@
 #' summaryLocalRepo( exampleRepoDir )
 #' 
 #' 
-#' # once can remove object specifying only its md5hash abbreviation
+#' # one can remove object specifying only its md5hash abbreviation
 #' (myplo123Md5hash <- saveToRepo(myplot123, repoDir=exampleRepoDir))
 #' showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
-#' # "ff751bb5ba34bbb8a7851958b15f2ef7"
-#' # so example abbreviation might be : "ff751"
-#' rmFromRepo("ff751", repoDir = exampleRepoDir)
+#' 
+#' # If md5hash is "db50a4e667581f8c531acd78ad24bfee" then
+#' # model abbreviation might be : "db50a"
+#' # Note that with each evaluation of createEmptyRepo function new md5hashes
+#' # are created. This is why, in your evaluation of the code, artifact 
+#' # myplo123Md5hash will have a different md5hash and the following
+#' # instruction will result in an error.
+#' rmFromRepo("db40a", repoDir = exampleRepoDir, removeData = TRUE)
 #' summaryLocalRepo( repoDir = exampleRepoDir )
 #' 
 #' 
@@ -248,28 +244,50 @@
 #' zk=matrix(rnorm(100*20),100,20)
 #' bk=rnorm(100)
 #' glmnet1=glmnet(zk,bk)
-#' 
-#' 
-#' # creating example Repository - that examples will work
-#' 
-#' # need few artifacts to remove
-#' 
-#' exampleRepoDir <- tempdir()
-#' createEmptyRepo( repoDir = exampleRepoDir )
-#' saveToRepo( iris, repoDir=exampleRepoDir )
+#'  
+#' # Creating example Repository so that we may see it on our computer
+#'
+#' exampleRepoDir <- "defRepo" 
+#' createEmptyRepo( repoDir = exampleRepoDir, force = TRUE)
+#' saveToRepo( iris, repoDir=exampleRepoDir)
 #' saveToRepo( model, repoDir=exampleRepoDir )
 #' saveToRepo( agn1, repoDir=exampleRepoDir )
 #' saveToRepo( fannyx, repoDir=exampleRepoDir )
 #' saveToRepo( lda1, repoDir=exampleRepoDir )
 #' saveToRepo( glmnet1, repoDir=exampleRepoDir )
+#'
+#' ArtifactsAndData <- unique(showLocalRepo(repoDir = exampleRepoDir)[,1])
+#' ArtifactsData <- unique(searchInLocalRepo(pattern = "relationWith", fixed = FALSE,
+#'                                    repoDir = exampleRepoDir))
+#' Artifacts <- setdiff(ArtifactsAndData, ArtifactsData)
 #' 
+#' # Removing many artifacts with many = TRUE argument
+#' rmFromRepo(Artifacts, repoDir = exampleRepoDir, many = TRUE)
 #' 
-#' allUniqueMd5hashes <- unique(showLocalRepo(exampleRepoDir)[,1])
-#' allUniqueMd5hashes
-#' rmFromRepo(allUniqueMd5hashes, many = TRUE, repoDir = exampleRepoDir)
-#' unique(showLocalRepo(exampleRepoDir)[,1])
+#' # We may notice, in two ways, that artifacts' data is still in "defRepo".
+#' # Either we may look into gallery folder of "defRepo" or
+#' # show how database.db file looks like.
+#' showLocalRepo(repoDir = exampleRepoDir) # artifacts' data is there indeed!
 #' 
+#' # If we want to remove artifact's data now we simply call rmFromRepo function
+#' # with removeData = TRUE additional argument.
+#' rmFromRepo(Artifacts, repoDir = exampleRepoDir, removeData = TRUE,  many = TRUE)
+#' showLocalRepo(repoDir = exampleRepoDir) 
 #' 
+#' # Perhaps you may think that "defRepo" is empty as database indicates. However,
+#' # if you look into gallery folder there will be some ".txt" or ".png" files. 
+#' # Those are probably, the so called, Miniatures. Let's try to remove them.
+#' # In order to do it we call rmFromRepo function with removeMiniature = TRUE argument.
+#' rmFromRepo(Artifacts, many = TRUE, repoDir = exampleRepoDir, removeMiniature = TRUE)
+#' # Gallery folder is empty now!
+#' # Of course we may have done all these instructions by one simple function call.
+#' # rmFromRepo(Artifacts, many = TRUE, repoDir = exampleRepoDir,
+#' #            removeData = TRUE, removeMiniature = TRUE)
+#' # Nevertheless, it may be instructive to see how it is done step by step.
+#' 
+#' # removing an example Repository
+#' deleteRepo(repoDir = exampleRepoDir, deleteRoot = TRUE)
+#'    
 #' rm( exampleRepoDir )
 #' }
 #' @family archivist
@@ -283,11 +301,19 @@ rmFromRepo <- function( md5hash, repoDir = NULL, removeData = FALSE,
     
   repoDir <- checkDirectory( repoDir )
   
-  # what if many md5hashes are passed to be deleted?
+  # We will use md5hash list in chcecking whether md5hash is in the Repository
+  md5hashList <- executeSingleQuery( dir = repoDir,
+                                     paste0( "SELECT md5hash FROM artifact" ) )
+  md5hashList <- as.character( md5hashList[, 1] )
   
+  # what if many md5hashes are passed to be deleted?
   if ( many ){
     
-    
+    # if we gave the wrong md5hash character, the following error would occur:
+    if (!all(is.element(md5hash, md5hashList))){
+      stop( "one or more md5hash is not in the Repository. Try again with different md5hashes")
+    }
+    # remove objects from backpack.db file
     executeSingleQuery( dir = repoDir,
                         paste0( "DELETE FROM artifact WHERE ",
                                 "md5hash IN ('", paste0( md5hash, collapse = "','" ), "')")
@@ -298,7 +324,7 @@ rmFromRepo <- function( md5hash, repoDir = NULL, removeData = FALSE,
                                 "artifact IN ('", paste0( md5hash, collapse = "','" ), "')")
                       )      
     
-    # remove files from gallery folder
+    # remove objects' files from gallery folder
     sapply( md5hash, function( md5hashSingle ) {
     if ( file.exists( paste0( repoDir, "gallery/", md5hashSingle, ".rda" ) ) )
       file.remove( paste0( repoDir, "gallery/", md5hashSingle, ".rda" ) )
@@ -321,11 +347,26 @@ rmFromRepo <- function( md5hash, repoDir = NULL, removeData = FALSE,
       dataMd5hash <-  executeSingleQuery( dir = repoDir,
                                           paste0( "SELECT artifact FROM tag WHERE ",
                                                   "tag IN ('", paste0("relationWith:", md5hash, collapse="','"), "')" ) )
+      # We want dataMd5hash as a character vector, not a data frame
+      dataMd5hash <- unlist(dataMd5hash, use.names = FALSE) 
       
+      # remove object's data from backpack.db file
       executeSingleQuery( dir = repoDir,
                           paste0( "DELETE FROM artifact WHERE ",
                                   "md5hash IN ('", paste0( dataMd5hash, collapse = "','" ), "')")
       )
+      executeSingleQuery( dir = repoDir,
+                          paste0( "DELETE FROM tag WHERE ",
+                                  "artifact IN ('", paste0( dataMd5hash, collapse = "','" ), "')")
+      )      
+      
+      # remove object's data files from gallery folder
+      sapply( dataMd5hash, function(dataMd5hashSingle){
+        if ( file.exists( paste0( repoDir, "gallery/", dataMd5hashSingle, ".rda" ) ) )
+          file.remove( paste0( repoDir, "gallery/", dataMd5hashSingle, ".rda" ) )
+        if ( file.exists( paste0( repoDir, "gallery/", dataMd5hashSingle, ".txt" ) ) )
+          file.remove( paste0( repoDir, "gallery/", dataMd5hashSingle, ".txt" ) )
+      })
       
     }
                         
@@ -334,47 +375,63 @@ rmFromRepo <- function( md5hash, repoDir = NULL, removeData = FALSE,
   # what if abbreviation was given
   if ( nchar( md5hash ) < 32 ){
     
-    md5hashList <- executeSingleQuery( dir = repoDir,
-                               paste0( "SELECT artifact FROM tag" ) )
-    md5hashList <- as.character( md5hashList[, 1] )
     md5hash <- unique( grep( 
       pattern = paste0( "^", md5hash ), 
       x = md5hashList, 
       value = TRUE ) )
+    
+    # if we gave the wrong md5hash character, the following error would occur:
+    if (length(md5hash) == 0){
+      stop( "Given md5hash is not in the Repository. Try again with different md5hash abbreviation")
+    }
   }
 
   # send deletes for data 
   if ( removeData ){
-    # if there are many objects with the same m5hash (copies) all of them will be deleted
-    dataMd5hash <-  executeSingleQuery( dir = repoDir,
-                     paste0( "SELECT artifact FROM tag WHERE ",
-                             "tag = '", paste0("relationWith:", md5hash), "'" ) ) 
+    # if there are many objects with the same md5hash (copies) all of them will be deleted
     
-    if ( length( dataMd5hash ) !=  1  & !force ){
+    # if we gave the wrong md5hash character, the following error would occur:
+    if (!is.element(md5hash, md5hashList)){
+        stop( "Given md5hash is not in the Repository. Try again with different md5hash")
+    }
+
+    # find object's data md5hash(es) in backpack.db file
+    dataMd5hash <-  executeSingleQuery( dir = repoDir,
+                                        paste0( "SELECT artifact FROM tag WHERE ",
+                                                "tag IN ('", paste0("relationWith:", md5hash, collapse="','"), "')" ) )
+    
+    # we want dataMd5hash as a character vector, not a data frame
+    dataMd5hash <- unlist(dataMd5hash, use.names = FALSE) 
+    
+    if ( length( dataMd5hash ) >  1  & !force ){
       stop( "Data related to ", md5hash, " are also in relation with other artifacts. \n",
             "To remove try again with argument removeData = FALSE to remove artifact only or with argument force = TRUE to remove data anyway.")
     }
-    if ( length( dataMd5hash ) != 1  & force )
+    if ( length( dataMd5hash ) > 1  & force )
       cat( "Data related to more than 1 artifact was removed from Repository.")
     
+    # remove object's (objects') data from backpack.db file
+    executeSingleQuery( dir = repoDir,
+                        paste0( "DELETE FROM artifact WHERE ",
+                                "md5hash IN ('", paste0( dataMd5hash, collapse = "','" ), "')")
+    )
     
-    sapply( dataMd5hash, function(x){
-      executeSingleQuery( dir = repoDir,
-                  paste0( "DELETE FROM artifact WHERE ",
-                          "md5hash = '", x, "'" ) )} )
-    sapply( dataMd5hash, function(x){
-      executeSingleQuery( dir = repoDir,
-                  paste0( "DELETE FROM tag WHERE ",
-                          "artifact = '", x, "'" ) )} )
+    executeSingleQuery( dir = repoDir,
+                        paste0( "DELETE FROM tag WHERE ",
+                                "artifact IN ('", paste0( dataMd5hash, collapse = "','" ), "')")
+    )
     
-    # remove data files from gallery folder
-    if ( file.exists( paste0( repoDir, "gallery/", dataMd5hash, ".rda" ) ) )
-      file.remove( paste0( repoDir, "gallery/", dataMd5hash, ".rda" ) )
-    
+    # remove object's(objects') data files from gallery folder    
+    sapply( dataMd5hash, function(dataMd5hashSingle){
+      if ( file.exists( paste0( repoDir, "gallery/", dataMd5hashSingle, ".rda" ) ) )
+        file.remove( paste0( repoDir, "gallery/", dataMd5hashSingle, ".rda" ) )
+      if ( file.exists( paste0( repoDir, "gallery/", dataMd5hashSingle, ".txt" ) ) )
+        file.remove( paste0( repoDir, "gallery/", dataMd5hashSingle, ".txt" ) )
+    })
   }
   
   # remove object from database
-  # if there are many objects with the same m5hash (copies) all of them will be deleted
+  # if there are many objects with the same md5hash (copies) all of them will be deleted
   sapply( md5hash, function(x){
     executeSingleQuery( dir = repoDir,
                 paste0( "DELETE FROM artifact WHERE ",
@@ -384,7 +441,7 @@ rmFromRepo <- function( md5hash, repoDir = NULL, removeData = FALSE,
                 paste0( "DELETE FROM tag WHERE ",
                         "artifact = '", x, "'" ) )} )
    
-  # remove files from gallery folder
+  # remove object's files from gallery folder
   if ( file.exists( paste0( repoDir, "gallery/", md5hash, ".rda" ) ) )
     file.remove( paste0( repoDir, "gallery/", md5hash, ".rda" ) )
   
@@ -396,5 +453,6 @@ rmFromRepo <- function( md5hash, repoDir = NULL, removeData = FALSE,
   if ( file.exists( paste0( repoDir, "gallery/", md5hash, ".txt" ) ) )
     file.remove( paste0( repoDir, "gallery/", md5hash, ".txt" ) )
   }
-} 
+}
+invisible(NULL)
 }

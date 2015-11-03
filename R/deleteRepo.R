@@ -1,25 +1,23 @@
 ##    archivist package for R
 ##
-#' @title Delete an Existing Repository from Given Directory
+#' @title Delete the Existing Repository from the Given Directory
 #'
 #' @description
-#' \code{deleteRepo} deletes an existing \link{Repository} from a given directory, so all artifacts from \code{gallery} folder are
-#' removed and database \code{backpack.db} is deleted.
-#' 
-#' 
-#' @details
-#' \code{deleteRepo} deletes an existing \link{Repository} from a given directory, so all artifacts from \code{gallery} folder are
-#' removed and database \code{backpack.db} is deleted. 
-#'
-#' @param repoDir A character that specifies the directory for the Repository to be deleted.
-#' @param deleteRoot A logical value that specifies if the repository root directory shall be deleted.
+#' \code{deleteRepo} deletes the existing \link{Repository} from the given directory.
+#' As a result all artifacts from \code{gallery} folder are removed and database \code{backpack.db}
+#' is deleted.
+#'  
+#' @param repoDir A character that specifies the directory for the Repository
+#' which is to be deleted.
+#' @param deleteRoot A logical value that specifies if the repository root directory
+#' should be deleted.
 #' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #'
 #' @examples
-#' # objects preparation
 #' \dontrun{
+#' # objects preparation
 #' # data.frame object
 #' data(iris)
 #' 
@@ -72,7 +70,7 @@
 #' glmnet1=glmnet(zk,bk)
 #'
 #' 
-#' # creating example Repository - that examples will work
+#' # creating example Repository - on which examples will work
 #' 
 #' # save examples
 #' 
@@ -88,7 +86,7 @@
 #' saveToRepo( glmnet1, repoDir=exampleRepoDir )
 #' 
 #' 
-#' # let's see how the Repository look like: show
+#' # let's see how the Repository looks like: show
 #' 
 #' showLocalRepo( method = "md5hashes", repoDir = exampleRepoDir )
 #' showLocalRepo( method = "tags", repoDir = exampleRepoDir )
@@ -102,6 +100,30 @@
 #' deleteRepo( repoDir = exampleRepoDir)
 #' 
 #' rm( exampleRepoDir )
+#' 
+#' ## Using deleteRoot = TRUE argument 
+#'
+#' # First we create default Repository on our computer
+#' createEmptyRepo( repoDir = "defRepo", force = TRUE, default = TRUE )
+#' saveToRepo( myplot123)
+#' saveToRepo( iris)
+#' saveToRepo( model)
+#'
+#' # Let's see how the Repository looks like: show
+#' 
+#' showLocalRepo( method = "md5hashes")
+#' showLocalRepo( method = "tags")
+#' 
+#' # Let's get information about that Repository
+#' 
+#' summaryLocalRepo()
+#' 
+#' # Now let's delete the Repository and it's root folder by using
+#' # deleteRoot = TRUE argument
+#' 
+#' deleteRepo(repoDir = "defRepo", deleteRoot = TRUE) 
+#' # defRepo was completely deleted indeed! We may notice it on our computer.
+#' 
 #' }
 #' 
 #' @family archivist
@@ -112,17 +134,17 @@ deleteRepo <- function(repoDir, deleteRoot = FALSE){
   
   repoDir <- checkDirectory( repoDir )
   
-  x <- list.files( paste0( repoDir , "gallery/" ) )
+  x <- list.files( file.path( repoDir , "gallery") )
   sapply( x , function(x ){
-       file.remove( paste0( repoDir, "gallery/", x ) )
-     })
+       file.remove( file.path( repoDir, "gallery", x ) )
+       })
   
   
-  file.remove( paste0( repoDir, "backpack.db" ) )
-  unlink( paste0( repoDir, "gallery" ), recursive = TRUE )    
+  file.remove( file.path( repoDir, "backpack.db" ) )
+  unlink( file.path( repoDir, "gallery" ), recursive = TRUE )    
   
   if (deleteRoot) {
-    unlink( repoDir, recursive = TRUE )    
+    unlink( file.path(repoDir), recursive = TRUE )    
   }
   
 }
