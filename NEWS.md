@@ -13,7 +13,7 @@ that do not exist.
   4. `deleteRoot = TRUE` argument of the `deleteRepo` function works properly and enables
   removing root directory of the Repository.
   5. Some changes in `rmFromRepo`'s body:
-    1. Function will give an error when a user uses a wrong md5hash
+    1. Function will give an error when a user uses a wrong md5hash (that does not exist in the `Repository`)
     2. Artifacts' data is now removed from tag table in `backpack.db` file when `many = TRUE`
     3. Artifacts' data files are now removed from `gallery` folder when `many = TRUE`
     4. Artifact's (Artifacts') data files are now removed from `gallery` folder when `many = FALSE`
@@ -24,8 +24,8 @@ that do not exist.
 	3. Additional examples to better understand usage of archivist package functions:
 		1. in `loadFromRepo` function - Loading artifacts from the repository which is built in the archivist package and saving them on the example repository.
 		2. in `createEmptyRepo` function - creating a default local Repository in non existing directory.
-    3. in `rmFromRepo` function - removing artifacts with `many = TRUE` argument
-    4. in `deleteRepo` function - using `deleteRoot = TRUE` argument 
+		3. in `rmFromRepo` function - removing artifacts with `many = TRUE` argument
+		4. in `deleteRepo` function - using `deleteRoot = TRUE` argument 
 	4. Alterations in the text of: `?Tags`, `?Repository`, `?md5hash`, `archivist-package`, 
   `?saveToRepo`, `loadFromRepo`, `summaryRepo`, `showRepo`, `?searchInRepo`, `?createEmptyRepo`,
   `?rmFromRepo`, `?deleteRepo` documentation pages.
