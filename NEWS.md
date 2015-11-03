@@ -2,7 +2,8 @@ archivist 1.8
 ----------------------------------------------------------------
 
 * **Archivist Integration With GitHub API**: new functions:
-- it is possible to create new GitHub repository with an empty `archivist`-like `Repository` with `createEmptyGithubRepo` function.
+  1. it is possible to create new GitHub repository with an empty `archivist`-like `Repository` with `createEmptyGithubRepo` function. We also added `createEmptyLocalRepo` to maintain consistency with other sister functions. `createEmptyRepo` is now a wrapper around `createEmptyLocalRepo` and `createEmptyGithubRepo` functions.
+  2. Added manual page to enable easier usage of this integration: ``?`archivist-github-integration```. 
 * `checkDirectory` function is now immune to directories that don't exist. This made
 `showLocalRepo` function working properly when passed an argument to the directory
 that do not exist.
@@ -11,8 +12,8 @@ that do not exist.
 * `print.ahistory` function can now print outputs of the artifact's history as the `knitr::kable` would.
 * Examples for `searchInGithubRepo` now works for `user='pbiecek'` and `repo='archivist` parameters as we added new backpack.db file. The previous one was almost empty (for 7 months).
 * Additional examples to better understand usage of archivist package functions:
-- in `loadFromRepo` function - Loading artifacts from the repository which is built in the archivist package and saving them on the example repository.
-- in `createEmptyRepo` function - creating a default local Repository in non existing directory. 
+  1. in `loadFromRepo` function - Loading artifacts from the repository which is built in the archivist package and saving them on the example repository.
+  2. in `createEmptyRepo` function - creating a default local Repository in non existing directory. 
 * Alterations in the text of: `?Tags`, `?Repository`, `?md5hash`, `archivist-package`, `?saveToRepo`, `loadFromRepo`, `summaryRepo`, `showRepo`, `?searchInRepo` and `?createEmptyRepo` documentation pages.
 * Adding missing functions which are used in the archivist package now to `?Repository` documentation page.
 
@@ -43,4 +44,15 @@ archivist 1.6
 archivist 1.5
 ----------------------------------------------------------------
 
+...should be updated...
+
+archivist 1.4
+----------------------------------------------------------------
+
+...should be updated...
+
+archivist 1.3
+----------------------------------------------------------------
+
+* Added `setLocalRepo` and `setGithubRepo` functions.
 ...should be updated...

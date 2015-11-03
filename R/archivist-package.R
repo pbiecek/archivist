@@ -56,6 +56,8 @@
 #' @importMethodsFrom git2r push
 #' @importMethodsFrom git2r init
 #' @importMethodsFrom git2r remote_add
+#' @importClassesFrom git2r cred_user_pass
+#' @importFrom jsonlite unbox
 #'
 #' @family archivist
 #' @name archivist-package

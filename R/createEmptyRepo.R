@@ -1,9 +1,15 @@
 ##    archivist package for R
 ##
-#' @title Create an Empty Repository in the Given Directory
+#' @title Create an Empty Repository
 #'
 #' @description
-#' \code{createEmptyRepo} creates an empty \link{Repository} in the given directory in which archived artifacts will be stored.
+#' \code{createEmptyLocalRepo} creates an empty \link{Repository} in the given directory in which archived artifacts will be stored.
+#' \code{createEmptyGithubRepo} creates a new GitHub repository with an empty \pkg{archivist}-like \link{Repository} and
+#' also creates a local \code{Repository} with \code{createEmptyLocalRepo} which is git-synchronized with
+#' new GitHub repository. \code{createEmptyRepo} is a wrapper around \code{createEmptyLocalRepo} and \code{createEmptyGithubRepo}
+#'  functions and by default triggers \code{createEmptyLocalRepo} to maintain consistency with the previous \pkg{archivist} versions (<1.8.6.0)
+#'  where there was only \code{createEmptyRepo} which created local \code{Repository}. To learn more about
+#'  \code{Archivist Integration With GitHub API} visit \link{archivist-github-integration}.
 #' 
 #' 
 #' @details
@@ -29,6 +35,8 @@
 #' After every \code{saveToRepo} call the database is refreshed. As a result, the artifact is available 
 #' immediately in \code{backpack.db} database for other collaborators.
 #' 
+#' @param type A character. Whether to use \code{Local} or \code{Github} version while using \code{createEmptyRepo} wrapper.
+#' 
 #' @param repoDir A character that specifies the directory for the Repository which is to be made.
 #' 
 #' @param force If \code{force = TRUE} and \code{repoDir} parameter specifies the directory that doesn't exist,
@@ -36,6 +44,19 @@
 #' Default set to \code{force = TRUE}.
 #' 
 #' @param default If \code{default = TRUE} then \code{repoDir} is set as default local repository.
+#' 
+#' @param repoName While working with a Github repository. A character denoting new GitHub repository name. White spaces will be substitued with a dash.
+#' @param github_token While working with a Github repository. An OAuth GitHub Token created with the \link{oauth2.0_token} function. See \link{archivist-github-integration}.
+#' Can be set globally with \code{aoptions("github_token", github_token)}.
+#' @param repoDescription While working with a Github repository. A character specifing the new GitHub repository description.
+#' @param user.name While working with a Github repository. A character denoting GitHub user name. Can be set globally with \code{aoptions("user.name", user.name)}.
+#'  See \link{archivist-github-integration}.
+#' @param user.password While working with a Github repository. A character denoting GitHub user password. Can be set globally with \code{aoptions("user.password", user.password)}.
+#' See \link{archivist-github-integration}.
+#' @param readmeDescription While working with a Github repository. A character of the content of \code{README.md} file. By default a description of \link{Repository}.
+#' Can be set globally with \code{aoptions("readmeDescription", readmeDescription)}. For no \code{README.md} file 
+#' set \code{aoptions("readmeDescription", NULL)}.
+#' @param response A logical value. Should the GitHub API response should be returned.
 #' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
@@ -52,7 +73,7 @@
 #' 
 #' # creating a Repository in non existing directory
 #' 
-#' createEmptyRepo( "xyzdd234") # force = TRUE is default argument
+#' createEmptyLocalRepo( "xyzdd234") # force = TRUE is default argument
 #'
 #' # creating a default local Repository in non existing directory
 #' 
@@ -68,11 +89,56 @@
 #' deleteRepo("def", TRUE)
 #' 
 #' rm( exampleRepoDir )
+#' 
+#' ## GitHub version
+#' 
+#' library(httr)
+#' myapp <- oauth_app("github",
+#'                    key = app_key,
+#'                    secret = app_secret)
+#' github_token <- oauth2.0_token(oauth_endpoints("github"),
+#'                                 myapp,
+#'                                 scope = "public_repo")
+#' aoptions("github_token", github_token)
+#' aoptions("user.name", user.name)
+#' aoptions("user.password", user.password)
+#' 
+#' createEmptyGithubRepo("Museum")
+#' createEmptyGithubRepo("Museum-Extras", response = TRUE)
+#' createEmptyGithubRepo("Gallery", readmeDescription = NULL)
+#' createEmptyGithubRepo("Landfill", repoDescription = "My models and stuff") 
 #' }
 #' @family archivist
 #' @rdname createEmptyRepo
 #' @export
-createEmptyRepo <- function( repoDir, force = TRUE, default = FALSE){
+createEmptyRepo <- function( repoDir, force = TRUE, default = FALSE,
+                             repoName,
+                             github_token = aoptions("github_token"), 
+                             user.name = aoptions("user.name"),
+                             #user.email = aoptions("user.email"),
+                             user.password = aoptions("user.password"),
+                             repoDescription = aoptions("repoDescription"),
+                             readmeDescription = aoptions("readmeDescription"),
+                             response = aoptions("response"),
+                             type = "local"){
+  stopifnot(is.character(type) & length(type) ==1 & type %in% c("local", "github"))
+  if (type == "local") {
+    createEmptyLocalRepo(repoDir = repoDir, force = force, default = default)
+  } else {
+    createEmptyGithubRepo(repoName = repoName,
+                          github_token = github_token,
+                          user.name = user.name,
+                          user.password = user.password,
+                          repoDescription = repoDescription,
+                          readmeDescription = readmeDescription,
+                          response = response)
+  }
+  
+}
+
+#' @rdname createEmptyRepo
+#' @export
+createEmptyLocalRepo <- function( repoDir, force = TRUE, default = FALSE){
   stopifnot( is.character( repoDir ) )
   
   if ( !file.exists( repoDir ) & !force ) 
@@ -119,6 +185,90 @@ createEmptyRepo <- function( repoDir, force = TRUE, default = FALSE){
   }
    
 }
+
+#' @rdname createEmptyRepo
+#' @export
+createEmptyGithubRepo <- function(repoName,
+                                  github_token = aoptions("github_token"), 
+                                  user.name = aoptions("user.name"),
+                                  #user.email = aoptions("user.email"),
+                                  user.password = aoptions("user.password"),
+                                  repoDescription = aoptions("repoDescription"),
+                                  readmeDescription = aoptions("readmeDescription"),
+                                  response = aoptions("response")){
+  stopifnot(is.character(repoName) & length(repoName) ==1)
+  stopifnot(is.character(repoDescription) & length(repoDescription) ==1)
+  #stopifnot(any(class(github_token) %in% "Token"))
+  stopifnot(is.character(user.name) & length(user.name)==1)
+  #stopifnot(is.character(user.email) & length(user.email)==1)
+  stopifnot(is.character(user.password) & length(user.password)==1)
+  stopifnot((is.character(readmeDescription) & length(readmeDescription)==1) |
+              is.null(readmeDescription))
+  
+  repoName <- gsub(pattern = " ", "-", repoName)
+  
+  # httr imports are in archivist-package.R file
+  # creating an empty GitHub Repository
+  POST(url = "https://api.github.com/user/repos",
+       encode = "json",
+       body = list(
+         name = jsonlite::unbox(repoName),
+         description = jsonlite::unbox(repoDescription)
+       ),
+       config = httr::config(token = github_token)
+  ) -> resp
+  
+  
+  # git2r imports are in the archivist-package.R
+  path <- repoName
+  dir.create(path)
+  
+  # initialize local git repository
+  # git init
+  repo <- init(path)
+  
+  ## Create and configure a user
+  # git config - added to Note section
+  #git2r::config(repo, ...) # if about to use, the add to archivist-package.R
+  
+  # archivist-like Repository creation
+  createEmptyRepo(repoDir = path)
+  file.create(file.path(path, "gallery", ".gitkeep"))
+  # git add
+  if (!is.null(readmeDescription)){
+    file.create(file.path(path, "README.md"))
+    writeLines(aoptions("readmeDescription"), file.path(path, "README.md"))
+    add(repo, c("backpack.db", "gallery/", "README.md"))
+  } else {
+    add(repo, c("backpack.db", "gallery/"))
+  }
+  
+  # git commit
+  new_commit <- commit(repo, "archivist Repository creation.")
+  
+  # association of the local and GitHub git repository
+  # git add remote
+  remote_add(repo,
+             "upstream2",
+             paste0("https://github.com/", user.name, "/", repoName, ".git"))
+  
+  # GitHub authorization
+  # to perform pull and push operations
+  cred <- git2r::cred_user_pass(user.name,
+                         user.password)
+  
+  # push archivist-like Repository to GitHub repository
+  push(repo,
+       name = "upstream2",
+       refspec = "refs/heads/master",
+       credentials = cred)
+  
+  if (response){
+    return(resp)
+  }
+}
+
+
 
 addArtifact <- function( md5hash, name, dir ){
   # creates connection and driver
