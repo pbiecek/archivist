@@ -2,48 +2,45 @@
 #' @title Create a zip Archive From an Existing Repository
 #' 
 #' @description
-#' \code{zipLocalRepo} and \code{zipGithubRepo} create a zip archive from an existing \link{Repository}.
+#' \code{zipLocalRepo} and \code{zipGithubRepo} create a zip archive from an
+#' existing \link{Repository}. \code{zipLocalRepo} zips local \code{Repository},
+#' \code{zipGithubRepo} zips \code{Repository} stored on Github.
 #' 
-#' 
-#' 
-#' If the function does not work, it might be a reason of Rtools that are not installed. 
-#' To solve this problem follow those \href{http://cran.r-project.org/web/packages/openxlsx/vignettes/Introduction.pdf}{Instructions.}
 #' 
 #' @note
-#' If the function does not work, it might be a reason of Rtools that are not installed. 
-#' To solve this problem follow those \href{http://cran.r-project.org/web/packages/openxlsx/vignettes/Introduction.pdf}{Instructions.}
+#' The function might not work if \code{Rtools} are not installed.
+#' To solve this problem follow these \href{http://cran.r-project.org/web/packages/openxlsx/vignettes/Introduction.pdf}{Instructions.}
 #' 
-#' 
-#' @details
-#' \code{zipLocalRepo} and \code{zipGithubRepo} create a zip archive from an existing \link{Repository}.
-#' \code{zipLocalRepo} zips local \code{Repository}, \code{zipGithubRepo} zips \code{Repository} 
-#' stored on Github.
+#' If \code{repo} and \code{user} are set to \code{NULL} (as default) in Github mode then global parameters
+#' set in \link{setGithubRepo} function are used.
 #'
 #' @param repoDir A character that specifies the directory of the Repository which
 #' will be zipped. If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.
 #'
-#' @param repo Only if working with a Github repository. A character containing a name of a Github repository on which the Repository to be zipped is archived.
-#' By default set to \code{NULL} - see \code{Note}. 
-#' @param user Only if working with a Github repository. A character containing a name of a Github user on whose account the \code{repo} is created.
+#' @param repo While working with the Github repository. A character containing
+#' a name of the Github repository on which the Repository, which is to be zipped, is archived.
 #' By default set to \code{NULL} - see \code{Note}.
-#' @param branch Only if working with a Github repository. A character containing a name of 
-#' Github repository's branch in which Repository to be zipped is archived. Default \code{branch} is \code{master}.
 #' 
-#' @param repoDirGit Only if working with a Github repository. A character containing a name of a directory on Github repository 
-#' on which the Repository to be zipped is stored. If the Repository is stored in main folder on Github repository, this should be set 
-#' to \code{repoDirGit = FALSE} as default.
+#' @param user While working with the Github repository. A character containing
+#' a name of the Github user on whose account the \code{repo} is created.
+#' By default set to \code{NULL} - see \code{Note}.
 #' 
-#' @param repoTo A character that specifies the directory in which
+#' @param branch While working with the Github repository. A character containing a name of the
+#' Github repository's branch on which Repository, which is to be zipped, is archived.
+#' Default \code{branch} is \code{master}.
+#' 
+#' @param repoDirGit While working with a Github repository. A character containing a name of
+#' a directory on Github repository on which the Repository, which is to be zipped, is stored.
+#' If the Repository is stored in the main folder on the Github repository, this should be set 
+#' to FALSE as default.
+#' 
+#' @param repoTo A character that specifies the directory in which there
 #' will be created zip archive from \code{Repository} stored in \code{repoDir} or Github directory.
-#' By default set to working directory (\code{getwd()})/
+#' By default set to working directory (\code{getwd()}).
 #' 
-#' @param zipname A character that specifies name of zipped repository.
+#' @param zipname A character that specifies name of the zipped repository.
 #' It is assumed that this file does not exist or does not contain backpack.db file.
 #' An attempt to override will produce an error.
-#' 
-#' @note
-#' If \code{repo} and \code{user} are set to \code{NULL} (as default) in Github mode then global parameters
-#' set in \link{setGithubRepo} function are used.
 #' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}, Przemyslaw Biecek
@@ -124,14 +121,14 @@ zipGithubRepo <- function( repoTo = getwd(), user = NULL, repo = NULL, branch = 
   
   # clone Github repo
   tempRepoTo <- tempdir()
-  tempRepoTo <- checkDirectory( tempRepoTo )
   createEmptyRepo( tempRepoTo, force = TRUE )
+  tempRepoTo <- checkDirectory( tempRepoTo )
   hashes <- searchInGithubRepo( pattern="", user=user, repo=repo, branch = branch, repoDirGit = repoDirGit, fixed=FALSE )
   copyGithubRepo(repoTo = tempRepoTo , md5hashes = hashes,
                  user=user, repo=repo, branch = branch, repoDirGit = repoDirGit)
   # list of files
-  files <- c( paste0( tempRepoTo, "backpack.db"), 
-              list.files( paste0(tempRepoTo, "gallery"), full.names=TRUE ))
+  files <- c( file.path( tempRepoTo, "backpack.db"), 
+              list.files( file.path(tempRepoTo, "gallery"), full.names=TRUE ))
 
   zip( paste0( repoTo, zipname), files=files)
   
