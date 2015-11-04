@@ -152,9 +152,11 @@ copyGithubRepo <- function( repoTo, md5hashes, user = NULL, repo = NULL, branch=
   
   Temp <- downloadDB( repo, user, branch, repoDirGit )
   
+  on.exit(file.remove(Temp))
+  
   copyRepo( repoTo = repoTo, repoFrom = Temp, md5hashes = md5hashes , 
             local = FALSE, user = user, repo = repo, branch = branch, repoDirGit = repoDirGit )  
-  file.remove(Temp)
+  
   invisible(NULL)  
 }
 
@@ -162,7 +164,7 @@ copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, bra
   
   # clone artifact table
   toInsertArtifactTable <- executeSingleQuery( dir = repoFrom, realDBname = local,
-                      paste0( "SELECT * FROM artifact WHERE md5hash IN ",
+                      paste0( "SELECT DISTINCT * FROM artifact WHERE md5hash IN ",
                              "('", paste0( md5hashes, collapse="','"), "')" ) ) 
   
   apply( toInsertArtifactTable, 1, function(x){
@@ -173,7 +175,7 @@ copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, bra
                               x[3], "')" ) ) } )
   # clone tag table
   toInsertTagTable <- executeSingleQuery( dir = repoFrom, realDBname = local,
-                                               paste0( "SELECT * FROM tag WHERE artifact IN ",
+                                               paste0( "SELECT DISTINCT * FROM tag WHERE artifact IN ",
                                                        "('", paste0( md5hashes, collapse="','"), "')" ) ) 
   apply( toInsertTagTable, 1, function(x){
     executeSingleQuery( dir = repoTo, 
