@@ -23,7 +23,7 @@ that do not exist.
   7. Some changes in `zipGithubRepo`'s body:
     1. New order of expressions: `createEmptyRepo(...)` before `tempRepoTo <- ...`
     2. `paste0()` function was replaced by `file.path()` function in appropriate places.
-  8. `copyFromLocalRepo` and `copyFromGithubRepo` copies only distinct records for table `tag` and `artifact` in `backpack.db` file, that can be seen with `show*Repo`.
+  8. `copyFromLocalRepo` and `copyFromGithubRepo` copies only distinct records for table `tag` and `artifact` in `backpack.db` file, that can be seen with `show*Repo` and copies all mentioned artifacts for local version.
 * **New features:**
 	1. `print.ahistory` function can now print outputs of the artifact's history as the `knitr::kable` would.
 	2. Examples for `searchInGithubRepo` now works for `user='pbiecek'` and `repo='archivist` parameters as we added new backpack.db file. The previous one was almost empty (for 7 months).

@@ -187,13 +187,13 @@ copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, bra
   # clone files
   
   whichToClone <- unlist( sapply( md5hashes, function(x){
-    which( x == sub( list.files( "gallery" ), pattern = "\\.[a-z]{3}", 
+    which( x == sub( list.files( file.path( repoFrom,"gallery" ) ), pattern = "\\.[a-z]{3}", 
                      replacement="" ) ) 
   } ) )
   
-  filesToClone <- list.files( "gallery" )[whichToClone]
+  filesToClone <- list.files( file.path( repoFrom,"gallery" ) )[whichToClone]
   sapply( filesToClone, function(x){
-    file.copy( from = paste0(repoFrom, "gallery/",x), to = paste0( repoTo, "gallery/" ),
+    file.copy( from = file.path(repoFrom, "gallery", x), to = file.path( repoTo, "gallery" ),
           recursive = TRUE )})
   } else {
     # if github mode
