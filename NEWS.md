@@ -17,7 +17,7 @@ that do not exist.
     2. Artifacts' data is now removed from tag table in `backpack.db` file when `many = TRUE`.
     3. Artifacts' data files are now removed from `gallery` folder when `many = TRUE`.
     4. Artifact's (Artifacts') data files are now removed from `gallery` folder when `many = FALSE`.
-    5. `Invisible(NULL)` is the result of the function evaluation
+    5. `Invisible(NULL)` is the result of the function evaluation.
   6. Some changes in `copy*Repo`'s body:
     1. `Invisible(NULL)` is the result of the function evaluation
   7. Some changes in `zipGithubRepo`'s body:
