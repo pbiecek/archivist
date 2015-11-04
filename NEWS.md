@@ -14,12 +14,15 @@ that do not exist.
   removing root directory of the Repository.
   5. Some changes in `rmFromRepo`'s body:
     1. Function will give an error when a user uses a wrong md5hash (that does not exist in the `Repository`)
-    2. Artifacts' data is now removed from tag table in `backpack.db` file when `many = TRUE`
-    3. Artifacts' data files are now removed from `gallery` folder when `many = TRUE`
-    4. Artifact's (Artifacts') data files are now removed from `gallery` folder when `many = FALSE`
+    2. Artifacts' data is now removed from tag table in `backpack.db` file when `many = TRUE`.
+    3. Artifacts' data files are now removed from `gallery` folder when `many = TRUE`.
+    4. Artifact's (Artifacts') data files are now removed from `gallery` folder when `many = FALSE`.
     5. `Invisible(NULL)` is the result of the function evaluation
   6. Some changes in `copy*Repo`'s body:
     1. `Invisible(NULL)` is the result of the function evaluation
+  7. Some changes in `zipGithubRepo`'s body:
+    1. New order of expressions: `createEmptyRepo(...)` before `tempRepoTo <- ...`
+    2. `paste0()` function was replaced by `file.path()` function in appropriate places.
 * **New features:**
 	1. `print.ahistory` function can now print outputs of the artifact's history as the `knitr::kable` would.
 	2. Examples for `searchInGithubRepo` now works for `user='pbiecek'` and `repo='archivist` parameters as we added new backpack.db file. The previous one was almost empty (for 7 months).
@@ -31,7 +34,7 @@ that do not exist.
     5. in `copy*Repo` function - using copyLocalRepo function
   4. Alterations in the text of: `?Tags`, `?Repository`, `?md5hash`, `archivist-package`, 
   `?saveToRepo`, `loadFromRepo`, `summaryRepo`, `showRepo`, `?searchInRepo`, `?createEmptyRepo`,
-  `?rmFromRepo`, `?deleteRepo`, `copyToRepo` documentation pages.
+  `?rmFromRepo`, `?deleteRepo`, `copyToRepo`, `zipRepo` documentation pages.
 	5. Adding missing functions which are used in the archivist package now to `?Repository` documentation page.
 
 archivist 1.7
