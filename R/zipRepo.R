@@ -122,7 +122,6 @@ zipGithubRepo <- function( repoTo = getwd(), user = NULL, repo = NULL, branch = 
   # clone Github repo
   tempRepoTo <- tempdir()
   createEmptyRepo( tempRepoTo, force = TRUE )
-  tempRepoTo <- checkDirectory( tempRepoTo )
   hashes <- searchInGithubRepo( pattern="", user=user, repo=repo, branch = branch, repoDirGit = repoDirGit, fixed=FALSE )
   copyGithubRepo(repoTo = tempRepoTo , md5hashes = hashes,
                  user=user, repo=repo, branch = branch, repoDirGit = repoDirGit)
