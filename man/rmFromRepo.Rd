@@ -27,7 +27,8 @@ Defualt \code{FALSE}.}
 
 \item{many}{A logical value. To accelerate the speed of removing many objects,
 you can set this parameter to \code{TRUE} and pass a vector of artifacts' \code{md5hashes}
-to a \code{md5hash} parameter. By default, set to \code{FALSE}.}
+to a \code{md5hash} parameter. It is not possible to use a vector of artifacts'
+\code{md5hashes} abbreviations - see \code{Note}. By default, set to \code{FALSE}.}
 }
 \description{
 \code{rmFromRepo} removes an artifact given as a \code{md5hash} from the \link{Repository}.
@@ -62,6 +63,10 @@ perform:
 \code{md5hash} can be a result of the \link{searchInLocalRepo} function called
 by \code{tag = NAME} argument, where \code{NAME} is a tag that describes
 the property of the artifacts to be deleted.
+
+It is not possible to use a vector of artifacts' \code{md5hashes} abbreviations
+while using \code{many = TRUE} argument. This assumption was made
+to protect a user from removing, by accident, too many artifacts from the Repository.
 
 For more information about \code{Tags} check \link{Tags}.
 }
