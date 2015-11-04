@@ -36,6 +36,10 @@
 #' by \code{tag = NAME} argument, where \code{NAME} is a tag that describes
 #' the property of the artifacts to be deleted. 
 #' 
+#' It is not possible to use a vector of artifacts' \code{md5hashes} abbreviations
+#' while using \code{many = TRUE} argument. This assumption was made 
+#' to protect a user from removing, by accident, too many artifacts from the Repository.
+#' 
 #' For more information about \code{Tags} check \link{Tags}.
 #' 
 #' @param md5hash A character assigned to the artifact through the use of a
@@ -57,7 +61,8 @@
 #' 
 #' @param many A logical value. To accelerate the speed of removing many objects,
 #' you can set this parameter to \code{TRUE} and pass a vector of artifacts' \code{md5hashes}
-#' to a \code{md5hash} parameter. By default, set to \code{FALSE}.
+#' to a \code{md5hash} parameter. It is not possible to use a vector of artifacts' 
+#' \code{md5hashes} abbreviations - see \code{Note}. By default, set to \code{FALSE}.
 #' 
 #' @author
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
