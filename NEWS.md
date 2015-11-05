@@ -2,57 +2,41 @@ archivist 1.8
 ----------------------------------------------------------------
 	
 * **Archivist Integration With GitHub API:** new functions:
-	1. it is possible to create new GitHub repository with an empty `archivist`-like `Repository`
-  with `createEmptyGithubRepo` function. We also added `createEmptyLocalRepo` to maintain
-  consistency with other sister functions. `createEmptyRepo` is now a wrapper around
-  `createEmptyLocalRepo` and `createEmptyGithubRepo` functions.
-	2. Added manual page to enable easier usage of this integration:
-  ``?`archivist-github-integration```. 
+	1. it is possible to create new GitHub repository with an empty `archivist`-like `Repository` with `createEmptyGithubRepo` function. We also added `createEmptyLocalRepo` to maintain consistency with other sister functions. `createEmptyRepo` is now a wrapper around `createEmptyLocalRepo` and `createEmptyGithubRepo` functions.
+	2. Added manual page to enable easier usage of this integration: ``?`archivist-github-integration```. 
 * **Bugs fixed:**
 	1. `checkDirectory` function is now immune to directories that don't exist. This made
-  `showLocalRepo` function working properly when passed an argument to the directory
-  that do not exist.
-	2. Changed `dbDisconnect( conn )` call to the `on.exit(dbDisconnect( conn ))` in
-  `executeSingleQuery` function to prevent a situation in which during an error inside a
-  function (which might be produced), the connection stays open, when it shouldn`t.
+`showLocalRepo` function working properly when passed an argument to the directory
+that do not exist.
+	2. Changed `dbDisconnect( conn )` call to the `on.exit(dbDisconnect( conn ))` in `executeSingleQuery` function to prevent a situation in which during an error inside a function (which might be produced), the connection stays open, when it shouldn`t.
 	3. `%a%` operator does react on `default = TRUE` in `createEmpyRepo` function.
   4. `deleteRoot = TRUE` argument of the `deleteRepo` function works properly and enables
   removing root directory of the Repository.
-  5. `paste0()` was replaced by `file.path()` in appropriate places in the following 
-  function's bodies: `deleteRepo`, `zipGithubRepo`.
-  6. Some changes in `rmFromRepo`'s body:
-    1. Function will give an error when a user uses a wrong md5hash 
-    (that does not exist in the Repository).
+  5. Some changes in `rmFromRepo`'s body:
+    1. Function will give an error when a user uses a wrong md5hash (that does not exist in the `Repository`)
     2. Artifacts' data is now removed from tag table in `backpack.db` file when `many = TRUE`.
     3. Artifacts' data files are now removed from `gallery` folder when `many = TRUE`.
-    4. Artifact's (Artifacts') data files are now removed from `gallery` folder when
-    `many = FALSE`.
-    5. `Invisible(NULL)` is the result of the function evaluation.
-  7. Some changes in `copy*Repo`'s body:
-    1. `Invisible(NULL)` is the result of the function evaluation.
-  8. Some changes in `zipGithubRepo`'s body:
-    1. Expression `tempRepoTo <- checkDirectory( tempRepoTo )` was removed as 
-    `checkDirectory(tempRepoTo )` is evaluated in `createEmptyRepo`.
+    4. Artifact's (Artifacts') data files are now removed from `gallery` folder when `many = FALSE`.
+    5. `Invisible(NULL)` is the result of the function evaluation
+  6. Some changes in `copy*Repo`'s body:
+    1. `Invisible(NULL)` is the result of the function evaluation
+  7. Some changes in `zipGithubRepo`'s body:
+    1. New order of expressions: `createEmptyRepo(...)` before `tempRepoTo <- ...`
+    2. `paste0()` function was replaced by `file.path()` function in appropriate places.
+  8. `copyFromLocalRepo` and `copyFromGithubRepo` copies only distinct records for table `tag` and `artifact` in `backpack.db` file, that can be seen with `show*Repo` and copies all mentioned artifacts for local version.
 * **New features:**
-	1. `print.ahistory` function can now print outputs of the artifact's history
-  as the `knitr::kable` would.
-	2. Examples for `searchInGithubRepo` now works for `user='pbiecek'` and `repo='archivist`
-  parameters as we added new backpack.db file. The previous one was almost empty
-  (for 7 months).
+	1. `print.ahistory` function can now print outputs of the artifact's history as the `knitr::kable` would.
+	2. Examples for `searchInGithubRepo` now works for `user='pbiecek'` and `repo='archivist` parameters as we added new backpack.db file. The previous one was almost empty (for 7 months).
 	3. Additional examples to better understand usage of archivist package functions:
-		1. in `loadFromRepo` function - Loading artifacts from the repository which is built
-    in the archivist package and saving them on the example repository.
-		2. in `createEmptyRepo` function - creating a default local Repository in non existing
-    directory.
-		3. in `rmFromRepo` function - removing artifacts with `many = TRUE` argument.
-		4. in `deleteRepo` function - using `deleteRoot = TRUE` argument.
-    5. in `copy*Repo` function - using copyLocalRepo function.
-  4. Alterations in the text of: `?Tags`, `?Repository`, `?md5hash`, `archivist-package`,
-    `?saveToRepo`, `loadFromRepo`, `summaryRepo`, `showRepo`, `?searchInRepo`, 
-    `?createEmptyRepo`, `?rmFromRepo`, `?deleteRepo`, `copyToRepo`, `zipRepo` documentation
-    pages.
-  5. Adding missing functions, which are used in the archivist package now, to `?Repository`
-  documentation page.
+		1. in `loadFromRepo` function - Loading artifacts from the repository which is built in the archivist package and saving them on the example repository.
+		2. in `createEmptyRepo` function - creating a default local Repository in non existing directory.
+		3. in `rmFromRepo` function - removing artifacts with `many = TRUE` argument
+		4. in `deleteRepo` function - using `deleteRoot = TRUE` argument 
+    5. in `copy*Repo` function - using copyLocalRepo function
+  4. Alterations in the text of: `?Tags`, `?Repository`, `?md5hash`, `archivist-package`, 
+  `?saveToRepo`, `loadFromRepo`, `summaryRepo`, `showRepo`, `?searchInRepo`, `?createEmptyRepo`,
+  `?rmFromRepo`, `?deleteRepo`, `copyToRepo`, `zipRepo` documentation pages.
+	5. Adding missing functions which are used in the archivist package now to `?Repository` documentation page.
 
 archivist 1.7
 ----------------------------------------------------------------
