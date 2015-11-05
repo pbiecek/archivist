@@ -10,19 +10,18 @@ archivist 1.8
 that do not exist.
 	2. Changed `dbDisconnect( conn )` call to the `on.exit(dbDisconnect( conn ))` in `executeSingleQuery` function to prevent a situation in which during an error inside a function (which might be produced), the connection stays open, when it shouldn`t.
 	3. `%a%` operator does react on `default = TRUE` in `createEmpyRepo` function.
-  4. `deleteRoot = TRUE` argument of the `deleteRepo` function works properly and enables
-  removing root directory of the Repository.
-  5. Some changes in `rmFromRepo`'s body:
+  4. `deleteRoot = TRUE` argument of the `deleteRepo` function works properly and enables removing root directory of the Repository.
+  5. `paste0()` was replaced by `file.path()` in appropriate places in the
+  following function's bodies: `deleteRepo`, `zipGithubRepo`.
+  6. Some changes in `rmFromRepo`'s body:
     1. Function will give an error when a user uses a wrong md5hash (that does not exist in the `Repository`)
-    2. Artifacts' data is now removed from tag table in `backpack.db` file when `many = TRUE`.
-    3. Artifacts' data files are now removed from `gallery` folder when `many = TRUE`.
-    4. Artifact's (Artifacts') data files are now removed from `gallery` folder when `many = FALSE`.
-    5. `Invisible(NULL)` is the result of the function evaluation
-  6. Some changes in `copy*Repo`'s body:
+    2. Artifacts' data is now removed from tag table in `backpack.db` file when
+    `many = TRUE`. They were not removed before.
+    3. Artifacts' data files are now removed from `gallery` folder.
+    They were not removed before.
+    4. `Invisible(NULL)` is the result of the function evaluation.
+  7. Some changes in `copy*Repo`'s body:
     1. `Invisible(NULL)` is the result of the function evaluation
-  7. Some changes in `zipGithubRepo`'s body:
-    1. New order of expressions: `createEmptyRepo(...)` before `tempRepoTo <- ...`
-    2. `paste0()` function was replaced by `file.path()` function in appropriate places.
   8. `copyFromLocalRepo` and `copyFromGithubRepo` copies only distinct records for table `tag` and `artifact` in `backpack.db` file, that can be seen with `show*Repo` and copies all mentioned artifacts for local version.
 * **New features:**
 	1. `print.ahistory` function can now print outputs of the artifact's history as the `knitr::kable` would.
