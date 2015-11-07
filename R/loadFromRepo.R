@@ -272,7 +272,7 @@ loadFromGithubRepo <- function( md5hash, repo = NULL, user = NULL, branch = "mas
   if ( nchar( md5hash ) < 32 ){
     # database is needed to be downloaded
     Temp <- downloadDB( repo, user, branch, repoDirGit )
-    
+      
     md5hashList <- executeSingleQuery( dir = Temp, realDBname = FALSE,
                                        paste0( "SELECT DISTINCT artifact FROM tag WHERE artifact LIKE '",md5hash,"%'" ) )
     md5hash <- as.character( md5hashList[, 1] )
