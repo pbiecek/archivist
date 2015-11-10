@@ -156,9 +156,6 @@ summaryGithubRepo <- function( repo = NULL, user = NULL, branch = "master", repo
   
 }
 
-
-
-
 summaryRepo <- function( dir, realDBname ){
     # what classes types are there in the Repository
     classes <- executeSingleQuery( dir = dir , realDBname = realDBname,
