@@ -91,7 +91,7 @@
 #' 
 #' # creating example Repository - on which examples will work
 #' 
-#' exampleRepoDir <- tempdir()
+#' exampleRepoDir <- tempfile()
 #' createEmptyRepo(repoDir = exampleRepoDir)
 #' myplo123Md5hash <- saveToRepo(myplot123, repoDir=exampleRepoDir)
 #' irisMd5hash <- saveToRepo(iris, repoDir=exampleRepoDir)
@@ -146,6 +146,9 @@
 #' # and can be loaded as a value from it's abbreviation
 #' newModel  <- loadFromLocalRepo("cd6557c", repoDir = exampleRepoDir, value = TRUE)
 #' # note that "model" was not deleted
+
+#' # removing an example Repository
+#' deleteRepo( exampleRepoDir, TRUE)
 #' 
 #' #
 #' #GitHub Version
@@ -177,7 +180,7 @@
 #' 
 #' # Creating an example Repository - on which artifacts loaded from the
 #' # archivist package repository will be saved
-#' exampleRepoDir <- tempdir()
+#' exampleRepoDir <- tempfile()
 #' createEmptyRepo(repoDir = exampleRepoDir)
 #' 
 #' # Directory of the archivist package repository

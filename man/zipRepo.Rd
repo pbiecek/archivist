@@ -71,7 +71,7 @@ model <- lm(Sepal.Length~ Sepal.Width + Petal.Length + Petal.Width, data= iris)
 
 # Local version
 
-exampleRepoDir <- tempdir()
+exampleRepoDir <- tempfile()
 createEmptyRepo( repoDir = exampleRepoDir )
 saveToRepo( myplot123, repoDir=exampleRepoDir )
 saveToRepo( iris, repoDir=exampleRepoDir )

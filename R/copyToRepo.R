@@ -53,7 +53,7 @@
 #' ## Using archiviist Github Repository to copy artifacts
 #' # creating example Repository
 #'  
-#' exampleRepoDir <- tempdir()
+#' exampleRepoDir <- tempfile()
 #' createEmptyRepo( exampleRepoDir )
 #' 
 #' # Searching for md5hashes of artifacts (without data related to them)
@@ -73,7 +73,7 @@
 #'
 #' # removing an example Repository
 #' 
-#' deleteRepo( exampleRepoDir )
+#' deleteRepo( exampleRepoDir, deleteRoot=TRUE )
 #' 
 #' rm( exampleRepoDir )
 #' 
@@ -99,7 +99,7 @@
 #'
 #' # creating example Repository
 #'
-#' exampleRepoDir <- tempdir()
+#' exampleRepoDir <- tempfile()
 #' createEmptyRepo( exampleRepoDir )
 #'
 #' # Searching for md5hashes of artifacts (without data related to them)
@@ -118,7 +118,7 @@
 #' 
 #' # removing an example Repository
 #' 
-#' deleteRepo( exampleRepoDir )
+#' deleteRepo( exampleRepoDir, deleteRoot=TRUE )
 #' 
 #' rm( exampleRepoDir )
 #' rm( archivistRepo )

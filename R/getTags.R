@@ -42,7 +42,7 @@
 #' @examples
 #' \dontrun{
 #' library(dplyr)
-#' exampleRepoDir <- tempdir()
+#' exampleRepoDir <- tempfile()
 #' createEmptyRepo( exampleRepoDir )
 #' 
 #' data(mtcars)

@@ -87,7 +87,7 @@ immediately in \code{backpack.db} database for other collaborators.
 }
 \examples{
 \dontrun{
-exampleRepoDir <- tempdir()
+exampleRepoDir <- tempfile()
 createEmptyRepo( repoDir = exampleRepoDir )
 
 # check the state of an empty Repository

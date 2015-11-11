@@ -41,7 +41,7 @@ be searched in \link{searchInLocalRepo} or \link{searchInGithubRepo} functions.
 # Takes all objects of lm class from repository, 
 # extracts R2 for them and stores as R2: tags
 
-exampleRepoDir <- tempdir()
+exampleRepoDir <- tempfile()
 createEmptyRepo(exampleRepoDir, force=TRUE)
 m1 <- lm(Sepal.Length~Species, iris)
 saveToRepo(m1, exampleRepoDir)
@@ -53,7 +53,7 @@ addTagsRepo(md5hashes, exampleRepoDir, tags = "test")
 addTagsRepo(md5hashes, exampleRepoDir, function(x) paste0("R2:",summary(x)$r.square))
 getTagsLocal("da1bcaf68752c146903f700c1a458438", exampleRepoDir, "")
 showLocalRepo(exampleRepoDir)
-deleteRepo(exampleRepoDir)
+deleteRepo(exampleRepoDir, deleteRoot=TRUE)
 }
 
 }

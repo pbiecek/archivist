@@ -90,7 +90,7 @@ glmnet1=glmnet(zk,bk)
 
 # creating example Repository - on which examples will work
 
-exampleRepoDir <- tempdir()
+exampleRepoDir <- tempfile()
 createEmptyRepo(repoDir = exampleRepoDir)
 saveToRepo(myplot123, repoDir=exampleRepoDir)
 saveToRepo(iris, repoDir=exampleRepoDir)
@@ -118,18 +118,18 @@ rmFromRepo(qda1Md5hash, repoDir = exampleRepoDir)
 
 summaryLocalRepo( repoDir = exampleRepoDir )
 
+# removing an example Repository
+
+deleteRepo( exampleRepoDir, TRUE)
+
+rm( exampleRepoDir )
+
 #
 # Github version
 #
  
 x <- summaryGithubRepo( user="pbiecek", repo="archivist")
 print( x )
-
-# removing an example Repository
-
-deleteRepo( exampleRepoDir, TRUE)
-
-rm( exampleRepoDir )
 
 # many archivist-like Repositories on one Github repository
   

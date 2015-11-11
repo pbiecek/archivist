@@ -77,7 +77,7 @@ glmnet1=glmnet(zk,bk)
 
 # save examples
 
-exampleRepoDir <- tempdir()
+exampleRepoDir <- tempfile()
 createEmptyRepo( repoDir = exampleRepoDir )
 saveToRepo( myplot123, repoDir=exampleRepoDir )
 saveToRepo( iris, repoDir=exampleRepoDir )
@@ -98,7 +98,7 @@ showLocalRepo( method = "tags", repoDir = exampleRepoDir )
 
 summaryLocalRepo( repoDir = exampleRepoDir )
 
-# now let's delete the Repository
+# now let's delete the Repository without it's root
 
 deleteRepo( repoDir = exampleRepoDir)
 

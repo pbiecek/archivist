@@ -51,7 +51,7 @@ set in \link{setGithubRepo} function are used.
 \examples{
 \dontrun{
 library(dplyr)
-exampleRepoDir <- tempdir()
+exampleRepoDir <- tempfile()
 createEmptyRepo( exampleRepoDir )
 
 data(mtcars)

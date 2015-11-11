@@ -73,7 +73,7 @@ and \code{repoDirGit} parameters in future function calls. See examples.
 
 \dontrun{
 ## Local version
-exampleRepoDir <- tempdir()
+exampleRepoDir <- tempfile()
 createEmptyRepo(repoDir = exampleRepoDir)
 setLocalRepo(exampleRepoDir) 
 
@@ -94,7 +94,7 @@ summaryLocalRepo()
 
 # REMEMBER that in deleteRepo you MUST specify repoDir parameter!
 # deleteRepo doesn't take setLocalRepo's settings into consideration
-deleteRepo( exampleRepoDir)
+deleteRepo( exampleRepoDir, deleteRoot=TRUE)
 rm( exampleRepoDir )
 
 ## Github version
