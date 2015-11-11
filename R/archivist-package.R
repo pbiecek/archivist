@@ -31,6 +31,7 @@
 #' Marcin Kosinski [aut] \email{m.p.kosinski@@gmail.com}
 #' 
 #' @importFrom RCurl getBinaryURL
+#' @importFrom RCurl url.exists
 #' @import httr
 #' @importFrom DBI dbWriteTable
 #' @importFrom DBI dbGetQuery

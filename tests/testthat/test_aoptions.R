@@ -18,4 +18,5 @@ test_that("test aoptions", {
   # expect_equal(smry, "summary()")
   expect_equal(smry, "")
 
+  deleteRepo("test1111", deleteRoot = TRUE)
 })
