@@ -18,6 +18,14 @@ should be deleted.}
 As a result all artifacts from \code{gallery} folder are removed and database \code{backpack.db}
 is deleted.
 }
+\note{
+Remember that using \code{tempfile()} instead of \code{tempdir()}
+in examples section is crucial. \code{tempdir()} is existing directory
+in which R works so calling \code{deleteRepo(exampleRepoDir, deleteRoot=TRUE)}
+removes important R files. You can find out more information about this problem at 
+\href{http://stackoverflow.com/questions/22325820/unlink-function-causing-an-error-for-consequent-and-plot-functions}{stackoverflow}
+webpage.
+}
 \examples{
 \dontrun{
 # objects preparation
@@ -137,10 +145,11 @@ Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 Other archivist: \code{\link{Repository}},
   \code{\link{Tags}}, \code{\link{\%a\%}},
   \code{\link{addTagsRepo}}, \code{\link{ahistory}},
-  \code{\link{aoptions}},
+  \code{\link{aoptions}}, \code{\link{archive}},
   \code{\link{archivist-github-integration}},
   \code{\link{archivist-package}}, \code{\link{aread}},
   \code{\link{asearch}}, \code{\link{cache}},
+  \code{\link{cloneGithubRepo}},
   \code{\link{copyLocalRepo}},
   \code{\link{createEmptyRepo}},
   \code{\link{getTagsLocal}},
