@@ -24,22 +24,22 @@ that do not exist.
     1. `Invisible(NULL)` is the result of the function evaluation
   8. `copyFromLocalRepo` and `copyFromGithubRepo` copies only distinct records for table `tag` and `artifact` in `backpack.db` file, that can be seen with `show*Repo` and copies all mentioned artifacts for local version.
   9. `downloadDB` in `createEmptyRepo` function gives a user-friendly error.
-  10. In `testthat` there are new tests concerning `zip*Repo` function.
-  11. In `zipGithubRepo` unzipped file has the same name as zip file. Earlier it had a name of the temporary file that was difficult to notice.
-  12. In `setGithubRepo` it is now possible to use repoDirGit parameter. Before there was wrong `stopifnot` condition.
-  13. `tempdir()` was replaced by `tempfile()` in examples sections of: `?addTagsRepo`, `?cache`, `copyToRepo`, `createEmptyRepo`, `?deleteRepo`, `loadFromRepo`, `?rmFromRepo`, `?saveToRepo`, `setRepo`, `showRepo`, `summaryRepo`, `?Tags`, `zipRepo` documentation pages. `tempdir` is existing  directory in which R works so calling `deleteRepo( exampleRepoDir, deleteRoot=TRUE)` removed important R files.
+  10. In `zipGithubRepo` unzipped file has the same name as zip file. Earlier it had a name of the temporary file that was difficult to notice.
+  11. In `setGithubRepo` it is now possible to use repoDirGit parameter. Before there was wrong `stopifnot` condition.
 * **New features:**
 	1. `print.ahistory` function can now print outputs of the artifact's history as the `knitr::kable` would.
 	2. Examples for `searchInGithubRepo` now works for `user='pbiecek'` and `repo='archivist` parameters as we added new backpack.db file. The previous one was almost empty (for 7 months).
 	3. Additional examples to better understand usage of archivist package functions:
 		1. in `loadFromRepo` function - Loading artifacts from the repository which is built in the archivist package and saving them on the example repository.
 		2. in `createEmptyRepo` function - creating a default local Repository in non existing directory.
-		3. in `rmFromRepo` function - removing artifacts with `many = TRUE` argument
-		4. in `deleteRepo` function - using `deleteRoot = TRUE` argument 
-    5. in `copy*Repo` function - using copyLocalRepo function
-  4. Alterations in the text of: `?Tags`, `?Repository`, `?md5hash`, `archivist-package`, 
-  `?saveToRepo`, `loadFromRepo`, `summaryRepo`, `showRepo`, `?searchInRepo`, `?createEmptyRepo`, `?rmFromRepo`, `?deleteRepo`, `copyToRepo`, `zipRepo`, `setRepo` documentation pages.
+		3. in `rmFromRepo` function - removing artifacts with `many = TRUE` argument.
+		4. in `deleteRepo` function - using `deleteRoot = TRUE` argument. 
+		5. in `copy*Repo` function - using graphGallery local repository in `copyLocalRepo` function.
+		6. in `get*Tags` function - additional example using `getTagsLocal` function.
+	4. Alterations in the text of: `?Tags`, `?Repository`, `?md5hash`, `archivist-package`, `?saveToRepo`, `loadFromRepo`, `summaryRepo`, `showRepo`, `?searchInRepo`, `?createEmptyRepo`, `?rmFromRepo`, `?deleteRepo`, `copyToRepo`, `zipRepo`, `setRepo`, `getTags` documentation pages.
 	5. Adding missing functions which are used in the archivist package now to `?Repository` documentation page.
+	6. `tempdir()` was replaced by `tempfile()` in examples sections of: `?addTagsRepo`, `?cache`, `copyToRepo`, `createEmptyRepo`, `?deleteRepo`, `loadFromRepo`, `?rmFromRepo`, `?saveToRepo`, `setRepo`, `showRepo`, `summaryRepo`, `?Tags`, `zipRepo` documentation pages. `tempdir` is existing  directory in which R works so calling `deleteRepo( exampleRepoDir, deleteRoot=TRUE)` removed important R files.
+	7. New tests for the following functions: `zip*Repo`.
 
 archivist 1.7
 ----------------------------------------------------------------
