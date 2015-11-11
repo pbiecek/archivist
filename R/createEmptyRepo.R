@@ -107,6 +107,7 @@
 #' createEmptyGithubRepo("Museum-Extras", response = TRUE)
 #' createEmptyGithubRepo("Gallery", readmeDescription = NULL)
 #' createEmptyGithubRepo("Landfill", repoDescription = "My models and stuff") 
+#' 
 #' }
 #' @family archivist
 #' @rdname createEmptyRepo
@@ -204,6 +205,7 @@ createEmptyGithubRepo <- function(repoName,
   stopifnot(is.character(user.password) & length(user.password)==1)
   stopifnot((is.character(readmeDescription) & length(readmeDescription)==1) |
               is.null(readmeDescription))
+  stopifnot(is.logical(response) & length(response) ==1)
   
   repoName <- gsub(pattern = " ", "-", repoName)
   
