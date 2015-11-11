@@ -39,7 +39,7 @@
 #' @examples
 #' # objects preparation
 #' \dontrun{
-#' cacheRepo <- tempdir()
+#' cacheRepo <- tempfile()
 #' createEmptyRepo( cacheRepo )
 #' fun <- function(n) {replicate(n, summary(lm(Sepal.Length~Species, iris))$r.squared)}
 #' system.time( res <- cache(cacheRepo, fun, 1000) )

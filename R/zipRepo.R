@@ -65,7 +65,7 @@
 #' 
 #' # Local version
 #' 
-#' exampleRepoDir <- tempdir()
+#' exampleRepoDir <- tempfile()
 #' createEmptyRepo( repoDir = exampleRepoDir )
 #' saveToRepo( myplot123, repoDir=exampleRepoDir )
 #' saveToRepo( iris, repoDir=exampleRepoDir )
@@ -112,7 +112,10 @@ zipLocalRepo <- function( repoDir = NULL, repoTo = getwd() , zipname="repository
 #' @export
 zipGithubRepo <- function( repoTo = getwd(), user = NULL, repo = NULL, branch = "master", 
                            repoDirGit = FALSE, zipname = "repository.zip"){
-  stopifnot( is.character( c( repoTo, branch ) ) )
+  stopifnot( is.character( c( repoTo, branch, zipname ) ) )
+  stopifnot( file.exists( repoTo ) )
+
+  GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
 
   repoTo <- checkDirectory2( repoTo )
   if (file.exists(paste0(repoTo, zipname))) {
@@ -120,8 +123,9 @@ zipGithubRepo <- function( repoTo = getwd(), user = NULL, repo = NULL, branch = 
   }
   
   # clone Github repo
-  tempRepoTo <- tempdir()
+  tempRepoTo <- gsub(pattern = ".zip", replacement = "", x = zipname)
   createEmptyRepo( tempRepoTo, force = TRUE )
+  on.exit(deleteRepo( tempRepoTo, deleteRoot = TRUE ))
   hashes <- searchInGithubRepo( pattern="", user=user, repo=repo, branch = branch, repoDirGit = repoDirGit, fixed=FALSE )
   copyGithubRepo(repoTo = tempRepoTo , md5hashes = hashes,
                  user=user, repo=repo, branch = branch, repoDirGit = repoDirGit)
@@ -131,5 +135,5 @@ zipGithubRepo <- function( repoTo = getwd(), user = NULL, repo = NULL, branch = 
 
   zip( paste0( repoTo, zipname), files=files)
   
-  deleteRepo( tempRepoTo )
+  
 }

@@ -63,7 +63,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' exampleRepoDir <- tempdir()
+#' exampleRepoDir <- tempfile()
 #' createEmptyRepo( repoDir = exampleRepoDir )
 #'
 #' # check the state of an empty Repository
@@ -316,11 +316,16 @@ downloadDB <- function( repo, user, branch, repoDirGit ){
    }else{
      URLdb <- paste0( get( ".GithubURL", envir = .ArchivistEnv) , user, "/", repo, "/", branch, "/", repoDirGit, "/backpack.db") 
    }
-   db <- getBinaryURL( URLdb )
-   Temp2 <- tempfile()
-   file.create( Temp2 )
-   writeBin( db, Temp2 )
-   return( Temp2 )
+   if (url.exists(URLdb)){
+     db <- getBinaryURL( URLdb )
+     Temp2 <- tempfile()
+     file.create( Temp2 )
+     writeBin( db, Temp2 )
+     return( Temp2 )
+   } else {
+     stop(paste0("Such a repo: ", repo, " or user ", user, " or branch ", branch, " does not exist on Github"))
+   }
+     
 }
 
 checkDirectory <- function( directory, create = FALSE ){

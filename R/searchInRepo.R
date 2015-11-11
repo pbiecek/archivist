@@ -99,7 +99,7 @@
 #'   
 #'   # creating example Repository - on which examples will work
 #'   
-#'   exampleRepoDir <- tempdir()
+#'   exampleRepoDir <- tempfile()
 #'   createEmptyRepo(repoDir = exampleRepoDir)
 #'   saveToRepo(myplot123, repoDir=exampleRepoDir)
 #'   saveToRepo(iris, repoDir=exampleRepoDir)

@@ -100,7 +100,7 @@
 #' 
 #' # creating example Repository - on which examples will work
 #' 
-#' exampleRepoDir <- tempdir()
+#' exampleRepoDir <- tempfile()
 #' createEmptyRepo(repoDir = exampleRepoDir)
 #' myplo123Md5hash <- saveToRepo(myplot123, repoDir=exampleRepoDir)
 #' irisMd5hash <- saveToRepo(iris, repoDir=exampleRepoDir)
