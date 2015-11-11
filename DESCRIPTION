@@ -43,4 +43,4 @@ Suggests:
     ggplot2,
     dplyr
 BugReports: https://github.com/pbiecek/archivist/issues
-RoxygenNote: 5.0.1
+RoxygenNote: 5.0.0
