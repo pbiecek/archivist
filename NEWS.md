@@ -36,9 +36,10 @@ that do not exist.
 		2. in `createEmptyRepo` function - creating a default local Repository in non existing directory.
 		3. in `rmFromRepo` function - removing artifacts with `many = TRUE` argument
 		4. in `deleteRepo` function - using `deleteRoot = TRUE` argument 
-    5. in `copy*Repo` function - using copyLocalRepo function
+    5. in `copy*Repo` function - using `copyLocalRepo` function
+    6. in `get*Tags` function - additional example using `getTagsLocal` function.
   4. Alterations in the text of: `?Tags`, `?Repository`, `?md5hash`, `archivist-package`, 
-  `?saveToRepo`, `loadFromRepo`, `summaryRepo`, `showRepo`, `?searchInRepo`, `?createEmptyRepo`, `?rmFromRepo`, `?deleteRepo`, `copyToRepo`, `zipRepo`, `setRepo` documentation pages.
+  `?saveToRepo`, `loadFromRepo`, `summaryRepo`, `showRepo`, `?searchInRepo`, `?createEmptyRepo`, `?rmFromRepo`, `?deleteRepo`, `copyToRepo`, `zipRepo`, `setRepo`, `getTags` documentation pages.
 	5. Adding missing functions which are used in the archivist package now to `?Repository` documentation page.
 
 archivist 1.7
