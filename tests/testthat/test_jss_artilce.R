@@ -43,7 +43,7 @@ test_that("createEmptyRepo creates repo", {
   
   expect_equal(list.files("tmp_archivist"), c("backpack.db", "gallery"))
   expect_error(createEmptyRepo("tmp_archivist_2", force = FALSE))
-  deleteRepo("tmp_archivist")
+  deleteRepo("tmp_archivist", deleteRoot = TRUE)
 })
 
 
@@ -89,7 +89,7 @@ test_that("saveToRepo funcion works with regular parameters", {
   
   expect_equal(hash %in% showLocalRepo(repoDir = repo, "tags")[, "artifact"], TRUE)
   
-  deleteRepo("new_repo")
+  deleteRepo("new_repo", deleteRoot = TRUE)
 })
 
 

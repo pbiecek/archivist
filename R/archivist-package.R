@@ -31,6 +31,7 @@
 #' Marcin Kosinski [aut] \email{m.p.kosinski@@gmail.com}
 #' 
 #' @importFrom RCurl getBinaryURL
+#' @importFrom RCurl url.exists
 #' @import httr
 #' @importFrom DBI dbWriteTable
 #' @importFrom DBI dbGetQuery
@@ -56,6 +57,7 @@
 #' @importMethodsFrom git2r push
 #' @importMethodsFrom git2r init
 #' @importMethodsFrom git2r remote_add
+#' @importMethodsFrom git2r clone
 #' @importClassesFrom git2r cred_user_pass
 #' @importFrom jsonlite unbox
 #'
