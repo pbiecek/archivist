@@ -7,40 +7,56 @@
 lhs \%a\% rhs
 }
 \arguments{
-\item{lhs}{A dataset and function to apply to it.}
+\item{lhs}{An artifact that will be used as an argument of \code{rhs} by 
+\code{\%a\%} operator.}
 
-\item{rhs}{A dataset and function to apply to it.}
+\item{rhs}{A function call using \code{lhs} as an argument by
+\code{\%a\%} operator.}
 }
 \description{
 An extended pipe operator \link[magrittr]{\%>\%} from magrittr package version 1.0.1.
 Enables archiving artifacts with their chaining code - see examples and vignettes.
-
-The extension works as following, the result of %a% operator is archived together 
+}
+\details{
+The extension works as follows, the result of \code{\%a\%} operator is archived together 
 with lhs (as an artifact) and rhs (as a tag). This allows to present a history of
-an artifact. This option works only if a default repo is set.
+an artifact. This option works only if a default repository is set.
 }
 \examples{
 \dontrun{
-iris \%a\% summary()
-
-# Archiving artifacts with their chaining code
 
 library(dplyr)
-exampleRepoDir <- getwd()
-createEmptyRepo( exampleRepoDir )
 
+## Usage of \%a\% operator without setting default repository
+# We will receive sepcial warning
+iris \%a\% summary()
+
+## Archiving artifacts with their chaining code
+# Creating empty repository
+exampleRepoDir <- tempfile()
+createEmptyRepo( exampleRepoDir, default = TRUE ) # Remember to set repo to default
+
+# Start using \%a\% operator
 data("hflights", package = "hflights")
 hflights \%a\%
   group_by(Year, Month, DayofMonth) \%a\%
   select(Year:DayofMonth, ArrDelay, DepDelay) \%a\%
-  summarise(
-    arr = mean(ArrDelay, na.rm = TRUE),
-    dep = mean(DepDelay, na.rm = TRUE)
-  ) \%a\%
-  filter(arr > 30 | dep > 30) \%a\%
-  saveToRepo( exampleRepoDir )
-showLocalRepo(getwd())
+  summarise(arr = mean(ArrDelay, na.rm = TRUE),
+            dep = mean(DepDelay, na.rm = TRUE)) \%a\%
+  filter(arr > 30 | dep > 30)
+  
+# Let's check show tags of subsequent artifacts look like
+showLocalRepo()
+getTagsLocal("a8ce013a8e66df222be278122423dc60", tag = "") #1
+getTagsLocal("9d91fe67fd51f3bfdc9db0a596b12b38", tag = "") #2
+getTagsLocal("617ded4953ac986524a1c24703363980", tag = "") #3
+getTagsLocal("3f1ac0a27485be5d52e1b0a41d165abc", tag = "") #4
+getTagsLocal("0cb04315482de73d7f5a1081953236f8", tag = "") #5
+getTagsLocal("5629bc43e36d219b613076b17c665eda", tag = "") #6
 
+# Deleting existing repository
+deleteRepo(exampleRepoDir, deleteRoot = TRUE)
+rm(exampleRepoDir) 
 }
 }
 \seealso{
