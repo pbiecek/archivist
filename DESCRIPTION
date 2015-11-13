@@ -1,5 +1,5 @@
 Package: archivist
-Version: 1.8.9.4
+Version: 1.8.9.5
 Type: Package
 Title: Tools for Storing, Restoring and Searching for R Objects
 Authors@R: c(
@@ -43,4 +43,4 @@ Suggests:
     ggplot2,
     dplyr
 BugReports: https://github.com/pbiecek/archivist/issues
-RoxygenNote: 5.0.0
+RoxygenNote: 5.0.1
