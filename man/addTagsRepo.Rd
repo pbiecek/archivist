@@ -44,22 +44,48 @@ must be equal to 0.
 \examples{
 \dontrun{
 
-# Takes all objects of lm class from repository, 
-# extracts R2 for them and stores as R2: tags
+## We Take all artifacts of lm class from repository, 
+## extract R^2 for them and store as R^2:number tags
 
+# Creating empty repository
 exampleRepoDir <- tempfile()
 createEmptyRepo(exampleRepoDir, force=TRUE)
+
+# Saving lm artifacts into repository
 m1 <- lm(Sepal.Length~Species, iris)
 saveToRepo(m1, exampleRepoDir)
-m1 <- lm(Sepal.Width~Species, iris)
-saveToRepo(m1, exampleRepoDir)
+m2 <- lm(Sepal.Width~Species, iris)
+saveToRepo(m2, exampleRepoDir)
+
+# We may see what kind of tags are related to "m1" artifact corresponding to
+# "9e66edd297c2f291446f3503c01d443a" md5hash
+getTagsLocal("9e66edd297c2f291446f3503c01d443a", exampleRepoDir, "")
+
+# We may see what kind of tags are related to "m2" artifact corresponding to
+# "da1bcaf68752c146903f700c1a458438" md5hash
 getTagsLocal("da1bcaf68752c146903f700c1a458438", exampleRepoDir, "")
+
+# We Take all objects of lm class from repository
 md5hashes <- searchInLocalRepo(repoDir=exampleRepoDir, "class:lm")
+
+# Adding new tag "test" explicitly
 addTagsRepo(md5hashes, exampleRepoDir, tags = "test")
-addTagsRepo(md5hashes, exampleRepoDir, function(x) paste0("R2:",summary(x)$r.square))
+
+# Adding new tag "R^2: " using FUN parameter
+addTagsRepo(md5hashes, exampleRepoDir, function(x) paste0("R^2:",summary(x)$r.square))
+
+# And now: tags related to "m1" artifact are
+getTagsLocal("9e66edd297c2f291446f3503c01d443a", exampleRepoDir, "")
+
+# And now: tags related to "m2" artifact are
 getTagsLocal("da1bcaf68752c146903f700c1a458438", exampleRepoDir, "")
-showLocalRepo(exampleRepoDir)
+
+# One more look at our Repo
+showLocalRepo(exampleRepoDir, method = "tags")
+
+# Deleting example repository
 deleteRepo(exampleRepoDir, deleteRoot=TRUE)
+rm(exampleRepoDir)
 }
 
 }
