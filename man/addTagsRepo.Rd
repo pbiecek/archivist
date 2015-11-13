@@ -7,18 +7,22 @@
 addTagsRepo(md5hashes, repoDir = NULL, FUN = NULL, tags = NULL, ...)
 }
 \arguments{
-\item{md5hashes}{To which corresponding artifacts should \code{Tags} be added.}
+\item{md5hashes}{a character vector of \code{md5hashes} specifying to which
+corresponding artifacts new \code{Tags} should be added. See \code{Note} 
+to get to know about the length of \code{tags} and \code{md5hashes} parameters.}
 
-\item{repoDir}{A character that specifies the directory of the Repository into which
-new \code{Tags} will be added. If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.}
+\item{repoDir}{A character that specifies the directory of the Repository to which
+new \code{Tags} will be added. If it is set to \code{NULL} (by default),
+it uses the \code{repoDir} specified in \link{setLocalRepo}.}
 
-\item{FUN}{A function that evaluates on the artifacts for which \code{md5hashes} are given and generates
-\code{Tags} as a result that will be added to the local Repository. Can be specified only one of: \code{FUN} 
-or \code{tags}.}
+\item{FUN}{A function which is evaluated on the artifacts for which \code{md5hashes}
+are given. The result of this function evaluation are \code{Tags} which will
+be added to the local Repository.}
 
-\item{tags}{A character vector that specifies what tag should be added to which artifact that
-corresponds to given \code{md5hash}. Can be specified only one of: \code{FUN} 
-or \code{tags}. Should have length 1 or the same as length of \code{md5hashes} param.}
+\item{tags}{A character vector which specifies what kind of tags should be added to
+artifacts corresponding to given \code{md5hashes}. See \code{Note} to get to know about
+the length of \code{tags} and \code{md5hashes} parameters.
+One can specify either \code{FUN} or \code{tags}.}
 
 \item{...}{Other arguments that will be passed to FUN.}
 }
@@ -26,14 +30,16 @@ or \code{tags}. Should have length 1 or the same as length of \code{md5hashes} p
 \code{addTagsRepo} adds new \link{Tags} to the existing \link{Repository}.
 }
 \details{
-The \code{addTagsRepo} function adds new tags to artifacts that are already stored in repository. 
- One can add new \code{tags} explicitly with \code{tags} argument, or by passing a 
- function that extracts \code{tags} from selected artifacts specified by passing their \link{md5hash}.
-To learn more about artifacts visit \link[archivist]{archivist-package}.
-
-\code{Tags} are attributes of an artifact. \code{Tags} can be an artifact's \code{name}, \code{class} or \code{archiving date}. 
-Furthermore, for various artifact's classes more different \code{Tags} are available and can 
-be searched in \link{searchInLocalRepo} or \link{searchInGithubRepo} functions.
+\code{addTagsRepo} function adds new tags to artifacts that are already stored
+in the repository. One can add new \code{tags} either explicitly with \code{tags} argument
+or by passing a function which extracts \code{tags} from selected artifacts
+corresponding to \code{md5hashes}. To learn more about artifacts visit
+\link[archivist]{archivist-package}.
+}
+\note{
+One should remember that \code{length(tags)} modulo \code{length(md5hashes)} 
+must be equal to 0 or \code{length(md5hashes)} modulo \code{length(tags)}
+must be equal to 0.
 }
 \examples{
 \dontrun{
