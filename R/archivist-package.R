@@ -58,7 +58,12 @@
 #' @importMethodsFrom git2r init
 #' @importMethodsFrom git2r remote_add
 #' @importMethodsFrom git2r clone
+#' @importMethodsFrom git2r repository
+#' @importMethodsFrom git2r discover_repository
+#' @importMethodsFrom git2r in_repository
+#' @importMethodsFrom git2r cred_user_pass
 #' @importClassesFrom git2r cred_user_pass
+#' @importClassesFrom git2r git_repository
 #' @importFrom jsonlite unbox
 #'
 #' @family archivist

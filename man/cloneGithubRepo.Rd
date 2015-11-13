@@ -4,12 +4,13 @@
 \alias{cloneGithubRepo}
 \title{Clone Github Repository}
 \usage{
-cloneGithubRepo(repoURL, local_path, ...)
+cloneGithubRepo(repoURL, local_path = NULL, ...)
 }
 \arguments{
 \item{repoURL}{The remote repository to clone.}
 
-\item{local_path}{Local directory to clone to.}
+\item{local_path}{Local directory to clone to. If \code{NULL}, by default, creates a local directory
+which corresponds to the name after last \code{/} in \code{repoURL}.}
 
 \item{...}{Further parameters passed to \link[git2r]{clone}.}
 }

@@ -4,6 +4,15 @@
    packageStartupMessage("Welcome to archivist (version: ", utils::packageVersion("archivist"), ").")
   .ArchivistEnv$silent <- FALSE
   .ArchivistEnv$response <- FALSE
+  .ArchivistEnv$commitMessage <- NULL
+  .ArchivistEnv$archiveData <-TRUE 
+  .ArchivistEnv$archiveTags <- TRUE 
+  .ArchivistEnv$archiveMiniature <- TRUE
+  .ArchivistEnv$force <- TRUE
+  .ArchivistEnv$rememberName <- TRUE 
+  .ArchivistEnv$chain <- FALSE 
+  .ArchivistEnv$ascii <- FALSE
+  
   .ArchivistEnv$repoDescription <- "A Repository of Artifacts supported by archivist https://github.com/pbiecek"
   .ArchivistEnv$readmeDescription <- "A Repository of Artifacts supported by [archivist](https://github.com/pbiecek) \n\n
    [`Repository`](https://github.com/pbiecek/archivist/wiki/archivist-package-Repository) stores specific values of an artifact,
@@ -15,6 +24,14 @@
   assign( x = ".GithubURL", value = "https://raw.githubusercontent.com/", envir = .ArchivistEnv )
   .ArchivistEnv$silent <- FALSE
   .ArchivistEnv$response <- FALSE
+  .ArchivistEnv$commitMessage <- NULL
+  .ArchivistEnv$archiveData <-TRUE 
+  .ArchivistEnv$archiveTags <- TRUE 
+  .ArchivistEnv$archiveMiniature <- TRUE
+  .ArchivistEnv$force <- TRUE
+  .ArchivistEnv$rememberName <- TRUE 
+  .ArchivistEnv$chain <- FALSE 
+  .ArchivistEnv$ascii <- FALSE
   .ArchivistEnv$repoDescription <- "A Repository of Artifacts supported by archivist https://github.com/pbiecek"
   .ArchivistEnv$readmeDescription <- .ArchivistEnv$readmeDescription <- "A Repository of Artifacts supported by [archivist](https://github.com/pbiecek) \n\n
    [`Repository`](https://github.com/pbiecek/archivist/wiki/archivist-package-Repository) stores specific values of an artifact,
