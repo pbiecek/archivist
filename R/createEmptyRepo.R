@@ -325,7 +325,8 @@ downloadDB <- function( repo, user, branch, repoDirGit ){
      writeBin( db, Temp2 )
      return( Temp2 )
    } else {
-     stop(paste0("Such a repo: ", repo, " or user ", user, " or branch ", branch, " does not exist on Github"))
+     stop(paste0("Such a repo: ", repo, " or user ", user, " or branch ", branch, " does not exist on GitHub",
+                 "or there is no archivist-like Repository on this repo."))
    }
      
 }
