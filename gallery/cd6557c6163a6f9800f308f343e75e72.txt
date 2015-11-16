@@ -14,7 +14,7 @@ Sepal.Width   0.65084    0.06665   9.765  < 2e-16 ***
 Petal.Length  0.70913    0.05672  12.502  < 2e-16 ***
 Petal.Width  -0.55648    0.12755  -4.363 2.41e-05 ***
 ---
-Signif. codes:  0 â€˜***â€™ 0.001 â€˜**â€™ 0.01 â€˜*â€™ 0.05 â€˜.â€™ 0.1 â€˜ â€™ 1
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 Residual standard error: 0.3145 on 146 degrees of freedom
 Multiple R-squared:  0.8586,	Adjusted R-squared:  0.8557 
