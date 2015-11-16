@@ -69,6 +69,7 @@ Other archivist: \code{\link{Repository}},
   \code{\link{rmFromRepo}}, \code{\link{saveToRepo}},
   \code{\link{searchInLocalRepo}},
   \code{\link{setLocalRepo}}, \code{\link{showLocalRepo}},
+  \code{\link{splitTagsLocal}},
   \code{\link{summaryLocalRepo}},
   \code{\link{zipLocalRepo}}
 }

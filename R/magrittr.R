@@ -41,7 +41,7 @@
 #'             dep = mean(DepDelay, na.rm = TRUE)) %a%
 #'   filter(arr > 30 | dep > 30)
 #'   
-#' # Let's check show tags of subsequent artifacts look like
+#' # Let's check how tags of subsequent artifacts look like
 #' showLocalRepo()
 #' getTagsLocal("a8ce013a8e66df222be278122423dc60", tag = "") #1
 #' getTagsLocal("9d91fe67fd51f3bfdc9db0a596b12b38", tag = "") #2

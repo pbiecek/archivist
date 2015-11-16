@@ -158,6 +158,7 @@ Other archivist: \code{\link{Repository}},
   \code{\link{searchInLocalRepo}},
   \code{\link{setLocalRepo}},
   \code{\link{shinySearchInLocalRepo}},
-  \code{\link{showLocalRepo}}, \code{\link{zipLocalRepo}}
+  \code{\link{showLocalRepo}},
+  \code{\link{splitTagsLocal}}, \code{\link{zipLocalRepo}}
 }
 
