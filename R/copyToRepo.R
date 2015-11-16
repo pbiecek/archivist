@@ -41,7 +41,8 @@
 #' 
 #' @note
 #' If \code{repo} and \code{user} are set to \code{NULL} (as default) in Github mode then global parameters
-#' set in \link{setGithubRepo} function are used.
+#' set in \link{setGithubRepo} function are used. If one would like to copy whole Repository we suggest to 
+#' extract all \code{md5hashes} in this way \code{unique(showLocalRepo(repoDir)[,1])}.
 #' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
