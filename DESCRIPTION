@@ -1,5 +1,5 @@
 Package: archivist
-Version: 1.8.9.5
+Version: 1.8.10.0
 Type: Package
 Title: Tools for Storing, Restoring and Searching for R Objects
 Authors@R: c(
@@ -36,7 +36,8 @@ Imports:
     RSQLite,
     knitr,
     git2r,
-    jsonlite
+    jsonlite,
+    magrittr
 Suggests:
     shiny,
     testthat,

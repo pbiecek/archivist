@@ -3,7 +3,7 @@
 \name{showLocalRepo}
 \alias{showGithubRepo}
 \alias{showLocalRepo}
-\title{View the Lisf of Artifacts from the Repository}
+\title{View the List of Artifacts from the Repository}
 \usage{
 showLocalRepo(repoDir = NULL, method = "md5hashes")
 
@@ -197,6 +197,7 @@ Other archivist: \code{\link{Repository}},
   \code{\link{searchInLocalRepo}},
   \code{\link{setLocalRepo}},
   \code{\link{shinySearchInLocalRepo}},
+  \code{\link{splitTagsLocal}},
   \code{\link{summaryLocalRepo}},
   \code{\link{zipLocalRepo}}
 }

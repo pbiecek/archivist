@@ -1,6 +1,6 @@
 ##    archivist package for R
 ##
-#' @title View the Lisf of Artifacts from the Repository 
+#' @title View the List of Artifacts from the Repository 
 #'
 #' @description
 #' \code{showLocalRepo} and \code{showGithubRepo} functions produce the \code{data.frame} of the artifacts from

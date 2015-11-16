@@ -64,6 +64,7 @@ Other archivist: \code{\link{Repository}},
   \code{\link{setLocalRepo}},
   \code{\link{shinySearchInLocalRepo}},
   \code{\link{showLocalRepo}},
+  \code{\link{splitTagsLocal}},
   \code{\link{summaryLocalRepo}},
   \code{\link{zipLocalRepo}}
 }
