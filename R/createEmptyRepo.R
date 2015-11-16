@@ -351,7 +351,7 @@ checkDirectory <- function( directory, create = FALSE ){
     }
     # check if repository is proper (has backpack.db and gallery)
     if ( !all( c("backpack.db", "gallery") %in% list.files(directory) ) ){
-      stop( paste0( directory, " is not a proper repository. There is neither backpack.db or gallery." ) )
+      stop( paste0( directory, " is not a proper repository. There is neither backpack.db nor gallery." ) )
     }
   }
   # check if repoDir has "/" at the end and add it if not
