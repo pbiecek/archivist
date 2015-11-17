@@ -18,7 +18,7 @@ and a subdirectory named \code{gallery}.
 \itemize{
  \item \code{md5hash},
  \item \code{name},
- \item \code{createdDate}.
+ \item \code{createdDate},
 }
 while \emph{tag} table consists of the following three columns:
 \itemize{
