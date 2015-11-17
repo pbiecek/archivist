@@ -52,7 +52,6 @@
 #' @importFrom utils head
 #' @importFrom utils zip
 #' @importFrom knitr kable
-#' @importFrom magrittr %>%
 #' @importMethodsFrom git2r add
 #' @importMethodsFrom git2r commit
 #' @importMethodsFrom git2r push
@@ -71,3 +70,14 @@
 #' @name archivist-package
 #' @docType package
 invisible(NULL)
+#' Pipe operator
+#'
+#' See \code{\link[magrittr]{\%>\%}} for more details.
+#'
+#' @name %>%
+#' @rdname pipe
+#' @keywords internal
+#' @export
+#' @importFrom magrittr %>%
+#' @usage lhs \%>\% rhs
+NULL
