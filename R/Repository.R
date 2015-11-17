@@ -10,7 +10,29 @@
 #' @details
 #' 
 #' \code{Repository} is a folder with an SQLite database stored in a file named \code{backpack}
-#' and a subdirectory named \code{gallery} which collects artifacts saved as \code{.rda} files.
+#' and a subdirectory named \code{gallery}.
+#' 
+#' \code{backpack} contains two tables:\emph{artifact} and \emph{tag}.
+#' \emph{artifact} table consists of three columns:
+#' \itemize{
+#'  \item \code{md5hash},
+#'  \item \code{name},
+#'  \item \code{createdDate}.
+#' }
+#' while \emph{tag} table consists of the following three columns:
+#' \itemize{
+#'  \item \code{artifact},
+#'  \item \code{tag},
+#'  \item \code{createdDate}.
+#' }
+#' 
+#' \code{gallery} collects the following objects:
+#' \itemize{
+#'  \item artifacts saved as \code{.rda} files,
+#'  \item artifacts' data saved as \code{.txt} files,
+#'  \item artifacts' miniatures saved as \code{.png} files.
+#' }
+#'  
 #' 
 #' @seealso 
 #' Functions using \code{Repository} are:
