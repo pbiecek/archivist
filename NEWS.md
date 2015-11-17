@@ -24,6 +24,7 @@ that do not exist.
     4. `Invisible(NULL)` is the result of the function evaluation.
   7. Some changes in `copy*Repo`'s body:
     1. `Invisible(NULL)` is the result of the function evaluation
+    2. `repoFrom` parameter in `copyLocalRepo` is set to `NULL` as default.
   8. `copyFromLocalRepo` and `copyFromGithubRepo` copies only distinct records for table `tag` and `artifact` in `backpack.db` file, that can be seen with `show*Repo` and copies all mentioned artifacts for local version.
   9. `downloadDB` in `createEmptyRepo` function gives a user-friendly error.
   10. In `zipGithubRepo` unzipped file has the same name as zip file. Earlier it had a name of the temporary file that was difficult to notice.
@@ -38,7 +39,7 @@ that do not exist.
 		4. in `deleteRepo` function - using `deleteRoot = TRUE` argument. 
 		5. in `copy*Repo` function - using graphGallery local repository in `copyLocalRepo` function.
 		6. in `get*Tags` function - additional example using `getTagsLocal` function.
-	4. Alterations in the text of: `?Tags`, `?Repository`, `?md5hash`, `archivist-package`, `?saveToRepo`, `loadFromRepo`, `summaryRepo`, `showRepo`, `?searchInRepo`, `?createEmptyRepo`, `?rmFromRepo`, `?deleteRepo`, `copyToRepo`, `zipRepo`, `setRepo`, `getTags`, `addTagsRepo` documentation pages.
+	4. Alterations in the text of: `?Tags`, `?Repository`, `?md5hash`, `archivist-package`, `?saveToRepo`, `loadFromRepo`, `summaryRepo`, `showRepo`, `?searchInRepo`, `?createEmptyRepo`, `?rmFromRepo`, `?deleteRepo`, `copyToRepo`, `zipRepo`, `setRepo`, `getTags`, `addTagsRepo`, `magrittr` documentation pages.
 	5. Adding missing functions which are used in the archivist package now to `?Repository` documentation page.
 	6. `tempdir()` was replaced by `tempfile()` in examples sections of: `?addTagsRepo`, `?cache`, `copyToRepo`, `createEmptyRepo`, `?deleteRepo`, `loadFromRepo`, `?rmFromRepo`, `?saveToRepo`, `setRepo`, `showRepo`, `summaryRepo`, `?Tags`, `zipRepo` documentation pages. `tempdir` is existing  directory in which R works so calling `deleteRepo( exampleRepoDir, deleteRoot=TRUE)` removed important R files.
 	7. New tests for the following functions: `zip*Repo`.
