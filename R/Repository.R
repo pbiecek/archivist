@@ -28,9 +28,8 @@
 #' 
 #' \code{gallery} collects the following objects:
 #' \itemize{
-#'  \item artifacts saved as \code{.rda} files,
-#'  \item artifacts' data saved as \code{.txt} files,
-#'  \item artifacts' miniatures saved as \code{.png} files.
+#'  \item artifacts and artifacts' data saved as \code{.rda} files,
+#'  \item artifacts' miniatures saved as \code{.txt} and \code{.png} files.
 #' }
 #'  
 #' 
