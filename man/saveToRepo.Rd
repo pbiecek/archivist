@@ -17,7 +17,7 @@ If it is set to \code{NULL} (by default), it will use the \code{repoDir} specifi
 
 \item{archiveData}{A logical value denoting whether to archive the data from the \code{artifact}.}
 
-\item{archiveTags}{A logical value denoting whether to archive tags from the \code{artifact}.}
+\item{archiveTags}{A logical value denoting whether to archive Tags from the \code{artifact}.}
 
 \item{archiveMiniature}{A logical value denoting whether to archive a miniature of the \code{artifact}.}
 
@@ -33,7 +33,7 @@ can be used. See examples.}
 \item{...}{Graphical parameters denoting width and height of a miniature. See details. 
 Further arguments passed to \link{head}. See Details section about \code{firtsRows} parameter}
 
-\item{userTags}{A character vector with tags. These tags will be added to the repository along with the artifact.}
+\item{userTags}{A character vector with Tags. These Tags will be added to the repository along with the artifact.}
 
 \item{silent}{If TRUE produces no warnings.}
 
@@ -228,7 +228,7 @@ saveToRepo( lda1, repoDir=exampleRepoDir, force = FALSE )
 saveToRepo( qda1, repoDir=exampleRepoDir, archiveData = FALSE,
             archiveMiniature = FALSE)
 
-# one can specify his own additional tags which are to be archived with artifact
+# one can specify his own additional Tags which are to be archived with artifact
 
 attr( model, "tags" ) = c( "do not delete", "my favourite model" )
 saveToRepo( model, repoDir=exampleRepoDir )

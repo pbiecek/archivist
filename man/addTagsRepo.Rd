@@ -19,7 +19,7 @@ it uses the \code{repoDir} specified in \link{setLocalRepo}.}
 are given. The result of this function evaluation are \code{Tags} which will
 be added to the local Repository.}
 
-\item{tags}{A character vector which specifies what kind of tags should be added to
+\item{tags}{A character vector which specifies what kind of Tags should be added to
 artifacts corresponding to given \code{md5hashes}. See \code{Note} to get to know about
 the length of \code{tags} and \code{md5hashes} parameters.
 One can specify either \code{FUN} or \code{tags}.}
@@ -30,9 +30,9 @@ One can specify either \code{FUN} or \code{tags}.}
 \code{addTagsRepo} adds new \link{Tags} to the existing \link{Repository}.
 }
 \details{
-\code{addTagsRepo} function adds new tags to artifacts that are already stored
-in the repository. One can add new \code{tags} either explicitly with \code{tags} argument
-or by passing a function which extracts \code{tags} from selected artifacts
+\code{addTagsRepo} function adds new Tags to artifacts that are already stored
+in the repository. One can add new \code{Tags} either explicitly with \code{tags} parameter
+or by passing a function which extracts \code{Tags} from selected artifacts
 corresponding to \code{md5hashes}. To learn more about artifacts visit
 \link[archivist]{archivist-package}.
 }
@@ -45,7 +45,7 @@ must be equal to 0.
 \dontrun{
 
 ## We Take all artifacts of lm class from repository, 
-## extract R^2 for them and store as R^2:number tags
+## extract R^2 for them and store as R^2:number Tags
 
 # Creating empty repository
 exampleRepoDir <- tempfile()
@@ -57,11 +57,11 @@ saveToRepo(m1, exampleRepoDir)
 m2 <- lm(Sepal.Width~Species, iris)
 saveToRepo(m2, exampleRepoDir)
 
-# We may see what kind of tags are related to "m1" artifact corresponding to
+# We may see what kind of Tags are related to "m1" artifact corresponding to
 # "9e66edd297c2f291446f3503c01d443a" md5hash
 getTagsLocal("9e66edd297c2f291446f3503c01d443a", exampleRepoDir, "")
 
-# We may see what kind of tags are related to "m2" artifact corresponding to
+# We may see what kind of Tags are related to "m2" artifact corresponding to
 # "da1bcaf68752c146903f700c1a458438" md5hash
 getTagsLocal("da1bcaf68752c146903f700c1a458438", exampleRepoDir, "")
 
@@ -74,10 +74,10 @@ addTagsRepo(md5hashes, exampleRepoDir, tags = "test")
 # Adding new tag "R^2: " using FUN parameter
 addTagsRepo(md5hashes, exampleRepoDir, function(x) paste0("R^2:",summary(x)$r.square))
 
-# And now: tags related to "m1" artifact are
+# And now: Tags related to "m1" artifact are
 getTagsLocal("9e66edd297c2f291446f3503c01d443a", exampleRepoDir, "")
 
-# And now: tags related to "m2" artifact are
+# And now: Tags related to "m2" artifact are
 getTagsLocal("da1bcaf68752c146903f700c1a458438", exampleRepoDir, "")
 
 # One more look at our Repo

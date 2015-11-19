@@ -43,19 +43,20 @@ A \code{data.frame} with 4 columns: \code{artifact}, \code{tagKey},
 }
 \details{
 \code{tag} column from \emph{tag} table has normally the follwing structure:
-\code{tagKey:tagValue}. \code{splitTagsLocal} and \code{splitTagsGithub} functions
+\code{TagKey:TagValue}. \code{splitTagsLocal} and \code{splitTagsGithub} functions
 can be used to split \code{tag} column into two separate columns:
 \code{tagKey} and \code{tagValue}. As a result functions from \code{dplyr} package
-can be used to easily summarize, search, and extract artifacts' tags.
+can be used to easily summarize, search, and extract artifacts' Tags.
 See \code{examples}.
 }
 \note{
 If \code{repo} and \code{user} are set to \code{NULL} (as default) in the Github mode
 then global parameters set in \link{setGithubRepo} function are used.
 
-Sometimes a user can give a tag which doesn't match \code{tagKey:tagValue}
-structure. It is simply \code{tag}. In this case \code{tagKey = userTags} 
-and \code{tagValue = tag}. See \code{examples}.
+Sometimes we can use \code{addTags*} function or \code{userTags} parameter
+in \code{saveToRepo} to specify a \code{Tag} which might not match
+\code{TagKey:TagValue} structure. It is simply \code{Tag}. In this case 
+\code{tagKey = userTags} and \code{tagValue = Tag}. See \code{examples}.
 
 To learn more about \code{Tags} and \code{Repository} structure check 
 \link{Tags} and \link{Repository}.
@@ -73,19 +74,16 @@ data(iris)
 saveToRepo(iris, repoDir = exampleRepoDir )
 library(datasets)
 data(iris3)
-saveToRepo(iris3, format = "rdb")
+saveToRepo(iris3)
 data(longley)
-aoptions("format", "rdb")
 saveToRepo(longley)
 
 # Let's see the difference in tag table in backpack.db
 showLocalRepo( method = "tags" ) # a data frame with 3 columns
 splitTagsLocal()                 # a data frame with 4 columns
 
-# Now we can sum up what kind of tags we have in our repository.
-# detach("package:plyr", unload=TRUE) # sometimes you must use this. More about
-# this problem is here:
-# http://stackoverflow.com/questions/22801153/dplyr-error-in-n-function-should-not-be-called-directly
+# Now we can sum up what kind of Tags we have in our repository.
+library(dplyr)
 splitTagsLocal() \%>\%
   group_by(tagKey) \%>\%
   summarise(count = n())
@@ -94,20 +92,20 @@ splitTagsLocal() \%>\%
 deleteRepo(exampleRepoDir, deleteRoot = TRUE)
 rm(exampleRepoDir)
 
-## Example with tag that does not match tagKey:tagValue structure
+## Example with Tag that does not match TagKey:TagValue structure
 
 # Creating example default repository
 exampleRepoDir <- tempfile()
 createEmptyRepo( exampleRepoDir, default = TRUE )
 data(iris)
-# adding special tag "dlugoscJeden" to iris artifact and saving to repository
+# adding special Tag "lengthOne" to iris artifact and saving to repository
 saveToRepo(iris, repoDir = exampleRepoDir, 
-           userTags = "dlugoscJeden")
+           userTags = "lengthOne")
            
 # Let's see the difference in tag table in backpack.db
 showLocalRepo(method = "tags")
 splitTagsLocal() 
-# We can see that splitTagsLocal added tagKey = userTags to "dlugscJeden" tag.
+# We can see that splitTagsLocal added tagKey = userTags to "lengthOne" Tag.
 
 # Deleting existing repository
 deleteRepo(exampleRepoDir, deleteRoot = TRUE)
@@ -116,7 +114,7 @@ rm(exampleRepoDir)
 ## Github Version
 # Let's check how does table tag look like while we are using the
 # Gitub repository.
-# We will choose only special columns of data frames that show tags
+# We will choose only special columns of data frames that show Tags
 showGithubRepo( user = "pbiecek", repo = "archivist", method = "tags" )[,2]
 splitTagsGithub( user = "pbiecek", repo = "archivist" )[,2:3]
 

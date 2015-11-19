@@ -31,7 +31,7 @@ See \link{archivist-github-integration}.}
 
 \item{archiveData}{A logical value denoting whether to archive the data from the \code{artifact}.}
 
-\item{archiveTags}{A logical value denoting whether to archive tags from the \code{artifact}.}
+\item{archiveTags}{A logical value denoting whether to archive Tags from the \code{artifact}.}
 
 \item{archiveMiniature}{A logical value denoting whether to archive a miniature of the \code{artifact}.}
 
@@ -40,7 +40,7 @@ a Repository.}
 
 \item{rememberName}{A logical value. Should not be changed by a user. It is a technical parameter.}
 
-\item{userTags}{A character vector with tags. These tags will be added to the repository along with the artifact.}
+\item{userTags}{A character vector with Tags. These Tags will be added to the repository along with the artifact.}
 
 \item{silent}{If TRUE produces no warnings.}
 

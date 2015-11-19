@@ -14,8 +14,10 @@
 #' Both of them use \code{md5hashes} of artifacts which are to be copied 
 #' in \code{md5hashes} parameter. For more information about \code{md5hash} see \link{md5hash}.
 #'
-#' @param repoFrom A character that specifies the directory of the Repository from which
-#' artifacts will be copied. Works only on \code{copyLocalRepo}.
+#' @param repoFrom While copying local repository. A character that specifies
+#' the directory of the Repository from which
+#' artifacts will be copied. If it is set to \code{NULL} (by default),
+#' it will use the \code{repoDir} specified in \link{setLocalRepo}.
 #'
 #' @param repoTo A character that specifies the directory of the Repository into which
 #' artifacts will be copied.
@@ -106,6 +108,9 @@
 #' # Searching for md5hashes of artifacts (without data related to them)
 #' # in the graphGallery  Repository
 #' archivistRepo <- system.file( "graphGallery", package = "archivist")
+#' # You may use: 
+#' # hashes <- unique(showLocalRepo(repoDir)[,1]) 
+#' # to extract all artifacts from repository
 #' hashes <- searchInLocalRepo( pattern="name",
 #'                              repoDir =  archivistRepo,
 #'                              fixed=FALSE )
@@ -130,8 +135,9 @@
 #' @family archivist
 #' @rdname copyToRepo
 #' @export
-copyLocalRepo <- function( repoFrom, repoTo, md5hashes ){
- stopifnot( is.character( c( repoFrom, repoTo, md5hashes ) ) )
+copyLocalRepo <- function( repoFrom = NULL, repoTo, md5hashes ){
+ stopifnot( is.character( repoFrom ) | is.null( repoFrom ))
+ stopifnot( is.character( c( repoTo, md5hashes ) ) )
  
  repoFrom <- checkDirectory( repoFrom )
  repoTo <- checkDirectory( repoTo )

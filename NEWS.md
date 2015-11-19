@@ -4,8 +4,8 @@ archivist 1.8
 * **Archivist Integration With GitHub API:** new functions:
 	1. It is possible to create new GitHub repository with an empty `archivist`-like `Repository` with `createEmptyGithubRepo` function. We also added `createEmptyLocalRepo` to maintain consistency with other sister functions. `createEmptyRepo` is now a wrapper around `createEmptyLocalRepo` and `createEmptyGithubRepo` functions.
 	2. One can now clone GitHub-archivist repo with new `cloneGithubRepo` function.
-	3. Added manual page to enable easier usage of this integration: ``?`archivist-github-integration```. 
-* **New functions `splitTagsLocal` and `splitTagsGithub` enabling to split tag column in database into two separate columns: tagKey and tagValue.
+	3. Added manual page to enable easier usage of this integration: ``?`archivist-github-integration```.
+* **New functions** `splitTagsLocal` and `splitTagsGithub` enabling to split `tag` column in database into two separate columns: `tagKey` and `tagValue`.
 * **Bugs fixed:**
 	1. `checkDirectory` function is now immune to directories that don't exist. This made
 `showLocalRepo` function working properly when passed an argument to the directory
@@ -24,6 +24,7 @@ that do not exist.
     4. `Invisible(NULL)` is the result of the function evaluation.
   7. Some changes in `copy*Repo`'s body:
     1. `Invisible(NULL)` is the result of the function evaluation
+    2. `repoFrom` parameter in `copyLocalRepo` is set to `NULL` as default.
   8. `copyFromLocalRepo` and `copyFromGithubRepo` copies only distinct records for table `tag` and `artifact` in `backpack.db` file, that can be seen with `show*Repo` and copies all mentioned artifacts for local version.
   9. `downloadDB` in `createEmptyRepo` function gives a user-friendly error.
   10. In `zipGithubRepo` unzipped file has the same name as zip file. Earlier it had a name of the temporary file that was difficult to notice.
@@ -38,10 +39,15 @@ that do not exist.
 		4. in `deleteRepo` function - using `deleteRoot = TRUE` argument. 
 		5. in `copy*Repo` function - using graphGallery local repository in `copyLocalRepo` function.
 		6. in `get*Tags` function - additional example using `getTagsLocal` function.
-	4. Alterations in the text of: `?Tags`, `?Repository`, `?md5hash`, `archivist-package`, `?saveToRepo`, `loadFromRepo`, `summaryRepo`, `showRepo`, `?searchInRepo`, `?createEmptyRepo`, `?rmFromRepo`, `?deleteRepo`, `copyToRepo`, `zipRepo`, `setRepo`, `getTags`, `addTagsRepo` documentation pages.
+	4. Alterations in the text of: `?Tags`, `?Repository`, `?md5hash`, `archivist-package`, `?saveToRepo`, `loadFromRepo`, `summaryRepo`, `showRepo`, `?searchInRepo`, `?createEmptyRepo`, `?rmFromRepo`, `?deleteRepo`, `copyToRepo`, `zipRepo`, `setRepo`, `getTags`, `addTagsRepo`, `magrittr` documentation pages.
 	5. Adding missing functions which are used in the archivist package now to `?Repository` documentation page.
 	6. `tempdir()` was replaced by `tempfile()` in examples sections of: `?addTagsRepo`, `?cache`, `copyToRepo`, `createEmptyRepo`, `?deleteRepo`, `loadFromRepo`, `?rmFromRepo`, `?saveToRepo`, `setRepo`, `showRepo`, `summaryRepo`, `?Tags`, `zipRepo` documentation pages. `tempdir` is existing  directory in which R works so calling `deleteRepo( exampleRepoDir, deleteRoot=TRUE)` removed important R files.
 	7. New tests for the following functions: `zip*Repo`.
+  8. In order to obtain cohesion with `Tags` in all functions there has been stated
+such an order:
+    1. If we use `Tags` in the text of function's documentation, examples' comments, then `Tags` are considered as a proper name and they begin with capital letter.
+    2. If we use `tags` in function's body, as parameters, as R object's atrributes, then they begin with small letter.
+    
 
 archivist 1.7
 ----------------------------------------------------------------

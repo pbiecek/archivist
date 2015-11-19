@@ -7,8 +7,8 @@
 asearch(patterns, repo = NULL)
 }
 \arguments{
-\item{patterns}{A character vector of tags. Only artifacts that 
-contain all tags are returned.}
+\item{patterns}{A character vector of Tags. Only artifacts that 
+contain all Tags are returned.}
 
 \item{repo}{One of following:
 
@@ -25,7 +25,7 @@ and reads all of them from a Github \link{Repository}. It's a wrapper around
 \link{multiSearchInGithubRepo} and \link{loadFromGithubRepo}.
 }
 \details{
-Function \code{asearch} reads all artifacts that contain given list of tags
+Function \code{asearch} reads all artifacts that contain given list of Tags
 from GitHub Repository.
 It uses the function \link{loadFromGithubRepo} and
 \link{multiSearchInGithubRepo} but has shorter name and

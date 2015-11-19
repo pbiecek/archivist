@@ -5,14 +5,16 @@
 \alias{copyLocalRepo}
 \title{Copy an Existing Repository into Another Repository}
 \usage{
-copyLocalRepo(repoFrom, repoTo, md5hashes)
+copyLocalRepo(repoFrom = NULL, repoTo, md5hashes)
 
 copyGithubRepo(repoTo, md5hashes, user = NULL, repo = NULL,
   branch = "master", repoDirGit = FALSE)
 }
 \arguments{
-\item{repoFrom}{A character that specifies the directory of the Repository from which
-artifacts will be copied. Works only on \code{copyLocalRepo}.}
+\item{repoFrom}{While copying local repository. A character that specifies
+the directory of the Repository from which
+artifacts will be copied. If it is set to \code{NULL} (by default),
+it will use the \code{repoDir} specified in \link{setLocalRepo}.}
 
 \item{repoTo}{A character that specifies the directory of the Repository into which
 artifacts will be copied.}
@@ -50,7 +52,8 @@ in \code{md5hashes} parameter. For more information about \code{md5hash} see \li
 }
 \note{
 If \code{repo} and \code{user} are set to \code{NULL} (as default) in Github mode then global parameters
-set in \link{setGithubRepo} function are used.
+set in \link{setGithubRepo} function are used. If one would like to copy whole Repository we suggest to 
+extract all \code{md5hashes} in this way \code{unique(showLocalRepo(repoDir)[,1])}.
 }
 \examples{
 \dontrun{
@@ -111,6 +114,9 @@ createEmptyRepo( exampleRepoDir )
 # Searching for md5hashes of artifacts (without data related to them)
 # in the graphGallery  Repository
 archivistRepo <- system.file( "graphGallery", package = "archivist")
+# You may use: 
+# hashes <- unique(showLocalRepo(repoDir)[,1]) 
+# to extract all artifacts from repository
 hashes <- searchInLocalRepo( pattern="name",
                              repoDir =  archivistRepo,
                              fixed=FALSE )

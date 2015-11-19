@@ -8,7 +8,7 @@
 #' \link{multiSearchInGithubRepo} and \link{loadFromGithubRepo}.
 #' 
 #' @details
-#' Function \code{asearch} reads all artifacts that contain given list of tags
+#' Function \code{asearch} reads all artifacts that contain given list of Tags
 #' from GitHub Repository.
 #' It uses the function \link{loadFromGithubRepo} and
 #' \link{multiSearchInGithubRepo} but has shorter name and
@@ -20,8 +20,8 @@
 #' 
 #' NULL in this case search will be performed in the default repo.
 #' 
-#' @param patterns  A character vector of tags. Only artifacts that 
-#' contain all tags are returned.  
+#' @param patterns  A character vector of Tags. Only artifacts that 
+#' contain all Tags are returned.  
 #' 
 #' @return This function returns list of artifacts (by value).
 #' 
