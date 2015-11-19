@@ -43,6 +43,11 @@ that do not exist.
 	5. Adding missing functions which are used in the archivist package now to `?Repository` documentation page.
 	6. `tempdir()` was replaced by `tempfile()` in examples sections of: `?addTagsRepo`, `?cache`, `copyToRepo`, `createEmptyRepo`, `?deleteRepo`, `loadFromRepo`, `?rmFromRepo`, `?saveToRepo`, `setRepo`, `showRepo`, `summaryRepo`, `?Tags`, `zipRepo` documentation pages. `tempdir` is existing  directory in which R works so calling `deleteRepo( exampleRepoDir, deleteRoot=TRUE)` removed important R files.
 	7. New tests for the following functions: `zip*Repo`.
+  8. In order to obtain cohesion with `Tags` in all functions there has been stated
+such an order:
+    1. If we use `Tags` in the text of function's documentation, examples' comments, then `Tags` are considered as a proper name and they begin with capital letter.
+    2. If we use `tags` in function's body, as parameters, as R object's atrributes, then they begin with small letter.
+    
 
 archivist 1.7
 ----------------------------------------------------------------

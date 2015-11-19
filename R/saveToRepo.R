@@ -113,11 +113,11 @@
 #' 
 #' @param archiveData A logical value denoting whether to archive the data from the \code{artifact}.
 #' 
-#' @param archiveTags A logical value denoting whether to archive tags from the \code{artifact}.
+#' @param archiveTags A logical value denoting whether to archive Tags from the \code{artifact}.
 #' 
 #' @param archiveMiniature A logical value denoting whether to archive a miniature of the \code{artifact}.
 #' 
-#' @param userTags A character vector with tags. These tags will be added to the repository along with the artifact.
+#' @param userTags A character vector with Tags. These Tags will be added to the repository along with the artifact.
 #' 
 #' @param repoDir A character denoting an existing directory in which an artifact will be saved.
 #' If it is set to \code{NULL} (by default), it will use the \code{repoDir} specified in \link{setLocalRepo}.
@@ -231,7 +231,7 @@
 #' saveToRepo( qda1, repoDir=exampleRepoDir, archiveData = FALSE,
 #'             archiveMiniature = FALSE)
 #' 
-#' # one can specify his own additional tags which are to be archived with artifact
+#' # one can specify his own additional Tags which are to be archived with artifact
 #' 
 #' attr( model, "tags" ) = c( "do not delete", "my favourite model" )
 #' saveToRepo( model, repoDir=exampleRepoDir )
@@ -332,16 +332,16 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
 #   # rm( list = md5hash, envir = .ArchivistEnv ) 
    }
   
-  # whether to add tags
+  # whether to add Tags
   if ( archiveTags ) {
     extractedTags <- extractTags( artifact, objectNameX = objectName )
-    # remove name from tags
+    # remove name from Tags
     if (!rememberName) {
       extractedTags <- extractedTags[!grepl(extractedTags, pattern="^name:")]
     }
     derivedTags <- attr( artifact, "tags" ) 
     sapply( c( extractedTags, userTags, derivedTags), addTag, md5hash = md5hash, dir = repoDir )
-    # attr( artifact, "tags" ) are tags specified by an user
+    # attr( artifact, "tags" ) are Tags specified by a user
   }
   
   # whether to archive data 

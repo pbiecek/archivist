@@ -7,23 +7,23 @@
 #' To create an application one needs to point the name of artifacts repository.
 #' The application is generated on the fly. Right now two controllers are exposed. 
 #' A text input field and a slider. Tags that are typed into text field are used for searching in repository. 
-#' Object that have same tags are then presented on right panel.
+#' Object that have same Tags are then presented on right panel.
 #' These object might be also downloaded just by click.
 #' To learn more about artifacts visit \link[archivist]{archivist-package}.
 #' 
 #' @details
 #' \code{shinySearchInLocalRepo} searches for artifacts in a Repository using their's \code{Tag} 
 #' (e.g., \code{name}, \code{class} or \code{archiving date}). \code{Tags} are submitted in a 
-#' text input in a shiny application. Many tags may be specified, they should be comma separated. 
-#' User can specify more tags when artifact is created, tags like phase, project, author etc.
+#' text input in a shiny application. Many Tags may be specified, they should be comma separated. 
+#' User can specify more Tags when artifact is created, Tags like phase, project, author etc.
 #' 
-#' In the search query one can add tags started with sort: or sort:-
+#' In the search query one can add Tags started with sort: or sort:-
 #' then miniatures will be sorted accordingly.
-#' For exaple sort:class will sort along class tag, while sort:-class backward.
+#' For exaple sort:class will sort along class Tag, while sort:-class backward.
 #' sort:createdDate will sort along createdDate and sort:-createdDate backward.
 #' 
 #' \code{Tags}, submitted in the text field, should be given according to the 
-#' format: \code{"TagType:TagTypeValue"} - see examples.
+#' format: \code{"TagKey:TagValue"} - see examples.
 #'   
 #' @return
 #' \code{shinySearchInLocalRepo} runs a shiny application.
@@ -76,7 +76,7 @@ shinySearchInLocalRepo <- function( repoDir=NULL, host = '0.0.0.0' ){
       output$plot <- shiny::renderUI({ 
         tags <- strsplit(input$search, split=" *, *")[[1]]
         sortTags <- grep(tags, pattern="^sort:")
-        # tags with sort: key should be removed from search
+        # Tags with sort: key should be removed from search
         if (length(sortTags) > 0) {
           md5s <- multiSearchInLocalRepo( tags[-sortTags], repoDir, fixed = FALSE, intersect = TRUE )
         } else {

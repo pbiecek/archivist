@@ -121,7 +121,7 @@
 #'   }
 #' }
 #' 
-#' When none of above is specified, tags are assigned by default
+#' When none of above is specified, Tags are assigned by default
 #' 
 #' \describe{
 #'   \item{\code{default}}{

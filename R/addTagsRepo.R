@@ -6,9 +6,9 @@
 #' \code{addTagsRepo} adds new \link{Tags} to the existing \link{Repository}.
 #' 
 #' @details
-#' \code{addTagsRepo} function adds new tags to artifacts that are already stored
-#' in the repository. One can add new \code{tags} either explicitly with \code{tags} argument
-#' or by passing a function which extracts \code{tags} from selected artifacts
+#' \code{addTagsRepo} function adds new Tags to artifacts that are already stored
+#' in the repository. One can add new \code{Tags} either explicitly with \code{tags} parameter
+#' or by passing a function which extracts \code{Tags} from selected artifacts
 #' corresponding to \code{md5hashes}. To learn more about artifacts visit
 #' \link[archivist]{archivist-package}.
 #'
@@ -21,7 +21,7 @@
 #' corresponding artifacts new \code{Tags} should be added. See \code{Note} 
 #' to get to know about the length of \code{tags} and \code{md5hashes} parameters.
 #' 
-#' @param tags A character vector which specifies what kind of tags should be added to
+#' @param tags A character vector which specifies what kind of Tags should be added to
 #' artifacts corresponding to given \code{md5hashes}. See \code{Note} to get to know about
 #' the length of \code{tags} and \code{md5hashes} parameters.
 #' One can specify either \code{FUN} or \code{tags}.
@@ -45,7 +45,7 @@
 #' \dontrun{
 #' 
 #' ## We Take all artifacts of lm class from repository, 
-#' ## extract R^2 for them and store as R^2:number tags
+#' ## extract R^2 for them and store as R^2:number Tags
 #' 
 #' # Creating empty repository
 #' exampleRepoDir <- tempfile()
@@ -57,11 +57,11 @@
 #' m2 <- lm(Sepal.Width~Species, iris)
 #' saveToRepo(m2, exampleRepoDir)
 #' 
-#' # We may see what kind of tags are related to "m1" artifact corresponding to
+#' # We may see what kind of Tags are related to "m1" artifact corresponding to
 #' # "9e66edd297c2f291446f3503c01d443a" md5hash
 #' getTagsLocal("9e66edd297c2f291446f3503c01d443a", exampleRepoDir, "")
 #' 
-#' # We may see what kind of tags are related to "m2" artifact corresponding to
+#' # We may see what kind of Tags are related to "m2" artifact corresponding to
 #' # "da1bcaf68752c146903f700c1a458438" md5hash
 #' getTagsLocal("da1bcaf68752c146903f700c1a458438", exampleRepoDir, "")
 #' 
@@ -74,10 +74,10 @@
 #' # Adding new tag "R^2: " using FUN parameter
 #' addTagsRepo(md5hashes, exampleRepoDir, function(x) paste0("R^2:",summary(x)$r.square))
 #' 
-#' # And now: tags related to "m1" artifact are
+#' # And now: Tags related to "m1" artifact are
 #' getTagsLocal("9e66edd297c2f291446f3503c01d443a", exampleRepoDir, "")
 #' 
-#' # And now: tags related to "m2" artifact are
+#' # And now: Tags related to "m2" artifact are
 #' getTagsLocal("da1bcaf68752c146903f700c1a458438", exampleRepoDir, "")
 #' 
 #' # One more look at our Repo
@@ -106,19 +106,19 @@ addTagsRepo <- function( md5hashes, repoDir = NULL, FUN = NULL, tags = NULL, ...
   
   repoDir <- checkDirectory( repoDir )
   
-  if( !is.null(tags) ){ #applying only simple tags to given md5hashes
+  if( !is.null(tags) ){ #applying only simple Tags to given md5hashes
     helpfulDF <- data.frame( md5hashes, tags)
     apply( helpfulDF, 1, function(row){
       addTag( tag = row[2], md5hash = row[1], dir = repoDir )
     })
-  }else{ #applying tags after evaluations on artifacts correspoding to given md5hashes
+  }else{ #applying Tags after evaluations on artifacts correspoding to given md5hashes
     
     # load artifacts into new env and
-    # create tags for those artifacts
+    # create Tags for those artifacts
     helpfulDF <- lapply( md5hashes, function(x) {
       tmpObj <- loadFromLocalRepo(x, repoDir = repoDir, value = TRUE)
       tags <- FUN( tmpObj, ... )
-      # FUN may returns different number of tags (=more than one) for different objects
+      # FUN may returns different number of Tags (=more than one) for different objects
       sapply(tags, addTag, md5hash = x, dir = repoDir )
       c(x, tags)
     } )
