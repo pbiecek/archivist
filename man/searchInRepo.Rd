@@ -133,7 +133,7 @@ set in \link{setGithubRepo} function are used.
   
   # search examples
   
-  # tag search, fixed version
+  # Tag search, fixed version
   searchInLocalRepo( "class:ggplot", repoDir = exampleRepoDir )
   searchInLocalRepo( "name:myplot123", repoDir = exampleRepoDir )
   searchInLocalRepo( "varname:Sepal.Width", repoDir = exampleRepoDir )
@@ -141,7 +141,7 @@ set in \link{setGithubRepo} function are used.
   searchInLocalRepo( "coefname:Petal.Length", repoDir = exampleRepoDir )
   searchInLocalRepo( "ac:0.797755535467609", repoDir = exampleRepoDir )
   
-  # tag search, regex version
+  # Tag search, regex version
   
   searchInLocalRepo( "class", repoDir = exampleRepoDir, fixed = FALSE )
   searchInLocalRepo( "name", repoDir = exampleRepoDir, fixed = FALSE )
@@ -152,12 +152,12 @@ set in \link{setGithubRepo} function are used.
   showGithubRepo( user="pbiecek", repo="archivist" )
   showGithubRepo( user="pbiecek", repo="archivist", method = "tags" )
   
-  # tag search, fixed version
+  # Tag search, fixed version
   searchInGithubRepo( "varname:Sepal.Width", user="pbiecek", repo="archivist" )
   searchInGithubRepo( "class:lm", user="pbiecek", repo="archivist", branch="master" )
   searchInGithubRepo( "name:myplot123", user="pbiecek", repo="archivist" )
   
-  # tag search, regex version
+  # Tag search, regex version
   searchInGithubRepo( "class", user="pbiecek", repo="archivist",  fixed = FALSE )
   searchInGithubRepo( "name", user="pbiecek", repo="archivist", fixed = FALSE )
   

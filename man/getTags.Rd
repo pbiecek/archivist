@@ -80,7 +80,7 @@ hash <- mtcars \%a\%
 showLocalRepo(exampleRepoDir)
 showLocalRepo(exampleRepoDir, method = "tags")
 
-# We search for a tag with default "name" regular expression corresponding to 
+# We search for a Tag with default "name" regular expression corresponding to 
 # hash md5hash.
 getTagsLocal( md5hash = hash, exampleRepoDir )
 
@@ -100,10 +100,10 @@ showLocalRepo(exampleRepoDir, method = "tags")
 # We can notice that there is only one md5hash in repo so we will use it
 hash <- showLocalRepo(exampleRepoDir)[,1]
 
-# We search for a tag with "varname" regular expression corresponding to 
+# We search for a Tag with "varname" regular expression corresponding to 
 # hash md5hash.
 getTagsLocal( md5hash = hash, exampleRepoDir, tag = "varname" ) 
-# There are 5 different tags with "varname" regular expression
+# There are 5 different Tags with "varname" regular expression
 
 # We needn't use the whole expression "varname". We may use its abbreviation
 # and get the same result.
@@ -116,13 +116,13 @@ rm( exampleRepoDir )
 ## EXAMPLE: pbiecek archivist repository on Github
 
 showGithubRepo(user="pbiecek", repo="archivist")
-# We search for a tag with default "name" regular expression corresponding to 
+# We search for a Tag with default "name" regular expression corresponding to 
 # "cd6557c6163a6f9800f308f343e75e72" md5hash.
 getTagsGithub( "cd6557c6163a6f9800f308f343e75e72",
                 user="pbiecek", repo="archivist")
                 
 ## EXAMPLE: many archivist-like Repositories on one Github repository
-# We search for a tag with default "name" regular expression corresponding to 
+# We search for a Tag with default "name" regular expression corresponding to 
 # "ff575c261c949d073b2895b05d1097c3" md5hash.
 getTagsGithub("ff575c261c949d073b2895b05d1097c3", user="MarcinKosinski",
                repo="Museum", branch="master", repoDirGit="ex1")

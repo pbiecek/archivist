@@ -61,7 +61,7 @@ perform:
 }
 \note{
 \code{md5hash} can be a result of the \link{searchInLocalRepo} function called
-by \code{tag = NAME} argument, where \code{NAME} is a tag that describes
+by \code{tag = NAME} argument, where \code{NAME} is a Tag that describes
 the property of the artifacts to be deleted. 
 
 It is not possible to use a vector of artifacts' \code{md5hashes} abbreviations

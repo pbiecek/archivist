@@ -19,7 +19,7 @@ Enables archiving artifacts with their chaining code - see examples and vignette
 }
 \details{
 The extension works as follows, the result of \code{\%a\%} operator is archived together 
-with lhs (as an artifact) and rhs (as a tag). This allows to present a history of
+with lhs (as an artifact) and rhs (as a Tag). This allows to present a history of
 an artifact. This option works only if a default repository is set.
 }
 \examples{
@@ -45,7 +45,7 @@ hflights \%a\%
             dep = mean(DepDelay, na.rm = TRUE)) \%a\%
   filter(arr > 30 | dep > 30)
   
-# Let's check how tags of subsequent artifacts look like
+# Let's check how Tags of subsequent artifacts look like
 showLocalRepo()
 getTagsLocal("a8ce013a8e66df222be278122423dc60", tag = "") #1
 getTagsLocal("9d91fe67fd51f3bfdc9db0a596b12b38", tag = "") #2

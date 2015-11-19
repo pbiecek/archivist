@@ -29,7 +29,7 @@ It may be useful for objects that can be changed externally (like queries to dat
 \details{
 \code{cache} function stores all results of function calls in local \link{Repository} 
 specified by the \code{cacheRepo} argument.
-The md5 hash of \code{FUN} and it's arguments is added as an tag to the repository.
+The md5 hash of \code{FUN} and it's arguments is added as an Tag to the repository.
 Note that cache is a good solution if objects are not that big but calculations are time consuming. 
 If objects are big and calculations are easy, then disk input-output operations may take more time 
 than calculations itself.
