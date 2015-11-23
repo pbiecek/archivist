@@ -144,6 +144,13 @@ splitTags <- function( repoDir = NULL, repo = NULL, user = NULL,
                     method = "tags" ) -> tags_df
   }
   
+  if (nrow(tags_df) == 0 & local) {
+    stop("There were no Tags for this Repository. Try showLocalRepo(method='tags') to ensure there are any Tags.")
+  }
+  if (nrow(tags_df) == 0 & !local) {
+    stop("There were no Tags for this Repository. Try showGithubRepo(method='tags') to ensure there are any Tags.")
+  }
+  
   # We will split tag column into tagKey and tagValue columns
   strsplit(tags_df$tag, ":") %>%
     lapply( function(element){
@@ -154,6 +161,9 @@ splitTags <- function( repoDir = NULL, repo = NULL, user = NULL,
       } else if (length(element) == 1){ 
         # when a user gives Tag which does not match "TagKey:TagValue" structure
         element <- c("userTags", element)
+      } else if (length(element) == 0){ 
+        # when a user gives Tag which is a character of length 0 :)
+        element <- c("userTags", "")
       }
       element
     }) %>% 
