@@ -138,7 +138,7 @@
 #' @rdname deleteRepo
 #' @export
 deleteRepo <- function(repoDir, deleteRoot = FALSE){
-  stopifnot( is.character( repoDir ) )
+  stopifnot( is.character( repoDir ), length( repoDir ) == 1 )
   
   repoDir <- checkDirectory( repoDir )
   

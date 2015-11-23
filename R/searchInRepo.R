@@ -24,10 +24,10 @@
 #' by the \link{saveToRepo} function. If the artifact
 #' is not in the Repository then a logical value \code{FALSE} is returned.
 #' 
-#' @param pattern If \code{fixed = TRUE}: a character denoting a \link{Tags} which is to be searched for in the Repository.
+#' @param pattern If \code{fixed = TRUE}: a character denoting a \code{Tag} which is to be searched for in the Repository.
 #' It is also possible to specify \code{pattern} as a list of 
 #' length 2 with \code{dateFrom} and \code{dateTo}; see details. If \code{fixed = FALSE}: a regular expression 
-#' specifying the beginning of a \link{Tags}, which will be used to search for artifacts.
+#' specifying the beginning of a \code{Tag}, which will be used to search for artifacts.
 #' 
 #' @param patterns A character vector of \code{patterns}(see \code{pattern}) to find artifacts in the Repository.
 #' If \code{intersect = TRUE} then artifacts that 
@@ -187,7 +187,7 @@
 #' @rdname searchInRepo
 #' @export
 searchInLocalRepo <- function( pattern, repoDir = NULL, fixed = TRUE, realDBname = TRUE ){
-  stopifnot( is.character( repoDir ) | is.null( repoDir ) )
+  stopifnot( ( is.character( repoDir ) & length( repoDir ) == 1 ) | is.null( repoDir ) )
   stopifnot( is.logical( fixed ) )
   stopifnot( is.character( pattern ) | is.list( pattern ) ) 
   stopifnot( length( pattern ) == 1 | length( pattern ) == 2 )
@@ -224,7 +224,7 @@ searchInLocalRepo <- function( pattern, repoDir = NULL, fixed = TRUE, realDBname
 searchInGithubRepo <- function( pattern, repo = NULL, user = NULL, branch = "master", repoDirGit = FALSE,
                                 fixed = TRUE ){
 
-  stopifnot( is.character( branch ), is.logical( fixed ) )
+  stopifnot( is.character( branch ), is.logical( fixed ), length( branch ) == 1 )
   stopifnot( is.character( pattern ) | is.list( pattern ) )
   stopifnot( length( pattern ) == 1 | length( pattern ) == 2 )
 

@@ -136,8 +136,8 @@
 #' @rdname copyToRepo
 #' @export
 copyLocalRepo <- function( repoFrom = NULL, repoTo, md5hashes ){
- stopifnot( is.character( repoFrom ) | is.null( repoFrom ))
- stopifnot( is.character( c( repoTo, md5hashes ) ) )
+ stopifnot( (is.character( repoFrom ) & length( repoFrom ) == 1) | is.null( repoFrom ) )
+ stopifnot( is.character( c( repoTo, md5hashes ) ), length( repoTo ) == 1, length( md5hashes ) > 0 )
  
  repoFrom <- checkDirectory( repoFrom )
  repoTo <- checkDirectory( repoTo )
@@ -151,7 +151,8 @@ copyLocalRepo <- function( repoFrom = NULL, repoTo, md5hashes ){
 #' @export
 copyGithubRepo <- function( repoTo, md5hashes, user = NULL, repo = NULL, branch="master", 
                             repoDirGit = FALSE){
-  stopifnot( is.character( c( repoTo, branch, md5hashes ) ) )
+  stopifnot( is.character( c( repoTo, branch, md5hashes ) ),
+             length(repoTo) == 1, length(branch) == 1, length(md5hashes) > 0)
 
   GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
   

@@ -93,11 +93,10 @@
 #' @export
 addTagsRepo <- function( md5hashes, repoDir = NULL, FUN = NULL, tags = NULL, ...){
   stopifnot( xor( is.null(FUN), is.null(tags)))
-  stopifnot( is.character( md5hashes ) )
-  stopifnot( length(md5hashes) > 0 )
-  stopifnot( is.character( repoDir ) | is.null( repoDir ) )
+  stopifnot( is.character( md5hashes ), length( md5hashes ) > 0 )
+  stopifnot( ( is.character( repoDir ) & length( repoDir ) == 1 ) | is.null( repoDir ) )
   
-  if ( is.null(FUN) ){ stopifnot( is.character( tags ) ) }
+  if ( is.null(FUN) ){ stopifnot( is.character( tags ), length( tags ) > 0 ) }
   if ( is.null(tags) ){ stopifnot( is.function( FUN ) ) }
   if ( !is.null(tags) ){ stopifnot( 
     length( md5hashes )%%length( tags ) == 0 | length( tags )%%length( md5hashes ) == 0) }
