@@ -122,7 +122,7 @@
 #' @rdname setRepo
 #' @export
 setLocalRepo <- function( repoDir ){
-  stopifnot( is.character(repoDir) )
+  stopifnot( is.character(repoDir), length( repoDir ) == 1 )
   
   repoDir <- checkDirectory( repoDir )
   
@@ -138,8 +138,9 @@ setLocalRepo <- function( repoDir ){
 #' @export
 setGithubRepo <- function( user, repo, branch = "master", 
                            repoDirGit = FALSE){
-  stopifnot( is.character( c( repo, user, branch ) ) )
-  stopifnot( is.logical( repoDirGit ) | is.character( repoDirGit ) )
+  stopifnot( is.character( c( repo, user, branch ) ),
+             length( repo ) == 1, length( user ) == 1, length( branch ) == 1 )
+  stopifnot( is.logical( repoDirGit ) | (is.character( repoDirGit ) & length( repoDirGit ) == 1 ) )
   
   aoptions("user", user)
   aoptions("repo", repo)
@@ -167,9 +168,9 @@ useGithubSetupArguments <- function(){
 
 
 GithubCheck <- function( repo, user, repoDirGit ){
-  stopifnot( is.logical( repoDirGit ) | is.character( repoDirGit ) )
-  stopifnot( is.null( repo ) | is.character( repo ) )
-  stopifnot( is.null( user ) | is.character( user ) )
+  stopifnot( is.logical( repoDirGit ) | ( is.character( repoDirGit ) & length( repoDirGit ) == 1) )
+  stopifnot( is.null( repo ) | ( is.character( repo ) & length( repo ) == 1 ) )
+  stopifnot( is.null( user ) | ( is.character( user ) & length( user ) == 1 ) )
   #
   if( is.logical( repoDirGit ) ){
     if ( repoDirGit ){

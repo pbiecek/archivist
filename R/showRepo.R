@@ -176,8 +176,8 @@
 #' @rdname showRepo
 #' @export
 showLocalRepo <- function( repoDir = NULL, method = "md5hashes" ){
-  stopifnot( is.character( method ) )
-  stopifnot( is.character( repoDir ) | is.null( repoDir ) )
+  stopifnot( is.character( method ), length( method ) == 1 )
+  stopifnot( ( is.character( repoDir ) & length( repoDir ) == 1 ) | is.null( repoDir ) )
   
   repoDir <- checkDirectory( repoDir )
   
@@ -189,7 +189,7 @@ showLocalRepo <- function( repoDir = NULL, method = "md5hashes" ){
 #' @export
 showGithubRepo <- function( repo = NULL, user = NULL, branch = "master", repoDirGit = FALSE,
                             method = "md5hashes" ){
-  stopifnot( is.character( c( method, branch ) ) )
+  stopifnot( is.character( c( method, branch ) ), length( method ) == 1, length( branch ) == 1  )
   
   GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
   

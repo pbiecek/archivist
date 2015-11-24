@@ -132,7 +132,7 @@
 #' @rdname summaryRepo
 #' @export
 summaryLocalRepo <- function( repoDir = NULL ){
-  stopifnot( is.character( repoDir ) | is.null( repoDir ) )
+  stopifnot( ( is.character( repoDir ) & length( repoDir ) == 1 ) | is.null( repoDir ) )
   
   repoDir <- checkDirectory( repoDir )
   
@@ -145,7 +145,7 @@ summaryLocalRepo <- function( repoDir = NULL ){
 #' @rdname summaryRepo
 #' @export
 summaryGithubRepo <- function( repo = NULL, user = NULL, branch = "master", repoDirGit = FALSE ){
-  stopifnot( is.character( branch ) )
+  stopifnot( is.character( branch ), length( branch ) == 1 )
 
   GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
   

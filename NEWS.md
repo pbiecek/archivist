@@ -47,6 +47,8 @@ that do not exist.
 such an order:
     1. If we use `Tags` in the text of function's documentation, examples' comments, then `Tags` are considered as a proper name and they begin with capital letter.
     2. If we use `tags` in function's body, as parameters, as R object's atrributes, then they begin with small letter.
+  9. Added checking if parameters have appropriate lengths in the following function's bodies:
+`?addTagsRepo`, `asearch`, `?cloneGithubRepo`, `copy*Repo`, `createEmptyLocalRepo`, `getTags*`, `loadFrom*Repo`, `?rmFromRepo`, `?saveToRepo`, `searchIn*Repo`, `set*Repo`, `?shinySearchInLocalRepo`, `showRepo`, `summary*Repo`, `zip*Repo`
     
 
 archivist 1.7

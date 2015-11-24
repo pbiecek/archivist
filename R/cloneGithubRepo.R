@@ -28,12 +28,13 @@
 #' @export
 cloneGithubRepo <- function(repoURL, local_path = NULL, ...){
   stopifnot(url.exists(repoURL))
-  stopifnot(is.character(local_path) | is.null(local_path))
+  stopifnot((is.character(local_path) & length(local_path) == 1) | is.null(local_path))
   
   if (is.null(local_path)) {
     local_path <-tail(strsplit(repoURL,
                                "/")[[1]],1)
   }
+  
   if (!file.exists(local_path)) {
     dir.create(local_path)
   }

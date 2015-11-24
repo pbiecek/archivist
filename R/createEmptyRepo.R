@@ -139,8 +139,8 @@ createEmptyRepo <- function( repoDir, force = TRUE, default = FALSE,
 
 #' @rdname createEmptyRepo
 #' @export
-createEmptyLocalRepo <- function( repoDir, force = TRUE, default = FALSE){
-  stopifnot( is.character( repoDir ) )
+createEmptyLocalRepo <- function( repoDir, force = TRUE, default = FALSE ){
+  stopifnot( is.character( repoDir ), length( repoDir ) == 1 )
   
   if ( !file.exists( repoDir ) & !force ) 
     stop( paste0("Directory ", repoDir, " does not exist. Try with force=TRUE.") )

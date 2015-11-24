@@ -228,8 +228,8 @@
 #' @rdname loadFromRepo
 #' @export
 loadFromLocalRepo <- function( md5hash, repoDir = NULL, value = FALSE ){
-  stopifnot( is.character( md5hash ) )
-  stopifnot( is.character( repoDir ) | is.null( repoDir ) )
+  stopifnot( is.character( md5hash ), length( md5hash ) == 1 )
+  stopifnot( (is.character( repoDir ) & length( repoDir ) == 1) | is.null( repoDir ) )
   stopifnot( is.logical( value ) )
   
   repoDir <- checkDirectory( repoDir )
@@ -265,7 +265,7 @@ loadFromLocalRepo <- function( md5hash, repoDir = NULL, value = FALSE ){
 #' @rdname loadFromRepo
 #' @export
 loadFromGithubRepo <- function( md5hash, repo = NULL, user = NULL, branch = "master", repoDirGit = FALSE, value = FALSE ){
-  stopifnot( is.character( c( md5hash, branch ) ) )
+  stopifnot( is.character( c( md5hash, branch ) ), length( md5hash ) == 1, length( branch ) == 1 )
   stopifnot( is.logical( value ) )
   
   GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R

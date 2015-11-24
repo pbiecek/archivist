@@ -300,8 +300,8 @@
 #' @export
 rmFromRepo <- function( md5hash, repoDir = NULL, removeData = FALSE, 
                         removeMiniature = FALSE, force = FALSE, many = FALSE ){
-  stopifnot( is.character( md5hash  ) )
-  stopifnot( is.character( repoDir ) | is.null( repoDir ) )
+  stopifnot( is.character( md5hash  ), length( md5hash ) == 1 )
+  stopifnot( ( is.character( repoDir ) & length( repoDir ) == 1 ) | is.null( repoDir ) )
   stopifnot( is.logical( c( removeData, removeMiniature, many ) ) )
     
   repoDir <- checkDirectory( repoDir )

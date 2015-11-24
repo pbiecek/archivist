@@ -92,7 +92,8 @@
 #' @rdname zipRepo
 #' @export
 zipLocalRepo <- function( repoDir = NULL, repoTo = getwd() , zipname="repository.zip"){
-  stopifnot( is.character( repoDir ) | is.null( repoDir ) )
+  stopifnot( ( is.character( repoDir ) & length( repoDir ) == 1 ) | is.null( repoDir ) )
+  stopifnot( is.character( repoTo ), length( repoTo ) == 1 )
   
   repoTo <- checkDirectory2( repoTo )
   if (file.exists(paste0(repoTo, zipname))) {
@@ -112,7 +113,8 @@ zipLocalRepo <- function( repoDir = NULL, repoTo = getwd() , zipname="repository
 #' @export
 zipGithubRepo <- function( repoTo = getwd(), user = NULL, repo = NULL, branch = "master", 
                            repoDirGit = FALSE, zipname = "repository.zip"){
-  stopifnot( is.character( c( repoTo, branch, zipname ) ) )
+  stopifnot( is.character( c( repoTo, branch, zipname ) ), 
+             length( repoTo ) == 1, length( branch ) == 1,  length( zipname ) == 1)
   stopifnot( file.exists( repoTo ) )
 
   GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R

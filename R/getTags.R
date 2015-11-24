@@ -126,8 +126,8 @@
 #' @rdname getTags
 #' @export
 getTagsLocal <- function( md5hash, repoDir = NULL, tag ="name"){
-  stopifnot( is.character( c( md5hash, tag ) ) )
-  stopifnot( is.character( repoDir ) | is.null( repoDir ) )
+  stopifnot( is.character( c( md5hash, tag ) ), length( md5hash ) ==  1, length( tag ) == 1)
+  stopifnot( (is.character( repoDir ) & length( repoDir ) == 1) | is.null( repoDir ) )
   repoDir <- checkDirectory( repoDir ) 
   
 
@@ -142,7 +142,8 @@ getTagsLocal <- function( md5hash, repoDir = NULL, tag ="name"){
 #' @export
 getTagsGithub <- function( md5hash, user = NULL, repo = NULL, branch = "master", repoDirGit = FALSE,
                            tag ="name"){
-  stopifnot( is.character( c( md5hash, branch, tag ) ) )
+  stopifnot( is.character( c( md5hash, branch, tag ) ), 
+             length( md5hash ) ==  1, length( branch ) == 1, length( tag ) == 1 )
 
   GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
   

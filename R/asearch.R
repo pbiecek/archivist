@@ -39,7 +39,7 @@
 #' @rdname asearch
 #' @export
 asearch <- function( patterns, repo = NULL){
-  stopifnot( is.character( repo ) | is.null(repo) )
+  stopifnot( (is.character( repo ) & length( repo ) == 1) | is.null( repo ) )
   stopifnot( is.character( patterns ) )
 
   res <- list()

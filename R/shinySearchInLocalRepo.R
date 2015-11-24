@@ -53,7 +53,7 @@ shinySearchInLocalRepo <- function( repoDir=NULL, host = '0.0.0.0' ){
   if (!requireNamespace("shiny", quietly = TRUE)) {
     stop("shiny package required for shinySearchInLocalRepo function")
   }
-  stopifnot( is.character( repoDir ) | is.null( repoDir ) )
+  stopifnot( ( is.character( repoDir ) & length( repoDir ) == 1 ) | is.null( repoDir ) )
 
   shiny::runApp(list(
     ui = shiny::shinyUI(shiny::fluidPage(

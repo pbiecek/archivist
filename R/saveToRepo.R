@@ -278,7 +278,7 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
                         silent=aoptions("silent"), ascii = FALSE) { 
   stopifnot( is.logical( c( archiveData, archiveTags, archiveMiniature, 
                                                      chain, rememberName, ascii ) ) )
-  stopifnot( is.character( repoDir ) | is.null( repoDir ) )
+  stopifnot( ( is.character( repoDir ) & length( repoDir ) == 1 ) | is.null( repoDir ) )
 #   stopifnot( is.character( format ) & length( format ) == 1 & any(format %in% c("rda", "rdx")) )
   
   md5hash <- digest( artifact )
