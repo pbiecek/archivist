@@ -33,7 +33,7 @@
 #' # read the object
 #' asearch("pbiecek/graphGallery", 
 #'            patterns = list("class:lm", 
-#'                 "varname:Species")))
+#'                 "varname:Species"))
 #' }
 #' @family archivist
 #' @rdname asearch

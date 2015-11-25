@@ -252,7 +252,7 @@ createEmptyGithubRepo <- function(repoName,
   # git add remote
   remote_add(repo,
              "upstream2",
-             paste0("https://github.com/", user.name, "/", repoName, ".git"))
+             file.path("https://github.com", user.name, paste0(repoName, ".git")))
   
   # GitHub authorization
   # to perform pull and push operations
@@ -290,7 +290,7 @@ addTag <- function( tag, md5hash, createdDate = now(), dir ){
 # and they do not name this file as backpack.db in repoDir directory
 getConnectionToDB <- function( repoDir, realDBname ){
     if ( realDBname ){
-      conn <- dbConnect( get( "sqlite", envir = .ArchivistEnv ), paste0( repoDir, "backpack.db" ) )
+      conn <- dbConnect( get( "sqlite", envir = .ArchivistEnv ), file.path( repoDir, "backpack.db" ) )
     }else{
       conn <- dbConnect( get( "sqlite", envir = .ArchivistEnv ), repoDir )
     }
@@ -311,12 +311,14 @@ readSingleTable <- function( dir, table, realDBname = TRUE ){
   return( tabs )
 }
 
-# for Github version funtion tha require to load database
+# for Github version function that requires to load database
 downloadDB <- function( repo, user, branch, repoDirGit ){
    if( is.logical( repoDirGit ) ){
-     URLdb <- paste0( get( ".GithubURL", envir = .ArchivistEnv) , user, "/", repo, "/", branch, "/backpack.db") 
+     URLdb <- file.path( get( ".GithubURL", envir = .ArchivistEnv) ,
+                         user, repo, branch, "backpack.db") 
    }else{
-     URLdb <- paste0( get( ".GithubURL", envir = .ArchivistEnv) , user, "/", repo, "/", branch, "/", repoDirGit, "/backpack.db") 
+     URLdb <- file.path( get( ".GithubURL", envir = .ArchivistEnv) ,
+                         user, repo, branch, repoDirGit, "backpack.db") 
    }
    if (url.exists(URLdb)){
      db <- getBinaryURL( URLdb )
@@ -339,10 +341,10 @@ checkDirectory <- function( directory, create = FALSE ){
   }
   # check whether it is second call of checkDirectory 
   # (e.g CreatEmptyRepo + default = TRUE)
-  if ( grepl("/$", x = directory , perl=TRUE) ){
-    directory <- gsub(pattern = ".$", replacement = "",
-                      x = directory, perl = TRUE)
-  }
+#   if ( grepl("/$", x = directory , perl=TRUE) ){
+#     directory <- gsub(pattern = ".$", replacement = "",
+#                       x = directory, perl = TRUE)
+#   }
   # check property of directory
   if ( !create ){
     # check whether repository exists
@@ -355,21 +357,16 @@ checkDirectory <- function( directory, create = FALSE ){
     }
   }
   # check if repoDir has "/" at the end and add it if not
-  if ( !grepl("/$", x = directory , perl=TRUE) ){
-    directory <- paste0(  directory, "/"  )
-  }
+#   if ( !grepl("/$", x = directory , perl=TRUE) ){
+#     directory <- paste0(  directory, "/"  )
+#   }
   return( directory )
 }
 
-
-
-checkDirectory2 <- function( directory ){
-  # check if repoDir has "/" at the end and add it if not
-  if ( !grepl("/$", x = directory , perl=TRUE) ){
-    directory <- paste0(  directory, "/"  )
-  }
-  return( directory )
-}
-
-
-
+# checkDirectory2 <- function( directory ){
+#   check if repoDir has "/" at the end and add it if not
+#   if ( !grepl("/$", x = directory , perl=TRUE) ){
+#     directory <- paste0(  directory, "/"  )
+#   }
+#   return( directory )
+# }

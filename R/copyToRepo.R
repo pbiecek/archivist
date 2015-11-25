@@ -156,7 +156,7 @@ copyGithubRepo <- function( repoTo, md5hashes, user = NULL, repo = NULL, branch=
 
   GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
   
-  repoTo <- checkDirectory2( repoTo )
+  repoTo <- checkDirectory( repoTo )
   
   Temp <- downloadDB( repo, user, branch, repoDirGit )
   
@@ -219,7 +219,7 @@ copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, bra
       whichFilesToClone <- grep("gallery/", filelist, value = TRUE, fixed = TRUE)
       needTidy <- strsplit(whichFilesToClone, "gallery/")
       whichFilesToClone <- unlist(lapply(needTidy, function(x){
-        paste0("gallery/", x[2])
+        file.path("gallery", x[2])
       }))
     }else{
       whichFilesToClone <- grep(paste0(repoDirGit,"/gallery/"), filelist, 
@@ -239,8 +239,8 @@ copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, bra
 
 cloneGithubFile <- function( file, repo, user, branch, to, repoDirGit ){
 
-    URLfile <- paste0( get( ".GithubURL", envir = .ArchivistEnv) , 
-                       user, "/", repo, "/", branch, "/", file) 
+    URLfile <- file.path( get( ".GithubURL", envir = .ArchivistEnv) , 
+                       user, repo, branch, file) 
     # tidy
     if ( is.character( repoDirGit ) ){
       file <- paste0( "gallery/", strsplit(file, "gallery/")[[1]][2] )
@@ -248,8 +248,8 @@ cloneGithubFile <- function( file, repo, user, branch, to, repoDirGit ){
     
     fileFromGithub <- getBinaryURL( URLfile )
     
-    file.create( paste0( to, file ) )
-    writeBin( fileFromGithub, paste0( to, file ) )
+    file.create( file.path( to, file ) )
+    writeBin( fileFromGithub, file.path( to, file ) )
     #files contain "gallery/" in it's name
     
   }

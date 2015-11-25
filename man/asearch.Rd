@@ -36,7 +36,7 @@ different paramter's specification.
 # read the object
 asearch("pbiecek/graphGallery", 
            patterns = list("class:lm", 
-                "varname:Species")))
+                "varname:Species"))
 }
 }
 \author{

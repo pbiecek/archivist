@@ -147,7 +147,7 @@ chain <- FALSE
   }
   if ( rememberName ){
     #     if( format == "rda"){
-    save( file = paste0(repoDir,"gallery/", md5hash, ".rda"), ascii = ascii, list = objectName,  envir = parent.frame(1))
+    save( file = file.path(repoDir,"gallery", paste0(md5hash, ".rda")), ascii = ascii, list = objectName,  envir = parent.frame(1))
     #     }else{
     #       saveToRepo2(artifact, filebase = paste0(repoDir,"gallery/", md5hash), ascii = ascii, ...)
     #     }
@@ -156,7 +156,7 @@ chain <- FALSE
     #    save( file = paste0(repoDir, "gallery/", md5hash, ".rda"),  ascii=TRUE, list = md5hash, envir = .GlobalEnv  )
     assign( value = artifact, x = md5hash, envir = .ArchivistEnv )
     #     if( format == "rda" ){
-    save( file = paste0(repoDir, "gallery/", md5hash, ".rda"),  ascii=ascii, list = md5hash, envir = .ArchivistEnv  )
+    save( file = file.path(repoDir, "gallery", paste0(md5hash, ".rda")),  ascii=ascii, list = md5hash, envir = .ArchivistEnv  )
     #     }else{
     #       saveToRepo2(artifact, filebase = paste0(repoDir,"gallery/", md5hash), ascii = ascii, ...)
     #     }

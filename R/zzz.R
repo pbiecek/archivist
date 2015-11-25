@@ -21,7 +21,7 @@
 
 .onLoad <- function(...) {
   assign( x = "sqlite", value = dbDriver( "SQLite" ), envir = .ArchivistEnv )
-  assign( x = ".GithubURL", value = "https://raw.githubusercontent.com/", envir = .ArchivistEnv )
+  assign( x = ".GithubURL", value = "https://raw.githubusercontent.com", envir = .ArchivistEnv )
   .ArchivistEnv$silent <- FALSE
   .ArchivistEnv$response <- FALSE
   .ArchivistEnv$commitMessage <- NULL
