@@ -238,6 +238,11 @@ showLocalRepo( method = "tags", repoDir = exampleRepoDir )
 saveToRepo( model, repoDir = exampleRepoDir, 
             userTags = c( "do not delete", "my favourite model" ) )
 
+# removing an example Repository
+deleteRepo( exampleRepoDir, TRUE)
+
+rm( exampleRepoDir )
+
 # saveToRepo in chaining code
 library(dplyr)
 

@@ -10,7 +10,8 @@ rmFromRepo(md5hash, repoDir = NULL, removeData = FALSE,
 \arguments{
 \item{md5hash}{A character assigned to the artifact through the use of a
 cryptographical hash function with MD5 algorithm, or it's abbreviation.
-This object will be removed.}
+This object will be removed. If \code{many} parameter is set to TRUE then
+md5hash will be a character vector.}
 
 \item{repoDir}{A character denoting an existing directory from which an 
 artifact will be removed. If it is set to \code{NULL} (by default), it  will
@@ -170,7 +171,9 @@ rmFromRepo(agn1Md5hash, repoDir = exampleRepoDir, removeData = TRUE,
 obj2rm <- searchInLocalRepo( pattern = list(dateFrom = Sys.Date(), dateTo = Sys.Date()),
                              repoDir = exampleRepoDir )
 sapply(obj2rm, rmFromRepo, repoDir = exampleRepoDir)
-# above function call removed all objects which were created in these examples
+# above function call removed all objects which were created in these examples.
+# Note that in the gallery folder there may be still some miniatures as
+# removeMiniature parameter is set to FALSE
 
 # let's see how the Repository looks like: show
 showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
@@ -213,6 +216,8 @@ REMOVING MANY ARTIFACTS
 ######
 ######
 
+data(iris)
+
 # lm object
 model <- lm(Sepal.Length~ Sepal.Width + Petal.Length + Petal.Width, data= iris)
 
@@ -254,7 +259,7 @@ glmnet1=glmnet(zk,bk)
  
 # Creating example Repository so that we may see it on our computer
 
-exampleRepoDir <- "defRepo" 
+exampleRepoDir <- tempfile()
 createEmptyRepo( repoDir = exampleRepoDir, force = TRUE)
 saveToRepo( iris, repoDir=exampleRepoDir)
 saveToRepo( model, repoDir=exampleRepoDir )
@@ -271,8 +276,8 @@ Artifacts <- setdiff(ArtifactsAndData, ArtifactsData)
 # Removing many artifacts with many = TRUE argument
 rmFromRepo(Artifacts, repoDir = exampleRepoDir, many = TRUE)
 
-# We may notice, in two ways, that artifacts' data is still in "defRepo".
-# Either we may look into gallery folder of "defRepo" or
+# We may notice, in two ways, that artifacts' data is still in "exampleRepoDir".
+# Either we may look into gallery folder of "exampleRepoDir" or
 # show how database.db file looks like.
 showLocalRepo(repoDir = exampleRepoDir) # artifacts' data is there indeed!
 
@@ -281,7 +286,7 @@ showLocalRepo(repoDir = exampleRepoDir) # artifacts' data is there indeed!
 rmFromRepo(Artifacts, repoDir = exampleRepoDir, removeData = TRUE,  many = TRUE)
 showLocalRepo(repoDir = exampleRepoDir) 
 
-# Perhaps you may think that "defRepo" is empty as database indicates. However,
+# Perhaps you may think that "exampleRepoDir" is empty as database indicates. However,
 # if you look into gallery folder there will be some ".txt" or ".png" files. 
 # Those are probably, the so called, Miniatures. Let's try to remove them.
 # In order to do it we call rmFromRepo function with removeMiniature = TRUE argument.

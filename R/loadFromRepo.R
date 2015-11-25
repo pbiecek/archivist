@@ -245,13 +245,13 @@ loadFromLocalRepo <- function( md5hash, repoDir = NULL, value = FALSE ){
   # using sapply in case abbreviation mode found more than 1 md5hash
   if ( !value ) {
     sapply( md5hash, function(x) {
-      load( file = paste0( repoDir, "gallery/", x, ".rda" ), envir = .GlobalEnv )
+      load( file = file.path( repoDir, "gallery", paste0(x, ".rda" )), envir = .GlobalEnv )
     } )
   }else{
     .nameEnv <- new.env()
     name <- character( length = length( md5hash ) )
     for( i in seq_along( md5hash ) ) {
-      name[i] <- load( file = paste0( repoDir, "gallery/", md5hash[i], ".rda" ), 
+      name[i] <- load( file = file.path( repoDir, "gallery", paste0(md5hash[i], ".rda") ), 
                        envir = .nameEnv ) 
       }
     if ( length( name ) == 1) {
@@ -289,13 +289,13 @@ loadFromGithubRepo <- function( md5hash, repo = NULL, user = NULL, branch = "mas
     # sapply and replicate because of abbreviation mode can find more than 1 md5hash
     if( is.character( repoDirGit )){
     tmpobjectS <- lapply( md5hash, function(x){
-      getBinaryURL( paste0( get( x = ".GithubURL", envir = .ArchivistEnv), user, "/", repo, "/",
-                            branch, "/", repoDirGit, "/gallery/", x, ".rda") )  } )
+      getBinaryURL( file.path( get( x = ".GithubURL", envir = .ArchivistEnv), user, repo,
+                            branch, repoDirGit, "gallery", paste0(x, ".rda") ) )  } )
     }
     if( is.logical( repoDirGit )){
       tmpobjectS <- lapply( md5hash, function(x){
-        getBinaryURL( paste0( get( x = ".GithubURL", envir = .ArchivistEnv), user, "/", repo, "/",
-                              branch, "/gallery/", x, ".rda") )  } )  
+        getBinaryURL( file.path( get( x = ".GithubURL", envir = .ArchivistEnv), user, repo,
+                              branch, "gallery", paste0(x, ".rda") ) )  } )  
     }
     tfS <- replicate( length( md5hash ), tempfile() )
         
@@ -311,13 +311,13 @@ loadFromGithubRepo <- function( md5hash, repo = NULL, user = NULL, branch = "mas
     # sapply and replicate because of abbreviation mode can find more than 1 md5hash
     if( is.character( repoDirGit )){
       tmpobjectS <- lapply( md5hash, function(x){
-        getBinaryURL( paste0( get( x = ".GithubURL", envir = .ArchivistEnv), user, "/", repo, "/",
-                              branch, "/", repoDirGit, "/gallery/", x, ".rda") )  } )
+        getBinaryURL( file.path( get( x = ".GithubURL", envir = .ArchivistEnv), user, repo,
+                              branch, repoDirGit, "gallery", paste0(x, ".rda") ) )  } )
     }
     if( is.logical( repoDirGit )){
       tmpobjectS <- lapply( md5hash, function(x){
-        getBinaryURL( paste0( get( x = ".GithubURL", envir = .ArchivistEnv), user, "/", repo, "/",
-                              branch, "/gallery/", x, ".rda") )  } )  
+        getBinaryURL( file.path( get( x = ".GithubURL", envir = .ArchivistEnv), user, repo,
+                              branch, "gallery", paste0(x, ".rda") ) )  } )  
     }
     tfS <- replicate( length( md5hash ), tempfile() )
     

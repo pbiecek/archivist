@@ -95,16 +95,16 @@ zipLocalRepo <- function( repoDir = NULL, repoTo = getwd() , zipname="repository
   stopifnot( ( is.character( repoDir ) & length( repoDir ) == 1 ) | is.null( repoDir ) )
   stopifnot( is.character( repoTo ), length( repoTo ) == 1 )
   
-  repoTo <- checkDirectory2( repoTo )
-  if (file.exists(paste0(repoTo, zipname))) {
-    stop(paste0("The file ", repoTo, zipname), " allready exists")
+#   repoTo <- checkDirectory2( repoTo )
+  if (file.exists(file.path(repoTo, zipname))) {
+    stop(paste0("The file ", file.path(repoTo, zipname), " allready exists"))
   }
 
   repoDir <- checkDirectory( repoDir )
   
-  files <- c( paste0( repoDir, "backpack.db"), 
-              paste0( repoDir, "gallery/", list.files( paste0(repoDir, "gallery/") ) ) )
-  zip( paste0( repoTo, zipname), files)
+  files <- c( file.path( repoDir, "backpack.db"), 
+              list.files( file.path(repoDir, "gallery"), full.names = TRUE ) ) 
+  zip( file.path( repoTo, zipname), files)
 
 }
 
@@ -119,9 +119,9 @@ zipGithubRepo <- function( repoTo = getwd(), user = NULL, repo = NULL, branch = 
 
   GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
 
-  repoTo <- checkDirectory2( repoTo )
-  if (file.exists(paste0(repoTo, zipname))) {
-    stop(paste0("The file ", repoTo, zipname), " allready exists")
+# repoTo <- checkDirectory2( repoTo )
+  if (file.exists(file.path(repoTo, zipname))) {
+    stop(paste0("The file ", file.path(repoTo, zipname), " allready exists"))
   }
   
   # clone Github repo
@@ -135,7 +135,5 @@ zipGithubRepo <- function( repoTo = getwd(), user = NULL, repo = NULL, branch = 
   files <- c( file.path( tempRepoTo, "backpack.db"), 
               list.files( file.path(tempRepoTo, "gallery"), full.names=TRUE ))
 
-  zip( paste0( repoTo, zipname), files=files)
-  
-  
+  zip( file.path( repoTo, zipname), files=files)
 }

@@ -13,22 +13,25 @@ that do not exist.
 	2. Changed `dbDisconnect( conn )` call to the `on.exit(dbDisconnect( conn ))` in `executeSingleQuery` function to prevent a situation in which during an error inside a function (which might be produced), the connection stays open, when it shouldn`t.
 	3. `%a%` operator does react on `default = TRUE` in `createEmpyRepo` function.
   4. `deleteRoot = TRUE` argument of the `deleteRepo` function works properly and enables removing root directory of the Repository.
-  5. `paste0()` was replaced by `file.path()` in appropriate places in the
-  following function's bodies: `deleteRepo`, `zipGithubRepo`.
-  6. Some changes in `rmFromRepo`'s body:
+  5. Some changes in `rmFromRepo`'s body:
     1. Function will give an error when a user uses a wrong md5hash (that does not exist in the `Repository`)
     2. Artifacts' data is now removed from tag table in `backpack.db` file when
     `many = TRUE`. They were not removed before.
     3. Artifacts' data files are now removed from `gallery` folder.
     They were not removed before.
     4. `Invisible(NULL)` is the result of the function evaluation.
-  7. Some changes in `copy*Repo`'s body:
+  6. Some changes in `copy*Repo`'s body:
     1. `Invisible(NULL)` is the result of the function evaluation
     2. `repoFrom` parameter in `copyLocalRepo` is set to `NULL` as default.
-  8. `copyFromLocalRepo` and `copyFromGithubRepo` copies only distinct records for table `tag` and `artifact` in `backpack.db` file, that can be seen with `show*Repo` and copies all mentioned artifacts for local version.
-  9. `downloadDB` in `createEmptyRepo` function gives a user-friendly error.
-  10. In `zipGithubRepo` unzipped file has the same name as zip file. Earlier it had a name of the temporary file that was difficult to notice.
-  11. In `setGithubRepo` it is now possible to use repoDirGit parameter. Before there was wrong `stopifnot` condition.
+  7. `copyFromLocalRepo` and `copyFromGithubRepo` copies only distinct records for table `tag` and `artifact` in `backpack.db` file, that can be seen with `show*Repo` and copies all mentioned artifacts for local version.
+  8. `downloadDB` in `createEmptyRepo` function gives a user-friendly error.
+  9. In `zipGithubRepo` unzipped file has the same name as zip file. Earlier it had a name of the temporary file that was difficult to notice.
+  10. In `setGithubRepo` it is now possible to use repoDirGit parameter. Before there was wrong `stopifnot` condition.
+  11. `paste0()` was replaced by `file.path()` in appropriate places of function's bodies in the following R scripts: `archive.R`, `copyToRepo.R`, `createEmptyRepo.R`, `deleteRepo.R`,
+`extractMiniature.R`, `loadFromRepo.R`, `rmFromRepo.R`, `saveToRepo.R`, `zipRepo.R`.
+  12. Two crucial parts of `checkDirectory`'s function body were removed due to changes in point 11.
+`checkDirectory2` was completely removed as it is unnecessary now.
+  13. Small change in `test_base_functionalities.R` due to changes in point 11 and 12.
 * **New features:**
 	1. `print.ahistory` function can now print outputs of the artifact's history as the `knitr::kable` would.
 	2. Examples for `searchInGithubRepo` now works for `user='pbiecek'` and `repo='archivist` parameters as we added new backpack.db file. The previous one was almost empty (for 7 months).

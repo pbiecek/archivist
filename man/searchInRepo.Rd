@@ -170,7 +170,8 @@ set in \link{setGithubRepo} function are used.
   
   # also on Github
   
-  searchInGithubRepo( pattern = list( dateFrom = "2015-10-01", dateTo = "2015-10-30" ), 
+  # Remeber to set dateTo parameter to actual date because sometimes we update datasets.
+  searchInGithubRepo( pattern = list( dateFrom = "2015-10-01", dateTo = "2015-11-30" ), 
                       user="pbiecek", repo="archivist", branch="master" )
   
   

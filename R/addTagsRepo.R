@@ -102,7 +102,6 @@ addTagsRepo <- function( md5hashes, repoDir = NULL, FUN = NULL, tags = NULL, ...
     length( md5hashes )%%length( tags ) == 0 | length( tags )%%length( md5hashes ) == 0) }
   # that a helpful data frame can be computed
   
-  
   repoDir <- checkDirectory( repoDir )
   
   if( !is.null(tags) ){ #applying only simple Tags to given md5hashes

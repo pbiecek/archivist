@@ -241,6 +241,11 @@
 #' saveToRepo( model, repoDir = exampleRepoDir, 
 #'             userTags = c( "do not delete", "my favourite model" ) )
 #' 
+#' # removing an example Repository
+#' deleteRepo( exampleRepoDir, TRUE)
+#' 
+#' rm( exampleRepoDir )
+#' 
 #' # saveToRepo in chaining code
 #' library(dplyr)
 #' 
@@ -308,7 +313,7 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
   }
   if ( rememberName ){
 #     if( format == "rda"){
-      save( file = paste0(repoDir,"gallery/", md5hash, ".rda"), ascii = ascii, list = objectName,  envir = parent.frame(1))
+      save( file = file.path(repoDir,"gallery", paste0(md5hash, ".rda")), ascii = ascii, list = objectName,  envir = parent.frame(1))
 #     }else{
 #       saveToRepo2(artifact, filebase = paste0(repoDir,"gallery/", md5hash), ascii = ascii, ...)
 #     }
@@ -317,7 +322,7 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
 #    save( file = paste0(repoDir, "gallery/", md5hash, ".rda"),  ascii=TRUE, list = md5hash, envir = .GlobalEnv  )
     assign( value = artifact, x = md5hash, envir = .ArchivistEnv )
 #     if( format == "rda" ){
-      save( file = paste0(repoDir, "gallery/", md5hash, ".rda"),  ascii=ascii, list = md5hash, envir = .ArchivistEnv  )
+      save( file = file.path(repoDir, "gallery", paste0(md5hash, ".rda")),  ascii=ascii, list = md5hash, envir = .ArchivistEnv  )
 #     }else{
 #       saveToRepo2(artifact, filebase = paste0(repoDir,"gallery/", md5hash), ascii = ascii, ...)
 #     }
@@ -326,10 +331,10 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
   
   # add entry to database 
    if ( rememberName ){
-  addArtifact( md5hash, name = objectName, dir = repoDir ) 
+     addArtifact( md5hash, name = objectName, dir = repoDir ) 
    }else{
-   addArtifact( md5hash, name = md5hash , dir = repoDir)
-#   # rm( list = md5hash, envir = .ArchivistEnv ) 
+     addArtifact( md5hash, name = md5hash , dir = repoDir)
+   # rm( list = md5hash, envir = .ArchivistEnv ) 
    }
   
   # whether to add Tags

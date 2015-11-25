@@ -1,7 +1,7 @@
 test_that("setLocalRepo sets repo", {
   createEmptyRepo("tmp_archivist")
   setLocalRepo(repoDir = "tmp_archivist")
-  expect_equal(aoptions("repoDir"), "tmp_archivist/")
+  expect_equal(aoptions("repoDir"), "tmp_archivist")
   
   setGithubRepo("MarcinKosinski", "archivist", "master", "clone123")
   expect_equal(aoptions("user"), "MarcinKosinski")
@@ -13,7 +13,7 @@ test_that("setLocalRepo sets repo", {
 
 test_that(".ArchivistEnv exists", {
   expect_equal(get("sqlite", envir = .ArchivistEnv), DBI::dbDriver( "SQLite" ))
-  expect_equal(get(".GithubURL", envir = .ArchivistEnv), "https://raw.githubusercontent.com/")
+  expect_equal(get(".GithubURL", envir = .ArchivistEnv), "https://raw.githubusercontent.com")
 })
 
 test_that("aoptions sets options", {
