@@ -170,6 +170,23 @@
 #' repoDirGit="ex1")
 #' showGithubRepo( user="MarcinKosinski", repo="Museum", branch="master",
 #'                 repoDirGit="ex2")
+#'                 
+#' ## Github options
+#' showGithubRepo('archivist', 'pbiecek')
+#' aoptions('user', 'pbiecek')
+#' aoptions('repo', 'archivist')
+#' loadFromGithubRepo("ff575c261c", value = TRUE) -> iris123
+#' 
+#' showGithubRepo('Museum', 'MarcinKosinski', repoDirGit = 'ex1')
+#' aoptions('repo', 'Museum')
+#' aoptions('user', 'MarcinKosinski')
+#' aoptions('repoDirGit', 'ex1')
+#' aoptions('branch', 'master')
+#' showGithubRepo()
+#' showGithubRepo(repoDirGit = 'ex2')
+#' 
+#' aoptions('repoDirGit')
+#'
 #' 
 #' }
 #' @family archivist
@@ -190,6 +207,7 @@ showLocalRepo <- function( repoDir = NULL, method = "md5hashes" ){
 showGithubRepo <- function( repo = NULL, user = NULL, branch = "master", repoDirGit = FALSE,
                             method = "md5hashes" ){
   stopifnot( is.character( c( method, branch ) ), length( method ) == 1, length( branch ) == 1  )
+  
   
   GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
   

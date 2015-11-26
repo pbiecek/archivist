@@ -166,7 +166,6 @@ useGithubSetupArguments <- function(){
 
 }
 
-
 GithubCheck <- function( repo, user, repoDirGit ){
   stopifnot( is.logical( repoDirGit ) | ( is.character( repoDirGit ) & length( repoDirGit ) == 1) )
   stopifnot( is.null( repo ) | ( is.character( repo ) & length( repo ) == 1 ) )
@@ -183,12 +182,21 @@ GithubCheck <- function( repo, user, repoDirGit ){
     stop( "Both or none of user and repo should be NULL. See documentation." )
   }
   
-  if ( is.null( c( repo, user ) ) ){
+  if ( is.null( c( repo, user ) ) & is.logical( repoDirGit ) ){
     useGithubSetupArguments() 
+  } else if ( is.null( c( repo, user ) ) & is.character( repoDirGit ) ){
+    useGithubSetupArguments2()
   }
-#   if ( is.null( branch) ){
-#     useGithubSetupArguments( branch = TRUE )
-#   }
 }
 
-
+useGithubSetupArguments2 <- function(){
+  #   assign( "repo", get( ".repo", envir = .ArchivistEnv ), envir = parent.frame(2) )
+  #   assign( "user", get( ".user", envir = .ArchivistEnv ), envir = parent.frame(2) )
+  #   assign( "branch", get( ".branch", envir = .ArchivistEnv ), envir = parent.frame(2) )
+  #   assign( "repoDirGit", get( ".repoDirGit", envir = .ArchivistEnv ), envir = parent.frame(2) )
+  assign( "repo", aoptions("repo"), envir = parent.frame(2) )
+  assign( "user", aoptions("user"), envir = parent.frame(2) )
+  #assign( "branch", aoptions("branch"), envir = parent.frame(2) )
+  #assign( "repoDirGit", aoptions("repoDirGit"), envir = parent.frame(2) )
+  
+}
