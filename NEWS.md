@@ -14,7 +14,8 @@ that do not exist.
 	3. `%a%` operator does react on `default = TRUE` in `createEmpyRepo` function.
   4. `deleteRoot = TRUE` argument of the `deleteRepo` function works properly and enables removing root directory of the Repository.
   5. Some changes in `rmFromRepo`'s body:
-    1. Function will give an error when a user uses a wrong md5hash (that does not exist in the `Repository`)
+    1. Function will give a warning when a user uses wrong md5hash (that does not exist in the `Repository`).
+    In case of wrong md5hash abbreviation a user will receive an error message.
     2. Artifacts' data is now removed from tag table in `backpack.db` file when
     `many = TRUE`. They were not removed before.
     3. Artifacts' data files are now removed from `gallery` folder.

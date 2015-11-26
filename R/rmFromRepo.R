@@ -103,7 +103,7 @@
 #' 
 #' exampleRepoDir <- tempfile()
 #' createEmptyRepo(repoDir = exampleRepoDir)
-#' myplo123Md5hash <- saveToRepo(myplot123, repoDir=exampleRepoDir)
+#' myplot123Md5hash <- saveToRepo(myplot123, repoDir=exampleRepoDir)
 #' irisMd5hash <- saveToRepo(iris, repoDir=exampleRepoDir)
 #' modelMd5hash  <- saveToRepo(model, repoDir=exampleRepoDir)
 #' agn1Md5hash <- saveToRepo(agn1, repoDir=exampleRepoDir)
@@ -271,25 +271,36 @@
 #'                                    repoDir = exampleRepoDir))
 #' Artifacts <- setdiff(ArtifactsAndData, ArtifactsData)
 #' 
+#' 
 #' # Removing many artifacts with many = TRUE argument
 #' rmFromRepo(Artifacts, repoDir = exampleRepoDir, many = TRUE)
 #' 
 #' # We may notice, in two ways, that artifacts' data is still in "exampleRepoDir".
-#' # Either we may look into gallery folder of "exampleRepoDir" or
-#' # show how database.db file looks like.
+#' # Either we may look into gallery folder of "exampleRepoDir" 
+#' list.files(file.path(exampleRepoDir, "gallery"))
+#' # or show how database.db file looks like.
 #' showLocalRepo(repoDir = exampleRepoDir) # artifacts' data is there indeed!
 #' 
 #' # If we want to remove artifact's data now we simply call rmFromRepo function
 #' # with removeData = TRUE additional argument.
 #' rmFromRepo(Artifacts, repoDir = exampleRepoDir, removeData = TRUE,  many = TRUE)
-#' showLocalRepo(repoDir = exampleRepoDir) 
 #' 
+#' # We receive a warning as Artifacts are no longer in the repository. 
+#' # However, let's check what happened with Artifact's data.
+#' showLocalRepo(repoDir = exampleRepoDir) # They were removed.
 #' # Perhaps you may think that "exampleRepoDir" is empty as database indicates. However,
 #' # if you look into gallery folder there will be some ".txt" or ".png" files. 
+#' list.files(file.path(exampleRepoDir, "gallery"))
+#' 
 #' # Those are probably, the so called, Miniatures. Let's try to remove them.
 #' # In order to do it we call rmFromRepo function with removeMiniature = TRUE argument.
 #' rmFromRepo(Artifacts, many = TRUE, repoDir = exampleRepoDir, removeMiniature = TRUE)
-#' # Gallery folder is empty now!
+#' 
+#' # Again we receive a warning as Artifacts are no longer in the repository but ...
+#' list.files(file.path(exampleRepoDir, "gallery")) 
+#' # gallery folder is empty now! Artifact's miniature's were removed.
+#' 
+#' 
 #' # Of course we may have done all these instructions by one simple function call.
 #' # rmFromRepo(Artifacts, many = TRUE, repoDir = exampleRepoDir,
 #' #            removeData = TRUE, removeMiniature = TRUE)
@@ -323,29 +334,6 @@ rmFromRepo <- function( md5hash, repoDir = NULL, removeData = FALSE,
   
   # what if many md5hashes are passed to be deleted?
   if ( many ){
-    
-    # if we gave the wrong md5hash character, the following error would occur:
-     if (!all(is.element(md5hash, md5hashList))){
-       stop( "Some of the artifacts were not deleted. One or more md5hash is not in the Repository.
-                Try again with different md5hashes")
-     }
-    # remove objects from backpack.db file
-    executeSingleQuery( dir = repoDir,
-                        paste0( "DELETE FROM artifact WHERE ",
-                                "md5hash IN ('", paste0( md5hash, collapse = "','" ), "')")
-                      )
-                        
-    executeSingleQuery( dir = repoDir,
-                        paste0( "DELETE FROM tag WHERE ",
-                                "artifact IN ('", paste0( md5hash, collapse = "','" ), "')")
-                      )      
-    
-    # remove objects' files from gallery folder
-    sapply( md5hash, function( md5hashSingle ) {
-    if ( file.exists( file.path( repoDir, "gallery", paste0(md5hashSingle, ".rda") ) ) )
-      file.remove( file.path( repoDir, "gallery", paste0(md5hashSingle, ".rda" ) ) )
-    } )
-    
     
     # remove the miniature of an object
     if ( removeMiniature ){
@@ -385,8 +373,31 @@ rmFromRepo <- function( md5hash, repoDir = NULL, removeData = FALSE,
       })
       
     }
+    
+    # if we gave the wrong md5hash character, the following error would occur:
+    if (!all(is.element(md5hash, md5hashList))){
+      warning("Some of the artifacts were not deleted. One or more md5hash is not in the Repository.
+If you used artifact's md5hash that was recently deleted from repository then it's data or miniatures were removed.
+Otherwise you used md5hash that was not stored in the repository. Try again with different md5hash.") 
+    }
+    # remove objects from backpack.db file
+    executeSingleQuery( dir = repoDir,
+                        paste0( "DELETE FROM artifact WHERE ",
+                                "md5hash IN ('", paste0( md5hash, collapse = "','" ), "')")
+                      )
                         
-  }else{  
+    executeSingleQuery( dir = repoDir,
+                        paste0( "DELETE FROM tag WHERE ",
+                                "artifact IN ('", paste0( md5hash, collapse = "','" ), "')")
+                      )      
+    
+    # remove objects' files from gallery folder
+    sapply( md5hash, function( md5hashSingle ) {
+    if ( file.exists( file.path( repoDir, "gallery", paste0(md5hashSingle, ".rda") ) ) )
+      file.remove( file.path( repoDir, "gallery", paste0(md5hashSingle, ".rda" ) ) )
+    } )    
+                        
+  } else {  
   
   # what if abbreviation was given
   if ( nchar( md5hash ) < 32 ){
@@ -398,18 +409,23 @@ rmFromRepo <- function( md5hash, repoDir = NULL, removeData = FALSE,
     
     # if we gave the wrong md5hash character, the following error would occur:
     if (length(md5hash) == 0){
-      stop( "Given md5hash is not in the Repository. Try again with different md5hash abbreviation")
+      stop( "Given md5hash is not in the Repository. Try again with different md5hash abbreviation.
+If you used artifact's md5hash abreviation that was deleted then try to use complete md5hash.")
     }
+  }
+  
+  # remove the miniature of an object
+  if ( removeMiniature ){
+    if ( file.exists( file.path( repoDir, "gallery", paste0(md5hash, ".png") ) ) )
+      file.remove( file.path( repoDir, "gallery", paste0(md5hash, ".png") ) )
+    
+    if ( file.exists( file.path( repoDir, "gallery", paste0(md5hash, ".txt") ) ) )
+      file.remove( file.path( repoDir, "gallery", paste0(md5hash, ".txt") ) )
   }
 
   # send deletes for data 
-  if ( removeData ){
-    # if there are many objects with the same md5hash (copies) all of them will be deleted
-    
-    # if we gave the wrong md5hash character, the following error would occur:
-    if (!is.element(md5hash, md5hashList)){
-        stop( "Given md5hash is not in the Repository. Try again with different md5hash")
-    }
+  if ( removeData ) {
+    # if there are many objects with the same md5hash (copies) all of them will be deleted  
 
     # find object's data md5hash(es) in backpack.db file
     dataMd5hash <-  executeSingleQuery( dir = repoDir,
@@ -446,6 +462,14 @@ rmFromRepo <- function( md5hash, repoDir = NULL, removeData = FALSE,
     })
   }
   
+  
+  # if we gave the wrong md5hash character, the following error would occur:
+  if (!is.element(md5hash, md5hashList)){
+    warning("Given md5hash is not in the Repository.
+If you used artifact's md5hash that was recently deleted from repository then it's data or miniatures were removed.
+Otherwise you used md5hash that was not stored in the repository. Try again with different md5hash.") 
+  }
+  
   # remove object from database
   # if there are many objects with the same md5hash (copies) all of them will be deleted
   sapply( md5hash, function(x){
@@ -461,14 +485,6 @@ rmFromRepo <- function( md5hash, repoDir = NULL, removeData = FALSE,
   if ( file.exists( file.path( repoDir, "gallery", paste0(md5hash, ".rda") ) ) )
     file.remove( file.path( repoDir, "gallery", paste0(md5hash, ".rda") ) )
   
-  # remove the miniature of an object
-  if ( removeMiniature ){
-  if ( file.exists( file.path( repoDir, "gallery", paste0(md5hash, ".png") ) ) )
-    file.remove( file.path( repoDir, "gallery", paste0(md5hash, ".png") ) )
-    
-  if ( file.exists( file.path( repoDir, "gallery", paste0(md5hash, ".txt") ) ) )
-    file.remove( file.path( repoDir, "gallery", paste0(md5hash, ".txt") ) )
-  }
 }
 invisible(NULL)
 }

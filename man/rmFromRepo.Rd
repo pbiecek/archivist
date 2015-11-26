@@ -106,7 +106,7 @@ fannyx <- fanny(x, 2)
 
 exampleRepoDir <- tempfile()
 createEmptyRepo(repoDir = exampleRepoDir)
-myplo123Md5hash <- saveToRepo(myplot123, repoDir=exampleRepoDir)
+myplot123Md5hash <- saveToRepo(myplot123, repoDir=exampleRepoDir)
 irisMd5hash <- saveToRepo(iris, repoDir=exampleRepoDir)
 modelMd5hash  <- saveToRepo(model, repoDir=exampleRepoDir)
 agn1Md5hash <- saveToRepo(agn1, repoDir=exampleRepoDir)
@@ -273,25 +273,36 @@ ArtifactsData <- unique(searchInLocalRepo(pattern = "relationWith", fixed = FALS
                                    repoDir = exampleRepoDir))
 Artifacts <- setdiff(ArtifactsAndData, ArtifactsData)
 
+
 # Removing many artifacts with many = TRUE argument
 rmFromRepo(Artifacts, repoDir = exampleRepoDir, many = TRUE)
 
 # We may notice, in two ways, that artifacts' data is still in "exampleRepoDir".
-# Either we may look into gallery folder of "exampleRepoDir" or
-# show how database.db file looks like.
+# Either we may look into gallery folder of "exampleRepoDir" 
+list.files(file.path(exampleRepoDir, "gallery"))
+# or show how database.db file looks like.
 showLocalRepo(repoDir = exampleRepoDir) # artifacts' data is there indeed!
 
 # If we want to remove artifact's data now we simply call rmFromRepo function
 # with removeData = TRUE additional argument.
 rmFromRepo(Artifacts, repoDir = exampleRepoDir, removeData = TRUE,  many = TRUE)
-showLocalRepo(repoDir = exampleRepoDir) 
 
+# We receive a warning as Artifacts are no longer in the repository. 
+# However, let's check what happened with Artifact's data.
+showLocalRepo(repoDir = exampleRepoDir) # They were removed.
 # Perhaps you may think that "exampleRepoDir" is empty as database indicates. However,
 # if you look into gallery folder there will be some ".txt" or ".png" files. 
+list.files(file.path(exampleRepoDir, "gallery"))
+
 # Those are probably, the so called, Miniatures. Let's try to remove them.
 # In order to do it we call rmFromRepo function with removeMiniature = TRUE argument.
 rmFromRepo(Artifacts, many = TRUE, repoDir = exampleRepoDir, removeMiniature = TRUE)
-# Gallery folder is empty now!
+
+# Again we receive a warning as Artifacts are no longer in the repository but ...
+list.files(file.path(exampleRepoDir, "gallery")) 
+# gallery folder is empty now! Artifact's miniature's were removed.
+
+
 # Of course we may have done all these instructions by one simple function call.
 # rmFromRepo(Artifacts, many = TRUE, repoDir = exampleRepoDir,
 #            removeData = TRUE, removeMiniature = TRUE)
