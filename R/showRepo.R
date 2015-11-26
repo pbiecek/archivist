@@ -191,7 +191,7 @@ showGithubRepo <- function( repo = NULL, user = NULL, branch = "master", repoDir
                             method = "md5hashes" ){
   stopifnot( is.character( c( method, branch ) ), length( method ) == 1, length( branch ) == 1  )
   
-  GithubCheck( repo, user, branch, repoDirGit ) # implemented in setRepo.R
+  GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
   
   # database is needed to be downloaded
   Temp <- downloadDB( repo, user, branch, repoDirGit )

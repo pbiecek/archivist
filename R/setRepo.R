@@ -154,28 +154,24 @@ setGithubRepo <- function( user, repo, branch = "master",
 }
 
 
-useGithubSetupArguments <- function(repo = FALSE, user = FALSE, branch = FALSE){
+useGithubSetupArguments <- function(){
 #   assign( "repo", get( ".repo", envir = .ArchivistEnv ), envir = parent.frame(2) )
 #   assign( "user", get( ".user", envir = .ArchivistEnv ), envir = parent.frame(2) )
 #   assign( "branch", get( ".branch", envir = .ArchivistEnv ), envir = parent.frame(2) )
 #   assign( "repoDirGit", get( ".repoDirGit", envir = .ArchivistEnv ), envir = parent.frame(2) )
-  if (repo)
-    assign( "repo", aoptions("repo"), envir = parent.frame(2) )
-  if (user)
-    assign( "user", aoptions("user"), envir = parent.frame(2) )
-  if (branch)
-    assign( "branch", aoptions("branch"), envir = parent.frame(2) )
-#   if (repoDirGit)
-#     assign( "repoDirGit", aoptions("repoDirGit"), envir = parent.frame(2) )
+  assign( "repo", aoptions("repo"), envir = parent.frame(2) )
+  assign( "user", aoptions("user"), envir = parent.frame(2) )
+  assign( "branch", aoptions("branch"), envir = parent.frame(2) )
+  assign( "repoDirGit", aoptions("repoDirGit"), envir = parent.frame(2) )
 
 }
 
 
-GithubCheck <- function( repo, user, branch, repoDirGit ){
+GithubCheck <- function( repo, user, repoDirGit ){
   stopifnot( is.logical( repoDirGit ) | ( is.character( repoDirGit ) & length( repoDirGit ) == 1) )
   stopifnot( is.null( repo ) | ( is.character( repo ) & length( repo ) == 1 ) )
   stopifnot( is.null( user ) | ( is.character( user ) & length( user ) == 1 ) )
-  stopifnot( is.null( branch ) | ( is.character( branch ) & length( branch ) == 1 ) )
+  #stopifnot( is.null( branch ) | ( is.character( branch ) & length( branch ) == 1 ) )
   #
   if( is.logical( repoDirGit ) ){
     if ( repoDirGit ){
@@ -188,11 +184,11 @@ GithubCheck <- function( repo, user, branch, repoDirGit ){
   }
   
   if ( is.null( c( repo, user ) ) ){
-    useGithubSetupArguments(repo = TRUE, user = TRUE ) 
+    useGithubSetupArguments() 
   }
-  if ( is.null( branch) ){
-    useGithubSetupArguments( branch = TRUE )
-  }
+#   if ( is.null( branch) ){
+#     useGithubSetupArguments( branch = TRUE )
+#   }
 }
 
 
