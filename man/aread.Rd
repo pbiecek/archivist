@@ -2,24 +2,29 @@
 % Please edit documentation in R/aread.R
 \name{aread}
 \alias{aread}
-\title{Read Artifact Given as a md5hash from a Repository}
+\title{Read the artifact given as a md5hash from the Repository}
 \usage{
 aread(md5hash)
 }
 \arguments{
-\item{md5hash}{One from following:
+\item{md5hash}{One of the following:
 
-A character with at least three components sepearated with '/': GitHub user name, GitHub repository and name of the artifact (MD5 hash) or it's abbreviation.
+A character vector which elements  are consisting of at least three components separated with '/': GitHub user name, GitHub repository and name of the artifact (MD5 hash) or it's abbreviation.
 
-A MD5 hash of object in current local default directory or it's abbreviation.}
+MD5 hashes of artifacts in current local default directory or its abbreviations.}
 }
 \description{
-\code{aread} reads an artifact from a Github \link{Repository}. It's a wrapper around 
-\link{loadFromGithubRepo}.
+\code{aread} reads the artifact from the \link{Repository}. It's a wrapper around 
+\link{loadFromLocalRepo} and \link{loadFromGithubRepo}.
 }
 \details{
-Function \code{aread} read artifact (by the \code{md5hash}) from GitHub Repository.
-It uses the function \link{loadFromGithubRepo} with different paramter's specification.
+Function \code{aread} reads the artifact (by the \code{md5hash}) from GitHub Repository.
+It uses \link{loadFromLocalRepo} and \link{loadFromGithubRepo} functions
+with different parameter's specification.
+}
+\note{
+Before you start using this function, remember to set local or github repository
+to default by using \code{setLocalRepo()} or \code{setGithubRepo} functions.
 }
 \examples{
 \dontrun{

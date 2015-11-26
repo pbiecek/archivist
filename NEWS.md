@@ -45,7 +45,7 @@ that do not exist.
 		5. in `copy*Repo` function - using graphGallery local repository in `copyLocalRepo` function.
 		6. in `get*Tags` function - additional example using `getTagsLocal` function.
     7. in `aoptions` function - added two new examples concerning usage of `silent` and `repoDir` parameters in this function.
-	4. Alterations in the text of: `?Tags`, `?Repository`, `?md5hash`, `archivist-package`, `?saveToRepo`, `loadFromRepo`, `summaryRepo`, `showRepo`, `?searchInRepo`, `?createEmptyRepo`, `?rmFromRepo`, `?deleteRepo`, `copyToRepo`, `zipRepo`, `setRepo`, `getTags`, `addTagsRepo`, `magrittr`, `archivistOptions` documentation pages.
+	4. Alterations in the text of: `?Tags`, `?Repository`, `?md5hash`, `archivist-package`, `?saveToRepo`, `loadFromRepo`, `summaryRepo`, `showRepo`, `?searchInRepo`, `?createEmptyRepo`, `?rmFromRepo`, `?deleteRepo`, `copyToRepo`, `zipRepo`, `setRepo`, `getTags`, `addTagsRepo`, `magrittr`, `archivistOptions`, `?aread` documentation pages.
 	5. Adding missing functions which are used in the archivist package now to `?Repository` documentation page.
 	6. `tempdir()` was replaced by `tempfile()` in examples sections of: `?addTagsRepo`, `?cache`, `copyToRepo`, `createEmptyRepo`, `?deleteRepo`, `loadFromRepo`, `?rmFromRepo`, `?saveToRepo`, `setRepo`, `showRepo`, `summaryRepo`, `?Tags`, `zipRepo` documentation pages. `tempdir` is existing  directory in which R works so calling `deleteRepo( exampleRepoDir, deleteRoot=TRUE)` removed important R files.
 	7. New tests for the following functions: `zip*Repo`.
