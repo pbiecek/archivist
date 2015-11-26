@@ -33,6 +33,7 @@ that do not exist.
   12. Two crucial parts of `checkDirectory`'s function body were removed due to changes in point 11.
 `checkDirectory2` was completely removed as it is unnecessary now.
   13. Small change in `test_base_functionalities.R` due to changes in point 11 and 12.
+  14. `aoptions` for `user` and `repo` will work properly with `showGithubRepo` and `summaryGithubRepo` when set. It might have not been noticed in version 1.7, it might have been a bug that occured in the development between 1.7 and 1.8 version.
 * **New features:**
 	1. `print.ahistory` function can now print outputs of the artifact's history as the `knitr::kable` would.
 	2. Examples for `searchInGithubRepo` now works for `user='pbiecek'` and `repo='archivist` parameters as we added new backpack.db file. The previous one was almost empty (for 7 months).

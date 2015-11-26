@@ -12,6 +12,8 @@
   .ArchivistEnv$rememberName <- TRUE 
   .ArchivistEnv$chain <- FALSE 
   .ArchivistEnv$ascii <- FALSE
+  .ArchivistEnv$branch <- "master"
+  .ArchivistEnv$repoDirGit <- FALSE
   
   .ArchivistEnv$repoDescription <- "A Repository of Artifacts supported by archivist https://github.com/pbiecek"
   .ArchivistEnv$readmeDescription <- "A Repository of Artifacts supported by [archivist](https://github.com/pbiecek) \n\n
@@ -22,6 +24,8 @@
 .onLoad <- function(...) {
   assign( x = "sqlite", value = dbDriver( "SQLite" ), envir = .ArchivistEnv )
   assign( x = ".GithubURL", value = "https://raw.githubusercontent.com", envir = .ArchivistEnv )
+  .ArchivistEnv$branch <- "master"
+  .ArchivistEnv$repoDirGit <- FALSE
   .ArchivistEnv$silent <- FALSE
   .ArchivistEnv$response <- FALSE
   .ArchivistEnv$commitMessage <- NULL
