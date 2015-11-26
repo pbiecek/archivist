@@ -2,6 +2,7 @@
 % Please edit documentation in R/githubFunctions.R
 \docType{class}
 \name{archivist-github-integration}
+\alias{agithub}
 \alias{archivist-github-integration}
 \title{Archivist Integration With GitHub API}
 \description{

@@ -58,5 +58,6 @@
 #' }
 #' @family archivist
 #' @name archivist-github-integration
+#' @aliases agithub
 #' @docType class
 invisible(NULL)

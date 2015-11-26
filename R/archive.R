@@ -5,7 +5,7 @@
 #' @description
 #' \code{archive}
 #' 
-#' More archivist functionalities that integrate archivist and GitHub API can be found here \link{archivist-github-integration}.
+#' More archivist functionalities that integrate archivist and GitHub API can be found here \link{archivist-github-integration} (\link{agithub}).
 #' @param artifact An artifact to be archived on Local and Github \link{Repository}.
 #' @param commitMessage A character denoting a message added to the commit while archiving \code{artifact} on GitHub Repository.
 #' By default, an artifact's \link{md5hash} is added to the commit message when it is specified to \code{NULL}.
@@ -47,26 +47,26 @@
 #' @examples 
 #' \dontrun{
 #' 
-#' ## Empty Github Repository Creation
+#' # empty Github Repository creation
 #' 
 #' library(httr)
 #' myapp <- oauth_app("github",
-#'                    key = app_key,
-#'                    secret = app_secret)
+#'                    key = '1fab1e77d27079c0717d',
+#'                    secret = 'c1284ed206b4a7f5f0bca508a6df5919e7fbf799')
 #' github_token <- oauth2.0_token(oauth_endpoints("github"),
 #'                                myapp,
 #'                                scope = "public_repo")
+#' # setting options                              
 #' aoptions("github_token", github_token)
-#' aoptions("user.name", user.name)
-#' aoptions("user.password", user.password)
+#' aoptions("user.name", 'MarcinKosinski')
+#' aoptions("user.password", 'sobieskiego77')
 #' 
-#' createEmptyGithubRepo("archive-test")
-#' unlink("archive-test", recursive = TRUE)
-#' cloneGithubRepo('https://github.com/MarcinKosinski/archive-test')
-#' setGithubRepo(aoptions("user.name"), "archive-test")
+#' createEmptyGithubRepo("archive-test4")
+#' setGithubRepo(aoptions("user.name"), "archive-test4")
 #' ## artifact's archiving
-#' 
 #' przyklad <- 1:100
+#' 
+#' # archiving
 #' archive(przyklad) -> md5hash_path
 #' 
 #' ## proof that artifact is really archived
@@ -75,6 +75,16 @@
 #' rm(przyklad)
 #' # and load it back from md5hash_path
 #' aread(md5hash_path)
+#' 
+#' 
+#' # clone example
+#' unlink("archive-test", recursive = TRUE)
+#' cloneGithubRepo('https://github.com/MarcinKosinski/archive-test')
+#' setGithubRepo(aoptions("user.name"), "archive-test")
+#' data(iris)
+#' archive(iris)
+#' showGithubRepo()
+#' 
 #' 
 #' }
 #' @family archivist
