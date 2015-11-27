@@ -37,6 +37,7 @@ than calculations itself.
 \examples{
 # objects preparation
 \dontrun{
+library(lubridate)
 cacheRepo <- tempfile()
 createEmptyRepo( cacheRepo )
 fun <- function(n) {replicate(n, summary(lm(Sepal.Length~Species, iris))$r.squared)}

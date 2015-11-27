@@ -7,7 +7,7 @@
 asearch(patterns, repo = NULL)
 }
 \arguments{
-\item{patterns}{A character vector of Tags. Only artifacts that 
+\item{patterns}{A character vector of \code{Tags}. Only artifacts that 
 contain all Tags are returned.}
 
 \item{repo}{One of following:
@@ -20,12 +20,12 @@ NULL in this case search will be performed in the default repo.}
 This function returns list of artifacts (by value).
 }
 \description{
-\code{asearch} searches for artifacts that contain all specified Tags 
+\code{asearch} searches for artifacts that contain all specified \link{Tags}
 and reads all of them from a Github \link{Repository}. It's a wrapper around 
 \link{multiSearchInGithubRepo} and \link{loadFromGithubRepo}.
 }
 \details{
-Function \code{asearch} reads all artifacts that contain given list of Tags
+Function \code{asearch} reads all artifacts that contain given list of \code{Tags}
 from GitHub Repository.
 It uses the function \link{loadFromGithubRepo} and
 \link{multiSearchInGithubRepo} but has shorter name and
@@ -33,10 +33,12 @@ different paramter's specification.
 }
 \examples{
 \dontrun{
-# read the object
 asearch("pbiecek/graphGallery", 
-           patterns = list("class:lm", 
-                "varname:Species"))
+        patterns = c("class:lm"))
+
+asearch("pbiecek/graphGallery", 
+        patterns = c("class:gg",
+                     "labelx:Sepal.Length"))
 }
 }
 \author{

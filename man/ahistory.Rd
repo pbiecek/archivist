@@ -2,16 +2,10 @@
 % Please edit documentation in R/ahistory.R
 \name{ahistory}
 \alias{ahistory}
-\alias{print.ahistory}
-\alias{print.ahistoryKable}
 \title{Show Artifact's History}
 \usage{
 ahistory(artifact = NULL, md5hash = NULL, repoDir = NULL,
   aformat = "regular")
-
-\method{print}{ahistory}(x, ...)
-
-\method{print}{ahistoryKable}(x, ...)
 }
 \arguments{
 \item{artifact}{An artifact for which history should be derived. Will be converted  into md5hash.}
@@ -23,8 +17,6 @@ If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{s
 
 \item{aformat}{A character denoting whether to print history in a \code{"regular"} (default) way or like in a \code{"kable"} function.
 See Notes.}
-
-\item{x}{An object of class \code{ahistory} or {ahistoryKable}, which are 2 possible outputs from \code{ahistory} function.}
 
 \item{...}{Further parameters passed to \link[knitr]{kable} function. Used when \code{aformat = "kable"}.}
 }
@@ -64,7 +56,6 @@ filter(Sepal.Length < 6) \%a\%
 ahistory(artifact)
 ahistory(artifact, aformat = "kable")  
 print(ahistory(artifact, aformat = "kable"), format = "latex")
-vignette(topic="Pedigree_Retrieval", package = "archivist")
 
 }
 }
@@ -72,48 +63,6 @@ vignette(topic="Pedigree_Retrieval", package = "archivist")
 Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
 }
 \seealso{
-Other archivist: \code{\link{Repository}},
-  \code{\link{Tags}}, \code{\link{\%a\%}},
-  \code{\link{addTagsRepo}}, \code{\link{aoptions}},
-  \code{\link{archive}},
-  \code{\link{archivist-github-integration}},
-  \code{\link{archivist-package}}, \code{\link{aread}},
-  \code{\link{asearch}}, \code{\link{cache}},
-  \code{\link{cloneGithubRepo}},
-  \code{\link{copyLocalRepo}},
-  \code{\link{createEmptyRepo}}, \code{\link{deleteRepo}},
-  \code{\link{getTagsLocal}},
-  \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
-  \code{\link{rmFromRepo}}, \code{\link{saveToRepo}},
-  \code{\link{searchInLocalRepo}},
-  \code{\link{setLocalRepo}},
-  \code{\link{shinySearchInLocalRepo}},
-  \code{\link{showLocalRepo}},
-  \code{\link{splitTagsLocal}},
-  \code{\link{summaryLocalRepo}},
-  \code{\link{zipLocalRepo}}
-
-Other archivist: \code{\link{Repository}},
-  \code{\link{Tags}}, \code{\link{\%a\%}},
-  \code{\link{addTagsRepo}}, \code{\link{aoptions}},
-  \code{\link{archive}},
-  \code{\link{archivist-github-integration}},
-  \code{\link{archivist-package}}, \code{\link{aread}},
-  \code{\link{asearch}}, \code{\link{cache}},
-  \code{\link{cloneGithubRepo}},
-  \code{\link{copyLocalRepo}},
-  \code{\link{createEmptyRepo}}, \code{\link{deleteRepo}},
-  \code{\link{getTagsLocal}},
-  \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
-  \code{\link{rmFromRepo}}, \code{\link{saveToRepo}},
-  \code{\link{searchInLocalRepo}},
-  \code{\link{setLocalRepo}},
-  \code{\link{shinySearchInLocalRepo}},
-  \code{\link{showLocalRepo}},
-  \code{\link{splitTagsLocal}},
-  \code{\link{summaryLocalRepo}},
-  \code{\link{zipLocalRepo}}
-
 Other archivist: \code{\link{Repository}},
   \code{\link{Tags}}, \code{\link{\%a\%}},
   \code{\link{addTagsRepo}}, \code{\link{aoptions}},
