@@ -101,7 +101,8 @@ rm( exampleRepoDir )
 setGithubRepo( user="MarcinKosinski", repo="Museum", branch="master",
                repoDirGit="ex1" )
                
-# From this moment repoDir parameter may be ommitted in the following functions
+# From this moment user, repo, branch, repoDirGit parameters may be ommitted
+# in the following functions:
 showGithubRepo()
 loadFromGithubRepo( "ff575c261c949d073b2895b05d1097c3")
 this <- loadFromGithubRepo( "ff", value = T)
@@ -114,7 +115,7 @@ summaryGithubRepo( )
 # To use multisearchInGithubRepo we should use repository with more than one artifact. 
 setGithubRepo( user="pbiecek", repo="archivist"  )
 
-# From this moment repoDir parameter may be ommitted in the following functions
+# From this moment user and repo parameters may be ommitted in the following functions
 showGithubRepo()
 multiSearchInGithubRepo( patterns=c("varname:Sepal.Width", "class:lm", "name:myplot123"), 
                          intersect = FALSE )
