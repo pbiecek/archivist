@@ -1,6 +1,6 @@
 ##    archivist package for R
 ##
-#' @title Read artifacts given as md5hashes from the Repository
+#' @title Read Artifacts Given as md5hashes from the Repository
 #'
 #' @description
 #' \code{aread} reads the artifact from the \link{Repository}. It's a wrapper around 

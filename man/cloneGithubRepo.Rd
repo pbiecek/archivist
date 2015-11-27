@@ -18,13 +18,53 @@ which corresponds to the name after last \code{/} in \code{repoURL}.}
 \code{cloneGithubRepo} is a wrapper around \code{git clone} and clones GitHub Repository
 into the \code{local_path} directory.
 
-More archivist functionalities that integrate archivist and GitHub API can be found here \link{archivist-github-integration}.
+More archivist functionalities that integrate archivist and GitHub API can be found here \link{archivist-github-integration} (\link{agithub}).
 }
 \examples{
 \dontrun{
 
 cloneGithubRepo("https://github.com/MarcinKosinski/Museum")
 cloneGithubRepo("https://github.com/MarcinKosinski/Museum-Extra")
+
+
+# empty Github Repository creation
+
+library(httr)
+myapp <- oauth_app("github",
+                   key = '1fab1e77d27079c0717d',
+                   secret = 'c1284ed206b4a7f5f0bca508a6df5919e7fbf799')
+github_token <- oauth2.0_token(oauth_endpoints("github"),
+                               myapp,
+                               scope = "public_repo")
+# setting options                              
+aoptions("github_token", github_token)
+aoptions("user.name", 'MarcinKosinski')
+aoptions("user.password", 'sobieskiego77')
+
+createEmptyGithubRepo("archive-test4")
+setGithubRepo(aoptions("user.name"), "archive-test4")
+## artifact's archiving
+przyklad <- 1:100
+
+# archiving
+archive(przyklad) -> md5hash_path
+
+## proof that artifact is really archived
+showGithubRepo() # uses options from setGithubRepo
+# let's remove przyklad
+rm(przyklad)
+# and load it back from md5hash_path
+aread(md5hash_path)
+
+
+# clone example
+unlink("archive-test", recursive = TRUE)
+cloneGithubRepo('https://github.com/MarcinKosinski/archive-test')
+setGithubRepo(aoptions("user.name"), "archive-test")
+data(iris)
+archive(iris)
+showGithubRepo()
+
 
 }
 }

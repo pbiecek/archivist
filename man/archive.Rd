@@ -7,7 +7,7 @@
 archive(artifact, commitMessage = aoptions("commitMessage"),
   repo = aoptions("repo"), user.name = aoptions("user.name"),
   user.password = aoptions("user.password"),
-  response = aoptions("response"), archiveData = aoptions("archiveData"),
+  archiveData = aoptions("archiveData"),
   archiveTags = aoptions("archiveTags"),
   archiveMiniature = aoptions("archiveMiniature"),
   force = aoptions("force"), rememberName = aoptions("rememberName"), ...,
@@ -19,15 +19,13 @@ archive(artifact, commitMessage = aoptions("commitMessage"),
 \item{commitMessage}{A character denoting a message added to the commit while archiving \code{artifact} on GitHub Repository.
 By default, an artifact's \link{md5hash} is added to the commit message when it is specified to \code{NULL}.}
 
-\item{repo}{A character denoting GitHub repository name.}
+\item{repo}{A character denoting GitHub repository name and synchronized local existing directory in which an artifact will be saved.}
 
 \item{user.name}{A character denoting GitHub user name. Can be set globally with \code{aoptions("user.name", user.name)}.
 See \link{archivist-github-integration}.}
 
 \item{user.password}{A character denoting GitHub user password. Can be set globally with \code{aoptions("user.password", user.password)}.
 See \link{archivist-github-integration}.}
-
-\item{response}{A logical value. Should the GitHub API response be printed.}
 
 \item{archiveData}{A logical value denoting whether to archive the data from the \code{artifact}.}
 
@@ -40,47 +38,45 @@ a Repository.}
 
 \item{rememberName}{A logical value. Should not be changed by a user. It is a technical parameter.}
 
+\item{...}{Graphical parameters denoting width and height of a miniature. See details. 
+Further arguments passed to \link{head}. See Details section in \link{saveToRepo} about \code{firtsRows} parameter}
+
 \item{userTags}{A character vector with Tags. These Tags will be added to the repository along with the artifact.}
 
 \item{silent}{If TRUE produces no warnings.}
 
 \item{ascii}{A logical value. An \code{ascii} argument is passed to \link{save} function.}
-
-\item{repoDir}{A character denoting an existing directory in which an artifact will be saved.
-If it is set to \code{NULL} (by default), it will use the \code{repoDir} specified in \link{setLocalRepo}.}
-
-\item{chain}{A logical value. Should the result be (default \code{chain = FALSE}) the \code{md5hash} 
-of a stored artifact or should the result be an input artifact (\code{chain = TRUE}), so that chaining code 
-can be used. See examples.}
 }
 \description{
-\code{archive}
-
-More archivist functionalities that integrate archivist and GitHub API can be found here \link{archivist-github-integration}.
+\code{archive} stores artifacts in the local \link{Repository} and automatically pushes archived
+artifacts to the Github \code{Repository} with which the local \code{Repository} is synchronized
+(via \link{createEmptyGithubRepo} or \link{cloneGithubRepo}). Function stores artifacts on the same
+way as \link{saveToRepo} function. More archivist functionalities that integrate archivist and GitHub API
+ can be found here \link{archivist-github-integration} (\link{agithub}).
 }
 \examples{
 \dontrun{
 
-## Empty Github Repository Creation
+# empty Github Repository creation
 
 library(httr)
 myapp <- oauth_app("github",
-                   key = app_key,
-                   secret = app_secret)
+                   key = '1fab1e77d27079c0717d',
+                   secret = 'c1284ed206b4a7f5f0bca508a6df5919e7fbf799')
 github_token <- oauth2.0_token(oauth_endpoints("github"),
                                myapp,
                                scope = "public_repo")
+# setting options                              
 aoptions("github_token", github_token)
-aoptions("user.name", user.name)
-aoptions("user.password", user.password)
+aoptions("user.name", 'MarcinKosinski')
+aoptions("user.password", 'sobieskiego77')
 
-createEmptyGithubRepo("archive-test")
-unlink("archive-test", recursive = TRUE)
-cloneGithubRepo('https://github.com/MarcinKosinski/archive-test')
-setGithubRepo(aoptions("user.name"), "archive-test")
+createEmptyGithubRepo("archive-test4")
+setGithubRepo(aoptions("user.name"), "archive-test4")
 ## artifact's archiving
-
 przyklad <- 1:100
+
+# archiving
 archive(przyklad) -> md5hash_path
 
 ## proof that artifact is really archived
@@ -89,6 +85,16 @@ showGithubRepo() # uses options from setGithubRepo
 rm(przyklad)
 # and load it back from md5hash_path
 aread(md5hash_path)
+
+
+# clone example
+unlink("archive-test", recursive = TRUE)
+cloneGithubRepo('https://github.com/MarcinKosinski/archive-test')
+setGithubRepo(aoptions("user.name"), "archive-test")
+data(iris)
+archive(iris)
+showGithubRepo()
+
 
 }
 }

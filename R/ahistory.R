@@ -19,7 +19,6 @@
 #' @param md5hash  If \code{artifact} is not specified then \code{md5hash} is used.
 #' @param repoDir  A character denoting an existing directory in which an artifact will be saved.
 #' If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.
-#' @param x  An object of class \code{ahistory} or {ahistoryKable}, which are 2 possible outputs from \code{ahistory} function. 
 #' @param ...  Further parameters passed to \link[knitr]{kable} function. Used when \code{aformat = "kable"}.
 #' @param aformat A character denoting whether to print history in a \code{"regular"} (default) way or like in a \code{"kable"} function.
 #' See Notes.
@@ -48,7 +47,6 @@
 #' ahistory(artifact)
 #' ahistory(artifact, aformat = "kable")  
 #' print(ahistory(artifact, aformat = "kable"), format = "latex")
-#' vignette(topic="Pedigree_Retrieval", package = "archivist")
 #' 
 #' }
 #' @family archivist
@@ -109,8 +107,7 @@ ahistory <- function(artifact = NULL, md5hash = NULL, repoDir = NULL, aformat = 
   df
 }
 
-#' @family archivist
-#' @rdname ahistory
+
 #' @export
 
 print.ahistory <- function(x, ...) {
@@ -122,8 +119,6 @@ print.ahistory <- function(x, ...) {
   }
 }
 
-#' @family archivist
-#' @rdname ahistory
 #' @export
 
 print.ahistoryKable <- function(x, ...){

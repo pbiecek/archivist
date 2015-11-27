@@ -60,7 +60,7 @@ also creates a local \code{Repository} with \code{createEmptyLocalRepo} which is
 new GitHub repository. \code{createEmptyRepo} is a wrapper around \code{createEmptyLocalRepo} and \code{createEmptyGithubRepo}
  functions and by default triggers \code{createEmptyLocalRepo} to maintain consistency with the previous \pkg{archivist} versions (<1.8.6.0)
  where there was only \code{createEmptyRepo} which created local \code{Repository}. To learn more about
- \code{Archivist Integration With GitHub API} visit \link{archivist-github-integration}.
+ \code{Archivist Integration With GitHub API} visit \link{archivist-github-integration} (\link{agithub}).
 }
 \details{
 At least one Repository must be initialized before using other functions from the \pkg{archivist} package. 
@@ -130,7 +130,48 @@ aoptions("user.password", user.password)
 createEmptyGithubRepo("Museum")
 createEmptyGithubRepo("Museum-Extras", response = TRUE)
 createEmptyGithubRepo("Gallery", readmeDescription = NULL)
-createEmptyGithubRepo("Landfill", repoDescription = "My models and stuff") 
+createEmptyGithubRepo("Landfill", 
+        repoDescription = "My models and stuff") 
+        
+        
+        
+# empty Github Repository creation
+
+library(httr)
+myapp <- oauth_app("github",
+                   key = '1fab1e77d27079c0717d',
+                   secret = 'c1284ed206b4a7f5f0bca508a6df5919e7fbf799')
+github_token <- oauth2.0_token(oauth_endpoints("github"),
+                               myapp,
+                               scope = "public_repo")
+# setting options                              
+aoptions("github_token", github_token)
+aoptions("user.name", 'MarcinKosinski')
+aoptions("user.password", 'sobieskiego77')
+
+createEmptyGithubRepo("archive-test4")
+setGithubRepo(aoptions("user.name"), "archive-test4")
+## artifact's archiving
+przyklad <- 1:100
+
+# archiving
+archive(przyklad) -> md5hash_path
+
+## proof that artifact is really archived
+showGithubRepo() # uses options from setGithubRepo
+# let's remove przyklad
+rm(przyklad)
+# and load it back from md5hash_path
+aread(md5hash_path)
+
+
+# clone example
+unlink("archive-test", recursive = TRUE)
+cloneGithubRepo('https://github.com/MarcinKosinski/archive-test')
+setGithubRepo(aoptions("user.name"), "archive-test")
+data(iris)
+archive(iris)
+showGithubRepo()
 
 }
 }
