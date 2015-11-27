@@ -18,7 +18,7 @@ which corresponds to the name after last \code{/} in \code{repoURL}.}
 \code{cloneGithubRepo} is a wrapper around \code{git clone} and clones GitHub Repository
 into the \code{local_path} directory.
 
-More archivist functionalities that integrate archivist and GitHub API can be found here \link{archivist-github-integration}.
+More archivist functionalities that integrate archivist and GitHub API can be found here \link{archivist-github-integration} (\link{agithub}).
 }
 \examples{
 \dontrun{

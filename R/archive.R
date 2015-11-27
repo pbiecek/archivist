@@ -3,18 +3,20 @@
 #' @title Archive Artifact to Local and Github Repository
 #'
 #' @description
-#' \code{archive}
-#' 
-#' More archivist functionalities that integrate archivist and GitHub API can be found here \link{archivist-github-integration} (\link{agithub}).
+#' \code{archive} stores artifacts in the local \link{Repository} and automatically pushes archived
+#' artifacts to the Github \code{Repository} with which the local \code{Repository} is synchronized
+#' (via \link{createEmptyGithubRepo} or \link{cloneGithubRepo}). Function stores artifacts on the same
+#' way as \link{saveToRepo} function. More archivist functionalities that integrate archivist and GitHub API
+#'  can be found here \link{archivist-github-integration} (\link{agithub}).
+#'  
 #' @param artifact An artifact to be archived on Local and Github \link{Repository}.
 #' @param commitMessage A character denoting a message added to the commit while archiving \code{artifact} on GitHub Repository.
 #' By default, an artifact's \link{md5hash} is added to the commit message when it is specified to \code{NULL}.
-#' @param repo A character denoting GitHub repository name.
+#' @param repo A character denoting GitHub repository name and synchronized local existing directory in which an artifact will be saved.
 #' @param user.name A character denoting GitHub user name. Can be set globally with \code{aoptions("user.name", user.name)}.
 #'  See \link{archivist-github-integration}.
 #' @param user.password A character denoting GitHub user password. Can be set globally with \code{aoptions("user.password", user.password)}.
 #' See \link{archivist-github-integration}.
-#' @param response A logical value. Should the GitHub API response be printed.
 #' @param archiveData A logical value denoting whether to archive the data from the \code{artifact}.
 #' 
 #' @param archiveTags A logical value denoting whether to archive Tags from the \code{artifact}.
@@ -23,23 +25,17 @@
 #' 
 #' @param userTags A character vector with Tags. These Tags will be added to the repository along with the artifact.
 #' 
-#' @param repoDir A character denoting an existing directory in which an artifact will be saved.
-#' If it is set to \code{NULL} (by default), it will use the \code{repoDir} specified in \link{setLocalRepo}.
-#' 
 #' @param force A logical value denoting whether to archive \code{artifact} if it was already archived in
 #' a Repository.
 #' 
 #' @param rememberName A logical value. Should not be changed by a user. It is a technical parameter.
 #' 
-#' @param chain A logical value. Should the result be (default \code{chain = FALSE}) the \code{md5hash} 
-#' of a stored artifact or should the result be an input artifact (\code{chain = TRUE}), so that chaining code 
-#' can be used. See examples.
-#'
 #' @param silent If TRUE produces no warnings.
 #' 
 #' @param ascii A logical value. An \code{ascii} argument is passed to \link{save} function.
 #' 
-#' 
+#' @param ... Graphical parameters denoting width and height of a miniature. See details. 
+#' Further arguments passed to \link{head}. See Details section in \link{saveToRepo} about \code{firtsRows} parameter
 #' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
@@ -94,7 +90,6 @@ archive <- function(artifact, commitMessage = aoptions("commitMessage"),
                     repo = aoptions("repo"), 
                     user.name = aoptions("user.name"),
                     user.password = aoptions("user.password"),
-                    response = aoptions("response"),
                     archiveData = aoptions("archiveData"), 
                     archiveTags = aoptions("archiveTags"), 
                     archiveMiniature = aoptions("archiveMiniature"),
@@ -107,7 +102,7 @@ archive <- function(artifact, commitMessage = aoptions("commitMessage"),
   stopifnot(is.character(repo) & length(repo) ==1)
   stopifnot(is.character(user.name) & length(user.name)==1)
   stopifnot(is.character(user.password) & length(user.password)==1)
-  stopifnot(is.logical(response) & length(response) ==1)
+  #stopifnot(is.logical(response) & length(response) ==1)
   
   # artifact archiving
   # the name of the GitHub repo should be the same
@@ -251,9 +246,7 @@ chain <- FALSE
   hook <- paste0("archivist::aread(\"",user.name,"/",repoName,"/",md5hash,"\")")
   
   cat(hook, "\n\n")
-  if (response){
-    cat(print(resp))
-  }
+
   return(paste0(user.name,"/",repoName,"/",md5hash))
   
   
