@@ -2,7 +2,7 @@
 % Please edit documentation in R/aread.R
 \name{aread}
 \alias{aread}
-\title{Read the artifact given as a md5hash from the Repository}
+\title{Read Artifacts Given as md5hashes from the Repository}
 \usage{
 aread(md5hash)
 }
@@ -18,7 +18,7 @@ MD5 hashes of artifacts in current local default directory or its abbreviations.
 \link{loadFromLocalRepo} and \link{loadFromGithubRepo}.
 }
 \details{
-Function \code{aread} reads the artifact (by the \code{md5hash}) from GitHub Repository.
+Function \code{aread} reads artifacts (by \code{md5hashes}) from GitHub Repository.
 It uses \link{loadFromLocalRepo} and \link{loadFromGithubRepo} functions
 with different parameter's specification.
 }
