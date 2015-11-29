@@ -43,3 +43,5 @@ help(package="archivist")
 > Przemysław Biecek, przemyslaw.biecek@gmail.com
 >
 > Marcin Kosiński, m.p.kosinski@gmail.com
+>
+> Witold Chodor, witoldchodor@gmail.com
