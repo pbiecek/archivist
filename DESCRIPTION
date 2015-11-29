@@ -1,12 +1,14 @@
 Package: archivist
-Version: 1.8.12.3
+Version: 1.9.0.1
 Type: Package
 Title: Tools for Storing, Restoring and Searching for R Objects
 Authors@R: c(
     person("Przemyslaw", "Biecek", role = c("aut", "cre"),
     email = "przemyslaw.biecek@gmail.com"),
     person("Marcin", "Kosinski", role = c("aut"),
-    email = "m.p.kosinski@gmail.com")
+    email = "m.p.kosinski@gmail.com"),
+    person("Witold", "Chodor", role = c("ctb"),
+    email = "witoldchodor@gmail.com")
     )
 Description: Data exploration and modelling is a process in which a lot of data
     artifacts are produced. Artifacts like: subsets, data aggregates, plots,

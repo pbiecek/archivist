@@ -1,11 +1,17 @@
+archivist 1.9
+----------------------------------------------------------------
+
+
 archivist 1.8
 ----------------------------------------------------------------
 	
 * **Archivist Integration With GitHub API:** new functions:
 	1. It is possible to create new GitHub repository with an empty `archivist`-like `Repository` with `createEmptyGithubRepo` function. We also added `createEmptyLocalRepo` to maintain consistency with other sister functions. `createEmptyRepo` is now a wrapper around `createEmptyLocalRepo` and `createEmptyGithubRepo` functions.
 	2. One can now clone GitHub-archivist repo with new `cloneGithubRepo` function.
-	3. Added manual page to enable easier usage of this integration: ``?`archivist-github-integration```.
-* **New functions** `splitTagsLocal` and `splitTagsGithub` enabling to split `tag` column in database into two separate columns: `tagKey` and `tagValue`.
+	3. One can automatically archive artifacts to Local and synchronized GitHub archivist-like Repositiories with new `archive` function. Example: https://github.com/MarcinKosinski/archive-test4/commits/master
+	4. Added manual page to enable easier usage of this integration: ``?`archivist-github-integration``` (or shorter `?agithub`).
+* **New functions:** 
+	1. `splitTagsLocal` and `splitTagsGithub` enabling to split `tag` column in database into two separate columns: `tagKey` and `tagValue`.
 * **Bugs fixed:**
 	1. `checkDirectory` function is now immune to directories that don't exist. This made
 `showLocalRepo` function working properly when passed an argument to the directory
