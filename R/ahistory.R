@@ -9,25 +9,26 @@
 #' \code{print.ahistoryKable} function prints this history in the same way as \link[knitr]{kable}.
 #' 
 #' @details
-#' All artifacts created with operator \link[archivist]{\%a\%} are archivised with 
+#' All artifacts created with \link[archivist]{\%a\%} operator are archivised with 
 #' detailed information  about it's source (both call and md5hash of the input).
 #' The function \code{ahistory} reads all artifacts that 
 #' precede \code{artifact} and create a description of the input flow. 
 #' The generic \code{print.ahistory} function plots the history in a human readable  way.
 #' 
-#' @param artifact An artifact for which history should be derived. Will be converted  into md5hash.
+#' @param artifact An artifact which history is supposed to be reconstructed.
+#' It will be converted  into md5hash.
 #' @param md5hash  If \code{artifact} is not specified then \code{md5hash} is used.
 #' @param repoDir  A character denoting an existing directory in which an artifact will be saved.
 #' If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.
 #' @param ...  Further parameters passed to \link[knitr]{kable} function. Used when \code{aformat = "kable"}.
-#' @param aformat A character denoting whether to print history in a \code{"regular"} (default) way or like in a \code{"kable"} function.
+#' @param aformat A character denoting whether to print history in either a \code{"regular"} (default) way or like in a \code{"kable"} function.
 #' See Notes.
 #' 
-#' @return This function returns data frame with two columns - names of calls and md5hashes of partial results.
+#' @return A data frame with two columns - names of calls and md5hashes of partial results.
 #' 
 #' @note There are provided functions (\code{print.ahistory} and \code{print.ahistoryKable}) to print the artifact's history. 
-#' History can be printed in a \code{regular} way which is friendy for the console output or in a \code{kable} format which 
-#' prints the artifact's history in a way in which \link[knitr]{kable} function would. This is convenient when one prints history
+#' History can be printed either in a \code{regular} way which is friendy for the console output or in a \code{kable} format which 
+#' prints the artifact's history in a way \link[knitr]{kable} function would. This is convenient when one prints history
 #' in \code{.Rmd} files using \link[rmarkdown]{rmarkdown}
 #' 
 #' @author 
@@ -48,6 +49,9 @@
 #' ahistory(artifact, aformat = "kable")  
 #' print(ahistory(artifact, aformat = "kable"), format = "latex")
 #' 
+#' repoDir <- file.path(getwd(), "ahistory_check")
+#' deleteRepo(repoDir, deleteRoot = TRUE)
+#' 
 #' }
 #' @family archivist
 #' @rdname ahistory
@@ -60,7 +64,7 @@ ahistory <- function(artifact = NULL, md5hash = NULL, repoDir = NULL, aformat = 
   if (is.null(md5hash)) 
     stop("Either artifact or md5hash has to be set")
   
-  stopifnot(length(aformat) ==1 & aformat %in% c("regular", "kable"))
+  stopifnot(length(aformat) == 1 & aformat %in% c("regular", "kable"))
   
   res_names <- c()
   res_md5 <- md5hash

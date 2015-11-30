@@ -1,6 +1,8 @@
 archivist 1.9
 ----------------------------------------------------------------
 
+* **New features:**
+  1. Alterations in the text of: `?ahistory`, documentation pages.
 
 archivist 1.8
 ----------------------------------------------------------------
