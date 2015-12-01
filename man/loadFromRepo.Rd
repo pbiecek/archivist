@@ -3,12 +3,17 @@
 \name{loadFromLocalRepo}
 \alias{loadFromGithubRepo}
 \alias{loadFromLocalRepo}
+\alias{loadFromRepo}
 \title{Load Artifact Given as a md5hash from a Repository}
 \usage{
 loadFromLocalRepo(md5hash, repoDir = NULL, value = FALSE)
 
 loadFromGithubRepo(md5hash, repo = NULL, user = NULL, branch = "master",
   repoDirGit = FALSE, value = FALSE)
+
+loadFromRepo(type = aoptions("type"), md5hash, repoDir = NULL,
+  repo = NULL, user = NULL, branch = "master", repoDirGit = FALSE,
+  value = FALSE)
 }
 \arguments{
 \item{md5hash}{A character assigned to the artifact through the use of a cryptographical hash function with MD5 algorithm, or it's abbreviation.}
@@ -32,6 +37,8 @@ Github Repository's branch on which the Repository is archived. Default \code{br
 \item{repoDirGit}{While working with a Github repository. A character containing a name of a directory on Github repository 
 on which the Repository is stored. If the Repository is stored in main folder on Github repository, this should be set 
 to \code{repoDirGit = FALSE} as default.}
+
+\item{type}{A character}
 }
 \description{
 \code{loadFromLocalRepo} loads an artifact from a local \link{Repository} into the workspace.

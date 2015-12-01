@@ -14,28 +14,91 @@ contain all Tags are returned.}
 
 A character with GitHub user name and GitHub repository name separated by `/`.
 
-NULL in this case search will be performed in the default repo.}
+NULL in this case search will be performed in the default repo, either local or GitHub.}
 }
 \value{
-This function returns list of artifacts (by value).
+This function returns a list of artifacts (by their values).
 }
 \description{
 \code{asearch} searches for artifacts that contain all specified \link{Tags}
-and reads all of them from a Github \link{Repository}. It's a wrapper around 
-\link{multiSearchInGithubRepo} and \link{loadFromGithubRepo}.
+and reads all of them from a default or Github \link{Repository}. It's a wrapper around 
+\link{multiSearchInRepo} and \link{loadFromRepo}.
 }
 \details{
 Function \code{asearch} reads all artifacts that contain given list of \code{Tags}
-from GitHub Repository.
-It uses the function \link{loadFromGithubRepo} and
-\link{multiSearchInGithubRepo} but has shorter name and
-different paramter's specification.
+from default or GitHub Repository.
+It uses both \link{loadFromRepo} and \link{multiSearchInRepo} functions 
+but has shorter name and different parameter's specification.
+}
+\note{
+Remember that if you want to use local repository you should set it to default.
 }
 \examples{
 \dontrun{
-asearch("pbiecek/graphGallery", 
-        patterns = c("class:lm"))
+### default LOCAL version
+## objects preparation
 
+# data.frame object
+data(iris)
+
+# ggplot/gg object
+library(ggplot2)
+df <- data.frame(gp = factor(rep(letters[1:3], each = 10)),y = rnorm(30))
+library(plyr)
+ds <- ddply(df, .(gp), summarise, mean = mean(y), sd = sd(y))
+myplot123 <- ggplot(df, aes(x = gp, y = y)) +
+  geom_point() +  geom_point(data = ds, aes(y = mean),
+                             colour = 'red', size = 3)
+
+# lm object
+model <- lm(Sepal.Length~ Sepal.Width + Petal.Length + Petal.Width, data= iris)
+model2 <- lm(Sepal.Length~ Sepal.Width + Petal.Width, data= iris)
+model3 <- lm(Sepal.Length~ Sepal.Width, data= iris)
+
+## creating example default local repository
+exampleRepoDir <- tempfile()
+createEmptyRepo(repoDir = exampleRepoDir)
+## setting default local repository
+setRepo(type = "local", repoDir = exampleRepoDir)
+
+saveToRepo(myplot123)
+saveToRepo(iris)
+saveToRepo(model)
+saveToRepo(model2)
+saveToRepo(model3)
+
+## Searching for objects of class:lm
+lm <- asearch(patterns = "class:lm")
+
+## Searching for objects of class:lm with coefname:Petal.Width
+lm_c_PW <- asearch(patterns = c("class:lm","coefname:Petal.Width"))
+
+# Note that we searched for objects. Then loaded them from repository by their value.
+
+
+## deleting example repository
+deleteRepo(repoDir = exampleRepoDir, deleteRoot = TRUE)
+rm(exampleRepoDir)
+
+### default GitHub version
+## Setting default github repository
+setRepo(type = "github", user = "pbiecek", repo = "archivist")
+
+showGithubRepo(method = "tags")$tag
+searchInGithubRepo(pattern = "class:lm")
+searchInGithubRepo(pattern = "class:gg")
+getTagsGithub(md5hash = "cd6557c6163a6f9800f308f343e75e72", tag = "")
+
+## Searching for objects of class:lm
+asearch(patterns = c("class:lm"))
+## Searching for objects of class:gg
+asearch(patterns = c("class:gg"))
+
+### Github version 
+## Note that repo argument is passed in the following way to asearch:
+## repo = "GitHub user name/GitHub repository name"
+
+## Searching for objects of class:gg
 asearch("pbiecek/graphGallery", 
         patterns = c("class:gg",
                      "labelx:Sepal.Length"))

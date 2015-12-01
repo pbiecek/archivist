@@ -3,6 +3,7 @@
 \name{searchInLocalRepo}
 \alias{multiSearchInGithubRepo}
 \alias{multiSearchInLocalRepo}
+\alias{multiSearchInRepo}
 \alias{searchInGithubRepo}
 \alias{searchInLocalRepo}
 \title{Search for an Artifact in the Repository Using Tags}
@@ -15,6 +16,10 @@ searchInGithubRepo(pattern, repo = NULL, user = NULL, branch = "master",
 
 multiSearchInLocalRepo(patterns, repoDir = NULL, fixed = TRUE,
   intersect = TRUE, realDBname = TRUE)
+
+multiSearchInRepo(type = aoptions("type"), patterns, fixed = TRUE,
+  intersect = TRUE, repoDir = NULL, realDBname = TRUE, repo = NULL,
+  user = NULL, branch = "master", repoDirGit = FALSE)
 
 multiSearchInGithubRepo(patterns, repo = NULL, user = NULL,
   branch = "master", repoDirGit = FALSE, fixed = TRUE, intersect = TRUE)
@@ -55,6 +60,9 @@ match all conditions are returned. If \code{intersect = FALSE} then artifacts th
 are returned.}
 
 \item{intersect}{A logical value. See \code{patterns} for more details.}
+
+\item{type}{A character denoting whether to use \code{local} or \code{github} version
+while using \code{multiSearchInRepo} wrapper.}
 }
 \value{
 \code{searchInRepo} returns character vector of \code{md5hashes} of artifacts that were searched for.

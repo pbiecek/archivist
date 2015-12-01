@@ -23,6 +23,9 @@
 #' 
 #' \href{https://github.com/pbiecek/archivist/wiki}{https://github.com/pbiecek/archivist/wiki}
 #' 
+#' @param type A character denoting whether to use \code{local} or \code{github} version
+#' while using \code{setRepo} wrapper.
+#' 
 #' @param repoDir A character denoting a directory of a Repository that we want to
 #' make dafault. In this way, in the following function calls: \link{saveToRepo},
 #' \link{loadFromLocalRepo},\link{searchInLocalRepo}, \link{rmFromRepo}, \link{zipLocalRepo}, 
@@ -123,7 +126,7 @@
 #' @rdname setRepo
 #' @export
 setLocalRepo <- function( repoDir ){
-  stopifnot( is.character(repoDir), length( repoDir ) == 1 )
+  stopifnot( is.character( repoDir ), length( repoDir ) == 1 )
   
   repoDir <- checkDirectory( repoDir )
   
@@ -154,6 +157,17 @@ setGithubRepo <- function( user, repo, branch = "master",
   invisible(NULL)
 }
 
+#' @family archivist
+#' @rdname setRepo
+#' @export
+setRepo <- function( type, repoDir, user, repo, branch = "master", repoDirGit = FALSE ){
+  stopifnot( is.character(type), length(type) == 1, type %in% c("local", "github") )
+  aoptions( "type", type )
+  if ( type == "local" )
+    setLocalRepo( repoDir = repoDir )
+  else
+    setGithubRepo( repo = repo, user = user, branch = branch, repoDirGit = repoDirGit )
+}
 
 useGithubSetupArguments <- function(){
 #   assign( "repo", get( ".repo", envir = .ArchivistEnv ), envir = parent.frame(2) )
