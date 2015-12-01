@@ -24,6 +24,9 @@
 #' by the \link{saveToRepo} function. If the artifact
 #' is not in the Repository then a logical value \code{FALSE} is returned.
 #' 
+#' @param type A character denoting whether to use \code{local} or \code{github} version
+#' while using \code{multiSearchInRepo} wrapper.
+#' 
 #' @param pattern If \code{fixed = TRUE}: a character denoting a \code{Tag} which is to be searched for in the Repository.
 #' It is also possible to specify \code{pattern} as a list of 
 #' length 2 with \code{dateFrom} and \code{dateTo}; see details. If \code{fixed = FALSE}: a regular expression 
@@ -269,6 +272,22 @@ multiSearchInLocalRepo <- function( patterns, repoDir = NULL, fixed = TRUE, inte
   unique(unlist(md5hs))
 }
 
+#' @rdname searchInRepo
+#' @export
+multiSearchInRepo <- function( type = aoptions("type"),
+                               patterns, fixed = TRUE, intersect = TRUE,
+                               repoDir = NULL, realDBname = TRUE,
+                               repo = NULL, user = NULL, branch = "master", repoDirGit = FALSE ){
+  
+  stopifnot( is.character(type), length(type) == 1, type %in% c("local", "github") )
+  
+  if ( type == "local" )
+    multiSearchInLocalRepo( patterns = patterns, repoDir = repoDir, fixed = fixed,
+                            intersect = intersect, realDBname = realDBname )
+  else 
+    multiSearchInGithubRepo( patterns = patterns, repo = repo, user = user, branch = branch,
+                             repoDirGit = repoDirGit, fixed = fixed, intersect = intersect )
+}
 
 
 #' @rdname searchInRepo
