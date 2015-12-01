@@ -164,7 +164,6 @@ createEmptyRepo <- function( repoDir, force = TRUE, default = FALSE,
                              response = aoptions("response"),
                              type = "local"){
   stopifnot(is.character(type) & length(type) ==1 & type %in% c("local", "github"))
-  if (default) aoptions("type", type)
   if (type == "local") {
     createEmptyLocalRepo(repoDir = repoDir, force = force, default = default)
   } else {

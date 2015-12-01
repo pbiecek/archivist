@@ -1,7 +1,7 @@
 archivist 1.9
 ----------------------------------------------------------------
 * **New functions**:
-    1. Created wrappers around existing local and github functions: `multiSearchInRepo`, `setRepo`, `loadFromRepo`.
+    1. Created wrappers around existing local and github functions: `multiSearchInRepo`  , `loadFromRepo`.
 * **Bugs fixed**:
     1. `asearch` function enables a user to read artifacts from default GitHub repository. In the previous version it was possible only in default local repository.
 * **New features**:

@@ -3,14 +3,11 @@
 \name{setLocalRepo}
 \alias{setGithubRepo}
 \alias{setLocalRepo}
-\alias{setRepo}
 \title{Set Repository's Global Path}
 \usage{
 setLocalRepo(repoDir)
 
 setGithubRepo(user, repo, branch = "master", repoDirGit = FALSE)
-
-setRepo(type, repoDir, user, repo, branch = "master", repoDirGit = FALSE)
 }
 \arguments{
 \item{repoDir}{A character denoting a directory of a Repository that we want to
@@ -54,9 +51,6 @@ In this way, in the following function calls:
 \code{repoDirGit} parameter may be omitted.
 If the Repository is stored in the main folder on the Github repository,
 this should be set to \code{repoDirGit = FALSE} as default.}
-
-\item{type}{A character denoting whether to use \code{local} or \code{github} version
-while using \code{setRepo} wrapper.}
 }
 \description{
 \code{setLocalRepo} sets local \link{Repository}'s global path.
@@ -132,26 +126,6 @@ Marcin Kosinski , \email{m.p.kosinski@gmail.com}
 }
 \seealso{
 \href{https://github.com/pbiecek/archivist/wiki}{https://github.com/pbiecek/archivist/wiki}
-
-Other archivist: \code{\link{Repository}},
-  \code{\link{Tags}}, \code{\link{\%a\%}},
-  \code{\link{addTagsRepo}}, \code{\link{ahistory}},
-  \code{\link{aoptions}}, \code{\link{archive}},
-  \code{\link{archivist-github-integration}},
-  \code{\link{archivist-package}}, \code{\link{aread}},
-  \code{\link{asearch}}, \code{\link{cache}},
-  \code{\link{cloneGithubRepo}},
-  \code{\link{copyLocalRepo}},
-  \code{\link{createEmptyRepo}}, \code{\link{deleteRepo}},
-  \code{\link{getTagsLocal}},
-  \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
-  \code{\link{rmFromRepo}}, \code{\link{saveToRepo}},
-  \code{\link{searchInLocalRepo}},
-  \code{\link{shinySearchInLocalRepo}},
-  \code{\link{showLocalRepo}},
-  \code{\link{splitTagsLocal}},
-  \code{\link{summaryLocalRepo}},
-  \code{\link{zipLocalRepo}}
 
 Other archivist: \code{\link{Repository}},
   \code{\link{Tags}}, \code{\link{\%a\%}},

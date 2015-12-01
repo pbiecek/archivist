@@ -24,8 +24,6 @@
 #' by the \link{saveToRepo} function. If the artifact
 #' is not in the Repository then a logical value \code{FALSE} is returned.
 #' 
-#' @param type A character denoting whether to use \code{local} or \code{github} version
-#' while using \code{multiSearchInRepo} wrapper.
 #' 
 #' @param pattern If \code{fixed = TRUE}: a character denoting a \code{Tag} which is to be searched for in the Repository.
 #' It is also possible to specify \code{pattern} as a list of 
@@ -274,24 +272,6 @@ multiSearchInLocalRepo <- function( patterns, repoDir = NULL, fixed = TRUE, inte
 
 #' @rdname searchInRepo
 #' @export
-multiSearchInRepo <- function( type = aoptions("type"),
-                               patterns, fixed = TRUE, intersect = TRUE,
-                               repoDir = NULL, realDBname = TRUE,
-                               repo = NULL, user = NULL, branch = "master", repoDirGit = FALSE ){
-  
-  stopifnot( is.character(type), length(type) == 1, type %in% c("local", "github") )
-  
-  if ( type == "local" )
-    multiSearchInLocalRepo( patterns = patterns, repoDir = repoDir, fixed = fixed,
-                            intersect = intersect, realDBname = realDBname )
-  else 
-    multiSearchInGithubRepo( patterns = patterns, repo = repo, user = user, branch = branch,
-                             repoDirGit = repoDirGit, fixed = fixed, intersect = intersect )
-}
-
-
-#' @rdname searchInRepo
-#' @export
 multiSearchInGithubRepo <- function( patterns, repo = NULL, user = NULL, 
                                      branch = "master", repoDirGit = FALSE, 
                                      fixed = TRUE, intersect = TRUE ){
@@ -306,3 +286,21 @@ multiSearchInGithubRepo <- function( patterns, repo = NULL, user = NULL,
   return( m )
 }
 
+#' @rdname searchInRepo
+#' @export
+multiSearchInRepo <- function(patterns, fixed = TRUE, intersect = TRUE,
+                              repoDir = NULL, realDBname = TRUE,
+                              repo = NULL, user = NULL, branch = "master", repoDirGit = FALSE ){
+  
+  local <- (!is.null(aoptions("repoDir")) && is.null(repo)) || (!is.null(repoDir) && is.null(repo))
+  GitHub <- (is.null(repoDir) && !is.null(aoptions("repo"))) || (is.null(repoDir) && !is.null(repo))
+  if (local){
+    multiSearchInLocalRepo( patterns = patterns, repoDir = repoDir, fixed = fixed,
+                            intersect = intersect, realDBname = realDBname )
+  }  else if (GitHub) {
+    multiSearchInGithubRepo( patterns = patterns, repo = repo, user = user, branch = branch,
+                             repoDirGit = repoDirGit, fixed = fixed, intersect = intersect )
+  } else {
+    stop("repo and repoDir parameters can not be used simultaneously.")
+  }
+}
