@@ -216,9 +216,9 @@ print.repository <- function( x, ... ){
   invisible( x )
 }
 
-#' @export
-plot.repository <- function( x, ... ){
-  barplot( x$savesPerDay, ... )
-  # invisible( x )
-}
+# #' @export
+# plot.repository <- function( x, ... ){
+#   barplot( x$savesPerDay, ... )
+#   # invisible( x )
+# }
 
