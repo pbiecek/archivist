@@ -38,7 +38,8 @@ Github Repository's branch on which the Repository is archived. Default \code{br
 on which the Repository is stored. If the Repository is stored in main folder on Github repository, this should be set 
 to \code{repoDirGit = FALSE} as default.}
 
-\item{type}{A character}
+\item{type}{A character denoting whether to use \code{local} or \code{github} version
+while using \code{loadFromRepo} wrapper.}
 }
 \description{
 \code{loadFromLocalRepo} loads an artifact from a local \link{Repository} into the workspace.
