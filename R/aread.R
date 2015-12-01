@@ -50,10 +50,10 @@ aread <- function( md5hash){
     stopifnot( length(elements) >= 3 | length(elements) == 1)
     if (length(elements) == 1) {
       # local directory
-      res[[md5h]] <- loadFromRepo(type = "local", md5hash = elements, value = TRUE)
+      res[[md5h]] <- loadFromRepo(md5hash = elements, value = TRUE)
     } else {
       # GitHub directory
-      res[[md5h]] <- loadFromRepo(type = "github", md5hash = elements[length(elements)], 
+      res[[md5h]] <- loadFromRepo(md5hash = elements[length(elements)], 
                                         repo = elements[2],
                                         repoDirGit = ifelse(length(elements) > 3, paste(elements[3:(length(elements)-1)], collapse="/"), FALSE),
                                         user = elements[1], value = TRUE)

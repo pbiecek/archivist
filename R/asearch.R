@@ -56,7 +56,7 @@
 #' exampleRepoDir <- tempfile()
 #' createEmptyRepo(repoDir = exampleRepoDir)
 #' ## setting default local repository
-#' setRepo(type = "local", repoDir = exampleRepoDir)
+#' setLocalRepo( repoDir = exampleRepoDir )
 #' 
 #' saveToRepo(myplot123)
 #' saveToRepo(iris)
@@ -79,7 +79,7 @@
 #' 
 #' ### default GitHub version
 #' ## Setting default github repository
-#' setRepo(type = "github", user = "pbiecek", repo = "archivist")
+#' setGithubRepo( user = "pbiecek", repo = "archivist")
 #' 
 #' showGithubRepo(method = "tags")$tag
 #' searchInGithubRepo(pattern = "class:lm")
@@ -113,13 +113,12 @@ asearch <- function( patterns, repo = NULL){
     # use default repo
 #     oblist <- multiSearchInLocalRepo(patterns = patterns,
 #                                      intersect = TRUE)
-     oblist <- multiSearchInRepo(patterns = patterns,
-                                 type = aoptions("type"))
+     oblist <- multiSearchInRepo(patterns = patterns)
 #     if (length(oblist) > 0) {
 #       res <- lapply(oblist, aread)
 #     }
     if (length(oblist) > 0) {
-      res <- lapply(oblist, loadFromRepo, type = aoptions("type"), value = TRUE)
+      res <- lapply(oblist, loadFromRepo, value = TRUE)
     }
   } else {
     # at least 3 elements
@@ -127,8 +126,7 @@ asearch <- function( patterns, repo = NULL){
     elements <- strsplit(repo, "/")[[1]]
     stopifnot( length(elements) >= 2 )
     
-    oblist <- multiSearchInRepo(type = "github",
-                                user = elements[1], repo=paste(elements[-1], collapse = "/"), 
+    oblist <- multiSearchInRepo(user = elements[1], repo=paste(elements[-1], collapse = "/"), 
                                 patterns = patterns)
     if (length(oblist)>0) {
       res <- lapply(paste0(repo, "/", oblist), aread)

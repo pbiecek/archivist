@@ -33,8 +33,6 @@
 #' If \code{repo} and \code{user} are set to \code{NULL} (as default) in Github mode then global parameters
 #' set in \link{setGithubRepo} function are used.
 #' 
-#' @param type A character denoting whether to use \code{local} or \code{github} version
-#' while using \code{loadFromRepo} wrapper.
 #' 
 #' @param repoDir A character denoting an existing directory from which an artifact will be loaded.
 #' If it is set to \code{NULL} (by default), it will use the \code{repoDir} specified in \link{setLocalRepo}.
@@ -344,13 +342,18 @@ loadFromGithubRepo <- function( md5hash, repo = NULL, user = NULL, branch = "mas
 
 #' @rdname loadFromRepo
 #' @export
-loadFromRepo <- function( type = aoptions("type"), md5hash, repoDir = NULL,
+loadFromRepo <- function( md5hash, repoDir = NULL,
                           repo = NULL, user = NULL, branch = "master", repoDirGit = FALSE,
                           value = FALSE ){
-  stopifnot( is.character(type), length(type) == 1, type %in% c("local", "github") )
-  if ( type == "local" )
+  
+  local <- (!is.null(aoptions("repoDir")) && is.null(repo)) || (!is.null(repoDir) && is.null(repo))
+  GitHub <- (is.null(repoDir) && !is.null(aoptions("repo"))) || (is.null(repoDir) && !is.null(repo))
+  if (local) {
     loadFromLocalRepo( md5hash = md5hash, repoDir = repoDir, value = value )
-  else
+  } else if (GitHub) {
     loadFromGithubRepo(  md5hash = md5hash, repo = repo, user = user, branch = branch,
                          repoDirGit = repoDirGit, value = value )
+  } else {
+    stop("repo and repoDir parameters can not be used simultaneously.")
+  } 
 }
