@@ -59,7 +59,7 @@ model3 <- lm(Sepal.Length~ Sepal.Width, data= iris)
 exampleRepoDir <- tempfile()
 createEmptyRepo(repoDir = exampleRepoDir)
 ## setting default local repository
-setRepo(type = "local", repoDir = exampleRepoDir)
+setLocalRepo( repoDir = exampleRepoDir )
 
 saveToRepo(myplot123)
 saveToRepo(iris)
@@ -82,7 +82,7 @@ rm(exampleRepoDir)
 
 ### default GitHub version
 ## Setting default github repository
-setRepo(type = "github", user = "pbiecek", repo = "archivist")
+setGithubRepo( user = "pbiecek", repo = "archivist")
 
 showGithubRepo(method = "tags")$tag
 searchInGithubRepo(pattern = "class:lm")
