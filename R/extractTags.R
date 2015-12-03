@@ -12,29 +12,37 @@ extractTags.default <- function( object, objectNameX, ... ) {
 
 extractTags.data.frame <- function( object, objectNameX, ... ) {
   name <- paste0( "name:", objectNameX )
-  var <- unique( paste0( "varname:", c( colnames( object ) ) ) )
   class <- paste0( "class:", class( object ) )
+  var <- unique( paste0( "varname:", c( colnames( object ) ) ) )
   date <- paste0( "date:", now() )
-  return( c( name, var, class, date ) )
+  return( c( name, class, var, date ) )
 }
 
 extractTags.ggplot <- function( object, objectNameX, ... ) {
+  name <- paste0( "name:", objectNameX )
+  class <- paste0( "class:", class( object ) )
   labx <- paste0( "labelx:", object$labels$x )
   laby <- paste0( "labely:", object$labels$y )
-  class <- paste0( "class:", class( object ) )
-  name <- paste0( "name:", objectNameX )
   date <- paste0( "date:", now() )
-  return( c( labx, laby, class, name, date ) )
-  
+  return( c( name, class, labx, laby, date ) )
 }
 
-extractTags.lm <- function( object, objectNameX, ... ) {
-  var <- paste0( "coefname:", names( object$coefficients ) )
-  class <- paste0( "class:", class( object ) )
-  name <- paste0( "name:", objectNameX )
-  date <- paste0( "date:", now() )
-  return( c( name, class, var, date ) )
-  
+extractTags.lm <- function( object, objectNameX, ... ) {  
+    name <- paste0( "name:", objectNameX )
+    class <- paste0( "class:", class( object ) )
+    var <- paste0( "coefname:", names( object$coefficients ) )
+    rank <- paste0( "numeric rank:", object$rank )
+    df.residual <- paste0( "residual DF:", object$df.residual )
+    sigma <- paste0( "sigma:", round(summary( object )$sigma, 4) )
+    r.squared <- paste0( "R^2:", round(summary( object )$r.squared, 4) )
+    adj.r.squared <- paste0( "adjusted R^2:", round(summary( object )$adj.r.squared, 4) )
+    f_stat <- summary( object )$fstatistic
+    names( f_stat ) <- NULL
+    f_stat[1] <- round( f_stat[1], 1 )
+    f.statistic <- paste0( "F-statistic:", paste(f_stat, c("on", "and", "DF"), collapse = " ") )
+    date <- paste0( "date:", now() )
+    return( c( name, class, var, rank, sigma, df.residual,
+               r.squared, adj.r.squared, f.statistic, date ) )
 }
 
 extractTags.htest <- function( object, objectNameX, ... ) {
