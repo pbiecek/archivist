@@ -17,12 +17,12 @@ searchInGithubRepo(pattern, repo = NULL, user = NULL, branch = "master",
 multiSearchInLocalRepo(patterns, repoDir = NULL, fixed = TRUE,
   intersect = TRUE, realDBname = TRUE)
 
+multiSearchInGithubRepo(patterns, repo = NULL, user = NULL,
+  branch = "master", repoDirGit = FALSE, fixed = TRUE, intersect = TRUE)
+
 multiSearchInRepo(patterns, fixed = TRUE, intersect = TRUE,
   repoDir = NULL, realDBname = TRUE, repo = NULL, user = NULL,
   branch = "master", repoDirGit = FALSE)
-
-multiSearchInGithubRepo(patterns, repo = NULL, user = NULL,
-  branch = "master", repoDirGit = FALSE, fixed = TRUE, intersect = TRUE)
 }
 \arguments{
 \item{pattern}{If \code{fixed = TRUE}: a character denoting a \code{Tag} which is to be searched for in the Repository.
