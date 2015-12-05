@@ -46,13 +46,32 @@ extractTags.lm <- function( object, objectNameX, ... ) {
 }
 
 extractTags.htest <- function( object, objectNameX, ... ) {
-  alt <- paste0( "alternative:", object$alternative )
-  method <- paste0( "method:", object$method )
-  class <- paste0( "class:", class( object ) )
   name <- paste0( "name:", objectNameX )
+  class <- paste0( "class:", class( object ) )
+  method <- paste0( "method:", object$method )
+  data_name <- paste0( "data.name:", object$data.name)
+  n_value <- object$null.value
+  n_value <- paste0("H_0:", names(n_value), "=", n_value ) 
+  alt <- paste0( "alternative:", object$alternative )
+  stat<- object$statistic
+  stat <- paste0("statistic:", names(stat), "=", stat ) 
+  param <- object$parameter
+  param <- paste0("parameter:", paste0(names(param), "=", param)) 
+  p_value <- paste0("p.value:", object$p.value)
+  intervals <- round(object$conf.int, 6)
+  intervals <- paste0(attributes(intervals)$conf.level*100, " percent conf.int.:[", intervals[1],", ", intervals[2],"]") 
+  estim <- round(object$estimate, 6)
+  estim <- paste0("estimate:", names(estim), "=", estim)
   date <- paste0( "date:", now() )
-  return( c( name, class, alt, method, date ) )
-  
+  return( c( name, class, method, data_name, n_value, alt,
+             stat, param, p_value, intervals, estim, date ) )
+}
+
+extractTags.lda <- function( object, objectNameX, ... ) {
+  name <- paste0( "name:", objectNameX )
+  class <- paste0( "class:", class( object ) )
+  date <- paste0( "date:", now() )
+  return( c( name, class, date ) )
 }
 
 extractTags.trellis <- function( object, objectNameX, ... ) {
@@ -79,12 +98,6 @@ extractTags.partition <- function( object, objectNameX, ... ) {
   return( c( name, class, date, objective ) )
 }
 
-extractTags.lda <- function( object, objectNameX, ... ) {
-  class <- paste0( "class:", class( object ) )
-  name <- paste0( "name:", objectNameX )
-  date <- paste0( "date:", now() )
-  return( c( name, class, date ) )
-}
 
 extractTags.qda <- function( object, objectNameX, ... ) {
   class <- paste0( "class:", class( object ) )
