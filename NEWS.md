@@ -10,6 +10,7 @@ archivist 1.9
         1. In `asearch` completely new example section divided into 3 subsections: default local repository, default GitHub resository and Github repository.
     3. Added new tags in the following methods: `extractTags.lm`, `extractTags.htest`.
     4. `htest` object's data is now saved to repository as a list.
+    5. Changed parameter name in `cloneGithubRepo` from `local_path` to `repoDir` to maintain consistency within package documentation and name convention.
 
 archivist 1.8
 ----------------------------------------------------------------
