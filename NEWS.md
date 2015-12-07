@@ -11,6 +11,7 @@ archivist 1.9
     3. Added new tags in the following methods: `extractTags.lm`, `extractTags.htest`.
     4. `htest` object's data is now saved to repository as a list.
     5. Changed parameter name in `cloneGithubRepo` from `local_path` to `repoDir` to maintain consistency within package documentation and name convention.
+    6. `createEmptyGithubRepo` and `createEmptyRepo(type ='github')` now reacts on new `default` parameter which sets newly created repositories (GitHub and synchronized with it Local one) as default.
 
 archivist 1.8
 ----------------------------------------------------------------

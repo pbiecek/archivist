@@ -43,7 +43,8 @@
 #' then function call will force to create new \code{repoDir} directory.
 #' Default set to \code{force = TRUE}.
 #' 
-#' @param default If \code{default = TRUE} then \code{repoDir} is set as default local repository.
+#' @param default If \code{default = TRUE} then \code{repoDir} (\code{repoName}) is set as default local repository 
+#' (for GitHub version also the \code{user.name} is set as default GitHub user).
 #' 
 #' @param repoName While working with a Github repository. A character denoting new GitHub repository name. White spaces will be substitued with a dash.
 #' @param github_token While working with a Github repository. An OAuth GitHub Token created with the \link{oauth2.0_token} function. See \link{archivist-github-integration}.
@@ -173,7 +174,7 @@ createEmptyRepo <- function( repoDir, force = TRUE, default = FALSE,
                           user.password = user.password,
                           repoDescription = repoDescription,
                           readmeDescription = readmeDescription,
-                          response = response)
+                          response = response, default = default)
   }
   
 }
@@ -182,6 +183,7 @@ createEmptyRepo <- function( repoDir, force = TRUE, default = FALSE,
 #' @export
 createEmptyLocalRepo <- function( repoDir, force = TRUE, default = FALSE ){
   stopifnot( is.character( repoDir ), length( repoDir ) == 1 )
+  stopifnot( is.logical( default ), length( default ) == 1 )
   
   if ( !file.exists( repoDir ) & !force ) 
     stop( paste0("Directory ", repoDir, " does not exist. Try with force=TRUE.") )
@@ -237,7 +239,8 @@ createEmptyGithubRepo <- function(repoName,
                                   user.password = aoptions("user.password"),
                                   repoDescription = aoptions("repoDescription"),
                                   readmeDescription = aoptions("readmeDescription"),
-                                  response = aoptions("response")){
+                                  response = aoptions("response"),
+                                  default = default){
   stopifnot(is.character(repoName) & length(repoName) ==1)
   stopifnot(is.character(repoDescription) & length(repoDescription) ==1)
   #stopifnot(any(class(github_token) %in% "Token"))
@@ -248,7 +251,16 @@ createEmptyGithubRepo <- function(repoName,
               is.null(readmeDescription))
   stopifnot(is.logical(response) & length(response) ==1)
   
+  
+  stopifnot( is.logical( default ), length( default ) == 1 )
   repoName <- gsub(pattern = " ", "-", repoName)
+  if (default) {
+    setLocalRepo(repoName)
+    setGithubRepo(repo = repoName, user = user.name)
+  }
+  
+  
+
   
   # httr imports are in archivist-package.R file
   # creating an empty GitHub Repository
