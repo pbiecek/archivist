@@ -38,6 +38,19 @@ extractData.htest <- function( object, parrentMd5hash, parentDir, isForce, ASCII
   }
 }
 
+extractData.lda <- function( object, parrentMd5hash, parentDir, isForce, ASCII ){
+  if (exists(as.character( ( object$call ) )[3], envir = parent.frame(1) )){
+    extractedDF <-  get( as.character( ( object$call ) )[3], envir = parent.frame(1) )
+    md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, repoDir = parentDir,
+                             rememberName = FALSE, archiveTags = FALSE, force = isForce, ascii = ASCII )
+    addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
+    return( md5hashDF )
+  }else{
+    warning(paste0("Could not find data ", as.character( ( object$call ) )[3], 
+                   ". Dataset was not archived.")) 
+  }
+}
+
 extractData.trellis <- function( object, parrentMd5hash, parentDir, isForce, ASCII ){
   if (exists(as.character( ( object$call ) )[3], envir = parent.frame(1) )){
   extractedDF <- get( as.character( object$call )[3], envir = parent.frame(1) )
@@ -67,19 +80,6 @@ extractData.partition <- function( object, parrentMd5hash, parentDir, isForce, A
                            rememberName = FALSE, archiveTags = FALSE, force = isForce, ascii = ASCII )
   addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
   return( md5hashDF )
-}
-
-extractData.lda <- function( object, parrentMd5hash, parentDir, isForce, ASCII ){
-  if (exists(as.character( ( object$call ) )[3], envir = parent.frame(1) )){
-  extractedDF <-  get( as.character( ( object$call ) )[3], envir = parent.frame(1) )
-  md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, repoDir = parentDir,
-                           rememberName = FALSE, archiveTags = FALSE, force = isForce, ascii = ASCII )
-  addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
-  return( md5hashDF )
-  }else{
-   warning(paste0("Could not find data ", as.character( ( object$call ) )[3], 
-                  ". Dataset was not archived.")) 
-  }
 }
 
 extractData.qda <- function( object, parrentMd5hash, parentDir, isForce, ASCII ){

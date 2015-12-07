@@ -8,6 +8,8 @@ archivist 1.9
     1. Alterations in the text of: `?ahistory`, `?cache`, `?asearch` documentation pages.
     2. Additional examples to better understand usage of archivist package functions: 
         1. In `asearch` completely new example section divided into 3 subsections: default local repository, default GitHub resository and Github repository.
+    3. Added new tags in the following methods: `extractTags.lm`, `extractTags.htest`.
+    4. `htest` object's data is now saved to repository as a list.
 
 archivist 1.8
 ----------------------------------------------------------------
