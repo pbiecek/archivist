@@ -21,7 +21,7 @@ createEmptyGithubRepo(repoName, github_token = aoptions("github_token"),
   user.password = aoptions("user.password"),
   repoDescription = aoptions("repoDescription"),
   readmeDescription = aoptions("readmeDescription"),
-  response = aoptions("response"))
+  response = aoptions("response"), default = default)
 }
 \arguments{
 \item{repoDir}{A character that specifies the directory for the Repository which is to be made.}
@@ -30,7 +30,8 @@ createEmptyGithubRepo(repoName, github_token = aoptions("github_token"),
 then function call will force to create new \code{repoDir} directory.
 Default set to \code{force = TRUE}.}
 
-\item{default}{If \code{default = TRUE} then \code{repoDir} is set as default local repository.}
+\item{default}{If \code{default = TRUE} then \code{repoDir} (\code{repoName}) is set as default local repository 
+(for GitHub version also the \code{user.name} is set as default GitHub user).}
 
 \item{repoName}{While working with a Github repository. A character denoting new GitHub repository name. White spaces will be substitued with a dash.}
 
