@@ -402,7 +402,7 @@ checkDirectory <- function( directory, create = FALSE ){
   # check property of directory
   if ( !create ){
     # check whether repository exists
-    if ( !file.exists( directory ) ){
+    if ( !dir.exists( directory ) ){
       stop( paste0( "There is no such repository as ", directory ) )
     }
     # check if repository is proper (has backpack.db and gallery)
