@@ -55,9 +55,9 @@
 #' @param user.password While working with a Github repository. A character denoting GitHub user password. Can be set globally with \code{aoptions("user.password", user.password)}.
 #' See \link{archivist-github-integration}.
 #' @param readmeDescription While working with a Github repository. A character of the content of \code{README.md} file. By default a description of \link{Repository}.
-#' Can be set globally with \code{aoptions("readmeDescription", readmeDescription)}. For no \code{README.md} file 
-#' set \code{aoptions("readmeDescription", NULL)}.
-#' @param response A logical value. Should the GitHub API response should be returned.
+#' Can be set globally with \code{aoptions("readmeDescription", readmeDescription)}. In order to omit 
+#' \code{README.md} file set \code{aoptions("readmeDescription", NULL)}.
+#' @param response A logical value. Should the GitHub API response be returned.
 #' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}

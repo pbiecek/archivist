@@ -47,10 +47,10 @@ See \link{archivist-github-integration}.}
 \item{repoDescription}{While working with a Github repository. A character specifing the new GitHub repository description.}
 
 \item{readmeDescription}{While working with a Github repository. A character of the content of \code{README.md} file. By default a description of \link{Repository}.
-Can be set globally with \code{aoptions("readmeDescription", readmeDescription)}. For no \code{README.md} file 
-set \code{aoptions("readmeDescription", NULL)}.}
+Can be set globally with \code{aoptions("readmeDescription", readmeDescription)}. In order to omit 
+\code{README.md} file set \code{aoptions("readmeDescription", NULL)}.}
 
-\item{response}{A logical value. Should the GitHub API response should be returned.}
+\item{response}{A logical value. Should the GitHub API response be returned.}
 
 \item{type}{A character. Whether to use \code{Local} or \code{Github} version while using \code{createEmptyRepo} wrapper.}
 }
