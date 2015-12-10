@@ -10,21 +10,24 @@
 #' 
 #' @details
 #' 
-#' To use this set of functionalities, one first has to authorize himselft to the GitHub API.
-#' It can be done by creating an \href{OAuth application on GitHub}{https://github.com/settings/developers}
-#'  (register new application). When application is created, one will have to copy its \code{Client ID} and
-#'  \code{Client Secret} and authorize his github user with this application with running those command
+#' To use this set of functionalities, one firstly has to authorize himselft to the GitHub API.
+#' It can be done by creating \href{OAuth application on GitHub}{https://github.com/settings/developers}
+#' (register new application). When application is created, one will have to copy its \code{Client ID} and
+#' \code{Client Secret} and authorize his github user with this application by running those commands:
 #'  \itemize{
 #'    \item \code{myapp <- oauth_app("github", key = Client_ID, secret = Client_Secret)},
 #'    \item \code{github_token <- oauth2.0_token(oauth_endpoints("github"), myapp, scope = "public_repo")}.
 #'  } 
-#'  The \code{scope} limits can be found here \href{https://developer.github.com/v3/oauth/#scopes}{https://developer.github.com/v3/oauth/#scopes}.
-#'  Basically this is how you grant your application an access and give permissions. With such a token one
-#'  is authorized and can work with GitHub API and \pkg{archivist} functions devoted to GitHub integration.
+#' The \code{scope} limits can be found here 
+#' \href{https://developer.github.com/v3/oauth/#scopes}{https://developer.github.com/v3/oauth/#scopes}.
+#' Basically, this is how you grant an access to your application  and give permissions.
+#' With such a token one is authorized and can work with GitHub API and \pkg{archivist}
+#' functions devoted to GitHub integration.
 #'  
-#' To perform GitHub integration operations such as \code{push}, \code{pull}, \code{commit}, \code{add} etc. a user
-#' has to pass his GitHub user name (\code{user.name} parameter), user email (\code{user.email} parameter) and user password
-#' (\code{user.password} parameter). Those parameters can be set globbaly with \code{aoptions("user.email", user.email)}, \code{aoptions("user.name", user.name)}
+#' To perform GitHub integration operations such as \code{push}, \code{pull}, \code{commit}, \code{add} etc.
+#' a user has to pass his GitHub user name (\code{user.name} parameter), user email (\code{user.email}
+#' parameter) and user password (\code{user.password} parameter). Those parameters can be set globbaly
+#' with \code{aoptions("user.email", user.email)}, \code{aoptions("user.name", user.name)}
 #' and \code{aoptions("user.password", user.password)}.
 #'  
 #' 
