@@ -5,8 +5,15 @@
 #' @description
 #' Set of functions to integrate \link[archivist]{archivist-package} with
 #' GitHub API \href{https://developer.github.com/v3/}{https://developer.github.com/v3/}.
+#' 
 #' It is possible to create new GitHub repository with an empty \pkg{archivist}-like \link{Repository}
-#' with \link{createEmptyGithubRepo} function.
+#' with \link{createEmptyGithubRepo} function. 
+#' 
+#' \link{archive} stores artifacts in the local
+#' \code{Repository} and automatically pushes archived artifacts to the Github
+#' \code{Repository} with which the local \code{Repository} is synchronized. 
+#' 
+#' \link{cloneGithubRepo} clones GitHub Repository into the local directory.
 #' 
 #' @details
 #' 
