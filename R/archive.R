@@ -57,8 +57,7 @@
 #' aoptions("user.name", user_name)
 #' aoptions("user.password", user_password)
 #' 
-#' createEmptyGithubRepo("archive-test4")
-#' setGithubRepo(aoptions("user.name"), "archive-test4")
+#' createEmptyGithubRepo("archive-test4", default = TRUE)
 #' ## artifact's archiving
 #' przyklad <- 1:100
 #' 
