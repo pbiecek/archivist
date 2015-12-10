@@ -33,7 +33,7 @@ See \link{archivist-github-integration}.}
 
 \item{archiveMiniature}{A logical value denoting whether to archive a miniature of the \code{artifact}.}
 
-\item{force}{A logical value denoting whether to archive \code{artifact} if it was already archived in
+\item{force}{A logical value denoting whether to archive \code{artifact} if it is already archived in
 a Repository.}
 
 \item{rememberName}{A logical value. Should not be changed by a user. It is a technical parameter.}

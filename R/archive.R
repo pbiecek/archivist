@@ -25,7 +25,7 @@
 #' 
 #' @param userTags A character vector with Tags. These Tags will be added to the repository along with the artifact.
 #' 
-#' @param force A logical value denoting whether to archive \code{artifact} if it was already archived in
+#' @param force A logical value denoting whether to archive \code{artifact} if it is already archived in
 #' a Repository.
 #' 
 #' @param rememberName A logical value. Should not be changed by a user. It is a technical parameter.
