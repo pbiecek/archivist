@@ -2,6 +2,7 @@ archivist 1.9
 ----------------------------------------------------------------
 * **New functions**:
     1. Created wrappers around existing local and github functions: `multiSearchInRepo`  , `loadFromRepo`.
+    2. `alink` function: Returns a Link To Download an Artifact Stored on GitHub Repository. Ideal combination with `archive`
 * **Bugs fixed**:
     1. `asearch` function enables a user to read artifacts from default GitHub repository. In the previous version it was possible only in default local repository.
 * **New features**:
@@ -12,6 +13,7 @@ archivist 1.9
     4. `htest` object's data is now saved to repository as a list.
     5. Changed parameter name in `cloneGithubRepo` from `local_path` to `repoDir` to maintain consistency within package documentation and name convention.
     6. `createEmptyGithubRepo` and `createEmptyRepo(type ='github')` now reacts on new `default` parameter which sets newly created repositories (GitHub and synchronized with it Local one) as default.
+    7. `archive` no longer cats hook to the artifact during the execution. Hook cat can be set with new `alink` parameter that uses `alink()` function, where parameters can be passed with `...`.
 
 archivist 1.8
 ----------------------------------------------------------------

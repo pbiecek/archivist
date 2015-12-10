@@ -11,7 +11,8 @@ archive(artifact, commitMessage = aoptions("commitMessage"),
   archiveTags = aoptions("archiveTags"),
   archiveMiniature = aoptions("archiveMiniature"),
   force = aoptions("force"), rememberName = aoptions("rememberName"), ...,
-  userTags = c(), silent = aoptions("silent"), ascii = aoptions("ascii"))
+  userTags = c(), silent = aoptions("silent"), ascii = aoptions("ascii"),
+  alink = aoptions("alink"))
 }
 \arguments{
 \item{artifact}{An artifact to be archived on Local and Github \link{Repository}.}
@@ -38,7 +39,8 @@ a Repository.}
 
 \item{rememberName}{A logical value. Should not be changed by a user. It is a technical parameter.}
 
-\item{...}{Graphical parameters denoting width and height of a miniature. See details. 
+\item{...}{Further arguments passed to \link{alink} function, when \code{alink} set to \code{TRUE} OR 
+graphical parameters denoting width and height of a miniature. See details. 
 Further arguments passed to \link{head}. See Details section in \link{saveToRepo} about \code{firtsRows} parameter}
 
 \item{userTags}{A character vector with Tags. These Tags will be added to the repository along with the artifact.}
@@ -46,6 +48,9 @@ Further arguments passed to \link{head}. See Details section in \link{saveToRepo
 \item{silent}{If TRUE produces no warnings.}
 
 \item{ascii}{A logical value. An \code{ascii} argument is passed to \link{save} function.}
+
+\item{alink}{Logical. Whether the result should be put into \link{alink} function. Pass further arguments with \code{...}
+parameter.}
 }
 \description{
 \code{archive} stores artifacts in the local \link{Repository} and automatically pushes archived
@@ -73,15 +78,15 @@ aoptions("user.password", user_password)
 
 createEmptyGithubRepo("archive-test4", default = TRUE)
 ## artifact's archiving
-przyklad <- 1:100
+exampleVec <- 1:100
 
 # archiving
-archive(przyklad) -> md5hash_path
+archive(exampleVec) -> md5hash_path
 
 ## proof that artifact is really archived
 showGithubRepo() # uses options from setGithubRepo
-# let's remove przyklad
-rm(przyklad)
+# let's remove exampleVec
+rm(exampleVec)
 # and load it back from md5hash_path
 aread(md5hash_path)
 
@@ -94,6 +99,14 @@ data(iris)
 archive(iris)
 showGithubRepo()
 
+## alink() option
+vectorLong <- 1:100
+vectorShort <- 1:20
+# archiving
+alink(archive(vectorLong))
+archive(vectorShort, alink = TRUE)
+showGithubRepo()
+
 
 }
 }
@@ -104,7 +117,7 @@ Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 Other archivist: \code{\link{Repository}},
   \code{\link{Tags}}, \code{\link{\%a\%}},
   \code{\link{addTagsRepo}}, \code{\link{ahistory}},
-  \code{\link{aoptions}},
+  \code{\link{alink}}, \code{\link{aoptions}},
   \code{\link{archivist-github-integration}},
   \code{\link{archivist-package}}, \code{\link{aread}},
   \code{\link{asearch}}, \code{\link{cache}},

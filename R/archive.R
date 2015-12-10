@@ -34,8 +34,12 @@
 #' 
 #' @param ascii A logical value. An \code{ascii} argument is passed to \link{save} function.
 #' 
-#' @param ... Graphical parameters denoting width and height of a miniature. See details. 
+#' @param ... Further arguments passed to \link{alink} function, when \code{alink} set to \code{TRUE} OR 
+#' graphical parameters denoting width and height of a miniature. See details. 
 #' Further arguments passed to \link{head}. See Details section in \link{saveToRepo} about \code{firtsRows} parameter
+#' 
+#' @param alink Logical. Whether the result should be put into \link{alink} function. Pass further arguments with \code{...}
+#' parameter.
 #' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
@@ -59,15 +63,15 @@
 #' 
 #' createEmptyGithubRepo("archive-test4", default = TRUE)
 #' ## artifact's archiving
-#' przyklad <- 1:100
+#' exampleVec <- 1:100
 #' 
 #' # archiving
-#' archive(przyklad) -> md5hash_path
+#' archive(exampleVec) -> md5hash_path
 #' 
 #' ## proof that artifact is really archived
 #' showGithubRepo() # uses options from setGithubRepo
-#' # let's remove przyklad
-#' rm(przyklad)
+#' # let's remove exampleVec
+#' rm(exampleVec)
 #' # and load it back from md5hash_path
 #' aread(md5hash_path)
 #' 
@@ -78,6 +82,14 @@
 #' setGithubRepo(aoptions("user.name"), "archive-test")
 #' data(iris)
 #' archive(iris)
+#' showGithubRepo()
+#' 
+#' ## alink() option
+#' vectorLong <- 1:100
+#' vectorShort <- 1:20
+#' # archiving
+#' alink(archive(vectorLong))
+#' archive(vectorShort, alink = TRUE)
 #' showGithubRepo()
 #' 
 #' 
@@ -97,10 +109,12 @@ archive <- function(artifact, commitMessage = aoptions("commitMessage"),
                     ... ,
                     userTags = c(), 
                     silent=aoptions("silent"),
-                    ascii = aoptions("ascii")){
+                    ascii = aoptions("ascii"), 
+                    alink = aoptions("alink")){
   stopifnot(is.character(repo) & length(repo) ==1)
   stopifnot(is.character(user.name) & length(user.name)==1)
   stopifnot(is.character(user.password) & length(user.password)==1)
+  stopifnot(is.logical(alink) & length(alink) == 1)
   #stopifnot(is.logical(response) & length(response) ==1)
   
   # artifact archiving
@@ -242,11 +256,15 @@ chain <- FALSE
        refspec = "refs/heads/master",
        credentials = cred)
   
-  hook <- paste0("archivist::aread(\"",user.name,"/",repoName,"/",md5hash,"\")")
-  
-  cat(hook, "\n\n")
+#   hook <- paste0("archivist::aread(\"",user.name,"/",repoName,"/",md5hash,"\")")
+#   
+#   cat(hook, "\n\n")
 
-  return(paste0(user.name,"/",repoName,"/",md5hash))
+  if (alink) {
+    return(alink(paste0(user.name,"/",repoName,"/",md5hash)), ...)
+  } else {
+    return(paste0(user.name,"/",repoName,"/",md5hash))
+  }
   
   
 }
