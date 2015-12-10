@@ -42,7 +42,7 @@ format: \code{"TagKey:TagValue"} - see examples.
 \section{shiny}{
 
 
-This function use tools from the fantastic \code{shiny}
+This function use tools from the fantastic \pkg{shiny}
 package, so you'll need to make sure to have it installed.
 }
 \examples{
