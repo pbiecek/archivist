@@ -4,23 +4,24 @@
 #'
 #' @description
 #' \code{shinySearchInLocalRepo} searches for an artifact in a \link{Repository} using \link{Tags}.
-#' To create an application one needs to point the name of artifacts repository.
-#' The application is generated on the fly. Right now two controllers are exposed. 
+#' To create an application one needs to point the name of artifacts' repository.
+#' The application is generated on the run. As for now there are two controllers exposed. 
 #' A text input field and a slider. Tags that are typed into text field are used for searching in repository. 
-#' Object that have same Tags are then presented on right panel.
+#' Objects that have the same Tags are presented on the right panel.
 #' These object might be also downloaded just by click.
 #' To learn more about artifacts visit \link[archivist]{archivist-package}.
 #' 
 #' @details
-#' \code{shinySearchInLocalRepo} searches for artifacts in a Repository using their's \code{Tag} 
+#' \code{shinySearchInLocalRepo} searches for artifacts in a Repository using their \code{Tags} 
 #' (e.g., \code{name}, \code{class} or \code{archiving date}). \code{Tags} are submitted in a 
 #' text input in a shiny application. Many Tags may be specified, they should be comma separated. 
-#' User can specify more Tags when artifact is created, Tags like phase, project, author etc.
+#' User can specify more Tags like phase, project, author etc. when artifact is created.
 #' 
-#' In the search query one can add Tags started with sort: or sort:-
-#' then miniatures will be sorted accordingly.
-#' For exaple sort:class will sort along class Tag, while sort:-class backward.
-#' sort:createdDate will sort along createdDate and sort:-createdDate backward.
+#' In the search query one can add Tags starting with \code{sort:} or \code{sort:-}.
+#' As a result, miniatures will be sorted appropriately.
+#' For example \code{sort:class} will sort \code{class} Tags, while \code{sort:-class} will
+#' sort \code{class} tags backwards. \code{sort:createdDate} will sort \code{createdDate} Tag and
+#' \code{sort:-createdDate} will sort \code{createdDate} Tag backwards.
 #' 
 #' \code{Tags}, submitted in the text field, should be given according to the 
 #' format: \code{"TagKey:TagValue"} - see examples.
@@ -38,8 +39,8 @@
 #'
 #' @section shiny:
 #'
-#' This function use tools from the fantastic shiny
-#' package, so you'll need to make sure to have that installed.
+#' This function use tools from the fantastic \code{shiny}
+#' package, so you'll need to make sure to have it installed.
 #'
 #' @examples
 #' \dontrun{
