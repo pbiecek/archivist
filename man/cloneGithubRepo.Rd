@@ -9,7 +9,7 @@ cloneGithubRepo(repoURL, repoDir = NULL, ...)
 \arguments{
 \item{repoURL}{The remote repository to clone.}
 
-\item{repoDir}{Local directory to clone to. If \code{NULL}, by default, creates a local directory.
+\item{repoDir}{Local directory to clone to. If \code{NULL}, by default, creates a local directory,
 which corresponds to the name after last \code{/} in \code{repoURL}.}
 
 \item{...}{Further parameters passed to \link[git2r]{clone}.}
