@@ -21,7 +21,7 @@ createEmptyGithubRepo(repoName, github_token = aoptions("github_token"),
   user.password = aoptions("user.password"),
   repoDescription = aoptions("repoDescription"),
   readmeDescription = aoptions("readmeDescription"),
-  response = aoptions("response"), default = default)
+  response = aoptions("response"), default = FALSE)
 }
 \arguments{
 \item{repoDir}{A character that specifies the directory for the Repository which is to be made.}
@@ -150,8 +150,7 @@ aoptions("github_token", github_token)
 aoptions("user.name", user_name)
 aoptions("user.password", user_password)
 
-createEmptyGithubRepo("archive-test4")
-setGithubRepo(aoptions("user.name"), "archive-test4")
+createEmptyGithubRepo("archive-test4", default = TRUE)
 ## artifact's archiving
 przyklad <- 1:100
 
@@ -183,7 +182,8 @@ Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 Other archivist: \code{\link{Repository}},
   \code{\link{Tags}}, \code{\link{\%a\%}},
   \code{\link{addTagsRepo}}, \code{\link{ahistory}},
-  \code{\link{aoptions}}, \code{\link{archive}},
+  \code{\link{alink}}, \code{\link{aoptions}},
+  \code{\link{archive}},
   \code{\link{archivist-github-integration}},
   \code{\link{archivist-package}}, \code{\link{aread}},
   \code{\link{asearch}}, \code{\link{cache}},

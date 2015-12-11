@@ -126,8 +126,7 @@
 #' aoptions("user.name", user_name)
 #' aoptions("user.password", user_password)
 #' 
-#' createEmptyGithubRepo("archive-test4")
-#' setGithubRepo(aoptions("user.name"), "archive-test4")
+#' createEmptyGithubRepo("archive-test4", default = TRUE)
 #' ## artifact's archiving
 #' przyklad <- 1:100
 #' 
@@ -240,7 +239,7 @@ createEmptyGithubRepo <- function(repoName,
                                   repoDescription = aoptions("repoDescription"),
                                   readmeDescription = aoptions("readmeDescription"),
                                   response = aoptions("response"),
-                                  default = default){
+                                  default = FALSE){
   stopifnot(is.character(repoName) & length(repoName) ==1)
   stopifnot(is.character(repoDescription) & length(repoDescription) ==1)
   #stopifnot(any(class(github_token) %in% "Token"))
