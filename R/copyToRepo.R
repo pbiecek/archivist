@@ -22,7 +22,7 @@
 #' @param repoTo A character that specifies the directory of the Repository into which
 #' artifacts will be copied.
 #' 
-#' @param md5hashes A character vector containing \code{md5hashes} of artifacts to be copied.
+#' @param md5hashes A character vector containing \code{md5hashes} of artifacts to be copied. 
 #' 
 #' @param repo While coping the Github repository. A character containing a name of the
 #' Github repository on which the "\code{repoFrom}" - Repository is archived.
