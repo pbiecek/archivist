@@ -113,9 +113,21 @@ extractTags.lda <- function( object, objectNameX, ... ) {
 extractTags.qda <- function( object, objectNameX, ... ) {
   class <- paste0( "class:", class( object ) )
   name <- paste0( "name:", objectNameX )
+  N <- paste0("N:", object$N)
+  lev <- paste0("levels:", object$lev)
+  counts <- object$counts
+  counts <- paste0("counts_", names(counts),":", counts)
+  prior <- round(object$prior, 3)
+  prior <- paste0("prior_", names(prior), ":", prior)
+  ldet <- paste0("ldet:", object$ldet)
+  terms <- object$terms
+  if (!is.null(terms)) {
+    terms <- paste0( "terms:", terms )
+  } else {
+    terms <- paste0( "terms:", deparse(terms) )
+  }
   date <- paste0( "date:", now() )
-  terms <- paste0( "terms:", object$terms )
-  return( c( name, class, date, terms ) )
+  return( c( name, class, N, lev, counts, prior, ldet, date, terms ) )
 }
 
 extractTags.twins <- function( object, objectNameX, ... ) {
