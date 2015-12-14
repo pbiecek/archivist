@@ -121,13 +121,9 @@ extractTags.qda <- function( object, objectNameX, ... ) {
   prior <- paste0("prior_", names(prior), ":", prior)
   ldet <- paste0("ldet:", object$ldet)
   terms <- object$terms
-  if (!is.null(terms)) {
-    terms <- paste0( "terms:", terms )
-  } else {
-    terms <- paste0( "terms:", deparse(terms) )
-  }
+  terms <- paste0( "terms:", ifelse(!is.null(terms), terms, deparse(terms)))                  
   date <- paste0( "date:", now() )
-  return( c( name, class, N, lev, counts, prior, ldet, date, terms ) )
+  return( c( name, class, N, lev, counts, prior, ldet, terms, date ) )
 }
 
 extractTags.twins <- function( object, objectNameX, ... ) {
@@ -154,10 +150,14 @@ extractTags.glmnet <- function( object, objectNameX, ... ) {
 }
 
 extractTags.survfit <- function( object, objectNameX, ... ) {
-  class <- paste0( "class:", class( object ) )
   name <- paste0( "name:", objectNameX )
+  class <- paste0( "class:", class( object ) )
+  n <- paste0("n:", survfit1$n)
+  type <- paste0("type:", survfit1$type)
+  conf_type <- paste0("conf.type:", survfit1$conf.type)
+  conf_int <- paste0("conf.int:", survfit1$conf.int)  
+  strata <- object$strata
+  strata <- paste0( "strata:", ifelse(!is.null(strata), strata, deparse(strata)))                  
   date <- paste0( "date:", now() )
-  strata <- paste0( "strata:", object$strata )
-  type <- paste0( "type:", object$type )
-  return( c( name, class, date, strata, type ) )
+  return( c( name, class, n, type, conf_type, conf_int, strata, date ) )
 }
