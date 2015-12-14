@@ -52,11 +52,13 @@ extractTags.summary.lm <- function( object, objectNameX, ... ) {
   r.squared <- paste0( "R^2:", round( object$r.squared, 4 ) )
   adj.r.squared <- paste0( "adjusted R^2:", round( object$adj.r.squared, 4 ) )
   f_stat <- object$fstatistic
-  f_stat[1] <- round( f_stat[1], 1 )
-  f.statistic <- paste0( "F-statistic:", paste(f_stat, c("on", "and", "DF"), collapse = " ") )
+#   f_stat[1] <- round( f_stat[1], 1 )
+#   f.statistic <- paste0( "F-statistic:", paste(f_stat, c("on", "and", "DF"), collapse = " ") )
+  f.statistic <- paste0( "F-statistic:",  round( f_stat[1], 1 ))
+  f.statistic.df <-paste0("F-statistic DF:", f_stat[-1])
   date <- paste0( "date:", now() )
   return( c( name, class, sigma, df, r.squared,
-             adj.r.squared, f.statistic, date ) )
+             adj.r.squared, f.statistic, f.statistic.df, date ) )
 }
 
 extractTags.htest <- function( object, objectNameX, ... ) {
