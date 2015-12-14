@@ -137,11 +137,20 @@ extractTags.twins <- function( object, objectNameX, ... ) {
 }
 
 extractTags.partition <- function( object, objectNameX, ... ) {
-  objective <- paste0( "objective:", object$objective )
-  class <- paste0( "class:", class( object ) )
   name <- paste0( "name:", objectNameX )
+  class <- paste0( "class:", class( object ) )
+  memb_exp <- paste0("memb.exp:", fannyx$memb.exp)
+  coefficient <- paste0(c("dunn_coeff:", "normalized dunn_coef:"), fannyx$coeff)
+  k_crisp <- paste0("k_crisp:", fannyx$k.crisp)
+  objective <- paste0(c("objective:", "tolerance:"), fannyx$objective)
+  conv <- fannyx$convergence
+  conv <- paste(names(conv), conv, sep=":")
+  silinfo <- fannyx$silinfo
+  clus.avg.widths <- paste0('clus.avg.widths:', silinfo[[2]])
+  avg.width <- paste0('avg.width:', silinfo[[3]])
   date <- paste0( "date:", now() )
-  return( c( name, class, date, objective ) )
+  return( c( name, class, memb_exp, coefficient, k_crisp,
+             objective, conv, clus.avg.widths, avg.width, date) )
 }
 
 extractTags.glmnet <- function( object, objectNameX, ... ) {
