@@ -145,10 +145,15 @@ extractTags.partition <- function( object, objectNameX, ... ) {
 }
 
 extractTags.glmnet <- function( object, objectNameX, ... ) {
-  class <- paste0( "class:", class( object ) )
   name <- paste0( "name:", objectNameX )
+  class <- paste0( "class:", class( object ) )  
+  dim <- paste0("dim:", object$dim)
+  nulldev <- paste0("nulldev:", object$nulldev)
+  npasses <- paste0("npasses:", object$npasses)
+  offset <- paste0("offset:", object$offset)
+  nobs <- paste0("nobs:",object$nobs)  
   date <- paste0( "date:", now() )
-  return( c( name, class, date ) )
+  return( c( name, class, dim, nulldev, npasses, offset, nobs, date ) )
 }
 
 extractTags.survfit <- function( object, objectNameX, ... ) {
