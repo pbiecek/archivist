@@ -40,6 +40,7 @@ to \code{repoDirGit = FALSE} as default.}
 \description{
 \code{loadFromLocalRepo} loads an artifact from a local \link{Repository} into the workspace.
 \code{loadFromGithubRepo} loads an artifact from a Github \link{Repository} into the workspace.
+\code{loadFromRepo} is a wrapper around \code{loadFromLocalRepo} and \code{loadFromGithubRepo}.
 To learn more about artifacts visit \link[archivist]{archivist-package}.
 }
 \details{
@@ -67,6 +68,11 @@ You can specify one \code{md5hash} (or its abbreviation) per function call.
 
 If \code{repo} and \code{user} are set to \code{NULL} (as default) in Github mode then global parameters
 set in \link{setGithubRepo} function are used.
+
+You should remember while using \code{loadFromRepo} wrapper that \code{repoDir} is
+a parameter used only in \code{loadFromLocalRepo} while \code{repo}, \code{user},
+\code{branch} and \code{repoDirGit} are used only in \code{loadFromGithubRepo}. So, using them
+both will result in an error message.
 }
 \examples{
 

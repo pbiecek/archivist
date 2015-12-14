@@ -5,6 +5,7 @@
 #' @description
 #' \code{loadFromLocalRepo} loads an artifact from a local \link{Repository} into the workspace.
 #' \code{loadFromGithubRepo} loads an artifact from a Github \link{Repository} into the workspace.
+#' \code{loadFromRepo} is a wrapper around \code{loadFromLocalRepo} and \code{loadFromGithubRepo}.
 #' To learn more about artifacts visit \link[archivist]{archivist-package}.
 #' 
 #' @details
@@ -33,6 +34,10 @@
 #' If \code{repo} and \code{user} are set to \code{NULL} (as default) in Github mode then global parameters
 #' set in \link{setGithubRepo} function are used.
 #' 
+#' You should remember while using \code{loadFromRepo} wrapper that \code{repoDir} is
+#' a parameter used only in \code{loadFromLocalRepo} while \code{repo}, \code{user},
+#' \code{branch} and \code{repoDirGit} are used only in \code{loadFromGithubRepo}. When you mix those
+#' parameters you will receive an error message.
 #' 
 #' @param repoDir A character denoting an existing directory from which an artifact will be loaded.
 #' If it is set to \code{NULL} (by default), it will use the \code{repoDir} specified in \link{setLocalRepo}.
@@ -346,14 +351,23 @@ loadFromRepo <- function( md5hash, repoDir = NULL,
                           repo = NULL, user = NULL, branch = "master", repoDirGit = FALSE,
                           value = FALSE ){
   
-  local <- (!is.null(aoptions("repoDir")) && is.null(repo)) || (!is.null(repoDir) && is.null(repo))
-  GitHub <- (is.null(repoDir) && !is.null(aoptions("repo"))) || (is.null(repoDir) && !is.null(repo))
+  w1 <- is.null(repoDir); w2 <- is.null(aoptions("repoDir"))
+  w3 <- is.null(repo); w4 <- is.null(aoptions("repo"))
+  w5 <- is.null(user); w6 <- is.null(aoptions("user"))
+  w7 <- branch == "master";
+  w8 <- repoDirGit == FALSE
+  local <- (!w1 || !w2) && w3 && w4 && w5 && w6 && w7 && w8
+  GitHub <- (w1 && w2) && (!w3 || !w4) && (!w5 || !w6)
+  none <- w1 && w2 && w3 && w4 && w5 && w6
   if (local) {
     loadFromLocalRepo( md5hash = md5hash, repoDir = repoDir, value = value )
   } else if (GitHub) {
     loadFromGithubRepo(  md5hash = md5hash, repo = repo, user = user, branch = branch,
                          repoDirGit = repoDirGit, value = value )
+  } else if (none){
+    stop("None of the parameters: repoDir, repo, user was specified.")
   } else {
-    stop("repo and repoDir parameters can not be used simultaneously.")
+    stop("repoDir and repo or user or branch or repoDirGit were used simultaneously. Remember
+to use them separately!")
   } 
 }
