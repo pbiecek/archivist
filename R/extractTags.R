@@ -97,8 +97,17 @@ extractTags.htest <- function( object, objectNameX, ... ) {
 extractTags.lda <- function( object, objectNameX, ... ) {
   name <- paste0( "name:", objectNameX )
   class <- paste0( "class:", class( object ) )
+  N <- paste0("N:", object$N)
+  lev <- paste0("lev:", object$lev)
+  counts <- object$counts
+  counts <- paste0("counts_", names(counts),":", counts)
+  prior <- round(object$prior, 3)
+  prior <- paste0("prior_", names(prior), ":", prior)
+  LD <- object$scaling
+  LD <- paste(outer(rownames(LD), colnames(LD), FUN = paste), LD, sep=":")
+  svd <- paste0("svd:", round(object$svd, 3))
   date <- paste0( "date:", now() )
-  return( c( name, class, date ) )
+  return( c( name, class, N, lev, counts, prior, LD, svd, date ) )
 }
 
 extractTags.qda <- function( object, objectNameX, ... ) {
