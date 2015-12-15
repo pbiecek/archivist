@@ -71,8 +71,8 @@ set in \link{setGithubRepo} function are used.
 
 You should remember while using \code{loadFromRepo} wrapper that \code{repoDir} is
 a parameter used only in \code{loadFromLocalRepo} while \code{repo}, \code{user},
-\code{branch} and \code{repoDirGit} are used only in \code{loadFromGithubRepo}. So, using them
-both will result in an error message.
+\code{branch} and \code{repoDirGit} are used only in \code{loadFromGithubRepo}. When you mix those
+parameters you will receive an error message.
 }
 \examples{
 

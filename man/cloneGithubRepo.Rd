@@ -4,7 +4,7 @@
 \alias{cloneGithubRepo}
 \title{Clone Github Repository}
 \usage{
-cloneGithubRepo(repoURL, repoDir = NULL, ...)
+cloneGithubRepo(repoURL, repoDir = NULL, default = FALSE, ...)
 }
 \arguments{
 \item{repoURL}{The remote repository to clone.}
@@ -12,11 +12,15 @@ cloneGithubRepo(repoURL, repoDir = NULL, ...)
 \item{repoDir}{Local directory to clone to. If \code{NULL}, by default, creates a local directory,
 which corresponds to the name after last \code{/} in \code{repoURL}.}
 
+\item{default}{Sets cloned Repository as default Local and GitHub Repository. 
+If \code{default = TRUE} then \code{repoDir} (last piece of \code{repoURL}) is set as default Local Repository 
+ and for GitHub repository also the \code{user} from  \code{repoURL} is set as default GitHub user).}
+
 \item{...}{Further parameters passed to \link[git2r]{clone}.}
 }
 \description{
 \code{cloneGithubRepo} is a wrapper around \code{git clone} and clones GitHub Repository
-into the \code{local_path} directory.
+into the \code{repoDir} directory.
 
 More archivist functionalities that integrate archivist and GitHub API can be found here \link{archivist-github-integration} (\link{agithub}).
 }
@@ -61,6 +65,9 @@ aread(md5hash_path)
 unlink("archive-test", recursive = TRUE)
 cloneGithubRepo('https://github.com/MarcinKosinski/archive-test')
 setGithubRepo(aoptions("user.name"), "archive-test")
+# equivalent is cloneGithubRepo('https://github.com/MarcinKosinski/archive-test', default = TRUE)
+# check if default is set with
+# aoptions('repoDir'); aoptions('repo'); aoptions('user')
 data(iris)
 archive(iris)
 showGithubRepo()
