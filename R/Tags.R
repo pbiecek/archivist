@@ -29,26 +29,49 @@
 #' \describe{
 #'   \item{\code{lm}}{
 #'   \itemize{
-#'      \item coefname
-#'      \item class
 #'      \item name
+#'      \item class
+#'      \item var
+#'      \item rank
+#'      \item df.residual
+#'      \item date
+#'   }
+#'   }
+#'   \item{\code{summary.lm}}{
+#'   \itemize{
+#'      \item name
+#'      \item class
+#'      \item sigma
+#'      \item df
+#'      \item r.squared
+#'      \item adj.r.squared
+#'      \item f.statistic
+#'      \item f.statistic.df
 #'      \item date
 #'   }
 #'   }
 #'   \item{\code{glmnet}}{
 #'   \itemize{
-#'      \item date
 #'      \item name
 #'      \item class
+#'      \item dim
+#'      \item nulldev
+#'      \item npasses
+#'      \item offset
+#'      \item nobs
+#'      \item date
 #'   }
 #'   }
 #'   \item{\code{survfit}}{
 #'   \itemize{
-#'      \item date
 #'      \item name
 #'      \item class
-#'      \item strata
+#'      \item n
 #'      \item type
+#'      \item conf_type
+#'      \item conf_int
+#'      \item strata
+#'      \item date
 #'   }
 #'   }
 #' }
@@ -85,25 +108,42 @@
 #'   }
 #'   \item{\code{partition which is a result of pam, clara or fanny functions}}{
 #'   \itemize{
-#'      \item date
 #'      \item name
 #'      \item class
+#'      \item memb_exp
+#'      \item coefficient
+#'      \item k_crisp
 #'      \item objective
+#'      \item conv
+#'      \item clus.avg.widths
+#'      \item avg.width
+#'      \item date
 #'   }
 #'   }
 #'   \item{\code{lda}}{
 #'   \itemize{
-#'      \item date
 #'      \item name
 #'      \item class
+#'      \item N
+#'      \item lev
+#'      \item counts
+#'      \item prior
+#'      \item LD
+#'      \item svd
+#'      \item date
 #'   }
 #'   }
 #'   \item{\code{qda}}{
 #'   \itemize{
-#'      \item date
 #'      \item name
 #'      \item class
+#'      \item N
+#'      \item lev
+#'      \item counts
+#'      \item prior
+#'      \item ldet
 #'      \item terms
+#'      \item date
 #'   }
 #'   }
 #' }
@@ -112,11 +152,18 @@
 #' \describe{
 #'   \item{\code{htest}}{
 #'   \itemize{
-#'      \item alternative
-#'      \item method
-#'      \item date
 #'      \item name
 #'      \item class
+#'      \item method
+#'      \item data.name
+#'      \item n.value
+#'      \item alt
+#'      \item stat
+#'      \item param
+#'      \item p.value
+#'      \item intervals
+#'      \item estim
+#'      \item date
 #'   }
 #'   }
 #' }
