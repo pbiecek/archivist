@@ -30,26 +30,49 @@ Regression Models
 \describe{
   \item{\code{lm}}{
   \itemize{
-     \item coefname
-     \item class
      \item name
+     \item class
+     \item coefname
+     \item rank
+     \item df.residual
+     \item date
+  }
+  }
+  \item{\code{summary.lm}}{
+  \itemize{
+     \item name
+     \item class
+     \item sigma
+     \item df
+     \item r.squared
+     \item adj.r.squared
+     \item fstatistic
+     \item fstatistic.df
      \item date
   }
   }
   \item{\code{glmnet}}{
   \itemize{
-     \item date
      \item name
      \item class
+     \item dim
+     \item nulldev
+     \item npasses
+     \item offset
+     \item nobs
+     \item date
   }
   }
   \item{\code{survfit}}{
   \itemize{
-     \item date
      \item name
      \item class
-     \item strata
+     \item n
      \item type
+     \item conf.type
+     \item conf.int
+     \item strata
+     \item date
   }
   }
 }
@@ -86,25 +109,45 @@ Results of Agglomeration Methods
   }
   \item{\code{partition which is a result of pam, clara or fanny functions}}{
   \itemize{
-     \item date
      \item name
      \item class
+     \item memb.exp
+     \item dunn_coeff
+     \item normalized dunn_coeff
+     \item k.crisp
      \item objective
+     \item tolerance
+     \item iterations
+     \item converged
+     \item maxit
+     \item clus.avg.widths
+     \item avg.width
+     \item date
   }
   }
   \item{\code{lda}}{
   \itemize{
-     \item date
      \item name
      \item class
+     \item N
+     \item lev
+     \item counts
+     \item prior
+     \item svd
+     \item date
   }
   }
   \item{\code{qda}}{
   \itemize{
-     \item date
      \item name
      \item class
+     \item N
+     \item lev
+     \item counts
+     \item prior
+     \item ldet
      \item terms
+     \item date
   }
   }
 }
@@ -113,11 +156,18 @@ Statistical Tests
 \describe{
   \item{\code{htest}}{
   \itemize{
-     \item alternative
-     \item method
-     \item date
      \item name
      \item class
+     \item method
+     \item data.name
+     \item null.value
+     \item alternative
+     \item statistic
+     \item parameter
+     \item p.value
+     \item intervals
+     \item estimate
+     \item date
   }
   }
 }

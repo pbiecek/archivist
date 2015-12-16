@@ -31,7 +31,7 @@
 #'   \itemize{
 #'      \item name
 #'      \item class
-#'      \item var
+#'      \item coefname
 #'      \item rank
 #'      \item df.residual
 #'      \item date
@@ -45,8 +45,8 @@
 #'      \item df
 #'      \item r.squared
 #'      \item adj.r.squared
-#'      \item f.statistic
-#'      \item f.statistic.df
+#'      \item fstatistic
+#'      \item fstatistic.df
 #'      \item date
 #'   }
 #'   }
@@ -68,8 +68,8 @@
 #'      \item class
 #'      \item n
 #'      \item type
-#'      \item conf_type
-#'      \item conf_int
+#'      \item conf.type
+#'      \item conf.int
 #'      \item strata
 #'      \item date
 #'   }
@@ -110,11 +110,15 @@
 #'   \itemize{
 #'      \item name
 #'      \item class
-#'      \item memb_exp
-#'      \item coefficient
-#'      \item k_crisp
+#'      \item memb.exp
+#'      \item dunn_coeff
+#'      \item normalized dunn_coeff
+#'      \item k.crisp
 #'      \item objective
-#'      \item conv
+#'      \item tolerance
+#'      \item iterations
+#'      \item converged
+#'      \item maxit
 #'      \item clus.avg.widths
 #'      \item avg.width
 #'      \item date
@@ -128,7 +132,6 @@
 #'      \item lev
 #'      \item counts
 #'      \item prior
-#'      \item LD
 #'      \item svd
 #'      \item date
 #'   }
@@ -156,13 +159,13 @@
 #'      \item class
 #'      \item method
 #'      \item data.name
-#'      \item n.value
-#'      \item alt
-#'      \item stat
-#'      \item param
+#'      \item null.value
+#'      \item alternative
+#'      \item statistic
+#'      \item parameter
 #'      \item p.value
-#'      \item intervals
-#'      \item estim
+#'      \item conf.int.
+#'      \item estimate
 #'      \item date
 #'   }
 #'   }

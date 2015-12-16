@@ -37,44 +37,44 @@ extractTags.trellis <- function( object, objectNameX, ... ) {
 extractTags.lm <- function( object, objectNameX, ... ) {  
     name <- paste0( "name:", objectNameX )
     class <- paste0( "class:", class( object ) )
-    var <- paste0( "coefname:", names( object$coefficients ) )
-    rank <- paste0( "numeric rank:", object$rank )
-    df.residual <- paste0( "residual DF:", object$df.residual )
+    coefname <- paste0( "coefname:", names( object$coefficients ) )
+    rank <- paste0( "rank:", object$rank )
+    df.residual <- paste0( "df.residual:", object$df.residual )
     date <- paste0( "date:", now() )
-    return( c( name, class, var, rank, df.residual, date ) )
+    return( c( name, class, coefname, rank, df.residual, date ) )
 }
 
 extractTags.summary.lm <- function( object, objectNameX, ... ) {  
   name <- paste0( "name:", objectNameX )
   class <- paste0( "class:", class( object ) )  
   sigma <- paste0( "sigma:", round( object$sigma, 4 ) )
-  df <- paste0( "df:", paste0( object$df, collapse = " " ) )
+  df <- paste0( "df:", object$df )
   r.squared <- paste0( "R^2:", round( object$r.squared, 4 ) )
   adj.r.squared <- paste0( "adjusted R^2:", round( object$adj.r.squared, 4 ) )
-  f_stat <- object$fstatistic
-  f.statistic <- paste0( "F-statistic:",  round( f_stat[1], 1 ))
-  f.statistic.df <-paste0("F-statistic DF:", f_stat[-1])
+  fstat <- object$fstatistic
+  fstatistic <- paste0( "fstatistic:",  round( fstat[1], 1 ))
+  fstatistic.df <- paste0("fstatistic.df:", fstat[-1])
   date <- paste0( "date:", now() )
   return( c( name, class, sigma, df, r.squared,
-             adj.r.squared, f.statistic, f.statistic.df, date ) )
+             adj.r.squared, fstatistic, fstatistic.df, date ) )
 }
 
 extractTags.htest <- function( object, objectNameX, ... ) {
   name <- paste0( "name:", objectNameX )
   class <- paste0( "class:", class( object ) )
   method <- paste0( "method:", object$method )
-  data_name <- paste0( "data.name:", object$data.name)
-  n_value <- object$null.value
-  n_value <- paste0("null.value:", names(n_value), "=", n_value ) 
-  alt <- paste0( "alternative:", object$alternative )
-  stat <- paste0("statistic:", object$statistic ) 
-  param <- object$parameter
-  if (!is.null(param)){
-    param <- paste0("parameter:", paste0(names(param), "=", param))    
+  data.name <- paste0( "data.name:", object$data.name)
+  null.value <- object$null.value
+  null.value <- paste0("null.value:", names(null.value), "=", null.value ) 
+  alternative <- paste0( "alternative:", object$alternative )
+  statistic <- paste0("statistic:", object$statistic ) 
+  parameter <- object$parameter
+  if (!is.null(parameter)){
+    parameter <- paste0("parameter:", paste0(names(parameter), "=", parameter))    
   } else {
-    param <- paste0("parameter:", deparse(param))
+    parameter <- paste0("parameter:", deparse(parameter))
   } 
-  p_value <- paste0("p.value:", object$p.value)
+  p.value <- paste0("p.value:", object$p.value)
   intervals <- object$conf.int
   if (!is.null(intervals)){
     intervals <- round(intervals, 6)
@@ -82,16 +82,16 @@ extractTags.htest <- function( object, objectNameX, ... ) {
   } else {
     intervals <- paste0("conf.int.:", deparse(intervals))
   }
-  estim <- object$estimate  
-  if (!is.null(estim)){
-    estim <- round(estim, 6)
-    estim <- paste0("estimate:", estim)
+  estimate <- object$estimate  
+  if (!is.null(estimate)){
+    estimate <- round(estimate, 6)
+    estimate <- paste0("estimate:", estimate)
   } else {
-    estim <- paste0("estimate:", deparse(estim))
+    estimate <- paste0("estimate:", deparse(estimate))
   }
   date <- paste0( "date:", now() )
-  return( c( name, class, method, data_name, n_value, alt,
-             stat, param, p_value, intervals, estim, date ) )
+  return( c( name, class, method, data.name, null.value, alternative,
+             statistic, parameter, p.value, intervals, estimate, date ) )
 }
 
 extractTags.lda <- function( object, objectNameX, ... ) {
@@ -103,18 +103,16 @@ extractTags.lda <- function( object, objectNameX, ... ) {
   counts <- paste0("counts_", names(counts),":", counts)
   prior <- round(object$prior, 3)
   prior <- paste0("prior_", names(prior), ":", prior)
-  LD <- object$scaling
-  LD <- paste(outer(rownames(LD), colnames(LD), FUN = paste), LD, sep=":")
   svd <- paste0("svd:", round(object$svd, 3))
   date <- paste0( "date:", now() )
-  return( c( name, class, N, lev, counts, prior, LD, svd, date ) )
+  return( c( name, class, N, lev, counts, prior, svd, date ) )
 }
 
 extractTags.qda <- function( object, objectNameX, ... ) {
-  class <- paste0( "class:", class( object ) )
   name <- paste0( "name:", objectNameX )
+  class <- paste0( "class:", class( object ) )
   N <- paste0("N:", object$N)
-  lev <- paste0("levels:", object$lev)
+  lev <- paste0("lev:", object$lev)
   counts <- object$counts
   counts <- paste0("counts_", names(counts),":", counts)
   prior <- round(object$prior, 3)
@@ -137,9 +135,9 @@ extractTags.twins <- function( object, objectNameX, ... ) {
 extractTags.partition <- function( object, objectNameX, ... ) {
   name <- paste0( "name:", objectNameX )
   class <- paste0( "class:", class( object ) )
-  memb_exp <- paste0("memb.exp:", fannyx$memb.exp)
-  coefficient <- paste0(c("dunn_coeff:", "normalized dunn_coef:"), fannyx$coeff)
-  k_crisp <- paste0("k_crisp:", fannyx$k.crisp)
+  memb.exp <- paste0("memb.exp:", fannyx$memb.exp)
+  coeff <- paste0(c("dunn_coeff:", "normalized dunn_coeff:"), fannyx$coeff)
+  k.crisp <- paste0("k.crisp:", fannyx$k.crisp)
   objective <- paste0(c("objective:", "tolerance:"), fannyx$objective)
   conv <- fannyx$convergence
   conv <- paste(names(conv), conv, sep=":")
@@ -147,7 +145,7 @@ extractTags.partition <- function( object, objectNameX, ... ) {
   clus.avg.widths <- paste0('clus.avg.widths:', silinfo[[2]])
   avg.width <- paste0('avg.width:', silinfo[[3]])
   date <- paste0( "date:", now() )
-  return( c( name, class, memb_exp, coefficient, k_crisp,
+  return( c( name, class, memb.exp, coeff, k.crisp,
              objective, conv, clus.avg.widths, avg.width, date) )
 }
 
@@ -168,10 +166,10 @@ extractTags.survfit <- function( object, objectNameX, ... ) {
   class <- paste0( "class:", class( object ) )
   n <- paste0("n:", survfit1$n)
   type <- paste0("type:", survfit1$type)
-  conf_type <- paste0("conf.type:", survfit1$conf.type)
-  conf_int <- paste0("conf.int:", survfit1$conf.int)  
+  conf.type <- paste0("conf.type:", survfit1$conf.type)
+  conf.int <- paste0("conf.int:", survfit1$conf.int)  
   strata <- object$strata
   strata <- paste0( "strata:", ifelse(!is.null(strata), strata, deparse(strata)))                  
   date <- paste0( "date:", now() )
-  return( c( name, class, n, type, conf_type, conf_int, strata, date ) )
+  return( c( name, class, n, type, conf.type, conf.int, strata, date ) )
 }
