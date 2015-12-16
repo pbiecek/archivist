@@ -165,7 +165,7 @@ Statistical Tests
      \item statistic
      \item parameter
      \item p.value
-     \item intervals
+     \item conf.int.
      \item estimate
      \item date
   }

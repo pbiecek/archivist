@@ -127,6 +127,9 @@ archive <- function(artifact, commitMessage = aoptions("commitMessage"),
 #              ) -> md5hash
   stopifnot( is.logical( c( archiveData, archiveTags, archiveMiniature, 
                             rememberName, ascii ) ) )
+  stopifnot( length(archiveData) == 1, length(archiveTags) == 1,
+             length(archiveMiniature) == 1,
+             length(rememberName) == 1, length(ascii) == 1)
   #   stopifnot( is.character( format ) & length( format ) == 1 & any(format %in% c("rda", "rdx")) )
   
 repoDir <- repo
