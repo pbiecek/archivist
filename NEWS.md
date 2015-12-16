@@ -12,8 +12,9 @@ archivist 1.9
     3. Added new tags in the following methods: `extractTags.lm`, `extractTags.htest`. `extractTags.lda`, `extractTags.qda`, `extractTags.survfit`, `extractTags.glmnet`, `extractTags.partition`.
     4. `htest` object's data is now saved to repository as a list.
     5. Changed parameter name in `cloneGithubRepo` from `local_path` to `repoDir` to maintain consistency within package documentation and name convention.
-    6. `createEmptyGithubRepo`, `createEmptyRepo(type ='github')` and `cloneGithubRepo` now reacts on new `default` parameter which sets newly created/cloned repositories (GitHub and synchronized with it Local one) as default [[#171](https://github.com/pbiecek/archivist/issues/171) , [#142](https://github.com/pbiecek/archivist/issues/142]).
+    6. `createEmptyGithubRepo`, `createEmptyRepo(type ='github')` and `cloneGithubRepo` now reacts on new `default` parameter which sets newly created/cloned repositories (GitHub and synchronized with it Local one) as default [[#171](https://github.com/pbiecek/archivist/issues/171) , [#142](https://github.com/pbiecek/archivist/issues/142])].
     7. `archive` no longer cats hook to the artifact during the execution. Hook cat can be set with new `alink` parameter that uses `alink()` function, where parameters can be passed with `...`.
+    8. `deleteRepo` has now new `unset` parameter that allows to unset global `aoptions('repoDir')` when deleted `repoDir` was a globally specified Repository [[#157](https://github.com/pbiecek/archivist/issues/157)].
  
 
 archivist 1.8

@@ -11,6 +11,8 @@
 #' which is to be deleted.
 #' @param deleteRoot A logical value that specifies if the repository root directory
 #' should be deleted.
+#' @param unset A logical. If deleted \code{repoDir} was set to be default Local Repository
+#' and \code{unset} is TRUE, then \code{repoDir} is unset as a default Local Repository (\code{aoptions('repoDir', NULL)}).
 #' 
 #' @note
 #' Remember that using \code{tempfile()} instead of \code{tempdir()}
@@ -131,13 +133,16 @@
 #' 
 #' deleteRepo(repoDir = "defRepo", deleteRoot = TRUE) 
 #' # defRepo was completely deleted indeed! We may notice it on our computer.
+#' #
+#' # or if aoptions('repodir') == repodir then 
+#' # deleteRepo(repoDir, deleteRoot = TRUE, unset = TRUE)
 #' 
 #' }
 #' 
 #' @family archivist
 #' @rdname deleteRepo
 #' @export
-deleteRepo <- function(repoDir, deleteRoot = FALSE){
+deleteRepo <- function(repoDir, deleteRoot = FALSE, unset = FALSE){
   stopifnot( is.character( repoDir ), length( repoDir ) == 1 )
   
   repoDir <- checkDirectory( repoDir )
@@ -155,4 +160,12 @@ deleteRepo <- function(repoDir, deleteRoot = FALSE){
     unlink( file.path(repoDir), recursive = TRUE )    
   }
   
+  if (unset & repoDir == aoptions('repodir')) {
+    aoptions('repoDir', NULL)
+  }
+  
 }
+
+
+
+

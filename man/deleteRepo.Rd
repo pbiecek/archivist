@@ -4,7 +4,7 @@
 \alias{deleteRepo}
 \title{Delete the Existing Repository from the Given Directory}
 \usage{
-deleteRepo(repoDir, deleteRoot = FALSE)
+deleteRepo(repoDir, deleteRoot = FALSE, unset = FALSE)
 }
 \arguments{
 \item{repoDir}{A character that specifies the directory for the Repository
@@ -12,6 +12,9 @@ which is to be deleted.}
 
 \item{deleteRoot}{A logical value that specifies if the repository root directory
 should be deleted.}
+
+\item{unset}{A logical. If deleted \code{repoDir} was set to be default Local Repository
+and \code{unset} is TRUE, then \code{repoDir} is unset as a default Local Repository (\code{aoptions('repoDir', NULL)}).}
 }
 \description{
 \code{deleteRepo} deletes the existing \link{Repository} from the given directory.
@@ -134,6 +137,9 @@ summaryLocalRepo()
 
 deleteRepo(repoDir = "defRepo", deleteRoot = TRUE) 
 # defRepo was completely deleted indeed! We may notice it on our computer.
+#
+# or if aoptions('repodir') == repodir then 
+# deleteRepo(repoDir, deleteRoot = TRUE, unset = TRUE)
 
 }
 
