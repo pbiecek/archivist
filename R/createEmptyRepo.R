@@ -253,12 +253,6 @@ createEmptyGithubRepo <- function(repoName,
   
   stopifnot( is.logical( default ), length( default ) == 1 )
   repoName <- gsub(pattern = " ", "-", repoName)
-  if (default) {
-    setLocalRepo(repoName)
-    setGithubRepo(repo = repoName, user = user.name)
-  }
-  
-  
 
   
   # httr imports are in archivist-package.R file
@@ -321,6 +315,12 @@ createEmptyGithubRepo <- function(repoName,
   if (response){
     return(resp)
   }
+  
+  if (default) {
+    setLocalRepo(repoName)
+    setGithubRepo(repo = repoName, user = user.name)
+  }
+  
 }
 
 
