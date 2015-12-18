@@ -114,6 +114,7 @@ archive <- function(artifact, commitMessage = aoptions("commitMessage"),
   stopifnot(is.character(repo) & length(repo) ==1)
   stopifnot(is.character(user.name) & length(user.name)==1)
   stopifnot(is.character(user.password) & length(user.password)==1)
+  stopifnot( is.character( userTags ), length( userTags ) > 0)
   stopifnot(is.logical(alink) & length(alink) == 1)
   #stopifnot(is.logical(response) & length(response) ==1)
   
@@ -126,10 +127,10 @@ archive <- function(artifact, commitMessage = aoptions("commitMessage"),
 #                                deparse( substitute( artifact ) ))
 #              ) -> md5hash
   stopifnot( is.logical( c( archiveData, archiveTags, archiveMiniature, 
-                            rememberName, ascii ) ) )
+                            force, rememberName, silent, ascii ) ) )
   stopifnot( length(archiveData) == 1, length(archiveTags) == 1,
-             length(archiveMiniature) == 1,
-             length(rememberName) == 1, length(ascii) == 1)
+             length(archiveMiniature) == 1, length(force) == 1,
+             length(rememberName) == 1, length(silent), length(ascii) == 1)
   #   stopifnot( is.character( format ) & length( format ) == 1 & any(format %in% c("rda", "rdx")) )
   
 repoDir <- repo
