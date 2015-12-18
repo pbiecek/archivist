@@ -6,7 +6,7 @@ archivist 1.9
 * **Bugs fixed**:
     1. `asearch` function enables a user to read artifacts from default GitHub repository. In the previous version it was possible only in default local repository.
 * **New features**:
-    1. Alterations in the text of: `?ahistory`, `?cache`, `?asearch`, `?archive`, `?cloneGithubRepo`, `githubFunctions`, `?shinySearchInLocalRepo` documentation pages.
+    1. Alterations in the text of: `?ahistory`, `?cache`, `?asearch`, `?archive`, `?cloneGithubRepo`, `githubFunctions`, `?shinySearchInLocalRepo`, `?alink` documentation pages.
     2. Additional examples to better understand usage of archivist package functions: 
         1. In `asearch` completely new example section divided into 3 subsections: default local repository, default GitHub resository and Github repository.
     3. Added new tags in the following methods: `extractTags.lm`, `extractTags.htest`. `extractTags.lda`, `extractTags.qda`, `extractTags.survfit`, `extractTags.glmnet`, `extractTags.partition`.

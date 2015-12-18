@@ -4,67 +4,43 @@
 \alias{alink}
 \title{Return a Link To Download an Artifact Stored on GitHub Repository}
 \usage{
-alink(md5hash, repo = aoptions("repo"), user = aoptions("repo"),
-  format = "markdown", rawLink = FALSE)
+alink(md5hash, repo = aoptions("repo"), user = aoptions("user"),
+  repoDirGit = FALSE, branch = "master", format = "markdown",
+  rawLink = FALSE)
 }
 \arguments{
-\item{md5hash}{A character assigned to the artifact through the use of a cryptographical hash function with MD5 algorithm. See more \link{md5hash}. 
-If specified in a format of \code{'repo/user/md5hash'} then the \code{user} and \code{repo} parameters are omitted.}
+\item{md5hash}{A character assigned to the artifact through the use of a cryptographical hash function with MD5 algorithm. 
+If it is specified in a format of \code{'repo/user/md5hash'} then \code{user} and \code{repo} parameters are omitted.}
 
-\item{repo}{The GitHub \code{Repository} on which the desired to be download artifact
+\item{repo}{The GitHub \code{Repository} on which the artifact that we want to download
 is stored.}
 
-\item{user}{The name of a user on whos \code{Repository} the desired to be download artifact 
+\item{user}{The name of a user on whose \code{Repository} the the artifact that we want to download
 is stored.}
+
+\item{repoDirGit}{A character containing a name of a directory on the Github repository 
+on which the Repository is stored. If the Repository is stored in the main folder on the Github repository, this should be set 
+to \code{repoDirGit = FALSE} as default.}
+
+\item{branch}{A character containing a name of the Github Repository's branch
+on which the Repository is archived. Default \code{branch} is \code{master}.}
 
 \item{format}{In which format the link should be returned. Possibilites are \code{markdown} (default) or \code{latex}.}
 
-\item{rawLink}{A logical denoting whether to return raw link or a link in \code{format} convention.}
+\item{rawLink}{A logical denoting whether to return raw link or a link in the \code{format} convention. 
+Default value is \code{FALSE}.}
 }
 \value{
-This function returns a link to download artifact that are archived on GitHub.
+This function returns a link to download artifact that is archived on GitHub.
 }
 \description{
-\code{alink} returns a link to download and artifact from GitHub \link{Repository}.
-Artifact has to be prior archived on github, e.g with \link{archive} function (recomended) or 
-\link{saveToRepo} function and traditional git manual synchronization.
+\code{alink} returns a link to download an artifact from the GitHub \link{Repository}.
+Artifact has to be already archived on GitHub, e.g with \link{archive} function (recommended) or 
+\link{saveToRepo} function and traditional Git manual synchronization.
 To learn more about artifacts visit \link[archivist]{archivist-package}.
 }
 \details{
 For more information about \code{md5hash} see \link{md5hash}.
-}
-\examples{
-\dontrun{
-
-
-alink('pbiecek/archivist/134ecbbe2a8814d98f0c2758000c408e')
-alink(user = 'MarcinKosinski', repo = 'Museum',
- md5hash = '1651caa499a2b07a3bdad3896a2fc717', format = 'latex)
-alink('pbiecek/graphGallery/02af4f99e440324b9e329faa293a9394', rawLink = TRUE)  
-
-## Exmaple with archive function and 
-## empty Github Repository creation
-
-library(httr)
-myapp <- oauth_app("github",
-                   key = app_key,
-                   secret = app_secret)
-github_token <- oauth2.0_token(oauth_endpoints("github"),
-                               myapp,
-                               scope = "public_repo")
-# setting options                              
-aoptions("github_token", github_token)
-aoptions("user.name", user_name)
-aoptions("user.password", user_password)
-
-createEmptyGithubRepo("archive-test4", default = TRUE)
-## artifact's archiving
-vectorLong <- 1:100
-vectorShort <- 1:20
-# archiving
-alink(archive(vectorLong))
-archive(vectorShort, alink = TRUE)
-}
 }
 \author{
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}
