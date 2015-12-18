@@ -74,12 +74,21 @@ summaryLocalRepo()
 deleteRepo( exampleRepoDir, deleteRoot = TRUE)
 rm( exampleRepoDir )
 
-## Github options
-showGithubRepo('archivist', 'pbiecek')
-aoptions('user', 'pbiecek')
-aoptions('repo', 'archivist')
-loadFromGithubRepo("ff575c261c", value = TRUE) -> iris123
+## EXAMPLE 3 : SET default Github repository using aoptions() function.
+aoptions(key = "user", value = "pbiecek")
+aoptions(key = "repo", value = "archivist")
 
+# From this moment user and repo parameters may be ommitted in the following functions:
+showGithubRepo() 
+loadFromGithubRepo( "ff575c261c949d073b2895b05d1097c3")
+this <- loadFromGithubRepo( "ff", value = T)
+file.remove(file.path(getwd(), "repository.zip")) # We can remove this zip file
+searchInGithubRepo( "name:", fixed= FALSE)
+getTagsGithub("ff575c261c949d073b2895b05d1097c3")
+summaryGithubRepo( )
+multiSearchInGithubRepo( patterns=c("varname:Sepal.Width", "class:lm", "name:myplot123"), 
+                         intersect = FALSE ) 
+## EXAMPLE 4 : SET default Github repository using aoptions() function.
 showGithubRepo('Museum', 'MarcinKosinski', repoDirGit = 'ex1')
 aoptions('repo', 'Museum')
 aoptions('user', 'MarcinKosinski')
@@ -89,8 +98,6 @@ showGithubRepo()
 showGithubRepo(repoDirGit = 'ex2')
 
 aoptions('repoDirGit')
-
-
 }
 
 }
