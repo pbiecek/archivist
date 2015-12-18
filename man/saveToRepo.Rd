@@ -6,7 +6,7 @@
 \usage{
 saveToRepo(artifact, repoDir = NULL, archiveData = TRUE,
   archiveTags = TRUE, archiveMiniature = TRUE, force = TRUE,
-  rememberName = TRUE, chain = FALSE, ..., userTags = c(),
+  rememberName = TRUE, chain = FALSE, ..., userTags = character(0),
   silent = aoptions("silent"), ascii = FALSE)
 }
 \arguments{

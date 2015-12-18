@@ -284,7 +284,7 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
   stopifnot( is.logical( c( archiveData, archiveTags, archiveMiniature, 
                             force,  rememberName, chain, silent, ascii ) ) )
   stopifnot( ( is.character( repoDir ) & length( repoDir ) == 1 ) | is.null( repoDir ) )
-  stopifnot( is.character( userTags ), length( userTags ) > 0)
+  stopifnot( is.character( userTags ))
   stopifnot( length(archiveData) == 1, length(archiveTags) == 1, length(archiveMiniature) == 1,
              length(force) == 1, length(rememberName) == 1, 
              length(chain), length(ascii) == 1)
