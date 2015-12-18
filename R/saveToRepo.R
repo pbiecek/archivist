@@ -279,7 +279,7 @@
 saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE, 
                         archiveTags = TRUE, 
                         archiveMiniature = TRUE, force = TRUE, rememberName = TRUE, 
-                        chain = FALSE, ... , userTags = c(), 
+                        chain = FALSE, ... , userTags = character(0), 
                         silent=aoptions("silent"), ascii = FALSE) { 
   stopifnot( is.logical( c( archiveData, archiveTags, archiveMiniature, 
                             force,  rememberName, chain, silent, ascii ) ) )

@@ -15,8 +15,8 @@ archivist 1.9
     6. `createEmptyGithubRepo`, `createEmptyRepo(type ='github')` and `cloneGithubRepo` now reacts on new `default` parameter which sets newly created/cloned repositories (GitHub and synchronized with it Local one) as default [[#171](https://github.com/pbiecek/archivist/issues/171) , [#142](https://github.com/pbiecek/archivist/issues/142)].
     7. `archive` no longer cats hook to the artifact during the execution. Hook cat can be set with new `alink` parameter that uses `alink()` function, where parameters can be passed with `...`.
     8. `deleteRepo` has now new `unset` parameter that allows to unset global `aoptions('repoDir')` when deleted `repoDir` was a globally specified Repository [[#157](https://github.com/pbiecek/archivist/issues/157)].
- 
-
+    9. `archive` and `saveToRepo`'s `userTags` parameter has new default value: `character(0)` instead of `c()`.
+    
 archivist 1.8
 ----------------------------------------------------------------
 	

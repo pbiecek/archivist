@@ -107,7 +107,7 @@ archive <- function(artifact, commitMessage = aoptions("commitMessage"),
                     force = aoptions("force"),
                     rememberName = aoptions("rememberName"), 
                     ... ,
-                    userTags = c(), 
+                    userTags = character(0), 
                     silent=aoptions("silent"),
                     ascii = aoptions("ascii"), 
                     alink = aoptions("alink")){
