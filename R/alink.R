@@ -68,8 +68,7 @@
 #' vectorLong <- 1:100
 #' vectorShort <- 1:20
 #' # archiving
-#' aoptions("alink", FALSE)
-#' alink(archive(vectorLong), repo="archive-test4", user = user_name)
+#' alink(archive(vectorLong))
 #' archive(vectorShort, alink = TRUE)
 #' }
 #' @family archivist
@@ -85,8 +84,6 @@ alink <- function(md5hash, repo = aoptions('repo'),
   stopifnot(is.character(branch), length(branch) == 1)
   stopifnot(is.logical(rawLink) & length(rawLink) == 1)
   
-  GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
-  
   if ( strsplit(md5hash, "/")[[1]] %>% length  == 3 ) {
     archLINK <- paste0('https://github.com/',
                        strsplit(md5hash, "/")[[1]][1],
@@ -96,6 +93,7 @@ alink <- function(md5hash, repo = aoptions('repo'),
                        strsplit(md5hash, "/")[[1]][3],
                        '.rda?raw=true')
   } else {
+    GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
     archLINK <- paste0('https://github.com/',
                        user,
                        '/',
@@ -138,7 +136,7 @@ alink <- function(md5hash, repo = aoptions('repo'),
 }
 
 
-#' export
+#' @export
 print.alink <- function(x, ...) {
   cat(x)
 }
