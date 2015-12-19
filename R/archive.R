@@ -13,9 +13,9 @@
 #' @param commitMessage A character denoting a message added to the commit while archiving \code{artifact} on GitHub Repository.
 #' By default, an artifact's \link{md5hash} is added to the commit message when it is specified to \code{NULL}.
 #' @param repo A character denoting GitHub repository name and synchronized local existing directory in which an artifact will be saved.
-#' @param user.name A character denoting GitHub user name. Can be set globally with \code{aoptions("user.name", user.name)}.
+#' @param user A character denoting GitHub user name. Can be set globally with \code{aoptions("user", user)}.
 #'  See \link{archivist-github-integration}.
-#' @param user.password A character denoting GitHub user password. Can be set globally with \code{aoptions("user.password", user.password)}.
+#' @param password A character denoting GitHub user password. Can be set globally with \code{aoptions("password", password)}.
 #' See \link{archivist-github-integration}.
 #' @param archiveData A logical value denoting whether to archive the data from the \code{artifact}.
 #' 
@@ -58,8 +58,8 @@
 #'                                scope = "public_repo")
 #' # setting options                              
 #' aoptions("github_token", github_token)
-#' aoptions("user.name", user_name)
-#' aoptions("user.password", user_password)
+#' aoptions("user", user)
+#' aoptions("password", user)
 #' 
 #' createEmptyGithubRepo("archive-test4", default = TRUE)
 #' ## artifact's archiving
@@ -79,7 +79,7 @@
 #' # clone example
 #' unlink("archive-test", recursive = TRUE)
 #' cloneGithubRepo('https://github.com/MarcinKosinski/archive-test')
-#' setGithubRepo(aoptions("user.name"), "archive-test")
+#' setGithubRepo(aoptions("user"), "archive-test")
 #' data(iris)
 #' archive(iris)
 #' showGithubRepo()
@@ -99,21 +99,21 @@
 #' @export
 archive <- function(artifact, commitMessage = aoptions("commitMessage"),
                     repo = aoptions("repo"), 
-                    user.name = aoptions("user.name"),
-                    user.password = aoptions("user.password"),
+                    user = aoptions("user"),
+                    password = aoptions("password"),
                     archiveData = aoptions("archiveData"), 
                     archiveTags = aoptions("archiveTags"), 
                     archiveMiniature = aoptions("archiveMiniature"),
                     force = aoptions("force"),
                     rememberName = aoptions("rememberName"), 
                     ... ,
-                    userTags = character(0), 
+                    userTags = character(), 
                     silent=aoptions("silent"),
                     ascii = aoptions("ascii"), 
                     alink = aoptions("alink")){
   stopifnot(is.character(repo) & length(repo) ==1)
-  stopifnot(is.character(user.name) & length(user.name)==1)
-  stopifnot(is.character(user.password) & length(user.password)==1)
+  stopifnot(is.character(user) & length(user)==1)
+  stopifnot(is.character(password) & length(password)==1)
   stopifnot( is.character( userTags ))
   stopifnot(is.logical(alink) & length(alink) == 1)
   #stopifnot(is.logical(response) & length(response) ==1)
@@ -251,8 +251,8 @@ chain <- FALSE
 #              paste0("https://github.com/",user,"/",repo,".git"))
   
   # authentication with GitHub
-  cred <- cred_user_pass(user.name,
-                         user.password)
+  cred <- cred_user_pass(user,
+                         password)
   
   # wyslanie do repozytorium na githubie
   push(repo,
@@ -260,14 +260,14 @@ chain <- FALSE
        refspec = "refs/heads/master",
        credentials = cred)
   
-#   hook <- paste0("archivist::aread(\"",user.name,"/",repoName,"/",md5hash,"\")")
+#   hook <- paste0("archivist::aread(\"",user,"/",repoName,"/",md5hash,"\")")
 #   
 #   cat(hook, "\n\n")
 
   if (alink) {
-    return(alink(paste0(user.name,"/",repoName,"/",md5hash), repoName, user.name) )
+    alink(paste0(user,"/",repoName,"/",md5hash),...)
   } else {
-    return(paste0(user.name,"/",repoName,"/",md5hash))
+    return(paste0(user,"/",repoName,"/",md5hash))
   }
   
 }

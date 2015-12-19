@@ -7,9 +7,8 @@
 \title{Create an Empty Repository}
 \usage{
 createEmptyRepo(repoDir, force = TRUE, default = FALSE, repoName,
-  github_token = aoptions("github_token"),
-  user.name = aoptions("user.name"),
-  user.password = aoptions("user.password"),
+  github_token = aoptions("github_token"), user = aoptions("user"),
+  password = aoptions("password"),
   repoDescription = aoptions("repoDescription"),
   readmeDescription = aoptions("readmeDescription"),
   response = aoptions("response"), type = "local")
@@ -17,8 +16,7 @@ createEmptyRepo(repoDir, force = TRUE, default = FALSE, repoName,
 createEmptyLocalRepo(repoDir, force = TRUE, default = FALSE)
 
 createEmptyGithubRepo(repoName, github_token = aoptions("github_token"),
-  user.name = aoptions("user.name"),
-  user.password = aoptions("user.password"),
+  user = aoptions("user"), password = aoptions("password"),
   repoDescription = aoptions("repoDescription"),
   readmeDescription = aoptions("readmeDescription"),
   response = aoptions("response"), default = FALSE)
@@ -31,17 +29,17 @@ then function call will force to create new \code{repoDir} directory.
 Default set to \code{force = TRUE}.}
 
 \item{default}{If \code{default = TRUE} then \code{repoDir} (\code{repoName}) is set as default local repository 
-(for GitHub version also the \code{user.name} is set as default GitHub user).}
+(for GitHub version also the \code{user} is set as default GitHub user).}
 
 \item{repoName}{While working with a Github repository. A character denoting new GitHub repository name. White spaces will be substitued with a dash.}
 
 \item{github_token}{While working with a Github repository. An OAuth GitHub Token created with the \link{oauth2.0_token} function. See \link{archivist-github-integration}.
 Can be set globally with \code{aoptions("github_token", github_token)}.}
 
-\item{user.name}{While working with a Github repository. A character denoting GitHub user name. Can be set globally with \code{aoptions("user.name", user.name)}.
+\item{user}{While working with a Github repository. A character denoting GitHub user name. Can be set globally with \code{aoptions("user", user)}.
 See \link{archivist-github-integration}.}
 
-\item{user.password}{While working with a Github repository. A character denoting GitHub user password. Can be set globally with \code{aoptions("user.password", user.password)}.
+\item{password}{While working with a Github repository. A character denoting GitHub user password. Can be set globally with \code{aoptions("password", password)}.
 See \link{archivist-github-integration}.}
 
 \item{repoDescription}{While working with a Github repository. A character specifing the new GitHub repository description.}
@@ -125,8 +123,8 @@ github_token <- oauth2.0_token(oauth_endpoints("github"),
                                 myapp,
                                 scope = "public_repo")
 aoptions("github_token", github_token)
-aoptions("user.name", user.name)
-aoptions("user.password", user.password)
+aoptions("user", user)
+aoptions("password", password)
 
 createEmptyGithubRepo("Museum")
 createEmptyGithubRepo("Museum-Extras", response = TRUE)
@@ -147,8 +145,8 @@ github_token <- oauth2.0_token(oauth_endpoints("github"),
                                scope = "public_repo")
 # setting options                              
 aoptions("github_token", github_token)
-aoptions("user.name", user_name)
-aoptions("user.password", user_password)
+aoptions("user", user)
+aoptions("password", password)
 
 createEmptyGithubRepo("archive-test4", default = TRUE)
 ## artifact's archiving
@@ -168,7 +166,7 @@ aread(md5hash_path)
 # clone example
 unlink("archive-test", recursive = TRUE)
 cloneGithubRepo('https://github.com/MarcinKosinski/archive-test')
-setGithubRepo(aoptions("user.name"), "archive-test")
+setGithubRepo(aoptions("user"), "archive-test")
 data(iris)
 archive(iris)
 showGithubRepo()

@@ -60,8 +60,8 @@
 #' # setting options
 #'                     
 #' aoptions("github_token", github_token)
-#' aoptions("user.name", user_name)
-#' aoptions("user.password", user_password)
+#' aoptions("user", user)
+#' aoptions("password", password)
 #' 
 #' createEmptyGithubRepo("archive-test4", default = TRUE)
 #' ## artifact's archiving

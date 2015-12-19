@@ -44,15 +44,15 @@
 #' Default set to \code{force = TRUE}.
 #' 
 #' @param default If \code{default = TRUE} then \code{repoDir} (\code{repoName}) is set as default local repository 
-#' (for GitHub version also the \code{user.name} is set as default GitHub user).
+#' (for GitHub version also the \code{user} is set as default GitHub user).
 #' 
 #' @param repoName While working with a Github repository. A character denoting new GitHub repository name. White spaces will be substitued with a dash.
 #' @param github_token While working with a Github repository. An OAuth GitHub Token created with the \link{oauth2.0_token} function. See \link{archivist-github-integration}.
 #' Can be set globally with \code{aoptions("github_token", github_token)}.
 #' @param repoDescription While working with a Github repository. A character specifing the new GitHub repository description.
-#' @param user.name While working with a Github repository. A character denoting GitHub user name. Can be set globally with \code{aoptions("user.name", user.name)}.
+#' @param user While working with a Github repository. A character denoting GitHub user name. Can be set globally with \code{aoptions("user", user)}.
 #'  See \link{archivist-github-integration}.
-#' @param user.password While working with a Github repository. A character denoting GitHub user password. Can be set globally with \code{aoptions("user.password", user.password)}.
+#' @param password While working with a Github repository. A character denoting GitHub user password. Can be set globally with \code{aoptions("password", password)}.
 #' See \link{archivist-github-integration}.
 #' @param readmeDescription While working with a Github repository. A character of the content of \code{README.md} file. By default a description of \link{Repository}.
 #' Can be set globally with \code{aoptions("readmeDescription", readmeDescription)}. In order to omit 
@@ -101,8 +101,8 @@
 #'                                 myapp,
 #'                                 scope = "public_repo")
 #' aoptions("github_token", github_token)
-#' aoptions("user.name", user.name)
-#' aoptions("user.password", user.password)
+#' aoptions("user", user)
+#' aoptions("password", password)
 #' 
 #' createEmptyGithubRepo("Museum")
 #' createEmptyGithubRepo("Museum-Extras", response = TRUE)
@@ -123,8 +123,8 @@
 #'                                scope = "public_repo")
 #' # setting options                              
 #' aoptions("github_token", github_token)
-#' aoptions("user.name", user_name)
-#' aoptions("user.password", user_password)
+#' aoptions("user", user)
+#' aoptions("password", password)
 #' 
 #' createEmptyGithubRepo("archive-test4", default = TRUE)
 #' ## artifact's archiving
@@ -144,7 +144,7 @@
 #' # clone example
 #' unlink("archive-test", recursive = TRUE)
 #' cloneGithubRepo('https://github.com/MarcinKosinski/archive-test')
-#' setGithubRepo(aoptions("user.name"), "archive-test")
+#' setGithubRepo(aoptions("user"), "archive-test")
 #' data(iris)
 #' archive(iris)
 #' showGithubRepo()
@@ -156,9 +156,9 @@
 createEmptyRepo <- function( repoDir, force = TRUE, default = FALSE,
                              repoName,
                              github_token = aoptions("github_token"), 
-                             user.name = aoptions("user.name"),
+                             user = aoptions("user"),
                              #user.email = aoptions("user.email"),
-                             user.password = aoptions("user.password"),
+                             password = aoptions("password"),
                              repoDescription = aoptions("repoDescription"),
                              readmeDescription = aoptions("readmeDescription"),
                              response = aoptions("response"),
@@ -169,8 +169,8 @@ createEmptyRepo <- function( repoDir, force = TRUE, default = FALSE,
   } else {
     createEmptyGithubRepo(repoName = repoName,
                           github_token = github_token,
-                          user.name = user.name,
-                          user.password = user.password,
+                          user = user,
+                          password = password,
                           repoDescription = repoDescription,
                           readmeDescription = readmeDescription,
                           response = response, default = default)
@@ -233,9 +233,9 @@ createEmptyLocalRepo <- function( repoDir, force = TRUE, default = FALSE ){
 #' @export
 createEmptyGithubRepo <- function(repoName,
                                   github_token = aoptions("github_token"), 
-                                  user.name = aoptions("user.name"),
+                                  user = aoptions("user"),
                                   #user.email = aoptions("user.email"),
-                                  user.password = aoptions("user.password"),
+                                  password = aoptions("password"),
                                   repoDescription = aoptions("repoDescription"),
                                   readmeDescription = aoptions("readmeDescription"),
                                   response = aoptions("response"),
@@ -243,9 +243,9 @@ createEmptyGithubRepo <- function(repoName,
   stopifnot(is.character(repoName) & length(repoName) ==1)
   stopifnot(is.character(repoDescription) & length(repoDescription) ==1)
   #stopifnot(any(class(github_token) %in% "Token"))
-  stopifnot(is.character(user.name) & length(user.name)==1)
+  stopifnot(is.character(user) & length(user)==1)
   #stopifnot(is.character(user.email) & length(user.email)==1)
-  stopifnot(is.character(user.password) & length(user.password)==1)
+  stopifnot(is.character(password) & length(password)==1)
   stopifnot((is.character(readmeDescription) & length(readmeDescription)==1) |
               is.null(readmeDescription))
   stopifnot(is.logical(response) & length(response) ==1)
@@ -299,12 +299,12 @@ createEmptyGithubRepo <- function(repoName,
   remote_add(repo,
              #"upstream2",
              'origin',
-             file.path("https://github.com", user.name, paste0(repoName, ".git")))
+             file.path("https://github.com", user, paste0(repoName, ".git")))
   
   # GitHub authorization
   # to perform pull and push operations
-  cred <- git2r::cred_user_pass(user.name,
-                         user.password)
+  cred <- git2r::cred_user_pass(user,
+                         password)
   
   # push archivist-like Repository to GitHub repository
   push(repo,
@@ -318,7 +318,7 @@ createEmptyGithubRepo <- function(repoName,
   
   if (default) {
     setLocalRepo(repoName)
-    setGithubRepo(repo = repoName, user = user.name)
+    setGithubRepo(repo = repoName, user = user)
   }
   
 }
