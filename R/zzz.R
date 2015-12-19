@@ -14,7 +14,7 @@
   .ArchivistEnv$ascii <- FALSE
   .ArchivistEnv$branch <- "master"
   .ArchivistEnv$repoDirGit <- FALSE
-  
+  .ArchivistEnv$alink <- FALSE
   .ArchivistEnv$repoDescription <- "A Repository of Artifacts supported by archivist https://github.com/pbiecek"
   .ArchivistEnv$readmeDescription <- "A Repository of Artifacts supported by [archivist](https://github.com/pbiecek) \n\n
    [`Repository`](https://github.com/pbiecek/archivist/wiki/archivist-package-Repository) stores specific values of an artifact,
@@ -36,6 +36,7 @@
   .ArchivistEnv$rememberName <- TRUE 
   .ArchivistEnv$chain <- FALSE 
   .ArchivistEnv$ascii <- FALSE
+  .ArchivistEnv$alink <- FALSE
   .ArchivistEnv$repoDescription <- "A Repository of Artifacts supported by archivist https://github.com/pbiecek"
   .ArchivistEnv$readmeDescription <- .ArchivistEnv$readmeDescription <- "A Repository of Artifacts supported by [archivist](https://github.com/pbiecek) \n\n
    [`Repository`](https://github.com/pbiecek/archivist/wiki/archivist-package-Repository) stores specific values of an artifact,
