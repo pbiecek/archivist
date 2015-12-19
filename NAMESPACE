@@ -2,6 +2,7 @@
 
 S3method(print,ahistory)
 S3method(print,ahistoryKable)
+S3method(print,alink)
 S3method(print,repository)
 export("%>%")
 export("%a%")
