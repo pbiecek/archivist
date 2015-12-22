@@ -160,7 +160,7 @@ deleteRepo <- function(repoDir, deleteRoot = FALSE, unset = FALSE){
     unlink( file.path(repoDir), recursive = TRUE )    
   }
   
-  if (unset & repoDir == aoptions('repodir')) {
+  if (unset) {
     aoptions('repoDir', NULL)
   }
   
