@@ -135,13 +135,13 @@ extractTags.twins <- function( object, objectNameX, ... ) {
 extractTags.partition <- function( object, objectNameX, ... ) {
   name <- paste0( "name:", objectNameX )
   class <- paste0( "class:", class( object ) )
-  memb.exp <- paste0("memb.exp:", fannyx$memb.exp)
-  coeff <- paste0(c("dunn_coeff:", "normalized dunn_coeff:"), fannyx$coeff)
-  k.crisp <- paste0("k.crisp:", fannyx$k.crisp)
-  objective <- paste0(c("objective:", "tolerance:"), fannyx$objective)
-  conv <- fannyx$convergence
+  memb.exp <- paste0("memb.exp:", object$memb.exp)
+  coeff <- paste0(c("dunn_coeff:", "normalized dunn_coeff:"), object$coeff)
+  k.crisp <- paste0("k.crisp:", object$k.crisp)
+  objective <- paste0(c("objective:", "tolerance:"), object$objective)
+  conv <- object$convergence
   conv <- paste(names(conv), conv, sep=":")
-  silinfo <- fannyx$silinfo
+  silinfo <- object$silinfo
   clus.avg.widths <- paste0('clus.avg.widths:', silinfo[[2]])
   avg.width <- paste0('avg.width:', silinfo[[3]])
   date <- paste0( "date:", now() )
@@ -164,10 +164,10 @@ extractTags.glmnet <- function( object, objectNameX, ... ) {
 extractTags.survfit <- function( object, objectNameX, ... ) {
   name <- paste0( "name:", objectNameX )
   class <- paste0( "class:", class( object ) )
-  n <- paste0("n:", survfit1$n)
-  type <- paste0("type:", survfit1$type)
-  conf.type <- paste0("conf.type:", survfit1$conf.type)
-  conf.int <- paste0("conf.int:", survfit1$conf.int)  
+  n <- paste0("n:", object$n)
+  type <- paste0("type:", object$type)
+  conf.type <- paste0("conf.type:", object$conf.type)
+  conf.int <- paste0("conf.int:", object$conf.int)  
   strata <- object$strata
   strata <- paste0( "strata:", ifelse(!is.null(strata), strata, deparse(strata)))                  
   date <- paste0( "date:", now() )
