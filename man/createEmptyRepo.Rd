@@ -6,7 +6,7 @@
 \alias{createEmptyRepo}
 \title{Create an Empty Repository}
 \usage{
-createEmptyRepo(repoDir, force = TRUE, default = FALSE, repoName,
+createEmptyRepo(repoDir, force = TRUE, default = FALSE, repo,
   github_token = aoptions("github_token"), user = aoptions("user"),
   password = aoptions("password"),
   repoDescription = aoptions("repoDescription"),
@@ -15,23 +15,25 @@ createEmptyRepo(repoDir, force = TRUE, default = FALSE, repoName,
 
 createEmptyLocalRepo(repoDir, force = TRUE, default = FALSE)
 
-createEmptyGithubRepo(repoName, github_token = aoptions("github_token"),
-  user = aoptions("user"), password = aoptions("password"),
+createEmptyGithubRepo(repo, github_token = aoptions("github_token"),
+  user = aoptions("user"), repoDir = NULL,
+  password = aoptions("password"),
   repoDescription = aoptions("repoDescription"),
   readmeDescription = aoptions("readmeDescription"),
   response = aoptions("response"), default = FALSE)
 }
 \arguments{
-\item{repoDir}{A character that specifies the directory for the Repository which is to be made.}
+\item{repoDir}{A character that specifies the directory for the Repository which is to be made. While working with GitHub Repository, this will
+be the directory of the synchronized Local Repository, in which the new Local Repository will be created (is \code{NULL} then is the same as \code{repo}).}
 
 \item{force}{If \code{force = TRUE} and \code{repoDir} parameter specifies the directory that doesn't exist,
 then function call will force to create new \code{repoDir} directory.
 Default set to \code{force = TRUE}.}
 
-\item{default}{If \code{default = TRUE} then \code{repoDir} (\code{repoName}) is set as default local repository 
+\item{default}{If \code{default = TRUE} then \code{repoDir} (\code{repo}) is set as default local repository 
 (for GitHub version also the \code{user} is set as default GitHub user).}
 
-\item{repoName}{While working with a Github repository. A character denoting new GitHub repository name. White spaces will be substitued with a dash.}
+\item{repo}{While working with a Github repository. A character denoting new GitHub repository name. White spaces will be substitued with a dash.}
 
 \item{github_token}{While working with a Github repository. An OAuth GitHub Token created with the \link{oauth2.0_token} function. See \link{archivist-github-integration}.
 Can be set globally with \code{aoptions("github_token", github_token)}.}
@@ -63,7 +65,7 @@ new GitHub repository. \code{createEmptyRepo} is a wrapper around \code{createEm
 }
 \details{
 At least one Repository must be initialized before using other functions from the \pkg{archivist} package. 
-While working in groups, it is highly recommended to create a Repository on a shared Dropbox/Git folder.
+While working in groups, it is highly recommended to create a Repository on a shared Dropbox/GitHub folder.
 
 All artifacts which are desired to be archived are going to be saved in the local Repository, which is an SQLite 
 database stored in a file named \code{backpack}. 
@@ -131,6 +133,7 @@ createEmptyGithubRepo("Museum-Extras", response = TRUE)
 createEmptyGithubRepo("Gallery", readmeDescription = NULL)
 createEmptyGithubRepo("Landfill", 
         repoDescription = "My models and stuff") 
+createEmptyGithubRepo("MuseumYYYY", repoDir = "Museum_YY")
         
         
         
