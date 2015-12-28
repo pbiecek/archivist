@@ -10,8 +10,8 @@ archive(artifact, commitMessage = aoptions("commitMessage"),
   archiveTags = aoptions("archiveTags"),
   archiveMiniature = aoptions("archiveMiniature"),
   force = aoptions("force"), rememberName = aoptions("rememberName"), ...,
-  userTags = character(), silent = aoptions("silent"),
-  ascii = aoptions("ascii"), alink = aoptions("alink"))
+  userTags = c(), silent = aoptions("silent"), ascii = aoptions("ascii"),
+  alink = aoptions("alink"))
 }
 \arguments{
 \item{artifact}{An artifact to be archived on Local and Github \link{Repository}.}
