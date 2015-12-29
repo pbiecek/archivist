@@ -35,7 +35,7 @@ archivist 1.8
 `showLocalRepo` function working properly when passed an argument to the directory
 that do not exist.
 	  2. Changed `dbDisconnect( conn )` call to the `on.exit(dbDisconnect( conn ))` in `executeSingleQuery` function to prevent a situation in which during an error inside a function (which might be produced), the connection stays open, when it shouldn`t.
-	  3. `%a%` operator does react on `default = TRUE` in `createEmpyRepo` function.
+	  3. `%a%` operator does react on `default = TRUE` in `createEmptyRepo` function.
     4. `deleteRoot = TRUE` argument of the `deleteRepo` function works properly and enables removing root directory of the Repository.
     5. Some changes in `rmFromRepo`'s body:
         1. Function will give a warning when a user uses wrong md5hash (that does not exist in the `Repository`).
