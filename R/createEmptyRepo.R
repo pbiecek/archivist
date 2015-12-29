@@ -259,7 +259,9 @@ createEmptyGithubRepo <- function(repo,
   stopifnot( is.logical( default ), length( default ) == 1 )
   repo <- gsub(pattern = " ", "-", repo)
 
+  shortPath <- FALSE
   if(is.null(repoDir)) {
+    shortPath <- TRUE
     repoDir <- repo
   }
   
@@ -278,8 +280,13 @@ createEmptyGithubRepo <- function(repo,
   # git2r imports are in the archivist-package.R
   #path <- repoDir
   dir.create(repoDir)
-  dir.create(file.path(repoDir, repo))
-  repoDir_path <- file.path(repoDir, repo)
+  
+  if (!shortPath){
+    dir.create(file.path(repoDir, repo))
+    repoDir_path <- file.path(repoDir, repo)
+  } else {
+    repoDir_path <- repo
+  }
   
   # initialize local git repository
   # git init
