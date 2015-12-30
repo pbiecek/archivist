@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/13191/pbiecek/archivist.svg)](http://dx.doi.org/10.5281/zenodo.31445)
+[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.31445.svg)](http://dx.doi.org/10.5281/zenodo.31445)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/archivist)](http://cran.r-project.org/web/packages/archivist)
 [![Downloads](http://cranlogs.r-pkg.org/badges/archivist)](http://cran.rstudio.com/package=archivist)
 [![Build Status](https://api.travis-ci.org/pbiecek/archivist.png)](https://travis-ci.org/pbiecek/archivist)
