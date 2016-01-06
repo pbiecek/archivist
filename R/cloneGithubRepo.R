@@ -86,7 +86,7 @@ cloneGithubRepo <- function(repoURL, repoDir = NULL, default = FALSE, ...){
   if (!file.exists(repoDir)) {
     dir.create(repoDir)
   }
-  git2r::clone(repoURL, repoDir, ...)
+  git2r::clone(repoURL, repoDir, ...) -> repo2return
   
 
   if (default) {
@@ -96,4 +96,5 @@ cloneGithubRepo <- function(repoURL, repoDir = NULL, default = FALSE, ...){
                   repo = tail(strsplit(repoURL,
                                                         "/")[[1]],1))
   }
+  return(repo2return)
 }

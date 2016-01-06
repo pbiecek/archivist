@@ -12,11 +12,14 @@ GitHub API \href{https://developer.github.com/v3/}{https://developer.github.com/
 It is possible to create new GitHub repository with an empty \pkg{archivist}-like \link{Repository}
 with \link{createEmptyGithubRepo} function. 
 
-\link{archive} stores artifacts in the local
+\link{archive} stores artifacts in the Local
 \code{Repository} and automatically pushes archived artifacts to the Github
 \code{Repository} with which the local \code{Repository} is synchronized. 
 
 \link{cloneGithubRepo} clones GitHub Repository into the local directory.
+
+\link{deleteGithubRepo} can delete whole GitHub-Repository or only archivist-like Repository
+stored on a GitHub-Repository
 }
 \details{
 To use this set of functionalities, one firstly has to authorize himselft to the GitHub API.
@@ -52,7 +55,8 @@ myapp <- oauth_app("github",
                    secret = app_secret)
 github_token <- oauth2.0_token(oauth_endpoints("github"),
                                 myapp,
-                                scope = "public_repo")
+                                scope = c("public_repo",
+                                          "delete_repo"))
 aoptions("github_token", github_token)
 aoptions("user.name", user.name)
 aoptions("user.password", user.password)
