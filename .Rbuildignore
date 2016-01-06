@@ -5,11 +5,9 @@
 # OsX data
 .DS_Store
 scripts
-backpack.db
 archiwum.png
 buildingDB.R
 buildingVignette.R
-gallery
 README.md
 archiwum.png
 ghPage
