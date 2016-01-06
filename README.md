@@ -1,12 +1,12 @@
 [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.31445.svg)](http://dx.doi.org/10.5281/zenodo.31445)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/archivist)](http://cran.r-project.org/web/packages/archivist)
 [![Downloads](http://cranlogs.r-pkg.org/badges/archivist)](http://cran.rstudio.com/package=archivist)
-[![Build Status](https://api.travis-ci.org/pbiecek/archivist.png)](https://travis-ci.org/pbiecek/archivist)
-[![Stories in Ready](https://badge.waffle.io/pbiecek/archivist.png?label=READY)](http://waffle.io/pbiecek/archivist)
 [![Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/archivist?color=orange)](http://cranlogs.r-pkg.org/badges/grand-total/archivist)
-[![Coverage Status](https://coveralls.io/repos/pbiecek/archivist/badge.svg)](https://coveralls.io/r/pbiecek/archivist)
 
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+[![Build Status](https://api.travis-ci.org/pbiecek/archivist.png)](https://travis-ci.org/pbiecek/archivist)
+[![Stories in Ready](https://badge.waffle.io/pbiecek/archivist.png?label=READY)](http://waffle.io/pbiecek/archivist)
+[![Coverage Status](https://coveralls.io/repos/pbiecek/archivist/badge.svg)](https://coveralls.io/r/pbiecek/archivist)
 
 A set of tools for datasets and plots archiving
 =====================================================
