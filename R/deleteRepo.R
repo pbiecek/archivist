@@ -193,14 +193,15 @@
 #' @family archivist
 #' @rdname deleteRepo
 #' @export
-deleteRepo <- function(type = "local", repoDir, repo,
+deleteRepo <- function(repoDir, repo,
                        github_token = aoptions("github_token"), 
                        user = aoptions("user"),
                        password = aoptions("password"),
                        unset = FALSE, 
                        deleteRoot = FALSE, 
                        repoDirGit = NULL, 
-                       response = aoptions("response")){
+                       response = aoptions("response"),
+                       type = "local"){
   stopifnot(is.character(type) & length(type) ==1 & type %in% c("local", "github"))
   if (type == "local") {
     deleteLocalRepo(repoDir = repoDir, deleteRoot = deleteRoot,

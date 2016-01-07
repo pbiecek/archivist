@@ -6,10 +6,10 @@
 \alias{deleteRepo}
 \title{Delete the Existing Repository from the Given Directory}
 \usage{
-deleteRepo(type = "local", repoDir, repo,
-  github_token = aoptions("github_token"), user = aoptions("user"),
-  password = aoptions("password"), unset = FALSE, deleteRoot = FALSE,
-  repoDirGit = NULL, response = aoptions("response"))
+deleteRepo(repoDir, repo, github_token = aoptions("github_token"),
+  user = aoptions("user"), password = aoptions("password"), unset = FALSE,
+  deleteRoot = FALSE, repoDirGit = NULL, response = aoptions("response"),
+  type = "local")
 
 deleteLocalRepo(repoDir, deleteRoot = FALSE, unset = FALSE)
 
