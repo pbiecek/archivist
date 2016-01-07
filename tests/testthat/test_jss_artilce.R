@@ -24,6 +24,7 @@ test_that("aread downloads files", {
 
 
 test_that("asearch works properly", {
+  aoptions('repoDir', NULL, T)
   models <- asearch("pbiecek/graphGallery", patterns = c("class:lm", "coefname:Sepal.Length"))
   
   expect_output(str(models), "List of 2")
