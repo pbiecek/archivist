@@ -39,7 +39,7 @@
 #' @family archivist
 #' @rdname aread
 #' @export
-aread <- function( md5hash){
+aread <- function(md5hash){
   stopifnot( is.character( md5hash ) )
 
   # work for vectors  
@@ -53,7 +53,7 @@ aread <- function( md5hash){
       res[[md5h]] <- loadFromRepo(md5hash = elements, value = TRUE)
     } else {
       # GitHub directory
-      res[[md5h]] <- loadFromRepo(md5hash = elements[length(elements)], 
+      res[[md5h]] <- loadFromRepo(md5hash = tail(elements,1), 
                                         repo = elements[2],
                                         repoDirGit = ifelse(length(elements) > 3, paste(elements[3:(length(elements)-1)], collapse="/"), FALSE),
                                         user = elements[1], value = TRUE)

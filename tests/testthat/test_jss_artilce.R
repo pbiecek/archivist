@@ -1,4 +1,5 @@
 test_that("aread downloads files", {
+  aoptions('repoDir', NULL, T) 
   aread("pbiecek/graphGallery/2166dfbd3a7a68a91a2f8e6df1a44111") -> ddl_ggplot
   aread("pbiecek/graphGallery/2166d") -> ddl_ggplot_abrv
   
