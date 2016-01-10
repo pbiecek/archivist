@@ -11,6 +11,8 @@
 A set of tools for datasets and plots archiving
 =====================================================
 
+[![Join the chat at https://gitter.im/pbiecek/archivist](https://badges.gitter.im/pbiecek/archivist.svg)](https://gitter.im/pbiecek/archivist?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ![Overview of archivist package](https://raw.githubusercontent.com/pbiecek/archivist/master/archiwum.png)
 
 Project is supported by [Travis CI](https://travis-ci.org/) and [waffle.io](https://waffle.io/).
