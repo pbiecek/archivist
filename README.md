@@ -19,6 +19,9 @@ Project is supported by [Travis CI](https://travis-ci.org/) and [waffle.io](http
 
 ### Please see the  [archivist wiki](https://github.com/pbiecek/archivist/wiki) for information. 
 
+### Information for [developers](https://github.com/pbiecek/archivist/wiki/For-developers)
+
+[![Gitter](https://badges.gitter.im/pbiecek/archivist.svg)](https://gitter.im/pbiecek/archivist?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 <h5> Installation of the archivist package: </h5>
 To get started, install the latest version of **archivist** from CRAN:
