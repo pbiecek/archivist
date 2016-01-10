@@ -127,8 +127,8 @@
 #' 
 #' @param rememberName A logical value. Should not be changed by a user. It is a technical parameter.
 #' 
-#' @param chain A logical value. Should the result be (default \code{chain = FALSE}) the \code{md5hash} 
-#' of a stored artifact or should the result be an input artifact (\code{chain = TRUE}), so that chaining code 
+#' @param value A logical value. Should the result be (default \code{value = FALSE}) the \code{md5hash} 
+#' of a stored artifact or should the result be an input artifact (\code{value = TRUE}), so that valueing code 
 #' can be used. See examples.
 #'
 #' @param silent If TRUE produces no warnings.
@@ -246,10 +246,10 @@
 #' 
 #' rm( exampleRepoDir )
 #' 
-#' # saveToRepo in chaining code
+#' # saveToRepo in valueing code
 #' library(dplyr)
 #' 
-#' # chaining code
+#' # valueing code
 #' exampleRepoDir <- tempdir()
 #' createEmptyRepo(exampleRepoDir, default = TRUE)
 #' library(dplyr)
@@ -279,16 +279,16 @@
 saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE, 
                         archiveTags = TRUE, 
                         archiveMiniature = TRUE, force = TRUE, rememberName = TRUE, 
-                        chain = FALSE, ... , userTags = c(), 
+                        value = FALSE, ... , userTags = c(), 
                         silent=aoptions("silent"), ascii = FALSE) { 
   stopifnot( is.logical( c( archiveData, archiveTags, archiveMiniature, 
-                            force,  rememberName, chain, silent, ascii ) ) )
+                            force,  rememberName, value, silent, ascii ) ) )
   stopifnot( ( is.character( repoDir ) & length( repoDir ) == 1 ) | is.null( repoDir ) )
 #  stopifnot( is.character( userTags ))    - user can specify tags: userTags = 1:2, and they should
 # be converted to characters as in the previous archivist versions. we even have testsfor that
   stopifnot( length(archiveData) == 1, length(archiveTags) == 1, length(archiveMiniature) == 1,
              length(force) == 1, length(rememberName) == 1, 
-             length(chain) == 1, length(ascii) == 1)
+             length(value) == 1, length(ascii) == 1)
 #   stopifnot( is.character( format ) & length( format ) == 1 & any(format %in% c("rda", "rdx")) )
   
   md5hash <- digest( artifact )
@@ -355,12 +355,12 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
   }
   
   # whether to archive data 
-  # if chaining code is used, the "data" attr is not needed
-  if ( archiveData & !chain ){
+  # if valueing code is used, the "data" attr is not needed
+  if ( archiveData & !value ){
     attr( md5hash, "data" )  <-  extractData( artifact, parrentMd5hash = md5hash, 
                                               parentDir = repoDir, isForce = force, ASCII = ascii )
   }
-  if ( archiveData & chain ){
+  if ( archiveData & value ){
     extractData( artifact, parrentMd5hash = md5hash, 
                  parentDir = repoDir, isForce = force, ASCII = ascii )
   }
@@ -368,8 +368,8 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
   # whether to archive miniature
   if ( archiveMiniature )
     extractMiniature( artifact, md5hash, parentDir = repoDir ,... )
-  # whether to return md5hash or an artifact if chaining code is used
-  if ( !chain ){
+  # whether to return md5hash or an artifact if valueing code is used
+  if ( !value ){
     return( md5hash )
   }else{
     return( artifact )

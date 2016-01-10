@@ -6,7 +6,7 @@
 \usage{
 saveToRepo(artifact, repoDir = NULL, archiveData = TRUE,
   archiveTags = TRUE, archiveMiniature = TRUE, force = TRUE,
-  rememberName = TRUE, chain = FALSE, ..., userTags = c(),
+  rememberName = TRUE, value = FALSE, ..., userTags = c(),
   silent = aoptions("silent"), ascii = FALSE)
 }
 \arguments{
@@ -26,8 +26,8 @@ a Repository.}
 
 \item{rememberName}{A logical value. Should not be changed by a user. It is a technical parameter.}
 
-\item{chain}{A logical value. Should the result be (default \code{chain = FALSE}) the \code{md5hash} 
-of a stored artifact or should the result be an input artifact (\code{chain = TRUE}), so that chaining code 
+\item{value}{A logical value. Should the result be (default \code{value = FALSE}) the \code{md5hash} 
+of a stored artifact or should the result be an input artifact (\code{value = TRUE}), so that valueing code 
 can be used. See examples.}
 
 \item{...}{Graphical parameters denoting width and height of a miniature. See details. 
@@ -243,10 +243,10 @@ deleteRepo( exampleRepoDir, TRUE)
 
 rm( exampleRepoDir )
 
-# saveToRepo in chaining code
+# saveToRepo in valueing code
 library(dplyr)
 
-# chaining code
+# valueing code
 exampleRepoDir <- tempdir()
 createEmptyRepo(exampleRepoDir, default = TRUE)
 library(dplyr)

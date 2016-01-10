@@ -27,6 +27,7 @@
 #' If it's in main directory, then specify to \code{NULL} (default).
 #' @param password Only when \code{deleteRoot = FALSE}. While working with a Github repository. A character denoting GitHub user password. Can be set globally with \code{aoptions("password", password)}.
 #' See \link{archivist-github-integration}.
+#' @param type A character. Whether to use \code{Local} or \code{Github} version while using \code{deleteRepo} wrapper.
 #' 
 #' @details
 #' 

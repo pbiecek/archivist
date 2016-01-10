@@ -43,6 +43,8 @@ should be deleted for Local Repository or for GitHub whether to delete whole Git
 If it's in main directory, then specify to \code{NULL} (default).}
 
 \item{response}{A logical value. Should the GitHub API response be returned (only when \code{deleteRoot = TRUE}).}
+
+\item{type}{A character. Whether to use \code{Local} or \code{Github} version while using \code{deleteRepo} wrapper.}
 }
 \description{
 \code{deleteRepo} deletes the existing \link{Repository} from the given directory.
