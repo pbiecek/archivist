@@ -4,14 +4,14 @@
 \alias{aoptions}
 \title{Default Options for Archivist}
 \usage{
-aoptions(key, value = NULL, forceNULL = FALSE)
+aoptions(key, value = NULL, unset = FALSE)
 }
 \arguments{
 \item{key}{A character denoting name of the parameter.}
 
 \item{value}{New value for the 'key' parameter.}
 
-\item{forceNULL}{Set to \code{TRUE} if want to set parameter to \code{NULL}, 
+\item{unset}{Set to \code{TRUE} if want to set parameter to \code{NULL}, 
 i.e. when unsetting Repository \code{aoptions('repoDir', NULL, T)}.}
 }
 \value{

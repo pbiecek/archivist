@@ -15,7 +15,7 @@
 #' @param deleteRoot A logical value that specifies if the repository root directory
 #' should be deleted for Local Repository or for GitHub whether to delete whole GitHub-Repository.
 #' @param unset A logical. If deleted \code{repoDir/repo} was set to be default Local/GitHub Repository
-#' and \code{unset} is TRUE, then \code{repoDir/repo} is unset as a default Local/GitHub Repository (\code{aoptions('repoDir/repo', NULL)}).
+#' and \code{unset} is TRUE, then \code{repoDir/repo} is unset as a default Local/GitHub Repository (\code{aoptions('repoDir/repo', NULL, T)}).
 #' @param repo While working with a Github repository. A character denoting GitHub repository name to be deleted.
 #' @param github_token While working with a Github repository. An OAuth GitHub Token created with the \link{oauth2.0_token} function. To delete GitHub Repository you
 #' need to have \code{delete_repo} scope set - see examples. See \link{archivist-github-integration}.
@@ -240,7 +240,7 @@ deleteLocalRepo <- function(repoDir, deleteRoot = FALSE, unset = FALSE){
   }
   
   if (unset) {
-    aoptions('repoDir', NULL)
+    aoptions('repoDir', NULL, T)
   }
   
 }
@@ -287,7 +287,7 @@ deleteGithubRepo <- function(repo,
   }
   
   if (unset) {
-    aoptions('repo', NULL)
+    aoptions('repo', NULL,T)
   }
   
   

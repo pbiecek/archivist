@@ -6,6 +6,7 @@ archivist 1.9
         1. Provided new functions `deleteLocalRepo` (previous `deleteRepo`) and `deleteGithubRepo`. `deleteRepo` is now a wrapper around those both. [[#156](https://github.com/pbiecek/archivist/issues/156)] 
 * **Bugs fixed**:
     1. `asearch` function enables a user to read artifacts from default GitHub repository. In the previous version it was possible only in default local repository.
+    2. It is now possible to unset global Repository with `apotions('repo/repoDir', NULL, unset = TRUE)` [[#176](https://github.com/pbiecek/archivist/issues/176)].
 * **New features**:
     1. Alterations in the text of: `?ahistory`, `?cache`, `?asearch`, `?archive`, `?cloneGithubRepo`, `githubFunctions`, `?shinySearchInLocalRepo`, `?alink` documentation pages.
     2. Additional examples to better understand usage of archivist package functions: 
@@ -16,7 +17,7 @@ archivist 1.9
     1. `user.name` and `user.password` parameters of `archive` and `createEmptyGithubRepo` were changed into `user` and `password` correspondingly.
     2. `createEmptyGithubRepo` now can use `repoDir` to specify in which directory the synchronized Local Repository should be created [[#142](https://github.com/pbiecek/archivist/issues/142)]. 
     3. `archive` no longer cats hook to the artifact during the execution. Hook cat can be set with new `alink` parameter that uses `alink()` function, where parameters can be passed with `...`.
-    4. `deleteRepo` has now new `unset` parameter that allows to unset global `aoptions('repoDir')` when deleted `repoDir` was a globally specified Repository [[#157](https://github.com/pbiecek/archivist/issues/157)].
+    4. `deleteRepo` has now new `unset` parameter that allows to unset global `aoptions('repoDir', NULL, unset = TRUE)` when deleted `repoDir` was a globally specified Repository [[#157](https://github.com/pbiecek/archivist/issues/157)].
     5. Changed parameter name in `cloneGithubRepo` from `local_path` to `repoDir` to maintain consistency within package documentation and name convention.
     6. `createEmptyGithubRepo`, `createEmptyRepo(type ='github')` and `cloneGithubRepo` now reacts on new `default` parameter which sets newly created/cloned repositories (GitHub and synchronized with it Local one) as default [[#171](https://github.com/pbiecek/archivist/issues/171) , [#142](https://github.com/pbiecek/archivist/issues/142)].
     7. Changed the name of `chain` parameter to `value` in `saveToRepo` function [#101](https://github.com/pbiecek/archivist/issues/101)].

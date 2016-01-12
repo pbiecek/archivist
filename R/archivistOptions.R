@@ -19,7 +19,7 @@
 #' 
 #' @param value New value for the 'key' parameter.
 #' 
-#' @param forceNULL Set to \code{TRUE} if want to set parameter to \code{NULL}, 
+#' @param unset Set to \code{TRUE} if want to set parameter to \code{NULL}, 
 #' i.e. when unsetting Repository \code{aoptions('repoDir', NULL, T)}.
 #' 
 #' @author 
@@ -104,11 +104,11 @@
 #' @family archivist
 #' @rdname archivistOptions
 #' @export
-aoptions <- function(key, value=NULL, forceNULL = FALSE) {
+aoptions <- function(key, value=NULL, unset = FALSE) {
   
   stopifnot( is.character( key ) )
-  stopifnot( is.logical( forceNULL ) )
-  if (forceNULL | !is.null(value)) {
+  stopifnot( is.logical( unset ) )
+  if (unset | !is.null(value)) {
     .ArchivistEnv[[key]] <- value
   }
   .ArchivistEnv[[key]]
