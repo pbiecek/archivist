@@ -61,7 +61,7 @@ be obtained.
 }
 \note{
 If \code{repo} and \code{user} are set to \code{NULL} (as default) in the Github mode then global parameters
-set in \link{setGithubRepo} function are used.
+set in \link{setGithubRepo} (or via \link{aoptions}) function are used.
 }
 \examples{
 \dontrun{
@@ -208,8 +208,9 @@ Other archivist: \code{\link{Repository}},
   \code{\link{asearch}}, \code{\link{cache}},
   \code{\link{cloneGithubRepo}},
   \code{\link{copyLocalRepo}},
-  \code{\link{createEmptyRepo}}, \code{\link{deleteRepo}},
-  \code{\link{getTagsLocal}},
+  \code{\link{createEmptyRepo}},
+  \code{\link{createGithubMDGallery}},
+  \code{\link{deleteRepo}}, \code{\link{getTagsLocal}},
   \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
   \code{\link{rmFromRepo}}, \code{\link{saveToRepo}},
   \code{\link{searchInLocalRepo}},
