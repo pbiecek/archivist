@@ -351,6 +351,12 @@ loadFromRepo <- function( md5hash, repoDir = NULL,
                           repo = NULL, user = NULL, branch = "master", repoDirGit = FALSE,
                           value = FALSE ){
   
+  if (length(strsplit(md5hash, "/")[[1]]) == 3 & is.null(repo) & is.null(user)){
+    loadFromGithubRepo(md5hash = strsplit(md5hash, "/")[[1]][1],
+                       user = strsplit(md5hash, "/")[[1]][2],
+                       repo = strsplit(md5hash, "/")[[1]][3])
+  }else{
+  
   w1 <- is.null(repoDir); w2 <- is.null(aoptions("repoDir"))
   w3 <- is.null(repo); w4 <- is.null(aoptions("repo"))
   w5 <- is.null(user); w6 <- is.null(aoptions("user"))
@@ -370,4 +376,5 @@ loadFromRepo <- function( md5hash, repoDir = NULL,
     stop("repoDir and repo or user or branch or repoDirGit were used simultaneously. Remember
 to use them separately!")
   } 
+  }
 }
