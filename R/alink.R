@@ -108,11 +108,11 @@ alink <- function(md5hash, repo = aoptions('repo'),
     return(archLINK)
   } else {
     if ( format == "markdown" ){
-      paste0('[archivist::aread(\'',
+      paste0('[archivist::aread(\"',
              ifelse(strsplit(md5hash, "/")[[1]] %>% length  == 3,
                                 md5hash,
                                 file.path(user, repo, md5hash)),
-             '\')](',
+             '\")](',
              archLINK,
              ')'
              ) -> resLINK
@@ -122,11 +122,11 @@ alink <- function(md5hash, repo = aoptions('repo'),
       paste0('\\href{',
              archLINK,
              '}{',
-             'archivist::aread(\'',
+             'archivist::aread(\"',
              ifelse(strsplit(md5hash, "/")[[1]] %>% length  == 3,
                     md5hash,
                     file.path(user, repo, md5hash)),
-             '\')}'
+             '\")}'
       ) -> resLINK
       class(resLINK) <- 'alink'
       return(resLINK)
