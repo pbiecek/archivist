@@ -58,8 +58,8 @@ github_token <- oauth2.0_token(oauth_endpoints("github"),
                                 scope = c("public_repo",
                                           "delete_repo"))
 aoptions("github_token", github_token)
-aoptions("user.name", user.name)
-aoptions("user.password", user.password)
+aoptions("name", user.name)
+aoptions("password", user.password)
 
 createEmptyGithubRepo("Museum")
 createEmptyGithubRepo("Museum-Extras", response = TRUE)

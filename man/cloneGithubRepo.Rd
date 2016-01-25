@@ -42,11 +42,11 @@ github_token <- oauth2.0_token(oauth_endpoints("github"),
                                scope = "public_repo")
 # setting options                              
 aoptions("github_token", github_token)
-aoptions("user.name", user_name)
-aoptions("user.password", user_password)
+aoptions("name", user_name)
+aoptions("password", user_password)
 
 createEmptyGithubRepo("archive-test4")
-setGithubRepo(aoptions("user.name"), "archive-test4")
+setGithubRepo(aoptions("name"), "archive-test4")
 ## artifact's archiving
 przyklad <- 1:100
 
@@ -64,7 +64,7 @@ aread(md5hash_path)
 # clone example
 unlink("archive-test", recursive = TRUE)
 cloneGithubRepo('https://github.com/MarcinKosinski/archive-test')
-setGithubRepo(aoptions("user.name"), "archive-test")
+setGithubRepo(aoptions("name"), "archive-test")
 # equivalent is cloneGithubRepo('https://github.com/MarcinKosinski/archive-test', default = TRUE)
 # check if default is set with
 # aoptions('repoDir'); aoptions('repo'); aoptions('user')
