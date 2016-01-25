@@ -114,7 +114,8 @@ archive <- function(artifact, commitMessage = aoptions("commitMessage"),
   stopifnot(is.character(repo) & length(repo) ==1)
   stopifnot(is.character(user) & length(user)==1)
   stopifnot(is.character(password) & length(password)==1)
-  stopifnot( is.character( userTags ))
+  #  stopifnot( is.character( userTags ))    - user can specify tags: userTags = 1:2, and they should
+  # be converted to characters as in the previous archivist versions. we even have testsfor that
   stopifnot(is.logical(alink) & length(alink) == 1)
   #stopifnot(is.logical(response) & length(response) ==1)
   
