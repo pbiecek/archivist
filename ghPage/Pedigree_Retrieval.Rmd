@@ -64,5 +64,13 @@ ahistory(artifact)
 ahistory(artifact, aformat = "kable")
 ```
 
+#### With hooks
+
+Supposing those artifacts exist on a GitHub repository
+```{r, results='asis'}
+# results='asis'
+ahistory(artifact, aformat = "kable", repoDir = "Pedigree_Example", alink = TRUE,
+         user = "MarcinKosinski", repo = "Museum")
+```
 
 
