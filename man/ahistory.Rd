@@ -5,7 +5,7 @@
 \title{Show Artifact's History}
 \usage{
 ahistory(artifact = NULL, md5hash = NULL, repoDir = NULL,
-  aformat = "regular")
+  aformat = "regular", alink = FALSE, ...)
 }
 \arguments{
 \item{artifact}{An artifact which history is supposed to be reconstructed.
@@ -19,7 +19,9 @@ If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{s
 \item{aformat}{A character denoting whether to print history in either a \code{"regular"} (default) way or like in a \code{"kable"} function.
 See Notes.}
 
-\item{...}{Further parameters passed to \link[knitr]{kable} function. Used when \code{aformat = "kable"}.}
+\item{alink}{Whether to provide hooks to objects like in \link{alink}. See examples.}
+
+\item{...}{Further parameters passed to \link{alink} function. Used when \code{aformat = "kable"} and \code{alink = TRUE}.}
 }
 \value{
 A data frame with two columns - names of calls and md5hashes of partial results.
@@ -29,6 +31,7 @@ A data frame with two columns - names of calls and md5hashes of partial results.
 history of calls and md5hashes of partial results. The overloaded 
 \code{print.ahistory} function prints this history in a concise way. The overloaded
 \code{print.ahistoryKable} function prints this history in the same way as \link[knitr]{kable}.
+When \code{alink=TRUE} one can create history table/kable with hooks to partial results (artifacts) as in the \link{alink} function.
 }
 \details{
 All artifacts created with \link[archivist]{\%a\%} operator are archivised with 
@@ -65,6 +68,8 @@ deleteRepo(repoDir, deleteRoot = TRUE)
 }
 \author{
 Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
+
+Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 }
 \seealso{
 Other archivist: \code{\link{Repository}},
