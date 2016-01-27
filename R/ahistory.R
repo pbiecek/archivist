@@ -21,8 +21,8 @@
 #' @param md5hash  If \code{artifact} is not specified then \code{md5hash} is used.
 #' @param repoDir  A character denoting an existing directory in which an artifact will be saved.
 #' If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.
-#' @param ...  Further parameters passed to \link{alink} function. Used when \code{aformat = "kable"} and \code{alink = TRUE}.
-#' @param aformat A character denoting whether to print history in either a \code{"regular"} (default) way or like in a \code{"kable"} function.
+#' @param ...  Further parameters passed to \link{alink} function. Used when \code{format = "kable"} and \code{alink = TRUE}.
+#' @param format A character denoting whether to print history in either a \code{"regular"} (default) way or like in a \code{"kable"} function.
 #' See Notes.
 #' @param alink Whether to provide hooks to objects like in \link{alink}. See examples.
 #' 
@@ -50,8 +50,8 @@
 #'  summary() -> artifact
 #'  
 #' ahistory(artifact)
-#' ahistory(artifact, aformat = "kable")  
-#' print(ahistory(artifact, aformat = "kable"), format = "latex")
+#' ahistory(artifact, format = "kable")  
+#' print(ahistory(artifact, format = "kable"), format = "latex")
 #' 
 #' repoDir <- file.path(getwd(), "ahistory_check")
 #' deleteRepo(repoDir, deleteRoot = TRUE)
@@ -61,14 +61,14 @@
 #' @rdname ahistory
 #' @export
 
-ahistory <- function(artifact = NULL, md5hash = NULL, repoDir = NULL, aformat = "regular", alink = FALSE, ...) {
+ahistory <- function(artifact = NULL, md5hash = NULL, repoDir = NULL, format = "regular", alink = FALSE, ...) {
   # if artifact is set then calculate md5hash for it
   if (!is.null(artifact)) 
     md5hash = digest(artifact)
   if (is.null(md5hash)) 
     stop("Either artifact or md5hash has to be set")
   
-  stopifnot(length(aformat) == 1 & aformat %in% c("regular", "kable"))
+  stopifnot(length(format) == 1 & format %in% c("regular", "kable"))
   
   res_names <- c()
   res_md5 <- md5hash
@@ -86,7 +86,7 @@ ahistory <- function(artifact = NULL, md5hash = NULL, repoDir = NULL, aformat = 
       } else {
        # that's should not happen
         df <- data.frame(md5hash = res_md5, call = rep("", length(res_md5)), stringsAsFactors = FALSE)
-        if (aformat == "kable") {
+        if (format == "kable") {
           class(df) = c("ahistoryKable", "data.frame") 
           if (alink) {
             df$md5hash <- paste0("[",
@@ -116,7 +116,7 @@ ahistory <- function(artifact = NULL, md5hash = NULL, repoDir = NULL, aformat = 
     res_names[max(length(res_md5), length(res_names))+1] = ""
   }
   df <- data.frame(md5hash = res_md5, call = res_names, stringsAsFactors = FALSE)
-  if (aformat == "kable") {
+  if (format == "kable") {
     class(df) = c("ahistoryKable", "data.frame")  
     if (alink) {
       df$md5hash <- paste0("[",

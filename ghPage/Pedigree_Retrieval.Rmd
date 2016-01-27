@@ -61,7 +61,7 @@ ahistory(artifact)
 
 ```{r, results='asis'}
 # results='asis'
-ahistory(artifact, aformat = "kable")
+ahistory(artifact, format = "kable")
 ```
 
 #### With hooks
@@ -69,7 +69,7 @@ ahistory(artifact, aformat = "kable")
 Supposing those artifacts exist on a GitHub repository
 ```{r, results='asis'}
 # results='asis'
-ahistory(artifact, aformat = "kable", repoDir = "Pedigree_Example", alink = TRUE,
+ahistory(artifact, format = "kable", repoDir = "Pedigree_Example", alink = TRUE,
          user = "MarcinKosinski", repo = "Museum")
 ```
 

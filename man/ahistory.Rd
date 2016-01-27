@@ -5,7 +5,7 @@
 \title{Show Artifact's History}
 \usage{
 ahistory(artifact = NULL, md5hash = NULL, repoDir = NULL,
-  aformat = "regular", alink = FALSE, ...)
+  format = "regular", alink = FALSE, ...)
 }
 \arguments{
 \item{artifact}{An artifact which history is supposed to be reconstructed.
@@ -16,12 +16,12 @@ It will be converted  into md5hash.}
 \item{repoDir}{A character denoting an existing directory in which an artifact will be saved.
 If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.}
 
-\item{aformat}{A character denoting whether to print history in either a \code{"regular"} (default) way or like in a \code{"kable"} function.
+\item{format}{A character denoting whether to print history in either a \code{"regular"} (default) way or like in a \code{"kable"} function.
 See Notes.}
 
 \item{alink}{Whether to provide hooks to objects like in \link{alink}. See examples.}
 
-\item{...}{Further parameters passed to \link{alink} function. Used when \code{aformat = "kable"} and \code{alink = TRUE}.}
+\item{...}{Further parameters passed to \link{alink} function. Used when \code{format = "kable"} and \code{alink = TRUE}.}
 }
 \value{
 A data frame with two columns - names of calls and md5hashes of partial results.
@@ -58,8 +58,8 @@ filter(Sepal.Length < 6) \%a\%
  summary() -> artifact
  
 ahistory(artifact)
-ahistory(artifact, aformat = "kable")  
-print(ahistory(artifact, aformat = "kable"), format = "latex")
+ahistory(artifact, format = "kable")  
+print(ahistory(artifact, format = "kable"), format = "latex")
 
 repoDir <- file.path(getwd(), "ahistory_check")
 deleteRepo(repoDir, deleteRoot = TRUE)
