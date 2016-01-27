@@ -277,7 +277,6 @@
 #' }
 #' @family archivist
 #' @rdname saveToRepo
-#' @import dplyr
 #' @export
 saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
                         archiveTags = TRUE,
