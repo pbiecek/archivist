@@ -113,6 +113,8 @@
 #'
 #' @param archiveData A logical value denoting whether to archive the data from the \code{artifact}.
 #'
+#' @param archiveSessionInfo A logical value denoting whether to archive the session info that describes the context in this given artifact was created.
+#'
 #' @param archiveTags A logical value denoting whether to archive Tags from the \code{artifact}.
 #'
 #' @param archiveMiniature A logical value denoting whether to archive a miniature of the \code{artifact}.
@@ -275,10 +277,13 @@
 #' }
 #' @family archivist
 #' @rdname saveToRepo
+#' @import dplyr
 #' @export
 saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
                         archiveTags = TRUE,
-                        archiveMiniature = TRUE, force = TRUE, rememberName = TRUE,
+                        archiveMiniature = TRUE, 
+                        archiveSessionInfo = FALSE, 
+                        force = TRUE, rememberName = TRUE,
                         value = FALSE, ... , userTags = c(),
                         silent=aoptions("silent"), ascii = FALSE) {
   stopifnot( is.logical( c( archiveData, archiveTags, archiveMiniature,
@@ -356,6 +361,13 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
     # attr( artifact, "tags" ) are Tags specified by a user
   }
 
+  # whether to archive session_info
+  if ( archiveSessionInfo ){
+    si <- devtools::session_info()
+    md5hashDF <- saveToRepo( si, archiveData = FALSE, repoDir = repoDir, 
+                             rememberName = FALSE, archiveTags = FALSE, force=TRUE)
+    addTag( tag = paste0("session_info:", md5hashDF), md5hash = md5hash, dir = repoDir )
+  }
   # whether to archive data
   # if valueing code is used, the "data" attr is not needed
   if ( archiveData & !value ){
