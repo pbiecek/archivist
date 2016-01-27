@@ -1,6 +1,6 @@
 ##    archivist package for R
 ##
-#' @title Archive Artifact to Local and Github Repository
+#' @title Archive Artifact to Local and GitHub Repository
 #'
 #' @description
 #' \code{archive} stores artifacts in the local \link{Repository} and automatically pushes archived

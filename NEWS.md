@@ -2,6 +2,7 @@ archivist 1.9
 ----------------------------------------------------------------
 * **New functions**:
     1. `alink` function: Returns a Link To Download an Artifact Stored on GitHub Repository. Ideal combination with `archive`
+    2. `pushRepo` function which add files, commits them and pushes from Local `Repository` to synchronized GitHub one.
     2. Created wrappers around existing local and GitHub functions: `multiSearchInRepo`, `loadFromRepo`, `deleteRepo`
         1. Provided new functions `deleteLocalRepo` (previous `deleteRepo`) and `deleteGithubRepo`. `deleteRepo` is now a wrapper around those both. [[#156](https://github.com/pbiecek/archivist/issues/156)].
     3. `createGithubMDGallery` that give the markdown summary for each artifact in the repository. Ideal for README.md file. Example [[#144](https://github.com/pbiecek/archivist/issues/144#issuecomment-174192366)]

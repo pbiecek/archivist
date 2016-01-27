@@ -2,7 +2,7 @@
 % Please edit documentation in R/archive.R
 \name{archive}
 \alias{archive}
-\title{Archive Artifact to Local and Github Repository}
+\title{Archive Artifact to Local and GitHub Repository}
 \usage{
 archive(artifact, commitMessage = aoptions("commitMessage"),
   repo = aoptions("repo"), user = aoptions("user"),
@@ -126,7 +126,8 @@ Other archivist: \code{\link{Repository}},
   \code{\link{createGithubMDGallery}},
   \code{\link{deleteRepo}}, \code{\link{getTagsLocal}},
   \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
-  \code{\link{rmFromRepo}}, \code{\link{saveToRepo}},
+  \code{\link{pushRepo}}, \code{\link{rmFromRepo}},
+  \code{\link{saveToRepo}},
   \code{\link{searchInLocalRepo}},
   \code{\link{setLocalRepo}},
   \code{\link{shinySearchInLocalRepo}},
