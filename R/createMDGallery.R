@@ -98,9 +98,9 @@ createGithubMDGallery <- function(output, repo = NULL, user = NULL, repoDirGit =
               "/",
               branch,
               "/",
-              ifelse(repoDirGit,
-                     paste0(repoDirGit, "gallery"),
-                     "gallery/"),
+              ifelse(repoDirGit == FALSE,
+                     "gallery/",
+                     paste0(repoDirGit, "gallery/")),
               md5, ".png)"))
         cat("\n")
       }
