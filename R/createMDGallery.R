@@ -71,8 +71,11 @@ createGithubMDGallery <- function(output, repo = NULL, user = NULL, repoDirGit =
     stop_for_status(req)
     filelist <- unlist(lapply(content(req)$tree, "[", "path"), use.names = F)
     # artifacts in a required directory with png miniature
-    filelist[substr(filelist,1, nchar(ifelse(repoDirGit, file.path(repoDirGit, "gallery"), "gallery/"))) ==
-             ifelse(repoDirGit, file.path(repoDirGit, "gallery"), "gallery/")] -> repoList
+    pattern <- paste0("^",
+                      ifelse(repoDirGit == FALSE,
+                             "gallery",
+                             file.path(repoDirGit, "gallery") ))
+    grep(filelist, pattern=pattern, value = TRUE) -> repoList
   }
 
 
