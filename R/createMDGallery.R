@@ -35,7 +35,8 @@
 #'
 #' Markdown example: \url{https://github.com/pbiecek/archivist/issues/144#issuecomment-174192366}
 #'
-#' @note#' If \code{repo} and \code{user} are set to \code{NULL} (as default) in the Github mode then global parameters
+#' @note
+#' If \code{repo} and \code{user} are set to \code{NULL} (as default) in the Github mode then global parameters
 #' set in \link{setGithubRepo} (or via \link{aoptions}) function are used.
 #'
 #' @author
