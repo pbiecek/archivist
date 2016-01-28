@@ -11,5 +11,5 @@ r_packages:
  - ggplot2
  - dplyr
  - knitr
- - datasets
+ - devtools
 sudo: required
