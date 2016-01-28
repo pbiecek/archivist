@@ -362,6 +362,9 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
 
   # whether to archive session_info
   if ( archiveSessionInfo ){
+    if (!requireNamespace("devtools", quietly = TRUE)) {
+      stop("devtoolw package required for archiveSessionInfo parameter")
+    }
     si <- devtools::session_info()
     md5hashDF <- saveToRepo( si, archiveData = FALSE, repoDir = repoDir, 
                              rememberName = FALSE, archiveTags = FALSE, force=TRUE)
