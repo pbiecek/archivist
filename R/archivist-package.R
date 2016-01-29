@@ -52,7 +52,6 @@
 #' @importFrom utils head
 #' @importFrom utils zip
 #' @importFrom knitr kable
-#' @importFrom devtools session_info
 #' @importFrom utils tail
 #' @importMethodsFrom git2r add
 #' @importMethodsFrom git2r commit
