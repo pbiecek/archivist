@@ -13,7 +13,7 @@ test_that("split*Repo does not react on errors as it should and works as it's ma
   saveToRepo(d1,
              userTags = c(":", "", "\n", "\t", "\\", "\\\\"),
              repoDir = exampleRepoDir )
-  expect_equal(nrow(splitTagsLocal()), 14)
+  expect_equal(nrow(splitTagsLocal()), 16) # PBI: changed from 14. But this is not a good test, since with new extensions of list of tags it will fail.
   
   expect_equal(names(splitTagsLocal()), c('artifact', 'tagKey',
                                           'tagValue', 'createdDate'))
