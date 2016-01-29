@@ -24,6 +24,7 @@ archivist 1.9
     6. `createEmptyGithubRepo`, `createEmptyRepo(type ='github')` and `cloneGithubRepo` now reacts on new `default` parameter which sets newly created/cloned repositories (GitHub and synchronized with it Local one) as default [[#171](https://github.com/pbiecek/archivist/issues/171) , [#142](https://github.com/pbiecek/archivist/issues/142)].
     7. Changed the name of `chain` parameter to `value` in `saveToRepo` function [#101](https://github.com/pbiecek/archivist/issues/101)].
     8. Changed the name of `aformat` parameter to `format` in `ahistory()` to maintain consistency with `alink()` function.
+    9. Fix in `alink`. Now the `repoDirGit` is supported.
 
     
 archivist 1.8
