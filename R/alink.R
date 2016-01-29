@@ -100,7 +100,7 @@ alink <- function(md5hash, repo = aoptions('repo'),
                        repo,
                        '/blob/master/',
                        ifelse(repoDirGit == FALSE, "", paste0(repoDirGit,"/")),
-                       'gallery',
+                       'gallery/',
                        md5hash,
                        '.rda?raw=true')
   }
