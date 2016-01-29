@@ -42,6 +42,10 @@
 #' \dontrun{
 #' # link in markdown format
 #' alink('pbiecek/archivist/134ecbbe2a8814d98f0c2758000c408e')
+#' # link in markdown format with additional repoDirGit
+#' alink(user='BetaAndBit',repo='PieczaraPietraszki',
+#'      md5hash = '1569cc44e8450439ac52c11ccac35138', 
+#'      repoDirGit = 'UniwersytetDzieci/arepo')
 #' # link in latex format
 #' alink(user = 'MarcinKosinski', repo = 'Museum',
 #'       md5hash = '1651caa499a2b07a3bdad3896a2fc717', format = 'latex')
