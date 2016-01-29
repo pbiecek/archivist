@@ -106,42 +106,40 @@ alink <- function(md5hash, repo = aoptions('repo'),
   }
   
   if ( rawLink ) {
-    class(archLINK) <- 'alink'
-    return(archLINK)
+    resLINK <- archLINK
   } else {
     if ( format == "markdown" ){
-      paste0('[archivist::aread(\"',
-             ifelse(strsplit(md5hash, "/")[[1]] %>% length  == 3,
-                                md5hash,
-                                file.path(user, repo, md5hash)),
-             '\")](',
+      resLINK <- paste0('[',
+             aread_command(md5hash, user, repo, repoDirGit),
+             '](',
              archLINK,
-             ')'
-             ) -> resLINK
-      class(resLINK) <- 'alink'
-      return(resLINK)
+             ')') 
     } else {
-      paste0('\\href{',
+      resLINK <- paste0('\\href{',
              archLINK,
              '}{',
-             'archivist::aread(\"',
-             ifelse(strsplit(md5hash, "/")[[1]] %>% length  == 3,
-                    md5hash,
-                    file.path(user, repo, 
-                              # required to handle repoDirGit
-                              ifelse(repoDirGit == FALSE, 
-                                     md5hash, 
-                                     paste0(repoDirGit,"/",md5hash))
-                              )),
-             '\")}'
-      ) -> resLINK
-      class(resLINK) <- 'alink'
-      return(resLINK)
+             aread_command(md5hash, user, repo, repoDirGit),
+             '}')
     }
   }
+  class(resLINK) <- 'alink'
+  return(resLINK)
   
 }
 
+
+aread_command <- function(md5hash, user, repo, repoDirGit) {
+ paste0('archivist::aread(\"',
+        ifelse(strsplit(md5hash, "/")[[1]] %>% length  == 3,
+               md5hash,
+               file.path(user, repo, 
+                         # required to handle repoDirGit
+                         ifelse(repoDirGit == FALSE, 
+                                md5hash, 
+                                paste0(repoDirGit,"/",md5hash))
+               )),
+        '\")') 
+}
 
 #' @export
 print.alink <- function(x, ...) {
