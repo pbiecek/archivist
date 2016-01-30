@@ -113,9 +113,9 @@ alink <- function(md5hash, repo = aoptions('repo'),
     resLINK <- archLINK
   } else {
     if ( format == "markdown" ){
-      resLINK <- paste0('[',
+      resLINK <- paste0('[`',
              aread_command(md5hash, user, repo, repoDirGit),
-             '](',
+             '`](',
              archLINK,
              ')') 
     } else {
@@ -133,7 +133,7 @@ alink <- function(md5hash, repo = aoptions('repo'),
 
 
 aread_command <- function(md5hash, user, repo, repoDirGit) {
- paste0('archivist::aread(\"',
+ paste0("archivist::aread('",
         ifelse(strsplit(md5hash, "/")[[1]] %>% length  == 3,
                md5hash,
                file.path(user, repo, 
@@ -142,7 +142,7 @@ aread_command <- function(md5hash, user, repo, repoDirGit) {
                                 md5hash, 
                                 paste0(repoDirGit,"/",md5hash))
                )),
-        '\")') 
+        "')") 
 }
 
 #' @export
