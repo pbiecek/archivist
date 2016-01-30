@@ -8,6 +8,7 @@
   .ArchivistEnv$archiveData <-TRUE 
   .ArchivistEnv$archiveTags <- TRUE 
   .ArchivistEnv$archiveMiniature <- TRUE
+  .ArchivistEnv$archiveSessionInfo <- FALSE
   .ArchivistEnv$force <- TRUE
   .ArchivistEnv$rememberName <- TRUE 
   .ArchivistEnv$chain <- FALSE 
@@ -32,6 +33,7 @@
   .ArchivistEnv$archiveData <-TRUE 
   .ArchivistEnv$archiveTags <- TRUE 
   .ArchivistEnv$archiveMiniature <- TRUE
+  .ArchivistEnv$archiveSessionInfo <- FALSE
   .ArchivistEnv$force <- TRUE
   .ArchivistEnv$rememberName <- TRUE 
   .ArchivistEnv$chain <- FALSE 

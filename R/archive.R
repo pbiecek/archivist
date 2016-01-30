@@ -23,6 +23,8 @@
 #' 
 #' @param archiveMiniature A logical value denoting whether to archive a miniature of the \code{artifact}.
 #' 
+#' @param archiveSessionInfo A logical value denoting whether to archive the session info that describes the context in this given artifact was created.
+#' 
 #' @param userTags A character vector with Tags. These Tags will be added to the repository along with the artifact.
 #' 
 #' @param force A logical value denoting whether to archive \code{artifact} if it is already archived in
@@ -104,6 +106,7 @@ archive <- function(artifact, commitMessage = aoptions("commitMessage"),
                     archiveData = aoptions("archiveData"), 
                     archiveTags = aoptions("archiveTags"), 
                     archiveMiniature = aoptions("archiveMiniature"),
+                    archiveSessionInfo = aoptions("archiveSessionInfo"),
                     force = aoptions("force"),
                     rememberName = aoptions("rememberName"), 
                     ... ,
@@ -127,10 +130,11 @@ archive <- function(artifact, commitMessage = aoptions("commitMessage"),
 #              userTags = paste0("name:", 
 #                                deparse( substitute( artifact ) ))
 #              ) -> md5hash
-  stopifnot( is.logical( c( archiveData, archiveTags, archiveMiniature, 
+  stopifnot( is.logical( c( archiveData, archiveTags, archiveMiniature, archiveSessionInfo,
                             force, rememberName, silent, ascii ) ) )
   stopifnot( length(archiveData) == 1, length(archiveTags) == 1,
              length(archiveMiniature) == 1, length(force) == 1,
+             length(archiveSessionInfo) == 1, 
              length(rememberName) == 1, length(silent) == 1, length(ascii) == 1)
   #   stopifnot( is.character( format ) & length( format ) == 1 & any(format %in% c("rda", "rdx")) )
   
@@ -204,6 +208,20 @@ chain <- FALSE
     derivedTags <- attr( artifact, "tags" ) 
     sapply( c( extractedTags, userTags, derivedTags), addTag, md5hash = md5hash, dir = repoDir )
     # attr( artifact, "tags" ) are Tags specified by an user
+  }
+  
+  # whether to archive session_info
+  if ( archiveSessionInfo ){
+    if (!requireNamespace("devtools", quietly = TRUE)) {
+      stop("devtools package required for archiveSessionInfo parameter")
+    }
+    si <- devtools::session_info()
+    md5hashDF <- archive( si, archiveData = FALSE, repo = repo, user = user, 
+                          commitMessage = paste0("session_info for", md5hash),
+                          password = password,
+                             rememberName = FALSE, archiveTags = FALSE, force=TRUE,
+                          userTags = paste0("session_info:", md5hashDF))
+    #addTag( tag = paste0("session_info:", md5hashDF), md5hash = md5hash, dir = repoDir )
   }
   
   # whether to archive data 

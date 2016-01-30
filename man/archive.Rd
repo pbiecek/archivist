@@ -9,6 +9,7 @@ archive(artifact, commitMessage = aoptions("commitMessage"),
   password = aoptions("password"), archiveData = aoptions("archiveData"),
   archiveTags = aoptions("archiveTags"),
   archiveMiniature = aoptions("archiveMiniature"),
+  archiveSessionInfo = aoptions("archiveSessionInfo"),
   force = aoptions("force"), rememberName = aoptions("rememberName"), ...,
   userTags = c(), silent = aoptions("silent"), ascii = aoptions("ascii"),
   alink = aoptions("alink"))
@@ -32,6 +33,8 @@ See \link{archivist-github-integration}.}
 \item{archiveTags}{A logical value denoting whether to archive Tags from the \code{artifact}.}
 
 \item{archiveMiniature}{A logical value denoting whether to archive a miniature of the \code{artifact}.}
+
+\item{archiveSessionInfo}{A logical value denoting whether to archive the session info that describes the context in this given artifact was created.}
 
 \item{force}{A logical value denoting whether to archive \code{artifact} if it is already archived in
 a Repository.}
