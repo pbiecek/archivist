@@ -16,6 +16,8 @@ archivist 1.9
     3. Added new tags in the following methods: `extractTags.lm`, `extractTags.htest`. `extractTags.lda`, `extractTags.qda`, `extractTags.survfit`, `extractTags.glmnet`, `extractTags.partition`.
     4. `htest` object's data is now saved to repository as a list.
     5. It is possible to archive `devtoolss::session_info()` with an artifact during the execution of `saveToRepo()` and `archive()` [[#184](https://github.com/pbiecek/archivist/issues/184)].
+    6. New tag `format:` is now added to every artifact/miniature. Artifacts can be saved in different (and more than one) formats (rda/json/csv) what makes them easier to access from other languages.
+
 * **New and renamed parameters**:
     1. `user.name` and `user.password` parameters of `archive` and `createEmptyGithubRepo` were changed into `user` and `password` correspondingly.
     2. `createEmptyGithubRepo` now can use `repoDir` to specify in which directory the synchronized Local Repository should be created [[#142](https://github.com/pbiecek/archivist/issues/142)]. 
