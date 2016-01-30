@@ -350,6 +350,7 @@ loadFromGithubRepo <- function( md5hash, repo = NULL, user = NULL, branch = "mas
 loadFromRepo <- function( md5hash, repoDir = NULL,
                           repo = NULL, user = NULL, branch = "master", repoDirGit = FALSE,
                           value = FALSE ){
+  .Deprecated("loadFromLocalRepo", msg = "The loadFromLocalRepo is set as deprecated. Try to use direct calls to loadFromLocalRepo/loadFromGitRepo.")
   
   if (length(strsplit(md5hash, "/")[[1]]) == 3 & is.null(repo) & is.null(user)){
     loadFromGithubRepo(md5hash = strsplit(md5hash, "/")[[1]][1],

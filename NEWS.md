@@ -29,6 +29,8 @@ archivist 1.9
     8. Changed the name of `aformat` parameter to `format` in `ahistory()` to maintain consistency with `alink()` function.
     9. Fix in `alink`. Now the `repoDirGit` is supported.
 
+* **Others**:
+    1. searchInRepo and loadFromRepo are set as deprecated.
     
 archivist 1.8
 ----------------------------------------------------------------

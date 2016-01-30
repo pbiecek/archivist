@@ -292,6 +292,8 @@ multiSearchInRepo <- function(patterns, fixed = TRUE, intersect = TRUE,
                               repoDir = NULL, realDBname = TRUE,
                               repo = NULL, user = NULL, branch = "master", repoDirGit = FALSE ){
   
+  .Deprecated("multiSearchInRepo", msg = "The multiSearchInRepo is set as deprecated. Try to use direct calls to multiSearchInLocalRepo/multiSearchInGitRepo")
+  
   local <- (!is.null(aoptions("repoDir")) && is.null(repo)) || (!is.null(repoDir) && is.null(repo))
   GitHub <- (is.null(repoDir) && !is.null(aoptions("repo"))) || (is.null(repoDir) && !is.null(repo))
   if (local){
