@@ -1,24 +1,24 @@
 .ArchivistEnv <- new.env()
 
 setDefaultArchivistEnv <- function() {
-  .ArchivistEnv$silent <- FALSE
-  .ArchivistEnv$response <- FALSE
-  .ArchivistEnv$commitMessage <- NULL
+  .ArchivistEnv$alink <- FALSE
   .ArchivistEnv$archiveData <-TRUE 
-  .ArchivistEnv$archiveTags <- TRUE 
   .ArchivistEnv$archiveMiniature <- TRUE
   .ArchivistEnv$archiveSessionInfo <- FALSE
-  .ArchivistEnv$force <- TRUE
-  .ArchivistEnv$rememberName <- TRUE 
-  .ArchivistEnv$chain <- FALSE 
+  .ArchivistEnv$archiveTags <- TRUE 
   .ArchivistEnv$ascii <- FALSE
   .ArchivistEnv$branch <- "master"
-  .ArchivistEnv$repoDirGit <- FALSE
-  .ArchivistEnv$alink <- FALSE
-  .ArchivistEnv$repoDescription <- "A Repository of Artifacts supported by archivist https://github.com/pbiecek"
-  .ArchivistEnv$readmeDescription <- .ArchivistEnv$readmeDescription <- "A Repository of Artifacts supported by [archivist](https://github.com/pbiecek) \n\n
+  .ArchivistEnv$chain <- FALSE 
+  .ArchivistEnv$commitMessage <- NULL
+  .ArchivistEnv$force <- TRUE
+  .ArchivistEnv$rememberName <- TRUE 
+  .ArchivistEnv$readmeDescription <- "A Repository of Artifacts supported by [archivist](https://github.com/pbiecek) \n\n
   [`Repository`](https://github.com/pbiecek/archivist/wiki/archivist-package-Repository) stores specific values of an artifact,
   different for various artifact's classes and artifacts themselves. To learn more about artifacts visit [wiki](https://github.com/pbiecek/archivist/wiki)."
+  .ArchivistEnv$repoDescription <- "A Repository of Artifacts supported by archivist https://github.com/pbiecek"
+  .ArchivistEnv$repoDirGit <- FALSE
+  .ArchivistEnv$response <- FALSE
+  .ArchivistEnv$silent <- FALSE
 }
 
 .onAttach <- function(...) {
