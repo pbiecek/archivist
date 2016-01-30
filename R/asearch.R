@@ -126,7 +126,7 @@ asearch <- function( patterns, repo = NULL){
     elements <- strsplit(repo, "/")[[1]]
     stopifnot( length(elements) >= 2 )
     
-    oblist <- multiSearchInGitHubRepo(user = elements[1], repo=paste(elements[-1], collapse = "/"), 
+    oblist <- multiSearchInGithubRepo(user = elements[1], repo=paste(elements[-1], collapse = "/"), 
                                 patterns = patterns)
     if (length(oblist)>0) {
       res <- lapply(paste0(repo, "/", oblist), aread)
