@@ -5,12 +5,12 @@
 #' @description
 #' \code{asearch} searches for artifacts that contain all specified \link{Tags}
 #' and reads all of them from a default or Github \link{Repository}. It's a wrapper around 
-#' \link{multiSearchInRepo} and \link{loadFromLocalRepo}.
+#' \link{multiSearchInLocalRepo} and \link{loadFromLocalRepo}.
 #' 
 #' @details
 #' Function \code{asearch} reads all artifacts that contain given list of \code{Tags}
 #' from default or GitHub Repository.
-#' It uses both \link{loadFromLocalRepo} and \link{multiSearchInRepo} functions 
+#' It uses both \link{loadFromLocalRepo} and \link{multiSearchInLocalRepo} functions 
 #' but has shorter name and different parameter's specification.
 #' 
 #' @note
@@ -111,9 +111,9 @@ asearch <- function( patterns, repo = NULL){
   
   if (is.null(repo)) {
     # use default repo
-#     oblist <- multiSearchInLocalRepo(patterns = patterns,
-#                                      intersect = TRUE)
-     oblist <- multiSearchInRepo(patterns = patterns)
+     oblist <- multiSearchInLocalRepo(patterns = patterns,
+                                      intersect = TRUE)
+#     oblist <- multiSearchInRepo(patterns = patterns)
 #     if (length(oblist) > 0) {
 #       res <- lapply(oblist, aread)
 #     }
@@ -126,7 +126,7 @@ asearch <- function( patterns, repo = NULL){
     elements <- strsplit(repo, "/")[[1]]
     stopifnot( length(elements) >= 2 )
     
-    oblist <- multiSearchInRepo(user = elements[1], repo=paste(elements[-1], collapse = "/"), 
+    oblist <- multiSearchInGitHubRepo(user = elements[1], repo=paste(elements[-1], collapse = "/"), 
                                 patterns = patterns)
     if (length(oblist)>0) {
       res <- lapply(paste0(repo, "/", oblist), aread)
