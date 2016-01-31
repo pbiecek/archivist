@@ -22,12 +22,12 @@ This function returns a list of artifacts (by their values).
 \description{
 \code{asearch} searches for artifacts that contain all specified \link{Tags}
 and reads all of them from a default or Github \link{Repository}. It's a wrapper around 
-\link{multiSearchInRepo} and \link{loadFromRepo}.
+\link{multiSearchInLocalRepo} and \link{loadFromLocalRepo}.
 }
 \details{
 Function \code{asearch} reads all artifacts that contain given list of \code{Tags}
 from default or GitHub Repository.
-It uses both \link{loadFromRepo} and \link{multiSearchInRepo} functions 
+It uses both \link{loadFromLocalRepo} and \link{multiSearchInLocalRepo} functions 
 but has shorter name and different parameter's specification.
 }
 \note{

@@ -3,10 +3,14 @@
 \name{loadFromLocalRepo}
 \alias{loadFromGithubRepo}
 \alias{loadFromLocalRepo}
+\alias{loadFromRemoteRepo}
 \alias{loadFromRepo}
 \title{Load Artifact Given as a md5hash from a Repository}
 \usage{
 loadFromLocalRepo(md5hash, repoDir = NULL, value = FALSE)
+
+loadFromRemoteRepo(md5hash, repo = NULL, user = NULL, branch = "master",
+  repoDirGit = FALSE, value = FALSE)
 
 loadFromGithubRepo(md5hash, repo = NULL, user = NULL, branch = "master",
   repoDirGit = FALSE, value = FALSE)
@@ -40,12 +44,13 @@ to \code{repoDirGit = FALSE} as default.}
 \description{
 \code{loadFromLocalRepo} loads an artifact from a local \link{Repository} into the workspace.
 \code{loadFromGithubRepo} loads an artifact from a Github \link{Repository} into the workspace.
+\code{loadFromRemoteRepo} loads an artifact from a git / mercurial \link{Repository} into the workspace.
 \code{loadFromRepo} is a wrapper around \code{loadFromLocalRepo} and \code{loadFromGithubRepo}.
 To learn more about artifacts visit \link[archivist]{archivist-package}.
 }
 \details{
-Functions \code{loadFromLocalRepo} and \code{loadFromGithubRepo} load artifacts from the archivist Repositories 
-stored in a local folder or on Github. Both of them take \code{md5hash} as a
+Functions \code{loadFromLocalRepo} and \code{loadFromRemoteRepo} load artifacts from the archivist Repositories 
+stored in a local folder or on git. Both of them take \code{md5hash} as a
 parameter, which is a result of \link{saveToRepo} function.
 For each artifact, \code{md5hash} is a unique string of length 32 that is produced by
 \link[digest]{digest} function, which uses a cryptographical MD5 hash algorithm. For more information see \link{md5hash}.
@@ -54,10 +59,10 @@ Important: instead of giving the whole \code{md5hash} character, the user can si
 For example, \code{a09dd} instead of \code{a09ddjdkf9kj33dcjdnfjgos9jd9jkcv}. All artifacts with the same \code{md5hash} 
 abbreviation will be loaded from \link{Repository}.
 
-Note that \code{user} and \code{repo} should be used only when working with a Github repository and should be omitted in the local mode. 
-\code{repoDir} should only be used when working on a local Repository and should be omitted in the Github mode.
+Note that \code{user} and \code{repo} should be used only when working with a git repository and should be omitted in the local mode. 
+\code{repoDir} should only be used when working on a local Repository and should be omitted in the git mode.
 
-One may notice that \code{loadFromGithubRepo} and \code{loadFromLocalRepo} load artifacts to the Global
+One may notice that \code{loadFromRemoteRepo} and \code{loadFromLocalRepo} load artifacts to the Global
 Environment with their original names. Alternatively,
 a parameter \code{value = TRUE} can be specified so that these functions may return artifacts as a value. As a result loaded artifacts
 can be attributed to new names. Note that, when an abbreviation of \code{md5hash} was given then a list of artifacts corresponding to this
