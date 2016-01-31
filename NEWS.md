@@ -2,9 +2,10 @@ archivist 1.9
 ----------------------------------------------------------------
 * **New functions**:
     1. `alink` function: Returns a Link To Download an Artifact Stored on GitHub Repository. Ideal combination with `archive`
-    2. `pushRepo` function which add files, commits them and pushes from Local `Repository` to synchronized GitHub one.
-    3. New functions `deleteLocalRepo` (previous `deleteRepo`) and `deleteGithubRepo`.  [[#156](https://github.com/pbiecek/archivist/issues/156)].
-    4. `createGithubMDGallery` that give the markdown summary for each artifact in the repository. Ideal for README.md file. Example [[#144](https://github.com/pbiecek/archivist/issues/144#issuecomment-174192366)]
+    2. `pushRepo` function which add files, commits them and pushes from Local `Repository` to synchronized GitHub one. [[#146](https://github.com/pbiecek/archivist/issues/146)].
+    3. `pullRepo` pulls (`git pull`) changes from remote GitHub `Repository` to the correspoding Local one. [[#146](https://github.com/pbiecek/archivist/issues/146)].
+    4. New functions `deleteLocalRepo` (previous `deleteRepo`) and `deleteGithubRepo`.  [[#156](https://github.com/pbiecek/archivist/issues/156)].
+    5. `createGithubMDGallery` that give the markdown summary for each artifact in the repository. Ideal for README.md file. Example [[#144](https://github.com/pbiecek/archivist/issues/144#issuecomment-174192366)]
 * **Bugs fixed**:
     1. `asearch` function enables a user to read artifacts from default GitHub repository. In the previous version it was possible only in default local repository.
     2. It is now possible to unset global Repository with `apotions('repo/repoDir', NULL, unset = TRUE)` [[#176](https://github.com/pbiecek/archivist/issues/176)].

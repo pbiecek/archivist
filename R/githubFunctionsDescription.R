@@ -11,12 +11,14 @@
 #' 
 #' \link{archive} stores artifacts in the Local
 #' \code{Repository} and automatically pushes archived artifacts to the Github
-#' \code{Repository} with which the local \code{Repository} is synchronized. 
+#' \code{Repository} with which the Local \code{Repository} is synchronized. 
 #' 
 #' \link{cloneGithubRepo} clones GitHub Repository into the local directory.
 #' 
 #' \link{deleteGithubRepo} can delete whole GitHub-Repository or only archivist-like Repository
-#' stored on a GitHub-Repository
+#' stored on a GitHub-Repository.
+#' 
+#' \link{pushRepo} and \link{pullRepo} synchronize Local and GitHub (remote) Repository.
 #' 
 #' @details
 #' 
@@ -64,6 +66,7 @@
 #' aoptions("name", user.name)
 #' aoptions("password", user.password)
 #' 
+#' ## here github_token is used
 #' createEmptyGithubRepo("Museum")
 #' createEmptyGithubRepo("Museum-Extras", response = TRUE)
 #' createEmptyGithubRepo("Gallery", readme = NULL)
