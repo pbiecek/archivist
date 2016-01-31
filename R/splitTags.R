@@ -1,6 +1,6 @@
 ##    archivist package for R
 ##
-#' @title Split tag column in database into two separate columns: tagKey and tagValue
+#' @title Split Tags in Repository
 #'
 #' @description
 #' \code{splitTagsLocal} and \code{splitTagsGithub} functions split \code{tag} column from
@@ -38,7 +38,7 @@
 #' 
 #' @return
 #' A \code{data.frame} with 4 columns: \code{artifact}, \code{tagKey},
-#' \code{tagValue} and \code{createdDate}.  
+#' \code{tagValue} and \code{createdDate}, corresponding to the current state of \link{Repository}.
 #' 
 #' @note
 #' If \code{repo} and \code{user} are set to \code{NULL} (as default) in the Github mode

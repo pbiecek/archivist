@@ -3,7 +3,7 @@
 \name{splitTagsLocal}
 \alias{splitTagsGithub}
 \alias{splitTagsLocal}
-\title{Split tag column in database into two separate columns: tagKey and tagValue}
+\title{Split Tags in Repository}
 \usage{
 splitTagsLocal(repoDir = NULL)
 
@@ -34,7 +34,7 @@ this should be set to \code{repoDirGit = FALSE} as default.}
 }
 \value{
 A \code{data.frame} with 4 columns: \code{artifact}, \code{tagKey},
-\code{tagValue} and \code{createdDate}.
+\code{tagValue} and \code{createdDate}, corresponding to the current state of \link{Repository}.
 }
 \description{
 \code{splitTagsLocal} and \code{splitTagsGithub} functions split \code{tag} column from
