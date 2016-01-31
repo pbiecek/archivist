@@ -197,16 +197,16 @@ print.repository <- function( x, ... ){
   if( x$artifactsNumber == 0 & x$dataSetsNumber == 0 ){
     cat( "Repository is empty." )
   } else {
-  cat( "Number of archived artifacts in the Repository: ", x$artifactsNumber, "\n")
-  cat( "Number of archived datasets in the Repository: ", x$dataSetsNumber, "\n") 
+  cat( "Number of archived artifacts in Repository: ", x$artifactsNumber, "\n")
+  cat( "Number of archived datasets in Repository: ", x$dataSetsNumber, "\n") 
   if( x$artifactsNumber > 1 ){
-    cat( "Number of various classes archived in the Repository: \n ")
+    cat( "Number of various classes archived in Repository: \n ")
     classes <- data.frame( x$classesNumber )
     names( classes ) <- "Number"
     print( classes )
   }
   
-  cat( "Saves per day in the Repository: \n ")
+  cat( "Saves per day in Repository: \n ")
   saves <- data.frame( x$savesPerDay )
   names( saves ) <- "Saves"
   print( saves )
