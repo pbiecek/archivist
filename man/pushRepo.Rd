@@ -8,7 +8,7 @@
 pushRepo(repoDir = aoptions("repoDir"),
   commitMessage = aoptions("commitMessage"), repo = aoptions("repo"),
   user = aoptions("user"), password = aoptions("password"),
-  files = c("gallery", "backpack.db"))
+  files = c("gallery", "backpack.db"), ...)
 
 pullRepo(repoDir = aoptions("repoDir"), user = aoptions("user"),
   password = aoptions("password"), ...)

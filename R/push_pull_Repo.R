@@ -57,7 +57,8 @@ pushRepo <- function(repoDir = aoptions('repoDir'),
                      repo = aoptions("repo"), 
                      user = aoptions("user"),
                      password = aoptions("password"),
-                     files = c("gallery", "backpack.db")) {
+                     files = c("gallery", "backpack.db"),
+                     ...) {
   stopifnot(is.character(repo) & length(repo) == 1)
   stopifnot(is.character(user) & length(user) == 1)
   stopifnot(is.character(password) & length(password) == 1)
