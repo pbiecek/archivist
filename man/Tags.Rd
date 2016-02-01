@@ -395,7 +395,7 @@ Functions using \code{Tags} are:
  }
 
 Other archivist: \code{\link{Repository}},
-  \code{\link{\%a\%}}, \code{\link{addArchivistHook}},
+  \code{\link{\%a\%}}, \code{\link{addHooksToPrint}},
   \code{\link{addTagsRepo}}, \code{\link{ahistory}},
   \code{\link{alink}}, \code{\link{aoptions}},
   \code{\link{archive}},

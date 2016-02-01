@@ -61,7 +61,7 @@ rm(exampleRepoDir)
 }
 \seealso{
 Other archivist: \code{\link{Repository}},
-  \code{\link{Tags}}, \code{\link{addArchivistHook}},
+  \code{\link{Tags}}, \code{\link{addHooksToPrint}},
   \code{\link{addTagsRepo}}, \code{\link{ahistory}},
   \code{\link{alink}}, \code{\link{aoptions}},
   \code{\link{archive}},

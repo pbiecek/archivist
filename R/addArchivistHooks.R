@@ -3,8 +3,8 @@
 #' @title Add Archivist Hooks to Report
 #'
 #' @description
-#' \code{addArchivistHook} adds a generic version of the print function for objects of selected class. 
-#' The generic function will add all object of selected class to the repo and then add hooks to the report for these objects .
+#' \code{addHooksToPrint} adds an overloaded version of the print function for objects of selected class. 
+#' The overloaded function will add all object of selected class to the repo and then add hooks to the report for these objects .
 #' 
 #' @param class A character containing a name of class (one or more) that should be archivised.
 #' @param repo A character containing a name of a Git repository on which the Repository is archived.
@@ -22,14 +22,14 @@
 #' 
 #' \dontrun{
 #' # only in Rmd report
-#' addArchivistHook(class="ggplot", repoDir = "arepo",
+#' addHooksToPrint(class="ggplot", repoDir = "arepo",
 #' repo="graphGallery", user="pbiecek")
 #' }
 #' @family archivist
-#' @rdname addArchivistHook
+#' @rdname addHooksToPrint
 #' @export
 
-addArchivistHook <- function(class = "ggplot",
+addHooksToPrint <- function(class = "ggplot",
   repoDir = aoptions("repoDir"), 
   repo = aoptions("repo"), user = aoptions("user"), branch = "master", repoDirGit = aoptions("repoDirGit")
   ){

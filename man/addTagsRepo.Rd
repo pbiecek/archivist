@@ -96,7 +96,7 @@ Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
 \seealso{
 Other archivist: \code{\link{Repository}},
   \code{\link{Tags}}, \code{\link{\%a\%}},
-  \code{\link{addArchivistHook}}, \code{\link{ahistory}},
+  \code{\link{addHooksToPrint}}, \code{\link{ahistory}},
   \code{\link{alink}}, \code{\link{aoptions}},
   \code{\link{archive}},
   \code{\link{archivist-github-integration}},
