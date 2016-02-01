@@ -36,7 +36,6 @@ Imports:
     DBI,
     lubridate,
     RSQLite,
-    knitr,
     git2r,
     jsonlite,
     magrittr
@@ -45,6 +44,7 @@ Suggests:
     testthat,
     ggplot2,
     dplyr,
-    devtools
+    devtools,
+    knitr
 BugReports: https://github.com/pbiecek/archivist/issues
 RoxygenNote: 5.0.1
