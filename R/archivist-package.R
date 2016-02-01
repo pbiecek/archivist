@@ -51,7 +51,6 @@
 #' @importFrom graphics plot
 #' @importFrom utils head
 #' @importFrom utils zip
-#' @importFrom knitr kable
 #' @importFrom utils tail
 #' @importMethodsFrom git2r add
 #' @importMethodsFrom git2r commit
