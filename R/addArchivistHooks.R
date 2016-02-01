@@ -55,6 +55,6 @@ addArchivistHook <- function(class = "ggplot",
   }')
   
   fun <- eval(parse(text=fun))
-  assign(paste0("print.", class), fun, pos=-2)
+  assign(paste0("print.", class), fun, pos=.GlobalEnv)
 }
 
