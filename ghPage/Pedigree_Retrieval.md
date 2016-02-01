@@ -21,13 +21,6 @@ parameters.
 ```r
 library(archivist)
 createEmptyRepo("Pedigree_Example", default = TRUE)
-```
-
-```
-Directory Pedigree_Example did not exist. Forced to create a new directory.
-```
-
-```r
 invisible(aoptions("silent", TRUE))
 ```
 
@@ -65,10 +58,12 @@ ahistory(artifact)
 ahistory(artifact, format = "kable")
 ```
 
-   iris                                  [ff575c261c949d073b2895b05d1097c3]
--> filter(Sepal.Length < 6)              [d3696e13d15223c7d0bbccb33cc20a11]
--> lm(Petal.Length ~ Species, data = .)  [6776c3a99b5946919800a99355814d24]
--> summary()                             [591fad1bb4a61ddd5458c1c84926f7da]
+     call                                   md5hash                          
+---  -------------------------------------  ---------------------------------
+4    iris                                   ff575c261c949d073b2895b05d1097c3 
+3    filter(Sepal.Length < 6)               d3696e13d15223c7d0bbccb33cc20a11 
+2    lm(Petal.Length ~ Species, data = .)   6776c3a99b5946919800a99355814d24 
+1    summary()                              591fad1bb4a61ddd5458c1c84926f7da 
 
 #### With hooks
 
@@ -80,9 +75,11 @@ ahistory(artifact, format = "kable", repoDir = "Pedigree_Example", alink = TRUE,
          user = "MarcinKosinski", repo = "Museum")
 ```
 
-   iris                                  [ff575c261c949d073b2895b05d1097c3]
--> filter(Sepal.Length < 6)              [d3696e13d15223c7d0bbccb33cc20a11]
--> lm(Petal.Length ~ Species, data = .)  [6776c3a99b5946919800a99355814d24]
--> summary()                             [591fad1bb4a61ddd5458c1c84926f7da]
+     call                                   md5hash                                                                                                                                        
+---  -------------------------------------  -----------------------------------------------------------------------------------------------------------------------------------------------
+4    iris                                   [ff575c261c949d073b2895b05d1097c3](https://github.com/MarcinKosinski/Museum/blob/master/gallery/ff575c261c949d073b2895b05d1097c3.rda?raw=true) 
+3    filter(Sepal.Length < 6)               [d3696e13d15223c7d0bbccb33cc20a11](https://github.com/MarcinKosinski/Museum/blob/master/gallery/d3696e13d15223c7d0bbccb33cc20a11.rda?raw=true) 
+2    lm(Petal.Length ~ Species, data = .)   [6776c3a99b5946919800a99355814d24](https://github.com/MarcinKosinski/Museum/blob/master/gallery/6776c3a99b5946919800a99355814d24.rda?raw=true) 
+1    summary()                              [591fad1bb4a61ddd5458c1c84926f7da](https://github.com/MarcinKosinski/Museum/blob/master/gallery/591fad1bb4a61ddd5458c1c84926f7da.rda?raw=true) 
 
 

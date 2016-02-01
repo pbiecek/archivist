@@ -10,7 +10,7 @@
 
 <meta name="author" content="Marcin Kosinski" />
 
-<meta name="date" content="2016-01-27" />
+<meta name="date" content="2016-02-02" />
 
 <title>Retrieval of the Artifact’s Pedigree</title>
 
@@ -76,7 +76,7 @@ img {
 <div id="header">
 <h1 class="title">Retrieval of the Artifact’s Pedigree</h1>
 <h4 class="author"><em>Marcin Kosinski</em></h4>
-<h4 class="date"><em>2016-01-27</em></h4>
+<h4 class="date"><em>2016-02-02</em></h4>
 </div>
 
 <div id="TOC">
@@ -97,9 +97,8 @@ img {
 <div id="repository-preparations" class="section level3">
 <h3>Repository Preparations</h3>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(archivist)
-<span class="kw">createEmptyRepo</span>(<span class="st">&quot;Pedigree_Example&quot;</span>, <span class="dt">default =</span> <span class="ot">TRUE</span>)</code></pre>
-<pre><code>Directory Pedigree_Example did not exist. Forced to create a new directory.</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">invisible</span>(<span class="kw">aoptions</span>(<span class="st">&quot;silent&quot;</span>, <span class="ot">TRUE</span>))</code></pre>
+<span class="kw">createEmptyRepo</span>(<span class="st">&quot;Pedigree_Example&quot;</span>, <span class="dt">default =</span> <span class="ot">TRUE</span>)
+<span class="kw">invisible</span>(<span class="kw">aoptions</span>(<span class="st">&quot;silent&quot;</span>, <span class="ot">TRUE</span>))</code></pre>
 </div>
 <div id="archiving-example" class="section level3">
 <h3>Archiving Example</h3>
@@ -119,14 +118,74 @@ iris %a%
 -&gt; summary()                             [591fad1bb4a61ddd5458c1c84926f7da]</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># results='asis'</span>
 <span class="kw">ahistory</span>(artifact, <span class="dt">format =</span> <span class="st">&quot;kable&quot;</span>)</code></pre>
-<p>iris [ff575c261c949d073b2895b05d1097c3] -&gt; filter(Sepal.Length &lt; 6) [d3696e13d15223c7d0bbccb33cc20a11] -&gt; lm(Petal.Length ~ Species, data = .) [6776c3a99b5946919800a99355814d24] -&gt; summary() [591fad1bb4a61ddd5458c1c84926f7da]</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">call</th>
+<th align="left">md5hash</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">4</td>
+<td align="left">iris</td>
+<td align="left">ff575c261c949d073b2895b05d1097c3</td>
+</tr>
+<tr class="even">
+<td align="left">3</td>
+<td align="left">filter(Sepal.Length &lt; 6)</td>
+<td align="left">d3696e13d15223c7d0bbccb33cc20a11</td>
+</tr>
+<tr class="odd">
+<td align="left">2</td>
+<td align="left">lm(Petal.Length ~ Species, data = .)</td>
+<td align="left">6776c3a99b5946919800a99355814d24</td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="left">summary()</td>
+<td align="left">591fad1bb4a61ddd5458c1c84926f7da</td>
+</tr>
+</tbody>
+</table>
 <div id="with-hooks" class="section level4">
 <h4>With hooks</h4>
 <p>Supposing those artifacts exist on a GitHub repository</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># results='asis'</span>
 <span class="kw">ahistory</span>(artifact, <span class="dt">format =</span> <span class="st">&quot;kable&quot;</span>, <span class="dt">repoDir =</span> <span class="st">&quot;Pedigree_Example&quot;</span>, <span class="dt">alink =</span> <span class="ot">TRUE</span>,
          <span class="dt">user =</span> <span class="st">&quot;MarcinKosinski&quot;</span>, <span class="dt">repo =</span> <span class="st">&quot;Museum&quot;</span>)</code></pre>
-<p>iris [ff575c261c949d073b2895b05d1097c3] -&gt; filter(Sepal.Length &lt; 6) [d3696e13d15223c7d0bbccb33cc20a11] -&gt; lm(Petal.Length ~ Species, data = .) [6776c3a99b5946919800a99355814d24] -&gt; summary() [591fad1bb4a61ddd5458c1c84926f7da]</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">call</th>
+<th align="left">md5hash</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">4</td>
+<td align="left">iris</td>
+<td align="left"><a href="https://github.com/MarcinKosinski/Museum/blob/master/gallery/ff575c261c949d073b2895b05d1097c3.rda?raw=true">ff575c261c949d073b2895b05d1097c3</a></td>
+</tr>
+<tr class="even">
+<td align="left">3</td>
+<td align="left">filter(Sepal.Length &lt; 6)</td>
+<td align="left"><a href="https://github.com/MarcinKosinski/Museum/blob/master/gallery/d3696e13d15223c7d0bbccb33cc20a11.rda?raw=true">d3696e13d15223c7d0bbccb33cc20a11</a></td>
+</tr>
+<tr class="odd">
+<td align="left">2</td>
+<td align="left">lm(Petal.Length ~ Species, data = .)</td>
+<td align="left"><a href="https://github.com/MarcinKosinski/Museum/blob/master/gallery/6776c3a99b5946919800a99355814d24.rda?raw=true">6776c3a99b5946919800a99355814d24</a></td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="left">summary()</td>
+<td align="left"><a href="https://github.com/MarcinKosinski/Museum/blob/master/gallery/591fad1bb4a61ddd5458c1c84926f7da.rda?raw=true">591fad1bb4a61ddd5458c1c84926f7da</a></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 
