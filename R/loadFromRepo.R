@@ -6,7 +6,6 @@
 #' \code{loadFromLocalRepo} loads an artifact from a local \link{Repository} into the workspace.
 #' \code{loadFromGithubRepo} loads an artifact from a Github \link{Repository} into the workspace.
 #' \code{loadFromRemoteRepo} loads an artifact from a git / mercurial \link{Repository} into the workspace.
-#' \code{loadFromRepo} is a wrapper around \code{loadFromLocalRepo} and \code{loadFromGithubRepo}.
 #' To learn more about artifacts visit \link[archivist]{archivist-package}.
 #' 
 #' @details
@@ -350,8 +349,7 @@ loadFromRemoteRepo <- function( md5hash, repo = NULL, user = NULL, branch = "mas
 #' @export
 loadFromGithubRepo <- loadFromRemoteRepo
 
-#' @rdname loadFromRepo
-#' @export
+
 loadFromRepo <- function( md5hash, repoDir = NULL,
                           repo = NULL, user = NULL, branch = "master", repoDirGit = FALSE,
                           value = FALSE ){

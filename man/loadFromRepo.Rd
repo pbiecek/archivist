@@ -4,7 +4,6 @@
 \alias{loadFromGithubRepo}
 \alias{loadFromLocalRepo}
 \alias{loadFromRemoteRepo}
-\alias{loadFromRepo}
 \title{Load Artifact Given as a md5hash from a Repository}
 \usage{
 loadFromLocalRepo(md5hash, repoDir = NULL, value = FALSE)
@@ -14,9 +13,6 @@ loadFromRemoteRepo(md5hash, repo = NULL, user = NULL, branch = "master",
 
 loadFromGithubRepo(md5hash, repo = NULL, user = NULL, branch = "master",
   repoDirGit = FALSE, value = FALSE)
-
-loadFromRepo(md5hash, repoDir = NULL, repo = NULL, user = NULL,
-  branch = "master", repoDirGit = FALSE, value = FALSE)
 }
 \arguments{
 \item{md5hash}{A character assigned to the artifact through the use of a cryptographical hash function with MD5 algorithm, or it's abbreviation.}
@@ -45,7 +41,6 @@ to \code{repoDirGit = FALSE} as default.}
 \code{loadFromLocalRepo} loads an artifact from a local \link{Repository} into the workspace.
 \code{loadFromGithubRepo} loads an artifact from a Github \link{Repository} into the workspace.
 \code{loadFromRemoteRepo} loads an artifact from a git / mercurial \link{Repository} into the workspace.
-\code{loadFromRepo} is a wrapper around \code{loadFromLocalRepo} and \code{loadFromGithubRepo}.
 To learn more about artifacts visit \link[archivist]{archivist-package}.
 }
 \details{
