@@ -8,7 +8,7 @@ addArchivistHook(class = "ggplot", repoDir = NULL, repo = NULL,
   user = NULL, branch = "master", repoDirGit = FALSE)
 }
 \arguments{
-\item{class}{A character containing a name of class that should be archivised.}
+\item{class}{A character containing a name of class (one or more) that should be archivised.}
 
 \item{repo}{A character containing a name of a Git repository on which the Repository is archived.}
 
