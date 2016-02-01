@@ -30,8 +30,8 @@
 #' @export
 
 addArchivistHook <- function(class = "ggplot",
-  repoDir = NULL, 
-  repo = NULL, user = NULL, branch = "master", repoDirGit = FALSE
+  repoDir = aoptions("repoDir"), 
+  repo = aoptions("repo"), user = aoptions("user"), branch = "master", repoDirGit = aoptions("repoDirGit")
   ){
   stopifnot( is.character( class ), 
              is.character( repoDir ), 

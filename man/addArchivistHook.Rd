@@ -4,8 +4,9 @@
 \alias{addArchivistHook}
 \title{Add Archivist Hooks to Report}
 \usage{
-addArchivistHook(class = "ggplot", repoDir = NULL, repo = NULL,
-  user = NULL, branch = "master", repoDirGit = FALSE)
+addArchivistHook(class = "ggplot", repoDir = aoptions("repoDir"),
+  repo = aoptions("repo"), user = aoptions("user"), branch = "master",
+  repoDirGit = aoptions("repoDirGit"))
 }
 \arguments{
 \item{class}{A character containing a name of class (one or more) that should be archivised.}
