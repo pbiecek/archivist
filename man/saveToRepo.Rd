@@ -284,6 +284,7 @@ The list of supported artifacts and their tags is available on \code{wiki} on \p
 
 Other archivist: \code{\link{Repository}},
   \code{\link{Tags}}, \code{\link{\%a\%}},
+  \code{\link{addArchivistHook}},
   \code{\link{addTagsRepo}}, \code{\link{ahistory}},
   \code{\link{alink}}, \code{\link{aoptions}},
   \code{\link{archive}},

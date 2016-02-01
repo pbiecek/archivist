@@ -200,6 +200,7 @@ Marcin Kosinski , \email{m.p.kosinski@gmail.com}
 \seealso{
 Other archivist: \code{\link{Repository}},
   \code{\link{Tags}}, \code{\link{\%a\%}},
+  \code{\link{addArchivistHook}},
   \code{\link{addTagsRepo}}, \code{\link{ahistory}},
   \code{\link{alink}}, \code{\link{aoptions}},
   \code{\link{archive}},

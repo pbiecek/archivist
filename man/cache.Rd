@@ -89,6 +89,7 @@ For more detailed information, check the \pkg{archivist} package
 
 Other archivist: \code{\link{Repository}},
   \code{\link{Tags}}, \code{\link{\%a\%}},
+  \code{\link{addArchivistHook}},
   \code{\link{addTagsRepo}}, \code{\link{ahistory}},
   \code{\link{alink}}, \code{\link{aoptions}},
   \code{\link{archive}},

@@ -395,9 +395,10 @@ Functions using \code{Tags} are:
  }
 
 Other archivist: \code{\link{Repository}},
-  \code{\link{\%a\%}}, \code{\link{addTagsRepo}},
-  \code{\link{ahistory}}, \code{\link{alink}},
-  \code{\link{aoptions}}, \code{\link{archive}},
+  \code{\link{\%a\%}}, \code{\link{addArchivistHook}},
+  \code{\link{addTagsRepo}}, \code{\link{ahistory}},
+  \code{\link{alink}}, \code{\link{aoptions}},
+  \code{\link{archive}},
   \code{\link{archivist-github-integration}},
   \code{\link{archivist-package}}, \code{\link{aread}},
   \code{\link{asearch}}, \code{\link{cache}},

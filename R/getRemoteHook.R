@@ -18,7 +18,7 @@
 #' to \code{repoDirGit = FALSE} as default.
 #' 
 #' @author 
-#' Przemysla Biecek, \email{przemyslaw.biecek@@gmail.com}
+#' Przemyslaw Biecek, \email{przemyslaw.biecek@@gmail.com}
 #'  
 #' @examples
 #' 
