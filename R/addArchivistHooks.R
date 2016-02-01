@@ -43,6 +43,10 @@ addArchivistHook <- function(class = "ggplot",
                          pattern="namespace:", value=T), 
                     pattern="namespace:", replacement="")
   
+  if (length(namespace) == 0) {
+    stop(paste0("The function print.",class, " has not been found."))
+  }
+  
   fun <- paste0('function(x, ...) {
     hash <- saveToRepo(x)
     al <- alink(hash, repo = "',repo,'", user = "',user,'", repoDirGit = ',ifelse(repoDirGit == FALSE, FALSE, paste0('"',repoDirGit,'"')),')
