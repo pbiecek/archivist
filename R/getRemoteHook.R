@@ -3,12 +3,10 @@
 #' @title Get http Hook for Remote Repo
 #'
 #' @description
-#' \code{loadFromLocalRepo} loads an artifact from a local \link{Repository} into the workspace.
-#' \code{loadFromGithubRepo} loads an artifact from a Github \link{Repository} into the workspace.
-#' \code{loadFromRemoteRepo} loads an artifact from a git / mercurial \link{Repository} into the workspace.
-#' \code{loadFromRepo} is a wrapper around \code{loadFromLocalRepo} and \code{loadFromGithubRepo}.
-#' To learn more about artifacts visit \link[archivist]{archivist-package}.
+#' \code{getRemoteHook} returns http adress of the remote \link{Repository}.
+#' Then it can be used to download artifacts from the remote \link{Repository}.
 #' 
+#' @param type A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.
 #' @param repo A character containing a name of a Git repository on which the Repository is archived.
 #' @param user A character containing a name of a Git user on whose account the \code{repo} is created.
 #' @param branch A character containing a name of Git Repository's branch on which the Repository is archived. 
@@ -24,10 +22,20 @@
 #' 
 #' \dontrun{
 #' # objects preparation
+#' getRemoteHook("graphGallery", "pbiecek")
 #' }
 #' @family archivist
 #' @rdname getRemoteHook
 #' @export
+
+getRemoteHook <- function(repo = NULL, user = NULL, branch = "master", repoDirGit = FALSE ,
+                          type = "github") {
+  stopifnot( is.character( type ), length( type ) == 1 )
+
+  switch(type,
+         github = getRemoteHookGithub(repo, user, branch, repoDirGit),
+         bitbucket = getRemoteHookBitbucket(repo, user, branch, repoDirGit))
+}
 
 getRemoteHookGithub <- function(repo = NULL, user = NULL, branch = "master", repoDirGit = FALSE ){
   stopifnot( is.character( c(branch ) ), length( branch ) == 1 )
