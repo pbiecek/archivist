@@ -17,6 +17,7 @@ setDefaultArchivistEnv <- function() {
   different for various artifact's classes and artifacts themselves. To learn more about artifacts visit [wiki](https://github.com/pbiecek/archivist/wiki)."
   .ArchivistEnv$repoDescription <- "A Repository of Artifacts supported by archivist https://github.com/pbiecek"
   .ArchivistEnv$repoDirGit <- FALSE
+  .ArchivistEnv$repoType <- "github"
   .ArchivistEnv$response <- FALSE
   .ArchivistEnv$silent <- FALSE
 }

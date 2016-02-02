@@ -6,7 +6,7 @@
 #' \code{getRemoteHook} returns http adress of the remote \link{Repository}.
 #' Then it can be used to download artifacts from the remote \link{Repository}.
 #' 
-#' @param type A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.
+#' @param repoType A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.
 #' @param repo A character containing a name of a Git repository on which the Repository is archived.
 #' @param user A character containing a name of a Git user on whose account the \code{repo} is created.
 #' @param branch A character containing a name of Git Repository's branch on which the Repository is archived. 
@@ -28,11 +28,11 @@
 #' @rdname getRemoteHook
 #' @export
 
-getRemoteHook <- function(repo = NULL, user = NULL, branch = "master", repoDirGit = FALSE ,
-                          type = "github") {
-  stopifnot( is.character( type ), length( type ) == 1 )
+getRemoteHook <- function(repo = aoptions("repo"), user = aoptions("user"), branch = aoptions("branch"), repoDirGit = aoptions("repoDirGit") ,
+                          repoType = aoptions("repoType")) {
+  stopifnot( is.character( repoType ), length( repoType ) == 1 )
 
-  switch(type,
+  switch(repoType,
          github = getRemoteHookGithub(repo, user, branch, repoDirGit),
          bitbucket = getRemoteHookBitbucket(repo, user, branch, repoDirGit))
 }
