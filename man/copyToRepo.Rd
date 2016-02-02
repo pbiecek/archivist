@@ -3,12 +3,18 @@
 \name{copyLocalRepo}
 \alias{copyGithubRepo}
 \alias{copyLocalRepo}
+\alias{copyRemoteRepo}
 \title{Copy an Existing Repository into Another Repository}
 \usage{
 copyLocalRepo(repoFrom = NULL, repoTo, md5hashes)
 
-copyGithubRepo(repoTo, md5hashes, user = NULL, repo = NULL,
-  branch = "master", repoDirGit = FALSE)
+copyRemoteRepo(repoTo, md5hashes, repo = aoptions("repo"),
+  user = aoptions("user"), branch = aoptions("branch"),
+  repoDirGit = aoptions("repoDirGit"), repoType = aoptions("repoType"))
+
+copyGithubRepo(repoTo, md5hashes, repo = aoptions("repo"),
+  user = aoptions("user"), branch = aoptions("branch"),
+  repoDirGit = aoptions("repoDirGit"), repoType = aoptions("repoType"))
 }
 \arguments{
 \item{repoFrom}{While copying local repository. A character that specifies
@@ -21,12 +27,12 @@ artifacts will be copied.}
 
 \item{md5hashes}{A character vector containing \code{md5hashes} of artifacts to be copied.}
 
-\item{user}{While coping the Github repository. A character containing a name
-of the Github user on whose account the "\code{repoFrom}" - Repository is created.
-By default set to \code{NULL} - see \code{Note}.}
-
 \item{repo}{While coping the Github repository. A character containing a name of the
 Github repository on which the "\code{repoFrom}" - Repository is archived.
+By default set to \code{NULL} - see \code{Note}.}
+
+\item{user}{While coping the Github repository. A character containing a name
+of the Github user on whose account the "\code{repoFrom}" - Repository is created.
 By default set to \code{NULL} - see \code{Note}.}
 
 \item{branch}{While coping with the Github repository. A character containing a name of 
@@ -37,6 +43,8 @@ Default \code{branch} is \code{master}.}
 a directory on the Github repository on which the "\code{repoFrom}" - Repository is stored.
 If the Repository is stored in the main folder on the Github repository, this should be set 
 to \code{FALSE} as default.}
+
+\item{repoType}{A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.}
 }
 \description{
 \code{copy*Repo} copies artifacts from one \code{Repository} into another \code{Repository}.
@@ -153,9 +161,8 @@ Other archivist: \code{\link{Repository}},
   \code{\link{asearch}}, \code{\link{cache}},
   \code{\link{cloneGithubRepo}},
   \code{\link{createEmptyRepo}},
-  \code{\link{createGithubMDGallery}},
-  \code{\link{deleteRepo}}, \code{\link{getRemoteHook}},
-  \code{\link{getTagsLocal}},
+  \code{\link{createMDGallery}}, \code{\link{deleteRepo}},
+  \code{\link{getRemoteHook}}, \code{\link{getTagsLocal}},
   \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
   \code{\link{pushRepo}}, \code{\link{rmFromRepo}},
   \code{\link{saveToRepo}},

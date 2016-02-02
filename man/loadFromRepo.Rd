@@ -8,11 +8,15 @@
 \usage{
 loadFromLocalRepo(md5hash, repoDir = NULL, value = FALSE)
 
-loadFromRemoteRepo(md5hash, repo = NULL, user = NULL, branch = "master",
-  repoDirGit = FALSE, value = FALSE)
+loadFromRemoteRepo(md5hash, repo = aoptions("repo"),
+  user = aoptions("user"), branch = aoptions("branch"),
+  repoDirGit = aoptions("repoDirGit"), repoType = aoptions("repoType"),
+  value = FALSE)
 
-loadFromGithubRepo(md5hash, repo = NULL, user = NULL, branch = "master",
-  repoDirGit = FALSE, value = FALSE)
+loadFromGithubRepo(md5hash, repo = aoptions("repo"),
+  user = aoptions("user"), branch = aoptions("branch"),
+  repoDirGit = aoptions("repoDirGit"), repoType = aoptions("repoType"),
+  value = FALSE)
 }
 \arguments{
 \item{md5hash}{A character assigned to the artifact through the use of a cryptographical hash function with MD5 algorithm, or it's abbreviation.}
@@ -36,6 +40,8 @@ Github Repository's branch on which the Repository is archived. Default \code{br
 \item{repoDirGit}{While working with a Github repository. A character containing a name of a directory on Github repository 
 on which the Repository is stored. If the Repository is stored in main folder on Github repository, this should be set 
 to \code{repoDirGit = FALSE} as default.}
+
+\item{repoType}{A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.}
 }
 \description{
 \code{loadFromLocalRepo} loads an artifact from a local \link{Repository} into the workspace.
@@ -257,11 +263,10 @@ Other archivist: \code{\link{Repository}},
   \code{\link{cloneGithubRepo}},
   \code{\link{copyLocalRepo}},
   \code{\link{createEmptyRepo}},
-  \code{\link{createGithubMDGallery}},
-  \code{\link{deleteRepo}}, \code{\link{getRemoteHook}},
-  \code{\link{getTagsLocal}}, \code{\link{md5hash}},
-  \code{\link{pushRepo}}, \code{\link{rmFromRepo}},
-  \code{\link{saveToRepo}},
+  \code{\link{createMDGallery}}, \code{\link{deleteRepo}},
+  \code{\link{getRemoteHook}}, \code{\link{getTagsLocal}},
+  \code{\link{md5hash}}, \code{\link{pushRepo}},
+  \code{\link{rmFromRepo}}, \code{\link{saveToRepo}},
   \code{\link{searchInLocalRepo}},
   \code{\link{setLocalRepo}},
   \code{\link{shinySearchInLocalRepo}},

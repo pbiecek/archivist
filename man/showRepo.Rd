@@ -3,12 +3,18 @@
 \name{showLocalRepo}
 \alias{showGithubRepo}
 \alias{showLocalRepo}
+\alias{showRemoteRepo}
 \title{View the List of Artifacts from the Repository}
 \usage{
 showLocalRepo(repoDir = NULL, method = "md5hashes")
 
-showGithubRepo(repo = NULL, user = NULL, branch = "master",
-  repoDirGit = FALSE, method = "md5hashes")
+showRemoteRepo(epo = aoptions("repo"), user = aoptions("user"),
+  branch = aoptions("branch"), repoDirGit = aoptions("repoDirGit"),
+  repoType = aoptions("repoType"), method = "md5hashes")
+
+showGithubRepo(epo = aoptions("repo"), user = aoptions("user"),
+  branch = aoptions("branch"), repoDirGit = aoptions("repoDirGit"),
+  repoType = aoptions("repoType"), method = "md5hashes")
 }
 \arguments{
 \item{repoDir}{A character denoting an existing directory of the Repository for which metadata will be returned.
@@ -16,9 +22,6 @@ If it is set to \code{NULL} (by default), it will use the \code{repoDir} specifi
 
 \item{method}{A character specifying a method to be used to show the Repository. Available methods: 
 \code{md5hashes} (default), \code{tags} and \code{sets} - see \href{https://github.com/pbiecek/archivist2}{archivist2::saveSetToRepo}.}
-
-\item{repo}{While working with the Github repository. A character containing a name of the Github repository on which the Repository is stored.
-By default set to \code{NULL} - see \code{Note}.}
 
 \item{user}{While working with the Github repository. A character containing a name of the Github user on whose account the \code{repo} is created.
 By default set to \code{NULL} - see \code{Note}.}
@@ -29,6 +32,11 @@ the Github Repository's branch on which the Repository is stored. Default \code{
 \item{repoDirGit}{While working with the Github repository. A character containing a name of a directory on the Github repository 
 on which the Repository is stored. If the Repository is stored in the main folder of the Github repository, this should be set 
 to \code{repoDirGit = FALSE} as default.}
+
+\item{repoType}{A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.}
+
+\item{repo}{While working with the Github repository. A character containing a name of the Github repository on which the Repository is stored.
+By default set to \code{NULL} - see \code{Note}.}
 }
 \value{
 If parameter \code{method} is set as \code{md5hashes} then a \code{data.frame} with artifacts' names and
@@ -209,9 +217,8 @@ Other archivist: \code{\link{Repository}},
   \code{\link{cloneGithubRepo}},
   \code{\link{copyLocalRepo}},
   \code{\link{createEmptyRepo}},
-  \code{\link{createGithubMDGallery}},
-  \code{\link{deleteRepo}}, \code{\link{getRemoteHook}},
-  \code{\link{getTagsLocal}},
+  \code{\link{createMDGallery}}, \code{\link{deleteRepo}},
+  \code{\link{getRemoteHook}}, \code{\link{getTagsLocal}},
   \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
   \code{\link{pushRepo}}, \code{\link{rmFromRepo}},
   \code{\link{saveToRepo}},

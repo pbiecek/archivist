@@ -60,6 +60,8 @@ match all conditions are returned. If \code{intersect = FALSE} then artifacts th
 are returned.}
 
 \item{intersect}{A logical value. See \code{patterns} for more details.}
+
+\item{repoType}{A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.}
 }
 \value{
 \code{searchInRepo} returns character vector of \code{md5hashes} of artifacts that were searched for.
@@ -219,9 +221,8 @@ Other archivist: \code{\link{Repository}},
   \code{\link{cloneGithubRepo}},
   \code{\link{copyLocalRepo}},
   \code{\link{createEmptyRepo}},
-  \code{\link{createGithubMDGallery}},
-  \code{\link{deleteRepo}}, \code{\link{getRemoteHook}},
-  \code{\link{getTagsLocal}},
+  \code{\link{createMDGallery}}, \code{\link{deleteRepo}},
+  \code{\link{getRemoteHook}}, \code{\link{getTagsLocal}},
   \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
   \code{\link{pushRepo}}, \code{\link{rmFromRepo}},
   \code{\link{saveToRepo}}, \code{\link{setLocalRepo}},

@@ -3,12 +3,18 @@
 \name{getTagsLocal}
 \alias{getTagsGithub}
 \alias{getTagsLocal}
+\alias{getTagsRemote}
 \title{Return Tags Corresponding to md5hash}
 \usage{
 getTagsLocal(md5hash, repoDir = NULL, tag = "name")
 
-getTagsGithub(md5hash, user = NULL, repo = NULL, branch = "master",
-  repoDirGit = FALSE, tag = "name")
+getTagsRemote(md5hash, repo = aoptions("repo"), user = aoptions("user"),
+  branch = aoptions("branch"), repoDirGit = aoptions("repoDirGit"),
+  repoType = aoptions("repoType"), tag = "name")
+
+getTagsGithub(md5hash, repo = aoptions("repo"), user = aoptions("user"),
+  branch = aoptions("branch"), repoDirGit = aoptions("repoDirGit"),
+  repoType = aoptions("repoType"), tag = "name")
 }
 \arguments{
 \item{md5hash}{A character containing \code{md5hash} 
@@ -21,12 +27,12 @@ uses the \code{repoDir} specified in \link{setLocalRepo}.}
 \item{tag}{A regular expression denoting type of a \code{Tag} that we search for
 (see \code{Examples}). Default \code{tag = "name"}.}
 
-\item{user}{While working with the Github repository. A character containing
-a name of the Github user on whose account the \code{repo} is created.
-By default set to \code{NULL} - see \code{Note}.}
-
 \item{repo}{While working with the Github repository. A character containing
 a name of the Github repository on which the Repository is stored.
+By default set to \code{NULL} - see \code{Note}.}
+
+\item{user}{While working with the Github repository. A character containing
+a name of the Github user on whose account the \code{repo} is created.
 By default set to \code{NULL} - see \code{Note}.}
 
 \item{branch}{While working with the Github repository. A character containing
@@ -37,6 +43,8 @@ Default \code{branch} is \code{master}.}
 a name of a directory on the Github repository on which the Repository is stored.
 If the Repository is stored in main folder on the Github repository, this should be set 
 to \code{repoDirGit = FALSE} as default.}
+
+\item{repoType}{A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.}
 }
 \value{
 The character vector of \code{Tags} (see \link{Tags}) related to \link{md5hash} 
@@ -145,8 +153,8 @@ Other archivist: \code{\link{Repository}},
   \code{\link{cloneGithubRepo}},
   \code{\link{copyLocalRepo}},
   \code{\link{createEmptyRepo}},
-  \code{\link{createGithubMDGallery}},
-  \code{\link{deleteRepo}}, \code{\link{getRemoteHook}},
+  \code{\link{createMDGallery}}, \code{\link{deleteRepo}},
+  \code{\link{getRemoteHook}},
   \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
   \code{\link{pushRepo}}, \code{\link{rmFromRepo}},
   \code{\link{saveToRepo}},
@@ -169,8 +177,32 @@ Other archivist: \code{\link{Repository}},
   \code{\link{cloneGithubRepo}},
   \code{\link{copyLocalRepo}},
   \code{\link{createEmptyRepo}},
-  \code{\link{createGithubMDGallery}},
-  \code{\link{deleteRepo}}, \code{\link{getRemoteHook}},
+  \code{\link{createMDGallery}}, \code{\link{deleteRepo}},
+  \code{\link{getRemoteHook}},
+  \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
+  \code{\link{pushRepo}}, \code{\link{rmFromRepo}},
+  \code{\link{saveToRepo}},
+  \code{\link{searchInLocalRepo}},
+  \code{\link{setLocalRepo}},
+  \code{\link{shinySearchInLocalRepo}},
+  \code{\link{showLocalRepo}},
+  \code{\link{splitTagsLocal}},
+  \code{\link{summaryLocalRepo}},
+  \code{\link{zipLocalRepo}}
+
+Other archivist: \code{\link{Repository}},
+  \code{\link{Tags}}, \code{\link{\%a\%}},
+  \code{\link{addHooksToPrint}}, \code{\link{addTagsRepo}},
+  \code{\link{ahistory}}, \code{\link{alink}},
+  \code{\link{aoptions}}, \code{\link{archive}},
+  \code{\link{archivist-github-integration}},
+  \code{\link{archivist-package}}, \code{\link{aread}},
+  \code{\link{asearch}}, \code{\link{cache}},
+  \code{\link{cloneGithubRepo}},
+  \code{\link{copyLocalRepo}},
+  \code{\link{createEmptyRepo}},
+  \code{\link{createMDGallery}}, \code{\link{deleteRepo}},
+  \code{\link{getRemoteHook}},
   \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
   \code{\link{pushRepo}}, \code{\link{rmFromRepo}},
   \code{\link{saveToRepo}},
