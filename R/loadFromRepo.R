@@ -39,6 +39,8 @@
 #' \code{branch} and \code{repoDirGit} are used only in \code{loadFromGithubRepo}. When you mix those
 #' parameters you will receive an error message.
 #' 
+#' @param repoType A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.
+#' 
 #' @param repoDir A character denoting an existing directory from which an artifact will be loaded.
 #' If it is set to \code{NULL} (by default), it will use the \code{repoDir} specified in \link{setLocalRepo}.
 #' 
@@ -270,17 +272,19 @@ loadFromLocalRepo <- function( md5hash, repoDir = NULL, value = FALSE ){
 
 #' @rdname loadFromRepo
 #' @export
-loadFromRemoteRepo <- function( md5hash, repo = NULL, user = NULL, branch = "master", repoDirGit = FALSE, value = FALSE ){
+loadFromRemoteRepo <- function( md5hash, repo = aoptions("repo"), user = aoptions("user"), branch = aoptions("branch"), repoDirGit = aoptions("repoDirGit"),
+                                repoType = aoptions("repoType"), value = FALSE ){
   stopifnot( is.character( c( md5hash, branch ) ), length( md5hash ) == 1, length( branch ) == 1 )
   stopifnot( is.logical( value ) )
   
   GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
   
+  remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, repoDirGit=repoDirGit, repoType=repoType)
   
   # what if abbreviation was given
   if ( nchar( md5hash ) < 32 ){
     # database is needed to be downloaded
-    Temp <- downloadDB( repo, user, branch, repoDirGit )
+    Temp <- downloadDB( remoteHook )
       
     md5hashList <- executeSingleQuery( dir = Temp, realDBname = FALSE,
                                        paste0( "SELECT DISTINCT artifact FROM tag WHERE artifact LIKE '",md5hash,"%'" ) )
@@ -295,13 +299,11 @@ loadFromRemoteRepo <- function( md5hash, repo = NULL, user = NULL, branch = "mas
     # sapply and replicate because of abbreviation mode can find more than 1 md5hash
     if( is.character( repoDirGit )){
     tmpobjectS <- lapply( md5hash, function(x){
-      getBinaryURL( file.path( get( x = ".GithubURL", envir = .ArchivistEnv), user, repo,
-                            branch, repoDirGit, "gallery", paste0(x, ".rda") ) )  } )
+      getBinaryURL( file.path( remoteHook, "gallery", paste0(x, ".rda") ) )  } )
     }
     if( is.logical( repoDirGit )){
       tmpobjectS <- lapply( md5hash, function(x){
-        getBinaryURL( file.path( get( x = ".GithubURL", envir = .ArchivistEnv), user, repo,
-                              branch, "gallery", paste0(x, ".rda") ) )  } )  
+        getBinaryURL( file.path( remoteHook, "gallery", paste0(x, ".rda") ) )  } )  
     }
     tfS <- replicate( length( md5hash ), tempfile() )
         
@@ -317,13 +319,11 @@ loadFromRemoteRepo <- function( md5hash, repo = NULL, user = NULL, branch = "mas
     # sapply and replicate because of abbreviation mode can find more than 1 md5hash
     if( is.character( repoDirGit )){
       tmpobjectS <- lapply( md5hash, function(x){
-        getBinaryURL( file.path( get( x = ".GithubURL", envir = .ArchivistEnv), user, repo,
-                              branch, repoDirGit, "gallery", paste0(x, ".rda") ) )  } )
+        getBinaryURL( file.path( remoteHook, "gallery", paste0(x, ".rda") ) )  } )
     }
     if( is.logical( repoDirGit )){
       tmpobjectS <- lapply( md5hash, function(x){
-        getBinaryURL( file.path( get( x = ".GithubURL", envir = .ArchivistEnv), user, repo,
-                              branch, "gallery", paste0(x, ".rda") ) )  } )  
+        getBinaryURL( file.path( remoteHook, "gallery", paste0(x, ".rda") ) )  } )  
     }
     tfS <- replicate( length( md5hash ), tempfile() )
     

@@ -24,6 +24,7 @@
 #' by the \link{saveToRepo} function. If the artifact
 #' is not in the Repository then a logical value \code{FALSE} is returned.
 #' 
+#' @param repoType A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.
 #' 
 #' @param pattern If \code{fixed = TRUE}: a character denoting a \code{Tag} which is to be searched for in the Repository.
 #' It is also possible to specify \code{pattern} as a list of 
@@ -233,8 +234,9 @@ searchInGithubRepo <- function( pattern, repo = NULL, user = NULL, branch = "mas
   GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
   
   # first download database
-  Temp <- downloadDB( repo, user, branch, repoDirGit )
-
+  remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, repoDirGit=repoDirGit)
+  Temp <- downloadDB( remoteHook )
+  
   # extracts md5hash
   if ( fixed ){
    if ( length( pattern ) == 1 ){
@@ -279,7 +281,8 @@ multiSearchInGithubRepo <- function( patterns, repo = NULL, user = NULL,
 
   GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
   
-  Temp <- downloadDB( repo, user, branch, repoDirGit )
+  remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, repoDirGit=repoDirGit)
+  Temp <- downloadDB( remoteHook )
   on.exit(file.remove( Temp ))
   m <- multiSearchInLocalRepo( patterns, repoDir = Temp, fixed=fixed,
                                intersect=intersect, realDBname = FALSE)

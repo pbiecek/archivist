@@ -382,14 +382,8 @@ readSingleTable <- function( dir, table, realDBname = TRUE ){
 }
 
 # for Github version function that requires to load database
-downloadDB <- function( repo, user, branch, repoDirGit ){
-   if( is.logical( repoDirGit ) ){
-     URLdb <- file.path( get( ".GithubURL", envir = .ArchivistEnv) ,
-                         user, repo, branch, "backpack.db") 
-   }else{
-     URLdb <- file.path( get( ".GithubURL", envir = .ArchivistEnv) ,
-                         user, repo, branch, repoDirGit, "backpack.db") 
-   }
+downloadDB <- function( remoteHook ){
+   URLdb <- file.path( remoteHook, "backpack.db") 
    if (url.exists(URLdb)){
      db <- getBinaryURL( URLdb )
      Temp2 <- tempfile()
@@ -397,7 +391,7 @@ downloadDB <- function( repo, user, branch, repoDirGit ){
      writeBin( db, Temp2 )
      return( Temp2 )
    } else {
-     stop(paste0("Such a repo: ", repo, " or user ", user, " or branch ", branch, " does not exist on GitHub",
+     stop(paste0("Such a repo: ", remoteHook, " does not exist",
                  "or there is no archivist-like Repository on this repo."))
    }
      

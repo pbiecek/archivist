@@ -19,6 +19,7 @@
 #' be seen with their unique \link{md5hash} or a \code{data.frame} with archived \link{Tags} can 
 #' be obtained.
 #' 
+#' @param repoType A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.
 #' @param method A character specifying a method to be used to show the Repository. Available methods: 
 #' \code{md5hashes} (default), \code{tags} and \code{sets} - see \href{https://github.com/pbiecek/archivist2}{archivist2::saveSetToRepo}.
 #' 
@@ -204,7 +205,8 @@ showLocalRepo <- function( repoDir = NULL, method = "md5hashes" ){
 
 #' @rdname showRepo
 #' @export
-showGithubRepo <- function( repo = NULL, user = NULL, branch = "master", repoDirGit = FALSE,
+showRemoteRepo <- function( repo = aoptions("repo"), user = aoptions("user"), branch = aoptions("branch"), repoDirGit = aoptions("repoDirGit"),
+                            repoType = aoptions("repoType"),
                             method = "md5hashes" ){
   stopifnot( is.character( c( method, branch ) ), length( method ) == 1, length( branch ) == 1  )
   
@@ -212,11 +214,15 @@ showGithubRepo <- function( repo = NULL, user = NULL, branch = "master", repoDir
   GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
   
   # database is needed to be downloaded
-  Temp <- downloadDB( repo, user, branch, repoDirGit )
+  remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, repoDirGit=repoDirGit, repoType=repoType)
+  Temp <- downloadDB( remoteHook )
   
   showRepo( method = method, dir = Temp, local = FALSE )
 }
 
+#' @rdname showRepo
+#' @export
+showGithubRepo <- showRemoteRepo
 
 showRepo <- function( method, local = TRUE, dir ){
   

@@ -14,6 +14,7 @@
 #' Both of them use \code{md5hashes} of artifacts which are to be copied 
 #' in \code{md5hashes} parameter. For more information about \code{md5hash} see \link{md5hash}.
 #'
+#' @param repoType A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.
 #' @param repoFrom While copying local repository. A character that specifies
 #' the directory of the Repository from which
 #' artifacts will be copied. If it is set to \code{NULL} (by default),
@@ -149,8 +150,8 @@ copyLocalRepo <- function( repoFrom = NULL, repoTo, md5hashes ){
 
 #' @rdname copyToRepo
 #' @export
-copyGithubRepo <- function( repoTo, md5hashes, user = NULL, repo = NULL, branch="master", 
-                            repoDirGit = FALSE){
+copyRemoteRepo <- function( repoTo, md5hashes, repo = aoptions("repo"), user = aoptions("user"), branch = aoptions("branch"), repoDirGit = aoptions("repoDirGit"),
+                            repoType = aoptions("repoType")){
   stopifnot( is.character( c( repoTo, branch, md5hashes ) ),
              length(repoTo) == 1, length(branch) == 1, length(md5hashes) > 0)
 
@@ -158,7 +159,8 @@ copyGithubRepo <- function( repoTo, md5hashes, user = NULL, repo = NULL, branch=
   
   repoTo <- checkDirectory( repoTo )
   
-  Temp <- downloadDB( repo, user, branch, repoDirGit )
+  remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, repoDirGit=repoDirGit, repoType=repoType)
+  Temp <- downloadDB( remoteHook )
   
   on.exit(file.remove(Temp))
   
@@ -167,6 +169,10 @@ copyGithubRepo <- function( repoTo, md5hashes, user = NULL, repo = NULL, branch=
   
   invisible(NULL)  
 }
+
+#' @rdname copyToRepo
+#' @export
+copyGithubRepo <- copyRemoteRepo
 
 copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, branch, repoDirGit ){
   

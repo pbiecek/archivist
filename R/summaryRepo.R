@@ -150,7 +150,8 @@ summaryGithubRepo <- function( repo = NULL, user = NULL, branch = "master", repo
   GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
   
   # database is needed to be downloaded
-  Temp <- downloadDB( repo, user, branch, repoDirGit )
+  remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, repoDirGit=repoDirGit)
+  Temp <- downloadDB( remoteHook )
   
   summaryRepo( dir = Temp, realDBname = FALSE )
   

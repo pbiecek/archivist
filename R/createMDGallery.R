@@ -8,6 +8,8 @@
 #' miniature (\code{addMiniature = TRUE}) if the artifact was archived with it's miniature and \code{Tags}. The miniature is a \link{print}
 #'  or \link{head} over an artifact or it's \code{png} when it was a plot. But this function only supports \code{png} miniatures.
 #'
+#' @param repoType A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.
+#'
 #' @param repo A character containing a name of the Github repository on which the Repository is stored.
 #' By default set to \code{NULL} - see \code{Note}.
 #'
@@ -55,14 +57,16 @@
 #' @family archivist
 #' @rdname createMDGallery
 #' @export
-createGithubMDGallery <- function(output, repo = NULL, user = NULL, repoDirGit = FALSE,  branch = "master",
+createMDGallery <- function(output, repo = aoptions("repo"), user = aoptions("user"), branch = aoptions("branch"), repoDirGit = aoptions("repoDirGit"),
+                                  repoType = aoptions("repoType"),
                                 addTags = FALSE, addMiniature = FALSE){
   stopifnot( is.character( branch ), length( branch ) == 1 )
   GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
   stopifnot(is.logical(c(addTags, addMiniature)) & length(addTags) == 1 & length(addMiniature) == 1 )
 
   # as in loadFromGithubRepo
-  Temp <- downloadDB( repo, user, branch, repoDirGit )
+  remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, repoDirGit=repoDirGit, repoType=repoType)
+  Temp <- downloadDB(remoteHook )
   on.exit( file.remove( Temp ) )
   md5hashList <- executeSingleQuery( dir = Temp, realDBname = FALSE,
                                      "SELECT DISTINCT artifact, tag FROM tag ")#WHERE tag LIKE 'name%'" )
@@ -117,4 +121,7 @@ createGithubMDGallery <- function(output, repo = NULL, user = NULL, repoDirGit =
   sink()
 }
 
-
+#' @family archivist
+#' @rdname createMDGallery
+#' @export
+createGithubMDGallery <- createMDGallery

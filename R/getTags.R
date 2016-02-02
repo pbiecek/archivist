@@ -15,6 +15,7 @@
 #' @return The character vector of \code{Tags} (see \link{Tags}) related to \link{md5hash} 
 #' of an artifact.
 #'
+#' @param repoType A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.
 #' @param repoDir A character denoting an existing directory in 
 #' which artifacts are stored. If set to \code{NULL} (by default),
 #' uses the \code{repoDir} specified in \link{setLocalRepo}.
@@ -140,7 +141,8 @@ getTagsLocal <- function( md5hash, repoDir = NULL, tag ="name"){
 #' @family archivist
 #' @rdname getTags
 #' @export
-getTagsGithub <- function( md5hash, user = NULL, repo = NULL, branch = "master", repoDirGit = FALSE,
+getTagsRemote <- function( md5hash, repo = aoptions("repo"), user = aoptions("user"), branch = aoptions("branch"), repoDirGit = aoptions("repoDirGit"),
+                           repoType = aoptions("repoType"),
                            tag ="name"){
   stopifnot( is.character( c( md5hash, branch, tag ) ), 
              length( md5hash ) ==  1, length( branch ) == 1, length( tag ) == 1 )
@@ -148,9 +150,15 @@ getTagsGithub <- function( md5hash, user = NULL, repo = NULL, branch = "master",
   GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
   
   # first download database
-  Temp <- downloadDB( repo, user, branch, repoDirGit )
+  remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, repoDirGit=repoDirGit, repoType=repoType)
+  Temp <- downloadDB( remoteHook )
   returnTag( md5hash, repoDir = Temp, local = FALSE, tag = tag )
 }
+
+#' @family archivist
+#' @rdname getTags
+#' @export
+getTagsGithub <- getTagsRemote
 
 returnTag <- function( md5hash, repoDir, local = TRUE, tag ){
   Tags <- unique( executeSingleQuery( repoDir, realDBname = local,
