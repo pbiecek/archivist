@@ -40,7 +40,11 @@ getRemoteHook <- function(repo = NULL, user = NULL, branch = "master", repoDirGi
 getRemoteHookGithub <- function(repo = NULL, user = NULL, branch = "master", repoDirGit = FALSE ){
   stopifnot( is.character( c(branch ) ), length( branch ) == 1 )
 
-  file.path( "https://raw.githubusercontent.com", user, repo, branch, repoDirGit)
+  if (repoDirGit == FALSE) {
+    return(file.path( "https://raw.githubusercontent.com", user, repo, branch))
+  } else {
+    return(file.path( "https://raw.githubusercontent.com", user, repo, branch, repoDirGit))
+  }
 }
 
 getRemoteHookBitbucket <- function(repo = NULL, user = NULL, branch = "master", repoDirGit = FALSE ){
