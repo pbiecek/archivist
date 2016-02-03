@@ -239,6 +239,10 @@
 #'  loadFromRemoteRepo(md5hash = "08dc0b66975cded92b5cd8291ebdc955", 
 #'                repo = "graphGalleryGit", user = "pbiecek", 
 #'                repoType = "bitbucket", value = TRUE)
+#'                
+#'  loadFromRemoteRepo(md5hash = "08dc0b66975cded92b5cd8291ebdc955", 
+#'                repo = "graphGalleryM", user = "pbiecek", 
+#'                repoType = "bitbucket", value = TRUE)
 #' }
 #' @family archivist
 #' @rdname loadFromRepo
@@ -319,7 +323,7 @@ loadFromRemoteRepo <- function( md5hash, repo = aoptions("repo"), user = aoption
   }else{
     # returns objects as value
 
-        # sapply and replicate because of abbreviation mode can find more than 1 md5hash
+    # sapply and replicate because of abbreviation mode can find more than 1 md5hash
     tmpobjectS <- lapply( md5hash, function(x){
         getBinaryURL( file.path( remoteHook, "gallery", paste0(x, ".rda") ) )  } )  
 
