@@ -9,7 +9,7 @@ test_that("setLocalRepo sets repo", {
   expect_equal(aoptions("branch"), "master")
   expect_equal(aoptions("repoDirGit"), "clone123")
   deleteRepo("tmp_archivist", deleteRoot = TRUE)
-  expect_equal(aoptions("repoDirGit"), FALSE)
+  aoptions("repoDirGit", FALSE)
 })
 
 test_that(".ArchivistEnv exists", {

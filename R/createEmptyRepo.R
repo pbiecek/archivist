@@ -392,7 +392,7 @@ downloadDB <- function( remoteHook ){
      return( Temp2 )
    } else {
      stop(paste0("Such a repo: ", remoteHook, " does not exist",
-                 "or there is no archivist-like Repository on this repo."))
+                 " or there is no archivist-like Repository on this repo."))
    }
      
 }
