@@ -34,7 +34,8 @@ getRemoteHook <- function(repo = aoptions("repo"), user = aoptions("user"), bran
 
   switch(repoType,
          github = getRemoteHookGithub(repo, user, branch, repoDirGit),
-         bitbucket = getRemoteHookBitbucket(repo, user, branch, repoDirGit))
+         bitbucket = getRemoteHookBitbucket(repo, user, branch, repoDirGit),
+         stop("No such repoType"))
 }
 
 getRemoteHookGithub <- function(repo = NULL, user = NULL, branch = "master", repoDirGit = FALSE ){
@@ -49,15 +50,15 @@ getRemoteHookGithub <- function(repo = NULL, user = NULL, branch = "master", rep
 
 getRemoteHookBitbucket <- function(repo = NULL, user = NULL, branch = "master", repoDirGit = FALSE ){
   stopifnot( is.character( c(branch ) ), length( branch ) == 1 )
-  
+  repo <- tolower(repo)
   json <- readLines(paste0("https://api.bitbucket.org/2.0/repositories/",user,"/",repo,"/commits/"), warn = FALSE)
   tmp <- strsplit(json, split='"')[[1]]
   last_commit <- tmp[which(tmp == "hash")+2]
   
   if (repoDirGit == FALSE) {
-    return(file.path("https://bitbucket.org",user,repo,"src",last_commit))
+    return(file.path("https://bitbucket.org",user,repo,"raw",last_commit))
   } else {
-#    paste0(file.path("https://bitbucket.org",user,repo,"src",last_commit,repoDirGit,"?at="),branch)
-    return(file.path("https://bitbucket.org",user,repo,"src",last_commit,repoDirGit))
+#    paste0(file.path("https://bitbucket.org",user,repo,"raw",last_commit,repoDirGit,"?at="),branch)
+    return(file.path("https://bitbucket.org",user,repo,"raw",last_commit,repoDirGit))
   }
 }
