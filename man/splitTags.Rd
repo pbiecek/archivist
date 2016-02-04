@@ -78,59 +78,18 @@ To learn more about \code{Tags} and \code{Repository} structure check
 \dontrun{
 ## LOCAL VERSION 
 
-# Creating example default repository
-exampleRepoDir <- tempfile()
-createEmptyRepo( exampleRepoDir, default = TRUE )
-
-# Adding new artifacts to repository
-data(iris)
-saveToRepo(iris, repoDir = exampleRepoDir )
-library(datasets)
-data(iris3)
-saveToRepo(iris3)
-data(longley)
-saveToRepo(longley)
-
-# Let's see the difference in tag table in backpack.db
-showLocalRepo( method = "tags" ) # a data frame with 3 columns
-splitTagsLocal()                 # a data frame with 4 columns
-
-# Now we can sum up what kind of Tags we have in our repository.
-library(dplyr)
-splitTagsLocal() \%>\%
-  group_by(tagKey) \%>\%
-  summarise(count = n())
-   
-# Deleting existing repository
-deleteRepo(exampleRepoDir, deleteRoot = TRUE)
-rm(exampleRepoDir)
-
-## Example with Tag that does not match TagKey:TagValue structure
-
-# Creating example default repository
-exampleRepoDir <- tempfile()
-createEmptyRepo( exampleRepoDir, default = TRUE )
-data(iris)
-# adding special Tag "lengthOne" to iris artifact and saving to repository
-saveToRepo(iris, repoDir = exampleRepoDir, 
-           userTags = "lengthOne")
-           
-# Let's see the difference in tag table in backpack.db
+setLocalRepo(system.file("graphGallery", package = "archivist"))
 showLocalRepo(method = "tags")
 splitTagsLocal() 
-# We can see that splitTagsLocal added tagKey = userTags to "lengthOne" Tag.
-
-# Deleting existing repository
-deleteRepo(exampleRepoDir, deleteRoot = TRUE)
-rm(exampleRepoDir)
 
 ## Github Version
 # Let's check how does table tag look like while we are using the
 # Gitub repository.
 # We will choose only special columns of data frames that show Tags
-showGithubRepo( user = "pbiecek", repo = "archivist", method = "tags" )[,2]
-splitTagsGithub( user = "pbiecek", repo = "archivist" )[,2:3]
+head(showGithubRepo( user = "pbiecek", repo = "archivist", method = "tags" )[,2])
+head(splitTagsGithub( user = "pbiecek", repo = "archivist" )[,2:3])
 
+head(splitTagsRemote("PieczaraPietraszki", "BetaAndBit", "master", "UniwersytetDzieci/arepo"))
 }
 }
 \author{
