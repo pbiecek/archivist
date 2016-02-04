@@ -195,7 +195,7 @@
 #' @family archivist
 #' @rdname showRepo
 #' @export
-showLocalRepo <- function( repoDir = aoption("repoDir"), method = "md5hashes"){
+showLocalRepo <- function( repoDir = aoptions("repoDir"), method = "md5hashes"){
   stopifnot( is.character( method ), length( method ) == 1 )
   stopifnot( ( is.character( repoDir ) & length( repoDir ) == 1 ) | is.null( repoDir ) )
   

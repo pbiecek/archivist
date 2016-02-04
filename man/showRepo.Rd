@@ -6,7 +6,7 @@
 \alias{showRemoteRepo}
 \title{View the List of Artifacts from the Repository}
 \usage{
-showLocalRepo(repoDir = aoption("repoDir"), method = "md5hashes")
+showLocalRepo(repoDir = aoptions("repoDir"), method = "md5hashes")
 
 showRemoteRepo(repo = aoptions("repo"), user = aoptions("user"),
   branch = aoptions("branch"), repoDirGit = aoptions("repoDirGit"),
