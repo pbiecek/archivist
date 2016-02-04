@@ -246,6 +246,18 @@ user="MarcinKosinski", repo="Museum", branch="master", repoDirGit="ex2")
 loadFromGithubRepo( "ff575c261c949d073b2895b05d1097c3", 
                     user="MarcinKosinski", repo="Museum", branch="master",
                     repoDirGit="ex1")
+                    
+loadFromRemoteRepo(md5hash = "08dc0b66975cded92b5cd8291ebdc955", 
+               repo = "graphGallery", user = "pbiecek", 
+               repoType = "github", value = TRUE)
+               
+ loadFromRemoteRepo(md5hash = "08dc0b66975cded92b5cd8291ebdc955", 
+               repo = "graphGalleryGit", user = "pbiecek", 
+               repoType = "bitbucket", value = TRUE)
+               
+ loadFromRemoteRepo(md5hash = "08dc0b66975cded92b5cd8291ebdc955", 
+               repo = "graphGalleryM", user = "pbiecek", 
+               repoType = "bitbucket", value = TRUE)
 }
 }
 \author{

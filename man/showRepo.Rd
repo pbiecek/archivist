@@ -8,11 +8,11 @@
 \usage{
 showLocalRepo(repoDir = NULL, method = "md5hashes")
 
-showRemoteRepo(epo = aoptions("repo"), user = aoptions("user"),
+showRemoteRepo(repo = aoptions("repo"), user = aoptions("user"),
   branch = aoptions("branch"), repoDirGit = aoptions("repoDirGit"),
   repoType = aoptions("repoType"), method = "md5hashes")
 
-showGithubRepo(epo = aoptions("repo"), user = aoptions("user"),
+showGithubRepo(repo = aoptions("repo"), user = aoptions("user"),
   branch = aoptions("branch"), repoDirGit = aoptions("repoDirGit"),
   repoType = aoptions("repoType"), method = "md5hashes")
 }
@@ -22,6 +22,9 @@ If it is set to \code{NULL} (by default), it will use the \code{repoDir} specifi
 
 \item{method}{A character specifying a method to be used to show the Repository. Available methods: 
 \code{md5hashes} (default), \code{tags} and \code{sets} - see \href{https://github.com/pbiecek/archivist2}{archivist2::saveSetToRepo}.}
+
+\item{repo}{While working with the Github repository. A character containing a name of the Github repository on which the Repository is stored.
+By default set to \code{NULL} - see \code{Note}.}
 
 \item{user}{While working with the Github repository. A character containing a name of the Github user on whose account the \code{repo} is created.
 By default set to \code{NULL} - see \code{Note}.}
@@ -34,9 +37,6 @@ on which the Repository is stored. If the Repository is stored in the main folde
 to \code{repoDirGit = FALSE} as default.}
 
 \item{repoType}{A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.}
-
-\item{repo}{While working with the Github repository. A character containing a name of the Github repository on which the Repository is stored.
-By default set to \code{NULL} - see \code{Note}.}
 }
 \value{
 If parameter \code{method} is set as \code{md5hashes} then a \code{data.frame} with artifacts' names and
