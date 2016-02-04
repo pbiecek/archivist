@@ -144,13 +144,12 @@ splitTags <- function( repoDir = NULL, repo = NULL, user = NULL,
                     method = "tags" ) -> tags_df
   }
   
-  if (nrow(tags_df) == 0 & local) {
-    stop("There were no Tags for this Repository. Try showLocalRepo(method='tags') to ensure there are any Tags.")
+  if (nrow(tags_df) == 0) {
+    stop("There were no Tags for this Repository. Try ",
+         ifelse(local, "showLocalRepo(method='tags')", "showRemoteRepo(method='tags')"),
+         " to ensure there are any Tags.")
   }
-  if (nrow(tags_df) == 0 & !local) {
-    stop("There were no Tags for this Repository. Try showGithubRepo(method='tags') to ensure there are any Tags.")
-  }
-  
+
   # We will split tag column into tagKey and tagValue columns
   strsplit(tags_df$tag, ":") %>%
     lapply( function(element){
