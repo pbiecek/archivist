@@ -38,12 +38,12 @@ Imports:
     RSQLite,
     git2r,
     jsonlite,
+    dplyr,
     magrittr
 Suggests:
     shiny,
     testthat,
     ggplot2,
-    dplyr,
     devtools,
     knitr
 BugReports: https://github.com/pbiecek/archivist/issues

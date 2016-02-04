@@ -3,17 +3,17 @@
 #' @title View the List of Artifacts from the Repository 
 #'
 #' @description
-#' \code{showLocalRepo} and \code{showGithubRepo} functions produce the \code{data.frame} of the artifacts from
+#' \code{showLocalRepo} and \code{showGithubRepo} and \code{showRemoteRepo} functions produce the \code{data.frame} of the artifacts from
 #' the \link{Repository} saved in a given \code{repoDir} (directory). \code{showLocalRepo}
-#' shows the artifacts from the \code{Repository} that exists on the user's computer whereas \code{showGithubRepo}
-#' shows the artifacts of the \code{Repository} existing on the Github repository.
+#' shows the artifacts from the \code{Repository} that exists on the user's computer whereas \code{showRemoteRepo}
+#' shows the artifacts of the \code{Repository} existing on the remote repository.
 #' To learn more about artifacts visit \link[archivist]{archivist-package}.
 #' 
 #' @details
-#' \code{showLocalRepo} and \code{showGithubRepo} functions produce the \code{data.frame} of the artifacts from
+#' \code{showLocalRepo} and \code{showGithubRepo} and \code{showRemoteRepo} functions produce the \code{data.frame} of the artifacts from
 #' a \link{Repository} saved in a given \code{repoDir} (directory). \code{showLocalRepo}
-#' shows the artifacts from the \code{Repository} that exists on the user's computer whereas \code{showGithubRepo}
-#' shows the artifacts of the \code{Repository} existing on the Github repository.
+#' shows the artifacts from the \code{Repository} that exists on the user's computer whereas \code{showRemoteRepo}
+#' shows the artifacts of the \code{Repository} existing on the remote repository.
 #' 
 #' Both functions show the current state of a \code{Repository}, inter alia, all archived artifacts can
 #' be seen with their unique \link{md5hash} or a \code{data.frame} with archived \link{Tags} can 
@@ -22,6 +22,8 @@
 #' @param repoType A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.
 #' @param method A character specifying a method to be used to show the Repository. Available methods: 
 #' \code{md5hashes} (default), \code{tags} and \code{sets} - see \href{https://github.com/pbiecek/archivist2}{archivist2::saveSetToRepo}.
+#' 
+#' @param repoType A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.
 #' 
 #' @param repoDir A character denoting an existing directory of the Repository for which metadata will be returned.
 #' If it is set to \code{NULL} (by default), it will use the \code{repoDir} specified in \link{setLocalRepo}.
@@ -193,7 +195,7 @@
 #' @family archivist
 #' @rdname showRepo
 #' @export
-showLocalRepo <- function( repoDir = NULL, method = "md5hashes" ){
+showLocalRepo <- function( repoDir = aoption("repoDir"), method = "md5hashes"){
   stopifnot( is.character( method ), length( method ) == 1 )
   stopifnot( ( is.character( repoDir ) & length( repoDir ) == 1 ) | is.null( repoDir ) )
   
@@ -209,7 +211,6 @@ showRemoteRepo <- function( repo = aoptions("repo"), user = aoptions("user"), br
                             repoType = aoptions("repoType"),
                             method = "md5hashes" ){
   stopifnot( is.character( c( method, branch ) ), length( method ) == 1, length( branch ) == 1  )
-  
   
   GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
   

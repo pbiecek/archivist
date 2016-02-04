@@ -15,6 +15,9 @@
 #' can be used to easily summarize, search, and extract artifacts' Tags.
 #' See \code{examples}.
 #' 
+#' @param repoType A character containing a type of the remote repository. 
+#' Currently it can be 'github' or 'bitbucket'.
+#' 
 #' @param repoDir While working with the local repository. A character denoting 
 #' an existing directory of the Repository. If it is set to \code{NULL} (by default),
 #' it will use the \code{repoDir} specified in \link{setLocalRepo}.
@@ -115,33 +118,38 @@
 #' @family archivist
 #' @rdname splitTags
 #' @export
-splitTagsLocal <- function( repoDir = NULL ){
-  
+splitTagsLocal <- function( repoDir = aoptions("repoDir") ){
   splitTags( repoDir = repoDir )
-  
 }
 
 
 #' @rdname splitTags
 #' @export
-splitTagsGithub <- function( repo = NULL, user = NULL, branch = "master",
-                              repoDirGit = FALSE ){ 
+splitTagsRemote <- function( repo = aoptions("repo"), user = aoptions("user"), 
+                             branch = aoptions("branch"), repoDirGit = aoptions("repoDirGit"),
+                             repoType = aoptions("repoType") ){ 
   
-  splitTags( repo = repo, user = user, branch = branch, repoDirGit = repoDirGit,
+  splitTags( repo = repo, user = user, branch = branch, repoDirGit = repoDirGit, repoType = repoType,
               local = FALSE )
   
 }
 
+#' @rdname splitTags
+#' @export
+splitTagsGithub <- splitTagsRemote
+
+#' @rdname splitTags
+#' @export
 splitTags <- function( repoDir = NULL, repo = NULL, user = NULL,
-                        branch = "master", repoDirGit = FALSE,
+                        branch = "master", repoDirGit = FALSE, repoType = NULL,
                         local = TRUE ){  
   # We will expand tag table in backpack.db
   if (local) {
     showLocalRepo( repoDir = repoDir, method = "tags" ) -> tags_df
   } else {
-    showGithubRepo( repo = repo, user = user, branch = branch,
+    showRemoteRepo( repo = repo, user = user, branch = branch,
                     repoDirGit = repoDirGit,
-                    method = "tags" ) -> tags_df
+                    method = "tags", repoType=repoType) -> tags_df
   }
   
   if (nrow(tags_df) == 0) {

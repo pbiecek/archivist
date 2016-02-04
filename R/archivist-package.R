@@ -66,6 +66,8 @@
 #' @importClassesFrom git2r cred_user_pass
 #' @importClassesFrom git2r git_repository
 #' @importFrom jsonlite unbox
+#' @importFrom dplyr mutate
+#' @importFrom dplyr select
 #'
 #' @family archivist
 #' @name archivist-package

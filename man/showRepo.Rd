@@ -6,7 +6,7 @@
 \alias{showRemoteRepo}
 \title{View the List of Artifacts from the Repository}
 \usage{
-showLocalRepo(repoDir = NULL, method = "md5hashes")
+showLocalRepo(repoDir = aoption("repoDir"), method = "md5hashes")
 
 showRemoteRepo(repo = aoptions("repo"), user = aoptions("user"),
   branch = aoptions("branch"), repoDirGit = aoptions("repoDirGit"),
@@ -37,6 +37,8 @@ on which the Repository is stored. If the Repository is stored in the main folde
 to \code{repoDirGit = FALSE} as default.}
 
 \item{repoType}{A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.}
+
+\item{repoType}{A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.}
 }
 \value{
 If parameter \code{method} is set as \code{md5hashes} then a \code{data.frame} with artifacts' names and
@@ -51,17 +53,17 @@ of the \code{Tag} or \code{md5hash}.
 To learn more about \code{Tags} or \code{md5hashes} check: \link{Tags} or \link{md5hash}.
 }
 \description{
-\code{showLocalRepo} and \code{showGithubRepo} functions produce the \code{data.frame} of the artifacts from
+\code{showLocalRepo} and \code{showGithubRepo} and \code{showRemoteRepo} functions produce the \code{data.frame} of the artifacts from
 the \link{Repository} saved in a given \code{repoDir} (directory). \code{showLocalRepo}
-shows the artifacts from the \code{Repository} that exists on the user's computer whereas \code{showGithubRepo}
-shows the artifacts of the \code{Repository} existing on the Github repository.
+shows the artifacts from the \code{Repository} that exists on the user's computer whereas \code{showRemoteRepo}
+shows the artifacts of the \code{Repository} existing on the remote repository.
 To learn more about artifacts visit \link[archivist]{archivist-package}.
 }
 \details{
-\code{showLocalRepo} and \code{showGithubRepo} functions produce the \code{data.frame} of the artifacts from
+\code{showLocalRepo} and \code{showGithubRepo} and \code{showRemoteRepo} functions produce the \code{data.frame} of the artifacts from
 a \link{Repository} saved in a given \code{repoDir} (directory). \code{showLocalRepo}
-shows the artifacts from the \code{Repository} that exists on the user's computer whereas \code{showGithubRepo}
-shows the artifacts of the \code{Repository} existing on the Github repository.
+shows the artifacts from the \code{Repository} that exists on the user's computer whereas \code{showRemoteRepo}
+shows the artifacts of the \code{Repository} existing on the remote repository.
 
 Both functions show the current state of a \code{Repository}, inter alia, all archived artifacts can
 be seen with their unique \link{md5hash} or a \code{data.frame} with archived \link{Tags} can 
