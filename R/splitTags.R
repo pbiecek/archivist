@@ -151,26 +151,8 @@ splitTags <- function( repoDir = NULL, repo = NULL, user = NULL,
   }
 
   # We will split tag column into tagKey and tagValue columns
-  strsplit(tags_df$tag, ":") %>%
-    lapply( function(element){
-      if (length(element) > 2) {
-        # in case of Tags with TagKey = date
-        element[2] <- paste0(element[-1], collapse = ":")
-        element <- element[1:2]
-      } else if (length(element) == 1){ 
-        # when a user gives Tag which does not match "TagKey:TagValue" structure
-        element <- c("userTags", element)
-      } else if (length(element) == 0){ 
-        # when a user gives Tag which is a character of length 0 :)
-        element <- c("userTags", "")
-      }
-      element
-    }) %>% 
-    simplify2array %>%
-    t %>%
-    cbind(tags_df) -> tags_df
-  tags_df <- tags_df[, c(3,1,2,5)]
-  names(tags_df)[2:3] <- c("tagKey", "tagValue")
-  
-  tags_df
+  tags_df %>%
+    mutate(tagKey = gsub(tag, pattern=":.*$", replacement=""),
+           tagValue = gsub(tag, pattern="^[^:]*:", replacement="")) %>%
+    select(artifact, tagKey, tagValue, createdDate) 
 }
