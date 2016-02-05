@@ -79,8 +79,8 @@ To learn more about \code{Tags} and \code{Repository} structure check
 ## LOCAL VERSION 
 
 setLocalRepo(system.file("graphGallery", package = "archivist"))
-showLocalRepo(method = "tags")
-splitTagsLocal() 
+head(showLocalRepo(method = "tags"))
+head(splitTagsLocal() )
 
 ## Github Version
 # Let's check how does table tag look like while we are using the
