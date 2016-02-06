@@ -41,14 +41,14 @@
 #' @param repoDir A character denoting an existing directory in which artifacts will be searched for.
 #' If it is set to \code{NULL} (by default), it will use the \code{repoDir} specified in \link{setLocalRepo}.
 #' 
-#' @param repo While working with the Github repository. A character containing a name of the Github repository on which the Repository is stored.
+#' @param repo While working with the Remote repository. A character containing a name of the Remote repository on which the Repository is stored.
 #' By default set to \code{NULL} - see \code{Note}.
 #' 
-#' @param user While working with the Github repository. A character containing a name of the Github user on whose account the \code{repo} is created.
+#' @param user While working with the Remote repository. A character containing a name of the Remote user on whose account the \code{repo} is created.
 #' By default set to \code{NULL} - see \code{Note}.
 #'
-#' @param branch While working with the Github repository. A character containing a name of 
-#' the Github Repository's branch on which the Repository is stored. Default \code{branch} is \code{master}.
+#' @param branch While working with the Remote repository. A character containing a name of 
+#' the Remote Repository's branch on which the Repository is stored. Default \code{branch} is \code{master}.
 #' 
 #' @param fixed A logical value specifying how \code{artifacts} should be searched for.
 #' If \code{fixed = TRUE} (default) then artifacts are searched for by using \code{pattern = "Tag"} argument.
@@ -56,15 +56,15 @@
 #' The latter is wider and more flexible method, e.g.,
 #' using \code{pattern = "name", fixed = FALSE} arguments enables to search for all artifacts in the \code{Repository}.
 #' 
-#' @param repoDirGit While working with the Github repository. A character containing a name of a directory on the Github repository 
-#' on which the Repository is stored. If the Repository is stored in the main folder of the Github repository, this should be set 
+#' @param repoDirGit While working with the Github repository. A character containing a name of a directory on the Remote repository 
+#' on which the Repository is stored. If the Repository is stored in the main folder of the Remote repository, this should be set 
 #' to \code{repoDirGit = FALSE} as default.
 #' 
 #' @param realDBname A logical value. Should not be changed by user. It is a technical parameter.
 #'
 #' @note
-#' If \code{repo} and \code{user} are set to \code{NULL} (as default) in the Github mode then global parameters
-#' set in \link{setGithubRepo} function are used.
+#' If \code{repo} and \code{user} are set to \code{NULL} (as default) in the Remote mode then global parameters
+#' set in \link{setRemoteRepo} function are used.
 #' 
 #' @author
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
@@ -136,18 +136,18 @@
 #'   
 #'   # Github version
 #'   # check the state of the Repository
-#'   summaryGithubRepo( user="pbiecek", repo="archivist" )
-#'   showGithubRepo( user="pbiecek", repo="archivist" )
-#'   showGithubRepo( user="pbiecek", repo="archivist", method = "tags" )
+#'   summaryRemoteRepo( user="pbiecek", repo="archivist" )
+#'   showRemoteRepo( user="pbiecek", repo="archivist" )
+#'   showRemoteRepo( user="pbiecek", repo="archivist", method = "tags" )
 #'   
 #'   # Tag search, fixed version
-#'   searchInGithubRepo( "varname:Sepal.Width", user="pbiecek", repo="archivist" )
-#'   searchInGithubRepo( "class:lm", user="pbiecek", repo="archivist", branch="master" )
-#'   searchInGithubRepo( "name:myplot123", user="pbiecek", repo="archivist" )
+#'   searchInRemoteRepo( "varname:Sepal.Width", user="pbiecek", repo="archivist" )
+#'   searchInRemoteRepo( "class:lm", user="pbiecek", repo="archivist", branch="master" )
+#'   searchInRemoteRepo( "name:myplot123", user="pbiecek", repo="archivist" )
 #'   
 #'   # Tag search, regex version
-#'   searchInGithubRepo( "class", user="pbiecek", repo="archivist",  fixed = FALSE )
-#'   searchInGithubRepo( "name", user="pbiecek", repo="archivist", fixed = FALSE )
+#'   searchInRemoteRepo( "class", user="pbiecek", repo="archivist",  fixed = FALSE )
+#'   searchInRemoteRepo( "name", user="pbiecek", repo="archivist", fixed = FALSE )
 #'   
 #'  
 #'   # date search
@@ -159,7 +159,7 @@
 #'   # also on Github
 #'   
 #'   # Remeber to set dateTo parameter to actual date because sometimes we update datasets.
-#'   searchInGithubRepo( pattern = list( dateFrom = "2015-10-01", dateTo = "2015-11-30" ), 
+#'   searchInRemoteRepo( pattern = list( dateFrom = "2015-10-01", dateTo = "2015-11-30" ), 
 #'                       user="pbiecek", repo="archivist", branch="master" )
 #'   
 #'   
@@ -173,23 +173,23 @@
 #'   
 #'   rm( exampleRepoDir )
 #'   
-#'   # many archivist-like Repositories on one Github repository
+#'   # many archivist-like Repositories on one Remote repository
 #'   
-#'   searchInGithubRepo( pattern = "name", user="MarcinKosinski", repo="Museum", 
+#'   searchInRemoteRepo( pattern = "name", user="MarcinKosinski", repo="Museum", 
 #'   branch="master", repoDirGit="ex1", fixed = FALSE )
 #'
-#'   searchInGithubRepo( pattern = "name", user="MarcinKosinski", repo="Museum", 
+#'   searchInRemoteRepo( pattern = "name", user="MarcinKosinski", repo="Museum", 
 #'                    branch="master", repoDirGit="ex2", fixed = FALSE )
 #'  
 #'  # multi versions
-#'  multiSearchInGithubRepo( patterns=c("varname:Sepal.Width", "class:lm", "name:myplot123"), 
+#'  multiSearchInRemoteRepo( patterns=c("varname:Sepal.Width", "class:lm", "name:myplot123"), 
 #'                          user="pbiecek", repo="archivist", intersect = FALSE )                                    
 #'   
 #' }
 #' @family archivist
 #' @rdname searchInRepo
 #' @export
-searchInLocalRepo <- function( pattern, repoDir = NULL, fixed = TRUE, realDBname = TRUE ){
+searchInLocalRepo <- function( pattern, repoDir = aoptions("repoDir"), fixed = TRUE, realDBname = TRUE ){
   stopifnot( ( is.character( repoDir ) & length( repoDir ) == 1 ) | is.null( repoDir ) )
   stopifnot( is.logical( fixed ) )
   stopifnot( is.character( pattern ) | is.list( pattern ) ) 
@@ -224,14 +224,12 @@ searchInLocalRepo <- function( pattern, repoDir = NULL, fixed = TRUE, realDBname
 
 #' @rdname searchInRepo
 #' @export
-searchInGithubRepo <- function( pattern, repo = NULL, user = NULL, branch = "master", repoDirGit = FALSE,
-                                fixed = TRUE ){
-
-  stopifnot( is.character( branch ), is.logical( fixed ), length( branch ) == 1 )
+searchInRemoteRepo <- function( pattern, repo = aoptions("repo"), user = aoptions("user"), branch = "master", repoDirGit = aoptions("repoDirGit"),
+                                repoType = aoptions("repoType"), fixed = TRUE ){
   stopifnot( is.character( pattern ) | is.list( pattern ) )
   stopifnot( length( pattern ) == 1 | length( pattern ) == 2 )
 
-  GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
+  RemoteRepoCheck( repo, user, branch, remoteDir, repoType) # implemented in setRepo.R
   
   # first download database
   remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, repoDirGit=repoDirGit)
@@ -261,7 +259,7 @@ searchInGithubRepo <- function( pattern, repo = NULL, user = NULL, branch = "mas
 
 #' @rdname searchInRepo
 #' @export
-multiSearchInLocalRepo <- function( patterns, repoDir = NULL, fixed = TRUE, intersect = TRUE, realDBname = TRUE ){
+multiSearchInLocalRepo <- function( patterns, repoDir = aoptions("repoDir"), fixed = TRUE, intersect = TRUE, realDBname = TRUE ){
   stopifnot( is.logical( intersect ) )      
              
   md5hs <- lapply(patterns, function(pattern) unique(searchInLocalRepo(pattern, repoDir=repoDir, fixed=fixed, realDBname = realDBname) ))
@@ -274,12 +272,12 @@ multiSearchInLocalRepo <- function( patterns, repoDir = NULL, fixed = TRUE, inte
 
 #' @rdname searchInRepo
 #' @export
-multiSearchInGithubRepo <- function( patterns, repo = NULL, user = NULL, 
-                                     branch = "master", repoDirGit = FALSE, 
+multiSearchInRemoteRepo <- function( patterns, repo = aoptions("repo"), user = aoptions("user"), branch = "master", repoDirGit = aoptions("repoDirGit"),
+                                     repoType = aoptions("repoType"), 
                                      fixed = TRUE, intersect = TRUE ){
   stopifnot( is.logical(  intersect ) )
 
-  GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
+  RemoteRepoCheck( repo, user, branch, remoteDir, repoType) # implemented in setRepo.R
   
   remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, repoDirGit=repoDirGit)
   Temp <- downloadDB( remoteHook )
@@ -287,25 +285,4 @@ multiSearchInGithubRepo <- function( patterns, repo = NULL, user = NULL,
   m <- multiSearchInLocalRepo( patterns, repoDir = Temp, fixed=fixed,
                                intersect=intersect, realDBname = FALSE)
   return( m )
-}
-
-#' @rdname searchInRepo
-#' @export
-multiSearchInRepo <- function(patterns, fixed = TRUE, intersect = TRUE,
-                              repoDir = NULL, realDBname = TRUE,
-                              repo = NULL, user = NULL, branch = "master", repoDirGit = FALSE ){
-  
-  .Deprecated("multiSearchInRepo", msg = "The multiSearchInRepo is set as deprecated. Try to use direct calls to multiSearchInLocalRepo/multiSearchInGitRepo")
-  
-  local <- (!is.null(aoptions("repoDir")) && is.null(repo)) || (!is.null(repoDir) && is.null(repo))
-  GitHub <- (is.null(repoDir) && !is.null(aoptions("repo"))) || (is.null(repoDir) && !is.null(repo))
-  if (local){
-    multiSearchInLocalRepo( patterns = patterns, repoDir = repoDir, fixed = fixed,
-                            intersect = intersect, realDBname = realDBname )
-  }  else if (GitHub) {
-    multiSearchInGithubRepo( patterns = patterns, repo = repo, user = user, branch = branch,
-                             repoDirGit = repoDirGit, fixed = fixed, intersect = intersect )
-  } else {
-    stop("repo and repoDir parameters can not be used simultaneously.")
-  }
 }
