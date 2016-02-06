@@ -70,13 +70,13 @@ test_that("createEmptyRepo creates repo", {
 test_that("copying from other repositories and showRepo", {
   repo <- "new_repo"
   invisible(createEmptyRepo(repoDir = repo))
-  copyGithubRepo( repoTo = repo, md5hashes= "2166dfbd3a7a68a91a2f8e6df1a44111", 
+  copyRemoteRepo( repoTo = repo, md5hashes= "2166dfbd3a7a68a91a2f8e6df1a44111", 
                   user="pbiecek", repo="graphGallery" )
   expect_is(showLocalRepo(repoDir = repo, method = "tags"), "data.frame")
   expect_equal(dim(showLocalRepo(repoDir = repo, method = "tags")), c(6, 3))
   expect_equal(names(showLocalRepo(repoDir = repo, method = "tags")), c("artifact", "tag", "createdDate"))
   
-  summaryGithubRepo(user="pbiecek", repo="graphGallery") -> graphGallery
+  summaryRemoteRepo(user="pbiecek", repo="graphGallery") -> graphGallery
   expect_output(str(graphGallery), "List of 5")
   expect_equal(graphGallery$artifactsNumber > 55, TRUE)
   
@@ -96,7 +96,7 @@ test_that("saveToRepo funcion works with regular parameters", {
 
 
 test_that("loadFromRepo functions works with regular parameters", {
-  pl2 <- loadFromGithubRepo("92ada1", repo="graphGallery", user="pbiecek", 
+  pl2 <- loadFromRemoteRepo("92ada1", repo="graphGallery", user="pbiecek", 
                             value=TRUE)
   expect_output(str(pl2), "List of 9")
 })
@@ -109,15 +109,15 @@ test_that("object is properly serialized", {
 
 test_that("search* functions does search", {
   expect_equal(c("d74472d5b4eee352ba17c5a6f2472c07", "4305c5b68bade4fdf2d7b4033dc19fa5") %in%
-  searchInGithubRepo(pattern="class:gg", user="pbiecek", repo="graphGallery"), c(TRUE, TRUE))
+  searchInRemoteRepo(pattern="class:gg", user="pbiecek", repo="graphGallery"), c(TRUE, TRUE))
   
   expect_equal(c("6dcb47aaff74b1b5f292b3eddc471c17", "c112c80ae9039b658149e1d66e7507e9") %in%
-  searchInGithubRepo(pattern = list( dateFrom = "2014-09-01", 
+  searchInRemoteRepo(pattern = list( dateFrom = "2014-09-01", 
                                      dateTo = "2014-09-30" ),
                      user="pbiecek", repo="graphGallery"), c(TRUE, TRUE))
   
   expect_equal(c("2166dfbd3a7a68a91a2f8e6df1a44111", "92ada1e052d4d963e5787bfc9c4b506c") %in%
-  multiSearchInGithubRepo(pattern=c("class:gg", "labelx:Sepal.Length"),
+  multiSearchInRemoteRepo(pattern=c("class:gg", "labelx:Sepal.Length"),
                           user="pbiecek", repo="graphGallery"), c(TRUE, TRUE))
 })
 

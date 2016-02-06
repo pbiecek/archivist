@@ -1,9 +1,9 @@
 test_that("zip*Repo does not react on errors as it should ", {
-  expect_error(zipGithubRepo( user="pbiecek", repo="archivist", repoTo = "Repo does not exist" ))
-  expect_error(zipGithubRepo( user="tyu oiyuvthfgy333", repo="archivist"))
-  expect_error(zipGithubRepo( user="wchodor", repo="jbsjdabfb"))
-  expect_error(zipGithubRepo( user="wchodor", repo="archivist", branch = "gajsdasb"))
-  expect_error(zipGithubRepo( user= 10, repo="archivist"))    
+  expect_error(zipRemoteRepo( user="pbiecek", repo="archivist", repoTo = "Repo does not exist" ))
+  expect_error(zipRemoteRepo( user="tyu oiyuvthfgy333", repo="archivist"))
+  expect_error(zipRemoteRepo( user="wchodor", repo="jbsjdabfb"))
+  expect_error(zipRemoteRepo( user="wchodor", repo="archivist", branch = "gajsdasb"))
+  expect_error(zipRemoteRepo( user= 10, repo="archivist"))    
 })
 
 
@@ -12,11 +12,11 @@ test_that("zip*Repo reacts properly on proper arguments ", {
   stop_for_status(req)
   filelist <- unlist(lapply(content(req)$tree, "[", "path"), use.names = F)
   liczba_art_gallery <- length(grep("ex1/gallery/", filelist, value = TRUE, fixed = TRUE))
-  liczba_art_backpack <- length(unique(showGithubRepo(repo = "museum",
+  liczba_art_backpack <- length(unique(showRemoteRepo(repo = "museum",
                                                       user = "MarcinKosinski",
                                                       repoDirGit = "ex1")[,1]))
   zipname <- "test1234.zip"
-  zipGithubRepo( user="MarcinKosinski", repo="Museum", zipname = zipname,
+  zipRemoteRepo( user="MarcinKosinski", repo="Museum", zipname = zipname,
                  repoDirGit="ex1")
   zipfile <- file.path(getwd(), zipname)
   repo_zip <- gsub(pattern = ".zip", replacement = "", x = zipfile)

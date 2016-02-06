@@ -3,7 +3,7 @@ test_that("setLocalRepo sets repo", {
   setLocalRepo(repoDir = "tmp_archivist")
   expect_equal(aoptions("repoDir"), "tmp_archivist")
   
-  setGithubRepo("MarcinKosinski", "archivist", "master", "clone123")
+  setRemoteRepo("MarcinKosinski", "archivist", "master", "clone123")
   expect_equal(aoptions("user"), "MarcinKosinski")
   expect_equal(aoptions("repo"), "archivist")
   expect_equal(aoptions("branch"), "master")
