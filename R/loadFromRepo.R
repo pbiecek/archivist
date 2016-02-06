@@ -4,8 +4,7 @@
 #'
 #' @description
 #' \code{loadFromLocalRepo} loads an artifact from a local \link{Repository} into the workspace.
-#' \code{loadFromGithubRepo} loads an artifact from a Github \link{Repository} into the workspace.
-#' \code{loadFromRemoteRepo} loads an artifact from a git / mercurial \link{Repository} into the workspace.
+#' \code{loadFromRemoteRepo} loads an artifact from a github / git / mercurial \link{Repository} into the workspace.
 #' To learn more about artifacts visit \link[archivist]{archivist-package}.
 #' 
 #' @details
@@ -31,30 +30,30 @@
 #' @note
 #' You can specify one \code{md5hash} (or its abbreviation) per function call. 
 #' 
-#' If \code{repo} and \code{user} are set to \code{NULL} (as default) in Github mode then global parameters
-#' set in \link{setGithubRepo} function are used.
+#' If \code{repo} and \code{user} are set to \code{NULL} (as default) in Remote mode then global parameters
+#' set in \link{setRemoteRepo} function are used.
 #' 
 #' You should remember while using \code{loadFromRepo} wrapper that \code{repoDir} is
 #' a parameter used only in \code{loadFromLocalRepo} while \code{repo}, \code{user},
-#' \code{branch} and \code{repoDirGit} are used only in \code{loadFromGithubRepo}. When you mix those
+#' \code{branch} and \code{repoDirGit} are used only in \code{loadFromRemoteRepo}. When you mix those
 #' parameters you will receive an error message.
 #' 
-#' @param repoType A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.
+#' @param repoType A character containing a type of the remote repository. Currently it can be 'Remote' or 'bitbucket'.
 #' 
 #' @param repoDir A character denoting an existing directory from which an artifact will be loaded.
 #' If it is set to \code{NULL} (by default), it will use the \code{repoDir} specified in \link{setLocalRepo}.
 #' 
 #' @param md5hash A character assigned to the artifact through the use of a cryptographical hash function with MD5 algorithm, or it's abbreviation.
 #' 
-#' @param repo While working with a Github repository. A character containing a name of a Github repository on which the Repository is archived.
+#' @param repo While working with a Remote repository. A character containing a name of a Remote repository on which the Repository is archived.
 #' By default set to \code{NULL} - see \code{Note}.
-#' @param user While working with a Github repository. A character containing a name of a Github user on whose account the \code{repo} is created.
+#' @param user While working with a Remote repository. A character containing a name of a Remote user on whose account the \code{repo} is created.
 #' By default set to \code{NULL} - see \code{Note}. 
-#' @param branch While working with a Github repository. A character containing a name of 
-#' Github Repository's branch on which the Repository is archived. Default \code{branch} is \code{master}.
+#' @param branch While working with a Remote repository. A character containing a name of 
+#' Remote Repository's branch on which the Repository is archived. Default \code{branch} is \code{master}.
 #' 
-#' @param repoDirGit While working with a Github repository. A character containing a name of a directory on Github repository 
-#' on which the Repository is stored. If the Repository is stored in main folder on Github repository, this should be set 
+#' @param repoDirGit While working with a Remote repository. A character containing a name of a directory on Remote repository 
+#' on which the Repository is stored. If the Repository is stored in main folder on Remote repository, this should be set 
 #' to \code{repoDirGit = FALSE} as default.
 #' 
 #' @param value If \code{FALSE} (default) then artifacts are loaded into the Global Environment with their original names, 
@@ -159,28 +158,28 @@
 #' deleteRepo( exampleRepoDir, TRUE)
 #' 
 #' #
-#' #GitHub Version
+#' #Remote Version
 #' #
 #' 
 #' # check the state of the Repository
-#' summaryGithubRepo( user="pbiecek", repo="archivist" )
-#' showGithubRepo( user="pbiecek", repo="archivist" )
-#' showGithubRepo( user="pbiecek", repo="archivist", method = "tags" )
+#' summaryRemoteRepo( user="pbiecek", repo="archivist" )
+#' showRemoteRepo( user="pbiecek", repo="archivist" )
+#' showRemoteRepo( user="pbiecek", repo="archivist", method = "tags" )
 #' 
 #' rm( model )
 #' rm( myplot123 )
 #' rm( qda1 )
-#' (VARmd5hash <- searchInGithubRepo( "varname:Sepal.Width", 
+#' (VARmd5hash <- searchInRemoteRepo( "varname:Sepal.Width", 
 #'                    user="pbiecek", repo="archivist" ))
-#' (NAMEmd5hash <- searchInGithubRepo( "name:qda1", 
+#' (NAMEmd5hash <- searchInRemoteRepo( "name:qda1", 
 #'                    user="pbiecek", repo="archivist", branch="master" ))
-#' (CLASSmd5hash <- searchInGithubRepo( "class:ggplot", 
+#' (CLASSmd5hash <- searchInRemoteRepo( "class:ggplot", 
 #'                    user="pbiecek", repo="archivist", branch="master" ))
 #' 
 #' 
-#' loadFromGithubRepo( "ff575c261c", user="pbiecek", repo="archivist")
-#' NewObjects <- loadFromGithubRepo( NAMEmd5hash, user="pbiecek", repo="archivist", value = TRUE )
-#' loadFromGithubRepo( CLASSmd5hash, user="pbiecek", repo="archivist")
+#' loadFromRemoteRepo( "ff575c261c", user="pbiecek", repo="archivist")
+#' NewObjects <- loadFromRemoteRepo( NAMEmd5hash, user="pbiecek", repo="archivist", value = TRUE )
+#' loadFromRemoteRepo( CLASSmd5hash, user="pbiecek", repo="archivist")
 #' 
 #' 
 #' ## Loading artifacts from the repository which is built in the archivist package 
@@ -222,25 +221,28 @@
 #' 
 #' rm( exampleRepoDir )
 #' 
-#' # many archivist-like Repositories on one Github repository
+#' # many archivist-like Repositories on one Remote repository
 #' 
-#' loadFromGithubRepo( "ff575c261c949d073b2895b05d1097c3", 
+#' loadFromRemoteRepo( "ff575c261c949d073b2895b05d1097c3", 
 #' user="MarcinKosinski", repo="Museum", branch="master", repoDirGit="ex2")
 #' 
 #' 
-#' loadFromGithubRepo( "ff575c261c949d073b2895b05d1097c3", 
+#' loadFromRemoteRepo( "ff575c261c949d073b2895b05d1097c3", 
 #'                     user="MarcinKosinski", repo="Museum", branch="master",
 #'                     repoDirGit="ex1")
 #'                     
+#' #github
 #' loadFromRemoteRepo(md5hash = "08dc0b66975cded92b5cd8291ebdc955", 
 #'                repo = "graphGallery", user = "pbiecek", 
 #'                repoType = "github", value = TRUE)
-#'                
-#'  loadFromRemoteRepo(md5hash = "08dc0b66975cded92b5cd8291ebdc955", 
+#'            
+#' #git
+#' loadFromRemoteRepo(md5hash = "08dc0b66975cded92b5cd8291ebdc955", 
 #'                repo = "graphGalleryGit", user = "pbiecek", 
 #'                repoType = "bitbucket", value = TRUE)
-#'                
-#'  loadFromRemoteRepo(md5hash = "08dc0b66975cded92b5cd8291ebdc955", 
+#' 
+#' # mercurial               
+#' loadFromRemoteRepo(md5hash = "08dc0b66975cded92b5cd8291ebdc955", 
 #'                repo = "graphGalleryM", user = "pbiecek", 
 #'                repoType = "bitbucket", value = TRUE)
 #' }
@@ -289,7 +291,7 @@ loadFromRemoteRepo <- function( md5hash, repo = aoptions("repo"), user = aoption
   stopifnot( is.character( c( md5hash, branch ) ), length( md5hash ) == 1, length( branch ) == 1 )
   stopifnot( is.logical( value ) )
   
-  GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
+  RemoteRepoCheck( repo, user, branch, repoDirGit, repoType) # implemented in setRepo.R
   
   remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, repoDirGit=repoDirGit, repoType=repoType)
   
@@ -347,50 +349,3 @@ loadFromRemoteRepo <- function( md5hash, repo = aoptions("repo"), user = aoption
 }
 }
 
-#' @rdname loadFromRepo
-#' @export
-loadFromGithubRepo <- loadFromRemoteRepo
-
-
-loadFromRepo <- function( md5hash, repoDir = NULL,
-                          repo = NULL, user = NULL, branch = "master", repoDirGit = FALSE,
-                          value = FALSE ){
-  .Deprecated("loadFromLocalRepo", msg = "The loadFromLocalRepo is set as deprecated. Try to use direct calls to loadFromLocalRepo/loadFromGitRepo.")
-  
-  if (length(strsplit(md5hash, "/")[[1]]) == 3 & is.null(repo) & is.null(user)){
-    loadFromGithubRepo(md5hash = strsplit(md5hash, "/")[[1]][1],
-                       user = strsplit(md5hash, "/")[[1]][2],
-                       repo = strsplit(md5hash, "/")[[1]][3],
-                       value = value)
-  }else{
-    
-    if(is.character(c(md5hash, repo, user)) & length(strsplit(md5hash, "/")[[1]]) == 1) {
-      loadFromGithubRepo(md5hash = md5hash,
-                         user = user,
-                         repoDirGit = repoDirGit,
-                         repo = repo,
-                         value = value)
-    }else{
-  
-  w1 <- is.null(repoDir); w2 <- is.null(aoptions("repoDir"))
-  w3 <- is.null(repo); w4 <- is.null(aoptions("repo"))
-  w5 <- is.null(user); w6 <- is.null(aoptions("user"))
-  w7 <- branch == "master";
-  w8 <- repoDirGit == FALSE
-  local <- (!w1 || !w2) && w3 && w4 && w5 && w6 && w7 && w8
-  GitHub <- (w1 && w2) && (!w3 || !w4) && (!w5 || !w6)
-  none <- w1 && w2 && w3 && w4 && w5 && w6
-  if (local) {
-    loadFromLocalRepo( md5hash = md5hash, repoDir = repoDir, value = value )
-  } else if (GitHub) {
-    loadFromGithubRepo(  md5hash = md5hash, repo = repo, user = user, branch = branch,
-                         repoDirGit = repoDirGit, value = value )
-  } else if (none){
-    stop("None of the parameters: repoDir, repo, user was specified.")
-  } else {
-    stop("repoDir and repo or user or branch or repoDirGit were used simultaneously. Remember
-to use them separately!")
-  } 
-  }
-  }
-}

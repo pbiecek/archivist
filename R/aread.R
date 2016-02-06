@@ -4,20 +4,20 @@
 #'
 #' @description
 #' \code{aread} reads the artifact from the \link{Repository}. It's a wrapper around 
-#' \link{loadFromLocalRepo} and \link{loadFromGithubRepo}.
+#' \link{loadFromLocalRepo} and \link{loadFromRemoteRepo}.
 #' 
 #' @details
-#' Function \code{aread} reads artifacts (by \code{md5hashes}) from GitHub Repository.
-#' It uses \link{loadFromLocalRepo} and \link{loadFromGithubRepo} functions
+#' Function \code{aread} reads artifacts (by \code{md5hashes}) from Remote Repository.
+#' It uses \link{loadFromLocalRepo} and \link{loadFromRemoteRepo} functions
 #' with different parameter's specification.
 #' 
 #' @note
-#' Before you start using this function, remember to set local or github repository
-#' to default by using \code{setLocalRepo()} or \code{setGithubRepo} functions.
+#' Before you start using this function, remember to set local or Remote repository
+#' to default by using \code{setLocalRepo()} or \code{setRemoteRepo} functions.
 #' 
 #' @param md5hash One of the following:
 #' 
-#' A character vector which elements  are consisting of at least three components separated with '/': GitHub user name, GitHub repository and name of the artifact (MD5 hash) or it's abbreviation.
+#' A character vector which elements  are consisting of at least three components separated with '/': Remote user name, Remote repository and name of the artifact (MD5 hash) or it's abbreviation.
 #' 
 #' MD5 hashes of artifacts in current local default directory or its abbreviations.
 #' 
@@ -31,7 +31,7 @@
 #' pl <- aread("2166dfbd3a7a68a91a2f8e6df1a44111")
 #' # plot it
 #' pl
-#' # read the object from GitHub
+#' # read the object from Remote
 #' pl <- aread("pbiecek/graphGallery/2166dfbd3a7a68a91a2f8e6df1a44111")
 #' # plot it
 #' pl
@@ -52,8 +52,8 @@ aread <- function(md5hash){
       # local directory
       res[[md5h]] <- loadFromLocalRepo(md5hash = elements, value = TRUE)
     } else {
-      # GitHub directory
-      res[[md5h]] <- loadFromGithubRepo(md5hash = tail(elements,1), 
+      # Remote directory
+      res[[md5h]] <- loadFromRemoteRepo(md5hash = tail(elements,1), 
                                         repo = elements[2],
                                         repoDirGit = ifelse(length(elements) > 3, paste(elements[3:(length(elements)-1)], collapse="/"), FALSE),
                                         user = elements[1], value = TRUE)
