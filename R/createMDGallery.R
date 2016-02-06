@@ -3,24 +3,24 @@
 #' @title Create the Summary for Each Artifact in a Markdown Format
 #'
 #' @description
-#' \code{createGithubMDGallery} creates a summary for each artifact from \link{Repository} stored on a GitHub.
+#' \code{createMDGallery} creates a summary for each artifact from \link{Repository} stored on a GitHub.
 #' For each artifact tihd function creates a markdown file with: the download link, artifact's \link{Tags} (when \code{addTags = TRUE}) and
 #' miniature (\code{addMiniature = TRUE}) if the artifact was archived with it's miniature and \code{Tags}. The miniature is a \link{print}
 #'  or \link{head} over an artifact or it's \code{png} when it was a plot. But this function only supports \code{png} miniatures.
 #'
 #' @param repoType A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.
 #'
-#' @param repo A character containing a name of the Github repository on which the Repository is stored.
+#' @param repo A character containing a name of the Remote repository on which the Repository is stored.
 #' By default set to \code{NULL} - see \code{Note}.
 #'
 #' @param user A character containing a name of the Github user on whose account the \code{repo} is created.
 #' By default set to \code{NULL} - see \code{Note}.
 #'
 #' @param branch A character containing a name of
-#' the Github Repository's branch on which the Repository is stored. Default \code{branch} is \code{master}.
+#' the Remote Repository's branch on which the Repository is stored. Default \code{branch} is \code{master}.
 #'
-#' @param repoDirGit A character containing a name of a directory on the Github repository
-#' on which the Repository is stored. If the Repository is stored in the main folder of the Github repository, this should be set
+#' @param repoDirGit A character containing a name of a directory on the Remote repository
+#' on which the Repository is stored. If the Repository is stored in the main folder of the Remote repository, this should be set
 #' to \code{repoDirGit = FALSE} as default.
 #'
 #' @param output A name of the file in which artifacts should be summarized.
@@ -38,8 +38,8 @@
 #' Markdown example: \url{https://github.com/pbiecek/archivist/issues/144#issuecomment-174192366}
 #'
 #' @note
-#' If \code{repo} and \code{user} are set to \code{NULL} (as default) in the Github mode then global parameters
-#' set in \link{setGithubRepo} (or via \link{aoptions}) function are used.
+#' If \code{repo} and \code{user} are set to \code{NULL} (as default) in the Remote mode then global parameters
+#' set in \link{setRemoteRepo} (or via \link{aoptions}) function are used.
 #'
 #' @author
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
@@ -47,9 +47,9 @@
 #' @examples
 #' \dontrun{
 #'
-#' createGithubMDGallery(user = 'MarcinKosinski', repo = 'Museum',
+#' createMDGallery(user = 'MarcinKosinski', repo = 'Museum',
 #'  'README_test7.md', addTags = TRUE)
-#' createGithubMDGallery('graphGallery', 'pbiecek', addMiniature = TRUE,
+#' createMDGallery('graphGallery', 'pbiecek', addMiniature = TRUE,
 #'  'README_test7.md', addTags = TRUE)
 #'
 #' }
@@ -60,11 +60,11 @@
 createMDGallery <- function(output, repo = aoptions("repo"), user = aoptions("user"), branch = aoptions("branch"), repoDirGit = aoptions("repoDirGit"),
                                   repoType = aoptions("repoType"),
                                 addTags = FALSE, addMiniature = FALSE){
-  stopifnot( is.character( branch ), length( branch ) == 1 )
-  GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
   stopifnot(is.logical(c(addTags, addMiniature)) & length(addTags) == 1 & length(addMiniature) == 1 )
 
-  # as in loadFromGithubRepo
+  RemoteRepoCheck( repo, user, branch, remoteDir, repoType) # implemented in setRepo.R
+
+  # as in loadFromRemoteRepo
   remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, repoDirGit=repoDirGit, repoType=repoType)
   Temp <- downloadDB(remoteHook )
   on.exit( file.remove( Temp ) )
@@ -120,8 +120,3 @@ createMDGallery <- function(output, repo = aoptions("repo"), user = aoptions("us
   }
   sink()
 }
-
-#' @family archivist
-#' @rdname createMDGallery
-#' @export
-createGithubMDGallery <- createMDGallery
