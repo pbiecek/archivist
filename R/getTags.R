@@ -3,12 +3,12 @@
 #' @title Return Tags Corresponding to md5hash
 #'
 #' @description
-#' \code{getTagsLocal} and \code{getTagsGithub} return \code{Tags} (see \link{Tags})
+#' \code{getTagsLocal} and \code{getTagsRemote} return \code{Tags} (see \link{Tags})
 #' related to \link{md5hash} of an artifact. To learn more about artifacts visit
 #' \link[archivist]{archivist-package}.
 #' 
 #' @details
-#' \code{getTagsLocal} and \code{getTagsGithub} return \code{Tags}, of a specific type described
+#' \code{getTagsLocal} and \code{getTagsRemote} return \code{Tags}, of a specific type described
 #' by \code{tag} parameter, related to \link{md5hash} of an artifact. To learn more about 
 #' artifacts visit \link[archivist]{archivist-package}.
 #'  
@@ -26,26 +26,26 @@
 #' @param tag A regular expression denoting type of a \code{Tag} that we search for
 #' (see \code{Examples}). Default \code{tag = "name"}.
 #' 
-#' @param repo While working with the Github repository. A character containing
-#' a name of the Github repository on which the Repository is stored.
+#' @param repo While working with the Remote repository. A character containing
+#' a name of the Remote repository on which the Repository is stored.
 #' By default set to \code{NULL} - see \code{Note}.
 #' 
-#' @param user While working with the Github repository. A character containing
-#' a name of the Github user on whose account the \code{repo} is created.
+#' @param user While working with the Remote repository. A character containing
+#' a name of the Remote user on whose account the \code{repo} is created.
 #' By default set to \code{NULL} - see \code{Note}.
 #' 
-#' @param branch While working with the Github repository. A character containing
-#' a name of the Github repository's branch on which the Repository is stored.
+#' @param branch While working with the Remote repository. A character containing
+#' a name of the Remote repository's branch on which the Repository is stored.
 #' Default \code{branch} is \code{master}.
 #'
-#' @param repoDirGit While working with the Github repository. A character containing
-#' a name of a directory on the Github repository on which the Repository is stored.
-#' If the Repository is stored in main folder on the Github repository, this should be set 
+#' @param repoDirGit While working with the Remote repository. A character containing
+#' a name of a directory on the Remote repository on which the Repository is stored.
+#' If the Repository is stored in main folder on the Remote repository, this should be set 
 #' to \code{repoDirGit = FALSE} as default.
 #' 
 #' @note
-#' If \code{repo} and \code{user} are set to \code{NULL} (as default) in Github mode then global parameters
-#' set in \link{setGithubRepo} function are used.
+#' If \code{repo} and \code{user} are set to \code{NULL} (as default) in Remote mode then global parameters
+#' set in \link{setRemoteRepo} function are used.
 #' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
@@ -106,19 +106,19 @@
 #' deleteRepo( exampleRepoDir, TRUE) 
 #' rm( exampleRepoDir ) 
 #' 
-#' ### Github version
+#' ### Remote version
 #' ## EXAMPLE: pbiecek archivist repository on Github
 #' 
-#' showGithubRepo(user="pbiecek", repo="archivist")
+#' showRemoteRepo(user="pbiecek", repo="archivist")
 #' # We search for a Tag with default "name" regular expression corresponding to 
 #' # "cd6557c6163a6f9800f308f343e75e72" md5hash.
-#' getTagsGithub( "cd6557c6163a6f9800f308f343e75e72",
+#' getTagsRemote( "cd6557c6163a6f9800f308f343e75e72",
 #'                 user="pbiecek", repo="archivist")
 #'                 
 #' ## EXAMPLE: many archivist-like Repositories on one Github repository
 #' # We search for a Tag with default "name" regular expression corresponding to 
 #' # "ff575c261c949d073b2895b05d1097c3" md5hash.
-#' getTagsGithub("ff575c261c949d073b2895b05d1097c3", user="MarcinKosinski",
+#' getTagsRemote("ff575c261c949d073b2895b05d1097c3", user="MarcinKosinski",
 #'                repo="Museum", branch="master", repoDirGit="ex1")
 #'                
 #' }
@@ -147,18 +147,13 @@ getTagsRemote <- function( md5hash, repo = aoptions("repo"), user = aoptions("us
   stopifnot( is.character( c( md5hash, branch, tag ) ), 
              length( md5hash ) ==  1, length( branch ) == 1, length( tag ) == 1 )
 
-  GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
+  RemoteRepoCheck( repo, user, branch, remoteDir, repoType)
   
   # first download database
   remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, repoDirGit=repoDirGit, repoType=repoType)
   Temp <- downloadDB( remoteHook )
   returnTag( md5hash, repoDir = Temp, local = FALSE, tag = tag )
 }
-
-#' @family archivist
-#' @rdname getTags
-#' @export
-getTagsGithub <- getTagsRemote
 
 returnTag <- function( md5hash, repoDir, local = TRUE, tag ){
   Tags <- unique( executeSingleQuery( repoDir, realDBname = local,
