@@ -38,7 +38,6 @@ Imports:
     RSQLite,
     git2r,
     jsonlite,
-    dplyr,
     magrittr
 Suggests:
     shiny,
