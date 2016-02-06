@@ -9,28 +9,30 @@
 #' \code{summaryRepo} summarizes the current state of a \link{Repository}. Recommended to use
 #' \code{print( summaryRepo ) )}. See examples.
 #' 
+#' @param repoType A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.
+#' 
 #' @param repoDir A character denoting an existing directory of the Repository for which a summary will be returned.
 #' If it is set to \code{NULL} (by default), it will use the \code{repoDir} specified in \link{setLocalRepo}.
 #' 
-#' @param repo While working with the Github repository. A character containing a name of the Github repository on which the Repository is stored.
+#' @param repo While working with the Remote repository. A character containing a name of the Remote repository on which the Repository is stored.
 #' By default set to \code{NULL} - see \code{Note}.
 #' 
-#' @param user While working with the Github repository. A character containing a name of the Github user on whose account the \code{repo} is created.
+#' @param user While working with the Remote repository. A character containing a name of the Remote user on whose account the \code{repo} is created.
 #' By default set to \code{NULL} - see \code{Note}.
 #'
-#' @param branch While working with the Github repository. A character containing a name of 
-#' the Github Repository's branch on which the Repository is stored. Default \code{branch} is \code{master}.
+#' @param branch While working with the Remote repository. A character containing a name of 
+#' the Remote Repository's branch on which the Repository is stored. Default \code{branch} is \code{master}.
 #' 
-#' @param repoDirGit While working with the Github repository. A character containing a name of a directory on the Github repository 
-#' on which the Repository is stored. If the Repository is stored in the main folder of the Github repository, this should be set 
+#' @param repoDirGit While working with the Remote repository. A character containing a name of a directory on the Remote repository 
+#' on which the Repository is stored. If the Repository is stored in the main folder of the Remote repository, this should be set 
 #' to \code{repoDirGit = FALSE} as default.
 #'
 #' @return An object of class \code{repository} which can be printed: \code{print(object)}.
 #' 
 #' @note If the same artifact was archived many times then it is counted as one artifact or database in \code{print(summaryRepo)}.
 #' 
-#' If \code{repo} and \code{user} are set to \code{NULL} (as default) in the Github mode then global parameters
-#' set in \link{setGithubRepo} function are used.
+#' If \code{repo} and \code{user} are set to \code{NULL} (as default) in the Remote mode then global parameters
+#' set in \link{setRemoteRepo} function are used.
 #' @author 
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
 #'
@@ -116,15 +118,15 @@
 #' rm( exampleRepoDir )
 #' 
 #' #
-#' # Github version
+#' # Remote version
 #' #
 #'  
-#' x <- summaryGithubRepo( user="pbiecek", repo="archivist")
+#' x <- summaryRemoteRepo( user="pbiecek", repo="archivist")
 #' print( x )
 #' 
-#' # many archivist-like Repositories on one Github repository
+#' # many archivist-like Repositories on one Remote repository
 #'   
-#' summaryGithubRepo(user="MarcinKosinski", repo="Museum", 
+#' summaryRemoteRepo(user="MarcinKosinski", repo="Museum", 
 #' branch="master", repoDirGit="ex2" )
 #' 
 #' }
@@ -144,10 +146,11 @@ summaryLocalRepo <- function( repoDir = NULL ){
 
 #' @rdname summaryRepo
 #' @export
-summaryGithubRepo <- function( repo = NULL, user = NULL, branch = "master", repoDirGit = FALSE ){
+summaryRemoteRepo <- function( repo = aoptions("repo"), user = aoptions("user"), branch = "master", 
+                               repoDirGit = aoptions("repoDirGit"),  repoType = aoptions("repoType")){
   stopifnot( is.character( branch ), length( branch ) == 1 )
 
-  GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
+  RemoteRepoCheck( repo, user, branch, remoteDir, repoType) # implemented in setRepo.R
   
   # database is needed to be downloaded
   remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, repoDirGit=repoDirGit)
