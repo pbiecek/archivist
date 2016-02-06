@@ -7,7 +7,6 @@ extractTags.default <- function( object, objectNameX, ... ) {
   class <- paste0( "class:", class( object ) )
   date <- paste0( "date:", now() )
   return( c( name, class, date ) )
-
 }
 
 extractTags.data.frame <- function( object, objectNameX, ... ) {

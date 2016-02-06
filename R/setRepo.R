@@ -150,41 +150,15 @@ setGithubRepo <- function( user, repo, branch = "master",
 }
 
 
-useGithubSetupArguments <- function(){
-  assign( "repo", aoptions("repo"), envir = parent.frame(2) )
-  assign( "user", aoptions("user"), envir = parent.frame(2) )
-  assign( "branch", aoptions("branch"), envir = parent.frame(2) )
-  assign( "repoDirGit", aoptions("repoDirGit"), envir = parent.frame(2) )
-
-}
-
-GithubCheck <- function( repo, user, repoDirGit ){
-  stopifnot( is.logical( repoDirGit ) | ( is.character( repoDirGit ) & length( repoDirGit ) == 1) )
+RemoteRepoCheck <- function( repo, user, remoteDir, repoType){
+  stopifnot( is.logical( remoteDir ) | ( is.character( remoteDir ) & length( remoteDir ) == 1) )
   stopifnot( is.null( repo ) | ( is.character( repo ) & length( repo ) == 1 ) )
   stopifnot( is.null( user ) | ( is.character( user ) & length( user ) == 1 ) )
-  #stopifnot( is.null( branch ) | ( is.character( branch ) & length( branch ) == 1 ) )
-  #
-  if( is.logical( repoDirGit ) & repoDirGit ){
+
+  if( is.logical( remoteDir ) & remoteDir ){
       stop( "repoDirGit may be only FALSE or a character. See documentation." )
   }
-  
   if ( xor( is.null( user ), is.null( repo ) ) ){
     stop( "Both or none of user and repo should be NULL. See documentation." )
   }
-  
-  if ( is.null( c( repo, user ) ) ){
-    if (is.logical( repoDirGit )) {
-      useGithubSetupArguments() 
-    } else { # is.character( repoDirGit )
-      useGithubSetupArguments2()
-    }
-  }
-}
-
-useGithubSetupArguments2 <- function(){
-  assign( "repo", aoptions("repo"), envir = parent.frame(2) )
-  assign( "user", aoptions("user"), envir = parent.frame(2) )
-  #assign( "branch", aoptions("branch"), envir = parent.frame(2) )
-  #assign( "repoDirGit", aoptions("repoDirGit"), envir = parent.frame(2) )
-  
 }
