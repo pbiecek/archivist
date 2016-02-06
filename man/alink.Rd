@@ -2,7 +2,7 @@
 % Please edit documentation in R/alink.R
 \name{alink}
 \alias{alink}
-\title{Return a Link To Download an Artifact Stored on GitHub Repository}
+\title{Return a Link To Download an Artifact Stored on Remote Repository}
 \usage{
 alink(md5hash, repo = aoptions("repo"), user = aoptions("user"),
   repoDirGit = FALSE, branch = "master", format = "markdown",
@@ -12,17 +12,17 @@ alink(md5hash, repo = aoptions("repo"), user = aoptions("user"),
 \item{md5hash}{A character assigned to the artifact through the use of a cryptographical hash function with MD5 algorithm. 
 If it is specified in a format of \code{'repo/user/md5hash'} then \code{user} and \code{repo} parameters are omitted.}
 
-\item{repo}{The GitHub \code{Repository} on which the artifact that we want to download
+\item{repo}{The Remote \code{Repository} on which the artifact that we want to download
 is stored.}
 
 \item{user}{The name of a user on whose \code{Repository} the the artifact that we want to download
 is stored.}
 
-\item{repoDirGit}{A character containing a name of a directory on the Github repository 
-on which the Repository is stored. If the Repository is stored in the main folder on the Github repository, this should be set 
+\item{repoDirGit}{A character containing a name of a directory on the Remote repository 
+on which the Repository is stored. If the Repository is stored in the main folder on the Remote repository, this should be set 
 to \code{repoDirGit = FALSE} as default.}
 
-\item{branch}{A character containing a name of the Github Repository's branch
+\item{branch}{A character containing a name of the Remote Repository's branch
 on which the Repository is archived. Default \code{branch} is \code{master}.}
 
 \item{format}{In which format the link should be returned. Possibilites are \code{markdown} (default) or \code{latex}.}
@@ -34,7 +34,7 @@ Default value is \code{FALSE}.}
 This function returns a link to download artifact that is archived on GitHub.
 }
 \description{
-\code{alink} returns a link to download an artifact from the GitHub \link{Repository}.
+\code{alink} returns a link to download an artifact from the Remote \link{Repository}.
 Artifact has to be already archived on GitHub, e.g with \link{archive} function (recommended) or 
 \link{saveToRepo} function and traditional Git manual synchronization.
 To learn more about artifacts visit \link[archivist]{archivist-package}.

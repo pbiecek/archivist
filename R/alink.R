@@ -1,9 +1,9 @@
 ##    archivist package for R
 ##
-#' @title Return a Link To Download an Artifact Stored on GitHub Repository
+#' @title Return a Link To Download an Artifact Stored on Remote Repository
 #'
 #' @description
-#' \code{alink} returns a link to download an artifact from the GitHub \link{Repository}.
+#' \code{alink} returns a link to download an artifact from the Remote \link{Repository}.
 #' Artifact has to be already archived on GitHub, e.g with \link{archive} function (recommended) or 
 #' \link{saveToRepo} function and traditional Git manual synchronization.
 #' To learn more about artifacts visit \link[archivist]{archivist-package}.
@@ -15,17 +15,17 @@
 #' @param md5hash A character assigned to the artifact through the use of a cryptographical hash function with MD5 algorithm. 
 #' If it is specified in a format of \code{'repo/user/md5hash'} then \code{user} and \code{repo} parameters are omitted.
 #' 
-#' @param repo The GitHub \code{Repository} on which the artifact that we want to download
+#' @param repo The Remote \code{Repository} on which the artifact that we want to download
 #' is stored.
 #' 
 #' @param user The name of a user on whose \code{Repository} the the artifact that we want to download
 #' is stored.
 #' 
-#' @param repoDirGit A character containing a name of a directory on the Github repository 
-#' on which the Repository is stored. If the Repository is stored in the main folder on the Github repository, this should be set 
+#' @param repoDirGit A character containing a name of a directory on the Remote repository 
+#' on which the Repository is stored. If the Repository is stored in the main folder on the Remote repository, this should be set 
 #' to \code{repoDirGit = FALSE} as default.
 #' 
-#' @param branch A character containing a name of the Github Repository's branch
+#' @param branch A character containing a name of the Remote Repository's branch
 #' on which the Repository is archived. Default \code{branch} is \code{master}.
 #' 
 #' @param format In which format the link should be returned. Possibilites are \code{markdown} (default) or \code{latex}.
@@ -85,7 +85,6 @@ alink <- function(md5hash, repo = aoptions('repo'),
   
   stopifnot(is.character(md5hash) & length(md5hash) == 1)
   stopifnot(is.character(format) & length(format) == 1 | format %in% c('markdown', 'latex'))
-  stopifnot(is.character(branch), length(branch) == 1)
   stopifnot(is.logical(rawLink) & length(rawLink) == 1)
   
   if ( strsplit(md5hash, "/")[[1]] %>% length  == 3 ) {
@@ -97,7 +96,7 @@ alink <- function(md5hash, repo = aoptions('repo'),
                        strsplit(md5hash, "/")[[1]][3],
                        '.rda?raw=true')
   } else {
-    GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
+    RemoteRepoCheck( repo, user, branch, remoteDir, repoType) # implemented in setRepo.R
     archLINK <- paste0('https://github.com/',
                        user,
                        '/',
