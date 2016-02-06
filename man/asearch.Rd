@@ -82,11 +82,11 @@ rm(exampleRepoDir)
 
 ### default GitHub version
 ## Setting default github repository
-setGithubRepo( user = "pbiecek", repo = "archivist")
+setRemoteRepo( user = "pbiecek", repo = "archivist")
 
-showGithubRepo(method = "tags")$tag
-searchInGithubRepo(pattern = "class:lm")
-searchInGithubRepo(pattern = "class:gg")
+showRemoteRepo(method = "tags")$tag
+searchInRemoteRepo(pattern = "class:lm")
+searchInRemoteRepo(pattern = "class:gg")
 getTagsGithub(md5hash = "cd6557c6163a6f9800f308f343e75e72", tag = "")
 
 ## Searching for objects of class:lm

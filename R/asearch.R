@@ -79,11 +79,11 @@
 #' 
 #' ### default GitHub version
 #' ## Setting default github repository
-#' setGithubRepo( user = "pbiecek", repo = "archivist")
+#' setRemoteRepo( user = "pbiecek", repo = "archivist")
 #' 
-#' showGithubRepo(method = "tags")$tag
-#' searchInGithubRepo(pattern = "class:lm")
-#' searchInGithubRepo(pattern = "class:gg")
+#' showRemoteRepo(method = "tags")$tag
+#' searchInRemoteRepo(pattern = "class:lm")
+#' searchInRemoteRepo(pattern = "class:gg")
 #' getTagsGithub(md5hash = "cd6557c6163a6f9800f308f343e75e72", tag = "")
 #' 
 #' ## Searching for objects of class:lm
@@ -126,7 +126,7 @@ asearch <- function( patterns, repo = NULL){
     elements <- strsplit(repo, "/")[[1]]
     stopifnot( length(elements) >= 2 )
     
-    oblist <- multiSearchInGithubRepo(user = elements[1], repo=paste(elements[-1], collapse = "/"), 
+    oblist <- multiSearchInRemoteRepo(user = elements[1], repo=paste(elements[-1], collapse = "/"), 
                                 patterns = patterns)
     if (length(oblist)>0) {
       res <- lapply(paste0(repo, "/", oblist), aread)

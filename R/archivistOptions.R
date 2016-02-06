@@ -80,23 +80,23 @@
 #' aoptions(key = "repo", value = "archivist")
 #' 
 #' # From this moment user and repo parameters may be ommitted in the following functions:
-#' showGithubRepo() 
-#' loadFromGithubRepo( "ff575c261c949d073b2895b05d1097c3")
-#' this <- loadFromGithubRepo( "ff", value = T)
+#' showRemoteRepo() 
+#' loadFromRemoteRepo( "ff575c261c949d073b2895b05d1097c3")
+#' this <- loadFromRemoteRepo( "ff", value = T)
 #' file.remove(file.path(getwd(), "repository.zip")) # We can remove this zip file
-#' searchInGithubRepo( "name:", fixed= FALSE)
+#' searchInRemoteRepo( "name:", fixed= FALSE)
 #' getTagsGithub("ff575c261c949d073b2895b05d1097c3")
-#' summaryGithubRepo( )
-#' multiSearchInGithubRepo( patterns=c("varname:Sepal.Width", "class:lm", "name:myplot123"), 
+#' summaryRemoteRepo( )
+#' multiSearchInRemoteRepo( patterns=c("varname:Sepal.Width", "class:lm", "name:myplot123"), 
 #'                          intersect = FALSE ) 
 #' ## EXAMPLE 4 : SET default Github repository using aoptions() function.
-#' showGithubRepo('Museum', 'MarcinKosinski', repoDirGit = 'ex1')
+#' showRemoteRepo('Museum', 'MarcinKosinski', repoDirGit = 'ex1')
 #' aoptions('repo', 'Museum')
 #' aoptions('user', 'MarcinKosinski')
 #' aoptions('repoDirGit', 'ex1')
 #' aoptions('branch', 'master')
-#' showGithubRepo()
-#' showGithubRepo(repoDirGit = 'ex2')
+#' showRemoteRepo()
+#' showRemoteRepo(repoDirGit = 'ex2')
 #' 
 #' aoptions('repoDirGit')
 #' }

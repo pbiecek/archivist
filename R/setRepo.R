@@ -157,7 +157,7 @@ RemoteRepoCheck <- function( repo, user, branch, repoDirGit, repoType){
   stopifnot( is.null( user ) | ( is.character( user ) & length( user ) == 1 ) )
   stopifnot( ( is.character( branch ) & length( branch ) == 1 ) )
   
-  if( is.logical( repoDirGit ) & repoDirGit ){
+  if( is.logical( repoDirGit ) && repoDirGit ){
       stop( "repoDirGit may be only FALSE or a character. See documentation." )
   }
   if ( xor( is.null( user ), is.null( repo ) ) ){
