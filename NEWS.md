@@ -1,3 +1,10 @@
+archivist 2.0
+----------------------------------------------------------------
+
+* **New functions**:
+    1. All *Github* functions are now *Remote* functions. This is because we support more than just GitHub repos (currently github + git/hg bitbucket)
+    2. `RemoteRepoCheck` is used to verify if parameters for remote repo are correct.
+
 archivist 1.9
 ----------------------------------------------------------------
 * **New functions**:
