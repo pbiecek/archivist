@@ -11,6 +11,7 @@
 #' @details
 #' For more information about \code{md5hash} see \link{md5hash}.
 #' 
+#' @param repoType A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.
 #'
 #' @param md5hash A character assigned to the artifact through the use of a cryptographical hash function with MD5 algorithm. 
 #' If it is specified in a format of \code{'repo/user/md5hash'} then \code{user} and \code{repo} parameters are omitted.
@@ -80,7 +81,7 @@
 #' @export
 alink <- function(md5hash, repo = aoptions('repo'),
                   user = aoptions('user'),
-                  repoDirGit = FALSE, branch = "master",
+                  repoDirGit = FALSE, branch = "master", repoType = aoptions("repoType"),
                   format = "markdown", rawLink = FALSE) {
   
   stopifnot(is.character(md5hash) & length(md5hash) == 1)

@@ -41,6 +41,7 @@ Imports:
     magrittr
 Suggests:
     shiny,
+    dplyr,
     testthat,
     ggplot2,
     devtools,
