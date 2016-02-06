@@ -147,7 +147,7 @@ getTagsRemote <- function( md5hash, repo = aoptions("repo"), user = aoptions("us
   stopifnot( is.character( c( md5hash, branch, tag ) ), 
              length( md5hash ) ==  1, length( branch ) == 1, length( tag ) == 1 )
 
-  RemoteRepoCheck( repo, user, branch, remoteDir, repoType)
+  RemoteRepoCheck( repo, user, branch, repoDirGit, repoType)
   
   # first download database
   remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, repoDirGit=repoDirGit, repoType=repoType)

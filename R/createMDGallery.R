@@ -62,7 +62,7 @@ createMDGallery <- function(output, repo = aoptions("repo"), user = aoptions("us
                                 addTags = FALSE, addMiniature = FALSE){
   stopifnot(is.logical(c(addTags, addMiniature)) & length(addTags) == 1 & length(addMiniature) == 1 )
 
-  RemoteRepoCheck( repo, user, branch, remoteDir, repoType) # implemented in setRepo.R
+  RemoteRepoCheck( repo, user, branch, repoDirGit, repoType) # implemented in setRepo.R
 
   # as in loadFromRemoteRepo
   remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, repoDirGit=repoDirGit, repoType=repoType)

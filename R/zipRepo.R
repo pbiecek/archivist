@@ -119,7 +119,7 @@ zipRemoteRepo <- function( repoTo = getwd(), user = aoptions("user"), repo = aop
              length( repoTo ) == 1, length( branch ) == 1,  length( zipname ) == 1)
   stopifnot( file.exists( repoTo ) )
 
-  RemoteRepoCheck( repo, user, branch, remoteDir, repoType) # implemented in setRepo.R
+  RemoteRepoCheck( repo, user, branch, repoDirGit, repoType) # implemented in setRepo.R
   
 # repoTo <- checkDirectory2( repoTo )
   if (file.exists(file.path(repoTo, zipname))) {

@@ -139,7 +139,7 @@ setLocalRepo <- function( repoDir ){
 #' @export
 setRemoteRepo <- function( user, repo, branch = "master", 
                            repoDirGit = FALSE, repoType='github'){
-  RemoteRepoCheck( repo, user, branch, remoteDir, repoType) # implemented in setRepo.R
+  RemoteRepoCheck( repo, user, branch, repoDirGit, repoType) # implemented in setRepo.R
   
   aoptions("user", user)
   aoptions("repo", repo)

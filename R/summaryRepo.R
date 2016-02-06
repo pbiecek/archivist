@@ -150,7 +150,7 @@ summaryRemoteRepo <- function( repo = aoptions("repo"), user = aoptions("user"),
                                repoDirGit = aoptions("repoDirGit"),  repoType = aoptions("repoType")){
   stopifnot( is.character( branch ), length( branch ) == 1 )
 
-  RemoteRepoCheck( repo, user, branch, remoteDir, repoType) # implemented in setRepo.R
+  RemoteRepoCheck( repo, user, branch, repoDirGit, repoType) # implemented in setRepo.R
   
   # database is needed to be downloaded
   remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, repoDirGit=repoDirGit)

@@ -96,7 +96,7 @@ alink <- function(md5hash, repo = aoptions('repo'),
                        strsplit(md5hash, "/")[[1]][3],
                        '.rda?raw=true')
   } else {
-    RemoteRepoCheck( repo, user, branch, remoteDir, repoType) # implemented in setRepo.R
+    RemoteRepoCheck( repo, user, branch, repoDirGit, repoType) # implemented in setRepo.R
     archLINK <- paste0('https://github.com/',
                        user,
                        '/',

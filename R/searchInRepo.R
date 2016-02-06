@@ -229,7 +229,7 @@ searchInRemoteRepo <- function( pattern, repo = aoptions("repo"), user = aoption
   stopifnot( is.character( pattern ) | is.list( pattern ) )
   stopifnot( length( pattern ) == 1 | length( pattern ) == 2 )
 
-  RemoteRepoCheck( repo, user, branch, remoteDir, repoType) # implemented in setRepo.R
+  RemoteRepoCheck( repo, user, branch, repoDirGit, repoType) # implemented in setRepo.R
   
   # first download database
   remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, repoDirGit=repoDirGit)
@@ -277,7 +277,7 @@ multiSearchInRemoteRepo <- function( patterns, repo = aoptions("repo"), user = a
                                      fixed = TRUE, intersect = TRUE ){
   stopifnot( is.logical(  intersect ) )
 
-  RemoteRepoCheck( repo, user, branch, remoteDir, repoType) # implemented in setRepo.R
+  RemoteRepoCheck( repo, user, branch, repoDirGit, repoType) # implemented in setRepo.R
   
   remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, repoDirGit=repoDirGit)
   Temp <- downloadDB( remoteHook )
