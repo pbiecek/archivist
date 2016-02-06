@@ -99,8 +99,8 @@ splitTagsGithub <- splitTagsRemote
 
 #' @rdname splitTags
 #' @export
-splitTags <- function( repoDir = NULL, repo = NULL, user = NULL,
-                        branch = "master", repoDirGit = FALSE, repoType = NULL,
+splitTags <- function( repoDir = NULL, repo = aoptions("repo"), user = aoptions("user"),
+                        branch = "master", repoDirGit = aoptions("repoDirGit"), repoType = aoptions("repoType"),
                         local = TRUE ){  
   # We will expand tag table in backpack.db
   if (local) {
@@ -118,8 +118,7 @@ splitTags <- function( repoDir = NULL, repo = NULL, user = NULL,
   }
 
   # We will split tag column into tagKey and tagValue columns
-  tags_df %>%
-    mutate(tagKey = gsub(tag, pattern=":.*$", replacement=""),
-           tagValue = gsub(tag, pattern="^[^:]*:", replacement="")) %>%
-    select(artifact, tagKey, tagValue, createdDate) 
+  tags_df$tagKey <- gsub(tags_df$tag, pattern=":.*$", replacement="") 
+  tags_df$tagValue <- gsub(tags_df$tag, pattern="^[^:]*:", replacement="") 
+  tags_df[,c("artifact", "tagKey", "tagValue", "createdDate")]
 }

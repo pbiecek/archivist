@@ -17,8 +17,10 @@ splitTagsGithub(repo = aoptions("repo"), user = aoptions("user"),
   branch = aoptions("branch"), repoDirGit = aoptions("repoDirGit"),
   repoType = aoptions("repoType"))
 
-splitTags(repoDir = NULL, repo = NULL, user = NULL, branch = "master",
-  repoDirGit = FALSE, repoType = NULL, local = TRUE)
+splitTags(repoDir = NULL, repo = aoptions("repo"),
+  user = aoptions("user"), branch = "master",
+  repoDirGit = aoptions("repoDirGit"), repoType = aoptions("repoType"),
+  local = TRUE)
 }
 \arguments{
 \item{repoDir}{While working with the local repository. A character denoting 
