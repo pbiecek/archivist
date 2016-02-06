@@ -209,7 +209,7 @@ copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, bra
     # get files list
     options(RCurlOptions = list(cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl")))
 
-    req <- GET( paste0( "https://api.Remote.com/repos/", user, "/",
+    req <- GET( paste0( "https://api.github.com/repos/", user, "/",
                         repo, "/git/trees/", branch, "?recursive=1" ) )
 
     stop_for_status(req)
@@ -240,7 +240,7 @@ copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, bra
 
 cloneRemoteFile <- function( file, repo, user, branch, to, repoDirGit ){
 
-    URLfile <- file.path( get( ".RemoteURL", envir = .ArchivistEnv) , 
+    URLfile <- file.path( get( ".GithubURL", envir = .ArchivistEnv) , 
                        user, repo, branch, file) 
     # tidy
     if ( is.character( repoDirGit ) ){
