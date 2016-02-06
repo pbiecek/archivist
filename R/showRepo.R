@@ -3,14 +3,14 @@
 #' @title View the List of Artifacts from the Repository 
 #'
 #' @description
-#' \code{showLocalRepo} and \code{showGithubRepo} and \code{showRemoteRepo} functions produce the \code{data.frame} of the artifacts from
+#' \code{showLocalRepo} and \code{showRemoteRepo} functions produce the \code{data.frame} of the artifacts from
 #' the \link{Repository} saved in a given \code{repoDir} (directory). \code{showLocalRepo}
 #' shows the artifacts from the \code{Repository} that exists on the user's computer whereas \code{showRemoteRepo}
 #' shows the artifacts of the \code{Repository} existing on the remote repository.
 #' To learn more about artifacts visit \link[archivist]{archivist-package}.
 #' 
 #' @details
-#' \code{showLocalRepo} and \code{showGithubRepo} and \code{showRemoteRepo} functions produce the \code{data.frame} of the artifacts from
+#' \code{showLocalRepo} and \code{showRemoteRepo} functions produce the \code{data.frame} of the artifacts from
 #' a \link{Repository} saved in a given \code{repoDir} (directory). \code{showLocalRepo}
 #' shows the artifacts from the \code{Repository} that exists on the user's computer whereas \code{showRemoteRepo}
 #' shows the artifacts of the \code{Repository} existing on the remote repository.
@@ -28,17 +28,17 @@
 #' @param repoDir A character denoting an existing directory of the Repository for which metadata will be returned.
 #' If it is set to \code{NULL} (by default), it will use the \code{repoDir} specified in \link{setLocalRepo}.
 #' 
-#' @param repo While working with the Github repository. A character containing a name of the Github repository on which the Repository is stored.
+#' @param repo While working with the Remote repository. A character containing a name of the Remote repository on which the Repository is stored.
 #' By default set to \code{NULL} - see \code{Note}.
 #' 
-#' @param user While working with the Github repository. A character containing a name of the Github user on whose account the \code{repo} is created.
+#' @param user While working with the Remote repository. A character containing a name of the Remote user on whose account the \code{repo} is created.
 #' By default set to \code{NULL} - see \code{Note}.
 #'
-#' @param branch While working with the Github repository. A character containing a name of 
-#' the Github Repository's branch on which the Repository is stored. Default \code{branch} is \code{master}.
+#' @param branch While working with the Remote repository. A character containing a name of 
+#' the Remote Repository's branch on which the Repository is stored. Default \code{branch} is \code{master}.
 #'
-#' @param repoDirGit While working with the Github repository. A character containing a name of a directory on the Github repository 
-#' on which the Repository is stored. If the Repository is stored in the main folder of the Github repository, this should be set 
+#' @param repoDirGit While working with the Remote repository. A character containing a name of a directory on the Remote repository 
+#' on which the Repository is stored. If the Repository is stored in the main folder of the Remote repository, this should be set 
 #' to \code{repoDirGit = FALSE} as default.
 #' 
 #' @return
@@ -56,8 +56,8 @@
 #' 
 #' 
 #' @note
-#' If \code{repo} and \code{user} are set to \code{NULL} (as default) in the Github mode then global parameters
-#' set in \link{setGithubRepo} (or via \link{aoptions}) function are used.
+#' If \code{repo} and \code{user} are set to \code{NULL} (as default) in the Remote mode then global parameters
+#' set in \link{setRemoteRepo} (or via \link{aoptions}) function are used.
 #' 
 #' @author 
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
@@ -140,10 +140,10 @@
 #' showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
 #' showLocalRepo(method = "tags", repoDir = exampleRepoDir)
 #' 
-#' # GitHub version
+#' # Remote version
 #' 
-#' showGithubRepo(method = "md5hashes", user = "pbiecek", repo = "archivist")
-#' showGithubRepo(method = "tags", user = "pbiecek", repo = "archivist", branch = "master")
+#' showRemoteRepo(method = "md5hashes", user = "pbiecek", repo = "archivist")
+#' showRemoteRepo(method = "tags", user = "pbiecek", repo = "archivist", branch = "master")
 #' 
 #' 
 #' 
@@ -167,26 +167,26 @@
 #'   
 #' rm( exampleRepoDir )
 #' 
-#' # many archivist-like Repositories on one Github repository
+#' # many archivist-like Repositories on one Remote repository
 #' 
-#' showGithubRepo( user="MarcinKosinski", repo="Museum", branch="master",
+#' showRemoteRepo( user="MarcinKosinski", repo="Museum", branch="master",
 #' repoDirGit="ex1")
-#' showGithubRepo( user="MarcinKosinski", repo="Museum", branch="master",
+#' showRemoteRepo( user="MarcinKosinski", repo="Museum", branch="master",
 #'                 repoDirGit="ex2")
 #'                 
-#' ## Github options
-#' showGithubRepo('archivist', 'pbiecek')
+#' ## Remote options
+#' showRemoteRepo('archivist', 'pbiecek')
 #' aoptions('user', 'pbiecek')
 #' aoptions('repo', 'archivist')
-#' loadFromGithubRepo("ff575c261c", value = TRUE) -> iris123
+#' loadFromRemoteRepo("ff575c261c", value = TRUE) -> iris123
 #' 
-#' showGithubRepo('Museum', 'MarcinKosinski', repoDirGit = 'ex1')
+#' showRemoteRepo('Museum', 'MarcinKosinski', repoDirGit = 'ex1')
 #' aoptions('repo', 'Museum')
 #' aoptions('user', 'MarcinKosinski')
 #' aoptions('repoDirGit', 'ex1')
 #' aoptions('branch', 'master')
-#' showGithubRepo()
-#' showGithubRepo(repoDirGit = 'ex2')
+#' showRemoteRepo()
+#' showRemoteRepo(repoDirGit = 'ex2')
 #' 
 #' aoptions('repoDirGit')
 #'
@@ -212,7 +212,7 @@ showRemoteRepo <- function( repo = aoptions("repo"), user = aoptions("user"), br
                             method = "md5hashes" ){
   stopifnot( is.character( c( method, branch ) ), length( method ) == 1, length( branch ) == 1  )
   
-  GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
+  RemoteRepoCheck( repo, user, branch, repoDirGit, repoType) # implemented in setRepo.R
   
   # database is needed to be downloaded
   remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, repoDirGit=repoDirGit, repoType=repoType)
@@ -221,9 +221,6 @@ showRemoteRepo <- function( repo = aoptions("repo"), user = aoptions("user"), br
   showRepo( method = method, dir = Temp, local = FALSE )
 }
 
-#' @rdname showRepo
-#' @export
-showGithubRepo <- showRemoteRepo
 
 showRepo <- function( method, local = TRUE, dir ){
   
