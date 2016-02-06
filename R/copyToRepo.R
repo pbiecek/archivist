@@ -5,16 +5,16 @@
 #' @description
 #' \code{copy*Repo} copies artifacts from one \code{Repository} into another \code{Repository}.
 #' It adds new files to existing \code{gallery} folder in \code{repoTo} \code{Repository}.
-#' \code{copyLocalRepo} copies local \code{Repository} while \code{copyGithubRepo} copies
-#' Github \code{Repository}. 
+#' \code{copyLocalRepo} copies local \code{Repository} while \code{copyRemoteRepo} copies
+#' remote \code{Repository}. 
 #' 
 #' @details
-#' Functions \code{copyLocalRepo} and \code{copyGithubRepo} copy artifacts from the
-#' archivist's Repositories stored in a local folder or on the Github. 
+#' Functions \code{copyLocalRepo} and \code{copyRemoteRepo} copy artifacts from the
+#' archivist's Repositories stored in a local folder or on the Remote. 
 #' Both of them use \code{md5hashes} of artifacts which are to be copied 
 #' in \code{md5hashes} parameter. For more information about \code{md5hash} see \link{md5hash}.
 #'
-#' @param repoType A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.
+#' @param repoType A character containing a type of the remote repository. Currently it can be 'Remote' or 'bitbucket'.
 #' @param repoFrom While copying local repository. A character that specifies
 #' the directory of the Repository from which
 #' artifacts will be copied. If it is set to \code{NULL} (by default),
@@ -25,26 +25,26 @@
 #' 
 #' @param md5hashes A character vector containing \code{md5hashes} of artifacts to be copied. 
 #' 
-#' @param repo While coping the Github repository. A character containing a name of the
-#' Github repository on which the "\code{repoFrom}" - Repository is archived.
+#' @param repo While coping the remote repository. A character containing a name of the
+#' remote repository on which the "\code{repoFrom}" - Repository is archived.
 #' By default set to \code{NULL} - see \code{Note}.
 #' 
-#' @param user While coping the Github repository. A character containing a name
-#' of the Github user on whose account the "\code{repoFrom}" - Repository is created.
+#' @param user While coping the remote repository. A character containing a name
+#' of the remote user on whose account the "\code{repoFrom}" - Repository is created.
 #' By default set to \code{NULL} - see \code{Note}.
 #' 
-#' @param branch While coping with the Github repository. A character containing a name of 
-#' Github Repository's branch on which the "\code{repoFrom}" - Repository is archived.
+#' @param branch While coping with the remote repository. A character containing a name of 
+#' Remote Repository's branch on which the "\code{repoFrom}" - Repository is archived.
 #' Default \code{branch} is \code{master}.
 #'
-#' @param repoDirGit While working with the Github repository. A character containing a name of
-#' a directory on the Github repository on which the "\code{repoFrom}" - Repository is stored.
-#' If the Repository is stored in the main folder on the Github repository, this should be set 
+#' @param repoDirGit While working with the remote repository. A character containing a name of
+#' a directory on the remote repository on which the "\code{repoFrom}" - Repository is stored.
+#' If the Repository is stored in the main folder on the remote repository, this should be set 
 #' to \code{FALSE} as default.
 #' 
 #' @note
-#' If \code{repo} and \code{user} are set to \code{NULL} (as default) in Github mode then global parameters
-#' set in \link{setGithubRepo} function are used. If one would like to copy whole Repository we suggest to 
+#' If \code{repo} and \code{user} are set to \code{NULL} (as default) in remote mode then global parameters
+#' set in \link{setRemoteRepo} function are used. If one would like to copy whole Repository we suggest to 
 #' extract all \code{md5hashes} in this way \code{unique(showLocalRepo(repoDir)[,1])}.
 #' 
 #' @author 
@@ -54,22 +54,22 @@
 #' \dontrun{
 #'
 #' 
-#' ## Using archiviist Github Repository to copy artifacts
+#' ## Using archivist remote Repository to copy artifacts
 #' # creating example Repository
 #'  
 #' exampleRepoDir <- tempfile()
 #' createEmptyRepo( exampleRepoDir )
 #' 
 #' # Searching for md5hashes of artifacts (without data related to them)
-#' # in the archivist Github  Repository
-#' hashes <- searchInGithubRepo( pattern="name", user="pbiecek", repo="archivist", fixed=FALSE )
+#' # in the archivist remote  Repository
+#' hashes <- searchInRemoteRepo( pattern="name", user="pbiecek", repo="archivist", fixed=FALSE )
 #' 
-#' # Copying selected artifacts from archivist Github  Repository into exampleRepoDir Repository
+#' # Copying selected artifacts from archivist Remote  Repository into exampleRepoDir Repository
 #'
-#' copyGithubRepo( repoTo = exampleRepoDir , md5hashes= hashes, user="pbiecek", repo="archivist" )
+#' copyRemoteRepo( repoTo = exampleRepoDir , md5hashes= hashes, user="pbiecek", repo="archivist" )
 #' 
 #' # See how the gallery folder in our exampleRepoDir Repository
-#' # with copies of artifacts from archivist Github  Repository looks like
+#' # with copies of artifacts from archivist Remote  Repository looks like
 #' list.files( path = file.path( exampleRepoDir, "gallery" ) )
 #'
 #' # See how the backpack database in our exampleRepoDir Repository looks like
@@ -81,11 +81,11 @@
 #' 
 #' rm( exampleRepoDir )
 #' 
-#' # many archivist-like Repositories on one Github repository
+#' # many archivist-like Repositories on one Remote repository
 #' 
 #' dir <- paste0(getwd(), "/ex1")
 #' createEmptyRepo( dir )
-#' copyGithubRepo( repoTo = dir , md5hashes = "ff575c261c949d073b2895b05d1097c3",
+#' copyRemoteRepo( repoTo = dir , md5hashes = "ff575c261c949d073b2895b05d1097c3",
 #'                 user="MarcinKosinski", repo="Museum",
 #'                 branch="master", repoDirGit="ex2")
 #'                 
@@ -116,7 +116,7 @@
 #'                              repoDir =  archivistRepo,
 #'                              fixed=FALSE )
 #' 
-#' # Copying selected artifacts from archivist Github  Repository into exampleRepoDir Repository
+#' # Copying selected artifacts from archivist Remote  Repository into exampleRepoDir Repository
 #'
 #' copyLocalRepo( repoFrom = archivistRepo, repoTo = exampleRepoDir , md5hashes= hashes )
 #'
@@ -155,7 +155,7 @@ copyRemoteRepo <- function( repoTo, md5hashes, repo = aoptions("repo"), user = a
   stopifnot( is.character( c( repoTo, branch, md5hashes ) ),
              length(repoTo) == 1, length(branch) == 1, length(md5hashes) > 0)
 
-  GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
+  RemoteRepoCheck( repo, user, branch, repoDirGit, repoType) # implemented in setRepo.R
   
   repoTo <- checkDirectory( repoTo )
   
@@ -170,12 +170,7 @@ copyRemoteRepo <- function( repoTo, md5hashes, repo = aoptions("repo"), user = a
   invisible(NULL)  
 }
 
-#' @rdname copyToRepo
-#' @export
-copyGithubRepo <- copyRemoteRepo
-
 copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, branch, repoDirGit ){
-  
   # clone artifact table
   toInsertArtifactTable <- executeSingleQuery( dir = repoFrom, realDBname = local,
                       paste0( "SELECT DISTINCT * FROM artifact WHERE md5hash IN ",
@@ -210,11 +205,11 @@ copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, bra
     file.copy( from = file.path(repoFrom, "gallery", x), to = file.path( repoTo, "gallery" ),
           recursive = TRUE )})
   } else {
-    # if github mode
+    # if Remote mode
     # get files list
     options(RCurlOptions = list(cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl")))
 
-    req <- GET( paste0( "https://api.github.com/repos/", user, "/",
+    req <- GET( paste0( "https://api.Remote.com/repos/", user, "/",
                         repo, "/git/trees/", branch, "?recursive=1" ) )
 
     stop_for_status(req)
@@ -237,25 +232,25 @@ copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, bra
     } ) ) ) #choose proper files from whole file list -whichFilesToClone
     
     # download files to gallery folder
-    lapply( filesToDownload, cloneGithubFile, repo = repo, user = user, branch = branch, 
+    lapply( filesToDownload, cloneRemoteFile, repo = repo, user = user, branch = branch, 
             to = repoTo, repoDirGit )
   }
   invisible(NULL)
 }
 
-cloneGithubFile <- function( file, repo, user, branch, to, repoDirGit ){
+cloneRemoteFile <- function( file, repo, user, branch, to, repoDirGit ){
 
-    URLfile <- file.path( get( ".GithubURL", envir = .ArchivistEnv) , 
+    URLfile <- file.path( get( ".RemoteURL", envir = .ArchivistEnv) , 
                        user, repo, branch, file) 
     # tidy
     if ( is.character( repoDirGit ) ){
       file <- paste0( "gallery/", strsplit(file, "gallery/")[[1]][2] )
     }
     
-    fileFromGithub <- getBinaryURL( URLfile )
+    fileFromRemote <- getBinaryURL( URLfile )
     
     file.create( file.path( to, file ) )
-    writeBin( fileFromGithub, file.path( to, file ) )
+    writeBin( fileFromRemote, file.path( to, file ) )
     #files contain "gallery/" in it's name
     
   }

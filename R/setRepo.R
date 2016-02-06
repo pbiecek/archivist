@@ -150,11 +150,12 @@ setGithubRepo <- function( user, repo, branch = "master",
 }
 
 
-RemoteRepoCheck <- function( repo, user, remoteDir, repoType){
+RemoteRepoCheck <- function( repo, user, branch, remoteDir, repoType){
   stopifnot( is.logical( remoteDir ) | ( is.character( remoteDir ) & length( remoteDir ) == 1) )
   stopifnot( is.null( repo ) | ( is.character( repo ) & length( repo ) == 1 ) )
   stopifnot( is.null( user ) | ( is.character( user ) & length( user ) == 1 ) )
-
+  stopifnot( ( is.character( branch ) & length( branch ) == 1 ) )
+  
   if( is.logical( remoteDir ) & remoteDir ){
       stop( "repoDirGit may be only FALSE or a character. See documentation." )
   }
