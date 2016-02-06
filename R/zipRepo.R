@@ -2,9 +2,9 @@
 #' @title Create a zip Archive From an Existing Repository
 #' 
 #' @description
-#' \code{zipLocalRepo} and \code{zipGithubRepo} create a zip archive from an
+#' \code{zipLocalRepo} and \code{zipRemoteRepo} create a zip archive from an
 #' existing \link{Repository}. \code{zipLocalRepo} zips local \code{Repository},
-#' \code{zipGithubRepo} zips \code{Repository} stored on Github.
+#' \code{zipRemoteRepo} zips \code{Repository} stored on Github.
 #' 
 #' 
 #' @note
@@ -12,30 +12,32 @@
 #' To solve this problem follow these \href{http://cran.r-project.org/web/packages/openxlsx/vignettes/Introduction.pdf}{Instructions.}
 #' 
 #' If \code{repo} and \code{user} are set to \code{NULL} (as default) in Github mode then global parameters
-#' set in \link{setGithubRepo} function are used.
+#' set in \link{setRemoteRepo} function are used.
 #'
+#' @param repoType A character containing a type of the remote repository. Currently it can be 'Remote' or 'bitbucket'.
+#' 
 #' @param repoDir A character that specifies the directory of the Repository which
 #' will be zipped. If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.
 #'
-#' @param repo While working with the Github repository. A character containing
-#' a name of the Github repository on which the Repository, which is to be zipped, is archived.
+#' @param repo While working with the Remote repository. A character containing
+#' a name of the Remote repository on which the Repository, which is to be zipped, is archived.
 #' By default set to \code{NULL} - see \code{Note}.
 #' 
-#' @param user While working with the Github repository. A character containing
-#' a name of the Github user on whose account the \code{repo} is created.
+#' @param user While working with the Remote repository. A character containing
+#' a name of the Remote user on whose account the \code{repo} is created.
 #' By default set to \code{NULL} - see \code{Note}.
 #' 
-#' @param branch While working with the Github repository. A character containing a name of the
-#' Github repository's branch on which Repository, which is to be zipped, is archived.
+#' @param branch While working with the Remote repository. A character containing a name of the
+#' Remote repository's branch on which Repository, which is to be zipped, is archived.
 #' Default \code{branch} is \code{master}.
 #' 
-#' @param repoDirGit While working with a Github repository. A character containing a name of
-#' a directory on Github repository on which the Repository, which is to be zipped, is stored.
-#' If the Repository is stored in the main folder on the Github repository, this should be set 
+#' @param repoDirGit While working with a Remote repository. A character containing a name of
+#' a directory on Remote repository on which the Repository, which is to be zipped, is stored.
+#' If the Repository is stored in the main folder on the Remote repository, this should be set 
 #' to FALSE as default.
 #' 
 #' @param repoTo A character that specifies the directory in which there
-#' will be created zip archive from \code{Repository} stored in \code{repoDir} or Github directory.
+#' will be created zip archive from \code{Repository} stored in \code{repoDir} or Remote directory.
 #' By default set to working directory (\code{getwd()}).
 #' 
 #' @param zipname A character that specifies name of the zipped repository.
@@ -81,10 +83,10 @@
 #' 
 #' # Github version
 #' 
-#' zipGithubRepo( user="MarcinKosinski", 
+#' zipRemoteRepo( user="MarcinKosinski", 
 #' repo="Museum", branch="master", repoDirGit="ex1" )
 #' 
-#' zipGithubRepo( user="pbiecek", repo="archivist", repoTo = getwd( ) )
+#' zipRemoteRepo( user="pbiecek", repo="archivist", repoTo = getwd( ) )
 #' 
 #' }
 #' 
@@ -111,26 +113,26 @@ zipLocalRepo <- function( repoDir = NULL, repoTo = getwd() , zipname="repository
 #' @family archivist
 #' @rdname zipRepo
 #' @export
-zipGithubRepo <- function( repoTo = getwd(), user = NULL, repo = NULL, branch = "master", 
-                           repoDirGit = FALSE, zipname = "repository.zip"){
+zipRemoteRepo <- function( repoTo = getwd(), user = aoptions("user"), repo = aoptions("repo"), branch = "master", 
+                           repoDirGit = aoptions("repoDirGit"),  repoType = aoptions("repoType"), zipname = "repository.zip"){
   stopifnot( is.character( c( repoTo, branch, zipname ) ), 
              length( repoTo ) == 1, length( branch ) == 1,  length( zipname ) == 1)
   stopifnot( file.exists( repoTo ) )
 
-  GithubCheck( repo, user, repoDirGit ) # implemented in setRepo.R
-
+  RemoteRepoCheck( repo, user, branch, remoteDir, repoType) # implemented in setRepo.R
+  
 # repoTo <- checkDirectory2( repoTo )
   if (file.exists(file.path(repoTo, zipname))) {
     stop(paste0("The file ", file.path(repoTo, zipname), " already exists"))
   }
   
-  # clone Github repo
+  # clone Remote repo
   tempRepoTo <- gsub(pattern = ".zip", replacement = "", x = zipname)
   createEmptyRepo( tempRepoTo, force = TRUE )
   on.exit(deleteRepo( tempRepoTo, deleteRoot = TRUE ))
-  hashes <- searchInGithubRepo( pattern="", user=user, repo=repo, branch = branch, repoDirGit = repoDirGit, fixed=FALSE )
-  copyGithubRepo(repoTo = tempRepoTo , md5hashes = hashes,
-                 user=user, repo=repo, branch = branch, repoDirGit = repoDirGit)
+  hashes <- searchInRemoteRepo( pattern="", user=user, repo=repo, branch = branch, repoDirGit = repoDirGit, repoType=repoType, fixed=FALSE )
+  copyRemoteRepo(repoTo = tempRepoTo , md5hashes = hashes,
+                 user=user, repo=repo, branch = branch, repoDirGit = repoDirGit, repoType=repoType)
   # list of files
   files <- c( file.path( tempRepoTo, "backpack.db"), 
               list.files( file.path(tempRepoTo, "gallery"), full.names=TRUE ))
