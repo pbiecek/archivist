@@ -5,7 +5,7 @@
 \title{Save an Artifact into a Repository}
 \usage{
 saveToRepo(artifact, repoDir = NULL, archiveData = TRUE,
-  archiveTags = TRUE, archiveMiniature = TRUE, archiveSessionInfo = FALSE,
+  archiveTags = TRUE, archiveMiniature = TRUE, archiveSessionInfo = TRUE,
   force = TRUE, rememberName = TRUE, value = FALSE, ..., userTags = c(),
   silent = aoptions("silent"), ascii = FALSE)
 }

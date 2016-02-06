@@ -281,7 +281,7 @@
 saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
                         archiveTags = TRUE,
                         archiveMiniature = TRUE, 
-                        archiveSessionInfo = FALSE, 
+                        archiveSessionInfo = TRUE, 
                         force = TRUE, rememberName = TRUE,
                         value = FALSE, ... , userTags = c(),
                         silent=aoptions("silent"), ascii = FALSE) {
