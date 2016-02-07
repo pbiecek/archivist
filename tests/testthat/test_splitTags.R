@@ -1,7 +1,7 @@
 test_that("split*Repo does not react on errors as it should and works as it's made to", {
   # Creating example default repository
   exampleRepoDir <- tempfile()
-  createEmptyRepo( exampleRepoDir, default = TRUE )
+  createLocalRepo( exampleRepoDir, default = TRUE )
   aoptions('silent', TRUE)
   # what about empty repo
   expect_error(splitTagsLocal())
@@ -28,5 +28,5 @@ test_that("split*Repo does not react on errors as it should and works as it's ma
   expect_error(splitTagsLocal(1:100))
   expect_equal(ncol(splitTagsLocal()), 4)
   
-  deleteRepo(repoDir = exampleRepoDir, deleteRoot = TRUE)
+  deleteLocalRepo(repoDir = exampleRepoDir, deleteRoot = TRUE)
 })

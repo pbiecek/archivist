@@ -41,11 +41,11 @@ test_that("asearch works properly", {
 
 
 test_that("createEmptyRepo creates repo", {
-  createEmptyRepo("tmp_archivist")
+  createLocalRepo("tmp_archivist")
   
   expect_equal(list.files("tmp_archivist"), c("backpack.db", "gallery"))
   expect_error(createEmptyRepo("tmp_archivist_2", force = FALSE))
-  deleteRepo("tmp_archivist", deleteRoot = TRUE)
+  deleteLocalRepo("tmp_archivist", deleteRoot = TRUE)
 })
 
 
@@ -69,7 +69,7 @@ test_that("createEmptyRepo creates repo", {
 
 test_that("copying from other repositories and showRepo", {
   repo <- "new_repo"
-  invisible(createEmptyRepo(repoDir = repo))
+  invisible(createLocalRepo(repoDir = repo))
   copyRemoteRepo( repoTo = repo, md5hashes= "2166dfbd3a7a68a91a2f8e6df1a44111", 
                   user="pbiecek", repo="graphGallery" )
   expect_is(showLocalRepo(repoDir = repo, method = "tags"), "data.frame")
@@ -85,13 +85,13 @@ test_that("copying from other repositories and showRepo", {
 
 test_that("saveToRepo funcion works with regular parameters", {
   repo <- "new_repo"
-  invisible(createEmptyRepo(repoDir = repo))
+  invisible(createLocalRepo(repoDir = repo))
   pl <- plot(iris$Sepal.Length, iris$Petal.Length)
   saveToRepo(pl, repoDir = repo) -> hash
   
   expect_equal(hash %in% showLocalRepo(repoDir = repo, "tags")[, "artifact"], TRUE)
   
-  deleteRepo("new_repo", deleteRoot = TRUE)
+  deleteLocalRepo("new_repo", deleteRoot = TRUE)
 })
 
 
