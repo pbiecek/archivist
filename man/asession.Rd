@@ -24,6 +24,11 @@ the artifact was created.
 \dontrun{
 setLocalRepo(system.file("graphGallery", package = "archivist"))
 asession("2a6e492cb6982f230e48cf46023e2e4f")
+
+# no session info
+asession("pbiecek/graphGallery/2a6e492cb6982f230e48cf46023e2e4f")
+# nice session info
+asession("pbiecek/graphGallery/600bda83cb840947976bd1ce3a11879d")
 }
 }
 \author{

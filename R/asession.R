@@ -21,6 +21,11 @@
 #' \dontrun{
 #' setLocalRepo(system.file("graphGallery", package = "archivist"))
 #' asession("2a6e492cb6982f230e48cf46023e2e4f")
+#' 
+#' # no session info
+#' asession("pbiecek/graphGallery/2a6e492cb6982f230e48cf46023e2e4f")
+#' # nice session info
+#' asession("pbiecek/graphGallery/600bda83cb840947976bd1ce3a11879d")
 #' }
 #' @family archivist
 #' @rdname asession
@@ -34,7 +39,7 @@ asession <- function( md5hash = NULL) {
     tags <- getTagsLocal(md5hash, tag = "")
     tagss <- grep(tags, pattern="^session_info:", value = TRUE)
     if (length(tagss) == 0) {
-      simpleWarning(paste0("No session info archived for ", md5hash))
+      warning(paste0("No session info archived for ", md5hash))
       return(NA)
     }
     return(loadFromLocalRepo(gsub(tagss[1], pattern = "^session_info:", replacement = ""), value = TRUE))
@@ -45,7 +50,7 @@ asession <- function( md5hash = NULL) {
                           user = elements[1], tag = "")
     tagss <- grep(tags, pattern="^session_info:", value = TRUE)
     if (length(tagss) == 0) {
-      simpleWarning(paste0("No session info archived for ", md5hash))
+      warning(paste0("No session info archived for ", md5hash))
       return(NA)
     }
     return(loadFromRemoteRepo(gsub(tagss[1], pattern = "^session_info:", replacement = ""), 
