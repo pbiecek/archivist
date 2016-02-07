@@ -5,6 +5,7 @@ archivist 2.0
     1. All *Github* functions are now *Remote* functions. This is because we support more than just GitHub repos (currently github + git/hg bitbucket)
     2. `RemoteRepoCheck` is used to verify if parameters for remote repo are correct.
     2. `asession` returns session info for given artifact (similar to aread).
+    2. `aformat` returns vector of formats in which the artifact is saved (similar to aread).
 * **New features**:
     1. `saveToRepo` by default saves session info.
 

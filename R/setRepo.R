@@ -19,56 +19,46 @@
 #' \code{setRemoteRepo} function and omit \code{user}, \code{repo}, \code{branch}
 #' and \code{repoDirGit} parameters in future function calls. See examples.
 #' 
+#' For local repositories, in this way, in the following function calls: 
+#' \link{loadFromLocalRepo},\link{searchInLocalRepo}, \link{rmFromRepo}, \link{zipLocalRepo}, 
+#' \link{multiSearchInLocalRepo}, \link{addTagsRepo}, \link{shinySearchInLocalRepo},
+#' \link{getTagsLocal}, \link{showLocalRepo}, \link{summaryLocalRepo} 
+#' \code{repoDir} parameter may be omitted. 
+#' For remote repositories, in this way,
+#' in the following function calls:
+#' \link{zipRemoteRepo}, \link{loadFromRemoteRepo}, \link{searchInRemoteRepo},
+#' \link{getTagsRemote}, \link{showRemoteRepo}, \link{summaryRemoteRepo},
+#' \link{multiSearchInRemoteRepo}, \link{copyRemoteRepo}
+#' parameters \code{user}, \code{repo}, \code{branch}, \code{repoDirGit}  may be omitted.
+#' 
 #' @seealso
 #' 
 #' \href{https://github.com/pbiecek/archivist/wiki}{https://github.com/pbiecek/archivist/wiki}
 #' 
 #' @param repoDir A character denoting a directory of a Repository that we want to
-#' make dafault. In this way, in the following function calls: \link{saveToRepo},
-#' \link{loadFromLocalRepo},\link{searchInLocalRepo}, \link{rmFromRepo}, \link{zipLocalRepo}, 
-#' \link{multiSearchInLocalRepo}, \link{addTagsRepo}, \link{shinySearchInLocalRepo},
-#' \link{getTagsLocal}, \link{showLocalRepo}, \link{summaryLocalRepo} 
-#' \code{repoDir} parameter may be omitted. 
+#' make dafault. 
 #' 
 #' @param repo While working with the Remote repository. A character containing
-#' a name of the Remote repository that we want to make default. In this way,
-#' in the following function calls:
-#' \link{zipRemoteRepo}, \link{loadFromRemoteRepo}, \link{searchInRemoteRepo},
-#' \link{getTagsRemote}, \link{showRemoteRepo}, \link{summaryRemoteRepo},
-#' \link{multiSearchInRemoteRepo}, \link{copyRemoteRepo}
-#' \code{repo} parameter may be omitted. 
+#' a name of the Remote repository that we want to make default. 
 #' 
-#' @param repoType A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.
+#' @param repoType A character containing a type of the remote repository. 
+#' Currently it can be 'github' or 'bitbucket'.
 #' 
 #' @param user While working with the Remote repository. A character containing
-#' a name of the Remote user that we want to make default. In this way,
-#' in the following function calls:
-#' \link{zipRemoteRepo}, \link{loadFromRemoteRepo}, \link{searchInRemoteRepo},
-#' \link{getTagsRemote}, \link{showRemoteRepo}, \link{summaryRemoteRepo},
-#' \link{multiSearchInRemoteRepo}, \link{copyRemoteRepo}
-#' \code{user} parameter may be omitted.
+#' a name of the Remote user that we want to make default. 
 #' 
 #' @param branch While working with the Remote repository. A character containing a name of 
-#' the Remote Repository's branch that we want to make default. In this way,
-#' in the following function calls:
-#' \link{zipRemoteRepo}, \link{loadFromRemoteRepo},
-#' \link{searchInRemoteRepo}, \link{getTagsRemote}, \link{showRemoteRepo},
-#' \link{summaryRemoteRepo}, \link{multiSearchInRemoteRepo},
-#' \link{copyRemoteRepo} 
-#' \code{branch} parameter may be omitted. Default \code{branch} is \code{master}.
+#' the Remote Repository's branch that we want to make default. Default \code{branch} is \code{master}.
 #' 
 #' @param repoDirGit While working with the Remote repository. A character containing a name
 #' of the Repository's directory on Remote that we want to make default.
-#' In this way, in the following function calls:
-#' \link{zipRemoteRepo}, \link{loadFromRemoteRepo}, \link{searchInRemoteRepo},
-#' \link{getTagsRemote}, \link{showRemoteRepo}, \link{summaryRemoteRepo},
-#' \link{multiSearchInRemoteRepo}, \link{copyRemoteRepo}
-#' \code{repoDirGit} parameter may be omitted.
 #' If the Repository is stored in the main folder on the Remote repository,
 #' this should be set to \code{repoDirGit = FALSE} as default.
 #' 
 #' @author 
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
+#' 
+#' Przemyslaw Biecek, \email{przemyslaw.biecek@@gmail.com}
 #' 
 #' @examples
 #' 
@@ -126,11 +116,10 @@
 #' @export
 setLocalRepo <- function( repoDir ){
   stopifnot( is.character( repoDir ), length( repoDir ) == 1 )
-  
+
   repoDir <- checkDirectory( repoDir )
   
   invisible(aoptions("repoDir", repoDir))
-  
 }
 
 
@@ -139,7 +128,7 @@ setLocalRepo <- function( repoDir ){
 #' @export
 setRemoteRepo <- function( user, repo, branch = "master", 
                            repoDirGit = FALSE, repoType='github'){
-  RemoteRepoCheck( repo, user, branch, repoDirGit, repoType) # implemented in setRepo.R
+  RemoteRepoCheck( repo, user, branch, repoDirGit, repoType) 
   
   aoptions("user", user)
   aoptions("repo", repo)
