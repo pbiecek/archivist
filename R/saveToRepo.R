@@ -289,8 +289,9 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
                         silent=aoptions("silent"), ascii = FALSE,
                         artifactName = deparse(substitute(artifact))) {
   stopifnot( is.logical( c( archiveData, archiveTags, archiveMiniature,
-                            force,  rememberName, value, silent, ascii, archiveSessionInfo, artifactName ) ) )
+                            force,  rememberName, value, silent, ascii, archiveSessionInfo ) ) )
   stopifnot( ( is.character( repoDir ) & length( repoDir ) == 1 ) | is.null( repoDir ) )
+  stopifnot( is.character(artifactName))
 #  stopifnot( is.character( userTags ))    - user can specify tags: userTags = 1:2, and they should
 # be converted to characters as in the previous archivist versions. we even have testsfor that
   stopifnot( length(archiveData) == 1, length(archiveTags) == 1, length(archiveMiniature) == 1,
@@ -300,7 +301,6 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
 #   stopifnot( is.character( format ) & length( format ) == 1 & any(format %in% c("rda", "rdx")) )
 
   md5hash <- digest( artifact )
-  objectName <- artifactName  
 
   repoDir <- checkDirectory( repoDir )
 
@@ -320,13 +320,13 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
   }
 
   # save artifact to .rd file
-  if ( rememberName & !(objectName %in% ls(envir = parent.frame(1)))) {
-    warning( paste0("Object with the name ", objectName, ", not found. Saving without name."))
+  if ( rememberName & !(artifactName %in% ls(envir = parent.frame(1)))) {
+    warning( paste0("Object with the name ", artifactName, ", not found. Saving without name."))
     rememberName = FALSE
   }
   if ( rememberName ){
 #     if( format == "rda"){
-      save( file = file.path(repoDir,"gallery", paste0(md5hash, ".rda")), ascii = ascii, list = objectName,  envir = parent.frame(1))
+      save( file = file.path(repoDir,"gallery", paste0(md5hash, ".rda")), ascii = ascii, list = artifactName,  envir = parent.frame(1))
       addTag("format:rda", md5hash, dir=repoDir)
 #     }else{
 #       saveToRepo2(artifact, filebase = paste0(repoDir,"gallery/", md5hash), ascii = ascii, ...)
@@ -346,7 +346,7 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
 
   # add entry to database
    if ( rememberName ){
-     addArtifact( md5hash, name = objectName, dir = repoDir )
+     addArtifact( md5hash, name = artifactName, dir = repoDir )
    }else{
      addArtifact( md5hash, name = md5hash , dir = repoDir)
    # rm( list = md5hash, envir = .ArchivistEnv )
@@ -354,7 +354,7 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
 
   # whether to add Tags
   if ( archiveTags ) {
-    extractedTags <- extractTags( artifact, objectNameX = objectName )
+    extractedTags <- extractTags( artifact, objectNameX = artifactName )
     # remove name from Tags
     if (!rememberName) {
       extractedTags <- extractedTags[!grepl(extractedTags, pattern="^name:")]
