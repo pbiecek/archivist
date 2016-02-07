@@ -51,6 +51,7 @@
 #' showLocalRepo()
 #' showLocalRepo(method = "tags")
 #' deleteLocalRepo( repoDir = exampleRepoDir, unset = TRUE, deleteRoot = TRUE)
+#' }
 #' @family archivist
 #' @rdname createEmptyRepo
 #' @export

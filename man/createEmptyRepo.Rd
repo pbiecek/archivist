@@ -43,6 +43,17 @@ artifacts will be archived.
 After every \code{saveToRepo} call the database is refreshed. As a result, the artifact is available 
 immediately in \code{backpack.db} database for other collaborators.
 }
+\examples{
+\dontrun{
+exampleRepoDir <- tempfile()
+createLocalRepo( repoDir = exampleRepoDir, default =  TRUE )
+data(iris)
+saveToRepo(iris)
+showLocalRepo()
+showLocalRepo(method = "tags")
+deleteLocalRepo( repoDir = exampleRepoDir, unset = TRUE, deleteRoot = TRUE)
+}
+}
 \author{
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 }
