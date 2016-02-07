@@ -127,7 +127,7 @@ setLocalRepo <- function( repoDir ){
 #' @rdname setRepo
 #' @export
 setRemoteRepo <- function( user, repo, branch = "master", 
-                           subdir = FALSE, repoType='github'){
+                           subdir = "/", repoType='github'){
   RemoteRepoCheck( repo, user, branch, subdir, repoType) 
   
   aoptions("user", user)
@@ -141,14 +141,11 @@ setRemoteRepo <- function( user, repo, branch = "master",
 
 
 RemoteRepoCheck <- function( repo, user, branch, subdir, repoType){
-  stopifnot( is.logical( subdir ) | ( is.character( subdir ) & length( subdir ) == 1) )
+  stopifnot( ( is.character( subdir ) & length( subdir ) == 1) )
   stopifnot( is.null( repo ) | ( is.character( repo ) & length( repo ) == 1 ) )
   stopifnot( is.null( user ) | ( is.character( user ) & length( user ) == 1 ) )
   stopifnot( ( is.character( branch ) & length( branch ) == 1 ) )
   
-  if( is.logical( subdir ) && subdir ){
-      stop( "subdir may be only FALSE or a character. See documentation." )
-  }
   if ( xor( is.null( user ), is.null( repo ) ) ){
     stop( "Both or none of user and repo should be NULL. See documentation." )
   }

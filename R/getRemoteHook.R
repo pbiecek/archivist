@@ -38,7 +38,7 @@ getRemoteHook <- function(repo = aoptions("repo"), user = aoptions("user"), bran
          stop("No such repoType"))
 }
 
-getRemoteHookGithub <- function(repo = NULL, user = NULL, branch = "master", subdir = FALSE ){
+getRemoteHookGithub <- function(repo = aoptions("repo"), user = aoptions("user"), branch = aoptions("branch"), subdir = aoptions("subdir") ){
   stopifnot( is.character( c(branch ) ), length( branch ) == 1 )
 
   if (subdir == FALSE) {
@@ -48,7 +48,7 @@ getRemoteHookGithub <- function(repo = NULL, user = NULL, branch = "master", sub
   }
 }
 
-getRemoteHookBitbucket <- function(repo = NULL, user = NULL, branch = "master", subdir = FALSE ){
+getRemoteHookBitbucket <- function(repo = aoptions("repo"), user = aoptions("user"), branch = aoptions("branch"), subdir = aoptions("subdir") ){
   stopifnot( is.character( c(branch ) ), length( branch ) == 1 )
   repo <- tolower(repo)
   json <- readLines(paste0("https://api.bitbucket.org/2.0/repositories/",user,"/",repo,"/commits/"), warn = FALSE)
