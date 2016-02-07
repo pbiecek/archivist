@@ -52,7 +52,7 @@ addHooksToPrint <- function(class = "ggplot",
     if (length(namespace) == 0) {
       stop(paste0("The function print.",class1, " has not been found."))
     }
-    
+
     fun <- paste0('function(x, ...) {
                   hash <- saveToRepo(x)
                   al <- alink(hash, repo = "',repo,'", user = "',user,'", subdir = "',subdir,'")
@@ -61,6 +61,7 @@ addHooksToPrint <- function(class = "ggplot",
   }')
     
     fun <- eval(parse(text=fun))
-    assign(paste0("print.", class1), fun, pos=.GlobalEnv)
+    veryDirtyHack <- 1
+    assign(paste0("print.", class1), fun, pos=veryDirtyHack) # 1 should stand for Global Env
 }
 }
