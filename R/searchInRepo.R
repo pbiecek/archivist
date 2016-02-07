@@ -115,7 +115,7 @@
 #'  
 #'  # multi versions
 #'  multiSearchInRemoteRepo( patterns=c("varname:Sepal.Width", "class:lm", "name:myplot123"), 
-#'                          user="pbiecek", repo="archivist", intersect = FALSE )                                    
+#'                          user="pbiecek", repo="archivist", intersect = FALSE )
 #'   
 #' }
 #' @family archivist
