@@ -58,7 +58,7 @@
 #' 
 #' @param subdir While working with the Github repository. A character containing a name of a directory on the Remote repository 
 #' on which the Repository is stored. If the Repository is stored in the main folder of the Remote repository, this should be set 
-#' to \code{subdir = FALSE} as default.
+#' to \code{subdir = "/"} as default.
 #' 
 #' @param realDBname A logical value. Should not be changed by user. It is a technical parameter.
 #'

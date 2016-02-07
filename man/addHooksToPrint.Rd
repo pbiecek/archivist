@@ -20,7 +20,7 @@ Default \code{branch} is \code{master}.}
 
 \item{subdir}{A character containing a name of a directory on Git repository 
 on which the Repository is stored. If the Repository is stored in main folder on Git repository, this should be set 
-to \code{subdir = FALSE} as default.}
+to \code{subdir = "/"} as default.}
 }
 \description{
 \code{addHooksToPrint} adds an overloaded version of the print function for objects of selected class. 

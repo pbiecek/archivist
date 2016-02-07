@@ -41,7 +41,7 @@
 #' @param subdir While working with the Remote repository. A character containing
 #' a name of a directory on the Remote repository on which the Repository is stored.
 #' If the Repository is stored in main folder on the Remote repository, this should be set 
-#' to \code{subdir = FALSE} as default.
+#' to \code{subdir = "/"} as default.
 #' 
 #' @note
 #' If \code{repo} and \code{user} are set to \code{NULL} (as default) in Remote mode then global parameters

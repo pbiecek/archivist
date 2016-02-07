@@ -37,7 +37,7 @@
 #' @param subdir While working with the Github repository. A character containing
 #' a name of a directory on the Github repository on which the Repository is stored.
 #' If the Repository is stored in the main folder of the Github repository,
-#' this should be set to \code{subdir = FALSE} as default.
+#' this should be set to \code{subdir = "/"} as default.
 #' 
 #' @return
 #' A \code{data.frame} with 4 columns: \code{artifact}, \code{tagKey},

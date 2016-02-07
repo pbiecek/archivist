@@ -33,7 +33,7 @@ Remote Repository's branch on which the Repository is archived. Default \code{br
 
 \item{subdir}{While working with a Remote repository. A character containing a name of a directory on Remote repository 
 on which the Repository is stored. If the Repository is stored in main folder on Remote repository, this should be set 
-to \code{subdir = FALSE} as default.}
+to \code{subdir = "/"} as default.}
 
 \item{repoType}{A character containing a type of the remote repository. Currently it can be 'Remote' or 'bitbucket'.}
 }

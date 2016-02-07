@@ -53,7 +53,7 @@
 #' @param subdir While working with the Remote repository. A character containing a name
 #' of the Repository's directory on Remote that we want to make default.
 #' If the Repository is stored in the main folder on the Remote repository,
-#' this should be set to \code{subdir = FALSE} as default.
+#' this should be set to \code{subdir = "/"} as default.
 #' 
 #' @author 
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}

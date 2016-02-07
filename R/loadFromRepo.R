@@ -54,7 +54,7 @@
 #' 
 #' @param subdir While working with a Remote repository. A character containing a name of a directory on Remote repository 
 #' on which the Repository is stored. If the Repository is stored in main folder on Remote repository, this should be set 
-#' to \code{subdir = FALSE} as default.
+#' to \code{subdir = "/"} as default.
 #' 
 #' @param value If \code{FALSE} (default) then artifacts are loaded into the Global Environment with their original names, 
 #' if \code{TRUE} then artifacts are returned as a list of values (if there is more than one artifact)

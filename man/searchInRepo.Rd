@@ -49,7 +49,7 @@ the Remote Repository's branch on which the Repository is stored. Default \code{
 
 \item{subdir}{While working with the Github repository. A character containing a name of a directory on the Remote repository 
 on which the Repository is stored. If the Repository is stored in the main folder of the Remote repository, this should be set 
-to \code{subdir = FALSE} as default.}
+to \code{subdir = "/"} as default.}
 
 \item{repoType}{A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.}
 

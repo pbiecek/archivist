@@ -26,7 +26,7 @@ the Remote Repository's branch that we want to make default. Default \code{branc
 \item{subdir}{While working with the Remote repository. A character containing a name
 of the Repository's directory on Remote that we want to make default.
 If the Repository is stored in the main folder on the Remote repository,
-this should be set to \code{subdir = FALSE} as default.}
+this should be set to \code{subdir = "/"} as default.}
 
 \item{repoType}{A character containing a type of the remote repository. 
 Currently it can be 'github' or 'bitbucket'.}

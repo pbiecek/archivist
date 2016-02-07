@@ -24,7 +24,7 @@
 #' 
 #' @param subdir A character containing a name of a directory on the Remote repository 
 #' on which the Repository is stored. If the Repository is stored in the main folder on the Remote repository, this should be set 
-#' to \code{subdir = FALSE} as default.
+#' to \code{subdir = "/"} as default.
 #' 
 #' @param branch A character containing a name of the Remote Repository's branch
 #' on which the Repository is archived. Default \code{branch} is \code{master}.
