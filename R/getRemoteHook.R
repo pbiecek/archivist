@@ -41,7 +41,7 @@ getRemoteHook <- function(repo = aoptions("repo"), user = aoptions("user"), bran
 getRemoteHookGithub <- function(repo = aoptions("repo"), user = aoptions("user"), branch = aoptions("branch"), subdir = aoptions("subdir") ){
   stopifnot( is.character( c(branch ) ), length( branch ) == 1 )
 
-  if (subdir == FALSE) {
+  if (subdir == "/") {
     return(file.path( "https://raw.githubusercontent.com", user, repo, branch))
   } else {
     return(file.path( "https://raw.githubusercontent.com", user, repo, branch, subdir))
@@ -55,7 +55,7 @@ getRemoteHookBitbucket <- function(repo = aoptions("repo"), user = aoptions("use
   tmp <- strsplit(json, split='"')[[1]]
   last_commit <- tmp[which(tmp == "hash")+2]
   
-  if (subdir == FALSE) {
+  if (subdir == "/") {
     return(file.path("https://bitbucket.org",user,repo,"raw",last_commit))
   } else {
 #    paste0(file.path("https://bitbucket.org",user,repo,"raw",last_commit,subdir,"?at="),branch)

@@ -216,7 +216,7 @@ copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, bra
     
     filelist <- unlist(lapply(content(req)$tree, "[", "path"), use.names = F)
     
-    if( is.logical( subdir ) ){
+    if( subdir == "/" ){
       whichFilesToClone <- grep("gallery/", filelist, value = TRUE, fixed = TRUE)
       needTidy <- strsplit(whichFilesToClone, "gallery/")
       whichFilesToClone <- unlist(lapply(needTidy, function(x){
@@ -243,7 +243,7 @@ cloneRemoteFile <- function( file, repo, user, branch, to, subdir ){
     URLfile <- file.path( get( ".GithubURL", envir = .ArchivistEnv) , 
                        user, repo, branch, file) 
     # tidy
-    if ( is.character( subdir ) ){
+    if (  subdir != "/" ){
       file <- paste0( "gallery/", strsplit(file, "gallery/")[[1]][2] )
     }
     
