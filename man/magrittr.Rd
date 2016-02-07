@@ -62,9 +62,9 @@ rm(exampleRepoDir)
 \seealso{
 Other archivist: \code{\link{Repository}},
   \code{\link{Tags}}, \code{\link{addHooksToPrint}},
-  \code{\link{addTagsRepo}}, \code{\link{ahistory}},
-  \code{\link{alink}}, \code{\link{aoptions}},
-  \code{\link{archive}},
+  \code{\link{addTagsRepo}}, \code{\link{aformat}},
+  \code{\link{ahistory}}, \code{\link{alink}},
+  \code{\link{aoptions}}, \code{\link{archive}},
   \code{\link{archivist-github-integration}},
   \code{\link{archivist-package}}, \code{\link{aread}},
   \code{\link{asearch}}, \code{\link{asession}},
