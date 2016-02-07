@@ -142,24 +142,24 @@ Example: The data set will be archived here.
 }
 }
 \examples{
-\dontrun{
 exampleRepoDir <- tempfile()
-createEmptyRepo( repoDir = exampleRepoDir )
+createEmptyRepo(repoDir = exampleRepoDir)
 data(iris)
-saveToRepo( iris, repoDir=exampleRepoDir, archiveSessionInfo = TRUE )
-showLocalRepo( method = "md5hashes", repoDir = exampleRepoDir )
-showLocalRepo( method = "tags", repoDir = exampleRepoDir )
+saveToRepo(iris, repoDir=exampleRepoDir, archiveSessionInfo = TRUE)
+showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
+showLocalRepo(method = "tags", repoDir = exampleRepoDir)
 
 loadFromLocalRepo(md5hash = '600bda83cb840947976bd1ce3a11879d',
   repoDir = system.file("graphGallery", package = "archivist"), value = TRUE) -> pl
 
-saveToRepo( pl, repoDir=exampleRepoDir,
-             userTags = c( "do not delete", "my favourite graph" ) )
+saveToRepo(pl, repoDir=exampleRepoDir,
+             userTags = c("do not delete", "my favourite graph"))
 aoptions('repoDir', system.file("graphGallery", package = "archivist"))
-showLocalRepo( method = "tags" )
+showLocalRepo(method = "tags")
 aoptions('repoDir', NULL, unset = TRUE)
-deleteRepo( exampleRepoDir, TRUE)
-}
+deleteRepo(exampleRepoDir, TRUE)
+rm(exampleRepoDir)
+
 }
 \author{
 Marcin Kosinski , \email{m.p.kosinski@gmail.com}
@@ -178,7 +178,7 @@ Other archivist: \code{\link{Repository}},
   \code{\link{archivist-package}}, \code{\link{aread}},
   \code{\link{asearch}}, \code{\link{asession}},
   \code{\link{cache}}, \code{\link{copyLocalRepo}},
-  \code{\link{createEmptyLocalRepo}},
+  \code{\link{createLocalRepo}},
   \code{\link{createMDGallery}},
   \code{\link{deleteLocalRepo}},
   \code{\link{getRemoteHook}}, \code{\link{getTagsLocal}},

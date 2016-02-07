@@ -3,9 +3,7 @@
 #' @title Create an Empty Repository
 #'
 #' @description
-#' \code{createEmptyLocalRepo} creates an empty \link{Repository} in the given directory in which archived artifacts will be stored.
-#' \code{createEmptyRepo} is a wrapper around \code{createEmptyLocalRepo} to maintain consistency with the previous \pkg{archivist} versions (<1.8.6.0)
-#'  where there was only \code{createEmptyRepo} which created Local \code{Repository}.  
+#' \code{createLocalRepo} creates an empty \link{Repository} in the given directory in which archived artifacts will be stored.
 #' 
 #' @details
 #' At least one Repository must be initialized before using other functions from the \pkg{archivist} package. 
@@ -47,39 +45,16 @@
 #' @examples
 #' \dontrun{
 #' exampleRepoDir <- tempfile()
-#' createEmptyRepo( repoDir = exampleRepoDir )
-#'
-#' # check the state of an empty Repository
-#' 
-#' summaryLocalRepo(  repoDir = exampleRepoDir )
-#' showLocalRepo( exampleRepoDir )
-#' 
-#' # creating a Repository in non existing directory
-#' 
-#' createEmptyLocalRepo( "xyzdd234") # force = TRUE is default argument
-#'
-#' # creating a default local Repository in non existing directory
-#' 
-#' createEmptyRepo("def", default = TRUE) 
+#' createEmptyRepo( repoDir = exampleRepoDir, default =  TRUE )
 #' data(iris)
-#' saveToRepo(iris) # We don't have to specify repoDir parameter
-#' showLocalRepo() # because repoDir="def" is default 
-#'
-#'  # removing an example Repositories
-#' 
-#' deleteRepo( exampleRepoDir, TRUE)
-#' deleteRepo( "xyzdd234", TRUE)
-#' deleteRepo("def", TRUE)
-#' 
-#' rm( exampleRepoDir )
-#' 
-#' 
-#' }
+#' saveToRepo(iris)
+#' showLocalRepo()
+#' showLocalRepo(method = "tags")
+#' deleteLocalRepo( repoDir = exampleRepoDir, unset = TRUE, deleteRoot = TRUE)
 #' @family archivist
-
 #' @rdname createEmptyRepo
 #' @export
-createEmptyLocalRepo <- function( repoDir, force = TRUE, default = FALSE ){
+createLocalRepo <- function( repoDir, force = TRUE, default = FALSE ){
   stopifnot( is.character( repoDir ), length( repoDir ) == 1 )
   stopifnot( is.logical( default ), length( default ) == 1 )
   
@@ -127,10 +102,6 @@ createEmptyLocalRepo <- function( repoDir, force = TRUE, default = FALSE ){
   }
    
 }
-
-#' @rdname createEmptyRepo
-#' @export
-createEmptyRepo <- createEmptyLocalRepo
 
 addArtifact <- function( md5hash, name, dir ){
   # creates connection and driver
