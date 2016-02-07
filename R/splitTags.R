@@ -69,7 +69,7 @@
 #' # Let's check how does table tag look like while we are using the
 #' # Gitub repository.
 #' # We will choose only special columns of data frames that show Tags
-#' head(showGithubRepo( user = "pbiecek", repo = "archivist", method = "tags" )[,2])
+#' head(showRemoteRepo( user = "pbiecek", repo = "archivist", method = "tags" )[,2])
 #' head(splitTagsGithub( user = "pbiecek", repo = "archivist" )[,2:3])
 #' 
 #' head(splitTagsRemote("PieczaraPietraszki", "BetaAndBit", "master", "UniwersytetDzieci/arepo"))
