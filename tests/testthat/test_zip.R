@@ -14,10 +14,10 @@ test_that("zip*Repo reacts properly on proper arguments ", {
   liczba_art_gallery <- length(grep("ex1/gallery/", filelist, value = TRUE, fixed = TRUE))
   liczba_art_backpack <- length(unique(showRemoteRepo(repo = "museum",
                                                       user = "MarcinKosinski",
-                                                      repoDirGit = "ex1")[,1]))
+                                                      subdir = "ex1")[,1]))
   zipname <- "test1234.zip"
   zipRemoteRepo( user="MarcinKosinski", repo="Museum", zipname = zipname,
-                 repoDirGit="ex1")
+                 subdir="ex1")
   zipfile <- file.path(getwd(), zipname)
   repo_zip <- gsub(pattern = ".zip", replacement = "", x = zipfile)
   unzip(zipfile, exdir = getwd())

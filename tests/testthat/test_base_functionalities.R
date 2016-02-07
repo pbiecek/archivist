@@ -3,13 +3,13 @@ test_that("setLocalRepo sets repo", {
   setLocalRepo(repoDir = "tmp_archivist")
   expect_equal(aoptions("repoDir"), "tmp_archivist")
   
-  setRemoteRepo(user = "MarcinKosinski", repo = "archivist", branch = "master", repoDirGit = "clone123")
+  setRemoteRepo(user = "MarcinKosinski", repo = "archivist", branch = "master", subdir = "clone123")
   expect_equal(aoptions("user"), "MarcinKosinski")
   expect_equal(aoptions("repo"), "archivist")
   expect_equal(aoptions("branch"), "master")
-  expect_equal(aoptions("repoDirGit"), "clone123")
+  expect_equal(aoptions("subdir"), "clone123")
   deleteRepo("tmp_archivist", deleteRoot = TRUE)
-  aoptions("repoDirGit", FALSE)
+  aoptions("subdir", "/")
 })
 
 test_that(".ArchivistEnv exists", {
