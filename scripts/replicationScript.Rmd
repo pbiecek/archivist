@@ -23,7 +23,7 @@ Creation of hooks to R objects.
 Following lines download R objects from remote repository.
 
 ```{r}
-archivist::aread("pbiecek/graphGallery/2166dfbd3a7a68a91a2f8e6df1a44111")
+archivist::aread("pbiecek/graphGallery/600bda83cb840947976bd1ce3a11879d")
 ```
 
 These instructions retrieve R objects from graphGallery directory attached to the archivist package.
@@ -31,8 +31,8 @@ These instructions retrieve R objects from graphGallery directory attached to th
 ```{r}
 setLocalRepo(system.file("graphGallery", package = "archivist"))
 # plot
-archivist::aread("2166dfbd3a7a68a91a2f8e6df1a44111")
-archivist::aread("2166d")
+archivist::aread("600bda83cb840947976bd1ce3a11879d")
+archivist::aread("600bda")
 
 # regression model
 model <- archivist::aread("2a6e492cb6982f230e48cf46023e2e4f")
