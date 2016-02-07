@@ -54,7 +54,7 @@ addHooksToPrint <- function(class = "ggplot",
     
     fun <- paste0('function(x, ...) {
                   hash <- saveToRepo(x)
-                  al <- alink(hash, repo = "',repo,'", user = "',user,'", subdir = ',ifelse(subdir == FALSE, FALSE, paste0('"',subdir,'"')),')
+                  al <- alink(hash, repo = "',repo,'", user = "',user,'", subdir = ',paste0('"',subdir,'"'),')
                   cat("Load: ", al, "\n", sep="")
                   ',namespace,':::print.',class1,'(x, ...)
   }')

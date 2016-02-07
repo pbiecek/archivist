@@ -7,7 +7,7 @@
 \usage{
 setLocalRepo(repoDir)
 
-setRemoteRepo(user, repo, branch = "master", subdir = FALSE,
+setRemoteRepo(user, repo, branch = "master", subdir = "/",
   repoType = "github")
 }
 \arguments{

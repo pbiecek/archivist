@@ -5,8 +5,8 @@
 \title{Return a Link To Download an Artifact Stored on Remote Repository}
 \usage{
 alink(md5hash, repo = aoptions("repo"), user = aoptions("user"),
-  subdir = FALSE, branch = "master", repoType = aoptions("repoType"),
-  format = "markdown", rawLink = FALSE)
+  subdir = aoptions("subdir"), branch = "master",
+  repoType = aoptions("repoType"), format = "markdown", rawLink = FALSE)
 }
 \arguments{
 \item{md5hash}{A character assigned to the artifact through the use of a cryptographical hash function with MD5 algorithm. 

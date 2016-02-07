@@ -77,7 +77,7 @@ createMDGallery <- function(output, repo = aoptions("repo"), user = aoptions("us
     filelist <- unlist(lapply(content(req)$tree, "[", "path"), use.names = F)
     # artifacts in a required directory with png miniature
     pattern <- paste0("^",
-                      ifelse(subdir == FALSE,
+                      ifelse(subdir == "/",
                              "gallery",
                              file.path(subdir, "gallery") ))
     grep(filelist, pattern=pattern, value = TRUE) -> repoList
@@ -103,7 +103,7 @@ createMDGallery <- function(output, repo = aoptions("repo"), user = aoptions("us
               "/",
               branch,
               "/",
-              ifelse(subdir == FALSE,
+              ifelse(subdir == "/",
                      "gallery/",
                      file.path(subdir, "gallery/")),
               md5, ".png)"))

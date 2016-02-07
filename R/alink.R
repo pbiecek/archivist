@@ -81,7 +81,7 @@
 #' @export
 alink <- function(md5hash, repo = aoptions('repo'),
                   user = aoptions('user'),
-                  subdir = FALSE, branch = "master", repoType = aoptions("repoType"),
+                  subdir = aoptions('subdir'), branch = "master", repoType = aoptions("repoType"),
                   format = "markdown", rawLink = FALSE) {
   
   stopifnot(is.character(md5hash) & length(md5hash) == 1)
@@ -103,7 +103,7 @@ alink <- function(md5hash, repo = aoptions('repo'),
                        '/',
                        repo,
                        '/blob/master/',
-                       ifelse(subdir == FALSE, "", paste0(subdir,"/")),
+                       ifelse(subdir == "/", "", paste0(subdir,"/")),
                        'gallery/',
                        md5hash,
                        '.rda?raw=true')
@@ -138,7 +138,7 @@ aread_command <- function(md5hash, user, repo, subdir) {
                md5hash,
                file.path(user, repo, 
                          # required to handle subdir
-                         ifelse(subdir == FALSE, 
+                         ifelse(subdir == "/", 
                                 md5hash, 
                                 paste0(subdir,"/",md5hash))
                )),
