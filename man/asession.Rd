@@ -4,13 +4,14 @@
 \alias{asession}
 \title{Show Artifact's Session Info}
 \usage{
-asession(md5hash = NULL, repoDir = aoptions("repoDir"))
+asession(md5hash = NULL)
 }
 \arguments{
-\item{md5hash}{\code{md5hash} of the artifact that should be returned.}
+\item{md5hash}{One of the following (see \link{aread}):
 
-\item{repoDir}{A character denoting an existing directory in which an artifact will be saved.
-If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.}
+A character vector which elements  are consisting of at least three components separated with '/': Remote user name, Remote repository and name of the artifact (MD5 hash) or it's abbreviation.
+
+MD5 hashes of artifacts in current local default directory or its abbreviations.}
 }
 \value{
 An object of the class \code{session_info}.

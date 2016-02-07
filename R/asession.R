@@ -6,9 +6,11 @@
 #' \code{asession} extracts artifact's session info. This allow to check in what conditions 
 #' the artifact was created.
 #' 
-#' @param md5hash  \code{md5hash} of the artifact that should be returned.
-#' @param repoDir  A character denoting an existing directory in which an artifact will be saved.
-#' If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.
+#' @param md5hash One of the following (see \link{aread}):
+#' 
+#' A character vector which elements  are consisting of at least three components separated with '/': Remote user name, Remote repository and name of the artifact (MD5 hash) or it's abbreviation.
+#' 
+#' MD5 hashes of artifacts in current local default directory or its abbreviations.
 #' 
 #' @return An object of the class \code{session_info}.
 #' 
@@ -24,12 +26,32 @@
 #' @rdname asession
 #' @export
 
-asession <- function( md5hash = NULL, repoDir = aoptions("repoDir")) {
-  tags <- getTagsLocal(md5hash, tag = "", repoDir=repoDir)
-  tagss <- grep(tags, pattern="^session_info:", value = TRUE)
-  if (length(tagss) == 0) {
-    simpleWarning(paste0("No session info archived for ", md5hash))
-    return(NA)
+asession <- function( md5hash = NULL) {
+  elements <- strsplit(md5hash, "/")[[1]]
+  stopifnot( length(elements) >= 3 | length(elements) == 1)
+  if (length(elements) == 1) {
+    # local directory
+    tags <- getTagsLocal(md5hash, tag = "")
+    tagss <- grep(tags, pattern="^session_info:", value = TRUE)
+    if (length(tagss) == 0) {
+      simpleWarning(paste0("No session info archived for ", md5hash))
+      return(NA)
+    }
+    return(loadFromLocalRepo(gsub(tagss[1], pattern = "^session_info:", replacement = ""), value = TRUE))
+  } else {
+    # Remote directory
+    tags <- getTagsRemote(tail(elements,1), repo = elements[2],
+                          repoDirGit = ifelse(length(elements) > 3, paste(elements[3:(length(elements)-1)], collapse="/"), FALSE),
+                          user = elements[1], tag = "")
+    tagss <- grep(tags, pattern="^session_info:", value = TRUE)
+    if (length(tagss) == 0) {
+      simpleWarning(paste0("No session info archived for ", md5hash))
+      return(NA)
+    }
+    return(loadFromRemoteRepo(gsub(tagss[1], pattern = "^session_info:", replacement = ""), 
+                              repo = elements[2],
+                              repoDirGit = ifelse(length(elements) > 3, paste(elements[3:(length(elements)-1)], collapse="/"), FALSE),
+                              user = elements[1],
+                              value = TRUE))
   }
-  loadFromLocalRepo(gsub(tagss[1], pattern = "^session_info:", replacement = ""), repoDir, value = TRUE)
 }
