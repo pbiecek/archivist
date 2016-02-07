@@ -368,7 +368,8 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
     }
     si <- devtools::session_info()
     md5hashDF <- saveToRepo( si, archiveData = FALSE, repoDir = repoDir, 
-                             rememberName = FALSE, archiveTags = FALSE, force=TRUE)
+                             rememberName = FALSE, archiveTags = FALSE, force=TRUE, 
+                             archiveSessionInfo = FALSE)
     addTag( tag = paste0("session_info:", md5hashDF), md5hash = md5hash, dir = repoDir )
   }
   # whether to archive data
