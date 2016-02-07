@@ -10,17 +10,16 @@
 splitTagsLocal(repoDir = aoptions("repoDir"))
 
 splitTagsRemote(repo = aoptions("repo"), user = aoptions("user"),
-  branch = aoptions("branch"), repoDirGit = aoptions("repoDirGit"),
+  branch = aoptions("branch"), subdir = aoptions("subdir"),
   repoType = aoptions("repoType"))
 
 splitTagsGithub(repo = aoptions("repo"), user = aoptions("user"),
-  branch = aoptions("branch"), repoDirGit = aoptions("repoDirGit"),
+  branch = aoptions("branch"), subdir = aoptions("subdir"),
   repoType = aoptions("repoType"))
 
 splitTags(repoDir = NULL, repo = aoptions("repo"),
-  user = aoptions("user"), branch = "master",
-  repoDirGit = aoptions("repoDirGit"), repoType = aoptions("repoType"),
-  local = TRUE)
+  user = aoptions("user"), branch = "master", subdir = aoptions("subdir"),
+  repoType = aoptions("repoType"), local = TRUE)
 }
 \arguments{
 \item{repoDir}{While working with the local repository. A character denoting 
@@ -39,10 +38,10 @@ By default set to \code{NULL} - see \code{Note}.}
 a name of the Github Repository's branch on which the Repository is stored.
 Default \code{branch} is \code{master}.}
 
-\item{repoDirGit}{While working with the Github repository. A character containing
+\item{subdir}{While working with the Github repository. A character containing
 a name of a directory on the Github repository on which the Repository is stored.
 If the Repository is stored in the main folder of the Github repository,
-this should be set to \code{repoDirGit = FALSE} as default.}
+this should be set to \code{subdir = FALSE} as default.}
 
 \item{repoType}{A character containing a type of the remote repository. 
 Currently it can be 'github' or 'bitbucket'.}

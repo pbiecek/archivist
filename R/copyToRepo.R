@@ -37,7 +37,7 @@
 #' Remote Repository's branch on which the "\code{repoFrom}" - Repository is archived.
 #' Default \code{branch} is \code{master}.
 #'
-#' @param repoDirGit While working with the remote repository. A character containing a name of
+#' @param subdir While working with the remote repository. A character containing a name of
 #' a directory on the remote repository on which the "\code{repoFrom}" - Repository is stored.
 #' If the Repository is stored in the main folder on the remote repository, this should be set 
 #' to \code{FALSE} as default.
@@ -87,7 +87,7 @@
 #' createEmptyRepo( dir )
 #' copyRemoteRepo( repoTo = dir , md5hashes = "ff575c261c949d073b2895b05d1097c3",
 #'                 user="MarcinKosinski", repo="Museum",
-#'                 branch="master", repoDirGit="ex2")
+#'                 branch="master", subdir="ex2")
 #'                 
 #' # Check if the copied artifact is on our dir Repository
 #'
@@ -150,27 +150,27 @@ copyLocalRepo <- function( repoFrom = NULL, repoTo, md5hashes ){
 
 #' @rdname copyToRepo
 #' @export
-copyRemoteRepo <- function( repoTo, md5hashes, repo = aoptions("repo"), user = aoptions("user"), branch = aoptions("branch"), repoDirGit = aoptions("repoDirGit"),
+copyRemoteRepo <- function( repoTo, md5hashes, repo = aoptions("repo"), user = aoptions("user"), branch = aoptions("branch"), subdir = aoptions("subdir"),
                             repoType = aoptions("repoType")){
   stopifnot( is.character( c( repoTo, branch, md5hashes ) ),
              length(repoTo) == 1, length(branch) == 1, length(md5hashes) > 0)
 
-  RemoteRepoCheck( repo, user, branch, repoDirGit, repoType) # implemented in setRepo.R
+  RemoteRepoCheck( repo, user, branch, subdir, repoType) # implemented in setRepo.R
   
   repoTo <- checkDirectory( repoTo )
   
-  remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, repoDirGit=repoDirGit, repoType=repoType)
+  remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, subdir=subdir, repoType=repoType)
   Temp <- downloadDB( remoteHook )
   
   on.exit(file.remove(Temp))
   
   copyRepo( repoTo = repoTo, repoFrom = Temp, md5hashes = md5hashes , 
-            local = FALSE, user = user, repo = repo, branch = branch, repoDirGit = repoDirGit )  
+            local = FALSE, user = user, repo = repo, branch = branch, subdir = subdir )  
   
   invisible(NULL)  
 }
 
-copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, branch, repoDirGit ){
+copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, branch, subdir ){
   # clone artifact table
   toInsertArtifactTable <- executeSingleQuery( dir = repoFrom, realDBname = local,
                       paste0( "SELECT DISTINCT * FROM artifact WHERE md5hash IN ",
@@ -216,14 +216,14 @@ copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, bra
     
     filelist <- unlist(lapply(content(req)$tree, "[", "path"), use.names = F)
     
-    if( is.logical( repoDirGit ) ){
+    if( is.logical( subdir ) ){
       whichFilesToClone <- grep("gallery/", filelist, value = TRUE, fixed = TRUE)
       needTidy <- strsplit(whichFilesToClone, "gallery/")
       whichFilesToClone <- unlist(lapply(needTidy, function(x){
         file.path("gallery", x[2])
       }))
     }else{
-      whichFilesToClone <- grep(paste0(repoDirGit,"/gallery/"), filelist, 
+      whichFilesToClone <- grep(paste0(subdir,"/gallery/"), filelist, 
                                 value = TRUE, fixed = TRUE)
     }
     
@@ -233,17 +233,17 @@ copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, bra
     
     # download files to gallery folder
     lapply( filesToDownload, cloneRemoteFile, repo = repo, user = user, branch = branch, 
-            to = repoTo, repoDirGit )
+            to = repoTo, subdir )
   }
   invisible(NULL)
 }
 
-cloneRemoteFile <- function( file, repo, user, branch, to, repoDirGit ){
+cloneRemoteFile <- function( file, repo, user, branch, to, subdir ){
 
     URLfile <- file.path( get( ".GithubURL", envir = .ArchivistEnv) , 
                        user, repo, branch, file) 
     # tidy
-    if ( is.character( repoDirGit ) ){
+    if ( is.character( subdir ) ){
       file <- paste0( "gallery/", strsplit(file, "gallery/")[[1]][2] )
     }
     

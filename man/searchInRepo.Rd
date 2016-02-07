@@ -11,17 +11,15 @@ searchInLocalRepo(pattern, repoDir = aoptions("repoDir"), fixed = TRUE,
   realDBname = TRUE)
 
 searchInRemoteRepo(pattern, repo = aoptions("repo"),
-  user = aoptions("user"), branch = "master",
-  repoDirGit = aoptions("repoDirGit"), repoType = aoptions("repoType"),
-  fixed = TRUE)
+  user = aoptions("user"), branch = "master", subdir = aoptions("subdir"),
+  repoType = aoptions("repoType"), fixed = TRUE)
 
 multiSearchInLocalRepo(patterns, repoDir = aoptions("repoDir"),
   fixed = TRUE, intersect = TRUE, realDBname = TRUE)
 
 multiSearchInRemoteRepo(patterns, repo = aoptions("repo"),
-  user = aoptions("user"), branch = "master",
-  repoDirGit = aoptions("repoDirGit"), repoType = aoptions("repoType"),
-  fixed = TRUE, intersect = TRUE)
+  user = aoptions("user"), branch = "master", subdir = aoptions("subdir"),
+  repoType = aoptions("repoType"), fixed = TRUE, intersect = TRUE)
 }
 \arguments{
 \item{pattern}{If \code{fixed = TRUE}: a character denoting a \code{Tag} which is to be searched for in the Repository.
@@ -49,9 +47,9 @@ By default set to \code{NULL} - see \code{Note}.}
 \item{branch}{While working with the Remote repository. A character containing a name of 
 the Remote Repository's branch on which the Repository is stored. Default \code{branch} is \code{master}.}
 
-\item{repoDirGit}{While working with the Github repository. A character containing a name of a directory on the Remote repository 
+\item{subdir}{While working with the Github repository. A character containing a name of a directory on the Remote repository 
 on which the Repository is stored. If the Repository is stored in the main folder of the Remote repository, this should be set 
-to \code{repoDirGit = FALSE} as default.}
+to \code{subdir = FALSE} as default.}
 
 \item{repoType}{A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.}
 
@@ -194,10 +192,10 @@ set in \link{setRemoteRepo} function are used.
   # many archivist-like Repositories on one Remote repository
   
   searchInRemoteRepo( pattern = "name", user="MarcinKosinski", repo="Museum", 
-  branch="master", repoDirGit="ex1", fixed = FALSE )
+  branch="master", subdir="ex1", fixed = FALSE )
 
   searchInRemoteRepo( pattern = "name", user="MarcinKosinski", repo="Museum", 
-                   branch="master", repoDirGit="ex2", fixed = FALSE )
+                   branch="master", subdir="ex2", fixed = FALSE )
  
  # multi versions
  multiSearchInRemoteRepo( patterns=c("varname:Sepal.Width", "class:lm", "name:myplot123"), 

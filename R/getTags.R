@@ -38,10 +38,10 @@
 #' a name of the Remote repository's branch on which the Repository is stored.
 #' Default \code{branch} is \code{master}.
 #'
-#' @param repoDirGit While working with the Remote repository. A character containing
+#' @param subdir While working with the Remote repository. A character containing
 #' a name of a directory on the Remote repository on which the Repository is stored.
 #' If the Repository is stored in main folder on the Remote repository, this should be set 
-#' to \code{repoDirGit = FALSE} as default.
+#' to \code{subdir = FALSE} as default.
 #' 
 #' @note
 #' If \code{repo} and \code{user} are set to \code{NULL} (as default) in Remote mode then global parameters
@@ -119,7 +119,7 @@
 #' # We search for a Tag with default "name" regular expression corresponding to 
 #' # "ff575c261c949d073b2895b05d1097c3" md5hash.
 #' getTagsRemote("ff575c261c949d073b2895b05d1097c3", user="MarcinKosinski",
-#'                repo="Museum", branch="master", repoDirGit="ex1")
+#'                repo="Museum", branch="master", subdir="ex1")
 #'                
 #' }
 #' 
@@ -141,16 +141,16 @@ getTagsLocal <- function( md5hash, repoDir = NULL, tag ="name"){
 #' @family archivist
 #' @rdname getTags
 #' @export
-getTagsRemote <- function( md5hash, repo = aoptions("repo"), user = aoptions("user"), branch = aoptions("branch"), repoDirGit = aoptions("repoDirGit"),
+getTagsRemote <- function( md5hash, repo = aoptions("repo"), user = aoptions("user"), branch = aoptions("branch"), subdir = aoptions("subdir"),
                            repoType = aoptions("repoType"),
                            tag ="name"){
   stopifnot( is.character( c( md5hash, branch, tag ) ), 
              length( md5hash ) ==  1, length( branch ) == 1, length( tag ) == 1 )
 
-  RemoteRepoCheck( repo, user, branch, repoDirGit, repoType)
+  RemoteRepoCheck( repo, user, branch, subdir, repoType)
   
   # first download database
-  remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, repoDirGit=repoDirGit, repoType=repoType)
+  remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, subdir=subdir, repoType=repoType)
   Temp <- downloadDB( remoteHook )
   returnTag( md5hash, repoDir = Temp, local = FALSE, tag = tag )
 }

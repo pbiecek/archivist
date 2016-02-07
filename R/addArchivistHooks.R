@@ -11,9 +11,9 @@
 #' @param user A character containing a name of a Git user on whose account the \code{repo} is created.
 #' @param branch A character containing a name of Git Repository's branch on which the Repository is archived. 
 #' Default \code{branch} is \code{master}.
-#' @param repoDirGit A character containing a name of a directory on Git repository 
+#' @param subdir A character containing a name of a directory on Git repository 
 #' on which the Repository is stored. If the Repository is stored in main folder on Git repository, this should be set 
-#' to \code{repoDirGit = FALSE} as default.
+#' to \code{subdir = FALSE} as default.
 #' 
 #' @author 
 #' Przemyslaw Biecek, \email{przemyslaw.biecek@@gmail.com}
@@ -30,9 +30,9 @@
 #' @export
 
 addHooksToPrint <- function(class = "ggplot",
-  repoDir = aoptions("repoDir"), 
-  repo = aoptions("repo"), user = aoptions("user"), branch = "master", repoDirGit = aoptions("repoDirGit")
-  ){
+                            repoDir = aoptions("repoDir"), 
+                            repo = aoptions("repo"), user = aoptions("user"), branch = "master", subdir = aoptions("subdir")
+){
   stopifnot( is.character( class ), 
              is.character( repoDir ), 
              is.character( repo ), 
@@ -53,14 +53,13 @@ addHooksToPrint <- function(class = "ggplot",
     }
     
     fun <- paste0('function(x, ...) {
-    hash <- saveToRepo(x)
-    al <- alink(hash, repo = "',repo,'", user = "',user,'", repoDirGit = ',ifelse(repoDirGit == FALSE, FALSE, paste0('"',repoDirGit,'"')),')
-    cat("Load: ", al, "\n", sep="")
-    ',namespace,':::print.',class1,'(x, ...)
+                  hash <- saveToRepo(x)
+                  al <- alink(hash, repo = "',repo,'", user = "',user,'", subdir = ',ifelse(subdir == FALSE, FALSE, paste0('"',subdir,'"')),')
+                  cat("Load: ", al, "\n", sep="")
+                  ',namespace,':::print.',class1,'(x, ...)
   }')
     
     fun <- eval(parse(text=fun))
     assign(paste0("print.", class1), fun, pos=.GlobalEnv)
-  }
 }
-
+}

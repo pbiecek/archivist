@@ -34,10 +34,10 @@
 #' a name of the Github Repository's branch on which the Repository is stored.
 #' Default \code{branch} is \code{master}.
 #'
-#' @param repoDirGit While working with the Github repository. A character containing
+#' @param subdir While working with the Github repository. A character containing
 #' a name of a directory on the Github repository on which the Repository is stored.
 #' If the Repository is stored in the main folder of the Github repository,
-#' this should be set to \code{repoDirGit = FALSE} as default.
+#' this should be set to \code{subdir = FALSE} as default.
 #' 
 #' @return
 #' A \code{data.frame} with 4 columns: \code{artifact}, \code{tagKey},
@@ -85,10 +85,10 @@ splitTagsLocal <- function( repoDir = aoptions("repoDir") ){
 #' @rdname splitTags
 #' @export
 splitTagsRemote <- function( repo = aoptions("repo"), user = aoptions("user"), 
-                             branch = aoptions("branch"), repoDirGit = aoptions("repoDirGit"),
+                             branch = aoptions("branch"), subdir = aoptions("subdir"),
                              repoType = aoptions("repoType") ){ 
   
-  splitTags( repo = repo, user = user, branch = branch, repoDirGit = repoDirGit, repoType = repoType,
+  splitTags( repo = repo, user = user, branch = branch, subdir = subdir, repoType = repoType,
               local = FALSE )
   
 }
@@ -100,14 +100,14 @@ splitTagsGithub <- splitTagsRemote
 #' @rdname splitTags
 #' @export
 splitTags <- function( repoDir = NULL, repo = aoptions("repo"), user = aoptions("user"),
-                        branch = "master", repoDirGit = aoptions("repoDirGit"), repoType = aoptions("repoType"),
+                        branch = "master", subdir = aoptions("subdir"), repoType = aoptions("repoType"),
                         local = TRUE ){  
   # We will expand tag table in backpack.db
   if (local) {
     showLocalRepo( repoDir = repoDir, method = "tags" ) -> tags_df
   } else {
     showRemoteRepo( repo = repo, user = user, branch = branch,
-                    repoDirGit = repoDirGit,
+                    subdir = subdir,
                     method = "tags", repoType=repoType) -> tags_df
   }
   

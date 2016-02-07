@@ -8,14 +8,14 @@
 \usage{
 deleteRepo(repoDir, repo, github_token = aoptions("github_token"),
   user = aoptions("user"), password = aoptions("password"), unset = FALSE,
-  deleteRoot = FALSE, repoDirGit = NULL, response = aoptions("response"),
+  deleteRoot = FALSE, subdir = NULL, response = aoptions("response"),
   type = "local")
 
 deleteLocalRepo(repoDir, deleteRoot = FALSE, unset = FALSE)
 
 deleteGithubRepo(repo, github_token = aoptions("github_token"),
   user = aoptions("user"), password = aoptions("password"), unset = FALSE,
-  deleteRoot = FALSE, repoDirGit = NULL, response = aoptions("response"))
+  deleteRoot = FALSE, subdir = NULL, response = aoptions("response"))
 }
 \arguments{
 \item{repoDir}{A character that specifies the directory for the Repository
@@ -39,7 +39,7 @@ and \code{unset} is TRUE, then \code{repoDir/repo} is unset as a default Local/G
 \item{deleteRoot}{A logical value that specifies if the repository root directory
 should be deleted for Local Repository or for GitHub whether to delete whole GitHub-Repository.}
 
-\item{repoDirGit}{Only when \code{deleteRoot = FALSE}. Subdirectory in which the archivist-Repository is stored on a GitHub Repository.
+\item{subdir}{Only when \code{deleteRoot = FALSE}. Subdirectory in which the archivist-Repository is stored on a GitHub Repository.
 If it's in main directory, then specify to \code{NULL} (default).}
 
 \item{response}{A logical value. Should the GitHub API response be returned (only when \code{deleteRoot = TRUE}).}

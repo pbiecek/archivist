@@ -9,7 +9,7 @@ copyLocalRepo(repoFrom = NULL, repoTo, md5hashes)
 
 copyRemoteRepo(repoTo, md5hashes, repo = aoptions("repo"),
   user = aoptions("user"), branch = aoptions("branch"),
-  repoDirGit = aoptions("repoDirGit"), repoType = aoptions("repoType"))
+  subdir = aoptions("subdir"), repoType = aoptions("repoType"))
 }
 \arguments{
 \item{repoFrom}{While copying local repository. A character that specifies
@@ -34,7 +34,7 @@ By default set to \code{NULL} - see \code{Note}.}
 Remote Repository's branch on which the "\code{repoFrom}" - Repository is archived.
 Default \code{branch} is \code{master}.}
 
-\item{repoDirGit}{While working with the remote repository. A character containing a name of
+\item{subdir}{While working with the remote repository. A character containing a name of
 a directory on the remote repository on which the "\code{repoFrom}" - Repository is stored.
 If the Repository is stored in the main folder on the remote repository, this should be set 
 to \code{FALSE} as default.}
@@ -95,7 +95,7 @@ dir <- paste0(getwd(), "/ex1")
 createEmptyRepo( dir )
 copyRemoteRepo( repoTo = dir , md5hashes = "ff575c261c949d073b2895b05d1097c3",
                 user="MarcinKosinski", repo="Museum",
-                branch="master", repoDirGit="ex2")
+                branch="master", subdir="ex2")
                 
 # Check if the copied artifact is on our dir Repository
 

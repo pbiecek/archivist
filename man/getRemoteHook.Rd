@@ -5,7 +5,7 @@
 \title{Get http Hook for Remote Repo}
 \usage{
 getRemoteHook(repo = aoptions("repo"), user = aoptions("user"),
-  branch = aoptions("branch"), repoDirGit = aoptions("repoDirGit"),
+  branch = aoptions("branch"), subdir = aoptions("subdir"),
   repoType = aoptions("repoType"))
 }
 \arguments{
@@ -16,9 +16,9 @@ getRemoteHook(repo = aoptions("repo"), user = aoptions("user"),
 \item{branch}{A character containing a name of Git Repository's branch on which the Repository is archived. 
 Default \code{branch} is \code{master}.}
 
-\item{repoDirGit}{A character containing a name of a directory on Git repository 
+\item{subdir}{A character containing a name of a directory on Git repository 
 on which the Repository is stored. If the Repository is stored in main folder on Git repository, this should be set 
-to \code{repoDirGit = FALSE} as default.}
+to \code{subdir = FALSE} as default.}
 
 \item{repoType}{A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.}
 }

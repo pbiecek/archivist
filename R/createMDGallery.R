@@ -19,9 +19,9 @@
 #' @param branch A character containing a name of
 #' the Remote Repository's branch on which the Repository is stored. Default \code{branch} is \code{master}.
 #'
-#' @param repoDirGit A character containing a name of a directory on the Remote repository
+#' @param subdir A character containing a name of a directory on the Remote repository
 #' on which the Repository is stored. If the Repository is stored in the main folder of the Remote repository, this should be set
-#' to \code{repoDirGit = FALSE} as default.
+#' to \code{subdir = FALSE} as default.
 #'
 #' @param output A name of the file in which artifacts should be summarized.
 #'
@@ -57,15 +57,15 @@
 #' @family archivist
 #' @rdname createMDGallery
 #' @export
-createMDGallery <- function(output, repo = aoptions("repo"), user = aoptions("user"), branch = aoptions("branch"), repoDirGit = aoptions("repoDirGit"),
+createMDGallery <- function(output, repo = aoptions("repo"), user = aoptions("user"), branch = aoptions("branch"), subdir = aoptions("subdir"),
                                   repoType = aoptions("repoType"),
                                 addTags = FALSE, addMiniature = FALSE){
   stopifnot(is.logical(c(addTags, addMiniature)) & length(addTags) == 1 & length(addMiniature) == 1 )
 
-  RemoteRepoCheck( repo, user, branch, repoDirGit, repoType) # implemented in setRepo.R
+  RemoteRepoCheck( repo, user, branch, subdir, repoType) # implemented in setRepo.R
 
   # as in loadFromRemoteRepo
-  remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, repoDirGit=repoDirGit, repoType=repoType)
+  remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, subdir=subdir, repoType=repoType)
   Temp <- downloadDB(remoteHook )
   on.exit( file.remove( Temp ) )
   md5hashList <- executeSingleQuery( dir = Temp, realDBname = FALSE,
@@ -77,9 +77,9 @@ createMDGallery <- function(output, repo = aoptions("repo"), user = aoptions("us
     filelist <- unlist(lapply(content(req)$tree, "[", "path"), use.names = F)
     # artifacts in a required directory with png miniature
     pattern <- paste0("^",
-                      ifelse(repoDirGit == FALSE,
+                      ifelse(subdir == FALSE,
                              "gallery",
-                             file.path(repoDirGit, "gallery") ))
+                             file.path(subdir, "gallery") ))
     grep(filelist, pattern=pattern, value = TRUE) -> repoList
   }
 
@@ -103,9 +103,9 @@ createMDGallery <- function(output, repo = aoptions("repo"), user = aoptions("us
               "/",
               branch,
               "/",
-              ifelse(repoDirGit == FALSE,
+              ifelse(subdir == FALSE,
                      "gallery/",
-                     file.path(repoDirGit, "gallery/")),
+                     file.path(subdir, "gallery/")),
               md5, ".png)"))
         cat("\n")
       }

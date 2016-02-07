@@ -8,9 +8,8 @@
 zipLocalRepo(repoDir = NULL, repoTo = getwd(), zipname = "repository.zip")
 
 zipRemoteRepo(repoTo = getwd(), user = aoptions("user"),
-  repo = aoptions("repo"), branch = "master",
-  repoDirGit = aoptions("repoDirGit"), repoType = aoptions("repoType"),
-  zipname = "repository.zip")
+  repo = aoptions("repo"), branch = "master", subdir = aoptions("subdir"),
+  repoType = aoptions("repoType"), zipname = "repository.zip")
 }
 \arguments{
 \item{repoDir}{A character that specifies the directory of the Repository which
@@ -36,7 +35,7 @@ By default set to \code{NULL} - see \code{Note}.}
 Remote repository's branch on which Repository, which is to be zipped, is archived.
 Default \code{branch} is \code{master}.}
 
-\item{repoDirGit}{While working with a Remote repository. A character containing a name of
+\item{subdir}{While working with a Remote repository. A character containing a name of
 a directory on Remote repository on which the Repository, which is to be zipped, is stored.
 If the Repository is stored in the main folder on the Remote repository, this should be set 
 to FALSE as default.}
@@ -92,7 +91,7 @@ rm( exampleRepoDir )
 # Github version
 
 zipRemoteRepo( user="MarcinKosinski", 
-repo="Museum", branch="master", repoDirGit="ex1" )
+repo="Museum", branch="master", subdir="ex1" )
 
 zipRemoteRepo( user="pbiecek", repo="archivist", repoTo = getwd( ) )
 

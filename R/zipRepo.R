@@ -31,7 +31,7 @@
 #' Remote repository's branch on which Repository, which is to be zipped, is archived.
 #' Default \code{branch} is \code{master}.
 #' 
-#' @param repoDirGit While working with a Remote repository. A character containing a name of
+#' @param subdir While working with a Remote repository. A character containing a name of
 #' a directory on Remote repository on which the Repository, which is to be zipped, is stored.
 #' If the Repository is stored in the main folder on the Remote repository, this should be set 
 #' to FALSE as default.
@@ -84,7 +84,7 @@
 #' # Github version
 #' 
 #' zipRemoteRepo( user="MarcinKosinski", 
-#' repo="Museum", branch="master", repoDirGit="ex1" )
+#' repo="Museum", branch="master", subdir="ex1" )
 #' 
 #' zipRemoteRepo( user="pbiecek", repo="archivist", repoTo = getwd( ) )
 #' 
@@ -114,12 +114,12 @@ zipLocalRepo <- function( repoDir = NULL, repoTo = getwd() , zipname="repository
 #' @rdname zipRepo
 #' @export
 zipRemoteRepo <- function( repoTo = getwd(), user = aoptions("user"), repo = aoptions("repo"), branch = "master", 
-                           repoDirGit = aoptions("repoDirGit"),  repoType = aoptions("repoType"), zipname = "repository.zip"){
+                           subdir = aoptions("subdir"),  repoType = aoptions("repoType"), zipname = "repository.zip"){
   stopifnot( is.character( c( repoTo, branch, zipname ) ), 
              length( repoTo ) == 1, length( branch ) == 1,  length( zipname ) == 1)
   stopifnot( file.exists( repoTo ) )
 
-  RemoteRepoCheck( repo, user, branch, repoDirGit, repoType) # implemented in setRepo.R
+  RemoteRepoCheck( repo, user, branch, subdir, repoType) # implemented in setRepo.R
   
 # repoTo <- checkDirectory2( repoTo )
   if (file.exists(file.path(repoTo, zipname))) {
@@ -130,9 +130,9 @@ zipRemoteRepo <- function( repoTo = getwd(), user = aoptions("user"), repo = aop
   tempRepoTo <- gsub(pattern = ".zip", replacement = "", x = zipname)
   createEmptyRepo( tempRepoTo, force = TRUE )
   on.exit(deleteRepo( tempRepoTo, deleteRoot = TRUE ))
-  hashes <- searchInRemoteRepo( pattern="", user=user, repo=repo, branch = branch, repoDirGit = repoDirGit, repoType=repoType, fixed=FALSE )
+  hashes <- searchInRemoteRepo( pattern="", user=user, repo=repo, branch = branch, subdir = subdir, repoType=repoType, fixed=FALSE )
   copyRemoteRepo(repoTo = tempRepoTo , md5hashes = hashes,
-                 user=user, repo=repo, branch = branch, repoDirGit = repoDirGit, repoType=repoType)
+                 user=user, repo=repo, branch = branch, subdir = subdir, repoType=repoType)
   # list of files
   files <- c( file.path( tempRepoTo, "backpack.db"), 
               list.files( file.path(tempRepoTo, "gallery"), full.names=TRUE ))

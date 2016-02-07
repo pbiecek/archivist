@@ -37,9 +37,9 @@
 #' @param branch While working with the Remote repository. A character containing a name of 
 #' the Remote Repository's branch on which the Repository is stored. Default \code{branch} is \code{master}.
 #'
-#' @param repoDirGit While working with the Remote repository. A character containing a name of a directory on the Remote repository 
+#' @param subdir While working with the Remote repository. A character containing a name of a directory on the Remote repository 
 #' on which the Repository is stored. If the Repository is stored in the main folder of the Remote repository, this should be set 
-#' to \code{repoDirGit = FALSE} as default.
+#' to \code{subdir = FALSE} as default.
 #' 
 #' @return
 #' 
@@ -170,9 +170,9 @@
 #' # many archivist-like Repositories on one Remote repository
 #' 
 #' showRemoteRepo( user="MarcinKosinski", repo="Museum", branch="master",
-#' repoDirGit="ex1")
+#' subdir="ex1")
 #' showRemoteRepo( user="MarcinKosinski", repo="Museum", branch="master",
-#'                 repoDirGit="ex2")
+#'                 subdir="ex2")
 #'                 
 #' ## Remote options
 #' showRemoteRepo('archivist', 'pbiecek')
@@ -180,15 +180,15 @@
 #' aoptions('repo', 'archivist')
 #' loadFromRemoteRepo("ff575c261c", value = TRUE) -> iris123
 #' 
-#' showRemoteRepo('Museum', 'MarcinKosinski', repoDirGit = 'ex1')
+#' showRemoteRepo('Museum', 'MarcinKosinski', subdir = 'ex1')
 #' aoptions('repo', 'Museum')
 #' aoptions('user', 'MarcinKosinski')
-#' aoptions('repoDirGit', 'ex1')
+#' aoptions('subdir', 'ex1')
 #' aoptions('branch', 'master')
 #' showRemoteRepo()
-#' showRemoteRepo(repoDirGit = 'ex2')
+#' showRemoteRepo(subdir = 'ex2')
 #' 
-#' aoptions('repoDirGit')
+#' aoptions('subdir')
 #'
 #' 
 #' }
@@ -207,15 +207,15 @@ showLocalRepo <- function( repoDir = aoptions("repoDir"), method = "md5hashes"){
 
 #' @rdname showRepo
 #' @export
-showRemoteRepo <- function( repo = aoptions("repo"), user = aoptions("user"), branch = aoptions("branch"), repoDirGit = aoptions("repoDirGit"),
+showRemoteRepo <- function( repo = aoptions("repo"), user = aoptions("user"), branch = aoptions("branch"), subdir = aoptions("subdir"),
                             repoType = aoptions("repoType"),
                             method = "md5hashes" ){
   stopifnot( is.character( c( method, branch ) ), length( method ) == 1, length( branch ) == 1  )
   
-  RemoteRepoCheck( repo, user, branch, repoDirGit, repoType) # implemented in setRepo.R
+  RemoteRepoCheck( repo, user, branch, subdir, repoType) # implemented in setRepo.R
   
   # database is needed to be downloaded
-  remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, repoDirGit=repoDirGit, repoType=repoType)
+  remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, subdir=subdir, repoType=repoType)
   Temp <- downloadDB( remoteHook )
   
   showRepo( method = method, dir = Temp, local = FALSE )

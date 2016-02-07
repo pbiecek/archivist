@@ -5,7 +5,7 @@
 \title{Create the Summary for Each Artifact in a Markdown Format}
 \usage{
 createMDGallery(output, repo = aoptions("repo"), user = aoptions("user"),
-  branch = aoptions("branch"), repoDirGit = aoptions("repoDirGit"),
+  branch = aoptions("branch"), subdir = aoptions("subdir"),
   repoType = aoptions("repoType"), addTags = FALSE, addMiniature = FALSE)
 }
 \arguments{
@@ -20,9 +20,9 @@ By default set to \code{NULL} - see \code{Note}.}
 \item{branch}{A character containing a name of
 the Remote Repository's branch on which the Repository is stored. Default \code{branch} is \code{master}.}
 
-\item{repoDirGit}{A character containing a name of a directory on the Remote repository
+\item{subdir}{A character containing a name of a directory on the Remote repository
 on which the Repository is stored. If the Repository is stored in the main folder of the Remote repository, this should be set
-to \code{repoDirGit = FALSE} as default.}
+to \code{subdir = FALSE} as default.}
 
 \item{repoType}{A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.}
 

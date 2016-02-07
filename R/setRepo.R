@@ -14,10 +14,10 @@
 #' in future function calls.
 #' 
 #' If you are working on the Remote Repository and you are tired of specifying \code{user}, 
-#' \code{repo}, \code{branch} and \code{repoDirGit} parameters in every function call
+#' \code{repo}, \code{branch} and \code{subdir} parameters in every function call
 #' that uses these parameters, you can set Remote Repository's path globally using
 #' \code{setRemoteRepo} function and omit \code{user}, \code{repo}, \code{branch}
-#' and \code{repoDirGit} parameters in future function calls. See examples.
+#' and \code{subdir} parameters in future function calls. See examples.
 #' 
 #' For local repositories, in this way, in the following function calls: 
 #' \link{loadFromLocalRepo},\link{searchInLocalRepo}, \link{rmFromRepo}, \link{zipLocalRepo}, 
@@ -29,7 +29,7 @@
 #' \link{zipRemoteRepo}, \link{loadFromRemoteRepo}, \link{searchInRemoteRepo},
 #' \link{getTagsRemote}, \link{showRemoteRepo}, \link{summaryRemoteRepo},
 #' \link{multiSearchInRemoteRepo}, \link{copyRemoteRepo}
-#' parameters \code{user}, \code{repo}, \code{branch}, \code{repoDirGit}  may be omitted.
+#' parameters \code{user}, \code{repo}, \code{branch}, \code{subdir}  may be omitted.
 #' 
 #' @seealso
 #' 
@@ -50,10 +50,10 @@
 #' @param branch While working with the Remote repository. A character containing a name of 
 #' the Remote Repository's branch that we want to make default. Default \code{branch} is \code{master}.
 #' 
-#' @param repoDirGit While working with the Remote repository. A character containing a name
+#' @param subdir While working with the Remote repository. A character containing a name
 #' of the Repository's directory on Remote that we want to make default.
 #' If the Repository is stored in the main folder on the Remote repository,
-#' this should be set to \code{repoDirGit = FALSE} as default.
+#' this should be set to \code{subdir = FALSE} as default.
 #' 
 #' @author 
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
@@ -90,9 +90,9 @@
 #' 
 #' ## Github version
 #' setRemoteRepo( user="MarcinKosinski", repo="Museum", branch="master",
-#'                repoDirGit="ex1" )
+#'                subdir="ex1" )
 #'                
-#' # From this moment user, repo, branch, repoDirGit parameters may be ommitted
+#' # From this moment user, repo, branch, subdir parameters may be ommitted
 #' # in the following functions:
 #' showRemoteRepo()
 #' loadFromRemoteRepo( "ff575c261c949d073b2895b05d1097c3")
@@ -127,27 +127,27 @@ setLocalRepo <- function( repoDir ){
 #' @rdname setRepo
 #' @export
 setRemoteRepo <- function( user, repo, branch = "master", 
-                           repoDirGit = FALSE, repoType='github'){
-  RemoteRepoCheck( repo, user, branch, repoDirGit, repoType) 
+                           subdir = FALSE, repoType='github'){
+  RemoteRepoCheck( repo, user, branch, subdir, repoType) 
   
   aoptions("user", user)
   aoptions("repo", repo)
   aoptions("branch", branch)
-  aoptions("repoDirGit", repoDirGit)
+  aoptions("subdir", subdir)
   aoptions("repoType", repoType)
   
   invisible(NULL)
 }
 
 
-RemoteRepoCheck <- function( repo, user, branch, repoDirGit, repoType){
-  stopifnot( is.logical( repoDirGit ) | ( is.character( repoDirGit ) & length( repoDirGit ) == 1) )
+RemoteRepoCheck <- function( repo, user, branch, subdir, repoType){
+  stopifnot( is.logical( subdir ) | ( is.character( subdir ) & length( subdir ) == 1) )
   stopifnot( is.null( repo ) | ( is.character( repo ) & length( repo ) == 1 ) )
   stopifnot( is.null( user ) | ( is.character( user ) & length( user ) == 1 ) )
   stopifnot( ( is.character( branch ) & length( branch ) == 1 ) )
   
-  if( is.logical( repoDirGit ) && repoDirGit ){
-      stop( "repoDirGit may be only FALSE or a character. See documentation." )
+  if( is.logical( subdir ) && subdir ){
+      stop( "subdir may be only FALSE or a character. See documentation." )
   }
   if ( xor( is.null( user ), is.null( repo ) ) ){
     stop( "Both or none of user and repo should be NULL. See documentation." )

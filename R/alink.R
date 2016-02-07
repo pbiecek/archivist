@@ -22,9 +22,9 @@
 #' @param user The name of a user on whose \code{Repository} the the artifact that we want to download
 #' is stored.
 #' 
-#' @param repoDirGit A character containing a name of a directory on the Remote repository 
+#' @param subdir A character containing a name of a directory on the Remote repository 
 #' on which the Repository is stored. If the Repository is stored in the main folder on the Remote repository, this should be set 
-#' to \code{repoDirGit = FALSE} as default.
+#' to \code{subdir = FALSE} as default.
 #' 
 #' @param branch A character containing a name of the Remote Repository's branch
 #' on which the Repository is archived. Default \code{branch} is \code{master}.
@@ -43,10 +43,10 @@
 #' \dontrun{
 #' # link in markdown format
 #' alink('pbiecek/archivist/134ecbbe2a8814d98f0c2758000c408e')
-#' # link in markdown format with additional repoDirGit
+#' # link in markdown format with additional subdir
 #' alink(user='BetaAndBit',repo='PieczaraPietraszki',
 #'      md5hash = '1569cc44e8450439ac52c11ccac35138', 
-#'      repoDirGit = 'UniwersytetDzieci/arepo')
+#'      subdir = 'UniwersytetDzieci/arepo')
 #' # link in latex format
 #' alink(user = 'MarcinKosinski', repo = 'Museum',
 #'       md5hash = '1651caa499a2b07a3bdad3896a2fc717', format = 'latex')
@@ -81,7 +81,7 @@
 #' @export
 alink <- function(md5hash, repo = aoptions('repo'),
                   user = aoptions('user'),
-                  repoDirGit = FALSE, branch = "master", repoType = aoptions("repoType"),
+                  subdir = FALSE, branch = "master", repoType = aoptions("repoType"),
                   format = "markdown", rawLink = FALSE) {
   
   stopifnot(is.character(md5hash) & length(md5hash) == 1)
@@ -97,13 +97,13 @@ alink <- function(md5hash, repo = aoptions('repo'),
                        strsplit(md5hash, "/")[[1]][3],
                        '.rda?raw=true')
   } else {
-    RemoteRepoCheck( repo, user, branch, repoDirGit, repoType) # implemented in setRepo.R
+    RemoteRepoCheck( repo, user, branch, subdir, repoType) # implemented in setRepo.R
     archLINK <- paste0('https://github.com/',
                        user,
                        '/',
                        repo,
                        '/blob/master/',
-                       ifelse(repoDirGit == FALSE, "", paste0(repoDirGit,"/")),
+                       ifelse(subdir == FALSE, "", paste0(subdir,"/")),
                        'gallery/',
                        md5hash,
                        '.rda?raw=true')
@@ -114,7 +114,7 @@ alink <- function(md5hash, repo = aoptions('repo'),
   } else {
     if ( format == "markdown" ){
       resLINK <- paste0('[`',
-             aread_command(md5hash, user, repo, repoDirGit),
+             aread_command(md5hash, user, repo, subdir),
              '`](',
              archLINK,
              ')') 
@@ -122,7 +122,7 @@ alink <- function(md5hash, repo = aoptions('repo'),
       resLINK <- paste0('\\href{',
              archLINK,
              '}{',
-             aread_command(md5hash, user, repo, repoDirGit),
+             aread_command(md5hash, user, repo, subdir),
              '}')
     }
   }
@@ -132,15 +132,15 @@ alink <- function(md5hash, repo = aoptions('repo'),
 }
 
 
-aread_command <- function(md5hash, user, repo, repoDirGit) {
+aread_command <- function(md5hash, user, repo, subdir) {
  paste0("archivist::aread('",
         ifelse(strsplit(md5hash, "/")[[1]] %>% length  == 3,
                md5hash,
                file.path(user, repo, 
-                         # required to handle repoDirGit
-                         ifelse(repoDirGit == FALSE, 
+                         # required to handle subdir
+                         ifelse(subdir == FALSE, 
                                 md5hash, 
-                                paste0(repoDirGit,"/",md5hash))
+                                paste0(subdir,"/",md5hash))
                )),
         "')") 
 }

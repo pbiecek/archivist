@@ -23,9 +23,9 @@
 #' @param branch While working with the Remote repository. A character containing a name of 
 #' the Remote Repository's branch on which the Repository is stored. Default \code{branch} is \code{master}.
 #' 
-#' @param repoDirGit While working with the Remote repository. A character containing a name of a directory on the Remote repository 
+#' @param subdir While working with the Remote repository. A character containing a name of a directory on the Remote repository 
 #' on which the Repository is stored. If the Repository is stored in the main folder of the Remote repository, this should be set 
-#' to \code{repoDirGit = FALSE} as default.
+#' to \code{subdir = FALSE} as default.
 #'
 #' @return An object of class \code{repository} which can be printed: \code{print(object)}.
 #' 
@@ -127,7 +127,7 @@
 #' # many archivist-like Repositories on one Remote repository
 #'   
 #' summaryRemoteRepo(user="MarcinKosinski", repo="Museum", 
-#' branch="master", repoDirGit="ex2" )
+#' branch="master", subdir="ex2" )
 #' 
 #' }
 #' @family archivist
@@ -147,13 +147,13 @@ summaryLocalRepo <- function( repoDir = NULL ){
 #' @rdname summaryRepo
 #' @export
 summaryRemoteRepo <- function( repo = aoptions("repo"), user = aoptions("user"), branch = "master", 
-                               repoDirGit = aoptions("repoDirGit"),  repoType = aoptions("repoType")){
+                               subdir = aoptions("subdir"),  repoType = aoptions("repoType")){
   stopifnot( is.character( branch ), length( branch ) == 1 )
 
-  RemoteRepoCheck( repo, user, branch, repoDirGit, repoType) # implemented in setRepo.R
+  RemoteRepoCheck( repo, user, branch, subdir, repoType) # implemented in setRepo.R
   
   # database is needed to be downloaded
-  remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, repoDirGit=repoDirGit)
+  remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, subdir=subdir)
   Temp <- downloadDB( remoteHook )
   
   summaryRepo( dir = Temp, realDBname = FALSE )

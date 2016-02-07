@@ -6,7 +6,7 @@
 \usage{
 addHooksToPrint(class = "ggplot", repoDir = aoptions("repoDir"),
   repo = aoptions("repo"), user = aoptions("user"), branch = "master",
-  repoDirGit = aoptions("repoDirGit"))
+  subdir = aoptions("subdir"))
 }
 \arguments{
 \item{class}{A character containing a name of class (one or more) that should be archivised.}
@@ -18,9 +18,9 @@ addHooksToPrint(class = "ggplot", repoDir = aoptions("repoDir"),
 \item{branch}{A character containing a name of Git Repository's branch on which the Repository is archived. 
 Default \code{branch} is \code{master}.}
 
-\item{repoDirGit}{A character containing a name of a directory on Git repository 
+\item{subdir}{A character containing a name of a directory on Git repository 
 on which the Repository is stored. If the Repository is stored in main folder on Git repository, this should be set 
-to \code{repoDirGit = FALSE} as default.}
+to \code{subdir = FALSE} as default.}
 }
 \description{
 \code{addHooksToPrint} adds an overloaded version of the print function for objects of selected class. 

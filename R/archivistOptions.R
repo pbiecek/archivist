@@ -90,15 +90,15 @@
 #' multiSearchInRemoteRepo( patterns=c("varname:Sepal.Width", "class:lm", "name:myplot123"), 
 #'                          intersect = FALSE ) 
 #' ## EXAMPLE 4 : SET default Github repository using aoptions() function.
-#' showRemoteRepo('Museum', 'MarcinKosinski', repoDirGit = 'ex1')
+#' showRemoteRepo('Museum', 'MarcinKosinski', subdir = 'ex1')
 #' aoptions('repo', 'Museum')
 #' aoptions('user', 'MarcinKosinski')
-#' aoptions('repoDirGit', 'ex1')
+#' aoptions('subdir', 'ex1')
 #' aoptions('branch', 'master')
 #' showRemoteRepo()
-#' showRemoteRepo(repoDirGit = 'ex2')
+#' showRemoteRepo(subdir = 'ex2')
 #' 
-#' aoptions('repoDirGit')
+#' aoptions('subdir')
 #' }
 #' 
 #' @family archivist

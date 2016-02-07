@@ -7,7 +7,7 @@
 \usage{
 setLocalRepo(repoDir)
 
-setRemoteRepo(user, repo, branch = "master", repoDirGit = FALSE,
+setRemoteRepo(user, repo, branch = "master", subdir = FALSE,
   repoType = "github")
 }
 \arguments{
@@ -23,10 +23,10 @@ a name of the Remote repository that we want to make default.}
 \item{branch}{While working with the Remote repository. A character containing a name of 
 the Remote Repository's branch that we want to make default. Default \code{branch} is \code{master}.}
 
-\item{repoDirGit}{While working with the Remote repository. A character containing a name
+\item{subdir}{While working with the Remote repository. A character containing a name
 of the Repository's directory on Remote that we want to make default.
 If the Repository is stored in the main folder on the Remote repository,
-this should be set to \code{repoDirGit = FALSE} as default.}
+this should be set to \code{subdir = FALSE} as default.}
 
 \item{repoType}{A character containing a type of the remote repository. 
 Currently it can be 'github' or 'bitbucket'.}
@@ -43,10 +43,10 @@ globally using \code{setLocalRepo} function and omit \code{repoDir} parameter
 in future function calls.
 
 If you are working on the Remote Repository and you are tired of specifying \code{user}, 
-\code{repo}, \code{branch} and \code{repoDirGit} parameters in every function call
+\code{repo}, \code{branch} and \code{subdir} parameters in every function call
 that uses these parameters, you can set Remote Repository's path globally using
 \code{setRemoteRepo} function and omit \code{user}, \code{repo}, \code{branch}
-and \code{repoDirGit} parameters in future function calls. See examples.
+and \code{subdir} parameters in future function calls. See examples.
 
 For local repositories, in this way, in the following function calls: 
 \link{loadFromLocalRepo},\link{searchInLocalRepo}, \link{rmFromRepo}, \link{zipLocalRepo}, 
@@ -58,7 +58,7 @@ in the following function calls:
 \link{zipRemoteRepo}, \link{loadFromRemoteRepo}, \link{searchInRemoteRepo},
 \link{getTagsRemote}, \link{showRemoteRepo}, \link{summaryRemoteRepo},
 \link{multiSearchInRemoteRepo}, \link{copyRemoteRepo}
-parameters \code{user}, \code{repo}, \code{branch}, \code{repoDirGit}  may be omitted.
+parameters \code{user}, \code{repo}, \code{branch}, \code{subdir}  may be omitted.
 }
 \examples{
 
@@ -90,9 +90,9 @@ rm( exampleRepoDir )
 
 ## Github version
 setRemoteRepo( user="MarcinKosinski", repo="Museum", branch="master",
-               repoDirGit="ex1" )
+               subdir="ex1" )
                
-# From this moment user, repo, branch, repoDirGit parameters may be ommitted
+# From this moment user, repo, branch, subdir parameters may be ommitted
 # in the following functions:
 showRemoteRepo()
 loadFromRemoteRepo( "ff575c261c949d073b2895b05d1097c3")

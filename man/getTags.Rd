@@ -8,7 +8,7 @@
 getTagsLocal(md5hash, repoDir = NULL, tag = "name")
 
 getTagsRemote(md5hash, repo = aoptions("repo"), user = aoptions("user"),
-  branch = aoptions("branch"), repoDirGit = aoptions("repoDirGit"),
+  branch = aoptions("branch"), subdir = aoptions("subdir"),
   repoType = aoptions("repoType"), tag = "name")
 }
 \arguments{
@@ -34,10 +34,10 @@ By default set to \code{NULL} - see \code{Note}.}
 a name of the Remote repository's branch on which the Repository is stored.
 Default \code{branch} is \code{master}.}
 
-\item{repoDirGit}{While working with the Remote repository. A character containing
+\item{subdir}{While working with the Remote repository. A character containing
 a name of a directory on the Remote repository on which the Repository is stored.
 If the Repository is stored in main folder on the Remote repository, this should be set 
-to \code{repoDirGit = FALSE} as default.}
+to \code{subdir = FALSE} as default.}
 
 \item{repoType}{A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.}
 }
@@ -128,7 +128,7 @@ getTagsRemote( "cd6557c6163a6f9800f308f343e75e72",
 # We search for a Tag with default "name" regular expression corresponding to 
 # "ff575c261c949d073b2895b05d1097c3" md5hash.
 getTagsRemote("ff575c261c949d073b2895b05d1097c3", user="MarcinKosinski",
-               repo="Museum", branch="master", repoDirGit="ex1")
+               repo="Museum", branch="master", subdir="ex1")
                
 }
 

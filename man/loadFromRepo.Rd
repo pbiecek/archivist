@@ -9,7 +9,7 @@ loadFromLocalRepo(md5hash, repoDir = NULL, value = FALSE)
 
 loadFromRemoteRepo(md5hash, repo = aoptions("repo"),
   user = aoptions("user"), branch = aoptions("branch"),
-  repoDirGit = aoptions("repoDirGit"), repoType = aoptions("repoType"),
+  subdir = aoptions("subdir"), repoType = aoptions("repoType"),
   value = FALSE)
 }
 \arguments{
@@ -31,9 +31,9 @@ By default set to \code{NULL} - see \code{Note}.}
 \item{branch}{While working with a Remote repository. A character containing a name of 
 Remote Repository's branch on which the Repository is archived. Default \code{branch} is \code{master}.}
 
-\item{repoDirGit}{While working with a Remote repository. A character containing a name of a directory on Remote repository 
+\item{subdir}{While working with a Remote repository. A character containing a name of a directory on Remote repository 
 on which the Repository is stored. If the Repository is stored in main folder on Remote repository, this should be set 
-to \code{repoDirGit = FALSE} as default.}
+to \code{subdir = FALSE} as default.}
 
 \item{repoType}{A character containing a type of the remote repository. Currently it can be 'Remote' or 'bitbucket'.}
 }
@@ -70,7 +70,7 @@ set in \link{setRemoteRepo} function are used.
 
 You should remember while using \code{loadFromRepo} wrapper that \code{repoDir} is
 a parameter used only in \code{loadFromLocalRepo} while \code{repo}, \code{user},
-\code{branch} and \code{repoDirGit} are used only in \code{loadFromRemoteRepo}. When you mix those
+\code{branch} and \code{subdir} are used only in \code{loadFromRemoteRepo}. When you mix those
 parameters you will receive an error message.
 }
 \examples{
@@ -233,12 +233,12 @@ rm( exampleRepoDir )
 # many archivist-like Repositories on one Remote repository
 
 loadFromRemoteRepo( "ff575c261c949d073b2895b05d1097c3", 
-user="MarcinKosinski", repo="Museum", branch="master", repoDirGit="ex2")
+user="MarcinKosinski", repo="Museum", branch="master", subdir="ex2")
 
 
 loadFromRemoteRepo( "ff575c261c949d073b2895b05d1097c3", 
                     user="MarcinKosinski", repo="Museum", branch="master",
-                    repoDirGit="ex1")
+                    subdir="ex1")
                     
 #github
 loadFromRemoteRepo(md5hash = "08dc0b66975cded92b5cd8291ebdc955", 

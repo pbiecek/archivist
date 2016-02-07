@@ -5,7 +5,7 @@
 \title{Return a Link To Download an Artifact Stored on Remote Repository}
 \usage{
 alink(md5hash, repo = aoptions("repo"), user = aoptions("user"),
-  repoDirGit = FALSE, branch = "master", repoType = aoptions("repoType"),
+  subdir = FALSE, branch = "master", repoType = aoptions("repoType"),
   format = "markdown", rawLink = FALSE)
 }
 \arguments{
@@ -18,9 +18,9 @@ is stored.}
 \item{user}{The name of a user on whose \code{Repository} the the artifact that we want to download
 is stored.}
 
-\item{repoDirGit}{A character containing a name of a directory on the Remote repository 
+\item{subdir}{A character containing a name of a directory on the Remote repository 
 on which the Repository is stored. If the Repository is stored in the main folder on the Remote repository, this should be set 
-to \code{repoDirGit = FALSE} as default.}
+to \code{subdir = FALSE} as default.}
 
 \item{branch}{A character containing a name of the Remote Repository's branch
 on which the Repository is archived. Default \code{branch} is \code{master}.}
@@ -48,10 +48,10 @@ For more information about \code{md5hash} see \link{md5hash}.
 \dontrun{
 # link in markdown format
 alink('pbiecek/archivist/134ecbbe2a8814d98f0c2758000c408e')
-# link in markdown format with additional repoDirGit
+# link in markdown format with additional subdir
 alink(user='BetaAndBit',repo='PieczaraPietraszki',
      md5hash = '1569cc44e8450439ac52c11ccac35138', 
-     repoDirGit = 'UniwersytetDzieci/arepo')
+     subdir = 'UniwersytetDzieci/arepo')
 # link in latex format
 alink(user = 'MarcinKosinski', repo = 'Museum',
       md5hash = '1651caa499a2b07a3bdad3896a2fc717', format = 'latex')

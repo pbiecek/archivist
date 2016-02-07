@@ -23,7 +23,7 @@
 #' @param user While working with a Github repository. A character denoting GitHub user name. Can be set globally with \code{aoptions("user", user)}.
 #'  See \link{archivist-github-integration}.
 #' @param response A logical value. Should the GitHub API response be returned (only when \code{deleteRoot = TRUE}).
-#' @param repoDirGit Only when \code{deleteRoot = FALSE}. Subdirectory in which the archivist-Repository is stored on a GitHub Repository.
+#' @param subdir Only when \code{deleteRoot = FALSE}. Subdirectory in which the archivist-Repository is stored on a GitHub Repository.
 #' If it's in main directory, then specify to \code{NULL} (default).
 #' @param password Only when \code{deleteRoot = FALSE}. While working with a Github repository. A character denoting GitHub user password. Can be set globally with \code{aoptions("password", password)}.
 #' See \link{archivist-github-integration}.
@@ -200,7 +200,7 @@ deleteRepo <- function(repoDir, repo,
                        password = aoptions("password"),
                        unset = FALSE, 
                        deleteRoot = FALSE, 
-                       repoDirGit = NULL, 
+                       subdir = NULL, 
                        response = aoptions("response"),
                        type = "local"){
   stopifnot(is.character(type) & length(type) ==1 & type %in% c("local", "github"))
@@ -214,7 +214,7 @@ deleteRepo <- function(repoDir, repo,
                      password = password,
                      unset = unset, 
                      deleteRoot = deleteRoot, 
-                     repoDirGit = repoDirGit,
+                     subdir = subdir,
                      response = response)
   }
 } 
@@ -253,7 +253,7 @@ deleteGithubRepo <- function(repo,
                              password = aoptions("password"),
                              unset = FALSE, 
                              deleteRoot = FALSE, 
-                             repoDirGit = NULL, 
+                             subdir = NULL, 
                              response = aoptions("response")) {
   stopifnot(is.character(repo) & length(repo) ==1)
   stopifnot(is.character(user) & length(user)==1)
@@ -269,7 +269,7 @@ deleteGithubRepo <- function(repo,
                     repoDir = tmpDir) -> clonedRepo
     # remove archivist-repository
     deleteLocalRepo(repoDir = file.path(tmpDir, 
-                                   ifelse(is.null(repoDirGit), "", repoDirGit)
+                                   ifelse(is.null(subdir), "", subdir)
                                    ))
     # add changes to git 
     add(clonedRepo, c("backpack.db", "gallery/"))

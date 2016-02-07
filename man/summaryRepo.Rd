@@ -8,7 +8,7 @@
 summaryLocalRepo(repoDir = NULL)
 
 summaryRemoteRepo(repo = aoptions("repo"), user = aoptions("user"),
-  branch = "master", repoDirGit = aoptions("repoDirGit"),
+  branch = "master", subdir = aoptions("subdir"),
   repoType = aoptions("repoType"))
 }
 \arguments{
@@ -24,9 +24,9 @@ By default set to \code{NULL} - see \code{Note}.}
 \item{branch}{While working with the Remote repository. A character containing a name of 
 the Remote Repository's branch on which the Repository is stored. Default \code{branch} is \code{master}.}
 
-\item{repoDirGit}{While working with the Remote repository. A character containing a name of a directory on the Remote repository 
+\item{subdir}{While working with the Remote repository. A character containing a name of a directory on the Remote repository 
 on which the Repository is stored. If the Repository is stored in the main folder of the Remote repository, this should be set 
-to \code{repoDirGit = FALSE} as default.}
+to \code{subdir = FALSE} as default.}
 
 \item{repoType}{A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.}
 }
@@ -137,7 +137,7 @@ print( x )
 # many archivist-like Repositories on one Remote repository
   
 summaryRemoteRepo(user="MarcinKosinski", repo="Museum", 
-branch="master", repoDirGit="ex2" )
+branch="master", subdir="ex2" )
 
 }
 }

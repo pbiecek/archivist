@@ -16,7 +16,7 @@ setDefaultArchivistEnv <- function() {
   [`Repository`](https://github.com/pbiecek/archivist/wiki/archivist-package-Repository) stores specific values of an artifact,
   different for various artifact's classes and artifacts themselves. To learn more about artifacts visit [wiki](https://github.com/pbiecek/archivist/wiki)."
   .ArchivistEnv$repoDescription <- "A Repository of Artifacts supported by archivist https://github.com/pbiecek"
-  .ArchivistEnv$repoDirGit <- FALSE
+  .ArchivistEnv$subdir <- FALSE
   .ArchivistEnv$repoType <- "github"
   .ArchivistEnv$response <- FALSE
   .ArchivistEnv$silent <- FALSE

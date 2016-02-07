@@ -55,7 +55,7 @@ aread <- function(md5hash){
       # Remote directory
       res[[md5h]] <- loadFromRemoteRepo(md5hash = tail(elements,1), 
                                         repo = elements[2],
-                                        repoDirGit = ifelse(length(elements) > 3, paste(elements[3:(length(elements)-1)], collapse="/"), FALSE),
+                                        subdir = ifelse(length(elements) > 3, paste(elements[3:(length(elements)-1)], collapse="/"), FALSE),
                                         user = elements[1], value = TRUE)
     }
   }

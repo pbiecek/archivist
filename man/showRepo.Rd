@@ -8,7 +8,7 @@
 showLocalRepo(repoDir = aoptions("repoDir"), method = "md5hashes")
 
 showRemoteRepo(repo = aoptions("repo"), user = aoptions("user"),
-  branch = aoptions("branch"), repoDirGit = aoptions("repoDirGit"),
+  branch = aoptions("branch"), subdir = aoptions("subdir"),
   repoType = aoptions("repoType"), method = "md5hashes")
 }
 \arguments{
@@ -27,9 +27,9 @@ By default set to \code{NULL} - see \code{Note}.}
 \item{branch}{While working with the Remote repository. A character containing a name of 
 the Remote Repository's branch on which the Repository is stored. Default \code{branch} is \code{master}.}
 
-\item{repoDirGit}{While working with the Remote repository. A character containing a name of a directory on the Remote repository 
+\item{subdir}{While working with the Remote repository. A character containing a name of a directory on the Remote repository 
 on which the Repository is stored. If the Repository is stored in the main folder of the Remote repository, this should be set 
-to \code{repoDirGit = FALSE} as default.}
+to \code{subdir = FALSE} as default.}
 
 \item{repoType}{A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.}
 
@@ -176,9 +176,9 @@ rm( exampleRepoDir )
 # many archivist-like Repositories on one Remote repository
 
 showRemoteRepo( user="MarcinKosinski", repo="Museum", branch="master",
-repoDirGit="ex1")
+subdir="ex1")
 showRemoteRepo( user="MarcinKosinski", repo="Museum", branch="master",
-                repoDirGit="ex2")
+                subdir="ex2")
                 
 ## Remote options
 showRemoteRepo('archivist', 'pbiecek')
@@ -186,15 +186,15 @@ aoptions('user', 'pbiecek')
 aoptions('repo', 'archivist')
 loadFromRemoteRepo("ff575c261c", value = TRUE) -> iris123
 
-showRemoteRepo('Museum', 'MarcinKosinski', repoDirGit = 'ex1')
+showRemoteRepo('Museum', 'MarcinKosinski', subdir = 'ex1')
 aoptions('repo', 'Museum')
 aoptions('user', 'MarcinKosinski')
-aoptions('repoDirGit', 'ex1')
+aoptions('subdir', 'ex1')
 aoptions('branch', 'master')
 showRemoteRepo()
-showRemoteRepo(repoDirGit = 'ex2')
+showRemoteRepo(subdir = 'ex2')
 
-aoptions('repoDirGit')
+aoptions('subdir')
 
 
 }

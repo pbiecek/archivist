@@ -35,7 +35,7 @@
 #' 
 #' You should remember while using \code{loadFromRepo} wrapper that \code{repoDir} is
 #' a parameter used only in \code{loadFromLocalRepo} while \code{repo}, \code{user},
-#' \code{branch} and \code{repoDirGit} are used only in \code{loadFromRemoteRepo}. When you mix those
+#' \code{branch} and \code{subdir} are used only in \code{loadFromRemoteRepo}. When you mix those
 #' parameters you will receive an error message.
 #' 
 #' @param repoType A character containing a type of the remote repository. Currently it can be 'Remote' or 'bitbucket'.
@@ -52,9 +52,9 @@
 #' @param branch While working with a Remote repository. A character containing a name of 
 #' Remote Repository's branch on which the Repository is archived. Default \code{branch} is \code{master}.
 #' 
-#' @param repoDirGit While working with a Remote repository. A character containing a name of a directory on Remote repository 
+#' @param subdir While working with a Remote repository. A character containing a name of a directory on Remote repository 
 #' on which the Repository is stored. If the Repository is stored in main folder on Remote repository, this should be set 
-#' to \code{repoDirGit = FALSE} as default.
+#' to \code{subdir = FALSE} as default.
 #' 
 #' @param value If \code{FALSE} (default) then artifacts are loaded into the Global Environment with their original names, 
 #' if \code{TRUE} then artifacts are returned as a list of values (if there is more than one artifact)
@@ -224,12 +224,12 @@
 #' # many archivist-like Repositories on one Remote repository
 #' 
 #' loadFromRemoteRepo( "ff575c261c949d073b2895b05d1097c3", 
-#' user="MarcinKosinski", repo="Museum", branch="master", repoDirGit="ex2")
+#' user="MarcinKosinski", repo="Museum", branch="master", subdir="ex2")
 #' 
 #' 
 #' loadFromRemoteRepo( "ff575c261c949d073b2895b05d1097c3", 
 #'                     user="MarcinKosinski", repo="Museum", branch="master",
-#'                     repoDirGit="ex1")
+#'                     subdir="ex1")
 #'                     
 #' #github
 #' loadFromRemoteRepo(md5hash = "08dc0b66975cded92b5cd8291ebdc955", 
@@ -286,14 +286,14 @@ loadFromLocalRepo <- function( md5hash, repoDir = NULL, value = FALSE ){
 
 #' @rdname loadFromRepo
 #' @export
-loadFromRemoteRepo <- function( md5hash, repo = aoptions("repo"), user = aoptions("user"), branch = aoptions("branch"), repoDirGit = aoptions("repoDirGit"),
+loadFromRemoteRepo <- function( md5hash, repo = aoptions("repo"), user = aoptions("user"), branch = aoptions("branch"), subdir = aoptions("subdir"),
                                 repoType = aoptions("repoType"), value = FALSE ){
   stopifnot( is.character( c( md5hash, branch ) ), length( md5hash ) == 1, length( branch ) == 1 )
   stopifnot( is.logical( value ) )
   
-  RemoteRepoCheck( repo, user, branch, repoDirGit, repoType) # implemented in setRepo.R
+  RemoteRepoCheck( repo, user, branch, subdir, repoType) # implemented in setRepo.R
   
-  remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, repoDirGit=repoDirGit, repoType=repoType)
+  remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, subdir=subdir, repoType=repoType)
   
   # what if abbreviation was given
   if ( nchar( md5hash ) < 32 ){

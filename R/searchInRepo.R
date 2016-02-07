@@ -56,9 +56,9 @@
 #' The latter is wider and more flexible method, e.g.,
 #' using \code{pattern = "name", fixed = FALSE} arguments enables to search for all artifacts in the \code{Repository}.
 #' 
-#' @param repoDirGit While working with the Github repository. A character containing a name of a directory on the Remote repository 
+#' @param subdir While working with the Github repository. A character containing a name of a directory on the Remote repository 
 #' on which the Repository is stored. If the Repository is stored in the main folder of the Remote repository, this should be set 
-#' to \code{repoDirGit = FALSE} as default.
+#' to \code{subdir = FALSE} as default.
 #' 
 #' @param realDBname A logical value. Should not be changed by user. It is a technical parameter.
 #'
@@ -176,10 +176,10 @@
 #'   # many archivist-like Repositories on one Remote repository
 #'   
 #'   searchInRemoteRepo( pattern = "name", user="MarcinKosinski", repo="Museum", 
-#'   branch="master", repoDirGit="ex1", fixed = FALSE )
+#'   branch="master", subdir="ex1", fixed = FALSE )
 #'
 #'   searchInRemoteRepo( pattern = "name", user="MarcinKosinski", repo="Museum", 
-#'                    branch="master", repoDirGit="ex2", fixed = FALSE )
+#'                    branch="master", subdir="ex2", fixed = FALSE )
 #'  
 #'  # multi versions
 #'  multiSearchInRemoteRepo( patterns=c("varname:Sepal.Width", "class:lm", "name:myplot123"), 
@@ -224,15 +224,15 @@ searchInLocalRepo <- function( pattern, repoDir = aoptions("repoDir"), fixed = T
 
 #' @rdname searchInRepo
 #' @export
-searchInRemoteRepo <- function( pattern, repo = aoptions("repo"), user = aoptions("user"), branch = "master", repoDirGit = aoptions("repoDirGit"),
+searchInRemoteRepo <- function( pattern, repo = aoptions("repo"), user = aoptions("user"), branch = "master", subdir = aoptions("subdir"),
                                 repoType = aoptions("repoType"), fixed = TRUE ){
   stopifnot( is.character( pattern ) | is.list( pattern ) )
   stopifnot( length( pattern ) == 1 | length( pattern ) == 2 )
 
-  RemoteRepoCheck( repo, user, branch, repoDirGit, repoType) # implemented in setRepo.R
+  RemoteRepoCheck( repo, user, branch, subdir, repoType) # implemented in setRepo.R
   
   # first download database
-  remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, repoDirGit=repoDirGit)
+  remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, subdir=subdir)
   Temp <- downloadDB( remoteHook )
   
   # extracts md5hash
@@ -272,14 +272,14 @@ multiSearchInLocalRepo <- function( patterns, repoDir = aoptions("repoDir"), fix
 
 #' @rdname searchInRepo
 #' @export
-multiSearchInRemoteRepo <- function( patterns, repo = aoptions("repo"), user = aoptions("user"), branch = "master", repoDirGit = aoptions("repoDirGit"),
+multiSearchInRemoteRepo <- function( patterns, repo = aoptions("repo"), user = aoptions("user"), branch = "master", subdir = aoptions("subdir"),
                                      repoType = aoptions("repoType"), 
                                      fixed = TRUE, intersect = TRUE ){
   stopifnot( is.logical(  intersect ) )
 
-  RemoteRepoCheck( repo, user, branch, repoDirGit, repoType) # implemented in setRepo.R
+  RemoteRepoCheck( repo, user, branch, subdir, repoType) # implemented in setRepo.R
   
-  remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, repoDirGit=repoDirGit)
+  remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, subdir=subdir)
   Temp <- downloadDB( remoteHook )
   on.exit(file.remove( Temp ))
   m <- multiSearchInLocalRepo( patterns, repoDir = Temp, fixed=fixed,

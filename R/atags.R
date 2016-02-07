@@ -40,7 +40,7 @@ aformat <- function( md5hash = NULL) {
   } else {
     # Remote directory
     tags <- getTagsRemote(tail(elements,1), repo = elements[2],
-                          repoDirGit = ifelse(length(elements) > 3, paste(elements[3:(length(elements)-1)], collapse="/"), FALSE),
+                          subdir = ifelse(length(elements) > 3, paste(elements[3:(length(elements)-1)], collapse="/"), FALSE),
                           user = elements[1], tag = "")
   }
   return(gsub(grep(tags,  pattern="^format:", value = TRUE), pattern="^format:", replacement=""))
