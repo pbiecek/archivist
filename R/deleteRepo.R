@@ -5,36 +5,18 @@
 #' @description
 #' \code{deleteRepo} deletes the existing \link{Repository} from the given directory.
 #' As a result all artifacts from \code{gallery} folder are removed and database \code{backpack.db}
-#' is deleted. \code{deleteGithubRepo} can delete whole GitHub-Repository or only archivist-like Repository
-#' stored on a GitHub-Repository (then it requires more parameters to be specified).
-#' To learn more about  \code{Archivist Integration With GitHub API} visit
-#'  \link{archivist-github-integration} (\link{agithub}).
-#'  
+#' is deleted. 
+#'   
 #' @param repoDir A character that specifies the directory for the Repository
 #' which is to be deleted.
 #' @param deleteRoot A logical value that specifies if the repository root directory
 #' should be deleted for Local Repository or for GitHub whether to delete whole GitHub-Repository.
 #' @param unset A logical. If deleted \code{repoDir/repo} was set to be default Local/GitHub Repository
 #' and \code{unset} is TRUE, then \code{repoDir/repo} is unset as a default Local/GitHub Repository (\code{aoptions('repoDir/repo', NULL, T)}).
-#' @param repo While working with a Github repository. A character denoting GitHub repository name to be deleted.
-#' @param github_token While working with a Github repository. An OAuth GitHub Token created with the \link{oauth2.0_token} function. To delete GitHub Repository you
-#' need to have \code{delete_repo} scope set - see examples. See \link{archivist-github-integration}.
-#' Can be set globally with \code{aoptions("github_token", github_token)}.
-#' @param user While working with a Github repository. A character denoting GitHub user name. Can be set globally with \code{aoptions("user", user)}.
-#'  See \link{archivist-github-integration}.
-#' @param response A logical value. Should the GitHub API response be returned (only when \code{deleteRoot = TRUE}).
-#' @param subdir Only when \code{deleteRoot = FALSE}. Subdirectory in which the archivist-Repository is stored on a GitHub Repository.
-#' If it's in main directory, then specify to \code{NULL} (default).
-#' @param password Only when \code{deleteRoot = FALSE}. While working with a Github repository. A character denoting GitHub user password. Can be set globally with \code{aoptions("password", password)}.
-#' See \link{archivist-github-integration}.
-#' @param type A character. Whether to use \code{Local} or \code{Github} version while using \code{deleteRepo} wrapper.
 #' 
 #' @details
 #' 
-#' To delete GitHub Repository you
-#' need to have \code{delete_repo} scope set - see examples.
-#' 
-#' Since version 1.9 \code{deleteRepo} is a wrapper around \code{deleteLocalRepo} (in earlier versions deleteRepo) and \code{deleteGithubRepo}
+#' Since version 1.9 \code{deleteRepo} is a wrapper around \code{deleteLocalRepo} (in earlier versions deleteRepo) and \link[archivist.github]{deleteGitHubRepo}
 #'  functions and by default triggers \code{deleteLocalRepo} to maintain consistency with the previous \pkg{archivist} versions (<1.9.0)
 #'  where there was only \code{deleteRepo} which deleted local \code{Repository}. 
 #' 
@@ -51,25 +33,6 @@
 #'
 #' @examples
 #' \dontrun{
-#' 
-#' ########################
-#' #### GitHub version ####
-#' ########################
-#' 
-#' library(httr)
-#' myapp <- oauth_app("github",
-#'                    key = app_key,
-#'                    secret = app_secret)
-#' github_token <- oauth2.0_token(oauth_endpoints("github"),
-#'                                 myapp,
-#'                                 scope = c("public_repo",
-#'                                           "delete_repo"))
-#' aoptions("github_token", github_token)
-#' aoptions("user", user)
-#' aoptions("password", password)
-#' 
-#' createEmptyGithubRepo("Museum")
-#' deleteGithubRepo(repo = "Museum", deleteRoot = TRUE, response = TRUE)
 #' 
 #' ########################
 #' #### Local version ####
@@ -185,39 +148,9 @@
 #' # or if aoptions('repodir') == repodir then 
 #' # deleteRepo(repoDir, deleteRoot = TRUE, unset = TRUE)
 #' 
-#' 
-#' 
-#' 
-#' 
 #' }
 #' 
 #' @family archivist
-#' @rdname deleteRepo
-#' @export
-deleteRepo <- function(repoDir, repo,
-                       github_token = aoptions("github_token"), 
-                       user = aoptions("user"),
-                       password = aoptions("password"),
-                       unset = FALSE, 
-                       deleteRoot = FALSE, 
-                       subdir = NULL, 
-                       response = aoptions("response"),
-                       type = "local"){
-  stopifnot(is.character(type) & length(type) ==1 & type %in% c("local", "github"))
-  if (type == "local") {
-    deleteLocalRepo(repoDir = repoDir, deleteRoot = deleteRoot,
-                    unset = unset)
-  } else {
-    deleteGithubRepo(repo = repo,
-                     github_token = github_token, 
-                     user = user,
-                     password = password,
-                     unset = unset, 
-                     deleteRoot = deleteRoot, 
-                     subdir = subdir,
-                     response = response)
-  }
-} 
 
 #' @rdname deleteRepo
 #' @export
@@ -247,57 +180,5 @@ deleteLocalRepo <- function(repoDir, deleteRoot = FALSE, unset = FALSE){
 
 #' @rdname deleteRepo
 #' @export
-deleteGithubRepo <- function(repo,
-                             github_token = aoptions("github_token"), 
-                             user = aoptions("user"),
-                             password = aoptions("password"),
-                             unset = FALSE, 
-                             deleteRoot = FALSE, 
-                             subdir = NULL, 
-                             response = aoptions("response")) {
-  stopifnot(is.character(repo) & length(repo) ==1)
-  stopifnot(is.character(user) & length(user)==1)
-
-  if (deleteRoot) {
-    DELETE(url = file.path("https://api.github.com/repos",user,repo),
-           config = httr::config(token = github_token)
-    ) -> resp
-  } else {
-    tempfile() -> tmpDir
-    # clone repo to tmpDir
-    cloneGithubRepo(file.path("https://github.com/", user, repo), 
-                    repoDir = tmpDir) -> clonedRepo
-    # remove archivist-repository
-    deleteLocalRepo(repoDir = file.path(tmpDir, 
-                                   ifelse(is.null(subdir), "", subdir)
-                                   ))
-    # add changes to git 
-    add(clonedRepo, c("backpack.db", "gallery/"))
-    # message
-    delete_commit <- commit(clonedRepo, "archivist Repository deletion.")
-    # GitHub authorization
-    # to perform pull and push operations
-    cred <- git2r::cred_user_pass(user,
-                                  password)
-    # push archivist-like Repository deletion to GitHub
-    push(clonedRepo,
-         refspec = "refs/heads/master",
-         credentials = cred)
-    
-  }
-  
-  if (unset) {
-    aoptions('repo', NULL,T)
-  }
-  
-  
-  if (response & deleteRoot){
-    return(resp)
-  }
-  
-  
-}
-
-
-
+deleteRepo <- deleteLocalRepo
 

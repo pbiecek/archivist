@@ -7,7 +7,8 @@
 saveToRepo(artifact, repoDir = NULL, archiveData = TRUE,
   archiveTags = TRUE, archiveMiniature = TRUE, archiveSessionInfo = TRUE,
   force = TRUE, rememberName = TRUE, value = FALSE, ..., userTags = c(),
-  silent = aoptions("silent"), ascii = FALSE)
+  silent = aoptions("silent"), ascii = FALSE,
+  artifactName = deparse(substitute(artifact)))
 }
 \arguments{
 \item{artifact}{An arbitrary R artifact to be saved. For supported artifacts see details.}
@@ -40,6 +41,8 @@ Further arguments passed to \link{head}. See Details section about \code{firtsRo
 \item{silent}{If TRUE produces no warnings.}
 
 \item{ascii}{A logical value. An \code{ascii} argument is passed to \link{save} function.}
+
+\item{artifactName}{The name of the artifact with which it should be archived.}
 }
 \value{
 As a result of calling this function a character string is returned, which determines
@@ -287,17 +290,15 @@ Other archivist: \code{\link{Repository}},
   \code{\link{addHooksToPrint}}, \code{\link{addTagsRepo}},
   \code{\link{aformat}}, \code{\link{ahistory}},
   \code{\link{alink}}, \code{\link{aoptions}},
-  \code{\link{archive}},
-  \code{\link{archivist-github-integration}},
   \code{\link{archivist-package}}, \code{\link{aread}},
   \code{\link{asearch}}, \code{\link{asession}},
-  \code{\link{cache}}, \code{\link{cloneGithubRepo}},
-  \code{\link{copyLocalRepo}},
-  \code{\link{createEmptyRepo}},
-  \code{\link{createMDGallery}}, \code{\link{deleteRepo}},
+  \code{\link{cache}}, \code{\link{copyLocalRepo}},
+  \code{\link{createEmptyLocalRepo}},
+  \code{\link{createMDGallery}},
+  \code{\link{deleteLocalRepo}},
   \code{\link{getRemoteHook}}, \code{\link{getTagsLocal}},
   \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
-  \code{\link{pushRepo}}, \code{\link{rmFromRepo}},
+  \code{\link{rmFromRepo}},
   \code{\link{searchInLocalRepo}},
   \code{\link{setLocalRepo}},
   \code{\link{shinySearchInLocalRepo}},
