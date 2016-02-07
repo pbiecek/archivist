@@ -45,7 +45,6 @@ To learn more about artifacts visit \link[archivist]{archivist-package}.
 For more information about \code{md5hash} see \link{md5hash}.
 }
 \examples{
-\dontrun{
 # link in markdown format
 alink('pbiecek/archivist/134ecbbe2a8814d98f0c2758000c408e')
 # link in markdown format with additional subdir
@@ -57,30 +56,6 @@ alink(user = 'MarcinKosinski', repo = 'Museum',
       md5hash = '1651caa499a2b07a3bdad3896a2fc717', format = 'latex')
 # link in raw format
 alink('pbiecek/graphGallery/02af4f99e440324b9e329faa293a9394', rawLink = TRUE)  
-
-## Example with archive function and empty Github Repository creation
-# Credentials for GitHub API
-library(httr)
-myapp <- oauth_app("github",
-                   key = app_key,
-                   secret = app_secret)
-github_token <- oauth2.0_token(oauth_endpoints("github"),
-                               myapp,
-                               scope = "public_repo")
-# setting options
-                    
-aoptions("github_token", github_token)
-aoptions("user", user)
-aoptions("password", password)
-
-createEmptyGithubRepo("archive-test4", default = TRUE)
-## artifact's archiving
-vectorLong <- 1:100
-vectorShort <- 1:20
-# archiving
-alink(archive(vectorLong))
-archive(vectorShort, alink = TRUE)
-}
 }
 \author{
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}

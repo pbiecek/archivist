@@ -84,7 +84,7 @@ saveToRepo( model, repoDir=exampleRepoDir )
  
 zipLocalRepo( exampleRepoDir )
 
-deleteRepo( exampleRepoDir, TRUE)
+deleteLocalRepo( exampleRepoDir, TRUE)
 
 rm( exampleRepoDir )
 

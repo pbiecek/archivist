@@ -196,10 +196,10 @@
 #'  \itemize{
 #'    \item \link{addTagsRepo}
 #'    \item \link{getTagsLocal}
-#'    \item \link{getTagsGithub}
+#'    \item \link{getTagsRemote}
 #'    \item \link{saveToRepo}
 #'    \item \link{searchInLocalRepo},
-#'    \item \link{searchInGithubRepo}. 
+#'    \item \link{searchInRemoteRepo}. 
 #'  }
 #' 
 #' @note 

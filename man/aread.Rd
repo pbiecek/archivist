@@ -27,7 +27,6 @@ Before you start using this function, remember to set local or Remote repository
 to default by using \code{setLocalRepo()} or \code{setRemoteRepo} functions.
 }
 \examples{
-\dontrun{
 # read the object from local directory
 setLocalRepo(system.file("graphGallery", package = "archivist"))
 pl <- aread("600bda83cb840947976bd1ce3a11879d")
@@ -37,7 +36,6 @@ pl
 pl <- aread("pbiecek/graphGallery/600bda83cb840947976bd1ce3a11879d")
 # plot it
 pl
-}
 }
 \author{
 Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}

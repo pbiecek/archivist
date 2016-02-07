@@ -40,7 +40,7 @@ addHooksToPrint <- function(class = "ggplot",
   
   # set local repo to repoDir
   if (!file.exists( repoDir )) 
-    createEmptyLocalRepo(repoDir)  
+    createLocalRepo(repoDir)  
   setLocalRepo(repoDir)
   
   for (class1 in class) {

@@ -78,93 +78,18 @@ parameters you will receive an error message.
 \dontrun{
 # objects preparation
 
-# data.frame object
-data(iris)
-
-# ggplot/gg object
-library(ggplot2)
-df <- data.frame(gp = factor(rep(letters[1:3], each = 10)),y = rnorm(30))
-library(plyr)
-ds <- ddply(df, .(gp), summarise, mean = mean(y), sd = sd(y))
-myplot123 <- ggplot(df, aes(x = gp, y = y)) +
-  geom_point() +  geom_point(data = ds, aes(y = mean),
-                             colour = 'red', size = 3)
-
-# lm object
-model <- lm(Sepal.Length~ Sepal.Width + Petal.Length + Petal.Width, data= iris)
-model2 <- lm(Sepal.Length~ Sepal.Width + Petal.Width, data= iris)
-model3 <- lm(Sepal.Length~ Sepal.Width, data= iris)
-
-# agnes (twins) object
-library(cluster)
-data(votes.repub)
-agn1 <- agnes(votes.repub, metric = "manhattan", stand = TRUE)
-
-# fanny (partition) object
-x <- rbind(cbind(rnorm(10, 0, 0.5), rnorm(10, 0, 0.5)),
-           cbind(rnorm(15, 5, 0.5), rnorm(15, 5, 0.5)),
-           cbind(rnorm( 3,3.2,0.5), rnorm( 3,3.2,0.5)))
-fannyx <- fanny(x, 2)
-
-# creating example Repository - on which examples will work
-
-exampleRepoDir <- tempfile()
+#' exampleRepoDir <- tempfile()
 createEmptyRepo(repoDir = exampleRepoDir)
-myplo123Md5hash <- saveToRepo(myplot123, repoDir=exampleRepoDir)
-irisMd5hash <- saveToRepo(iris, repoDir=exampleRepoDir)
-modelMd5hash  <- saveToRepo(model, repoDir=exampleRepoDir)
-agn1Md5hash <- saveToRepo(agn1, repoDir=exampleRepoDir)
-fannyxMd5hash <- saveToRepo(fannyx, repoDir=exampleRepoDir)
-
-# let's see how the Repository looks like: show
-
+data(iris)
+saveToRepo(iris, repoDir=exampleRepoDir, archiveSessionInfo = TRUE)
 showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
 showLocalRepo(method = "tags", repoDir = exampleRepoDir)
 
-# let's see how the Repository looks like: summary
+loadFromLocalRepo(md5hash = '600bda83cb840947976bd1ce3a11879d',
+  repoDir = system.file("graphGallery", package = "archivist"), value = TRUE) -> pl
+deleteRepo(exampleRepoDir, TRUE)
+rm(exampleRepoDir)
 
-summaryLocalRepo( exampleRepoDir )
-
-# load examples
-
-# first let's remove objects from Global Environment
-rm(myplot123)
-rm(iris)
-rm(agn1)
-
-# if those objects were archivised, they can be loaded
-# from Repository, when knowing their md5hash
-
-loadFromLocalRepo(myplo123Md5hash, repoDir = exampleRepoDir)
-loadFromLocalRepo(irisMd5hash, repoDir = exampleRepoDir)
-
-
-# if one doesn't remember the object's md5hash but
-# remembers the object's name, this object can still be
-# loaded.
-
-agnesHash <- searchInLocalRepo( "name:agn1", repoDir = exampleRepoDir)
-loadFromLocalRepo(agnesHash, repoDir = exampleRepoDir)
-
-# one can check that object has his own unique md5hash
-agnesHash == agn1Md5hash
-
-# object can be loadad as a value
-
-newData <- loadFromLocalRepo(irisMd5hash, repoDir = exampleRepoDir, value = TRUE)
-
-# object can be also loaded from it's abbreviation
-# modelMd5hash <- saveToRepo( model , repoDir=exampleRepoDir)
-rm( model )
-# "cd6557c6163a6f9800f308f343e75e72"
-# so example abbreviation might be : "cd6557c"
-loadFromLocalRepo("cd6557c", repoDir = exampleRepoDir)
-
-# and can be loaded as a value from it's abbreviation
-newModel  <- loadFromLocalRepo("cd6557c", repoDir = exampleRepoDir, value = TRUE)
-# note that "model" was not deleted
-# removing an example Repository
-deleteRepo( exampleRepoDir, TRUE)
 
 #
 #Remote Version

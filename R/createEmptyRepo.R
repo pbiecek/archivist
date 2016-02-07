@@ -45,7 +45,7 @@
 #' @examples
 #' \dontrun{
 #' exampleRepoDir <- tempfile()
-#' createEmptyRepo( repoDir = exampleRepoDir, default =  TRUE )
+#' createLocalRepo( repoDir = exampleRepoDir, default =  TRUE )
 #' data(iris)
 #' saveToRepo(iris)
 #' showLocalRepo()

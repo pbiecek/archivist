@@ -60,6 +60,9 @@ filter(Sepal.Length < 6) \%a\%
 ahistory(artifact)
 ahistory(artifact, format = "kable")  
 print(ahistory(artifact, format = "kable"), format = "latex")
+ahistory(artifact, format = "kable", alink = TRUE, repoDir = "ahistory_check",
+repo = "repo", user = "user")
+
 
 repoDir <- file.path(getwd(), "ahistory_check")
 deleteRepo(repoDir, deleteRoot = TRUE)

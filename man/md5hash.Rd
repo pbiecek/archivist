@@ -23,11 +23,9 @@ Functions that take \code{md5hash} as a parameter are:
  \item \link{addTagsRepo},
  \item \link{copyLocalRepo}, 
  \item \link{copyRemoteRepo},
- \item \link{copyRepoRepo},
  \item \link{loadFromLocalRepo}, 
  \item \link{loadFromRemoteRepo},
- \item \link{loadFromRemoteRepo},
- \item \link{getTagsGithub},
+ \item \link{getTagsRemote},
  \item \link{getTagsLocal},
  \item \link{rmFromRepo}.
 }
@@ -36,16 +34,13 @@ Functions returning \code{md5hash} as a value are:
  \item \link{saveToRepo},
  \item \link{searchInLocalRepo},
  \item \link{searchInRemoteRepo},
- \item \link{searchInRemoteRepo},
  \item \link{shinySearchInLocalRepo},
  \item \link{multiSearchInLocalRepo},
- \item \link{multiSearchInRemoteRepo},
  \item \link{multiSearchInRemoteRepo}.
 }
 Functions returning \code{md5hashes} as a \code{data.frame} are:
 \itemize{
  \item \link{showLocalRepo},
- \item \link{showRemoteRepo},
  \item \link{showRemoteRepo}.
 }
 

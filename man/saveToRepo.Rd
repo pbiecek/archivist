@@ -69,7 +69,7 @@ By default, a miniature of an artifact and (if possible) a data set needed to co
 They are also going to be saved in a file named by their \code{md5hash} in the \code{gallery} folder
 that exists in the directory specified in the \code{repoDir} argument. Moreover, a specific \code{Tag}-relation
 is going to be added to the \code{backpack} dataset in case there is a need to load
-the artifact with it's related data set - see \link{loadFromLocalRepo} or \link{loadFromGithubRepo} or \link{loadFromRemoteRepo}. Default settings
+the artifact with it's related data set - see \link{loadFromLocalRepo} or \link{loadFromRemoteRepo}. Default settings
 may be changed by using the \code{archiveData}, \code{archiveTag} or \code{archiveMiniature} arguments with the
 \code{FALSE} value.
 
@@ -77,7 +77,7 @@ may be changed by using the \code{archiveData}, \code{archiveTag} or \code{archi
 information check \link{Tags}
 
 Archived artifact can be searched in the \code{backpack} dataset by using the
-\link{searchInLocalRepo} or \link{searchInGithubRepo} or \link{searchInRemoteRepo} functions. Artifacts can be searched by their \link{Tags},
+\link{searchInLocalRepo} or \link{searchInRemoteRepo} functions. Artifacts can be searched by their \link{Tags},
 \code{names}, \code{classes} or \code{archiving date}.
 
 \code{firstRows} parameter.
@@ -143,7 +143,7 @@ Example: The data set will be archived here.
 }
 \examples{
 exampleRepoDir <- tempfile()
-createEmptyRepo(repoDir = exampleRepoDir)
+createLocalRepo(repoDir = exampleRepoDir)
 data(iris)
 saveToRepo(iris, repoDir=exampleRepoDir, archiveSessionInfo = TRUE)
 showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
@@ -157,7 +157,7 @@ saveToRepo(pl, repoDir=exampleRepoDir,
 aoptions('repoDir', system.file("graphGallery", package = "archivist"))
 showLocalRepo(method = "tags")
 aoptions('repoDir', NULL, unset = TRUE)
-deleteRepo(exampleRepoDir, TRUE)
+deleteLocalRepo(exampleRepoDir, TRUE)
 rm(exampleRepoDir)
 
 }
