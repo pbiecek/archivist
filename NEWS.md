@@ -8,6 +8,7 @@ archivist 2.0
     2. `aformat` returns vector of formats in which the artifact is saved (similar to aread).
 * **New features**:
     1. `saveToRepo` by default saves session info.
+    2. `repoDirGit` has changed name to `subdir`.
 
 archivist 1.9
 ----------------------------------------------------------------
