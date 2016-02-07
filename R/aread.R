@@ -28,11 +28,11 @@
 #' \dontrun{
 #' # read the object from local directory
 #' setLocalRepo(system.file("graphGallery", package = "archivist"))
-#' pl <- aread("2166dfbd3a7a68a91a2f8e6df1a44111")
+#' pl <- aread("600bda83cb840947976bd1ce3a11879d")
 #' # plot it
 #' pl
 #' # read the object from Remote
-#' pl <- aread("pbiecek/graphGallery/2166dfbd3a7a68a91a2f8e6df1a44111")
+#' pl <- aread("pbiecek/graphGallery/600bda83cb840947976bd1ce3a11879d")
 #' # plot it
 #' pl
 #' }
