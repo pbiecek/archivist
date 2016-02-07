@@ -4,7 +4,7 @@
 #'
 #' @description
 #' \code{alink} returns a link to download an artifact from the Remote \link{Repository}.
-#' Artifact has to be already archived on GitHub, e.g with \link{archive} function (recommended) or 
+#' Artifact has to be already archived on GitHub, e.g with \code{archivist.github::archive} function (recommended) or 
 #' \link{saveToRepo} function and traditional Git manual synchronization.
 #' To learn more about artifacts visit \link[archivist]{archivist-package}.
 #' 

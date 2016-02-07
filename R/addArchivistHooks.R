@@ -14,6 +14,7 @@
 #' @param subdir A character containing a name of a directory on Git repository 
 #' on which the Repository is stored. If the Repository is stored in main folder on Git repository, this should be set 
 #' to \code{subdir = "/"} as default.
+#' @param repoDir A character containing a name of Local Repository.
 #' 
 #' @author 
 #' Przemyslaw Biecek, \email{przemyslaw.biecek@@gmail.com}

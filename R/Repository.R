@@ -42,7 +42,7 @@
 #'  \item \link{asearch},
 #'  \item \link{cache},
 #'  \item \link{getTagsLocal},
-#'  \item \link{getTagsGithub},
+#'  \item \link{getTagsRemote},
 #'  \item \link{loadFromLocalRepo}, 
 #'  \item \link{loadFromRemoteRepo},
 #'  \item \link{multiSearchInLocalRepo},
@@ -59,11 +59,11 @@
 #'  }
 #' Function creating \code{Repository} is:
 #' \itemize{
-#'  \item \link{createEmptyRepo}.
+#'  \item \link{createLocalRepo}.
 #' }
 #' Function deleting \code{Repository} is:
 #' \itemize{
-#'  \item \link{deleteRepo}.
+#'  \item \link{deleteLocalRepo}.
 #' }
 #' Functions coping \code{Repository} are:
 #' \itemize{

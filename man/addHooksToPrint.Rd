@@ -11,6 +11,8 @@ addHooksToPrint(class = "ggplot", repoDir = aoptions("repoDir"),
 \arguments{
 \item{class}{A character containing a name of class (one or more) that should be archivised.}
 
+\item{repoDir}{A character containing a name of Local Repository.}
+
 \item{repo}{A character containing a name of a Git repository on which the Repository is archived.}
 
 \item{user}{A character containing a name of a Git user on whose account the \code{repo} is created.}
