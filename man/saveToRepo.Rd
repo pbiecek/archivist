@@ -143,137 +143,22 @@ Example: The data set will be archived here.
 }
 \examples{
 \dontrun{
-# objects preparation
-
-# data.frame object
-data(iris)
-
-# ggplot/gg object
-library(ggplot2)
-df <- data.frame(gp = factor(rep(letters[1:3], each = 10)),y = rnorm(30))
-library(plyr)
-ds <- ddply(df, .(gp), summarise, mean = mean(y), sd = sd(y))
-myplot123 <- ggplot(df, aes(x = gp, y = y)) +
-  geom_point() +  geom_point(data = ds, aes(y = mean),
-               colour = 'red', size = 3)
-
-# lm object
-model <- lm(Sepal.Length~ Sepal.Width + Petal.Length + Petal.Width, data= iris)
-
-# agnes (twins) object
-library(cluster)
-data(votes.repub)
-agn1 <- agnes(votes.repub, metric = "manhattan", stand = TRUE)
-
-# fanny (partition) object
-x <- rbind(cbind(rnorm(10, 0, 0.5), rnorm(10, 0, 0.5)),
-         cbind(rnorm(15, 5, 0.5), rnorm(15, 5, 0.5)),
-          cbind(rnorm( 3,3.2,0.5), rnorm( 3,3.2,0.5)))
-fannyx <- fanny(x, 2)
-
-# lda object
-library(MASS)
-
-Iris <- data.frame(rbind(iris3[,,1], iris3[,,2], iris3[,,3]),
-                  Sp = rep(c("s","c","v"), rep(50,3)))
-train <- c(8,83,115,118,146,82,76,9,70,139,85,59,78,143,68,
-           134,148,12,141,101,144,114,41,95,61,128,2,42,37,
-           29,77,20,44,98,74,32,27,11,49,52,111,55,48,33,38,
-           113,126,24,104,3,66,81,31,39,26,123,18,108,73,50,
-           56,54,65,135,84,112,131,60,102,14,120,117,53,138,5)
-lda1 <- lda(Sp ~ ., Iris, prior = c(1,1,1)/3, subset = train)
-
-# qda object
-tr <- c(7,38,47,43,20,37,44,22,46,49,50,19,4,32,12,29,27,34,2,1,17,13,3,35,36)
-train <- rbind(iris3[tr,,1], iris3[tr,,2], iris3[tr,,3])
-cl <- factor(c(rep("s",25), rep("c",25), rep("v",25)))
-qda1 <- qda(train, cl)
-
-# glmnet object
-library( glmnet )
-
-zk=matrix(rnorm(100*20),100,20)
-bk=rnorm(100)
-glmnet1=glmnet(zk,bk)
-
-
-# creating example Repository - on which examples will work
-
-# save examples
-
 exampleRepoDir <- tempfile()
 createEmptyRepo( repoDir = exampleRepoDir )
-saveToRepo( myplot123, repoDir=exampleRepoDir )
-saveToRepo( iris, repoDir=exampleRepoDir )
-saveToRepo( model, repoDir=exampleRepoDir )
-saveToRepo( agn1, repoDir=exampleRepoDir )
-saveToRepo( fannyx, repoDir=exampleRepoDir )
-saveToRepo( lda1, repoDir=exampleRepoDir )
-saveToRepo( glmnet1, repoDir=exampleRepoDir )
-
-# let's see how the Repository looks like: show
-
+data(iris)
+saveToRepo( iris, repoDir=exampleRepoDir, archiveSessionInfo = TRUE )
 showLocalRepo( method = "md5hashes", repoDir = exampleRepoDir )
 showLocalRepo( method = "tags", repoDir = exampleRepoDir )
 
-# let's see how the Repository looks like: summary
+loadFromLocalRepo(md5hash = '600bda83cb840947976bd1ce3a11879d',
+  repoDir = system.file("graphGallery", package = "archivist"), value = TRUE) -> pl
 
-summaryLocalRepo( exampleRepoDir )
-
-# one can archive the same artifact twice, but there is a message
-
-saveToRepo( model, repoDir=exampleRepoDir )
-
-# in order not to archive the same artifact twice, use
-
-saveToRepo( lda1, repoDir=exampleRepoDir, force = FALSE )
-
-# one can archive artifact without it's database and miniature
-
-saveToRepo( qda1, repoDir=exampleRepoDir, archiveData = FALSE,
-            archiveMiniature = FALSE)
-
-# one can specify his own additional Tags which are to be archived with artifact
-
-attr( model, "tags" ) = c( "do not delete", "my favourite model" )
-saveToRepo( model, repoDir=exampleRepoDir )
-showLocalRepo( method = "tags", repoDir = exampleRepoDir )
-
-# or one can do it even easier
-saveToRepo( model, repoDir = exampleRepoDir,
-            userTags = c( "do not delete", "my favourite model" ) )
-
-# removing an example Repository
+saveToRepo( pl, repoDir=exampleRepoDir,
+             userTags = c( "do not delete", "my favourite graph" ) )
+aoptions('repoDir', system.file("graphGallery", package = "archivist"))
+showLocalRepo( method = "tags" )
+aoptions('repoDir', NULL, unset = TRUE)
 deleteRepo( exampleRepoDir, TRUE)
-
-rm( exampleRepoDir )
-
-# saveToRepo in valueing code
-library(dplyr)
-
-# valueing code
-exampleRepoDir <- tempdir()
-createEmptyRepo(exampleRepoDir, default = TRUE)
-library(dplyr)
-invisible(aoptions("silent", TRUE))
-data("hflights", package = "hflights")
-hflights \%a\%
-  group_by(Year, Month, DayofMonth) \%a\%
-  select(Year:DayofMonth, ArrDelay, DepDelay) \%a\%
-  summarise(
-    arr = mean(ArrDelay, na.rm = TRUE),
-    dep = mean(DepDelay, na.rm = TRUE)
-  ) \%a\%
-  filter(arr > 30 | dep > 30) -> x
-showLocalRepo() # Repository was globally set in aoptions
-
-
-
-
-# removing an example Repository
-deleteRepo( exampleRepoDir, TRUE)
-
-rm( exampleRepoDir )
 }
 }
 \author{
