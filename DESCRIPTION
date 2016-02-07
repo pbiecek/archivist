@@ -1,5 +1,5 @@
 Package: archivist
-Version: 1.9.6.0
+Version: 1.9.7.0
 Type: Package
 Title: Tools for Storing, Restoring and Searching for R Objects
 Authors@R: c(
@@ -28,7 +28,7 @@ License: GPL-2
 LazyLoad: yes
 LazyData: yes
 Depends:
-    R (>= 3.0.0)
+    R (>= 3.2.0)
 Imports:
     RCurl,
     digest,
@@ -36,8 +36,6 @@ Imports:
     DBI,
     lubridate,
     RSQLite,
-    git2r,
-    jsonlite,
     magrittr
 Suggests:
     shiny,
