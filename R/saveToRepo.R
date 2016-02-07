@@ -137,6 +137,8 @@
 #'
 #' @param ascii A logical value. An \code{ascii} argument is passed to \link{save} function.
 #'
+#' @param artifactName The name of the artifact with which it should be archived.
+#'
 #'
 #' @author
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
@@ -284,20 +286,21 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
                         archiveSessionInfo = TRUE, 
                         force = TRUE, rememberName = TRUE,
                         value = FALSE, ... , userTags = c(),
-                        silent=aoptions("silent"), ascii = FALSE) {
+                        silent=aoptions("silent"), ascii = FALSE,
+                        artifactName = deparse(substitute(artifact))) {
   stopifnot( is.logical( c( archiveData, archiveTags, archiveMiniature,
-                            force,  rememberName, value, silent, ascii, archiveSessionInfo ) ) )
+                            force,  rememberName, value, silent, ascii, archiveSessionInfo, artifactName ) ) )
   stopifnot( ( is.character( repoDir ) & length( repoDir ) == 1 ) | is.null( repoDir ) )
 #  stopifnot( is.character( userTags ))    - user can specify tags: userTags = 1:2, and they should
 # be converted to characters as in the previous archivist versions. we even have testsfor that
   stopifnot( length(archiveData) == 1, length(archiveTags) == 1, length(archiveMiniature) == 1,
              length(archiveSessionInfo) == 1,
              length(force) == 1, length(rememberName) == 1,
-             length(value) == 1, length(ascii) == 1)
+             length(value) == 1, length(ascii) == 1, length(artifactName) == 1 )
 #   stopifnot( is.character( format ) & length( format ) == 1 & any(format %in% c("rda", "rdx")) )
 
   md5hash <- digest( artifact )
-  objectName <- deparse( substitute( artifact ) )
+  objectName <- artifactName  
 
   repoDir <- checkDirectory( repoDir )
 
