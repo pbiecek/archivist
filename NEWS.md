@@ -12,6 +12,7 @@ archivist 2.0
     3. All remote functions support github and bitbucket (see the `repoType` parameter).
     4. `alink` is now working with github and bitbucket repositories.
     5. `asearch` returns named list of artifacts. MD5hashes are used as names.
+    5. `silent=TRUE` by default in `saveToRepo`. Less warnings.
 * **Deprecations and new naming convention**:
     1. `archive`, `cloneGitHubRepo`, `createGitHubRepo`, (`deleteGithubRepo`) `deleteGitHubRepo`, (`pushRepo`) `pushGitHubRepo`, (`pullRepo`) `pullGitHubRepo` have been moved to separate [`archivist.github`](https://github.com/MarcinKosinski/archivist.github) package to maintain Local/Remote consistency. [[#198](https://github.com/pbiecek/archivist/issues/198)].
       1. For the above reason `deleteRepo` was deprecated. Use `deleteLocalRepo`
