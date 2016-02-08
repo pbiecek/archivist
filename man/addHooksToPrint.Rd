@@ -13,7 +13,8 @@ addHooksToPrint(class = "ggplot", repoDir = aoptions("repoDir"),
 
 \item{repoDir}{A character containing a name of Local Repository.}
 
-\item{repo}{A character containing a name of a Git repository on which the Repository is archived.}
+\item{repo}{A character containing a name of a Git repository on which the Repository is archived.
+If \code{repo = NULL} then hooks will be added to files in local directories.}
 
 \item{user}{A character containing a name of a Git user on whose account the \code{repo} is created.}
 
@@ -31,9 +32,12 @@ The overloaded function will add all object of selected class to the repo and th
 \examples{
 
 \dontrun{
-# only in Rmd report
+# only in Rmd report, links to github repository
 addHooksToPrint(class="ggplot", repoDir = "arepo",
 repo="graphGallery", user="pbiecek")
+# only in Rmd report, links to local files
+addHooksToPrint(class="ggplot", repoDir = "arepo",
+repo=NULL)
 }
 }
 \author{

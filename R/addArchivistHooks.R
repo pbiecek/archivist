@@ -8,6 +8,7 @@
 #' 
 #' @param class A character containing a name of class (one or more) that should be archivised.
 #' @param repo A character containing a name of a Git repository on which the Repository is archived.
+#' If \code{repo = NULL} then hooks will be added to files in local directories.
 #' @param user A character containing a name of a Git user on whose account the \code{repo} is created.
 #' @param branch A character containing a name of Git Repository's branch on which the Repository is archived. 
 #' Default \code{branch} is \code{master}.
@@ -22,9 +23,12 @@
 #' @examples
 #' 
 #' \dontrun{
-#' # only in Rmd report
+#' # only in Rmd report, links to github repository
 #' addHooksToPrint(class="ggplot", repoDir = "arepo",
 #' repo="graphGallery", user="pbiecek")
+#' # only in Rmd report, links to local files
+#' addHooksToPrint(class="ggplot", repoDir = "arepo",
+#' repo=NULL)
 #' }
 #' @family archivist
 #' @rdname addHooksToPrint
@@ -36,7 +40,7 @@ addHooksToPrint <- function(class = "ggplot",
 ){
   stopifnot( is.character( class ), 
              is.character( repoDir ), 
-             is.character( repo ), 
+             (is.null(repo) || is.character( repo )), 
              is.character( user ) )
   
   # set local repo to repoDir
@@ -50,18 +54,27 @@ addHooksToPrint <- function(class = "ggplot",
                       pattern="namespace:", replacement="")
     
     if (length(namespace) == 0) {
-      stop(paste0("The function print.",class1, " has not been found."))
+      stop(paste0("The function print.", class1, " has not been found."))
     }
-
-    fun <- paste0('function(x, ...) {
+    
+    if (is.null(repo)) { # local version
+      fun <- paste0('function(x, ...) {
+                  hash <- saveToRepo(x)
+                    cat("Load: [",hash,"](", repoDir, "/gallery/",hash,".rda)\n", sep="")
+                    ',namespace,':::print.',class1,'(x, ...)
+    }')
+    } else { # remote version
+      fun <- paste0('function(x, ...) {
                   hash <- saveToRepo(x)
                   al <- alink(hash, repo = "',repo,'", user = "',user,'", subdir = "',subdir,'")
                   cat("Load: ", al, "\n", sep="")
                   ',namespace,':::print.',class1,'(x, ...)
-  }')
-    
+    }')
+    }
+
     fun <- eval(parse(text=fun))
     veryDirtyHack <- 1
     assign(paste0("print.", class1), fun, pos=veryDirtyHack) # 1 should stand for Global Env
-}
+  }
+  invisible(NULL)
 }
