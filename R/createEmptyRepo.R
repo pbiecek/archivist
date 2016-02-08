@@ -104,6 +104,14 @@ createLocalRepo <- function( repoDir, force = TRUE, default = FALSE ){
    
 }
 
+#' @family archivist
+#' @rdname createEmptyRepo
+#' @export
+createEmptyRepo <- function(...) {
+  .Deprecated("createEmptyRepo is deprecated. Use createLocalRepo() instead.")
+  createLocalRepo(...)
+}
+
 addArtifact <- function( md5hash, name, dir ){
   # creates connection and driver
   # send insert
