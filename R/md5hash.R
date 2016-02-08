@@ -26,7 +26,7 @@
 #'  \item \link{loadFromRemoteRepo},
 #'  \item \link{getTagsRemote},
 #'  \item \link{getTagsLocal},
-#'  \item \link{rmFromRepo}.
+#'  \item \link{rmFromLocalRepo}.
 #' }
 #' Functions returning \code{md5hash} as a value are:
 #'\itemize{  

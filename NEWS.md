@@ -13,9 +13,10 @@ archivist 2.0
     4. `alink` is now working with github and bitbucket repositories.
     5. `asearch` returns named list of artifacts. MD5hashes are used as names.
 * **Deprecations and new naming convention**:
-    1. `archive`, `cloneGitHubRepo`, `createGitHubRepo`, (`deleteGithubRepo`) `deleteGitHubRepo`, (`pushRepo`) `pushGitHubRepo`, (`pullRepo`) `pullGitHubRepo` have been moved to separate [`archivist.github`](https://github.com/MarcinKosinski/archivist.github) package. [[#198](https://github.com/pbiecek/archivist/issues/198)].
+    1. `archive`, `cloneGitHubRepo`, `createGitHubRepo`, (`deleteGithubRepo`) `deleteGitHubRepo`, (`pushRepo`) `pushGitHubRepo`, (`pullRepo`) `pullGitHubRepo` have been moved to separate [`archivist.github`](https://github.com/MarcinKosinski/archivist.github) package to maintain Local/Remote consistency. [[#198](https://github.com/pbiecek/archivist/issues/198)].
       1. For the above reason `deleteRepo` was deprecated. Use `deleteLocalRepo`
       2. For the above reason `createEmptyLocalRepo` and `createEmptyRepo` were deprecated. Use `createLocalRepo`.
+      3. For the above reason `rmFromRepo` was deprecated. Use `rmFromLocalRepo`
     
 archivist 1.9
 ----------------------------------------------------------------

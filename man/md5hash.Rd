@@ -27,7 +27,7 @@ Functions that take \code{md5hash} as a parameter are:
  \item \link{loadFromRemoteRepo},
  \item \link{getTagsRemote},
  \item \link{getTagsLocal},
- \item \link{rmFromRepo}.
+ \item \link{rmFromLocalRepo}.
 }
 Functions returning \code{md5hash} as a value are:
 \itemize{  
@@ -60,7 +60,7 @@ Other archivist: \code{\link{Repository}},
   \code{\link{deleteLocalRepo}},
   \code{\link{getRemoteHook}}, \code{\link{getTagsLocal}},
   \code{\link{loadFromLocalRepo}},
-  \code{\link{rmFromRepo}}, \code{\link{saveToRepo}},
+  \code{\link{rmFromLocalRepo}}, \code{\link{saveToRepo}},
   \code{\link{searchInLocalRepo}},
   \code{\link{setLocalRepo}},
   \code{\link{shinySearchInLocalRepo}},

@@ -3,11 +3,11 @@
 #' @title Remove an Artifact Given as a md5hash from the Repository
 #'
 #' @description
-#' \code{rmFromRepo} removes an artifact given as a \code{md5hash} from the \link{Repository}.
+#' \code{rmFromLocalRepo} removes an artifact given as a \code{md5hash} from the \link{Repository}.
 #' To learn more about artifacts visit \link[archivist]{archivist-package}.
 #'  
 #' @details
-#' \code{rmFromRepo} removes an artifact given as a \link{md5hash} from the \link{Repository}.
+#' \code{rmFromLocalRepo} removes an artifact given as a \link{md5hash} from the \link{Repository}.
 #' To be more precise, an artifact is removed 
 #' both from \code{backpack.db} file(the SQLite database)and \code{gallery} subdirectory,
 #' where the artifacts are stored as \code{md5hash.rda} files.
@@ -18,7 +18,7 @@
 #' All artifacts with the same \code{md5hash} abbreviation  will be removed 
 #' from the \code{Repository}.
 #' 
-#' \code{rmFromRepo} provides functionality that enables us to delete miniatures
+#' \code{rmFromLocalRepo} provides functionality that enables us to delete miniatures
 #' of the artifacts (.txt or .png files) while removing .rda files.
 #' To delete miniature of the artifact use \code{removeMiniature = TRUE} argument.
 #' Moreover, if the data from the artifact is archived then there is a possibility 
@@ -28,7 +28,7 @@
 #' perform:
 #' \itemize{
 #'    \item \code{obj2rm <- searchInLocalRepo( tag = list(dateFrom, dateTo), repoDir = )}
-#'    \item \code{sapply(obj2rm, rmFromRepo, repoDir = )}
+#'    \item \code{sapply(obj2rm, rmFromLocalRepo, repoDir = )}
 #' }
 #' 
 #' @note 
@@ -118,10 +118,10 @@
 #' 
 #' # remove examples
 #' 
-#' rmFromRepo(fannyxMd5hash, repoDir = exampleRepoDir)
+#' rmFromLocalRepo(fannyxMd5hash, repoDir = exampleRepoDir)
 #' # removeData = FALSE default argument provides from removing archived
 #' # fannyxMd5hash object's data from the Repository and the gallery
-#' rmFromRepo(irisMd5hash, repoDir = exampleRepoDir)
+#' rmFromLocalRepo(irisMd5hash, repoDir = exampleRepoDir)
 #'  
 #' # let's see how the Repository looks like: show
 #' showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
@@ -154,11 +154,11 @@
 #  # still considered as one object - the number of saves hasn't changed
 #' 
 #' # one easy call removes them all but this call will result in error
-#' rmFromRepo(agn1Md5hash, repoDir = exampleRepoDir, removeData = TRUE, 
+#' rmFromLocalRepo(agn1Md5hash, repoDir = exampleRepoDir, removeData = TRUE, 
 #'             removeMiniature = TRUE)
 #' 
 #' # soultion to that is
-#' rmFromRepo(agn1Md5hash, repoDir = exampleRepoDir, removeData = TRUE, 
+#' rmFromLocalRepo(agn1Md5hash, repoDir = exampleRepoDir, removeData = TRUE, 
 #'             removeMiniature = TRUE, force = TRUE)
 #' # removeMiniature = TRUE removes miniatures from the gallery folder
 #' 
@@ -168,7 +168,7 @@
 #' 
 #' obj2rm <- searchInLocalRepo( pattern = list(dateFrom = Sys.Date(), dateTo = Sys.Date()),
 #'                              repoDir = exampleRepoDir )
-#' sapply(obj2rm, rmFromRepo, repoDir = exampleRepoDir)
+#' sapply(obj2rm, rmFromLocalRepo, repoDir = exampleRepoDir)
 #' # above function call removed all objects which were created in these examples.
 #' # Note that in the gallery folder there may be still some miniatures as
 #' # removeMiniature parameter is set to FALSE
@@ -184,7 +184,7 @@
 #' showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
 #' 
 #' objMd5hash <- searchInLocalRepo("class:lm", repoDir = exampleRepoDir)
-#' sapply(objMd5hash, rmFromRepo, repoDir = exampleRepoDir, removeData = TRUE, force = TRUE)
+#' sapply(objMd5hash, rmFromLocalRepo, repoDir = exampleRepoDir, removeData = TRUE, force = TRUE)
 #' showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
 #' summaryLocalRepo( exampleRepoDir )
 #' 
@@ -199,7 +199,7 @@
 #' # are created. This is why, in your evaluation of the code, artifact 
 #' # myplo123Md5hash will have a different md5hash and the following
 #' # instruction will result in an error.
-#' rmFromRepo("db40a", repoDir = exampleRepoDir, removeData = TRUE)
+#' rmFromLocalRepo("db40a", repoDir = exampleRepoDir, removeData = TRUE)
 #' summaryLocalRepo( repoDir = exampleRepoDir )
 #' 
 #' 
@@ -273,7 +273,7 @@
 #' 
 #' 
 #' # Removing many artifacts with many = TRUE argument
-#' rmFromRepo(Artifacts, repoDir = exampleRepoDir, many = TRUE)
+#' rmFromLocalRepo(Artifacts, repoDir = exampleRepoDir, many = TRUE)
 #' 
 #' # We may notice, in two ways, that artifacts' data is still in "exampleRepoDir".
 #' # Either we may look into gallery folder of "exampleRepoDir" 
@@ -281,9 +281,9 @@
 #' # or show how database.db file looks like.
 #' showLocalRepo(repoDir = exampleRepoDir) # artifacts' data is there indeed!
 #' 
-#' # If we want to remove artifact's data now we simply call rmFromRepo function
+#' # If we want to remove artifact's data now we simply call rmFromLocalRepo function
 #' # with removeData = TRUE additional argument.
-#' rmFromRepo(Artifacts, repoDir = exampleRepoDir, removeData = TRUE,  many = TRUE)
+#' rmFromLocalRepo(Artifacts, repoDir = exampleRepoDir, removeData = TRUE,  many = TRUE)
 #' 
 #' # We receive a warning as Artifacts are no longer in the repository. 
 #' # However, let's check what happened with Artifact's data.
@@ -293,8 +293,8 @@
 #' list.files(file.path(exampleRepoDir, "gallery"))
 #' 
 #' # Those are probably, the so called, Miniatures. Let's try to remove them.
-#' # In order to do it we call rmFromRepo function with removeMiniature = TRUE argument.
-#' rmFromRepo(Artifacts, many = TRUE, repoDir = exampleRepoDir, removeMiniature = TRUE)
+#' # In order to do it we call rmFromLocalRepo function with removeMiniature = TRUE argument.
+#' rmFromLocalRepo(Artifacts, many = TRUE, repoDir = exampleRepoDir, removeMiniature = TRUE)
 #' 
 #' # Again we receive a warning as Artifacts are no longer in the repository but ...
 #' list.files(file.path(exampleRepoDir, "gallery")) 
@@ -302,7 +302,7 @@
 #' 
 #' 
 #' # Of course we may have done all these instructions by one simple function call.
-#' # rmFromRepo(Artifacts, many = TRUE, repoDir = exampleRepoDir,
+#' # rmFromLocalRepo(Artifacts, many = TRUE, repoDir = exampleRepoDir,
 #' #            removeData = TRUE, removeMiniature = TRUE)
 #' # Nevertheless, it may be instructive to see how it is done step by step.
 #' 
@@ -312,9 +312,9 @@
 #' rm( exampleRepoDir )
 #' }
 #' @family archivist
-#' @rdname rmFromRepo
+#' @rdname rmFromLocalRepo
 #' @export
-rmFromRepo <- function( md5hash, repoDir = NULL, removeData = FALSE, 
+rmFromLocalRepo <- function( md5hash, repoDir = NULL, removeData = FALSE, 
                         removeMiniature = FALSE, force = FALSE, many = FALSE ){
   stopifnot( is.character( md5hash  ))
   stopifnot( ( is.character( repoDir ) & length( repoDir ) == 1 ) | is.null( repoDir ) )

@@ -34,6 +34,7 @@ but has shorter name and different parameter's specification.
 Remember that if you want to use local repository you should set it to default.
 }
 \examples{
+\dontrun{
 ### default LOCAL version
 ## objects preparation
 
@@ -102,6 +103,7 @@ asearch("pbiecek/graphGallery",
         patterns = c("class:gg",
                      "labelx:Sepal.Length"))
 }
+}
 \author{
 Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
 }
@@ -119,7 +121,7 @@ Other archivist: \code{\link{Repository}},
   \code{\link{deleteLocalRepo}},
   \code{\link{getRemoteHook}}, \code{\link{getTagsLocal}},
   \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
-  \code{\link{rmFromRepo}}, \code{\link{saveToRepo}},
+  \code{\link{rmFromLocalRepo}}, \code{\link{saveToRepo}},
   \code{\link{searchInLocalRepo}},
   \code{\link{setLocalRepo}},
   \code{\link{shinySearchInLocalRepo}},

@@ -49,7 +49,7 @@ that uses these parameters, you can set Remote Repository's path globally using
 and \code{subdir} parameters in future function calls. See examples.
 
 For local repositories, in this way, in the following function calls: 
-\link{loadFromLocalRepo},\link{searchInLocalRepo}, \link{rmFromRepo}, \link{zipLocalRepo}, 
+\link{loadFromLocalRepo},\link{searchInLocalRepo}, \link{rmFromLocalRepo}, \link{zipLocalRepo}, 
 \link{multiSearchInLocalRepo}, \link{addTagsRepo}, \link{shinySearchInLocalRepo},
 \link{getTagsLocal}, \link{showLocalRepo}, \link{summaryLocalRepo} 
 \code{repoDir} parameter may be omitted. 
@@ -76,9 +76,9 @@ saveToRepo(swiss)
 showLocalRepo()
 showLocalRepo(method = "tags")
 iris2 <- loadFromLocalRepo( "ff575c2" , value = TRUE)
-searchInLocalRepo("name:i", fixed = F)
+searchInLocalRepo("name:i", fixed = FALSE)
 getTagsLocal("ff575c261c949d073b2895b05d1097c3")
-rmFromRepo("4c43f")
+rmFromLocalRepo("4c43f")
 showLocalRepo()
 summaryLocalRepo()
 
@@ -95,7 +95,7 @@ setRemoteRepo( user="MarcinKosinski", repo="Museum", branch="master",
 # in the following functions:
 showRemoteRepo()
 loadFromRemoteRepo( "ff575c261c949d073b2895b05d1097c3")
-this <- loadFromRemoteRepo( "ff", value = T)
+this <- loadFromRemoteRepo( "ff", value = TRUE)
 zipRemoteRepo()
 file.remove(file.path(getwd(), "repository.zip")) # We can remove this zip file
 searchInRemoteRepo( "name:", fixed= FALSE)
@@ -131,7 +131,7 @@ Other archivist: \code{\link{Repository}},
   \code{\link{deleteLocalRepo}},
   \code{\link{getRemoteHook}}, \code{\link{getTagsLocal}},
   \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
-  \code{\link{rmFromRepo}}, \code{\link{saveToRepo}},
+  \code{\link{rmFromLocalRepo}}, \code{\link{saveToRepo}},
   \code{\link{searchInLocalRepo}},
   \code{\link{shinySearchInLocalRepo}},
   \code{\link{showLocalRepo}},
@@ -152,7 +152,7 @@ Other archivist: \code{\link{Repository}},
   \code{\link{deleteLocalRepo}},
   \code{\link{getRemoteHook}}, \code{\link{getTagsLocal}},
   \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
-  \code{\link{rmFromRepo}}, \code{\link{saveToRepo}},
+  \code{\link{rmFromLocalRepo}}, \code{\link{saveToRepo}},
   \code{\link{searchInLocalRepo}},
   \code{\link{shinySearchInLocalRepo}},
   \code{\link{showLocalRepo}},
