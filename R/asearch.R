@@ -31,6 +31,7 @@
 #' Przemyslaw Biecek, \email{przemyslaw.biecek@@gmail.com}
 #' 
 #' @examples
+#' \dontrun{
 #' ### default LOCAL version
 #' ## objects preparation
 #' 
@@ -98,6 +99,7 @@
 #' asearch("pbiecek/graphGallery", 
 #'         patterns = c("class:gg",
 #'                      "labelx:Sepal.Length"))
+#' }
 #' @family archivist
 #' @rdname asearch
 #' @export

@@ -47,7 +47,7 @@
 #'  \item \link{loadFromRemoteRepo},
 #'  \item \link{multiSearchInLocalRepo},
 #'  \item \link{multiSearchInRemoteRepo},
-#'  \item \link{rmFromRepo},
+#'  \item \link{rmFromLocalRepo},
 #'  \item \link{saveToRepo},
 #'  \item \link{searchInLocalRepo},
 #'  \item \link{searchInRemoteRepo}, 

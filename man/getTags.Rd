@@ -99,8 +99,8 @@ saveToRepo(iris, repoDir = exampleRepoDir )
 showLocalRepo(exampleRepoDir)
 showLocalRepo(exampleRepoDir, method = "tags")
 
-# We can notice that there is only one md5hash in repo so we will use it
-hash <- showLocalRepo(exampleRepoDir)[,1]
+# We can notice that there is only one md5hash (and second for archiveSessionInfo) in repo so we will use it
+hash <- showLocalRepo(exampleRepoDir)[1,1]
 
 # We search for a Tag with "varname" regular expression corresponding to 
 # hash md5hash.
@@ -148,7 +148,7 @@ Other archivist: \code{\link{Repository}},
   \code{\link{deleteLocalRepo}},
   \code{\link{getRemoteHook}},
   \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
-  \code{\link{rmFromRepo}}, \code{\link{saveToRepo}},
+  \code{\link{rmFromLocalRepo}}, \code{\link{saveToRepo}},
   \code{\link{searchInLocalRepo}},
   \code{\link{setLocalRepo}},
   \code{\link{shinySearchInLocalRepo}},
@@ -170,7 +170,7 @@ Other archivist: \code{\link{Repository}},
   \code{\link{deleteLocalRepo}},
   \code{\link{getRemoteHook}},
   \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
-  \code{\link{rmFromRepo}}, \code{\link{saveToRepo}},
+  \code{\link{rmFromLocalRepo}}, \code{\link{saveToRepo}},
   \code{\link{searchInLocalRepo}},
   \code{\link{setLocalRepo}},
   \code{\link{shinySearchInLocalRepo}},
