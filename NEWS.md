@@ -10,6 +10,7 @@ archivist 2.0
     1. `saveToRepo` by default saves session info.
     2. `repoDirGit` has changed name to `subdir` and the default value is now '/'.
     3. All remote functions support github and bitbucket (see the `repoType` parameter).
+    4. `alink` is now working with github and bitbucket repositories.
 * **Deprecations and new naming convention**:
     1. `archive`, `cloneGitHubRepo`, `createGitHubRepo`, (`deleteGithubRepo`) `deleteGitHubRepo`, (`pushRepo`) `pushGitHubRepo`, (`pullRepo`) `pullGitHubRepo` have been moved to separate [`archivist.github`](https://github.com/MarcinKosinski/archivist.github) package. [[#198](https://github.com/pbiecek/archivist/issues/198)].
       1. For the above reason `deleteRepo` was deprecated. Use `deleteLocalRepo`
