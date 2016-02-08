@@ -124,7 +124,7 @@
           e <- as.call(c(rhs[[1]], as.name(nm), as.list(rhs[-1])))
         }
       }
-      res <- withVisible(eval(e, env))
+      res <- withVisible(eval(e, envir=env))
     }
     # here saveToRepo res
     # if no local repository is set then rise a warning
