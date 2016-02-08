@@ -19,6 +19,8 @@ Default set to \code{force = TRUE}.}
 
 \item{default}{If \code{default = TRUE} then \code{repoDir} (\code{repo}) is set as default local repository 
 (for GitHub version also the \code{user} is set as default GitHub user).}
+
+\item{...}{All arguments are being passed to \code{createLocalRepo}.}
 }
 \description{
 \code{createLocalRepo} creates an empty \link{Repository} in the given directory in which archived artifacts will be stored.
