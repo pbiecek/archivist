@@ -79,7 +79,7 @@ parameters you will receive an error message.
 # objects preparation
 
 #' exampleRepoDir <- tempfile()
-createEmptyRepo(repoDir = exampleRepoDir)
+createLocalRepo(repoDir = exampleRepoDir)
 data(iris)
 saveToRepo(iris, repoDir=exampleRepoDir, archiveSessionInfo = TRUE)
 showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
@@ -87,7 +87,7 @@ showLocalRepo(method = "tags", repoDir = exampleRepoDir)
 
 loadFromLocalRepo(md5hash = '600bda83cb840947976bd1ce3a11879d',
   repoDir = system.file("graphGallery", package = "archivist"), value = TRUE) -> pl
-deleteRepo(exampleRepoDir, TRUE)
+deleteLocalRepo(exampleRepoDir, TRUE)
 rm(exampleRepoDir)
 
 
@@ -122,7 +122,7 @@ loadFromRemoteRepo( CLASSmd5hash, user="pbiecek", repo="archivist")
 # Creating an example Repository - on which artifacts loaded from the
 # archivist package repository will be saved
 exampleRepoDir <- tempfile()
-createEmptyRepo(repoDir = exampleRepoDir)
+createLocalRepo(repoDir = exampleRepoDir)
 
 # Directory of the archivist package repository
 repo_archivist <- system.file("graphGallery", package = "archivist") 
@@ -151,7 +151,7 @@ showLocalRepo(repoDir = exampleRepoDir, method = "tags")
 
 # removing an example Repository
 
-deleteRepo( exampleRepoDir, TRUE)
+deleteLocalRepo( exampleRepoDir, TRUE)
 
 rm( exampleRepoDir )
 

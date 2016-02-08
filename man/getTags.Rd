@@ -60,7 +60,6 @@ If \code{repo} and \code{user} are set to \code{NULL} (as default) in Remote mod
 set in \link{setRemoteRepo} function are used.
 }
 \examples{
-\dontrun{
 
 ### Local version
 
@@ -68,7 +67,7 @@ set in \link{setRemoteRepo} function are used.
 
 # Creating empty repository
 exampleRepoDir <- tempfile()
-createEmptyRepo( exampleRepoDir )
+createLocalRepo( exampleRepoDir )
 
 library(dplyr)
 data(mtcars)
@@ -88,12 +87,12 @@ showLocalRepo(exampleRepoDir, method = "tags")
 getTagsLocal( md5hash = hash, exampleRepoDir )
 
 # Deleting example respository
-deleteRepo( exampleRepoDir, TRUE) 
+deleteLocalRepo( exampleRepoDir, TRUE) 
 rm( exampleRepoDir ) 
 
 ## EXAMPLE with data iris
 exampleRepoDir <- tempfile()
-createEmptyRepo( exampleRepoDir )
+createLocalRepo( exampleRepoDir )
 
 data(iris)
 saveToRepo(iris, repoDir = exampleRepoDir )
@@ -112,7 +111,7 @@ getTagsLocal( md5hash = hash, exampleRepoDir, tag = "varname" )
 # and get the same result.
 getTagsLocal( md5hash = hash, exampleRepoDir, tag = "varna" ) 
 
-deleteRepo( exampleRepoDir, TRUE) 
+deleteLocalRepo( exampleRepoDir, TRUE) 
 rm( exampleRepoDir ) 
 
 ### Remote version
@@ -130,7 +129,6 @@ getTagsRemote( "cd6557c6163a6f9800f308f343e75e72",
 getTagsRemote("ff575c261c949d073b2895b05d1097c3", user="MarcinKosinski",
                repo="Museum", branch="master", subdir="ex1")
                
-}
 
 }
 \author{

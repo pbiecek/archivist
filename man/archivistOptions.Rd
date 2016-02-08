@@ -34,7 +34,7 @@ of the given \code{key} parameter.
 
 # Creating example repository - on which examples will work
 exampleRepoDir <- tempfile()
-createEmptyRepo(repoDir = exampleRepoDir)
+createLocalRepo(repoDir = exampleRepoDir)
 
 ## EXAMPLE 1 : TURN OFF warnings in saveToRepo() using aoptions() function
 aoptions(key = "silent", value = TRUE)
@@ -44,14 +44,14 @@ iris2 <- saveToRepo(iris, exampleRepoDir)
 # about another archivisation of the same artifact.
 
 # deleting example repoDir
-deleteRepo(exampleRepoDir, deleteRoot = TRUE)
+deleteLocalRepo(exampleRepoDir, deleteRoot = TRUE)
 rm(exampleRepoDir)
 
 ## EXAMPLE 2 : SET default local repository using aoptions() function.
 
 # creating example repository
 exampleRepoDir <- tempfile()
-createEmptyRepo(exampleRepoDir)
+createLocalRepo(exampleRepoDir)
 
 # "repodDir" parameter in each archivist function will be default and set to exampleRepoDir.
 aoptions(key = "repoDir", value = exampleRepoDir)
@@ -73,8 +73,8 @@ showLocalRepo()
 summaryLocalRepo()
 
 # REMEMBER that in deleteRepo you MUST specify repoDir parameter!
-# deleteRepo doesn't take setLocalRepo's settings into consideration
-deleteRepo( exampleRepoDir, deleteRoot = TRUE)
+# deleteLocalRepo doesn't take setLocalRepo's settings into consideration
+deleteLocalRepo( exampleRepoDir, deleteRoot = TRUE)
 rm( exampleRepoDir )
 
 ## EXAMPLE 3 : SET default Github repository using aoptions() function.

@@ -102,7 +102,7 @@
 #' # creating example Repository - on which examples will work
 #' 
 #' exampleRepoDir <- tempfile()
-#' createEmptyRepo(repoDir = exampleRepoDir)
+#' createLocalRepo(repoDir = exampleRepoDir)
 #' myplot123Md5hash <- saveToRepo(myplot123, repoDir=exampleRepoDir)
 #' irisMd5hash <- saveToRepo(iris, repoDir=exampleRepoDir)
 #' modelMd5hash  <- saveToRepo(model, repoDir=exampleRepoDir)
@@ -205,7 +205,7 @@
 #' 
 #' # removing an example Repository
 #' 
-#' deleteRepo( exampleRepoDir, TRUE)
+#' deleteLocalRepo( exampleRepoDir, TRUE)
 #' 
 #' 
 #' ######
@@ -258,7 +258,7 @@
 #' # Creating example Repository so that we may see it on our computer
 #'
 #' exampleRepoDir <- tempfile()
-#' createEmptyRepo( repoDir = exampleRepoDir, force = TRUE)
+#' createLocalRepo( repoDir = exampleRepoDir, force = TRUE)
 #' saveToRepo( iris, repoDir=exampleRepoDir)
 #' saveToRepo( model, repoDir=exampleRepoDir )
 #' saveToRepo( agn1, repoDir=exampleRepoDir )
@@ -307,7 +307,7 @@
 #' # Nevertheless, it may be instructive to see how it is done step by step.
 #' 
 #' # removing an example Repository
-#' deleteRepo(repoDir = exampleRepoDir, deleteRoot = TRUE)
+#' deleteLocalRepo(repoDir = exampleRepoDir, deleteRoot = TRUE)
 #'    
 #' rm( exampleRepoDir )
 #' }

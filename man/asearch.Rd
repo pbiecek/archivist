@@ -34,7 +34,6 @@ but has shorter name and different parameter's specification.
 Remember that if you want to use local repository you should set it to default.
 }
 \examples{
-\dontrun{
 ### default LOCAL version
 ## objects preparation
 
@@ -57,7 +56,7 @@ model3 <- lm(Sepal.Length~ Sepal.Width, data= iris)
 
 ## creating example default local repository
 exampleRepoDir <- tempfile()
-createEmptyRepo(repoDir = exampleRepoDir)
+createLocalRepo(repoDir = exampleRepoDir)
 ## setting default local repository
 setLocalRepo( repoDir = exampleRepoDir )
 
@@ -77,7 +76,7 @@ lm_c_PW <- asearch(patterns = c("class:lm","coefname:Petal.Width"))
 
 
 ## deleting example repository
-deleteRepo(repoDir = exampleRepoDir, deleteRoot = TRUE)
+deleteLocalRepo(repoDir = exampleRepoDir, deleteRoot = TRUE)
 rm(exampleRepoDir)
 
 ### default GitHub version
@@ -87,7 +86,7 @@ setRemoteRepo( user = "pbiecek", repo = "archivist")
 showRemoteRepo(method = "tags")$tag
 searchInRemoteRepo(pattern = "class:lm")
 searchInRemoteRepo(pattern = "class:gg")
-getTagsGithub(md5hash = "cd6557c6163a6f9800f308f343e75e72", tag = "")
+getTagsRemote(md5hash = "cd6557c6163a6f9800f308f343e75e72", tag = "")
 
 ## Searching for objects of class:lm
 asearch(patterns = c("class:lm"))
@@ -102,7 +101,6 @@ asearch(patterns = c("class:gg"))
 asearch("pbiecek/graphGallery", 
         patterns = c("class:gg",
                      "labelx:Sepal.Length"))
-}
 }
 \author{
 Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}

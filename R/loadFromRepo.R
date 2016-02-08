@@ -69,7 +69,7 @@
 #' # objects preparation
 #' 
 #' #' exampleRepoDir <- tempfile()
-#' createEmptyRepo(repoDir = exampleRepoDir)
+#' createLocalRepo(repoDir = exampleRepoDir)
 #' data(iris)
 #' saveToRepo(iris, repoDir=exampleRepoDir, archiveSessionInfo = TRUE)
 #' showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
@@ -77,7 +77,7 @@
 #' 
 #' loadFromLocalRepo(md5hash = '600bda83cb840947976bd1ce3a11879d',
 #'   repoDir = system.file("graphGallery", package = "archivist"), value = TRUE) -> pl
-#' deleteRepo(exampleRepoDir, TRUE)
+#' deleteLocalRepo(exampleRepoDir, TRUE)
 #' rm(exampleRepoDir)
 #' 
 #' 
@@ -112,7 +112,7 @@
 #' # Creating an example Repository - on which artifacts loaded from the
 #' # archivist package repository will be saved
 #' exampleRepoDir <- tempfile()
-#' createEmptyRepo(repoDir = exampleRepoDir)
+#' createLocalRepo(repoDir = exampleRepoDir)
 #' 
 #' # Directory of the archivist package repository
 #' repo_archivist <- system.file("graphGallery", package = "archivist") 
@@ -141,7 +141,7 @@
 #' 
 #' # removing an example Repository
 #' 
-#' deleteRepo( exampleRepoDir, TRUE)
+#' deleteLocalRepo( exampleRepoDir, TRUE)
 #' 
 #' rm( exampleRepoDir )
 #' 

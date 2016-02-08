@@ -62,10 +62,9 @@ parameters \code{user}, \code{repo}, \code{branch}, \code{subdir}  may be omitte
 }
 \examples{
 
-\dontrun{
 ## Local version
 exampleRepoDir <- tempfile()
-createEmptyRepo(repoDir = exampleRepoDir)
+createLocalRepo(repoDir = exampleRepoDir)
 setLocalRepo(exampleRepoDir) 
 
 data(iris)
@@ -83,9 +82,9 @@ rmFromRepo("4c43f")
 showLocalRepo()
 summaryLocalRepo()
 
-# REMEMBER that in deleteRepo you MUST specify repoDir parameter!
+# REMEMBER that in deleteLocalRepo you MUST specify repoDir parameter!
 # deleteRepo doesn't take setLocalRepo's settings into consideration
-deleteRepo( exampleRepoDir, deleteRoot=TRUE)
+deleteLocalRepo( exampleRepoDir, deleteRoot=TRUE)
 rm( exampleRepoDir )
 
 ## Github version
@@ -110,7 +109,6 @@ setRemoteRepo( user="pbiecek", repo="archivist"  )
 showRemoteRepo()
 multiSearchInRemoteRepo( patterns=c("varname:Sepal.Width", "class:lm", "name:myplot123"), 
                          intersect = FALSE )
-}
 }
 \author{
 Marcin Kosinski , \email{m.p.kosinski@gmail.com}
