@@ -40,12 +40,11 @@
 #' Przemyslaw Biecek, \email{Przemyslaw.Biecek@@gmail.com}
 #'
 #' @examples
-#' \dontrun{
 #' 
 #' # objects preparation
 #' library(lubridate)
 #' cacheRepo <- tempfile()
-#' createEmptyRepo( cacheRepo )
+#' createLocalRepo( cacheRepo )
 #' 
 #' ## Example 1:
 #' # cache is useful when objects used by FUN are not that big but calculations
@@ -77,10 +76,9 @@
 #' # passes with expiration date [within hour]
 #' tmp <- cache(cacheRepo, testFun, "Say hallo!", notOlderThan = now() - hours(1))
 #' 
-#' deleteRepo( cacheRepo, TRUE)
+#' deleteLocalRepo( cacheRepo, TRUE)
 #' rm( cacheRepo )
 #' 
-#' }
 #' @family archivist
 #' @rdname cache
 #' @export

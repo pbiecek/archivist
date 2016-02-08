@@ -31,7 +31,6 @@
 #' Przemyslaw Biecek, \email{przemyslaw.biecek@@gmail.com}
 #' 
 #' @examples
-#' \dontrun{
 #' ### default LOCAL version
 #' ## objects preparation
 #' 
@@ -54,7 +53,7 @@
 #' 
 #' ## creating example default local repository
 #' exampleRepoDir <- tempfile()
-#' createEmptyRepo(repoDir = exampleRepoDir)
+#' createLocalRepo(repoDir = exampleRepoDir)
 #' ## setting default local repository
 #' setLocalRepo( repoDir = exampleRepoDir )
 #' 
@@ -74,7 +73,7 @@
 #' 
 #' 
 #' ## deleting example repository
-#' deleteRepo(repoDir = exampleRepoDir, deleteRoot = TRUE)
+#' deleteLocalRepo(repoDir = exampleRepoDir, deleteRoot = TRUE)
 #' rm(exampleRepoDir)
 #' 
 #' ### default GitHub version
@@ -84,7 +83,7 @@
 #' showRemoteRepo(method = "tags")$tag
 #' searchInRemoteRepo(pattern = "class:lm")
 #' searchInRemoteRepo(pattern = "class:gg")
-#' getTagsGithub(md5hash = "cd6557c6163a6f9800f308f343e75e72", tag = "")
+#' getTagsRemote(md5hash = "cd6557c6163a6f9800f308f343e75e72", tag = "")
 #' 
 #' ## Searching for objects of class:lm
 #' asearch(patterns = c("class:lm"))
@@ -99,7 +98,6 @@
 #' asearch("pbiecek/graphGallery", 
 #'         patterns = c("class:gg",
 #'                      "labelx:Sepal.Length"))
-#' }
 #' @family archivist
 #' @rdname asearch
 #' @export

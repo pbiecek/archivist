@@ -62,10 +62,9 @@
 #' 
 #' @examples
 #' 
-#' \dontrun{
 #' ## Local version
 #' exampleRepoDir <- tempfile()
-#' createEmptyRepo(repoDir = exampleRepoDir)
+#' createLocalRepo(repoDir = exampleRepoDir)
 #' setLocalRepo(exampleRepoDir) 
 #' 
 #' data(iris)
@@ -83,9 +82,9 @@
 #' showLocalRepo()
 #' summaryLocalRepo()
 #' 
-#' # REMEMBER that in deleteRepo you MUST specify repoDir parameter!
+#' # REMEMBER that in deleteLocalRepo you MUST specify repoDir parameter!
 #' # deleteRepo doesn't take setLocalRepo's settings into consideration
-#' deleteRepo( exampleRepoDir, deleteRoot=TRUE)
+#' deleteLocalRepo( exampleRepoDir, deleteRoot=TRUE)
 #' rm( exampleRepoDir )
 #' 
 #' ## Github version
@@ -110,7 +109,6 @@
 #' showRemoteRepo()
 #' multiSearchInRemoteRepo( patterns=c("varname:Sepal.Width", "class:lm", "name:myplot123"), 
 #'                          intersect = FALSE )
-#' }
 #' @family archivist
 #' @rdname setRepo
 #' @export
