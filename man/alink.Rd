@@ -55,7 +55,8 @@ alink(user='BetaAndBit',repo='PieczaraPietraszki',
 alink(user = 'MarcinKosinski', repo = 'Museum',
       md5hash = '1651caa499a2b07a3bdad3896a2fc717', format = 'latex')
 # link in raw format
-alink('pbiecek/graphGallery/02af4f99e440324b9e329faa293a9394', rawLink = TRUE)  
+alink('pbiecek/graphGallery/f5185c458bff721f0faa8e1332f01e0f', rawLink = TRUE)  
+alink('pbiecek/graphgallerygit/02af4f99e440324b9e329faa293a9394', repoType='bitbucket')  
 }
 \author{
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}
