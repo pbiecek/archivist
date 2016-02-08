@@ -38,6 +38,7 @@
 #' 
 #' @param default If \code{default = TRUE} then \code{repoDir} (\code{repo}) is set as default local repository 
 #' (for GitHub version also the \code{user} is set as default GitHub user).
+#' @param ... All arguments are being passed to \code{createLocalRepo}.
 #' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
@@ -102,6 +103,14 @@ createLocalRepo <- function( repoDir, force = TRUE, default = FALSE ){
     setLocalRepo(repoDir)
   }
    
+}
+
+#' @family archivist
+#' @rdname createEmptyRepo
+#' @export
+createEmptyRepo <- function(...) {
+  .Deprecated("createEmptyRepo is deprecated. Use createLocalRepo() instead.")
+  createLocalRepo(...)
 }
 
 addArtifact <- function( md5hash, name, dir ){

@@ -111,12 +111,9 @@ asearch <- function( patterns, repo = NULL){
     # use default repo
      oblist <- multiSearchInLocalRepo(patterns = patterns,
                                       intersect = TRUE)
-#     oblist <- multiSearchInRepo(patterns = patterns)
-#     if (length(oblist) > 0) {
-#       res <- lapply(oblist, aread)
-#     }
     if (length(oblist) > 0) {
       res <- lapply(oblist, loadFromLocalRepo, value = TRUE)
+      names(res) <- oblist
     }
   } else {
     # at least 3 elements
@@ -128,6 +125,7 @@ asearch <- function( patterns, repo = NULL){
                                 patterns = patterns)
     if (length(oblist)>0) {
       res <- lapply(paste0(repo, "/", oblist), aread)
+      names(res) <- oblist
     } 
   } 
   res
