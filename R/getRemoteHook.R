@@ -62,3 +62,26 @@ getRemoteHookBitbucket <- function(repo = aoptions("repo"), user = aoptions("use
     return(file.path("https://bitbucket.org",user,repo,"raw",last_commit,subdir))
   }
 }
+
+
+getRemoteHookToFile <- function(repo = aoptions("repo"), 
+                                user = aoptions("user"), 
+                                branch = aoptions("branch"), 
+                                subdir = aoptions("subdir") ,
+                                repoType = aoptions("repoType"),
+                                file = "backpack.db") {
+  stopifnot( is.character( repoType ), length( repoType ) == 1 )
+  
+  switch(repoType,
+         github = getRemoteHookToFileGithub(repo, user, branch, subdir, file),
+         bitbucket = getRemoteHookToFileBitbucket(repo, user, branch, subdir, file),
+         stop("No such repoType"))
+}
+
+getRemoteHookToFileGithub <- function(repo = aoptions("repo"), user = aoptions("user"), branch = aoptions("branch"), subdir = aoptions("subdir"), file="backpack.db"){
+  file.path(getRemoteHookGithub(repo=repo, user=user, branch=branch, subdir=subdir), file)
+}
+
+getRemoteHookToFileBitbucket <- function(repo = aoptions("repo"), user = aoptions("user"), branch = aoptions("branch"), subdir = aoptions("subdir"), file="backpack.db"){
+  file.path(getRemoteHookBitbucket(repo=repo, user=user, branch=branch, subdir=subdir), file)
+}
