@@ -3,13 +3,13 @@
 #' @title Save an Artifact into a Repository
 #'
 #' @description
-#' \code{saveToRepo} function saves desired artifacts to the local \link{Repository} in a given directory.
+#' \code{saveToLocalRepo} function saves desired artifacts to the local \link{Repository} in a given directory.
 #' To learn more about artifacts visit \link[archivist]{archivist-package}.
 #'
 #' @details
-#' \code{saveToRepo} function saves desired artifacts to the local Repository in a given directory.
+#' \code{saveToLocalRepo} function saves desired artifacts to the local Repository in a given directory.
 #' Artifacts are saved in the local Repository, which is a SQLite database named \code{backpack}.
-#' After every \code{saveToRepo} call the database is refreshed, so the artifact is available
+#' After every \code{saveToLocalRepo} call the database is refreshed, so the artifact is available
 #' immediately in the database for other collaborators.
 #' Each artifact is archived in a \code{md5hash.rda} file. This file will be saved in a folder
 #' (under \code{repoDir} directory) named \code{gallery}. For each artifact, \code{md5hash} is a
@@ -81,29 +81,29 @@
 #'
 #' @note
 #' In the following way one can specify his own \code{Tags} for artifacts by setting artifact's attribute
-#' before call of the \code{saveToRepo} function:
+#' before call of the \code{saveToLocalRepo} function:
 #' \code{attr(x, "tags" ) = c( "name1", "name2" )}, where \code{x} is an artifact
 #' and \code{name1, name2} are \code{Tags} specified by a user.
 #' It can be also done in a new, simpler way by using \code{userTags} parameter like this:
 #'  \itemize{
-#'    \item \code{saveToRepo(model, repoDir, userTags = c("my_model", "do not delete"))}.
+#'    \item \code{saveToLocalRepo(model, repoDir, userTags = c("my_model", "do not delete"))}.
 #'  }
 #'
 #' Important: if one wants to archive data from artifacts which is one of:
 #' \code{survfit, glmnet, qda, lda, trellis, htest} class, and this dataset is transformed within
-#' the artifact's formula then \code{saveToRepo} will not archive this dataset. \code{saveToRepo}
+#' the artifact's formula then \code{saveToLocalRepo} will not archive this dataset. \code{saveToLocalRepo}
 #' only archives datasets that already exist in any of R environments.
 #'
 #' Example: The data set will not be archived here.
 #' \itemize{
 #'    \item \code{z <- lda(Sp ~ ., Iris, prior = c(1,1,1)/3, subset = train[,-8])}
-#'    \item \code{saveToRepo( z, repoDir )}
+#'    \item \code{saveToLocalRepo( z, repoDir )}
 #' }
 #' Example: The data set will be archived here.
 #' \itemize{
 #'    \item \code{train2 <- train[,-8]}
 #'    \item \code{z <- lda(Sp ~ ., Iris, prior = c(1,1,1)/3, subset = train2)}
-#'    \item \code{saveToRepo( z, repoDir )}
+#'    \item \code{saveToLocalRepo( z, repoDir )}
 #' }
 #'
 #' @param artifact An arbitrary R artifact to be saved. For supported artifacts see details.
@@ -147,14 +147,14 @@
 #' exampleRepoDir <- tempfile()
 #' createLocalRepo(repoDir = exampleRepoDir)
 #' data(iris)
-#' saveToRepo(iris, repoDir=exampleRepoDir, archiveSessionInfo = TRUE)
+#' saveToLocalRepo(iris, repoDir=exampleRepoDir, archiveSessionInfo = TRUE)
 #' showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
 #' showLocalRepo(method = "tags", repoDir = exampleRepoDir)
 #' 
 #' loadFromLocalRepo(md5hash = '600bda83cb840947976bd1ce3a11879d',
 #'   repoDir = system.file("graphGallery", package = "archivist"), value = TRUE) -> pl
 #' 
-#' saveToRepo(pl, repoDir=exampleRepoDir,
+#' saveToLocalRepo(pl, repoDir=exampleRepoDir,
 #'              userTags = c("do not delete", "my favourite graph"))
 #' aoptions('repoDir', system.file("graphGallery", package = "archivist"))
 #' showLocalRepo(method = "tags")
@@ -165,7 +165,7 @@
 #' @family archivist
 #' @rdname saveToRepo
 #' @export
-saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
+saveToLocalRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
                         archiveTags = TRUE,
                         archiveMiniature = TRUE, 
                         archiveSessionInfo = TRUE, 
@@ -248,7 +248,7 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
       stop("devtools package required for archiveSessionInfo parameter")
     }
     si <- devtools::session_info()
-    md5hashDF <- saveToRepo( si, archiveData = FALSE, repoDir = repoDir, 
+    md5hashDF <- saveToLocalRepo( si, archiveData = FALSE, repoDir = repoDir, 
                              rememberName = FALSE, archiveTags = FALSE, force=TRUE, 
                              archiveSessionInfo = FALSE)
     addTag( tag = paste0("session_info:", md5hashDF), md5hash = md5hash, dir = repoDir )
@@ -274,3 +274,13 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
     return( artifact )
   }
 }
+
+#'
+#' @rdname saveToRepo
+#' @export
+saveToRepo <- saveToLocalRepo
+  
+#'
+#' @rdname saveToRepo
+#' @export
+asave <- saveToLocalRepo
