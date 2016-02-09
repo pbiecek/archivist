@@ -128,7 +128,7 @@ Copying artifacts from other repositories.
 repo <- "arepo"
 createLocalRepo(repoDir = repo)
 copyRemoteRepo(repoTo = repo, md5hashes= "600bda83cb840947976bd1ce3a11879d", 
-         user = "pbiecek", repo = "graphGallery")
+         user = "pbiecek", repo = "graphGallery", repoType = "github")
 ```
 
 Showing repository statistics
@@ -145,7 +145,7 @@ summaryLocalRepo(repoDir =
 Setting default repository
 
 ```{r}
-setRemoteRepo(user = "pbiecek", repo = "graphGallery")
+setRemoteRepo(user = "pbiecek", repo = "graphGallery", repoType = "github")
 setLocalRepo(repoDir = system.file("graphGallery", package = "archivist"))
 ```
 
