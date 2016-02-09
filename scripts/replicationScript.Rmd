@@ -62,15 +62,19 @@ lapply(models, coef)
 ```
 
 ```{r}
-## from global
-#plots <- asearch("pbiecek/graphGallery", 
-#    patterns = c("class:gg", "labelx:Sepal.Length"))
+library("gridExtra")
+
+# from global
+plots <- asearch("pbiecek/graphGallery", 
+    patterns = c("class:gg", "labelx:Sepal.Length"))
+length(plots)
+
+do.call(grid.arrange,  plots)
 
 # from local
 plots <- asearch(patterns = c("class:gg", "labelx:Sepal.Length"))
 length(plots)
 
-library("gridExtra")
 do.call(grid.arrange,  plots)
 ```
 
@@ -78,11 +82,10 @@ do.call(grid.arrange,  plots)
 
 Retrieval of the object's pedigree.
 
-
 ```{r, message=FALSE, warning=FALSE}
 library("archivist")
 library("dplyr")
-createEmptyRepo("tmp_archivist", default = TRUE)
+createLocalRepo("arepo", default = TRUE)
 
 data(iris)
 
@@ -104,32 +107,31 @@ Creation of a new empty repository.
 
 ```{r}
 # global path
-repo <- "/Users/pbiecek/GitHub/new_repo"
+repo <- "/Users/pbiecek/GitHub/arepo"
 # local path
-repo <- "new_repo"
-createEmptyRepo(repoDir = repo, default = TRUE)
+repo <- "arepo"
+createLocalRepo(repoDir = repo, default = TRUE)
 ```
 
 Deletion of an existing repository
 
 
 ```{r}
-repo <- "new_repo"
-deleteRepo(repoDir = repo)
+repo <- "arepo"
+deleteLocalRepo(repoDir = repo)
 ```
 
 
 Copying artifacts from other repositories.
 
 ```{r}
-repo <- "new_repo"
-createEmptyRepo(repoDir = repo)
-copyGithubRepo(repoTo = repo, md5hashes= "2166dfbd3a7a68a91a2f8e6df1a44111", 
+repo <- "arepo"
+createLocalRepo(repoDir = repo)
+copyRemoteRepo(repoTo = repo, md5hashes= "600bda83cb840947976bd1ce3a11879d", 
          user = "pbiecek", repo = "graphGallery")
 ```
 
 Showing repository statistics
-
 
 ```{r}
 showLocalRepo(repoDir = repo, method = "tags")
@@ -143,7 +145,7 @@ summaryLocalRepo(repoDir =
 Setting default repository
 
 ```{r}
-setGithubRepo(user = "pbiecek", repo = "graphGallery")
+setRemoteRepo(user = "pbiecek", repo = "graphGallery")
 setLocalRepo(repoDir = system.file("graphGallery", package = "archivist"))
 ```
 
@@ -151,7 +153,7 @@ Saving to the default repository.
 
 ```{r}
 setLocalRepo(repoDir = repo)
-saveToRepo(iris)
+saveToLocalRepo(iris)
 ```
 
 
@@ -189,7 +191,7 @@ ahistory(md5hash = "050e41ec3bc40b3004bc6bdd356acae7")
 Loading an object from repository, remote, local or in a package.
 
 ```{r}
-pl2 <- loadFromGithubRepo("92ada1e052d4d963e5787bfc9c4b506c", repo="graphGallery", user="pbiecek", 
+pl2 <- loadFromRemoteRepo("92ada1e052d4d963e5787bfc9c4b506c", repo="graphGallery", user="pbiecek", 
                              value=TRUE)
 pl3 <- loadFromLocalRepo("92ada1", system.file("graphGallery", package = "archivist"), value=TRUE)
 
@@ -249,7 +251,7 @@ shinySearchInLocalRepo(arepo)
 Delete
 
 ```{r}
-deleteRepo("new_repo")
+deleteLocalRepo("arepo")
 ```
 
 
