@@ -5,12 +5,12 @@ test_that("aread downloads files", {
   
   expect_is(ddl_ggplot, "gg")
   expect_is(ddl_ggplot, "ggplot")
-  expect_output(str(ddl_ggplot), "List of 2")
+  expect_output(str(ddl_ggplot), "List of 9")
   expect_equal(ddl_ggplot$labels$x, "Sepal.Length")
   
   expect_is(ddl_ggplot_abrv, "gg")
   expect_is(ddl_ggplot_abrv, "ggplot")
-  expect_output(str(ddl_ggplot_abrv), "List of 2")
+  expect_output(str(ddl_ggplot_abrv), "List of 9")
   expect_equal(ddl_ggplot_abrv$labels$y, "Petal.Length")
   
   
@@ -44,7 +44,7 @@ test_that("createEmptyRepo creates repo", {
   createLocalRepo("arepo")
   
   expect_equal(list.files("arepo"), c("backpack.db", "gallery"))
-  expect_error(createEmptyRepo("arepo", force = FALSE))
+  expect_error(createLocalRepo("arepo2", force = FALSE))
   deleteLocalRepo("arepo", deleteRoot = TRUE)
 })
 
