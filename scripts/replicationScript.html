@@ -75,7 +75,7 @@ img {
   library(archivist)
 }</code></pre>
 <pre><code>## Loading required package: archivist</code></pre>
-<pre><code>## Welcome to archivist (version: 1.9.7.3).</code></pre>
+<pre><code>## Welcome to archivist (version: 2.0).</code></pre>
 </div>
 <div id="section-2.1" class="section level1">
 <h1>Section 2.1</h1>
@@ -160,9 +160,9 @@ length(plots)</code></pre>
 <p>Retrieval of the object’s pedigree.</p>
 <pre class="r"><code>library(&quot;archivist&quot;)
 library(&quot;dplyr&quot;)
-createLocalRepo(&quot;arepo&quot;, default = TRUE)</code></pre>
-<pre><code>## Directory arepo did not exist. Forced to create a new directory.</code></pre>
-<pre class="r"><code>data(iris)
+createLocalRepo(&quot;arepo&quot;, default = TRUE)
+
+data(iris)
 
 iris %a%
    filter(Sepal.Length &lt; 6) %a%
@@ -183,7 +183,7 @@ ahistory(tmp)</code></pre>
 <pre class="r"><code>sinfo &lt;- asession(&quot;050e41ec3bc40b3004bc6bdd356acae7&quot;)
 head(sinfo$packages)</code></pre>
 <pre><code>##  package    * version date       source        
-##  archivist  * 1.9.7.3 2016-02-10 CRAN (R 3.2.2)
+##  archivist  * 2.0     2016-02-10 CRAN (R 3.2.2)
 ##  assertthat   0.1     2013-12-06 CRAN (R 3.1.0)
 ##  bitops       1.0-6   2013-08-17 CRAN (R 3.1.0)
 ##  colorspace   1.2-6   2015-03-11 CRAN (R 3.1.3)
@@ -284,7 +284,7 @@ saveToRepo(pl, repoDir = repo)</code></pre>
 ## 15 ff575c261c949d073b2895b05d1097c3
 ## 16 ff575c261c949d073b2895b05d1097c3
 ## 17 ff575c261c949d073b2895b05d1097c3
-## 18 2cb581097226c11e0596d978630ca6fd
+## 18 d3532b2dc2b3914324c493dee0665a3f
 ## 19 ff575c261c949d073b2895b05d1097c3
 ## 20 ff575c261c949d073b2895b05d1097c3
 ## 21 11127cc6ce69a89d11d0e30865a33c13
@@ -294,10 +294,10 @@ saveToRepo(pl, repoDir = repo)</code></pre>
 ## 25 11127cc6ce69a89d11d0e30865a33c13
 ## 26 11127cc6ce69a89d11d0e30865a33c13
 ## 27 11127cc6ce69a89d11d0e30865a33c13
-## 28 30a2fcbb5cee66fd70d8eff35c68ccc5
+## 28 5675c2785c34bf8cec026a580f6b6abd
 ## 29 11127cc6ce69a89d11d0e30865a33c13
 ## 30 ff575c261c949d073b2895b05d1097c3
-## 31 30a2fcbb5cee66fd70d8eff35c68ccc5
+## 31 5675c2785c34bf8cec026a580f6b6abd
 ## 32 ff575c261c949d073b2895b05d1097c3
 ## 33 ff575c261c949d073b2895b05d1097c3
 ## 34 ff575c261c949d073b2895b05d1097c3
@@ -311,33 +311,33 @@ saveToRepo(pl, repoDir = repo)</code></pre>
 ## 6                       date:2016-02-09 14:37:06 2016-02-09 14:37:06
 ## 7  session_info:3b8c605199b8e36c8b06a193dd45c624 2016-02-09 14:37:06
 ## 8                                     format:png 2016-02-09 14:37:06
-## 9                                     format:rda 2016-02-10 02:28:26
-## 10                                     name:iris 2016-02-10 02:28:26
-## 11                              class:data.frame 2016-02-10 02:28:26
-## 12                          varname:Sepal.Length 2016-02-10 02:28:26
-## 13                           varname:Sepal.Width 2016-02-10 02:28:26
-## 14                          varname:Petal.Length 2016-02-10 02:28:26
-## 15                           varname:Petal.Width 2016-02-10 02:28:26
-## 16                               varname:Species 2016-02-10 02:28:26
-## 17                      date:2016-02-10 02:28:26 2016-02-10 02:28:26
-## 18                                    format:rda 2016-02-10 02:28:26
-## 19 session_info:2cb581097226c11e0596d978630ca6fd 2016-02-10 02:28:26
-## 20                                    format:txt 2016-02-10 02:28:26
-## 21                                    format:rda 2016-02-10 02:28:26
-## 22                                       name:pl 2016-02-10 02:28:26
-## 23                                      class:gg 2016-02-10 02:28:26
-## 24                                  class:ggplot 2016-02-10 02:28:26
-## 25                           labelx:Sepal.Length 2016-02-10 02:28:26
-## 26                           labely:Petal.Length 2016-02-10 02:28:26
-## 27                      date:2016-02-10 02:28:26 2016-02-10 02:28:26
-## 28                                    format:rda 2016-02-10 02:28:26
-## 29 session_info:30a2fcbb5cee66fd70d8eff35c68ccc5 2016-02-10 02:28:26
-## 30                                    format:rda 2016-02-10 02:28:26
-## 31                                    format:rda 2016-02-10 02:28:26
-## 32 session_info:30a2fcbb5cee66fd70d8eff35c68ccc5 2016-02-10 02:28:26
-## 33                                    format:txt 2016-02-10 02:28:26
-## 34 relationWith:11127cc6ce69a89d11d0e30865a33c13 2016-02-10 02:28:26
-## 35                                    format:png 2016-02-10 02:28:27</code></pre>
+## 9                                     format:rda 2016-02-10 17:01:44
+## 10                                     name:iris 2016-02-10 17:01:44
+## 11                              class:data.frame 2016-02-10 17:01:44
+## 12                          varname:Sepal.Length 2016-02-10 17:01:44
+## 13                           varname:Sepal.Width 2016-02-10 17:01:44
+## 14                          varname:Petal.Length 2016-02-10 17:01:44
+## 15                           varname:Petal.Width 2016-02-10 17:01:44
+## 16                               varname:Species 2016-02-10 17:01:44
+## 17                      date:2016-02-10 17:01:44 2016-02-10 17:01:44
+## 18                                    format:rda 2016-02-10 17:01:44
+## 19 session_info:d3532b2dc2b3914324c493dee0665a3f 2016-02-10 17:01:44
+## 20                                    format:txt 2016-02-10 17:01:44
+## 21                                    format:rda 2016-02-10 17:01:44
+## 22                                       name:pl 2016-02-10 17:01:44
+## 23                                      class:gg 2016-02-10 17:01:44
+## 24                                  class:ggplot 2016-02-10 17:01:44
+## 25                           labelx:Sepal.Length 2016-02-10 17:01:44
+## 26                           labely:Petal.Length 2016-02-10 17:01:44
+## 27                      date:2016-02-10 17:01:44 2016-02-10 17:01:44
+## 28                                    format:rda 2016-02-10 17:01:44
+## 29 session_info:5675c2785c34bf8cec026a580f6b6abd 2016-02-10 17:01:44
+## 30                                    format:rda 2016-02-10 17:01:44
+## 31                                    format:rda 2016-02-10 17:01:44
+## 32 session_info:5675c2785c34bf8cec026a580f6b6abd 2016-02-10 17:01:44
+## 33                                    format:txt 2016-02-10 17:01:44
+## 34 relationWith:11127cc6ce69a89d11d0e30865a33c13 2016-02-10 17:01:44
+## 35                                    format:png 2016-02-10 17:01:45</code></pre>
 <pre class="r"><code># deleteLocalRepo(repo)</code></pre>
 <p>Session info for this obejct.</p>
 <pre class="r"><code>asession(&quot;11127cc6ce69a89d11d0e30865a33c13&quot;)</code></pre>
@@ -352,7 +352,7 @@ saveToRepo(pl, repoDir = repo)</code></pre>
 ##  date     2016-02-10</code></pre>
 <pre><code>## Packages ------------------------------------------------------------------</code></pre>
 <pre><code>##  package    * version  date       source                         
-##  archivist  * 1.9.7.3  2016-02-10 CRAN (R 3.2.2)                 
+##  archivist  * 2.0      2016-02-10 CRAN (R 3.2.2)                 
 ##  assertthat   0.1      2013-12-06 CRAN (R 3.1.0)                 
 ##  bitops       1.0-6    2013-08-17 CRAN (R 3.1.0)                 
 ##  colorspace   1.2-6    2015-03-11 CRAN (R 3.1.3)                 
@@ -463,7 +463,7 @@ shinySearchInLocalRepo(arepo)</code></pre>
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] ggplot2_2.0.0     dplyr_0.4.3       gridExtra_2.0.0   archivist_1.9.7.3
+## [1] ggplot2_2.0.0   dplyr_0.4.3     gridExtra_2.0.0 archivist_2.0  
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] Rcpp_0.12.3      rstudioapi_0.3.1 knitr_1.12.3     magrittr_1.5    
