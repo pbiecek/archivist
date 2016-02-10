@@ -14,10 +14,11 @@ if (!require(archivist)) {
 # Creation of hooks to R objects.
 # Following lines download R objects from remote repository.
 
-archivist::aread("pbiecek/graphGallery/2166dfbd3a7a68a91a2f8e6df1a44111")
-archivist::aread("pbiecek/graphGallery/2166d")
+archivist::aread("pbiecek/graphGallery/600bda83cb840947976bd1ce3a11879d")
+archivist::aread("pbiecek/graphGallery/600bd")
 
-model <- archivist::aread("pbiecek/graphGallery/2a6e492cb6982f230e48cf46023e2e4f")
+# regression model
+model <- archivist::aread("2a6e492cb6982f230e48cf46023e2e4f")
 summary(model)
 
 
@@ -32,30 +33,44 @@ models <- asearch("pbiecek/graphGallery", patterns = c("class:lm", "coefname:Sep
 lapply(models, coef)
 
 plots <- asearch("pbiecek/graphGallery", 
-                 patterns = c("class:gg",
-                              "labelx:Sepal.Length"))
+                 patterns = c("class:gg", "labelx:Sepal.Length"))
+length(plots)
 
 library("gridExtra")
+
+do.call(grid.arrange,  plots)
+
+# from local
+plots <- asearch(patterns = c("class:gg", "labelx:Sepal.Length"))
+length(plots)
+
 do.call(grid.arrange,  plots)
 
 # Section 2.3
 
 # Retrieval of the object's pedigree.
 
-
-library("dplyr")
 library("archivist")
-createEmptyRepo("tmp_archivist")
-setLocalRepo(repoDir = "tmp_archivist")
+library("dplyr")
+createLocalRepo("arepo", default = TRUE)
+
+data(iris)
 
 iris %a%
-filter(Sepal.Length < 6) %a%
-lm(Petal.Length~Species, data=.) %a%
-summary() -> tmp
+  filter(Sepal.Length < 6) %a%
+  lm(Petal.Length~Species, data=.) %a%
+  summary() -> tmp
 
 ahistory(tmp)
 
 ahistory(md5hash = "050e41ec3bc40b3004bc6bdd356acae7")
+
+#Session info
+
+sinfo <- asession("050e41ec3bc40b3004bc6bdd356acae7")
+head(sinfo$packages)
+
+
 
 # Section 3.1
 
@@ -64,31 +79,31 @@ ahistory(md5hash = "050e41ec3bc40b3004bc6bdd356acae7")
 # Creation of a new empty repository.
 
 # local path
-repo <- "new_repo"
-createEmptyRepo(repoDir = repo)
+repo <- "arepo"
+createLocalRepo(repoDir = repo)
 
 # Deletion of an existing repository
 
-repo <- "new_repo"
-deleteRepo(repoDir = repo)
+repo <- "arepo"
+deleteLocalRepo(repoDir = repo)
 
 
 # Copying artifacts from other repositories.
 
-repo <- "new_repo"
-createEmptyRepo(repoDir = repo)
-copyGithubRepo( repoTo = repo, md5hashes= "2166dfbd3a7a68a91a2f8e6df1a44111", 
-user="pbiecek", repo="graphGallery" )
+repo <- "arepo"
+createLocalRepo(repoDir = repo, default = TRUE)
+copyRemoteRepo(repoTo = repo, md5hashes= "600bda83cb840947976bd1ce3a11879d", 
+               user = "pbiecek", repo = "graphGallery", repoType = "github")
 
 # Showing repository statistics
 
 showLocalRepo(repoDir = repo, method = "tags")
 
-summaryGithubRepo(user="pbiecek", repo="graphGallery") 
+summaryRemoteRepo(user="pbiecek", repo="graphGallery") 
 
 # Setting default repository
 
-setGithubRepo(user = "pbiecek", repo = "graphGallery")
+setRemoteRepo(user = "pbiecek", repo = "graphGallery")
 
 # Section 3.2
 
@@ -97,13 +112,13 @@ setGithubRepo(user = "pbiecek", repo = "graphGallery")
 # Saving an R object into a repository
 
 library("ggplot2")
-repo <- "new_repo"
+repo <- "arepo"
 pl <- qplot(Sepal.Length, Petal.Length, data = iris)
-saveToRepo(pl, repoDir = repo)
+saveToLocalRepo(pl, repoDir = repo)
 
 showLocalRepo(repoDir = repo, "tags")
 
-deleteRepo("new_repo")
+deleteRepo("arepo")
 
 
 # Serialization of an object creation event into repository
@@ -119,33 +134,44 @@ ahistory(md5hash = "050e41ec3bc40b3004bc6bdd356acae7")
 
 # Loading an object from repository
 
-pl2 <- loadFromGithubRepo("92ada1", repo="graphGallery", user="pbiecek", 
-value=TRUE)
-pl3 <- loadFromLocalRepo("92ada1", repo, value=TRUE)
+pl2 <- loadFromRemoteRepo("600bda83cb840947976bd1ce3a11879d", repo="graphGallery", user="pbiecek", 
+                          value=TRUE)
+pl3 <- loadFromLocalRepo("600bda", system.file("graphGallery", package = "archivist"), value=TRUE)
 
-archivist::aread("pbiecek/graphGallery/2166d")
+archivist::aread("pbiecek/graphGallery/600bda83cb840947976bd1ce3a11879d")
 
-model <- aread("pbiecek/graphGallery/2a6e492cb6982f230e48cf46023e2e4f")
+setLocalRepo(system.file("graphGallery", package = "archivist"))
+
+pl3 <- loadFromLocalRepo("600bda", value=TRUE)
+
+archivist::aread("600bda")
+
+setLocalRepo(system.file("graphGallery", package = "archivist"))
+model <- aread("2a6e492cb6982f230e48cf46023e2e4f")
 digest::digest(model)
 
 # Removal of an object from repository
 
-rmFromRepo("92ada1e052d4d963e5787bfc9c4b506c", repoDir = repo)
+rmFromLocalRepo("92ada1e052d4d963e5787bfc9c4b506c", repoDir = repo)
+
+#Remove all older than 30 days
 
 obj2rm <- searchInLocalRepo(list(dateFrom = "2010-01-01", dateTo = Sys.Date()-30), repoDir = repo)
 
-rmFromRepo(obj2rm, repoDir = repo, many = TRUE)
+rmFromLocalRepo(obj2rm, repoDir = repo, many = TRUE)
+
 
 # Search for an artifact
 
 # Search in a local/GitHub repository
 
-searchInGithubRepo(pattern="class:gg", user="pbiecek", repo="graphGallery")
+searchInLocalRepo(pattern = "class:gg", 
+                  repoDir = system.file("graphGallery", package = "archivist"))
 
-searchInGithubRepo(pattern = list( dateFrom = "2014-09-01", 
-dateTo = "2014-09-30" ),
-user="pbiecek", repo="graphGallery")
+searchInLocalRepo(pattern = list(dateFrom = "2016-01-01",
+                                 dateTo = "2016-02-07" ), 
+                  repoDir = system.file("graphGallery", package = "archivist"))
 
-multiSearchInGithubRepo(pattern=c("class:gg", "labelx:Sepal.Length"),
-user="pbiecek", repo="graphGallery")	
 
+multiSearchInLocalRepo(pattern=c("class:gg", "labelx:Sepal.Length"),
+                       repoDir = system.file("graphGallery", package = "archivist"))	
