@@ -165,15 +165,20 @@ Saving an R object into a repository
 
 ```{r}
 library("ggplot2")
-repo <- "new_repo"
+repo <- "arepo"
 pl <- qplot(Sepal.Length, Petal.Length, data = iris)
 saveToRepo(pl, repoDir = repo)
 
 showLocalRepo(repoDir = repo, "tags")
 
-# deleteRepo(repo)
+# deleteLocalRepo(repo)
 ```
 
+Session info for this obejct.
+
+```{r}
+asession("11127cc6ce69a89d11d0e30865a33c13")
+```
 
 Serialization of an object creation event into repository
 
@@ -191,17 +196,17 @@ ahistory(md5hash = "050e41ec3bc40b3004bc6bdd356acae7")
 Loading an object from repository, remote, local or in a package.
 
 ```{r}
-pl2 <- loadFromRemoteRepo("92ada1e052d4d963e5787bfc9c4b506c", repo="graphGallery", user="pbiecek", 
+pl2 <- loadFromRemoteRepo("600bda83cb840947976bd1ce3a11879d", repo="graphGallery", user="pbiecek", 
                              value=TRUE)
-pl3 <- loadFromLocalRepo("92ada1", system.file("graphGallery", package = "archivist"), value=TRUE)
+pl3 <- loadFromLocalRepo("600bda", system.file("graphGallery", package = "archivist"), value=TRUE)
 
-archivist::aread("pbiecek/graphGallery/2166dfbd3a7a68a91a2f8e6df1a44111")
+archivist::aread("pbiecek/graphGallery/600bda83cb840947976bd1ce3a11879d")
 
 setLocalRepo(system.file("graphGallery", package = "archivist"))
 
-pl3 <- loadFromLocalRepo("92ada1", value=TRUE)
+pl3 <- loadFromLocalRepo("600bda", value=TRUE)
 
-archivist::aread("2166d")
+archivist::aread("600bda")
 ```
 
 ```{r}
@@ -213,7 +218,7 @@ digest::digest(model)
 Removal of an object from repository
 
 ```{r}
-rmFromRepo("92ada1e052d4d963e5787bfc9c4b506c", repoDir = repo)
+rmFromLocalRepo("92ada1e052d4d963e5787bfc9c4b506c", repoDir = repo)
 ```
 
 Remove all older than 30 days
@@ -221,7 +226,7 @@ Remove all older than 30 days
 ```{r}
 obj2rm <- searchInLocalRepo(list(dateFrom = "2010-01-01", dateTo = Sys.Date()-30), repoDir = repo)
 
-rmFromRepo(obj2rm, repoDir = repo, many = TRUE)
+rmFromLocalRepo(obj2rm, repoDir = repo, many = TRUE)
 ```
 
 
