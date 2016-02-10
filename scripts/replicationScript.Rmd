@@ -29,6 +29,7 @@ archivist::aread("pbiecek/graphGallery/600bda83cb840947976bd1ce3a11879d")
 These instructions retrieve R objects from graphGallery directory attached to the archivist package.
 
 ```{r}
+library(archivist)
 setLocalRepo(system.file("graphGallery", package = "archivist"))
 # plot
 archivist::aread("600bda83cb840947976bd1ce3a11879d")
@@ -62,12 +63,12 @@ lapply(models, coef)
 ```
 
 ```{r}
-library("gridExtra")
-
 # from global
 plots <- asearch("pbiecek/graphGallery", 
     patterns = c("class:gg", "labelx:Sepal.Length"))
 length(plots)
+
+library("gridExtra")
 
 do.call(grid.arrange,  plots)
 
@@ -99,6 +100,13 @@ ahistory(tmp)
 ahistory(md5hash = "050e41ec3bc40b3004bc6bdd356acae7")
 ```
 
+Session info
+
+```{r}
+sinfo <- asession("050e41ec3bc40b3004bc6bdd356acae7")
+head(sinfo$packages)
+```
+
 # Section 3.1
 
 Repository management.
@@ -126,7 +134,7 @@ Copying artifacts from other repositories.
 
 ```{r}
 repo <- "arepo"
-createLocalRepo(repoDir = repo)
+createLocalRepo(repoDir = repo, default = TRUE)
 copyRemoteRepo(repoTo = repo, md5hashes= "600bda83cb840947976bd1ce3a11879d", 
          user = "pbiecek", repo = "graphGallery", repoType = "github")
 ```
@@ -153,9 +161,15 @@ Saving to the default repository.
 
 ```{r}
 setLocalRepo(repoDir = repo)
+data(iris)
 saveToLocalRepo(iris)
 ```
 
+aoptions
+
+```{r}
+aoptions("repoType", "github")
+```
 
 # Section 3.2
 
@@ -237,8 +251,8 @@ Search in a local/GitHub repository
 searchInLocalRepo(pattern = "class:gg", 
     repoDir = system.file("graphGallery", package = "archivist"))
 
-searchInLocalRepo(pattern = list(dateFrom = "2014-09-01",
-    dateTo = "2014-09-30" ), 
+searchInLocalRepo(pattern = list(dateFrom = "2016-01-01",
+    dateTo = "2016-02-07" ), 
     repoDir = system.file("graphGallery", package = "archivist"))
 
 
