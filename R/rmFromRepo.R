@@ -319,6 +319,7 @@ rmFromLocalRepo <- function( md5hash, repoDir = NULL, removeData = FALSE,
   stopifnot( is.character( md5hash  ))
   stopifnot( ( is.character( repoDir ) & length( repoDir ) == 1 ) | is.null( repoDir ) )
   stopifnot( is.logical( c( removeData, removeMiniature, many ) ) )
+  if (length( md5hash ) == 0) return(invisible(NULL))
   if (many){
     stopifnot( length( md5hash ) > 0 )
   } else {
