@@ -121,33 +121,29 @@
 #' @family archivist
 #' @rdname searchInRepo
 #' @export
-searchInLocalRepo <- function( pattern, repoDir = aoptions("repoDir"), fixed = TRUE, realDBname = TRUE ){
+searchInLocalRepo <- function( pattern, repoDir = aoptions("repoDir"), fixed = TRUE ){
   stopifnot( ( is.character( repoDir ) & length( repoDir ) == 1 ) | is.null( repoDir ) )
   stopifnot( is.logical( fixed ) )
   stopifnot( is.character( pattern ) | is.list( pattern ) ) 
   stopifnot( length( pattern ) == 1 | length( pattern ) == 2 )
   
-  # when infoRepo uses searchLocal, it come with realDBname = FALSE
-  if ( realDBname ){ 
-    repoDir <- checkDirectory( repoDir )}  
+  repoDir <- checkDirectory( repoDir )
   
   # extracts md5hash
   if ( fixed ){
-   if ( length( pattern ) == 1 ){
-     md5hashES <- unique( executeSingleQuery( dir = repoDir, realDBname = realDBname,
-                              paste0( "SELECT DISTINCT artifact FROM tag WHERE tag = ",
-                                      "'", pattern, "'" ) ) )
-                                  # when infoRepo uses searchLocal, it come with realDBname = FALSE
-   }else{
-     ## length pattern == 2
-     md5hashES <- unique( executeSingleQuery( dir = repoDir, realDBname = realDBname,
-                              paste0( "SELECT DISTINCT artifact FROM tag WHERE createdDate >",
-                                      "'", as.Date(pattern[[1]])-1, "'", " AND createdDate <",
-                                      "'", as.Date(pattern[[2]])+1, "'") ) ) }
-                                  # when infoRepo uses searchLocal, it come with realDBname = FALSE
+    if ( length( pattern ) == 1 ){
+      md5hashES <- unique( executeSingleQuery( dir = repoDir, 
+                                               paste0( "SELECT DISTINCT artifact FROM tag WHERE tag = ",
+                                                       "'", pattern, "'" ) ) )
+    }else{
+      ## length pattern == 2
+      md5hashES <- unique( executeSingleQuery( dir = repoDir, 
+                                               paste0( "SELECT DISTINCT artifact FROM tag WHERE createdDate >",
+                                                       "'", as.Date(pattern[[1]])-1, "'", " AND createdDate <",
+                                                       "'", as.Date(pattern[[2]])+1, "'") ) ) }
   }else{
     # fixed = FALSE
-    md5hashES <- unique( executeSingleQuery( dir = repoDir, realDBname = realDBname,
+    md5hashES <- unique( executeSingleQuery( dir = repoDir, 
                                              paste0( "SELECT DISTINCT artifact FROM tag WHERE tag LIKE ",
                                                      "'", pattern, "%'" ) ) )
   }
@@ -160,7 +156,7 @@ searchInRemoteRepo <- function( pattern, repo = aoptions("repo"), user = aoption
                                 repoType = aoptions("repoType"), fixed = TRUE ){
   stopifnot( is.character( pattern ) | is.list( pattern ) )
   stopifnot( length( pattern ) == 1 | length( pattern ) == 2 )
-
+  
   RemoteRepoCheck( repo, user, branch, subdir, repoType) # implemented in setRepo.R
   
   # first download database
@@ -169,32 +165,32 @@ searchInRemoteRepo <- function( pattern, repo = aoptions("repo"), user = aoption
   
   # extracts md5hash
   if ( fixed ){
-   if ( length( pattern ) == 1 ){
-     md5hashES <- unique( executeSingleQuery( dir = Temp, realDBname = FALSE,
-                              paste0( "SELECT artifact FROM tag WHERE tag = ",
-                                      "'", pattern, "'" ) ) )
-   }else{
-     # length pattern == 2
-     md5hashES <- unique( executeSingleQuery( dir = Temp, realDBname = FALSE,
-                              paste0( "SELECT artifact FROM tag WHERE createdDate >",
-                                      "'", as.Date(pattern[[1]])-1, "'", " AND createdDate <",
-                                      "'", as.Date(pattern[[2]])+1, "'") ) ) }
+    if ( length( pattern ) == 1 ){
+      md5hashES <- unique( executeSingleQuery( dir = Temp, 
+                                               paste0( "SELECT artifact FROM tag WHERE tag = ",
+                                                       "'", pattern, "'" ) ) )
+    }else{
+      # length pattern == 2
+      md5hashES <- unique( executeSingleQuery( dir = Temp, 
+                                               paste0( "SELECT artifact FROM tag WHERE createdDate >",
+                                                       "'", as.Date(pattern[[1]])-1, "'", " AND createdDate <",
+                                                       "'", as.Date(pattern[[2]])+1, "'") ) ) }
   }else{
     # fixed FALSE
-    md5hashES <- unique( executeSingleQuery( dir = Temp, realDBname = FALSE,
+    md5hashES <- unique( executeSingleQuery( dir = Temp, 
                                              paste0( "SELECT DISTINCT artifact FROM tag WHERE tag LIKE ",
                                                      "'", pattern, "%'" ) ) )
   }
-  file.remove( Temp )
+  unlink( Temp, recursive = TRUE, force = TRUE)
   return( as.character( md5hashES[, 1] ) ) 
 }
 
 #' @rdname searchInRepo
 #' @export
-multiSearchInLocalRepo <- function( patterns, repoDir = aoptions("repoDir"), fixed = TRUE, intersect = TRUE, realDBname = TRUE ){
+multiSearchInLocalRepo <- function( patterns, repoDir = aoptions("repoDir"), fixed = TRUE, intersect = TRUE ){
   stopifnot( is.logical( intersect ) )      
-             
-  md5hs <- lapply(patterns, function(pattern) unique(searchInLocalRepo(pattern, repoDir=repoDir, fixed=fixed, realDBname = realDBname) ))
+  
+  md5hs <- lapply(patterns, function(pattern) unique(searchInLocalRepo(pattern, repoDir=repoDir, fixed=fixed) ))
   if (intersect) {
     return(names(which(table(unlist(md5hs)) == length(md5hs))))
   } 
@@ -208,13 +204,13 @@ multiSearchInRemoteRepo <- function( patterns, repo = aoptions("repo"), user = a
                                      repoType = aoptions("repoType"), 
                                      fixed = TRUE, intersect = TRUE ){
   stopifnot( is.logical(  intersect ) )
-
+  
   RemoteRepoCheck( repo, user, branch, subdir, repoType) # implemented in setRepo.R
   
   remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, subdir=subdir)
   Temp <- downloadDB( remoteHook )
-  on.exit(file.remove( Temp ))
+  on.exit( unlink( Temp, recursive = TRUE, force = TRUE))
   m <- multiSearchInLocalRepo( patterns, repoDir = Temp, fixed=fixed,
-                               intersect=intersect, realDBname = FALSE)
+                               intersect=intersect)
   return( m )
 }

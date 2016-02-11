@@ -7,15 +7,14 @@
 \alias{searchInRemoteRepo}
 \title{Search for an Artifact in the Repository Using Tags}
 \usage{
-searchInLocalRepo(pattern, repoDir = aoptions("repoDir"), fixed = TRUE,
-  realDBname = TRUE)
+searchInLocalRepo(pattern, repoDir = aoptions("repoDir"), fixed = TRUE)
 
 searchInRemoteRepo(pattern, repo = aoptions("repo"),
   user = aoptions("user"), branch = "master", subdir = aoptions("subdir"),
   repoType = aoptions("repoType"), fixed = TRUE)
 
 multiSearchInLocalRepo(patterns, repoDir = aoptions("repoDir"),
-  fixed = TRUE, intersect = TRUE, realDBname = TRUE)
+  fixed = TRUE, intersect = TRUE)
 
 multiSearchInRemoteRepo(patterns, repo = aoptions("repo"),
   user = aoptions("user"), branch = "master", subdir = aoptions("subdir"),
@@ -35,8 +34,6 @@ If \code{fixed = TRUE} (default) then artifacts are searched for by using \code{
 If \code{fixed = FALSE} then artifacts are searched for by using \code{pattern = "regular expression"} argument.
 The latter is wider and more flexible method, e.g.,
 using \code{pattern = "name", fixed = FALSE} arguments enables to search for all artifacts in the \code{Repository}.}
-
-\item{realDBname}{A logical value. Should not be changed by user. It is a technical parameter.}
 
 \item{repo}{While working with the Remote repository. A character containing a name of the Remote repository on which the Repository is stored.
 By default set to \code{NULL} - see \code{Note}.}
@@ -59,6 +56,8 @@ match all conditions are returned. If \code{intersect = FALSE} then artifacts th
 are returned.}
 
 \item{intersect}{A logical value. See \code{patterns} for more details.}
+
+\item{realDBname}{A logical value. Should not be changed by user. It is a technical parameter.}
 }
 \value{
 \code{searchInRepo} returns character vector of \code{md5hashes} of artifacts that were searched for.
