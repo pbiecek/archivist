@@ -134,13 +134,13 @@ showRemoteRepo <- function( repo = aoptions("repo"), user = aoptions("user"), br
 showRepo <- function( method, local = TRUE, dir ){
   
   if ( method == "md5hashes" )
-    value <- readSingleTable( dir, "artifact", realDBname = local )
+    value <- readSingleTable( dir, "artifact" )
   
   if ( method == "tags" )
-    value <- readSingleTable( dir, "tag", realDBname = local )
+    value <- readSingleTable( dir, "tag" )
   
   if ( method == "sets" ){
-    value <- readSingleTable( dir, "tag", realDBname = local ) 
+    value <- readSingleTable( dir, "tag" ) 
       onlySetsNumber <- grep( "set", value$tag )
       onlySetsHashes <- value[onlySetsNumber, "artifact"]
     value <- value[ value$artifact %in% onlySetsHashes, ]

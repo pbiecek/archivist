@@ -21,7 +21,7 @@ parametrizeRepo <- function(repoDir = NULL, repo = NULL, user = NULL,
     }
     return(repository)
   } 
-  if (is.character(repo) & is.character(user))) {
+  if (is.character(repo) & is.character(user)) {
     repository <- list(repo = repo,
                        user = user,
                        branch = branch,
@@ -69,7 +69,7 @@ createRepo <- function(repository, set = FALSE, ...){
 ############################################################################
 ############################################################################
 
-searchInRepo <- function(pattern, repository = NULL, fixed, realDBname = TRUE){
+searchInRepo <- function(pattern, repository = NULL, fixed){
   stopifnot('repository' %in% class(repository))
   
   if (is.null(repository)) {
@@ -79,7 +79,7 @@ searchInRepo <- function(pattern, repository = NULL, fixed, realDBname = TRUE){
   if ('Local' %in% class(repository)) {
     # here parameters are checked inside searchInLocalRepo
     searchInLocalRepo(pattern = pattern, repoDir = repository$repoDir, 
-                      fixed = fixed, realDBname = realDBname)
+                      fixed = fixed)
   }
   if ('Github' %in% class(repository)) {
     # here parameters are checked inside searchInGithubRepo

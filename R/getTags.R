@@ -154,8 +154,8 @@ getTagsRemote <- function( md5hash, repo = aoptions("repo"), user = aoptions("us
   returnTag( md5hash, repoDir = Temp, local = FALSE, tag = tag )
 }
 
-returnTag <- function( md5hash, repoDir, local = TRUE, tag ){
-  Tags <- unique( executeSingleQuery( repoDir, realDBname = local,
+returnTag <- function( md5hash, repoDir, tag ){
+  Tags <- unique( executeSingleQuery( repoDir, 
                       paste0("SELECT DISTINCT tag FROM tag WHERE tag LIKE",
                              "'", tag, "%'", "AND artifact='", md5hash,"'") ) )
   return( as.character( Tags[, 1] ) )

@@ -70,7 +70,7 @@ createLocalRepo <- function( repoDir, force = TRUE, default = FALSE ){
   repoDir <- checkDirectory( repoDir, create = TRUE )
   
   # create connection
-  backpack <- getConnectionToDB( repoDir, realDBname = TRUE )
+  backpack <- getConnectionToDB( repoDir )
   
   # create tables
   artifact <- data.frame(md5hash = "",
@@ -128,30 +128,24 @@ addTag <- function( tag, md5hash, createdDate = now(), dir ){
 
 # realDBname was needed because Github version function uses temporary file as database
 # and they do not name this file as backpack.db in repoDir directory
-getConnectionToDB <- function( repoDir, realDBname ){
-    if ( realDBname ){
-      conn <- dbConnect( get( "sqlite", envir = .ArchivistEnv ), file.path( repoDir, "backpack.db" ) )
-    }else{
-      conn <- dbConnect( get( "sqlite", envir = .ArchivistEnv ), repoDir )
-    }
-    return( conn )
+getConnectionToDB <- function( repoDir ){
+  dbConnect( get( "sqlite", envir = .ArchivistEnv ), file.path( repoDir, "backpack.db" ) )
 }
   
-executeSingleQuery <- function( dir, query, realDBname = TRUE ) {
-  conn <- getConnectionToDB( dir, realDBname )
+executeSingleQuery <- function( dir, query ) {
+  conn <- getConnectionToDB( dir )
   on.exit( dbDisconnect( conn ) )
   res <- dbGetQuery( conn, query )
   return( res )
 }
 
-readSingleTable <- function( dir, table, realDBname = TRUE ){
-  conn <- getConnectionToDB( dir, realDBname )
+readSingleTable <- function( dir, table ){
+  conn <- getConnectionToDB( dir )
   tabs <- dbReadTable( conn, table )
   dbDisconnect( conn )
   return( tabs )
 }
 
-# for Github version function that requires to load database
 # for Github version function that requires to load database
 downloadDB <- function( remoteHook ){
   URLdb <- file.path( remoteHook, "backpack.db") 
