@@ -14,8 +14,9 @@ extractData.ggplot <- function( object, parrentMd5hash, parentDir, isForce, ASCI
     warning( "This artifact's data was already archived. Another archivisation executed with success.")
   }
   # archive data
+  DFname <- digest(extractedDF)
   md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, repoDir = parentDir, 
-                           artifactName = digest(extractedDF), archiveTags = FALSE, force = isForce, ascii = ASCII,
+                           artifactName = DFname, archiveTags = FALSE, force = isForce, ascii = ASCII,
                            archiveSessionInfo = FALSE, silent = TRUE)
   addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
   return( md5hashDF )
@@ -30,8 +31,9 @@ extractData.lm <- function( object, parrentMd5hash, parentDir, isForce, ASCII ){
     warning( "This artifact's data was already archived. Another archivisation executed with success.")
   }
   # archive data
+  DFname <- digest(extractedDF)
   md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, repoDir = parentDir,
-                           artifactName = digest(extractedDF), archiveTags = FALSE, force = isForce, ascii = ASCII,
+                           artifactName = DFname, archiveTags = FALSE, force = isForce, ascii = ASCII,
                            archiveSessionInfo = FALSE, silent = TRUE)
   addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
   return( md5hashDF )
@@ -49,9 +51,10 @@ extractData.htest <- function( object, parrentMd5hash, parentDir, isForce, ASCII
     warning( "This artifact's data was already archived. Another archivisation executed with success.")
   }
   # archive data
+  DFname <- digest(list( extractedDF1, extractedDF2 ))
   md5hashDF <- saveToRepo( list( extractedDF1, extractedDF2 ), 
                            archiveData = FALSE, repoDir = parentDir,
-                           artifactName = digest(list( extractedDF1, extractedDF2 )), archiveTags = FALSE,
+                           artifactName = DFname, archiveTags = FALSE,
                            force = isForce, ascii = ASCII,
                            archiveSessionInfo = FALSE, silent = TRUE)
   addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
@@ -73,8 +76,9 @@ extractData.lda <- function( object, parrentMd5hash, parentDir, isForce, ASCII )
       warning( "This artifact's data was already archived. Another archivisation executed with success.")
     }
     # archive data
+    DFname <- digest(extractedDF)
     md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, repoDir = parentDir,
-                             artifactName = digest(extractedDF), archiveTags = FALSE, force = isForce,
+                             artifactName = DFname, archiveTags = FALSE, force = isForce,
                              ascii = ASCII, archiveSessionInfo = FALSE, silent = TRUE)
     addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
     return( md5hashDF )
@@ -94,8 +98,9 @@ extractData.trellis <- function( object, parrentMd5hash, parentDir, isForce, ASC
     warning( "This artifact's data was already archived. Another archivisation executed with success.")
   }
   # archive data
+  DFname <- digest(extractedDF)
   md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, repoDir = parentDir,
-                           artifactName = digest(extractedDF), archiveTags = FALSE, force = isForce,
+                           artifactName = DFname, archiveTags = FALSE, force = isForce,
                            ascii = ASCII, archiveSessionInfo = FALSE, silent = TRUE)
   addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
   return( md5hashDF )
@@ -115,8 +120,9 @@ extractData.twins <- function( object, parrentMd5hash, parentDir, isForce, ASCII
     warning( "This artifact's data was already archived. Another archivisation executed with success.")
   }
   # archive data
+  DFname <- digest(extractedDF)
   md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, repoDir = parentDir,
-                           artifactName = digest(extractedDF), archiveTags = FALSE, force = isForce, ascii = ASCII,
+                           artifactName = DFname, archiveTags = FALSE, force = isForce, ascii = ASCII,
                            archiveSessionInfo = FALSE, silent = TRUE)
   addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
   return( md5hashDF )
@@ -132,8 +138,9 @@ extractData.partition <- function( object, parrentMd5hash, parentDir, isForce, A
     warning( "This artifact's data was already archived. Another archivisation executed with success.")
   }
   # archive data
+  DFname <- digest(extractedDF)
   md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, repoDir = parentDir,
-                           artifactName = digest(extractedDF), archiveTags = FALSE, force = isForce, ascii = ASCII,
+                           artifactName = DFname, archiveTags = FALSE, force = isForce, ascii = ASCII,
                            archiveSessionInfo = FALSE, silent = TRUE)
   addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
   return( md5hashDF )
@@ -149,8 +156,9 @@ extractData.qda <- function( object, parrentMd5hash, parentDir, isForce, ASCII )
     warning( "This artifact's data was already archived. Another archivisation executed with success.")
   }
   # archive data
+  DFname <- digest(extractedDF)
   md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, repoDir = parentDir,
-                           artifactName = digest(extractedDF), archiveTags = FALSE, force = isForce, ascii = ASCII,
+                           artifactName = DFname, archiveTags = FALSE, force = isForce, ascii = ASCII,
                            archiveSessionInfo = FALSE, silent = TRUE)
   addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
   return( md5hashDF )
@@ -175,8 +183,9 @@ extractData.glmnet <- function( object, parrentMd5hash, parentDir, isForce, ASCI
     warning( "This artifact's data was already archived. Another archivisation executed with success.")
   }
   # archive data
+  DFname <- digest(c( extractedDF1, extractedDF1 ))
   md5hashDF <- saveToRepo( c( extractedDF1, extractedDF1 ), archiveData = FALSE, 
-                           repoDir = parentDir, artifactName = digest(c( extractedDF1, extractedDF1 )),
+                           repoDir = parentDir, artifactName = DFname,
                            archiveTags = FALSE, 
                            force = isForce, ascii = ASCII, archiveSessionInfo = FALSE, silent = TRUE )
   addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
@@ -198,8 +207,9 @@ extractData.survfit <- function( object, parrentMd5hash, parentDir, isForce, ASC
     warning( "This artifact's data was already archived. Another archivisation executed with success.")
   }
   # archive data
+  DFname <- digest(extractedDF)
   md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, repoDir = parentDir, 
-                           artifactName = digest(extractedDF), archiveTags = FALSE, force = isForce, ascii = ASCII,
+                           artifactName = DFname, archiveTags = FALSE, force = isForce, ascii = ASCII,
                            archiveSessionInfo = FALSE, silent = TRUE)
   addTag( tag = paste0("relationWith:", parrentMd5hash), md5hash = md5hashDF, dir = parentDir )
   return( md5hashDF )
