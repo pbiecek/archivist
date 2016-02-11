@@ -26,7 +26,6 @@
 #' }
 #' @family archivist
 #' @rdname getRemoteHook
-#' @export
 
 getRemoteHook <- function(repo = aoptions("repo"), user = aoptions("user"), branch = aoptions("branch"), subdir = aoptions("subdir") ,
                           repoType = aoptions("repoType")) {
