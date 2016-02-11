@@ -162,7 +162,7 @@ copyRemoteRepo <- function( repoTo, md5hashes, repo = aoptions("repo"), user = a
   remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, subdir=subdir, repoType=repoType)
   Temp <- downloadDB( remoteHook )
   
-  on.exit(file.remove(Temp))
+  on.exit( unlink( Temp, recursive = TRUE, force = TRUE))
   
   copyRepo( repoTo = repoTo, repoFrom = Temp, md5hashes = md5hashes , 
             local = FALSE, user = user, repo = repo, branch = branch, subdir = subdir )  
