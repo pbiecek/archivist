@@ -166,7 +166,7 @@ saveToLocalRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
   stopifnot(is.null(artifactName) | is.character(artifactName))
   stopifnot(length(archiveData) == 1, length(archiveTags) == 1, length(archiveMiniature) == 1,
             length(archiveSessionInfo) == 1, length(force) == 1, 
-            length(value) == 1, length(ascii) == 1, length(artifactName) == 1)
+            length(value) == 1, length(ascii) == 1, length(artifactName) <= 1)
 
   md5hash <- digest( artifact )
   if (is.null(artifactName)) {
