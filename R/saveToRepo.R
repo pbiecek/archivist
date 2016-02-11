@@ -163,7 +163,7 @@ saveToLocalRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
                         artifactName = deparse(substitute(artifact))) {
   stopifnot(is.logical(c(archiveData, archiveTags, archiveMiniature, force,  value, silent, ascii, archiveSessionInfo)))
   stopifnot((is.character(repoDir) & length(repoDir) == 1 ) | is.null(repoDir))
-  stopifnot(is.character(artifactName))
+  stopifnot(is.null(artifactName) | is.character(artifactName))
   stopifnot(length(archiveData) == 1, length(archiveTags) == 1, length(archiveMiniature) == 1,
             length(archiveSessionInfo) == 1, length(force) == 1, 
             length(value) == 1, length(ascii) == 1, length(artifactName) == 1)
