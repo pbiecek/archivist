@@ -10,7 +10,7 @@
 #' @param repoDir A character that specifies the directory for the Repository
 #' which is to be deleted.
 #' @param deleteRoot A logical value that specifies if the repository root directory
-#' should be deleted for Local Repository or for GitHub whether to delete whole GitHub-Repository.
+#' should be deleted for Local Repository.
 #' @param unset A logical. If deleted \code{repoDir/repo} was set to be default Local/GitHub Repository
 #' and \code{unset} is TRUE, then \code{repoDir/repo} is unset as a default Local/GitHub Repository (\code{aoptions('repoDir/repo', NULL, T)}).
 #' 
