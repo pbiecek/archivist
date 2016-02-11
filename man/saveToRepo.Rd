@@ -137,6 +137,8 @@ It can be also done in a new, simpler way by using \code{userTags} parameter lik
  \itemize{
    \item \code{saveToLocalRepo(model, repoDir, userTags = c("my_model", "do not delete"))}.
  }
+ Specifing additional \code{Tags} by attributes can be beneficial when one uses \link{addHooksToPrint}.
+ 
 
 Important: if one wants to archive data from artifacts which is one of:
 \code{survfit, glmnet, qda, lda, trellis, htest} class, and this dataset is transformed within

@@ -29,6 +29,10 @@ to \code{subdir = "/"} as default.}
 \code{addHooksToPrint} adds an overloaded version of the print function for objects of selected class. 
 The overloaded function will add all object of selected class to the repo and then add hooks to the report for these objects .
 }
+\note{
+One can specify \code{userTags} as in \link{saveToLocalRepo} for artifacts by adding code{"tags"} attribute.
+See note secion about that in \link{saveToLocalRepo}.
+}
 \examples{
 
 \dontrun{

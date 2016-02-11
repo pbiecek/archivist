@@ -211,6 +211,7 @@
 #'  \itemize{
 #'    \item \code{saveToRepo(model, repoDir, userTags = c("my_model", "do not delete"))}.
 #'  }
+#'  Specifing additional \code{Tags} by attributes can be beneficial when one uses \link{addHooksToPrint}.
 #' 
 #' @examples
 #' 

@@ -201,6 +201,7 @@ It can be also done in a new, simpler way by using \code{userTags} parameter lik
  \itemize{
    \item \code{saveToRepo(model, repoDir, userTags = c("my_model", "do not delete"))}.
  }
+ Specifing additional \code{Tags} by attributes can be beneficial when one uses \link{addHooksToPrint}.
 }
 \examples{
 

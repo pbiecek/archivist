@@ -20,6 +20,10 @@
 #' @author 
 #' Przemyslaw Biecek, \email{przemyslaw.biecek@@gmail.com}
 #'  
+#' @note
+#' One can specify \code{userTags} as in \link{saveToLocalRepo} for artifacts by adding code{"tags"} attribute.
+#' See note secion about that in \link{saveToLocalRepo}.
+#'  
 #' @examples
 #' 
 #' \dontrun{
