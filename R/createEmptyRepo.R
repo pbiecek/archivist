@@ -152,19 +152,22 @@ readSingleTable <- function( dir, table, realDBname = TRUE ){
 }
 
 # for Github version function that requires to load database
+# for Github version function that requires to load database
 downloadDB <- function( remoteHook ){
-   URLdb <- file.path( remoteHook, "backpack.db") 
-   if (url.exists(URLdb)){
-     db <- getBinaryURL( URLdb )
-     Temp2 <- tempfile()
-     file.create( Temp2 )
-     writeBin( db, Temp2 )
-     return( Temp2 )
-   } else {
-     stop(paste0("Such a repo: ", remoteHook, " does not exist",
-                 " or there is no archivist-like Repository on this repo."))
-   }
-     
+  URLdb <- file.path( remoteHook, "backpack.db") 
+  if (url.exists(URLdb)){
+    db <- getBinaryURL( URLdb )
+    Temp2 <- tempfile()
+    dir.create( Temp2 )
+    Temp3 <- paste0(Temp2, "/backpack.db")
+    file.create( Temp3 )
+    writeBin( db, Temp3 )
+    return( Temp2 )
+  } else {
+    stop(paste0("Such a repo: ", remoteHook, " does not exist",
+                " or there is no archivist-like Repository on this repo."))
+  }
+  
 }
 
 checkDirectory <- function( directory, create = FALSE ){
