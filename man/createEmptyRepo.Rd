@@ -10,15 +10,13 @@ createLocalRepo(repoDir, force = TRUE, default = FALSE)
 createEmptyRepo(...)
 }
 \arguments{
-\item{repoDir}{A character that specifies the directory for the Repository which is to be made. While working with GitHub Repository, this will
-be the directory of the synchronized Local Repository, in which the new Local Repository will be created (is \code{NULL} then is the same as \code{repo}).}
+\item{repoDir}{A character that specifies the directory for the Repository which is to be made.}
 
 \item{force}{If \code{force = TRUE} and \code{repoDir} parameter specifies the directory that doesn't exist,
 then function call will force to create new \code{repoDir} directory.
 Default set to \code{force = TRUE}.}
 
-\item{default}{If \code{default = TRUE} then \code{repoDir} (\code{repo}) is set as default local repository 
-(for GitHub version also the \code{user} is set as default GitHub user).}
+\item{default}{If \code{default = TRUE} then \code{repoDir} is set as default Local Repository.}
 
 \item{...}{All arguments are being passed to \code{createLocalRepo}.}
 }
