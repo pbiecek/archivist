@@ -8,21 +8,20 @@
 \usage{
 saveToLocalRepo(artifact, repoDir = NULL, archiveData = TRUE,
   archiveTags = TRUE, archiveMiniature = TRUE, archiveSessionInfo = TRUE,
-  force = TRUE, rememberName = TRUE, value = FALSE, ..., userTags = c(),
+  force = TRUE, value = FALSE, ..., userTags = c(),
   silent = aoptions("silent"), ascii = FALSE,
   artifactName = deparse(substitute(artifact)))
 
 saveToRepo(artifact, repoDir = NULL, archiveData = TRUE,
   archiveTags = TRUE, archiveMiniature = TRUE, archiveSessionInfo = TRUE,
-  force = TRUE, rememberName = TRUE, value = FALSE, ..., userTags = c(),
+  force = TRUE, value = FALSE, ..., userTags = c(),
   silent = aoptions("silent"), ascii = FALSE,
   artifactName = deparse(substitute(artifact)))
 
 asave(artifact, repoDir = NULL, archiveData = TRUE, archiveTags = TRUE,
   archiveMiniature = TRUE, archiveSessionInfo = TRUE, force = TRUE,
-  rememberName = TRUE, value = FALSE, ..., userTags = c(),
-  silent = aoptions("silent"), ascii = FALSE,
-  artifactName = deparse(substitute(artifact)))
+  value = FALSE, ..., userTags = c(), silent = aoptions("silent"),
+  ascii = FALSE, artifactName = deparse(substitute(artifact)))
 }
 \arguments{
 \item{artifact}{An arbitrary R artifact to be saved. For supported artifacts see details.}
@@ -40,8 +39,6 @@ If it is set to \code{NULL} (by default), it will use the \code{repoDir} specifi
 
 \item{force}{A logical value denoting whether to archive \code{artifact} if it was already archived in
 a Repository.}
-
-\item{rememberName}{A logical value. Should not be changed by a user. It is a technical parameter.}
 
 \item{value}{A logical value. Should the result be (default \code{value = FALSE}) the \code{md5hash}
 of a stored artifact or should the result be an input artifact (\code{value = TRUE}), so that valueing code
@@ -111,22 +108,7 @@ If the artifact is of class \code{lattice} or \code{ggplot}, and
 possible to set the miniature's \code{width} and \code{height} parameters. By default they are set to
 \code{width = 800}, \code{height = 600}.
 
-Supported artifact's classes are (so far):
-\itemize{
- \item \code{lm},
- \item \code{data.frame},
- \item \code{ggplot},
- \item \code{htest},
- \item \code{trellis},
- \item \code{twins (result of agnes, diana or mona function)},
- \item \code{partition (result of pam, clara or fanny fuction)},
- \item \code{lda},
- \item \code{qda},
- \item \code{glmnet},
- \item \code{survfit}.
- }
-
-To check what \code{Tags} will be extracted from various artifacts see \link{Tags}.
+Supported artifact's classes are listed here \link{Tags}.
 }
 \note{
 In the following way one can specify his own \code{Tags} for artifacts by setting artifact's attribute
@@ -137,7 +119,8 @@ It can be also done in a new, simpler way by using \code{userTags} parameter lik
  \itemize{
    \item \code{saveToLocalRepo(model, repoDir, userTags = c("my_model", "do not delete"))}.
  }
- Specifing additional \code{Tags} by attributes can be beneficial when one uses \link{addHooksToPrint}.
+ 
+Specifing additional \code{Tags} by attributes can be beneficial when one uses \link{addHooksToPrint}.
  
 
 Important: if one wants to archive data from artifacts which is one of:
@@ -160,8 +143,8 @@ Example: The data set will be archived here.
 \examples{
 exampleRepoDir <- tempfile()
 createLocalRepo(repoDir = exampleRepoDir)
-data(iris)
-saveToLocalRepo(iris, repoDir=exampleRepoDir, archiveSessionInfo = TRUE)
+data(swiss)
+saveToLocalRepo(swiss, repoDir=exampleRepoDir, archiveSessionInfo = TRUE)
 showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
 showLocalRepo(method = "tags", repoDir = exampleRepoDir)
 
@@ -172,6 +155,8 @@ saveToLocalRepo(pl, repoDir=exampleRepoDir,
              userTags = c("do not delete", "my favourite graph"))
 aoptions('repoDir', system.file("graphGallery", package = "archivist"))
 showLocalRepo(method = "tags")
+data(iris)
+asave(iris, silent = FALSE) # iris was used in pl
 aoptions('repoDir', NULL, unset = TRUE)
 deleteLocalRepo(exampleRepoDir, TRUE)
 rm(exampleRepoDir)
@@ -182,7 +167,7 @@ Marcin Kosinski , \email{m.p.kosinski@gmail.com}
 }
 \seealso{
 For more detailed information check the \pkg{archivist} package
-\href{https://github.com/pbiecek/archivist#-the-list-of-use-cases-}{Use Cases}.
+\href{http://pbiecek.github.io/archivist/}{Use Cases}.
 The list of supported artifacts and their tags is available on \code{wiki} on \pkg{archivist}
 \href{https://github.com/pbiecek/archivist/wiki/archivist-package---Tags}{Github Repository}.
 
