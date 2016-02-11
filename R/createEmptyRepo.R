@@ -156,6 +156,7 @@ downloadDB <- function( remoteHook ){
     Temp3 <- paste0(Temp2, "/backpack.db")
     file.create( Temp3 )
     writeBin( db, Temp3 )
+    dir.create( paste0(Temp2, "/gallery") )
     return( Temp2 )
   } else {
     stop(paste0("Such a repo: ", remoteHook, " does not exist",
