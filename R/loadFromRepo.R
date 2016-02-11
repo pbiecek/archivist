@@ -224,11 +224,11 @@ loadFromRemoteRepo <- function( md5hash, repo = aoptions("repo"), user = aoption
     # database is needed to be downloaded
     Temp <- downloadDB( remoteHook )
       
-    md5hashList <- executeSingleQuery( dir = Temp, realDBname = FALSE,
+    md5hashList <- executeSingleQuery( dir = Temp, 
                                        paste0( "SELECT DISTINCT artifact FROM tag WHERE artifact LIKE '",md5hash,"%'" ) )
     md5hash <- as.character( md5hashList[, 1] )
     
-    file.remove( Temp )
+    unlink( Temp, recursive = TRUE, force = TRUE)
   }
       
   # load artifacts from Repository

@@ -60,8 +60,6 @@
 #' on which the Repository is stored. If the Repository is stored in the main folder of the Remote repository, this should be set 
 #' to \code{subdir = "/"} as default.
 #' 
-#' @param realDBname A logical value. Should not be changed by user. It is a technical parameter.
-#'
 #' @note
 #' If \code{repo} and \code{user} are set to \code{NULL} (as default) in the Remote mode then global parameters
 #' set in \link{setRemoteRepo} function are used.

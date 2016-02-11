@@ -56,8 +56,6 @@ match all conditions are returned. If \code{intersect = FALSE} then artifacts th
 are returned.}
 
 \item{intersect}{A logical value. See \code{patterns} for more details.}
-
-\item{realDBname}{A logical value. Should not be changed by user. It is a technical parameter.}
 }
 \value{
 \code{searchInRepo} returns character vector of \code{md5hashes} of artifacts that were searched for.

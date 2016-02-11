@@ -172,7 +172,7 @@ copyRemoteRepo <- function( repoTo, md5hashes, repo = aoptions("repo"), user = a
 
 copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, branch, subdir ){
   # clone artifact table
-  toInsertArtifactTable <- executeSingleQuery( dir = repoFrom, realDBname = local,
+  toInsertArtifactTable <- executeSingleQuery( dir = repoFrom, 
                       paste0( "SELECT DISTINCT * FROM artifact WHERE md5hash IN ",
                              "('", paste0( md5hashes, collapse="','"), "')" ) ) 
   
@@ -183,7 +183,7 @@ copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, bra
                               x[2], "','",
                               x[3], "')" ) ) } )
   # clone tag table
-  toInsertTagTable <- executeSingleQuery( dir = repoFrom, realDBname = local,
+  toInsertTagTable <- executeSingleQuery( dir = repoFrom,
                                                paste0( "SELECT DISTINCT * FROM tag WHERE artifact IN ",
                                                        "('", paste0( md5hashes, collapse="','"), "')" ) ) 
   apply( toInsertTagTable, 1, function(x){

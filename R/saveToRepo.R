@@ -176,7 +176,7 @@ saveToLocalRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
   repoDir <- checkDirectory( repoDir )
 
   # check if that artifact might have been already archived
-  check <- executeSingleQuery( dir = repoDir , realDBname = TRUE,
+  check <- executeSingleQuery( dir = repoDir , 
                     paste0( "SELECT * from artifact WHERE md5hash ='", md5hash, "'") )[,1]
 
   if ( length( check ) > 0 & !force ){
