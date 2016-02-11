@@ -123,7 +123,7 @@
 #'
 #' @param ascii A logical value. An \code{ascii} argument is passed to \link{save} function.
 #'
-#' @param artifactName The name of the artifact with which it should be archived.
+#' @param artifactName The name of the artifact with which it should be archived. If \code{NULL} then object's MD5 hash will be used instead.
 #'
 #'
 #' @author
@@ -168,8 +168,10 @@ saveToLocalRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
             length(archiveSessionInfo) == 1, length(force) == 1, 
             length(value) == 1, length(ascii) == 1, length(artifactName) == 1)
 
-
   md5hash <- digest( artifact )
+  if (is.null(artifactName)) {
+    artifactName <- md5hash
+  }
 
   repoDir <- checkDirectory( repoDir )
 
@@ -181,47 +183,19 @@ saveToLocalRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
     stop( paste0("Artifact ",md5hash," was already archived. If you want to archive it again, use force = TRUE. \n"))
   }
   if ( length( check ) > 0 & force & !silent){
-#    if ( rememberName ){
       warning( paste0("Artifact ",md5hash," was already archived. Another archivisation executed with success."))
-    } #else{
-#       warning( "This artifact's data was already archived. Another archivisation executed with success.")
-#     }
-#   }
+  } 
 
-  # save artifact to .rd file
-#   if ( rememberName & !(artifactName %in% ls(envir = parent.frame(1)))) {
-#     warning( paste0("Object with the name ", artifactName, ", not found. Saving without name."))
-#     rememberName = FALSE
-#   }
-  #if ( rememberName ){
-    assign(x = artifactName, value = artifact)
-    save( file = file.path(repoDir,"gallery", paste0(md5hash, ".rda")), ascii = ascii, list = artifactName)
-    addTag("format:rda", md5hash, dir=repoDir)
-  #}else{
-#    assign( value = artifact, x = md5hash, envir = .GlobalEnv )
-#    save( file = paste0(repoDir, "gallery/", md5hash, ".rda"),  ascii=TRUE, list = md5hash, envir = .GlobalEnv  )
-#     assign( value = artifact, x = md5hash, envir = .ArchivistEnv )
-#     save( file = file.path(repoDir, "gallery", paste0(md5hash, ".rda")),  ascii=ascii, list = md5hash, envir = .ArchivistEnv  )
-#     addTag("format:rda", md5hash, dir=repoDir)
-# 
-#     rm(list = md5hash, envir = .ArchivistEnv)
-#   }
+  assign(x = artifactName, value = artifact)
+  save( file = file.path(repoDir,"gallery", paste0(md5hash, ".rda")), ascii = ascii, list = artifactName)
+  addTag("format:rda", md5hash, dir=repoDir)
 
   # add entry to database
-#    if ( rememberName ){
-     addArtifact( md5hash, name = artifactName, dir = repoDir )
-#    }else{
-#      addArtifact( md5hash, name = md5hash , dir = repoDir)
-#    # rm( list = md5hash, envir = .ArchivistEnv )
-#    }
+   addArtifact( md5hash, name = artifactName, dir = repoDir )
 
   # whether to add Tags
   if ( archiveTags ) {
     extractedTags <- extractTags( artifact, objectNameX = artifactName )
-    # remove name from Tags
-#     if (!rememberName) {
-#       extractedTags <- extractedTags[!grepl(extractedTags, pattern="^name:")]
-#     }
     derivedTags <- attr( artifact, "tags" )
     sapply( c( extractedTags, userTags, derivedTags), addTag, md5hash = md5hash, dir = repoDir )
     # attr( artifact, "tags" ) are Tags specified by a user
@@ -232,9 +206,9 @@ saveToLocalRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
     if (!requireNamespace("devtools", quietly = TRUE)) {
       stop("devtools package required for archiveSessionInfo parameter")
     }
-    si <- devtools::session_info()
-    md5hashDF <- saveToLocalRepo( si, archiveData = FALSE, repoDir = repoDir, 
-                             artifactName = digest(si), archiveTags = FALSE, force=TRUE, 
+    sesionInfo <- devtools::session_info()
+    md5hashDF <- saveToLocalRepo( sesionInfo, archiveData = FALSE, repoDir = repoDir, 
+                             artifactName = NULL, archiveTags = FALSE, force=TRUE, 
                              archiveSessionInfo = FALSE)
     addTag( tag = paste0("session_info:", md5hashDF), md5hash = md5hash, dir = repoDir )
   }

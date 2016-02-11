@@ -53,7 +53,7 @@ Further arguments passed to \link{head}. See Details section about \code{firtsRo
 
 \item{ascii}{A logical value. An \code{ascii} argument is passed to \link{save} function.}
 
-\item{artifactName}{The name of the artifact with which it should be archived.}
+\item{artifactName}{The name of the artifact with which it should be archived. If \code{NULL} then object's MD5 hash will be used instead.}
 }
 \value{
 As a result of calling this function a character string is returned, which determines
