@@ -27,7 +27,6 @@ Before you start using this function, remember to set local or Remote repository
 to default by using \code{setLocalRepo()} or \code{setRemoteRepo} functions.
 }
 \examples{
-\dontrun{
 # read the object from local directory
 setLocalRepo(system.file("graphGallery", package = "archivist"))
 pl <- aread("600bda83cb840947976bd1ce3a11879d")
@@ -38,7 +37,6 @@ pl <- aread("pbiecek/graphGallery/600bda83cb840947976bd1ce3a11879d")
 # plot it
 pl
 }
-}
 \author{
 Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
 }
@@ -48,18 +46,16 @@ Other archivist: \code{\link{Repository}},
   \code{\link{addHooksToPrint}}, \code{\link{addTagsRepo}},
   \code{\link{aformat}}, \code{\link{ahistory}},
   \code{\link{alink}}, \code{\link{aoptions}},
-  \code{\link{archive}},
-  \code{\link{archivist-github-integration}},
   \code{\link{archivist-package}}, \code{\link{asearch}},
   \code{\link{asession}}, \code{\link{cache}},
-  \code{\link{cloneGithubRepo}},
   \code{\link{copyLocalRepo}},
-  \code{\link{createEmptyRepo}},
-  \code{\link{createMDGallery}}, \code{\link{deleteRepo}},
+  \code{\link{createLocalRepo}},
+  \code{\link{createMDGallery}},
+  \code{\link{deleteLocalRepo}},
   \code{\link{getRemoteHook}}, \code{\link{getTagsLocal}},
   \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
-  \code{\link{pushRepo}}, \code{\link{rmFromRepo}},
-  \code{\link{saveToRepo}},
+  \code{\link{rmFromLocalRepo}},
+  \code{\link{saveToLocalRepo}},
   \code{\link{searchInLocalRepo}},
   \code{\link{setLocalRepo}},
   \code{\link{shinySearchInLocalRepo}},

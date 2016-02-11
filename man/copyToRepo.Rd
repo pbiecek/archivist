@@ -66,7 +66,7 @@ extract all \code{md5hashes} in this way \code{unique(showLocalRepo(repoDir)[,1]
 # creating example Repository
  
 exampleRepoDir <- tempfile()
-createEmptyRepo( exampleRepoDir )
+createLocalRepo( exampleRepoDir )
 
 # Searching for md5hashes of artifacts (without data related to them)
 # in the archivist remote  Repository
@@ -85,14 +85,14 @@ showLocalRepo( repoDir = exampleRepoDir )
 
 # removing an example Repository
 
-deleteRepo( exampleRepoDir, deleteRoot=TRUE )
+deleteLocalRepo( exampleRepoDir, deleteRoot=TRUE )
 
 rm( exampleRepoDir )
 
 # many archivist-like Repositories on one Remote repository
 
 dir <- paste0(getwd(), "/ex1")
-createEmptyRepo( dir )
+createLocalRepo( dir )
 copyRemoteRepo( repoTo = dir , md5hashes = "ff575c261c949d073b2895b05d1097c3",
                 user="MarcinKosinski", repo="Museum",
                 branch="master", subdir="ex2")
@@ -103,7 +103,7 @@ showLocalRepo( repoDir = dir) # It is in backpack database indeed
 list.files( path = file.path( dir, "gallery" ) ) # it is also in gallery folder
 
 # removing an example Repository
-deleteRepo( dir, TRUE)
+deleteLocalRepo( dir, TRUE)
 
 rm(dir)
 
@@ -112,7 +112,7 @@ rm(dir)
 # creating example Repository
 
 exampleRepoDir <- tempfile()
-createEmptyRepo( exampleRepoDir )
+createLocalRepo( exampleRepoDir )
 
 # Searching for md5hashes of artifacts (without data related to them)
 # in the graphGallery  Repository
@@ -133,7 +133,7 @@ showLocalRepo( repoDir = exampleRepoDir )
 
 # removing an example Repository
 
-deleteRepo( exampleRepoDir, deleteRoot=TRUE )
+deleteLocalRepo( exampleRepoDir, deleteRoot=TRUE )
 
 rm( exampleRepoDir )
 rm( archivistRepo )
@@ -151,17 +151,15 @@ Other archivist: \code{\link{Repository}},
   \code{\link{addHooksToPrint}}, \code{\link{addTagsRepo}},
   \code{\link{aformat}}, \code{\link{ahistory}},
   \code{\link{alink}}, \code{\link{aoptions}},
-  \code{\link{archive}},
-  \code{\link{archivist-github-integration}},
   \code{\link{archivist-package}}, \code{\link{aread}},
   \code{\link{asearch}}, \code{\link{asession}},
-  \code{\link{cache}}, \code{\link{cloneGithubRepo}},
-  \code{\link{createEmptyRepo}},
-  \code{\link{createMDGallery}}, \code{\link{deleteRepo}},
+  \code{\link{cache}}, \code{\link{createLocalRepo}},
+  \code{\link{createMDGallery}},
+  \code{\link{deleteLocalRepo}},
   \code{\link{getRemoteHook}}, \code{\link{getTagsLocal}},
   \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
-  \code{\link{pushRepo}}, \code{\link{rmFromRepo}},
-  \code{\link{saveToRepo}},
+  \code{\link{rmFromLocalRepo}},
+  \code{\link{saveToLocalRepo}},
   \code{\link{searchInLocalRepo}},
   \code{\link{setLocalRepo}},
   \code{\link{shinySearchInLocalRepo}},

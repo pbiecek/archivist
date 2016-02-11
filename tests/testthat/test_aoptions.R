@@ -1,7 +1,7 @@
 # test aoptions
 test_that("test aoptions", {
   
-  createEmptyRepo("test1111", default = TRUE)
+  createLocalRepo("test1111", default = TRUE)
 #  setLocalRepo("test1111")
   invisible(aoptions("silent", TRUE))
   data(iris)
@@ -18,5 +18,5 @@ test_that("test aoptions", {
   # expect_equal(smry, "summary()")
   expect_equal(smry, "")
 
-  deleteRepo("test1111", deleteRoot = TRUE)
+  deleteLocalRepo("test1111", deleteRoot = TRUE)
 })

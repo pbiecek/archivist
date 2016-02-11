@@ -4,12 +4,22 @@ archivist 2.0
 * **New functions**:
     1. All *Github* functions are now *Remote* functions. This is because we support more than just GitHub repos (currently github + git/hg bitbucket)
     2. `RemoteRepoCheck` is used to verify if parameters for remote repo are correct.
-    2. `asession` returns session info for given artifact (similar to aread).
-    2. `aformat` returns vector of formats in which the artifact is saved (similar to aread).
+    3. `asession` returns session info for given artifact (similar to aread).
+    4. `aformat` returns vector of formats in which the artifact is saved (similar to aread).
 * **New features**:
     1. `saveToRepo` by default saves session info.
     2. `repoDirGit` has changed name to `subdir` and the default value is now '/'.
-
+    3. All remote functions support github and bitbucket (see the `repoType` parameter).
+    4. `alink` is now working with github and bitbucket repositories.
+    5. `asearch` returns named list of artifacts. MD5hashes are used as names.
+    6. `silent=TRUE` by default in `saveToRepo`. Less warnings.
+    7. `saveToRepo` has now two copies, consistent with other names `saveToLocalRepo` an short one `asave`.
+* **Deprecations and new naming convention**:
+    1. `archive`, `cloneGitHubRepo`, `createGitHubRepo`, (`deleteGithubRepo`) `deleteGitHubRepo`, (`pushRepo`) `pushGitHubRepo`, (`pullRepo`) `pullGitHubRepo` have been moved to separate [`archivist.github`](https://github.com/MarcinKosinski/archivist.github) package to maintain Local/Remote consistency. [[#198](https://github.com/pbiecek/archivist/issues/198)].
+      1. For the above reason `deleteRepo` was deprecated. Use `deleteLocalRepo`
+      2. For the above reason `createEmptyLocalRepo` and `createEmptyRepo` were deprecated. Use `createLocalRepo`.
+      3. For the above reason `rmFromRepo` was deprecated. Use `rmFromLocalRepo`
+    
 archivist 1.9
 ----------------------------------------------------------------
 * **New functions**:

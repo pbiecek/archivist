@@ -196,10 +196,10 @@
 #'  \itemize{
 #'    \item \link{addTagsRepo}
 #'    \item \link{getTagsLocal}
-#'    \item \link{getTagsGithub}
-#'    \item \link{saveToRepo}
+#'    \item \link{getTagsRemote}
+#'    \item \link{saveToLocalRepo}
 #'    \item \link{searchInLocalRepo},
-#'    \item \link{searchInGithubRepo}. 
+#'    \item \link{searchInRemoteRepo}. 
 #'  }
 #' 
 #' @note 
@@ -211,18 +211,19 @@
 #'  \itemize{
 #'    \item \code{saveToRepo(model, repoDir, userTags = c("my_model", "do not delete"))}.
 #'  }
+#'  Specifing additional \code{Tags} by attributes can be beneficial when one uses \link{addHooksToPrint}.
 #' 
 #' @examples
 #' 
-#' # examples
 #' \dontrun{
+#' # examples
 #' # data.frame object
 #' data(iris)
 #' exampleRepoDir <- tempfile()
-#' createEmptyRepo(repoDir = exampleRepoDir)
-#' saveToRepo( iris, repoDir=exampleRepoDir )
+#' createLocalRepo(repoDir = exampleRepoDir)
+#' saveToLocalRepo( iris, repoDir=exampleRepoDir )
 #' showLocalRepo( exampleRepoDir, "tags" )
-#' deleteRepo( exampleRepoDir, deleteRoot=TRUE )
+#' deleteLocalRepo( exampleRepoDir, deleteRoot=TRUE )
 #' 
 #' # ggplot/gg object
 #' library(ggplot2)
@@ -233,29 +234,29 @@
 #'   geom_point() +  geom_point(data = ds, aes(y = mean),
 #'                              colour = 'red', size = 3)
 #' exampleRepoDir <- tempfile()
-#' createEmptyRepo( repoDir = exampleRepoDir )
+#' createLocalRepo( repoDir = exampleRepoDir )
 #' saveToRepo( myplot123, repoDir=exampleRepoDir )
 #' showLocalRepo( exampleRepoDir, "tags" )
-#' deleteRepo( exampleRepoDir, deleteRoot=TRUE )
+#' deleteLocalRepo( exampleRepoDir, deleteRoot=TRUE )
 #' 
 #' # lm object
 #' model <- lm(Sepal.Length~ Sepal.Width + Petal.Length + Petal.Width, 
 #'            data= iris)
 #' exampleRepoDir <- tempfile()
-#' createEmptyRepo( repoDir = exampleRepoDir )
-#' saveToRepo( model, repoDir=exampleRepoDir )
+#' createLocalRepo( repoDir = exampleRepoDir )
+#' asave( model, repoDir=exampleRepoDir )
 #' showLocalRepo( exampleRepoDir, "tags" )
-#' deleteRepo( exampleRepoDir, TRUE )
+#' deleteLocalRepo( exampleRepoDir, TRUE )
 #' 
 #' # agnes (twins) object
 #' library(cluster)
 #' data(votes.repub)
 #' agn1 <- agnes(votes.repub, metric = "manhattan", stand = TRUE)
 #' exampleRepoDir <- tempfile()
-#' createEmptyRepo( repoDir = exampleRepoDir )
+#' createLocalRepo( repoDir = exampleRepoDir )
 #' saveToRepo( agn1, repoDir=exampleRepoDir )
 #' showLocalRepo( exampleRepoDir, "tags" )
-#' deleteRepo( exampleRepoDir, TRUE )
+#' deleteLocalRepo( exampleRepoDir, TRUE )
 #' 
 #' # fanny (partition) object
 #' x <- rbind(cbind(rnorm(10, 0, 0.5), rnorm(10, 0, 0.5)),
@@ -263,10 +264,10 @@
 #'           cbind(rnorm( 3,3.2,0.5), rnorm( 3,3.2,0.5)))
 #' fannyx <- fanny(x, 2)
 #' exampleRepoDir <- tempfile()
-#' createEmptyRepo( repoDir = exampleRepoDir )
+#' createLocalRepo( repoDir = exampleRepoDir )
 #' saveToRepo( fannyx, repoDir=exampleRepoDir )
 #' showLocalRepo( exampleRepoDir, "tags" )
-#' deleteRepo( exampleRepoDir, TRUE )
+#' deleteLocalRepo( exampleRepoDir, TRUE )
 #' 
 #' # lda object
 #' library(MASS)
@@ -280,10 +281,10 @@
 #'            56,54,65,135,84,112,131,60,102,14,120,117,53,138,5)
 #' lda1 <- lda(Sp ~ ., Iris, prior = c(1,1,1)/3, subset = train)
 #' exampleRepoDir <- tempfile()
-#' createEmptyRepo( repoDir = exampleRepoDir )
-#' saveToRepo( lda1, repoDir=exampleRepoDir )
+#' createLocalRepo( repoDir = exampleRepoDir )
+#' asave( lda1, repoDir=exampleRepoDir )
 #' showLocalRepo( exampleRepoDir, "tags" )
-#' deleteRepo( exampleRepoDir, TRUE )
+#' deleteLocalRepo( exampleRepoDir, TRUE )
 #' 
 #' # qda object
 #' tr <- c(7,38,47,43,20,37,44,22,46,49,50,19,4,32,12,29,27,34,2,1,17,13,3,35,36)
@@ -291,10 +292,10 @@
 #' cl <- factor(c(rep("s",25), rep("c",25), rep("v",25)))
 #' qda1 <- qda(train, cl)
 #' exampleRepoDir <- tempfile()
-#' createEmptyRepo( repoDir = exampleRepoDir )
+#' createLocalRepo( repoDir = exampleRepoDir )
 #' saveToRepo( qda1, repoDir=exampleRepoDir )
 #' showLocalRepo( exampleRepoDir, "tags" )
-#' deleteRepo( exampleRepoDir, TRUE )
+#' deleteLocalRepo( exampleRepoDir, TRUE )
 #' 
 #' 
 #' # glmnet object
@@ -304,10 +305,10 @@
 #' bk=rnorm(100)
 #' glmnet1=glmnet(zk,bk)
 #' exampleRepoDir <- tempfile()
-#' createEmptyRepo( repoDir = exampleRepoDir )
+#' createLocalRepo( repoDir = exampleRepoDir )
 #' saveToRepo( glmnet1, repoDir=exampleRepoDir )
 #' showLocalRepo( exampleRepoDir, "tags" )
-#' deleteRepo( exampleRepoDir, TRUE )
+#' deleteLocalRepo( exampleRepoDir, TRUE )
 #' 
 #' # trellis object
 #' require(stats)
@@ -337,10 +338,10 @@
 #'                        },
 #'                        aspect = "xy")
 #' exampleRepoDir <- tempfile()
-#' createEmptyRepo( repoDir = exampleRepoDir )
+#' createLocalRepo( repoDir = exampleRepoDir )
 #' saveToRepo( trellis.plot, repoDir=exampleRepoDir )
 #' showLocalRepo( exampleRepoDir, "tags" )
-#' deleteRepo( exampleRepoDir, TRUE )
+#' deleteLocalRepo( exampleRepoDir, TRUE )
 #' 
 #' # htest object
 #' 
@@ -348,10 +349,10 @@
 #' y <- c(0.878, 0.647, 0.598, 2.05, 1.06, 1.29, 1.06, 3.14, 1.29)
 #' this.test <- wilcox.test(x, y, paired = TRUE, alternative = "greater")
 #' exampleRepoDir <- tempfile()
-#' createEmptyRepo( repoDir = exampleRepoDir )
+#' createLocalRepo( repoDir = exampleRepoDir )
 #' saveToRepo( this.test, repoDir=exampleRepoDir )
 #' showLocalRepo( exampleRepoDir, "tags" )
-#' deleteRepo( exampleRepoDir, TRUE )
+#' deleteLocalRepo( exampleRepoDir, TRUE )
 #' 
 #' # survfit object
 #' library( survival )
@@ -363,20 +364,20 @@
 #' # Fit a stratified model 
 #' myFit <-  survfit( coxph(Surv(time, status) ~ x + strata(sex), test1), data = test1  )
 #' exampleRepoDir <- tempfile()
-#' createEmptyRepo( repoDir = exampleRepoDir )
+#' createLocalRepo( repoDir = exampleRepoDir )
 #' saveToRepo( myFit , repoDir=exampleRepoDir )
 #' showLocalRepo( exampleRepoDir, "tags" )[,-3]
-#' deleteRepo( exampleRepoDir, TRUE)
+#' deleteLocalRepo( exampleRepoDir, TRUE)
 #' 
 #' # origin of the artifacts stored as a name - chaining code
 #' library(dplyr)
 #' exampleRepoDir <- tempfile()
-#' createEmptyRepo( repoDir = exampleRepoDir )
+#' createLocalRepo( repoDir = exampleRepoDir )
 #' data("hflights", package = "hflights")
 #' hflights %>%
 #'   group_by(Year, Month, DayofMonth) %>%
 #'   select(Year:DayofMonth, ArrDelay, DepDelay) %>%
-#'   saveToRepo( exampleRepoDir, chain = TRUE ) %>%
+#'   saveToRepo( exampleRepoDir, value = TRUE ) %>%
 #'   # here the artifact is stored but chaining is not finished
 #'   summarise(
 #'     arr = mean(ArrDelay, na.rm = TRUE),
@@ -388,7 +389,7 @@
 #'   # artifact is stored
 #' showLocalRepo( exampleRepoDir, "tags" )[,-3]
 #' showLocalRepo( exampleRepoDir )
-#' deleteRepo( exampleRepoDir, TRUE)
+#' deleteLocalRepo( exampleRepoDir, TRUE)
 #' 
 #' rm( exampleRepoDir )
 #' }

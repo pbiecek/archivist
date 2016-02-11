@@ -3,13 +3,13 @@
 #' @title Split Tags in Repository
 #'
 #' @description
-#' \code{splitTagsLocal} and \code{splitTagsGithub} functions split \code{tag} column from
+#' \code{splitTagsLocal} and \code{splitTagsRemote} functions split \code{tag} column from
 #' \emph{tag} table placed in \code{backpack.db} into two separate columns:
 #' \code{tagKey} and \code{tagValue}.
 #' 
 #' @details
 #' \code{tag} column from \emph{tag} table has normally the follwing structure:
-#' \code{TagKey:TagValue}. \code{splitTagsLocal} and \code{splitTagsGithub} functions
+#' \code{TagKey:TagValue}. \code{splitTagsLocal} and \code{splitTagsRemote} functions
 #' can be used to split \code{tag} column into two separate columns:
 #' \code{tagKey} and \code{tagValue}. As a result functions from \code{dplyr} package
 #' can be used to easily summarize, search, and extract artifacts' Tags.
@@ -45,7 +45,7 @@
 #' 
 #' @note
 #' If \code{repo} and \code{user} are set to \code{NULL} (as default) in the Github mode
-#' then global parameters set in \link{setGithubRepo} function are used.
+#' then global parameters set in \link{setRemoteRepo} function are used.
 #' 
 #' Sometimes we can use \code{addTags*} function or \code{userTags} parameter
 #' in \code{saveToRepo} to specify a \code{Tag} which might not match
@@ -69,7 +69,7 @@
 #' # Let's check how does table tag look like while we are using the
 #' # Gitub repository.
 #' # We will choose only special columns of data frames that show Tags
-#' head(showGithubRepo( user = "pbiecek", repo = "archivist", method = "tags" )[,2])
+#' head(showRemoteRepo( user = "pbiecek", repo = "archivist", method = "tags" )[,2])
 #' head(splitTagsGithub( user = "pbiecek", repo = "archivist" )[,2:3])
 #' 
 #' head(splitTagsRemote("PieczaraPietraszki", "BetaAndBit", "master", "UniwersytetDzieci/arepo"))
@@ -93,12 +93,6 @@ splitTagsRemote <- function( repo = aoptions("repo"), user = aoptions("user"),
   
 }
 
-#' @rdname splitTags
-#' @export
-splitTagsGithub <- splitTagsRemote
-
-#' @rdname splitTags
-#' @export
 splitTags <- function( repoDir = NULL, repo = aoptions("repo"), user = aoptions("user"),
                         branch = "master", subdir = aoptions("subdir"), repoType = aoptions("repoType"),
                         local = TRUE ){  

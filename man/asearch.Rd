@@ -57,7 +57,7 @@ model3 <- lm(Sepal.Length~ Sepal.Width, data= iris)
 
 ## creating example default local repository
 exampleRepoDir <- tempfile()
-createEmptyRepo(repoDir = exampleRepoDir)
+createLocalRepo(repoDir = exampleRepoDir)
 ## setting default local repository
 setLocalRepo( repoDir = exampleRepoDir )
 
@@ -77,7 +77,7 @@ lm_c_PW <- asearch(patterns = c("class:lm","coefname:Petal.Width"))
 
 
 ## deleting example repository
-deleteRepo(repoDir = exampleRepoDir, deleteRoot = TRUE)
+deleteLocalRepo(repoDir = exampleRepoDir, deleteRoot = TRUE)
 rm(exampleRepoDir)
 
 ### default GitHub version
@@ -87,7 +87,7 @@ setRemoteRepo( user = "pbiecek", repo = "archivist")
 showRemoteRepo(method = "tags")$tag
 searchInRemoteRepo(pattern = "class:lm")
 searchInRemoteRepo(pattern = "class:gg")
-getTagsGithub(md5hash = "cd6557c6163a6f9800f308f343e75e72", tag = "")
+getTagsRemote(md5hash = "cd6557c6163a6f9800f308f343e75e72", tag = "")
 
 ## Searching for objects of class:lm
 asearch(patterns = c("class:lm"))
@@ -113,18 +113,16 @@ Other archivist: \code{\link{Repository}},
   \code{\link{addHooksToPrint}}, \code{\link{addTagsRepo}},
   \code{\link{aformat}}, \code{\link{ahistory}},
   \code{\link{alink}}, \code{\link{aoptions}},
-  \code{\link{archive}},
-  \code{\link{archivist-github-integration}},
   \code{\link{archivist-package}}, \code{\link{aread}},
   \code{\link{asession}}, \code{\link{cache}},
-  \code{\link{cloneGithubRepo}},
   \code{\link{copyLocalRepo}},
-  \code{\link{createEmptyRepo}},
-  \code{\link{createMDGallery}}, \code{\link{deleteRepo}},
+  \code{\link{createLocalRepo}},
+  \code{\link{createMDGallery}},
+  \code{\link{deleteLocalRepo}},
   \code{\link{getRemoteHook}}, \code{\link{getTagsLocal}},
   \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
-  \code{\link{pushRepo}}, \code{\link{rmFromRepo}},
-  \code{\link{saveToRepo}},
+  \code{\link{rmFromLocalRepo}},
+  \code{\link{saveToLocalRepo}},
   \code{\link{searchInLocalRepo}},
   \code{\link{setLocalRepo}},
   \code{\link{shinySearchInLocalRepo}},

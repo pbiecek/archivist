@@ -44,7 +44,11 @@ The generic \code{print.ahistory} function plots the history in a human readable
 There are provided functions (\code{print.ahistory} and \code{print.ahistoryKable}) to print the artifact's history. 
 History can be printed either in a \code{regular} way which is friendy for the console output or in a \code{kable} format which 
 prints the artifact's history in a way \link[knitr]{kable} function would. This is convenient when one prints history
-in \code{.Rmd} files using \link[rmarkdown]{rmarkdown}
+in \code{.Rmd} files using \link[rmarkdown]{rmarkdown}.
+
+Moreover when user passes \code{format = 'kable'} and \code{alink = TRUE} then one can use links for remote Repository. 
+Then mdhashes are taken from Local Repository, so user has to specify \code{repo}, \code{user} and \code{repoDir} even though 
+they are set globally, because \code{repo} is a substring of \code{repoDir} and during evalutation of \code{...} R treats \code{repo} as \code{repoDir}.
 }
 \examples{
 \dontrun{
@@ -60,6 +64,9 @@ filter(Sepal.Length < 6) \%a\%
 ahistory(artifact)
 ahistory(artifact, format = "kable")  
 print(ahistory(artifact, format = "kable"), format = "latex")
+ahistory(artifact, format = "kable", alink = TRUE, repoDir = "ahistory_check",
+repo = "repo", user = "user")
+
 
 repoDir <- file.path(getwd(), "ahistory_check")
 deleteRepo(repoDir, deleteRoot = TRUE)
@@ -76,18 +83,17 @@ Other archivist: \code{\link{Repository}},
   \code{\link{Tags}}, \code{\link{\%a\%}},
   \code{\link{addHooksToPrint}}, \code{\link{addTagsRepo}},
   \code{\link{aformat}}, \code{\link{alink}},
-  \code{\link{aoptions}}, \code{\link{archive}},
-  \code{\link{archivist-github-integration}},
-  \code{\link{archivist-package}}, \code{\link{aread}},
-  \code{\link{asearch}}, \code{\link{asession}},
-  \code{\link{cache}}, \code{\link{cloneGithubRepo}},
+  \code{\link{aoptions}}, \code{\link{archivist-package}},
+  \code{\link{aread}}, \code{\link{asearch}},
+  \code{\link{asession}}, \code{\link{cache}},
   \code{\link{copyLocalRepo}},
-  \code{\link{createEmptyRepo}},
-  \code{\link{createMDGallery}}, \code{\link{deleteRepo}},
+  \code{\link{createLocalRepo}},
+  \code{\link{createMDGallery}},
+  \code{\link{deleteLocalRepo}},
   \code{\link{getRemoteHook}}, \code{\link{getTagsLocal}},
   \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
-  \code{\link{pushRepo}}, \code{\link{rmFromRepo}},
-  \code{\link{saveToRepo}},
+  \code{\link{rmFromLocalRepo}},
+  \code{\link{saveToLocalRepo}},
   \code{\link{searchInLocalRepo}},
   \code{\link{setLocalRepo}},
   \code{\link{shinySearchInLocalRepo}},

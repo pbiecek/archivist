@@ -77,7 +77,7 @@
 #'  
 #' zipLocalRepo( exampleRepoDir )
 #' 
-#' deleteRepo( exampleRepoDir, TRUE)
+#' deleteLocalRepo( exampleRepoDir, TRUE)
 #' 
 #' rm( exampleRepoDir )
 #' 
@@ -128,8 +128,8 @@ zipRemoteRepo <- function( repoTo = getwd(), user = aoptions("user"), repo = aop
   
   # clone Remote repo
   tempRepoTo <- gsub(pattern = ".zip", replacement = "", x = zipname)
-  createEmptyRepo( tempRepoTo, force = TRUE )
-  on.exit(deleteRepo( tempRepoTo, deleteRoot = TRUE ))
+  createLocalRepo( tempRepoTo, force = TRUE )
+  on.exit(deleteLocalRepo( tempRepoTo, deleteRoot = TRUE ))
   hashes <- searchInRemoteRepo( pattern="", user=user, repo=repo, branch = branch, subdir = subdir, repoType=repoType, fixed=FALSE )
   copyRemoteRepo(repoTo = tempRepoTo , md5hashes = hashes,
                  user=user, repo=repo, branch = branch, subdir = subdir, repoType=repoType)

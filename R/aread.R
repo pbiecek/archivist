@@ -25,7 +25,6 @@
 #' Przemyslaw Biecek, \email{przemyslaw.biecek@@gmail.com}
 #' 
 #' @examples
-#' \dontrun{
 #' # read the object from local directory
 #' setLocalRepo(system.file("graphGallery", package = "archivist"))
 #' pl <- aread("600bda83cb840947976bd1ce3a11879d")
@@ -35,7 +34,6 @@
 #' pl <- aread("pbiecek/graphGallery/600bda83cb840947976bd1ce3a11879d")
 #' # plot it
 #' pl
-#' }
 #' @family archivist
 #' @rdname aread
 #' @export

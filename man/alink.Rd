@@ -37,7 +37,7 @@ This function returns a link to download artifact that is archived on GitHub.
 }
 \description{
 \code{alink} returns a link to download an artifact from the Remote \link{Repository}.
-Artifact has to be already archived on GitHub, e.g with \link{archive} function (recommended) or 
+Artifact has to be already archived on GitHub, e.g with \code{archivist.github::archive} function (recommended) or 
 \link{saveToRepo} function and traditional Git manual synchronization.
 To learn more about artifacts visit \link[archivist]{archivist-package}.
 }
@@ -45,8 +45,8 @@ To learn more about artifacts visit \link[archivist]{archivist-package}.
 For more information about \code{md5hash} see \link{md5hash}.
 }
 \examples{
-\dontrun{
 # link in markdown format
+\dontrun{
 alink('pbiecek/archivist/134ecbbe2a8814d98f0c2758000c408e')
 # link in markdown format with additional subdir
 alink(user='BetaAndBit',repo='PieczaraPietraszki',
@@ -56,30 +56,8 @@ alink(user='BetaAndBit',repo='PieczaraPietraszki',
 alink(user = 'MarcinKosinski', repo = 'Museum',
       md5hash = '1651caa499a2b07a3bdad3896a2fc717', format = 'latex')
 # link in raw format
-alink('pbiecek/graphGallery/02af4f99e440324b9e329faa293a9394', rawLink = TRUE)  
-
-## Example with archive function and empty Github Repository creation
-# Credentials for GitHub API
-library(httr)
-myapp <- oauth_app("github",
-                   key = app_key,
-                   secret = app_secret)
-github_token <- oauth2.0_token(oauth_endpoints("github"),
-                               myapp,
-                               scope = "public_repo")
-# setting options
-                    
-aoptions("github_token", github_token)
-aoptions("user", user)
-aoptions("password", password)
-
-createEmptyGithubRepo("archive-test4", default = TRUE)
-## artifact's archiving
-vectorLong <- 1:100
-vectorShort <- 1:20
-# archiving
-alink(archive(vectorLong))
-archive(vectorShort, alink = TRUE)
+alink('pbiecek/graphGallery/f5185c458bff721f0faa8e1332f01e0f', rawLink = TRUE)  
+alink('pbiecek/graphgallerygit/02af4f99e440324b9e329faa293a9394', repoType='bitbucket')  
 }
 }
 \author{
@@ -90,18 +68,17 @@ Other archivist: \code{\link{Repository}},
   \code{\link{Tags}}, \code{\link{\%a\%}},
   \code{\link{addHooksToPrint}}, \code{\link{addTagsRepo}},
   \code{\link{aformat}}, \code{\link{ahistory}},
-  \code{\link{aoptions}}, \code{\link{archive}},
-  \code{\link{archivist-github-integration}},
-  \code{\link{archivist-package}}, \code{\link{aread}},
-  \code{\link{asearch}}, \code{\link{asession}},
-  \code{\link{cache}}, \code{\link{cloneGithubRepo}},
+  \code{\link{aoptions}}, \code{\link{archivist-package}},
+  \code{\link{aread}}, \code{\link{asearch}},
+  \code{\link{asession}}, \code{\link{cache}},
   \code{\link{copyLocalRepo}},
-  \code{\link{createEmptyRepo}},
-  \code{\link{createMDGallery}}, \code{\link{deleteRepo}},
+  \code{\link{createLocalRepo}},
+  \code{\link{createMDGallery}},
+  \code{\link{deleteLocalRepo}},
   \code{\link{getRemoteHook}}, \code{\link{getTagsLocal}},
   \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
-  \code{\link{pushRepo}}, \code{\link{rmFromRepo}},
-  \code{\link{saveToRepo}},
+  \code{\link{rmFromLocalRepo}},
+  \code{\link{saveToLocalRepo}},
   \code{\link{searchInLocalRepo}},
   \code{\link{setLocalRepo}},
   \code{\link{shinySearchInLocalRepo}},

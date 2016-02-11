@@ -1,5 +1,5 @@
 test_that("setLocalRepo sets repo", {
-  createEmptyRepo("tmp_archivist")
+  createLocalRepo("tmp_archivist")
   setLocalRepo(repoDir = "tmp_archivist")
   expect_equal(aoptions("repoDir"), "tmp_archivist")
   
@@ -8,7 +8,7 @@ test_that("setLocalRepo sets repo", {
   expect_equal(aoptions("repo"), "archivist")
   expect_equal(aoptions("branch"), "master")
   expect_equal(aoptions("subdir"), "clone123")
-  deleteRepo("tmp_archivist", deleteRoot = TRUE)
+  deleteLocalRepo("tmp_archivist", deleteRoot = TRUE)
   aoptions("subdir", "/")
 })
 

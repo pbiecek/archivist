@@ -48,9 +48,9 @@
 #' \dontrun{
 #'
 #' createMDGallery(user = 'MarcinKosinski', repo = 'Museum',
-#'  'README_test7.md', addTags = TRUE)
+#'  'README_test1.md', addTags = TRUE)
 #' createMDGallery('graphGallery', 'pbiecek', addMiniature = TRUE,
-#'  'README_test7.md', addTags = TRUE)
+#'  'README_test2.md', addTags = TRUE)
 #'
 #' }
 #'

@@ -38,12 +38,11 @@ are time consuming (see \code{Examples}). If objects are big and calculations ar
 disk input-output operations may take more time than calculations itself.
 }
 \examples{
-\dontrun{
 
 # objects preparation
 library(lubridate)
 cacheRepo <- tempfile()
-createEmptyRepo( cacheRepo )
+createLocalRepo( cacheRepo )
 
 ## Example 1:
 # cache is useful when objects used by FUN are not that big but calculations
@@ -75,10 +74,9 @@ tmp <- cache(cacheRepo, testFun, "Say hallo!", notOlderThan = now())
 # passes with expiration date [within hour]
 tmp <- cache(cacheRepo, testFun, "Say hallo!", notOlderThan = now() - hours(1))
 
-deleteRepo( cacheRepo, TRUE)
+deleteLocalRepo( cacheRepo, TRUE)
 rm( cacheRepo )
 
-}
 }
 \author{
 Przemyslaw Biecek, \email{Przemyslaw.Biecek@gmail.com}
@@ -92,18 +90,16 @@ Other archivist: \code{\link{Repository}},
   \code{\link{addHooksToPrint}}, \code{\link{addTagsRepo}},
   \code{\link{aformat}}, \code{\link{ahistory}},
   \code{\link{alink}}, \code{\link{aoptions}},
-  \code{\link{archive}},
-  \code{\link{archivist-github-integration}},
   \code{\link{archivist-package}}, \code{\link{aread}},
   \code{\link{asearch}}, \code{\link{asession}},
-  \code{\link{cloneGithubRepo}},
   \code{\link{copyLocalRepo}},
-  \code{\link{createEmptyRepo}},
-  \code{\link{createMDGallery}}, \code{\link{deleteRepo}},
+  \code{\link{createLocalRepo}},
+  \code{\link{createMDGallery}},
+  \code{\link{deleteLocalRepo}},
   \code{\link{getRemoteHook}}, \code{\link{getTagsLocal}},
   \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
-  \code{\link{pushRepo}}, \code{\link{rmFromRepo}},
-  \code{\link{saveToRepo}},
+  \code{\link{rmFromLocalRepo}},
+  \code{\link{saveToLocalRepo}},
   \code{\link{searchInLocalRepo}},
   \code{\link{setLocalRepo}},
   \code{\link{shinySearchInLocalRepo}},

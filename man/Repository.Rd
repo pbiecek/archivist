@@ -42,12 +42,12 @@ Functions using \code{Repository} are:
  \item \link{asearch},
  \item \link{cache},
  \item \link{getTagsLocal},
- \item \link{getTagsGithub},
+ \item \link{getTagsRemote},
  \item \link{loadFromLocalRepo}, 
  \item \link{loadFromRemoteRepo},
  \item \link{multiSearchInLocalRepo},
  \item \link{multiSearchInRemoteRepo},
- \item \link{rmFromRepo},
+ \item \link{rmFromLocalRepo},
  \item \link{saveToRepo},
  \item \link{searchInLocalRepo},
  \item \link{searchInRemoteRepo}, 
@@ -59,11 +59,11 @@ Functions using \code{Repository} are:
  }
 Function creating \code{Repository} is:
 \itemize{
- \item \link{createEmptyRepo}.
+ \item \link{createLocalRepo}.
 }
 Function deleting \code{Repository} is:
 \itemize{
- \item \link{deleteRepo}.
+ \item \link{deleteLocalRepo}.
 }
 Functions coping \code{Repository} are:
 \itemize{
@@ -87,18 +87,16 @@ Other archivist: \code{\link{Tags}}, \code{\link{\%a\%}},
   \code{\link{addHooksToPrint}}, \code{\link{addTagsRepo}},
   \code{\link{aformat}}, \code{\link{ahistory}},
   \code{\link{alink}}, \code{\link{aoptions}},
-  \code{\link{archive}},
-  \code{\link{archivist-github-integration}},
   \code{\link{archivist-package}}, \code{\link{aread}},
   \code{\link{asearch}}, \code{\link{asession}},
-  \code{\link{cache}}, \code{\link{cloneGithubRepo}},
-  \code{\link{copyLocalRepo}},
-  \code{\link{createEmptyRepo}},
-  \code{\link{createMDGallery}}, \code{\link{deleteRepo}},
+  \code{\link{cache}}, \code{\link{copyLocalRepo}},
+  \code{\link{createLocalRepo}},
+  \code{\link{createMDGallery}},
+  \code{\link{deleteLocalRepo}},
   \code{\link{getRemoteHook}}, \code{\link{getTagsLocal}},
   \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
-  \code{\link{pushRepo}}, \code{\link{rmFromRepo}},
-  \code{\link{saveToRepo}},
+  \code{\link{rmFromLocalRepo}},
+  \code{\link{saveToLocalRepo}},
   \code{\link{searchInLocalRepo}},
   \code{\link{setLocalRepo}},
   \code{\link{shinySearchInLocalRepo}},

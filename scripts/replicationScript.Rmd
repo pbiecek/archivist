@@ -29,6 +29,7 @@ archivist::aread("pbiecek/graphGallery/600bda83cb840947976bd1ce3a11879d")
 These instructions retrieve R objects from graphGallery directory attached to the archivist package.
 
 ```{r}
+library(archivist)
 setLocalRepo(system.file("graphGallery", package = "archivist"))
 # plot
 archivist::aread("600bda83cb840947976bd1ce3a11879d")
@@ -62,15 +63,19 @@ lapply(models, coef)
 ```
 
 ```{r}
-## from global
-#plots <- asearch("pbiecek/graphGallery", 
-#    patterns = c("class:gg", "labelx:Sepal.Length"))
+# from global
+plots <- asearch("pbiecek/graphGallery", 
+    patterns = c("class:gg", "labelx:Sepal.Length"))
+length(plots)
+
+library("gridExtra")
+
+do.call(grid.arrange,  plots)
 
 # from local
 plots <- asearch(patterns = c("class:gg", "labelx:Sepal.Length"))
 length(plots)
 
-library("gridExtra")
 do.call(grid.arrange,  plots)
 ```
 
@@ -78,11 +83,10 @@ do.call(grid.arrange,  plots)
 
 Retrieval of the object's pedigree.
 
-
 ```{r, message=FALSE, warning=FALSE}
 library("archivist")
 library("dplyr")
-createEmptyRepo("tmp_archivist", default = TRUE)
+createLocalRepo("arepo", default = TRUE)
 
 data(iris)
 
@@ -96,6 +100,13 @@ ahistory(tmp)
 ahistory(md5hash = "050e41ec3bc40b3004bc6bdd356acae7")
 ```
 
+Session info
+
+```{r}
+sinfo <- asession("050e41ec3bc40b3004bc6bdd356acae7")
+head(sinfo$packages)
+```
+
 # Section 3.1
 
 Repository management.
@@ -104,32 +115,31 @@ Creation of a new empty repository.
 
 ```{r}
 # global path
-repo <- "/Users/pbiecek/GitHub/new_repo"
+repo <- "/Users/pbiecek/GitHub/arepo"
 # local path
-repo <- "new_repo"
-createEmptyRepo(repoDir = repo, default = TRUE)
+repo <- "arepo"
+createLocalRepo(repoDir = repo, default = TRUE)
 ```
 
 Deletion of an existing repository
 
 
 ```{r}
-repo <- "new_repo"
-deleteRepo(repoDir = repo)
+repo <- "arepo"
+deleteLocalRepo(repoDir = repo)
 ```
 
 
 Copying artifacts from other repositories.
 
 ```{r}
-repo <- "new_repo"
-createEmptyRepo(repoDir = repo)
-copyGithubRepo(repoTo = repo, md5hashes= "2166dfbd3a7a68a91a2f8e6df1a44111", 
-         user = "pbiecek", repo = "graphGallery")
+repo <- "arepo"
+createLocalRepo(repoDir = repo, default = TRUE)
+copyRemoteRepo(repoTo = repo, md5hashes= "600bda83cb840947976bd1ce3a11879d", 
+         user = "pbiecek", repo = "graphGallery", repoType = "github")
 ```
 
 Showing repository statistics
-
 
 ```{r}
 showLocalRepo(repoDir = repo, method = "tags")
@@ -143,7 +153,7 @@ summaryLocalRepo(repoDir =
 Setting default repository
 
 ```{r}
-setGithubRepo(user = "pbiecek", repo = "graphGallery")
+setRemoteRepo(user = "pbiecek", repo = "graphGallery", repoType = "github")
 setLocalRepo(repoDir = system.file("graphGallery", package = "archivist"))
 ```
 
@@ -151,9 +161,15 @@ Saving to the default repository.
 
 ```{r}
 setLocalRepo(repoDir = repo)
-saveToRepo(iris)
+data(iris)
+saveToLocalRepo(iris)
 ```
 
+aoptions
+
+```{r}
+aoptions("repoType", "github")
+```
 
 # Section 3.2
 
@@ -163,15 +179,20 @@ Saving an R object into a repository
 
 ```{r}
 library("ggplot2")
-repo <- "new_repo"
+repo <- "arepo"
 pl <- qplot(Sepal.Length, Petal.Length, data = iris)
 saveToRepo(pl, repoDir = repo)
 
 showLocalRepo(repoDir = repo, "tags")
 
-# deleteRepo(repo)
+# deleteLocalRepo(repo)
 ```
 
+Session info for this obejct.
+
+```{r}
+asession("11127cc6ce69a89d11d0e30865a33c13")
+```
 
 Serialization of an object creation event into repository
 
@@ -189,17 +210,17 @@ ahistory(md5hash = "050e41ec3bc40b3004bc6bdd356acae7")
 Loading an object from repository, remote, local or in a package.
 
 ```{r}
-pl2 <- loadFromGithubRepo("92ada1e052d4d963e5787bfc9c4b506c", repo="graphGallery", user="pbiecek", 
+pl2 <- loadFromRemoteRepo("600bda83cb840947976bd1ce3a11879d", repo="graphGallery", user="pbiecek", 
                              value=TRUE)
-pl3 <- loadFromLocalRepo("92ada1", system.file("graphGallery", package = "archivist"), value=TRUE)
+pl3 <- loadFromLocalRepo("600bda", system.file("graphGallery", package = "archivist"), value=TRUE)
 
-archivist::aread("pbiecek/graphGallery/2166dfbd3a7a68a91a2f8e6df1a44111")
+archivist::aread("pbiecek/graphGallery/600bda83cb840947976bd1ce3a11879d")
 
 setLocalRepo(system.file("graphGallery", package = "archivist"))
 
-pl3 <- loadFromLocalRepo("92ada1", value=TRUE)
+pl3 <- loadFromLocalRepo("600bda", value=TRUE)
 
-archivist::aread("2166d")
+archivist::aread("600bda")
 ```
 
 ```{r}
@@ -211,7 +232,7 @@ digest::digest(model)
 Removal of an object from repository
 
 ```{r}
-rmFromRepo("92ada1e052d4d963e5787bfc9c4b506c", repoDir = repo)
+rmFromLocalRepo("92ada1e052d4d963e5787bfc9c4b506c", repoDir = repo)
 ```
 
 Remove all older than 30 days
@@ -219,7 +240,7 @@ Remove all older than 30 days
 ```{r}
 obj2rm <- searchInLocalRepo(list(dateFrom = "2010-01-01", dateTo = Sys.Date()-30), repoDir = repo)
 
-rmFromRepo(obj2rm, repoDir = repo, many = TRUE)
+rmFromLocalRepo(obj2rm, repoDir = repo, many = TRUE)
 ```
 
 
@@ -230,8 +251,8 @@ Search in a local/GitHub repository
 searchInLocalRepo(pattern = "class:gg", 
     repoDir = system.file("graphGallery", package = "archivist"))
 
-searchInLocalRepo(pattern = list(dateFrom = "2014-09-01",
-    dateTo = "2014-09-30" ), 
+searchInLocalRepo(pattern = list(dateFrom = "2016-01-01",
+    dateTo = "2016-02-07" ), 
     repoDir = system.file("graphGallery", package = "archivist"))
 
 
@@ -249,7 +270,7 @@ shinySearchInLocalRepo(arepo)
 Delete
 
 ```{r}
-deleteRepo("new_repo")
+deleteLocalRepo("arepo")
 ```
 
 

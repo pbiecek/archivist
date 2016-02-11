@@ -14,7 +14,7 @@ test_that("createMD works", {
   createMDGallery('graphGallery', 'pbiecek',
                         addMiniature = TRUE, addTags = TRUE, output = "example.md")
   
-  expect_equal(TRUE, file.info("example.md")$size > 50000)
+  expect_equal(TRUE, file.info("example.md")$size > 40000)
   
   file.remove("example.md")
   

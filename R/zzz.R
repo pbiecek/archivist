@@ -19,7 +19,7 @@ setDefaultArchivistEnv <- function() {
   .ArchivistEnv$subdir <- "/"
   .ArchivistEnv$repoType <- "github"
   .ArchivistEnv$response <- FALSE
-  .ArchivistEnv$silent <- FALSE
+  .ArchivistEnv$silent <- TRUE
 }
 
 .onAttach <- function(...) {

@@ -73,73 +73,22 @@
 #' \dontrun{
 #' # objects preparation
 #' 
-#'  # data.frame object
-#'   data(iris)
-#'   
-#'  # ggplot/gg object
-#'   library(ggplot2)
-#'   df <- data.frame(gp = factor(rep(letters[1:3], each = 10)),y = rnorm(30))
-#'   library(plyr)
-#'   ds <- ddply(df, .(gp), summarise, mean = mean(y), sd = sd(y))
-#'   myplot123 <- ggplot(df, aes(x = gp, y = y)) +
-#'     geom_point() +  geom_point(data = ds, aes(y = mean),
-#'                                colour = 'red', size = 3)
-#'   
-#'   # lm object                
-#'   model <- lm(Sepal.Length~ Sepal.Width + Petal.Length + Petal.Width, data= iris)
-#'   
-#'   # agnes (twins) object 
-#'   library(cluster)
-#'   data(votes.repub)
-#'   agn1 <- agnes(votes.repub, metric = "manhattan", stand = TRUE)
-#'   
-#'   # fanny (partition) object
-#'   x <- rbind(cbind(rnorm(10, 0, 0.5), rnorm(10, 0, 0.5)),
-#'              cbind(rnorm(15, 5, 0.5), rnorm(15, 5, 0.5)),
-#'              cbind(rnorm( 3,3.2,0.5), rnorm( 3,3.2,0.5)))
-#'   fannyx <- fanny(x, 2)
-#'   
-#'   # creating example Repository - on which examples will work
-#'   
-#'   exampleRepoDir <- tempfile()
-#'   createEmptyRepo(repoDir = exampleRepoDir)
-#'   saveToRepo(myplot123, repoDir=exampleRepoDir)
-#'   saveToRepo(iris, repoDir=exampleRepoDir)
-#'   saveToRepo(model, repoDir=exampleRepoDir)
-#'   saveToRepo(agn1, repoDir=exampleRepoDir)
-#'   saveToRepo(fannyx, repoDir=exampleRepoDir)
-#'   
-#'   # let's see how the Repository looks like: show
-#'   
-#'   showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
-#'   showLocalRepo(method = "tags", repoDir = exampleRepoDir)
-#'   
-#'   # let's see how the Repository looks like: summary
-#'   
-#'   summaryLocalRepo( exampleRepoDir )
-#'   
-#'   
-#'   # search examples
+#'   showLocalRepo(method = "md5hashes", 
+#'      repoDir = system.file("graphGallery", package = "archivist"))
+#'   showLocalRepo(method = "tags", 
+#'      repoDir = system.file("graphGallery", package = "archivist"))
 #'   
 #'   # Tag search, fixed version
 #'   searchInLocalRepo( "class:ggplot", repoDir = exampleRepoDir )
-#'   searchInLocalRepo( "name:myplot123", repoDir = exampleRepoDir )
-#'   searchInLocalRepo( "varname:Sepal.Width", repoDir = exampleRepoDir )
-#'   searchInLocalRepo( "class:lm", repoDir = exampleRepoDir )
-#'   searchInLocalRepo( "coefname:Petal.Length", repoDir = exampleRepoDir )
-#'   searchInLocalRepo( "ac:0.797755535467609", repoDir = exampleRepoDir )
-#'   
+#'   searchInLocalRepo( "name:", repoDir = exampleRepoDir )
 #'   # Tag search, regex version
-#'   
 #'   searchInLocalRepo( "class", repoDir = exampleRepoDir, fixed = FALSE )
-#'   searchInLocalRepo( "name", repoDir = exampleRepoDir, fixed = FALSE )
 #'   
 #'   # Github version
 #'   # check the state of the Repository
 #'   summaryRemoteRepo( user="pbiecek", repo="archivist" )
 #'   showRemoteRepo( user="pbiecek", repo="archivist" )
 #'   showRemoteRepo( user="pbiecek", repo="archivist", method = "tags" )
-#'   
 #'   # Tag search, fixed version
 #'   searchInRemoteRepo( "varname:Sepal.Width", user="pbiecek", repo="archivist" )
 #'   searchInRemoteRepo( "class:lm", user="pbiecek", repo="archivist", branch="master" )
@@ -149,29 +98,12 @@
 #'   searchInRemoteRepo( "class", user="pbiecek", repo="archivist",  fixed = FALSE )
 #'   searchInRemoteRepo( "name", user="pbiecek", repo="archivist", fixed = FALSE )
 #'   
-#'  
-#'   # date search
-#'   
-#'   # objects archivised between 2 different days
-#'   searchInLocalRepo( pattern = list( dateFrom = Sys.Date()-1, dateTo = Sys.Date()+1), 
-#'                      repoDir = exampleRepoDir )
-#'   
 #'   # also on Github
 #'   
 #'   # Remeber to set dateTo parameter to actual date because sometimes we update datasets.
 #'   searchInRemoteRepo( pattern = list( dateFrom = "2015-10-01", dateTo = "2015-11-30" ), 
 #'                       user="pbiecek", repo="archivist", branch="master" )
 #'   
-#'   
-#'   # objects from Today
-#'   searchInLocalRepo( pattern = list( dateFrom = Sys.Date(), dateTo = Sys.Date() ), 
-#'                      repoDir = exampleRepoDir )
-#'   
-#'   # removing an example Repository
-#'   
-#'   deleteRepo( exampleRepoDir, TRUE)
-#'   
-#'   rm( exampleRepoDir )
 #'   
 #'   # many archivist-like Repositories on one Remote repository
 #'   
@@ -183,7 +115,7 @@
 #'  
 #'  # multi versions
 #'  multiSearchInRemoteRepo( patterns=c("varname:Sepal.Width", "class:lm", "name:myplot123"), 
-#'                          user="pbiecek", repo="archivist", intersect = FALSE )                                    
+#'                          user="pbiecek", repo="archivist", intersect = FALSE )
 #'   
 #' }
 #' @family archivist

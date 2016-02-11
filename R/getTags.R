@@ -51,7 +51,6 @@
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #'
 #' @examples
-#' \dontrun{
 #' 
 #' ### Local version
 #' 
@@ -59,7 +58,7 @@
 #' 
 #' # Creating empty repository
 #' exampleRepoDir <- tempfile()
-#' createEmptyRepo( exampleRepoDir )
+#' createLocalRepo( exampleRepoDir )
 #' 
 #' library(dplyr)
 #' data(mtcars)
@@ -79,20 +78,21 @@
 #' getTagsLocal( md5hash = hash, exampleRepoDir )
 #' 
 #' # Deleting example respository
-#' deleteRepo( exampleRepoDir, TRUE) 
+#' deleteLocalRepo( exampleRepoDir, TRUE) 
 #' rm( exampleRepoDir ) 
 #' 
 #' ## EXAMPLE with data iris
 #' exampleRepoDir <- tempfile()
-#' createEmptyRepo( exampleRepoDir )
+#' createLocalRepo( exampleRepoDir )
 #' 
 #' data(iris)
 #' saveToRepo(iris, repoDir = exampleRepoDir )
 #' showLocalRepo(exampleRepoDir)
 #' showLocalRepo(exampleRepoDir, method = "tags")
 #' 
-#' # We can notice that there is only one md5hash in repo so we will use it
-#' hash <- showLocalRepo(exampleRepoDir)[,1]
+#' # We can notice that there is only one md5hash 
+#' # (and second for archiveSessionInfo) in repo so we will use it
+#' hash <- showLocalRepo(exampleRepoDir)[1,1]
 #' 
 #' # We search for a Tag with "varname" regular expression corresponding to 
 #' # hash md5hash.
@@ -103,7 +103,7 @@
 #' # and get the same result.
 #' getTagsLocal( md5hash = hash, exampleRepoDir, tag = "varna" ) 
 #' 
-#' deleteRepo( exampleRepoDir, TRUE) 
+#' deleteLocalRepo( exampleRepoDir, TRUE) 
 #' rm( exampleRepoDir ) 
 #' 
 #' ### Remote version
@@ -121,7 +121,6 @@
 #' getTagsRemote("ff575c261c949d073b2895b05d1097c3", user="MarcinKosinski",
 #'                repo="Museum", branch="master", subdir="ex1")
 #'                
-#' }
 #' 
 #' @family archivist
 #' @rdname getTags

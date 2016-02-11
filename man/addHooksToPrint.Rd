@@ -11,7 +11,10 @@ addHooksToPrint(class = "ggplot", repoDir = aoptions("repoDir"),
 \arguments{
 \item{class}{A character containing a name of class (one or more) that should be archivised.}
 
-\item{repo}{A character containing a name of a Git repository on which the Repository is archived.}
+\item{repoDir}{A character containing a name of Local Repository.}
+
+\item{repo}{A character containing a name of a Git repository on which the Repository is archived.
+If \code{repo = NULL} then hooks will be added to files in local directories.}
 
 \item{user}{A character containing a name of a Git user on whose account the \code{repo} is created.}
 
@@ -26,12 +29,19 @@ to \code{subdir = "/"} as default.}
 \code{addHooksToPrint} adds an overloaded version of the print function for objects of selected class. 
 The overloaded function will add all object of selected class to the repo and then add hooks to the report for these objects .
 }
+\note{
+One can specify \code{userTags} as in \link{saveToLocalRepo} for artifacts by adding code{"tags"} attribute.
+See note secion about that in \link{saveToLocalRepo}.
+}
 \examples{
 
 \dontrun{
-# only in Rmd report
+# only in Rmd report, links to github repository
 addHooksToPrint(class="ggplot", repoDir = "arepo",
 repo="graphGallery", user="pbiecek")
+# only in Rmd report, links to local files
+addHooksToPrint(class="ggplot", repoDir = "arepo",
+repo=NULL)
 }
 }
 \author{
@@ -42,18 +52,17 @@ Other archivist: \code{\link{Repository}},
   \code{\link{Tags}}, \code{\link{\%a\%}},
   \code{\link{addTagsRepo}}, \code{\link{aformat}},
   \code{\link{ahistory}}, \code{\link{alink}},
-  \code{\link{aoptions}}, \code{\link{archive}},
-  \code{\link{archivist-github-integration}},
-  \code{\link{archivist-package}}, \code{\link{aread}},
-  \code{\link{asearch}}, \code{\link{asession}},
-  \code{\link{cache}}, \code{\link{cloneGithubRepo}},
+  \code{\link{aoptions}}, \code{\link{archivist-package}},
+  \code{\link{aread}}, \code{\link{asearch}},
+  \code{\link{asession}}, \code{\link{cache}},
   \code{\link{copyLocalRepo}},
-  \code{\link{createEmptyRepo}},
-  \code{\link{createMDGallery}}, \code{\link{deleteRepo}},
+  \code{\link{createLocalRepo}},
+  \code{\link{createMDGallery}},
+  \code{\link{deleteLocalRepo}},
   \code{\link{getRemoteHook}}, \code{\link{getTagsLocal}},
   \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
-  \code{\link{pushRepo}}, \code{\link{rmFromRepo}},
-  \code{\link{saveToRepo}},
+  \code{\link{rmFromLocalRepo}},
+  \code{\link{saveToLocalRepo}},
   \code{\link{searchInLocalRepo}},
   \code{\link{setLocalRepo}},
   \code{\link{shinySearchInLocalRepo}},

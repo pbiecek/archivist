@@ -47,9 +47,9 @@ set in \link{setRemoteRepo} (or via \link{aoptions}) function are used.
 \dontrun{
 
 createMDGallery(user = 'MarcinKosinski', repo = 'Museum',
- 'README_test7.md', addTags = TRUE)
+ 'README_test1.md', addTags = TRUE)
 createMDGallery('graphGallery', 'pbiecek', addMiniature = TRUE,
- 'README_test7.md', addTags = TRUE)
+ 'README_test2.md', addTags = TRUE)
 
 }
 
@@ -65,17 +65,15 @@ Other archivist: \code{\link{Repository}},
   \code{\link{addHooksToPrint}}, \code{\link{addTagsRepo}},
   \code{\link{aformat}}, \code{\link{ahistory}},
   \code{\link{alink}}, \code{\link{aoptions}},
-  \code{\link{archive}},
-  \code{\link{archivist-github-integration}},
   \code{\link{archivist-package}}, \code{\link{aread}},
   \code{\link{asearch}}, \code{\link{asession}},
-  \code{\link{cache}}, \code{\link{cloneGithubRepo}},
-  \code{\link{copyLocalRepo}},
-  \code{\link{createEmptyRepo}}, \code{\link{deleteRepo}},
+  \code{\link{cache}}, \code{\link{copyLocalRepo}},
+  \code{\link{createLocalRepo}},
+  \code{\link{deleteLocalRepo}},
   \code{\link{getRemoteHook}}, \code{\link{getTagsLocal}},
   \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
-  \code{\link{pushRepo}}, \code{\link{rmFromRepo}},
-  \code{\link{saveToRepo}},
+  \code{\link{rmFromLocalRepo}},
+  \code{\link{saveToLocalRepo}},
   \code{\link{searchInLocalRepo}},
   \code{\link{setLocalRepo}},
   \code{\link{shinySearchInLocalRepo}},

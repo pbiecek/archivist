@@ -54,7 +54,7 @@
 #' 
 #' ## creating example default local repository
 #' exampleRepoDir <- tempfile()
-#' createEmptyRepo(repoDir = exampleRepoDir)
+#' createLocalRepo(repoDir = exampleRepoDir)
 #' ## setting default local repository
 #' setLocalRepo( repoDir = exampleRepoDir )
 #' 
@@ -74,7 +74,7 @@
 #' 
 #' 
 #' ## deleting example repository
-#' deleteRepo(repoDir = exampleRepoDir, deleteRoot = TRUE)
+#' deleteLocalRepo(repoDir = exampleRepoDir, deleteRoot = TRUE)
 #' rm(exampleRepoDir)
 #' 
 #' ### default GitHub version
@@ -84,7 +84,7 @@
 #' showRemoteRepo(method = "tags")$tag
 #' searchInRemoteRepo(pattern = "class:lm")
 #' searchInRemoteRepo(pattern = "class:gg")
-#' getTagsGithub(md5hash = "cd6557c6163a6f9800f308f343e75e72", tag = "")
+#' getTagsRemote(md5hash = "cd6557c6163a6f9800f308f343e75e72", tag = "")
 #' 
 #' ## Searching for objects of class:lm
 #' asearch(patterns = c("class:lm"))
@@ -113,12 +113,9 @@ asearch <- function( patterns, repo = NULL){
     # use default repo
      oblist <- multiSearchInLocalRepo(patterns = patterns,
                                       intersect = TRUE)
-#     oblist <- multiSearchInRepo(patterns = patterns)
-#     if (length(oblist) > 0) {
-#       res <- lapply(oblist, aread)
-#     }
     if (length(oblist) > 0) {
       res <- lapply(oblist, loadFromLocalRepo, value = TRUE)
+      names(res) <- oblist
     }
   } else {
     # at least 3 elements
@@ -130,6 +127,7 @@ asearch <- function( patterns, repo = NULL){
                                 patterns = patterns)
     if (length(oblist)>0) {
       res <- lapply(paste0(repo, "/", oblist), aread)
+      names(res) <- oblist
     } 
   } 
   res

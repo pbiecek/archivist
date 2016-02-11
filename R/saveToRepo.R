@@ -3,13 +3,13 @@
 #' @title Save an Artifact into a Repository
 #'
 #' @description
-#' \code{saveToRepo} function saves desired artifacts to the local \link{Repository} in a given directory.
+#' \code{saveToLocalRepo} function saves desired artifacts to the local \link{Repository} in a given directory.
 #' To learn more about artifacts visit \link[archivist]{archivist-package}.
 #'
 #' @details
-#' \code{saveToRepo} function saves desired artifacts to the local Repository in a given directory.
+#' \code{saveToLocalRepo} function saves desired artifacts to the local Repository in a given directory.
 #' Artifacts are saved in the local Repository, which is a SQLite database named \code{backpack}.
-#' After every \code{saveToRepo} call the database is refreshed, so the artifact is available
+#' After every \code{saveToLocalRepo} call the database is refreshed, so the artifact is available
 #' immediately in the database for other collaborators.
 #' Each artifact is archived in a \code{md5hash.rda} file. This file will be saved in a folder
 #' (under \code{repoDir} directory) named \code{gallery}. For each artifact, \code{md5hash} is a
@@ -20,7 +20,7 @@
 #' They are also going to be saved in a file named by their \code{md5hash} in the \code{gallery} folder
 #' that exists in the directory specified in the \code{repoDir} argument. Moreover, a specific \code{Tag}-relation
 #' is going to be added to the \code{backpack} dataset in case there is a need to load
-#' the artifact with it's related data set - see \link{loadFromLocalRepo} or \link{loadFromGithubRepo} or \link{loadFromRemoteRepo}. Default settings
+#' the artifact with it's related data set - see \link{loadFromLocalRepo} or \link{loadFromRemoteRepo}. Default settings
 #' may be changed by using the \code{archiveData}, \code{archiveTag} or \code{archiveMiniature} arguments with the
 #' \code{FALSE} value.
 #'
@@ -28,7 +28,7 @@
 #' information check \link{Tags}
 #'
 #' Archived artifact can be searched in the \code{backpack} dataset by using the
-#' \link{searchInLocalRepo} or \link{searchInGithubRepo} or \link{searchInRemoteRepo} functions. Artifacts can be searched by their \link{Tags},
+#' \link{searchInLocalRepo} or \link{searchInRemoteRepo} functions. Artifacts can be searched by their \link{Tags},
 #' \code{names}, \code{classes} or \code{archiving date}.
 #'
 #' \code{firstRows} parameter.
@@ -81,29 +81,31 @@
 #'
 #' @note
 #' In the following way one can specify his own \code{Tags} for artifacts by setting artifact's attribute
-#' before call of the \code{saveToRepo} function:
+#' before call of the \code{saveToLocalRepo} function:
 #' \code{attr(x, "tags" ) = c( "name1", "name2" )}, where \code{x} is an artifact
 #' and \code{name1, name2} are \code{Tags} specified by a user.
 #' It can be also done in a new, simpler way by using \code{userTags} parameter like this:
 #'  \itemize{
-#'    \item \code{saveToRepo(model, repoDir, userTags = c("my_model", "do not delete"))}.
+#'    \item \code{saveToLocalRepo(model, repoDir, userTags = c("my_model", "do not delete"))}.
 #'  }
+#'  Specifing additional \code{Tags} by attributes can be beneficial when one uses \link{addHooksToPrint}.
+#'  
 #'
 #' Important: if one wants to archive data from artifacts which is one of:
 #' \code{survfit, glmnet, qda, lda, trellis, htest} class, and this dataset is transformed within
-#' the artifact's formula then \code{saveToRepo} will not archive this dataset. \code{saveToRepo}
+#' the artifact's formula then \code{saveToLocalRepo} will not archive this dataset. \code{saveToLocalRepo}
 #' only archives datasets that already exist in any of R environments.
 #'
 #' Example: The data set will not be archived here.
 #' \itemize{
 #'    \item \code{z <- lda(Sp ~ ., Iris, prior = c(1,1,1)/3, subset = train[,-8])}
-#'    \item \code{saveToRepo( z, repoDir )}
+#'    \item \code{saveToLocalRepo( z, repoDir )}
 #' }
 #' Example: The data set will be archived here.
 #' \itemize{
 #'    \item \code{train2 <- train[,-8]}
 #'    \item \code{z <- lda(Sp ~ ., Iris, prior = c(1,1,1)/3, subset = train2)}
-#'    \item \code{saveToRepo( z, repoDir )}
+#'    \item \code{saveToLocalRepo( z, repoDir )}
 #' }
 #'
 #' @param artifact An arbitrary R artifact to be saved. For supported artifacts see details.
@@ -144,143 +146,28 @@
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
 #'
 #' @examples
-#' \dontrun{
-#' # objects preparation
-#'
-#' # data.frame object
-#' data(iris)
-#'
-#' # ggplot/gg object
-#' library(ggplot2)
-#' df <- data.frame(gp = factor(rep(letters[1:3], each = 10)),y = rnorm(30))
-#' library(plyr)
-#' ds <- ddply(df, .(gp), summarise, mean = mean(y), sd = sd(y))
-#' myplot123 <- ggplot(df, aes(x = gp, y = y)) +
-#'   geom_point() +  geom_point(data = ds, aes(y = mean),
-#'                colour = 'red', size = 3)
-#'
-#' # lm object
-#' model <- lm(Sepal.Length~ Sepal.Width + Petal.Length + Petal.Width, data= iris)
-#'
-#' # agnes (twins) object
-#' library(cluster)
-#' data(votes.repub)
-#' agn1 <- agnes(votes.repub, metric = "manhattan", stand = TRUE)
-#'
-#' # fanny (partition) object
-#' x <- rbind(cbind(rnorm(10, 0, 0.5), rnorm(10, 0, 0.5)),
-#'          cbind(rnorm(15, 5, 0.5), rnorm(15, 5, 0.5)),
-#'           cbind(rnorm( 3,3.2,0.5), rnorm( 3,3.2,0.5)))
-#' fannyx <- fanny(x, 2)
-#'
-#' # lda object
-#' library(MASS)
-#'
-#' Iris <- data.frame(rbind(iris3[,,1], iris3[,,2], iris3[,,3]),
-#'                   Sp = rep(c("s","c","v"), rep(50,3)))
-#' train <- c(8,83,115,118,146,82,76,9,70,139,85,59,78,143,68,
-#'            134,148,12,141,101,144,114,41,95,61,128,2,42,37,
-#'            29,77,20,44,98,74,32,27,11,49,52,111,55,48,33,38,
-#'            113,126,24,104,3,66,81,31,39,26,123,18,108,73,50,
-#'            56,54,65,135,84,112,131,60,102,14,120,117,53,138,5)
-#' lda1 <- lda(Sp ~ ., Iris, prior = c(1,1,1)/3, subset = train)
-#'
-#' # qda object
-#' tr <- c(7,38,47,43,20,37,44,22,46,49,50,19,4,32,12,29,27,34,2,1,17,13,3,35,36)
-#' train <- rbind(iris3[tr,,1], iris3[tr,,2], iris3[tr,,3])
-#' cl <- factor(c(rep("s",25), rep("c",25), rep("v",25)))
-#' qda1 <- qda(train, cl)
-#'
-#' # glmnet object
-#' library( glmnet )
-#'
-#' zk=matrix(rnorm(100*20),100,20)
-#' bk=rnorm(100)
-#' glmnet1=glmnet(zk,bk)
-#'
-#'
-#' # creating example Repository - on which examples will work
-#'
-#' # save examples
-#'
 #' exampleRepoDir <- tempfile()
-#' createEmptyRepo( repoDir = exampleRepoDir )
-#' saveToRepo( myplot123, repoDir=exampleRepoDir )
-#' saveToRepo( iris, repoDir=exampleRepoDir )
-#' saveToRepo( model, repoDir=exampleRepoDir )
-#' saveToRepo( agn1, repoDir=exampleRepoDir )
-#' saveToRepo( fannyx, repoDir=exampleRepoDir )
-#' saveToRepo( lda1, repoDir=exampleRepoDir )
-#' saveToRepo( glmnet1, repoDir=exampleRepoDir )
+#' createLocalRepo(repoDir = exampleRepoDir)
+#' data(iris)
+#' saveToLocalRepo(iris, repoDir=exampleRepoDir, archiveSessionInfo = TRUE)
+#' showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
+#' showLocalRepo(method = "tags", repoDir = exampleRepoDir)
+#' 
+#' loadFromLocalRepo(md5hash = '600bda83cb840947976bd1ce3a11879d',
+#'   repoDir = system.file("graphGallery", package = "archivist"), value = TRUE) -> pl
+#' 
+#' saveToLocalRepo(pl, repoDir=exampleRepoDir,
+#'              userTags = c("do not delete", "my favourite graph"))
+#' aoptions('repoDir', system.file("graphGallery", package = "archivist"))
+#' showLocalRepo(method = "tags")
+#' aoptions('repoDir', NULL, unset = TRUE)
+#' deleteLocalRepo(exampleRepoDir, TRUE)
+#' rm(exampleRepoDir)
 #'
-#' # let's see how the Repository looks like: show
-#'
-#' showLocalRepo( method = "md5hashes", repoDir = exampleRepoDir )
-#' showLocalRepo( method = "tags", repoDir = exampleRepoDir )
-#'
-#' # let's see how the Repository looks like: summary
-#'
-#' summaryLocalRepo( exampleRepoDir )
-#'
-#' # one can archive the same artifact twice, but there is a message
-#'
-#' saveToRepo( model, repoDir=exampleRepoDir )
-#'
-#' # in order not to archive the same artifact twice, use
-#'
-#' saveToRepo( lda1, repoDir=exampleRepoDir, force = FALSE )
-#'
-#' # one can archive artifact without it's database and miniature
-#'
-#' saveToRepo( qda1, repoDir=exampleRepoDir, archiveData = FALSE,
-#'             archiveMiniature = FALSE)
-#'
-#' # one can specify his own additional Tags which are to be archived with artifact
-#'
-#' attr( model, "tags" ) = c( "do not delete", "my favourite model" )
-#' saveToRepo( model, repoDir=exampleRepoDir )
-#' showLocalRepo( method = "tags", repoDir = exampleRepoDir )
-#'
-#' # or one can do it even easier
-#' saveToRepo( model, repoDir = exampleRepoDir,
-#'             userTags = c( "do not delete", "my favourite model" ) )
-#'
-#' # removing an example Repository
-#' deleteRepo( exampleRepoDir, TRUE)
-#'
-#' rm( exampleRepoDir )
-#'
-#' # saveToRepo in valueing code
-#' library(dplyr)
-#'
-#' # valueing code
-#' exampleRepoDir <- tempdir()
-#' createEmptyRepo(exampleRepoDir, default = TRUE)
-#' library(dplyr)
-#' invisible(aoptions("silent", TRUE))
-#' data("hflights", package = "hflights")
-#' hflights %a%
-#'   group_by(Year, Month, DayofMonth) %a%
-#'   select(Year:DayofMonth, ArrDelay, DepDelay) %a%
-#'   summarise(
-#'     arr = mean(ArrDelay, na.rm = TRUE),
-#'     dep = mean(DepDelay, na.rm = TRUE)
-#'   ) %a%
-#'   filter(arr > 30 | dep > 30) -> x
-#' showLocalRepo() # Repository was globally set in aoptions
-#'
-#'
-#'
-#'
-#' # removing an example Repository
-#' deleteRepo( exampleRepoDir, TRUE)
-#'
-#' rm( exampleRepoDir )
-#' }
 #' @family archivist
 #' @rdname saveToRepo
 #' @export
-saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
+saveToLocalRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
                         archiveTags = TRUE,
                         archiveMiniature = TRUE, 
                         archiveSessionInfo = TRUE, 
@@ -289,8 +176,9 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
                         silent=aoptions("silent"), ascii = FALSE,
                         artifactName = deparse(substitute(artifact))) {
   stopifnot( is.logical( c( archiveData, archiveTags, archiveMiniature,
-                            force,  rememberName, value, silent, ascii, archiveSessionInfo, artifactName ) ) )
+                            force,  rememberName, value, silent, ascii, archiveSessionInfo ) ) )
   stopifnot( ( is.character( repoDir ) & length( repoDir ) == 1 ) | is.null( repoDir ) )
+  stopifnot( is.character(artifactName))
 #  stopifnot( is.character( userTags ))    - user can specify tags: userTags = 1:2, and they should
 # be converted to characters as in the previous archivist versions. we even have testsfor that
   stopifnot( length(archiveData) == 1, length(archiveTags) == 1, length(archiveMiniature) == 1,
@@ -300,7 +188,6 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
 #   stopifnot( is.character( format ) & length( format ) == 1 & any(format %in% c("rda", "rdx")) )
 
   md5hash <- digest( artifact )
-  objectName <- artifactName  
 
   repoDir <- checkDirectory( repoDir )
 
@@ -309,7 +196,7 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
                     paste0( "SELECT * from artifact WHERE md5hash ='", md5hash, "'") )[,1]
 
   if ( length( check ) > 0 & !force ){
-    stop( paste0("Artifact ",md5hash," was already archived. If you want to achive it again, use force = TRUE. \n"))
+    stop( paste0("Artifact ",md5hash," was already archived. If you want to archive it again, use force = TRUE. \n"))
   }
   if ( length( check ) > 0 & force & !silent){
     if ( rememberName ){
@@ -320,33 +207,26 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
   }
 
   # save artifact to .rd file
-  if ( rememberName & !(objectName %in% ls(envir = parent.frame(1)))) {
-    warning( paste0("Object with the name ", objectName, ", not found. Saving without name."))
+  if ( rememberName & !(artifactName %in% ls(envir = parent.frame(1)))) {
+    warning( paste0("Object with the name ", artifactName, ", not found. Saving without name."))
     rememberName = FALSE
   }
   if ( rememberName ){
-#     if( format == "rda"){
-      save( file = file.path(repoDir,"gallery", paste0(md5hash, ".rda")), ascii = ascii, list = objectName,  envir = parent.frame(1))
-      addTag("format:rda", md5hash, dir=repoDir)
-#     }else{
-#       saveToRepo2(artifact, filebase = paste0(repoDir,"gallery/", md5hash), ascii = ascii, ...)
-#     }
+    save( file = file.path(repoDir,"gallery", paste0(md5hash, ".rda")), ascii = ascii, list = artifactName,  envir = parent.frame(1))
+    addTag("format:rda", md5hash, dir=repoDir)
   }else{
 #    assign( value = artifact, x = md5hash, envir = .GlobalEnv )
 #    save( file = paste0(repoDir, "gallery/", md5hash, ".rda"),  ascii=TRUE, list = md5hash, envir = .GlobalEnv  )
     assign( value = artifact, x = md5hash, envir = .ArchivistEnv )
-#     if( format == "rda" ){
-      save( file = file.path(repoDir, "gallery", paste0(md5hash, ".rda")),  ascii=ascii, list = md5hash, envir = .ArchivistEnv  )
-      addTag("format:rda", md5hash, dir=repoDir)
-      #     }else{
-#       saveToRepo2(artifact, filebase = paste0(repoDir,"gallery/", md5hash), ascii = ascii, ...)
-#     }
+    save( file = file.path(repoDir, "gallery", paste0(md5hash, ".rda")),  ascii=ascii, list = md5hash, envir = .ArchivistEnv  )
+    addTag("format:rda", md5hash, dir=repoDir)
+
     rm(list = md5hash, envir = .ArchivistEnv)
   }
 
   # add entry to database
    if ( rememberName ){
-     addArtifact( md5hash, name = objectName, dir = repoDir )
+     addArtifact( md5hash, name = artifactName, dir = repoDir )
    }else{
      addArtifact( md5hash, name = md5hash , dir = repoDir)
    # rm( list = md5hash, envir = .ArchivistEnv )
@@ -354,7 +234,7 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
 
   # whether to add Tags
   if ( archiveTags ) {
-    extractedTags <- extractTags( artifact, objectNameX = objectName )
+    extractedTags <- extractTags( artifact, objectNameX = artifactName )
     # remove name from Tags
     if (!rememberName) {
       extractedTags <- extractedTags[!grepl(extractedTags, pattern="^name:")]
@@ -370,7 +250,7 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
       stop("devtools package required for archiveSessionInfo parameter")
     }
     si <- devtools::session_info()
-    md5hashDF <- saveToRepo( si, archiveData = FALSE, repoDir = repoDir, 
+    md5hashDF <- saveToLocalRepo( si, archiveData = FALSE, repoDir = repoDir, 
                              rememberName = FALSE, archiveTags = FALSE, force=TRUE, 
                              archiveSessionInfo = FALSE)
     addTag( tag = paste0("session_info:", md5hashDF), md5hash = md5hash, dir = repoDir )
@@ -397,94 +277,12 @@ saveToRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
   }
 }
 
-
-# # getFromNamespace(x = "makeLazyLoadDB", "tools")
-# saveToRepo2 <- function (from, filebase, compress = TRUE, ascii = FALSE, variables)
-# {
-#   ascii <- as.logical(ascii)
-#   if (is.na(ascii))
-#     stop("'ascii' must be TRUE or FALSE", domain = NA)
-#   ascii <- as.integer(ascii)
-#   envlist <- function(e) .Internal(getVarsFromFrame(ls(e, all.names = TRUE),
-#                                                     e, FALSE))
-#   envtable <- function() {
-#     idx <- 0
-#     envs <- NULL
-#     enames <- character(0L)
-#     find <- function(v, keys, vals) {
-#       for (i in seq_along(keys)) if (identical(v, keys[[i]]))
-#         return(vals[i])
-#       NULL
-#     }
-#     getname <- function(e) find(e, envs, enames)
-#     getenv <- function(n) find(n, enames, envs)
-#     insert <- function(e) {
-#       idx <<- idx + 1
-#       name <- paste("env", idx, sep = "::")
-#       envs <<- c(e, envs)
-#       enames <<- c(name, enames)
-#       name
-#     }
-#     list(insert = insert, getenv = getenv, getname = getname)
-#   }
-#   lazyLoadDBinsertValue <- function(value, file, ascii, compress,
-#                                     hook) .Internal(lazyLoadDBinsertValue(value, file, ascii,
-#                                                                           compress, hook))
-#   lazyLoadDBinsertListElement <- function(x, i, file, ascii,
-#                                           compress, hook) .Internal(lazyLoadDBinsertValue(x[[i]],
-#                                                                                           file, ascii, compress, hook))
-#   lazyLoadDBinsertVariable <- function(n, e, file, ascii, compress,
-#                                        hook) {
-#     x <- .Internal(getVarsFromFrame(n, e, FALSE))
-#     .Internal(lazyLoadDBinsertValue(x[[1L]], file, ascii,
-#                                     compress, hook))
-#   }
-#   mapfile <- paste(filebase, "rdx", sep = ".")
-#   datafile <- paste(filebase, "rdb", sep = ".")
-#   close(file(datafile, "wb"))
-#   table <- envtable()
-#   varenv <- new.env(hash = TRUE)
-#   envenv <- new.env(hash = TRUE)
-#   envhook <- function(e) {
-#     if (is.environment(e)) {
-#       name <- table$getname(e)
-#       if (is.null(name)) {
-#         name <- table$insert(e)
-#         data <- list(bindings = envlist(e), enclos = parent.env(e),
-#                      attributes = attributes(e), isS4 = isS4(e),
-#                      locked = environmentIsLocked(e))
-#         key <- lazyLoadDBinsertValue(data, datafile,
-#                                      ascii, compress, envhook)
-#         assign(name, key, envir = envenv)
-#       }
-#       name
-#     }
-#   }
-#   if (is.null(from) || is.environment(from)) {
-#     if (!missing(variables))
-#       vars <- variables
-#     else vars <- ls(from, all.names = TRUE)
-#   }
-#   else if (is.list(from)) {
-#     vars <- names(from)
-#     if (length(vars) != length(from) || any(!nzchar(vars)))
-#       stop("source list must have names for all elements")
-#   }
-#   else stop("source must be an environment or a list")
-#   for (i in seq_along(vars)) {
-#     key <- if (is.null(from) || is.environment(from))
-#       lazyLoadDBinsertVariable(vars[i], from, datafile,
-#                                ascii, compress, envhook)
-#     else lazyLoadDBinsertListElement(from, i, datafile, ascii,
-#                                      compress, envhook)
-#     assign(vars[i], key, envir = varenv)
-#   }
-#   vals <- lapply(vars, get, envir = varenv, inherits = FALSE)
-#   names(vals) <- vars
-#   rvars <- ls(envenv, all.names = TRUE)
-#   rvals <- lapply(rvars, get, envir = envenv, inherits = FALSE)
-#   names(rvals) <- rvars
-#   val <- list(variables = vals, references = rvals, compressed = compress)
-#   saveRDS(val, mapfile)
-# }
-
+#'
+#' @rdname saveToRepo
+#' @export
+saveToRepo <- saveToLocalRepo
+  
+#'
+#' @rdname saveToRepo
+#' @export
+asave <- saveToLocalRepo

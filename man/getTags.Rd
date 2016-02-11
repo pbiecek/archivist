@@ -60,7 +60,6 @@ If \code{repo} and \code{user} are set to \code{NULL} (as default) in Remote mod
 set in \link{setRemoteRepo} function are used.
 }
 \examples{
-\dontrun{
 
 ### Local version
 
@@ -68,7 +67,7 @@ set in \link{setRemoteRepo} function are used.
 
 # Creating empty repository
 exampleRepoDir <- tempfile()
-createEmptyRepo( exampleRepoDir )
+createLocalRepo( exampleRepoDir )
 
 library(dplyr)
 data(mtcars)
@@ -88,20 +87,21 @@ showLocalRepo(exampleRepoDir, method = "tags")
 getTagsLocal( md5hash = hash, exampleRepoDir )
 
 # Deleting example respository
-deleteRepo( exampleRepoDir, TRUE) 
+deleteLocalRepo( exampleRepoDir, TRUE) 
 rm( exampleRepoDir ) 
 
 ## EXAMPLE with data iris
 exampleRepoDir <- tempfile()
-createEmptyRepo( exampleRepoDir )
+createLocalRepo( exampleRepoDir )
 
 data(iris)
 saveToRepo(iris, repoDir = exampleRepoDir )
 showLocalRepo(exampleRepoDir)
 showLocalRepo(exampleRepoDir, method = "tags")
 
-# We can notice that there is only one md5hash in repo so we will use it
-hash <- showLocalRepo(exampleRepoDir)[,1]
+# We can notice that there is only one md5hash 
+# (and second for archiveSessionInfo) in repo so we will use it
+hash <- showLocalRepo(exampleRepoDir)[1,1]
 
 # We search for a Tag with "varname" regular expression corresponding to 
 # hash md5hash.
@@ -112,7 +112,7 @@ getTagsLocal( md5hash = hash, exampleRepoDir, tag = "varname" )
 # and get the same result.
 getTagsLocal( md5hash = hash, exampleRepoDir, tag = "varna" ) 
 
-deleteRepo( exampleRepoDir, TRUE) 
+deleteLocalRepo( exampleRepoDir, TRUE) 
 rm( exampleRepoDir ) 
 
 ### Remote version
@@ -130,7 +130,6 @@ getTagsRemote( "cd6557c6163a6f9800f308f343e75e72",
 getTagsRemote("ff575c261c949d073b2895b05d1097c3", user="MarcinKosinski",
                repo="Museum", branch="master", subdir="ex1")
                
-}
 
 }
 \author{
@@ -142,18 +141,16 @@ Other archivist: \code{\link{Repository}},
   \code{\link{addHooksToPrint}}, \code{\link{addTagsRepo}},
   \code{\link{aformat}}, \code{\link{ahistory}},
   \code{\link{alink}}, \code{\link{aoptions}},
-  \code{\link{archive}},
-  \code{\link{archivist-github-integration}},
   \code{\link{archivist-package}}, \code{\link{aread}},
   \code{\link{asearch}}, \code{\link{asession}},
-  \code{\link{cache}}, \code{\link{cloneGithubRepo}},
-  \code{\link{copyLocalRepo}},
-  \code{\link{createEmptyRepo}},
-  \code{\link{createMDGallery}}, \code{\link{deleteRepo}},
+  \code{\link{cache}}, \code{\link{copyLocalRepo}},
+  \code{\link{createLocalRepo}},
+  \code{\link{createMDGallery}},
+  \code{\link{deleteLocalRepo}},
   \code{\link{getRemoteHook}},
   \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
-  \code{\link{pushRepo}}, \code{\link{rmFromRepo}},
-  \code{\link{saveToRepo}},
+  \code{\link{rmFromLocalRepo}},
+  \code{\link{saveToLocalRepo}},
   \code{\link{searchInLocalRepo}},
   \code{\link{setLocalRepo}},
   \code{\link{shinySearchInLocalRepo}},
@@ -167,18 +164,16 @@ Other archivist: \code{\link{Repository}},
   \code{\link{addHooksToPrint}}, \code{\link{addTagsRepo}},
   \code{\link{aformat}}, \code{\link{ahistory}},
   \code{\link{alink}}, \code{\link{aoptions}},
-  \code{\link{archive}},
-  \code{\link{archivist-github-integration}},
   \code{\link{archivist-package}}, \code{\link{aread}},
   \code{\link{asearch}}, \code{\link{asession}},
-  \code{\link{cache}}, \code{\link{cloneGithubRepo}},
-  \code{\link{copyLocalRepo}},
-  \code{\link{createEmptyRepo}},
-  \code{\link{createMDGallery}}, \code{\link{deleteRepo}},
+  \code{\link{cache}}, \code{\link{copyLocalRepo}},
+  \code{\link{createLocalRepo}},
+  \code{\link{createMDGallery}},
+  \code{\link{deleteLocalRepo}},
   \code{\link{getRemoteHook}},
   \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
-  \code{\link{pushRepo}}, \code{\link{rmFromRepo}},
-  \code{\link{saveToRepo}},
+  \code{\link{rmFromLocalRepo}},
+  \code{\link{saveToLocalRepo}},
   \code{\link{searchInLocalRepo}},
   \code{\link{setLocalRepo}},
   \code{\link{shinySearchInLocalRepo}},

@@ -58,7 +58,7 @@
 #' # creating example Repository
 #'  
 #' exampleRepoDir <- tempfile()
-#' createEmptyRepo( exampleRepoDir )
+#' createLocalRepo( exampleRepoDir )
 #' 
 #' # Searching for md5hashes of artifacts (without data related to them)
 #' # in the archivist remote  Repository
@@ -77,14 +77,14 @@
 #'
 #' # removing an example Repository
 #' 
-#' deleteRepo( exampleRepoDir, deleteRoot=TRUE )
+#' deleteLocalRepo( exampleRepoDir, deleteRoot=TRUE )
 #' 
 #' rm( exampleRepoDir )
 #' 
 #' # many archivist-like Repositories on one Remote repository
 #' 
 #' dir <- paste0(getwd(), "/ex1")
-#' createEmptyRepo( dir )
+#' createLocalRepo( dir )
 #' copyRemoteRepo( repoTo = dir , md5hashes = "ff575c261c949d073b2895b05d1097c3",
 #'                 user="MarcinKosinski", repo="Museum",
 #'                 branch="master", subdir="ex2")
@@ -95,7 +95,7 @@
 #' list.files( path = file.path( dir, "gallery" ) ) # it is also in gallery folder
 #'
 #' # removing an example Repository
-#' deleteRepo( dir, TRUE)
+#' deleteLocalRepo( dir, TRUE)
 #'
 #' rm(dir)
 #' 
@@ -104,7 +104,7 @@
 #' # creating example Repository
 #'
 #' exampleRepoDir <- tempfile()
-#' createEmptyRepo( exampleRepoDir )
+#' createLocalRepo( exampleRepoDir )
 #'
 #' # Searching for md5hashes of artifacts (without data related to them)
 #' # in the graphGallery  Repository
@@ -125,7 +125,7 @@
 #' 
 #' # removing an example Repository
 #' 
-#' deleteRepo( exampleRepoDir, deleteRoot=TRUE )
+#' deleteLocalRepo( exampleRepoDir, deleteRoot=TRUE )
 #' 
 #' rm( exampleRepoDir )
 #' rm( archivistRepo )
