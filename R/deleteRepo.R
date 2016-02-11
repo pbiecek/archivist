@@ -11,8 +11,8 @@
 #' which is to be deleted.
 #' @param deleteRoot A logical value that specifies if the repository root directory
 #' should be deleted for Local Repository.
-#' @param unset A logical. If deleted \code{repoDir/repo} was set to be default Local/GitHub Repository
-#' and \code{unset} is TRUE, then \code{repoDir/repo} is unset as a default Local/GitHub Repository (\code{aoptions('repoDir/repo', NULL, T)}).
+#' @param unset A logical. If deleted \code{repoDir} was set to be default Local Repository
+#' and \code{unset} is TRUE, then \code{repoDir} is unset as a default Local  Repository (\code{aoptions('repoDir/repo', NULL, T)}).
 #' 
 #' @note
 #' Remember that using \code{tempfile()} instead of \code{tempdir()}
