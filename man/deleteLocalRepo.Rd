@@ -11,10 +11,10 @@ deleteLocalRepo(repoDir, deleteRoot = FALSE, unset = FALSE)
 which is to be deleted.}
 
 \item{deleteRoot}{A logical value that specifies if the repository root directory
-should be deleted for Local Repository or for GitHub whether to delete whole GitHub-Repository.}
+should be deleted for Local Repository.}
 
-\item{unset}{A logical. If deleted \code{repoDir/repo} was set to be default Local/GitHub Repository
-and \code{unset} is TRUE, then \code{repoDir/repo} is unset as a default Local/GitHub Repository (\code{aoptions('repoDir/repo', NULL, T)}).}
+\item{unset}{A logical. If deleted \code{repoDir} was set to be default Local Repository
+and \code{unset} is TRUE, then \code{repoDir} is unset as a default Local  Repository (\code{aoptions('repoDir/repo', NULL, T)}).}
 }
 \description{
 \code{deleteLocalRepo} deletes the existing \link{Repository} from the given directory.
