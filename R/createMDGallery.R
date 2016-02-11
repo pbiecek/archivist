@@ -67,8 +67,8 @@ createMDGallery <- function(output, repo = aoptions("repo"), user = aoptions("us
   # as in loadFromRemoteRepo
   remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, subdir=subdir, repoType=repoType)
   Temp <- downloadDB(remoteHook )
-  on.exit( file.remove( Temp ) )
-  md5hashList <- executeSingleQuery( dir = Temp, realDBname = FALSE,
+  on.exit( unlink( Temp, recursive = TRUE, force = TRUE) )
+  md5hashList <- executeSingleQuery( dir = Temp, 
                                      "SELECT DISTINCT artifact, tag FROM tag ")#WHERE tag LIKE 'name%'" )
 
   if (addMiniature) {

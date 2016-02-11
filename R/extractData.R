@@ -8,7 +8,7 @@ extractData.default <- function( object, parrentMd5hash, parentDir, isForce, ASC
 extractData.ggplot <- function( object, parrentMd5hash, parentDir, isForce, ASCII ){
   extractedDF <- object$data
   # check if that artifact might have been already archived
-  check <- executeSingleQuery( dir = parentDir , realDBname = TRUE,
+  check <- executeSingleQuery( dir = parentDir , 
                                paste0( "SELECT * from artifact WHERE md5hash ='", digest(extractedDF), "'") )[,1]
     if ( length( check ) > 0 & isForce ) {
     warning( "This artifact's data was already archived. Another archivisation executed with success.")
@@ -25,7 +25,7 @@ extractData.ggplot <- function( object, parrentMd5hash, parentDir, isForce, ASCI
 extractData.lm <- function( object, parrentMd5hash, parentDir, isForce, ASCII ){
   extractedDF <- object$model
   # check if that artifact might have been already archived
-  check <- executeSingleQuery( dir = parentDir , realDBname = TRUE,
+  check <- executeSingleQuery( dir = parentDir , 
                                paste0( "SELECT * from artifact WHERE md5hash ='", digest(extractedDF), "'") )[,1]
   if ( length( check ) > 0 & isForce ) {
     warning( "This artifact's data was already archived. Another archivisation executed with success.")
@@ -45,7 +45,7 @@ extractData.htest <- function( object, parrentMd5hash, parentDir, isForce, ASCII
   extractedDF1 <- get( strsplit(object$data.name, " and ")[[1]][1], envir = parent.frame(1) )
   extractedDF2 <- get( strsplit(object$data.name, " and ")[[1]][2], envir = parent.frame(1) )
   # check if that artifact might have been already archived
-  check <- executeSingleQuery( dir = parentDir , realDBname = TRUE,
+  check <- executeSingleQuery( dir = parentDir , 
                                paste0( "SELECT * from artifact WHERE md5hash ='", digest(list( extractedDF1, extractedDF2 )), "'") )[,1]
   if ( length( check ) > 0 & isForce ) {
     warning( "This artifact's data was already archived. Another archivisation executed with success.")
@@ -70,7 +70,7 @@ extractData.lda <- function( object, parrentMd5hash, parentDir, isForce, ASCII )
   if (exists(as.character( ( object$call ) )[3], envir = parent.frame(1) )){
     extractedDF <-  get( as.character( ( object$call ) )[3], envir = parent.frame(1) )
     # check if that artifact might have been already archived
-    check <- executeSingleQuery( dir = parentDir , realDBname = TRUE,
+    check <- executeSingleQuery( dir = parentDir , 
                                  paste0( "SELECT * from artifact WHERE md5hash ='", digest(extractedDF), "'") )[,1]
     if ( length( check ) > 0 & isForce ) {
       warning( "This artifact's data was already archived. Another archivisation executed with success.")
@@ -92,7 +92,7 @@ extractData.trellis <- function( object, parrentMd5hash, parentDir, isForce, ASC
   if (exists(as.character( ( object$call ) )[3], envir = parent.frame(1) )){
   extractedDF <- get( as.character( object$call )[3], envir = parent.frame(1) )
   # check if that artifact might have been already archived
-  check <- executeSingleQuery( dir = parentDir , realDBname = TRUE,
+  check <- executeSingleQuery( dir = parentDir , 
                                paste0( "SELECT * from artifact WHERE md5hash ='", digest(extractedDF), "'") )[,1]
   if ( length( check ) > 0 & isForce ) {
     warning( "This artifact's data was already archived. Another archivisation executed with success.")
@@ -114,7 +114,7 @@ extractData.twins <- function( object, parrentMd5hash, parentDir, isForce, ASCII
   # agnes / diana / mona inherits after twins
   extractedDF <- object$data
   # check if that artifact might have been already archived
-  check <- executeSingleQuery( dir = parentDir , realDBname = TRUE,
+  check <- executeSingleQuery( dir = parentDir , 
                                paste0( "SELECT * from artifact WHERE md5hash ='", digest(extractedDF), "'") )[,1]
   if ( length( check ) > 0 & isForce ) {
     warning( "This artifact's data was already archived. Another archivisation executed with success.")
@@ -132,7 +132,7 @@ extractData.partition <- function( object, parrentMd5hash, parentDir, isForce, A
   # pam / clara / fanny inherits after partition
   extractedDF <- object$data
   # check if that artifact might have been already archived
-  check <- executeSingleQuery( dir = parentDir , realDBname = TRUE,
+  check <- executeSingleQuery( dir = parentDir , 
                                paste0( "SELECT * from artifact WHERE md5hash ='", digest(extractedDF), "'") )[,1]
   if ( length( check ) > 0 & isForce ) {
     warning( "This artifact's data was already archived. Another archivisation executed with success.")
@@ -150,7 +150,7 @@ extractData.qda <- function( object, parrentMd5hash, parentDir, isForce, ASCII )
   if (exists(as.character( ( object$call ) )[2], envir = parent.frame(1) )){
   extractedDF <-  get( as.character( ( object$call ) )[2], envir = parent.frame(1) )
   # check if that artifact might have been already archived
-  check <- executeSingleQuery( dir = parentDir , realDBname = TRUE,
+  check <- executeSingleQuery( dir = parentDir , 
                                paste0( "SELECT * from artifact WHERE md5hash ='", digest(extractedDF), "'") )[,1]
   if ( length( check ) > 0 & isForce ) {
     warning( "This artifact's data was already archived. Another archivisation executed with success.")
@@ -177,7 +177,7 @@ extractData.glmnet <- function( object, parrentMd5hash, parentDir, isForce, ASCI
   extractedDF1 <- get( as.character( object$call )[2], envir = parent.frame(1) )
   extractedDF2 <- get( as.character( object$call )[3], envir = parent.frame(1) )
   # check if that artifact might have been already archived
-  check <- executeSingleQuery( dir = parentDir , realDBname = TRUE,
+  check <- executeSingleQuery( dir = parentDir , 
                                paste0( "SELECT * from artifact WHERE md5hash ='", digest(c( extractedDF1, extractedDF1 )), "'") )[,1]
   if ( length( check ) > 0 & isForce ) {
     warning( "This artifact's data was already archived. Another archivisation executed with success.")
@@ -201,7 +201,7 @@ extractData.survfit <- function( object, parrentMd5hash, parentDir, isForce, ASC
   if (exists(as.character( ( object$call ) )[3], envir = parent.frame(1) )){
   extractedDF <-  get( as.character( object$call )[3], envir = parent.frame(1) )
   # check if that artifact might have been already archived
-  check <- executeSingleQuery( dir = parentDir , realDBname = TRUE,
+  check <- executeSingleQuery( dir = parentDir , 
                                paste0( "SELECT * from artifact WHERE md5hash ='", digest(extractedDF), "'") )[,1]
   if ( length( check ) > 0 & isForce ) {
     warning( "This artifact's data was already archived. Another archivisation executed with success.")
