@@ -48,22 +48,7 @@
 #' possible to set the miniature's \code{width} and \code{height} parameters. By default they are set to
 #' \code{width = 800}, \code{height = 600}.
 #'
-#' Supported artifact's classes are (so far):
-#' \itemize{
-#'  \item \code{lm},
-#'  \item \code{data.frame},
-#'  \item \code{ggplot},
-#'  \item \code{htest},
-#'  \item \code{trellis},
-#'  \item \code{twins (result of agnes, diana or mona function)},
-#'  \item \code{partition (result of pam, clara or fanny fuction)},
-#'  \item \code{lda},
-#'  \item \code{qda},
-#'  \item \code{glmnet},
-#'  \item \code{survfit}.
-#'  }
-#'
-#' To check what \code{Tags} will be extracted from various artifacts see \link{Tags}.
+#' Supported artifact's classes are listed here \link{Tags}.
 #'
 #' @return
 #' As a result of calling this function a character string is returned, which determines
@@ -74,7 +59,7 @@
 #'
 #' @seealso
 #'  For more detailed information check the \pkg{archivist} package
-#' \href{https://github.com/pbiecek/archivist#-the-list-of-use-cases-}{Use Cases}.
+#' \href{http://pbiecek.github.io/archivist/}{Use Cases}.
 #' The list of supported artifacts and their tags is available on \code{wiki} on \pkg{archivist}
 #' \href{https://github.com/pbiecek/archivist/wiki/archivist-package---Tags}{Github Repository}.
 #'
@@ -88,7 +73,8 @@
 #'  \itemize{
 #'    \item \code{saveToLocalRepo(model, repoDir, userTags = c("my_model", "do not delete"))}.
 #'  }
-#'  Specifing additional \code{Tags} by attributes can be beneficial when one uses \link{addHooksToPrint}.
+#'  
+#' Specifing additional \code{Tags} by attributes can be beneficial when one uses \link{addHooksToPrint}.
 #'  
 #'
 #' Important: if one wants to archive data from artifacts which is one of:
@@ -129,8 +115,6 @@
 #' @param force A logical value denoting whether to archive \code{artifact} if it was already archived in
 #' a Repository.
 #'
-#' @param rememberName A logical value. Should not be changed by a user. It is a technical parameter.
-#'
 #' @param value A logical value. Should the result be (default \code{value = FALSE}) the \code{md5hash}
 #' of a stored artifact or should the result be an input artifact (\code{value = TRUE}), so that valueing code
 #' can be used. See examples.
@@ -148,8 +132,8 @@
 #' @examples
 #' exampleRepoDir <- tempfile()
 #' createLocalRepo(repoDir = exampleRepoDir)
-#' data(iris)
-#' saveToLocalRepo(iris, repoDir=exampleRepoDir, archiveSessionInfo = TRUE)
+#' data(swiss)
+#' saveToLocalRepo(swiss, repoDir=exampleRepoDir, archiveSessionInfo = TRUE)
 #' showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
 #' showLocalRepo(method = "tags", repoDir = exampleRepoDir)
 #' 
@@ -160,6 +144,8 @@
 #'              userTags = c("do not delete", "my favourite graph"))
 #' aoptions('repoDir', system.file("graphGallery", package = "archivist"))
 #' showLocalRepo(method = "tags")
+#' data(iris)
+#' asave(iris, silent = FALSE) # iris was used in pl
 #' aoptions('repoDir', NULL, unset = TRUE)
 #' deleteLocalRepo(exampleRepoDir, TRUE)
 #' rm(exampleRepoDir)
@@ -171,21 +157,17 @@ saveToLocalRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
                         archiveTags = TRUE,
                         archiveMiniature = TRUE, 
                         archiveSessionInfo = TRUE, 
-                        force = TRUE, rememberName = TRUE,
+                        force = TRUE, 
                         value = FALSE, ... , userTags = c(),
                         silent=aoptions("silent"), ascii = FALSE,
                         artifactName = deparse(substitute(artifact))) {
-  stopifnot( is.logical( c( archiveData, archiveTags, archiveMiniature,
-                            force,  rememberName, value, silent, ascii, archiveSessionInfo ) ) )
-  stopifnot( ( is.character( repoDir ) & length( repoDir ) == 1 ) | is.null( repoDir ) )
-  stopifnot( is.character(artifactName))
-#  stopifnot( is.character( userTags ))    - user can specify tags: userTags = 1:2, and they should
-# be converted to characters as in the previous archivist versions. we even have testsfor that
-  stopifnot( length(archiveData) == 1, length(archiveTags) == 1, length(archiveMiniature) == 1,
-             length(archiveSessionInfo) == 1,
-             length(force) == 1, length(rememberName) == 1,
-             length(value) == 1, length(ascii) == 1, length(artifactName) == 1 )
-#   stopifnot( is.character( format ) & length( format ) == 1 & any(format %in% c("rda", "rdx")) )
+  stopifnot(is.logical(c(archiveData, archiveTags, archiveMiniature, force,  value, silent, ascii, archiveSessionInfo)))
+  stopifnot((is.character(repoDir) & length(repoDir) == 1 ) | is.null(repoDir))
+  stopifnot(is.character(artifactName))
+  stopifnot(length(archiveData) == 1, length(archiveTags) == 1, length(archiveMiniature) == 1,
+            length(archiveSessionInfo) == 1, length(force) == 1, 
+            length(value) == 1, length(ascii) == 1, length(artifactName) == 1)
+
 
   md5hash <- digest( artifact )
 
@@ -199,46 +181,47 @@ saveToLocalRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
     stop( paste0("Artifact ",md5hash," was already archived. If you want to archive it again, use force = TRUE. \n"))
   }
   if ( length( check ) > 0 & force & !silent){
-    if ( rememberName ){
+#    if ( rememberName ){
       warning( paste0("Artifact ",md5hash," was already archived. Another archivisation executed with success."))
-    }else{
-      warning( "This artifact's data was already archived. Another archivisation executed with success.")
-    }
-  }
+    } #else{
+#       warning( "This artifact's data was already archived. Another archivisation executed with success.")
+#     }
+#   }
 
   # save artifact to .rd file
-  if ( rememberName & !(artifactName %in% ls(envir = parent.frame(1)))) {
-    warning( paste0("Object with the name ", artifactName, ", not found. Saving without name."))
-    rememberName = FALSE
-  }
-  if ( rememberName ){
-    save( file = file.path(repoDir,"gallery", paste0(md5hash, ".rda")), ascii = ascii, list = artifactName,  envir = parent.frame(1))
+#   if ( rememberName & !(artifactName %in% ls(envir = parent.frame(1)))) {
+#     warning( paste0("Object with the name ", artifactName, ", not found. Saving without name."))
+#     rememberName = FALSE
+#   }
+  #if ( rememberName ){
+    assign(x = artifactName, value = artifact)
+    save( file = file.path(repoDir,"gallery", paste0(md5hash, ".rda")), ascii = ascii, list = artifactName)
     addTag("format:rda", md5hash, dir=repoDir)
-  }else{
+  #}else{
 #    assign( value = artifact, x = md5hash, envir = .GlobalEnv )
 #    save( file = paste0(repoDir, "gallery/", md5hash, ".rda"),  ascii=TRUE, list = md5hash, envir = .GlobalEnv  )
-    assign( value = artifact, x = md5hash, envir = .ArchivistEnv )
-    save( file = file.path(repoDir, "gallery", paste0(md5hash, ".rda")),  ascii=ascii, list = md5hash, envir = .ArchivistEnv  )
-    addTag("format:rda", md5hash, dir=repoDir)
-
-    rm(list = md5hash, envir = .ArchivistEnv)
-  }
+#     assign( value = artifact, x = md5hash, envir = .ArchivistEnv )
+#     save( file = file.path(repoDir, "gallery", paste0(md5hash, ".rda")),  ascii=ascii, list = md5hash, envir = .ArchivistEnv  )
+#     addTag("format:rda", md5hash, dir=repoDir)
+# 
+#     rm(list = md5hash, envir = .ArchivistEnv)
+#   }
 
   # add entry to database
-   if ( rememberName ){
+#    if ( rememberName ){
      addArtifact( md5hash, name = artifactName, dir = repoDir )
-   }else{
-     addArtifact( md5hash, name = md5hash , dir = repoDir)
-   # rm( list = md5hash, envir = .ArchivistEnv )
-   }
+#    }else{
+#      addArtifact( md5hash, name = md5hash , dir = repoDir)
+#    # rm( list = md5hash, envir = .ArchivistEnv )
+#    }
 
   # whether to add Tags
   if ( archiveTags ) {
     extractedTags <- extractTags( artifact, objectNameX = artifactName )
     # remove name from Tags
-    if (!rememberName) {
-      extractedTags <- extractedTags[!grepl(extractedTags, pattern="^name:")]
-    }
+#     if (!rememberName) {
+#       extractedTags <- extractedTags[!grepl(extractedTags, pattern="^name:")]
+#     }
     derivedTags <- attr( artifact, "tags" )
     sapply( c( extractedTags, userTags, derivedTags), addTag, md5hash = md5hash, dir = repoDir )
     # attr( artifact, "tags" ) are Tags specified by a user
@@ -251,14 +234,14 @@ saveToLocalRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
     }
     si <- devtools::session_info()
     md5hashDF <- saveToLocalRepo( si, archiveData = FALSE, repoDir = repoDir, 
-                             rememberName = FALSE, archiveTags = FALSE, force=TRUE, 
+                             artifactName = digest(si), archiveTags = FALSE, force=TRUE, 
                              archiveSessionInfo = FALSE)
     addTag( tag = paste0("session_info:", md5hashDF), md5hash = md5hash, dir = repoDir )
   }
   # whether to archive data
   # if valueing code is used, the "data" attr is not needed
   if ( archiveData & !value ){
-    attr( md5hash, "data" )  <-  extractData( artifact, parrentMd5hash = md5hash,
+    attr( md5hash, "data" )  <-  extractData( artifact, parrentMd5hash = md5hash, 
                                               parentDir = repoDir, isForce = force, ASCII = ascii )
   }
   if ( archiveData & value ){

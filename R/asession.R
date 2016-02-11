@@ -3,7 +3,7 @@
 #' @title Show Artifact's Session Info
 #'
 #' @description
-#' \code{asession} extracts artifact's session info. This allow to check in what conditions 
+#' \code{asession} extracts artifact's session info. This allows to check in what conditions 
 #' the artifact was created.
 #' 
 #' @param md5hash One of the following (see \link{aread}):

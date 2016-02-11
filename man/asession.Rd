@@ -17,7 +17,7 @@ MD5 hashes of artifacts in current local default directory or its abbreviations.
 An object of the class \code{session_info}.
 }
 \description{
-\code{asession} extracts artifact's session info. This allow to check in what conditions 
+\code{asession} extracts artifact's session info. This allows to check in what conditions 
 the artifact was created.
 }
 \examples{
