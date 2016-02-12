@@ -25,6 +25,8 @@
 #' @param patterns  A character vector of \code{Tags}. Only artifacts that 
 #' contain all Tags are returned.  
 #' 
+#' @param repoType A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.
+#' 
 #' @return This function returns a list of artifacts (by their values).
 #' 
 #' @author 
@@ -103,7 +105,7 @@
 #' @family archivist
 #' @rdname asearch
 #' @export
-asearch <- function( patterns, repo = NULL){
+asearch <- function( patterns, repo = NULL, repoType){
   stopifnot( (is.character( repo ) & length( repo ) == 1) | is.null( repo ) )
   stopifnot( is.character( patterns ) )
 
@@ -119,12 +121,12 @@ asearch <- function( patterns, repo = NULL){
     }
   } else {
     # at least 3 elements
-    # it's GitHub Repo
+    # it's Remote Repo
     elements <- strsplit(repo, "/")[[1]]
     stopifnot( length(elements) >= 2 )
     
     oblist <- multiSearchInRemoteRepo(user = elements[1], repo=paste(elements[-1], collapse = "/"), 
-                                patterns = patterns)
+                                patterns = patterns, repoType = repoType)
     if (length(oblist)>0) {
       res <- lapply(paste0(repo, "/", oblist), aread)
       names(res) <- oblist
