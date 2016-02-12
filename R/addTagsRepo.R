@@ -49,13 +49,13 @@
 #' 
 #' # Creating empty repository
 #' exampleRepoDir <- tempfile()
-#' createEmptyRepo(exampleRepoDir, force=TRUE)
+#' createLocalRepo(exampleRepoDir, force=TRUE)
 #' 
 #' # Saving lm artifacts into repository
 #' m1 <- lm(Sepal.Length~Species, iris)
-#' saveToRepo(m1, exampleRepoDir)
+#' saveToLocalRepo(m1, exampleRepoDir)
 #' m2 <- lm(Sepal.Width~Species, iris)
-#' saveToRepo(m2, exampleRepoDir)
+#' saveToLocalRepo(m2, exampleRepoDir)
 #' 
 #' # We may see what kind of Tags are related to "m1" artifact corresponding to
 #' # "9e66edd297c2f291446f3503c01d443a" md5hash
@@ -84,7 +84,7 @@
 #' showLocalRepo(exampleRepoDir, method = "tags")
 #' 
 #' # Deleting example repository
-#' deleteRepo(exampleRepoDir, deleteRoot=TRUE)
+#' deleteLocalRepo(exampleRepoDir, deleteRoot=TRUE)
 #' rm(exampleRepoDir)
 #' }
 #' 

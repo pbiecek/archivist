@@ -19,6 +19,7 @@ archivist 2.0
       1. For the above reason `deleteRepo` was deprecated. Use `deleteLocalRepo`
       2. For the above reason `createEmptyLocalRepo` and `createEmptyRepo` were deprecated. Use `createLocalRepo`.
       3. For the above reason `rmFromRepo` was deprecated. Use `rmFromLocalRepo`
+    2. `multiSearchInLocalRepo` and it's remote version were deprecated. Now multiple patterns are available in `searchInLocalRepo`/`searchInRemoteRepo`. 
     
 archivist 1.9
 ----------------------------------------------------------------

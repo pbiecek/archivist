@@ -12,22 +12,22 @@ contain all Tags are returned.}
 
 \item{repo}{One of following:
 
-A character with GitHub user name and GitHub repository name separated by `/`.
+A character with Remote user name and Remote repository name separated by `/`.
 
-NULL in this case search will be performed in the default repo, either local or GitHub.}
+NULL in this case search will be performed in the default repo, either local or Remote}
 }
 \value{
 This function returns a list of artifacts (by their values).
 }
 \description{
 \code{asearch} searches for artifacts that contain all specified \link{Tags}
-and reads all of them from a default or Github \link{Repository}. It's a wrapper around 
-\link{multiSearchInLocalRepo} and \link{loadFromLocalRepo}.
+and reads all of them from a default or Remote \link{Repository}. It's a wrapper around 
+\link{searchInLocalRepo} and \link{loadFromLocalRepo} and their Remote versions.
 }
 \details{
 Function \code{asearch} reads all artifacts that contain given list of \code{Tags}
-from default or GitHub Repository.
-It uses both \link{loadFromLocalRepo} and \link{multiSearchInLocalRepo} functions 
+from default or Remote Repository.
+It uses both \link{loadFromLocalRepo} and \link{searchInLocalRepo} functions (or their Remote versions)
 but has shorter name and different parameter's specification.
 }
 \note{
@@ -61,11 +61,11 @@ createLocalRepo(repoDir = exampleRepoDir)
 ## setting default local repository
 setLocalRepo( repoDir = exampleRepoDir )
 
-saveToRepo(myplot123)
-saveToRepo(iris)
-saveToRepo(model)
-saveToRepo(model2)
-saveToRepo(model3)
+saveToLocalRepo(myplot123)
+saveToLocalRepo(iris)
+saveToLocalRepo(model)
+saveToLocalRepo(model2)
+saveToLocalRepo(model3)
 
 ## Searching for objects of class:lm
 lm <- asearch(patterns = "class:lm")
@@ -94,7 +94,7 @@ asearch(patterns = c("class:lm"))
 ## Searching for objects of class:gg
 asearch(patterns = c("class:gg"))
 
-### Github version 
+### Remote version 
 ## Note that repo argument is passed in the following way to asearch:
 ## repo = "GitHub user name/GitHub repository name"
 

@@ -16,8 +16,11 @@ if (!require(archivist)) {
 
 archivist::aread("pbiecek/graphGallery/600bda83cb840947976bd1ce3a11879d")
 archivist::aread("pbiecek/graphGallery/600bd")
+setLocalRepo(system.file("graphGallery", package = "archivist"))
+aread("600bda83cb840947976bd1ce3a11879d")
 
 # regression model
+
 model <- archivist::aread("2a6e492cb6982f230e48cf46023e2e4f")
 summary(model)
 
@@ -64,6 +67,7 @@ iris %a%
 ahistory(tmp)
 
 ahistory(md5hash = "050e41ec3bc40b3004bc6bdd356acae7")
+# this is not always this hash
 
 #Session info
 
@@ -85,7 +89,7 @@ createLocalRepo(repoDir = repo)
 # Deletion of an existing repository
 
 repo <- "arepo"
-deleteLocalRepo(repoDir = repo)
+deleteLocalRepo(repoDir = repo, deleteRoot = TRUE)
 
 
 # Copying artifacts from other repositories.
@@ -118,7 +122,7 @@ saveToLocalRepo(pl, repoDir = repo)
 
 showLocalRepo(repoDir = repo, "tags")
 
-deleteRepo("arepo")
+#deleteLocalRepo("arepo", deleteRoot = TRUE)
 
 
 # Serialization of an object creation event into repository
@@ -173,5 +177,5 @@ searchInLocalRepo(pattern = list(dateFrom = "2016-01-01",
                   repoDir = system.file("graphGallery", package = "archivist"))
 
 
-multiSearchInLocalRepo(pattern=c("class:gg", "labelx:Sepal.Length"),
+searchInLocalRepo(pattern=c("class:gg", "labelx:Sepal.Length"),
                        repoDir = system.file("graphGallery", package = "archivist"))	

@@ -30,7 +30,7 @@
 #' ## Archiving artifacts with their chaining code
 #' # Creating empty repository
 #' exampleRepoDir <- tempfile()
-#' createEmptyRepo( exampleRepoDir, default = TRUE ) # Remember to set repo to default
+#' createLocalRepo( exampleRepoDir, default = TRUE ) # Remember to set repo to default
 #' 
 #' # Start using %a% operator
 #' data("hflights", package = "hflights")
@@ -51,7 +51,7 @@
 #' getTagsLocal("5629bc43e36d219b613076b17c665eda", tag = "") #6
 #' 
 #' # Deleting existing repository
-#' deleteRepo(exampleRepoDir, deleteRoot = TRUE)
+#' deleteLocalRepo(exampleRepoDir, deleteRoot = TRUE)
 #' rm(exampleRepoDir) 
 #' }
 #' @family archivist

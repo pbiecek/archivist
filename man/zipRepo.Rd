@@ -75,10 +75,10 @@ model <- lm(Sepal.Length~ Sepal.Width + Petal.Length + Petal.Width, data= iris)
 # Local version
 
 exampleRepoDir <- tempfile()
-createEmptyRepo( repoDir = exampleRepoDir )
-saveToRepo( myplot123, repoDir=exampleRepoDir )
-saveToRepo( iris, repoDir=exampleRepoDir )
-saveToRepo( model, repoDir=exampleRepoDir )
+createLocalRepo( repoDir = exampleRepoDir )
+saveToLocalRepo( myplot123, repoDir=exampleRepoDir )
+saveToLocalRepo( iris, repoDir=exampleRepoDir )
+saveToLocalRepo( model, repoDir=exampleRepoDir )
 
 
  
@@ -88,7 +88,7 @@ deleteLocalRepo( exampleRepoDir, TRUE)
 
 rm( exampleRepoDir )
 
-# Github version
+# Remote version
 
 zipRemoteRepo( user="MarcinKosinski", 
 repo="Museum", branch="master", subdir="ex1" )

@@ -204,12 +204,12 @@
 #' 
 #' @note 
 #' In the following way one can specify his own \code{Tags} for artifacts by 
-#' setting artifact's attribute before call of the \code{saveToRepo} function: 
+#' setting artifact's attribute before call of the \code{saveToLocalRepo} function: 
 #' \code{attr(x, "tags" ) = c( "name1", "name2" )}, where \code{x} is an artifact 
 #' and \code{name1, name2} are \code{Tags} specified by a user.
 #' It can be also done in a new, simpler way by using \code{userTags} parameter like this: 
 #'  \itemize{
-#'    \item \code{saveToRepo(model, repoDir, userTags = c("my_model", "do not delete"))}.
+#'    \item \code{saveToLocalRepo(model, repoDir, userTags = c("my_model", "do not delete"))}.
 #'  }
 #'  Specifing additional \code{Tags} by attributes can be beneficial when one uses \link{addHooksToPrint}.
 #' 
@@ -235,7 +235,7 @@
 #'                              colour = 'red', size = 3)
 #' exampleRepoDir <- tempfile()
 #' createLocalRepo( repoDir = exampleRepoDir )
-#' saveToRepo( myplot123, repoDir=exampleRepoDir )
+#' saveToLocalRepo( myplot123, repoDir=exampleRepoDir )
 #' showLocalRepo( exampleRepoDir, "tags" )
 #' deleteLocalRepo( exampleRepoDir, deleteRoot=TRUE )
 #' 
@@ -254,7 +254,7 @@
 #' agn1 <- agnes(votes.repub, metric = "manhattan", stand = TRUE)
 #' exampleRepoDir <- tempfile()
 #' createLocalRepo( repoDir = exampleRepoDir )
-#' saveToRepo( agn1, repoDir=exampleRepoDir )
+#' saveToLocalRepo( agn1, repoDir=exampleRepoDir )
 #' showLocalRepo( exampleRepoDir, "tags" )
 #' deleteLocalRepo( exampleRepoDir, TRUE )
 #' 
@@ -265,7 +265,7 @@
 #' fannyx <- fanny(x, 2)
 #' exampleRepoDir <- tempfile()
 #' createLocalRepo( repoDir = exampleRepoDir )
-#' saveToRepo( fannyx, repoDir=exampleRepoDir )
+#' saveToLocalRepo( fannyx, repoDir=exampleRepoDir )
 #' showLocalRepo( exampleRepoDir, "tags" )
 #' deleteLocalRepo( exampleRepoDir, TRUE )
 #' 
@@ -293,7 +293,7 @@
 #' qda1 <- qda(train, cl)
 #' exampleRepoDir <- tempfile()
 #' createLocalRepo( repoDir = exampleRepoDir )
-#' saveToRepo( qda1, repoDir=exampleRepoDir )
+#' saveToLocalRepo( qda1, repoDir=exampleRepoDir )
 #' showLocalRepo( exampleRepoDir, "tags" )
 #' deleteLocalRepo( exampleRepoDir, TRUE )
 #' 
@@ -306,7 +306,7 @@
 #' glmnet1=glmnet(zk,bk)
 #' exampleRepoDir <- tempfile()
 #' createLocalRepo( repoDir = exampleRepoDir )
-#' saveToRepo( glmnet1, repoDir=exampleRepoDir )
+#' saveToLocalRepo( glmnet1, repoDir=exampleRepoDir )
 #' showLocalRepo( exampleRepoDir, "tags" )
 #' deleteLocalRepo( exampleRepoDir, TRUE )
 #' 
@@ -339,7 +339,7 @@
 #'                        aspect = "xy")
 #' exampleRepoDir <- tempfile()
 #' createLocalRepo( repoDir = exampleRepoDir )
-#' saveToRepo( trellis.plot, repoDir=exampleRepoDir )
+#' saveToLocalRepo( trellis.plot, repoDir=exampleRepoDir )
 #' showLocalRepo( exampleRepoDir, "tags" )
 #' deleteLocalRepo( exampleRepoDir, TRUE )
 #' 
@@ -350,7 +350,7 @@
 #' this.test <- wilcox.test(x, y, paired = TRUE, alternative = "greater")
 #' exampleRepoDir <- tempfile()
 #' createLocalRepo( repoDir = exampleRepoDir )
-#' saveToRepo( this.test, repoDir=exampleRepoDir )
+#' saveToLocalRepo( this.test, repoDir=exampleRepoDir )
 #' showLocalRepo( exampleRepoDir, "tags" )
 #' deleteLocalRepo( exampleRepoDir, TRUE )
 #' 
@@ -365,7 +365,7 @@
 #' myFit <-  survfit( coxph(Surv(time, status) ~ x + strata(sex), test1), data = test1  )
 #' exampleRepoDir <- tempfile()
 #' createLocalRepo( repoDir = exampleRepoDir )
-#' saveToRepo( myFit , repoDir=exampleRepoDir )
+#' saveToLocalRepo( myFit , repoDir=exampleRepoDir )
 #' showLocalRepo( exampleRepoDir, "tags" )[,-3]
 #' deleteLocalRepo( exampleRepoDir, TRUE)
 #' 
@@ -377,14 +377,14 @@
 #' hflights %>%
 #'   group_by(Year, Month, DayofMonth) %>%
 #'   select(Year:DayofMonth, ArrDelay, DepDelay) %>%
-#'   saveToRepo( exampleRepoDir, value = TRUE ) %>%
+#'   saveToLocalRepo( exampleRepoDir, value = TRUE ) %>%
 #'   # here the artifact is stored but chaining is not finished
 #'   summarise(
 #'     arr = mean(ArrDelay, na.rm = TRUE),
 #'     dep = mean(DepDelay, na.rm = TRUE)
 #'   ) %>%
 #'   filter(arr > 30 | dep > 30) %>%
-#'   saveToRepo( exampleRepoDir ) 
+#'   saveToLocalRepo( exampleRepoDir ) 
 #'   # chaining code is finished and after last operation the 
 #'   # artifact is stored
 #' showLocalRepo( exampleRepoDir, "tags" )[,-3]

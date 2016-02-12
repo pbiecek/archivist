@@ -256,7 +256,7 @@ searchInLocalRepo(pattern = list(dateFrom = "2016-01-01",
     repoDir = system.file("graphGallery", package = "archivist"))
 
 
-multiSearchInLocalRepo(pattern=c("class:gg", "labelx:Sepal.Length"),
+searchInLocalRepo(pattern=c("class:gg", "labelx:Sepal.Length"),
          repoDir = system.file("graphGallery", package = "archivist"))	
 ```
 

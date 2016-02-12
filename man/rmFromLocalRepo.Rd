@@ -106,11 +106,11 @@ fannyx <- fanny(x, 2)
 
 exampleRepoDir <- tempfile()
 createLocalRepo(repoDir = exampleRepoDir)
-myplot123Md5hash <- saveToRepo(myplot123, repoDir=exampleRepoDir)
-irisMd5hash <- saveToRepo(iris, repoDir=exampleRepoDir)
-modelMd5hash  <- saveToRepo(model, repoDir=exampleRepoDir)
-agn1Md5hash <- saveToRepo(agn1, repoDir=exampleRepoDir)
-fannyxMd5hash <- saveToRepo(fannyx, repoDir=exampleRepoDir)
+myplot123Md5hash <- saveToLocalRepo(myplot123, repoDir=exampleRepoDir)
+irisMd5hash <- saveToLocalRepo(iris, repoDir=exampleRepoDir)
+modelMd5hash  <- saveToLocalRepo(model, repoDir=exampleRepoDir)
+agn1Md5hash <- saveToLocalRepo(agn1, repoDir=exampleRepoDir)
+fannyxMd5hash <- saveToLocalRepo(fannyx, repoDir=exampleRepoDir)
 
 # let's see how the Repository looks like: show
 showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
@@ -136,8 +136,8 @@ summaryLocalRepo( exampleRepoDir )
 
 # one can have the same object archived three different times,
 # there will appear a warning message
-agn1Md5hash2 <- saveToRepo(agn1, repoDir=exampleRepoDir)
-agn1Md5hash3 <- saveToRepo(agn1, repoDir=exampleRepoDir)
+agn1Md5hash2 <- saveToLocalRepo(agn1, repoDir=exampleRepoDir)
+agn1Md5hash3 <- saveToLocalRepo(agn1, repoDir=exampleRepoDir)
 
 # md5hashes are the same for the same object (agn1)
 agn1Md5hash == agn1Md5hash2
@@ -180,9 +180,9 @@ showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
 showLocalRepo(method = "tags", repoDir = exampleRepoDir)
 
 # one can also delete objects of a specific class
-modelMd5hash  <- saveToRepo(model, repoDir=exampleRepoDir)
-model2Md5hash  <- saveToRepo(model2, repoDir=exampleRepoDir)
-model3Md5hash  <- saveToRepo(model3, repoDir=exampleRepoDir)
+modelMd5hash  <- saveToLocalRepo(model, repoDir=exampleRepoDir)
+model2Md5hash  <- saveToLocalRepo(model2, repoDir=exampleRepoDir)
+model3Md5hash  <- saveToLocalRepo(model3, repoDir=exampleRepoDir)
 showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
 
 objMd5hash <- searchInLocalRepo("class:lm", repoDir = exampleRepoDir)
@@ -192,7 +192,7 @@ summaryLocalRepo( exampleRepoDir )
 
 
 # one can remove object specifying only its md5hash abbreviation
-(myplo123Md5hash <- saveToRepo(myplot123, repoDir=exampleRepoDir))
+(myplo123Md5hash <- saveToLocalRepo(myplot123, repoDir=exampleRepoDir))
 showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
 
 # If md5hash is "db50a4e667581f8c531acd78ad24bfee" then
@@ -261,12 +261,12 @@ glmnet1=glmnet(zk,bk)
 
 exampleRepoDir <- tempfile()
 createLocalRepo( repoDir = exampleRepoDir, force = TRUE)
-saveToRepo( iris, repoDir=exampleRepoDir)
-saveToRepo( model, repoDir=exampleRepoDir )
-saveToRepo( agn1, repoDir=exampleRepoDir )
-saveToRepo( fannyx, repoDir=exampleRepoDir )
-saveToRepo( lda1, repoDir=exampleRepoDir )
-saveToRepo( glmnet1, repoDir=exampleRepoDir )
+saveToLocalRepo( iris, repoDir=exampleRepoDir)
+saveToLocalRepo( model, repoDir=exampleRepoDir )
+saveToLocalRepo( agn1, repoDir=exampleRepoDir )
+saveToLocalRepo( fannyx, repoDir=exampleRepoDir )
+saveToLocalRepo( lda1, repoDir=exampleRepoDir )
+saveToLocalRepo( glmnet1, repoDir=exampleRepoDir )
 
 ArtifactsAndData <- unique(showLocalRepo(repoDir = exampleRepoDir)[,1])
 ArtifactsData <- unique(searchInLocalRepo(pattern = "relationWith", fixed = FALSE,

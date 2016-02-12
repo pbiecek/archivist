@@ -47,7 +47,7 @@
 #' exampleRepoDir <- tempfile()
 #' createLocalRepo( repoDir = exampleRepoDir, default =  TRUE )
 #' data(iris)
-#' saveToRepo(iris)
+#' saveToLocalRepo(iris)
 #' showLocalRepo()
 #' showLocalRepo(method = "tags")
 #' deleteLocalRepo( repoDir = exampleRepoDir, unset = TRUE, deleteRoot = TRUE)

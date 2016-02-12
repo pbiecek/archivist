@@ -50,14 +50,14 @@ and \code{subdir} parameters in future function calls. See examples.
 
 For local repositories, in this way, in the following function calls: 
 \link{loadFromLocalRepo},\link{searchInLocalRepo}, \link{rmFromLocalRepo}, \link{zipLocalRepo}, 
-\link{multiSearchInLocalRepo}, \link{addTagsRepo}, \link{shinySearchInLocalRepo},
+\link{addTagsRepo}, \link{shinySearchInLocalRepo},
 \link{getTagsLocal}, \link{showLocalRepo}, \link{summaryLocalRepo} 
 \code{repoDir} parameter may be omitted. 
 For remote repositories, in this way,
 in the following function calls:
 \link{zipRemoteRepo}, \link{loadFromRemoteRepo}, \link{searchInRemoteRepo},
 \link{getTagsRemote}, \link{showRemoteRepo}, \link{summaryRemoteRepo},
-\link{multiSearchInRemoteRepo}, \link{copyRemoteRepo}
+\link{copyRemoteRepo}
 parameters \code{user}, \code{repo}, \code{branch}, \code{subdir}  may be omitted.
 }
 \examples{
@@ -107,7 +107,7 @@ setRemoteRepo( user="pbiecek", repo="archivist"  )
 
 # From this moment user and repo parameters may be ommitted in the following functions
 showRemoteRepo()
-multiSearchInRemoteRepo( patterns=c("varname:Sepal.Width", "class:lm", "name:myplot123"), 
+searchInRemoteRepo( pattern=c("varname:Sepal.Width", "class:lm", "name:myplot123"), 
                          intersect = FALSE )
 }
 \author{

@@ -51,10 +51,8 @@ Then mdhashes are taken from Local Repository, so user has to specify \code{repo
 they are set globally, because \code{repo} is a substring of \code{repoDir} and during evalutation of \code{...} R treats \code{repo} as \code{repoDir}.
 }
 \examples{
-\dontrun{
 
-createEmptyRepo("ahistory_check", default = TRUE)
-aoptions("silent", TRUE)
+createLocalRepo("ahistory_check", default = TRUE)
 library(dplyr)
 iris \%a\%
 filter(Sepal.Length < 6) \%a\%
@@ -69,9 +67,9 @@ repo = "repo", user = "user")
 
 
 repoDir <- file.path(getwd(), "ahistory_check")
-deleteRepo(repoDir, deleteRoot = TRUE)
+deleteLocalRepo(repoDir, deleteRoot = TRUE)
+aoptions('repoDir', NULL, unset = TRUE)
 
-}
 }
 \author{
 Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}

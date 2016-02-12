@@ -116,7 +116,7 @@ deleteLocalRepo( exampleRepoDir, TRUE)
 rm( exampleRepoDir ) 
 
 ### Remote version
-## EXAMPLE: pbiecek archivist repository on Github
+## EXAMPLE: pbiecek archivist repository on GitHub
 
 showRemoteRepo(user="pbiecek", repo="archivist")
 # We search for a Tag with default "name" regular expression corresponding to 

@@ -21,7 +21,7 @@
 #' @return
 #' \code{searchInRepo} returns character vector of \code{md5hashes} of artifacts that were searched for.
 #' Those are hashes assigned to artifacts while they were saved in the Repository
-#' by the \link{saveToRepo} function. If the artifact
+#' by the \link{saveToLocalRepo} function. If the artifact
 #' is not in the Repository then a logical value \code{FALSE} is returned.
 #' 
 #' @param repoType A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.
@@ -29,17 +29,14 @@
 #' @param pattern If \code{fixed = TRUE}: a character denoting a \code{Tag} which is to be searched for in the Repository.
 #' It is also possible to specify \code{pattern} as a list of 
 #' length 2 with \code{dateFrom} and \code{dateTo}; see details. If \code{fixed = FALSE}: a regular expression 
-#' specifying the beginning of a \code{Tag}, which will be used to search for artifacts.
+#' specifying the beginning of a \code{Tag}, which will be used to search for artifacts. If of length more than one and if 
+#' \code{intersect = TRUE} then artifacts that match all conditions are returned. If \code{intersect = FALSE} then artifacts that match any condition
+#' are returned. See examples.
 #' 
-#' @param patterns A character vector of \code{patterns}(see \code{pattern}) to find artifacts in the Repository.
-#' If \code{intersect = TRUE} then artifacts that 
-#' match all conditions are returned. If \code{intersect = FALSE} then artifacts that match any condition
-#' are returned.
-#' 
-#' @param intersect A logical value. See \code{patterns} for more details.
+#' @param intersect A logical value. Used only when \code{length(pattern) > 1 & is.character(pattern)}.
+#'  See \code{pattern} for more details.
 #' 
 #' @param repoDir A character denoting an existing directory in which artifacts will be searched for.
-#' If it is set to \code{NULL} (by default), it will use the \code{repoDir} specified in \link{setLocalRepo}.
 #' 
 #' @param repo While working with the Remote repository. A character containing a name of the Remote repository on which the Repository is stored.
 #' By default set to \code{NULL} - see \code{Note}.
@@ -56,12 +53,12 @@
 #' The latter is wider and more flexible method, e.g.,
 #' using \code{pattern = "name", fixed = FALSE} arguments enables to search for all artifacts in the \code{Repository}.
 #' 
-#' @param subdir While working with the Github repository. A character containing a name of a directory on the Remote repository 
+#' @param subdir While working with the Remote repository. A character containing a name of a directory on the Remote repository 
 #' on which the Repository is stored. If the Repository is stored in the main folder of the Remote repository, this should be set 
 #' to \code{subdir = "/"} as default.
 #' 
 #' @note
-#' If \code{repo} and \code{user} are set to \code{NULL} (as default) in the Remote mode then global parameters
+#' If \code{repo}, \code{user}, \code{subdir} and \code{repoType} are not specified in the Remote mode then global parameters
 #' set in \link{setRemoteRepo} function are used.
 #' 
 #' @author
@@ -112,18 +109,22 @@
 #'                    branch="master", subdir="ex2", fixed = FALSE )
 #'  
 #'  # multi versions
-#'  multiSearchInRemoteRepo( patterns=c("varname:Sepal.Width", "class:lm", "name:myplot123"), 
+#'  searchInRemoteRepo( pattern=c("varname:Sepal.Width", "class:lm", "name:myplot123"), 
 #'                          user="pbiecek", repo="archivist", intersect = FALSE )
 #'   
 #' }
 #' @family archivist
 #' @rdname searchInRepo
 #' @export
-searchInLocalRepo <- function( pattern, repoDir = aoptions("repoDir"), fixed = TRUE ){
+searchInLocalRepo <- function( pattern, repoDir = aoptions("repoDir"), fixed = TRUE, intersect = TRUE ){
   stopifnot( ( is.character( repoDir ) & length( repoDir ) == 1 ) | is.null( repoDir ) )
-  stopifnot( is.logical( fixed ) )
-  stopifnot( is.character( pattern ) | is.list( pattern ) ) 
-  stopifnot( length( pattern ) == 1 | length( pattern ) == 2 )
+  stopifnot( is.logical( c( fixed, intersect ) ), length( fixed ) == 1, length( intersect ) == 1 )
+  stopifnot( is.character( pattern ) | (is.list( pattern ) & length( pattern ) == 2) ) 
+  
+  
+  if ( is.character( pattern ) & length( pattern ) > 1 ) {
+    return(multiSearchInLocalRepo(patterns = pattern, repoDir = repoDir, fixed = fixed, intersect = intersect))
+  }
   
   repoDir <- checkDirectory( repoDir )
   
@@ -151,9 +152,14 @@ searchInLocalRepo <- function( pattern, repoDir = aoptions("repoDir"), fixed = T
 #' @rdname searchInRepo
 #' @export
 searchInRemoteRepo <- function( pattern, repo = aoptions("repo"), user = aoptions("user"), branch = "master", subdir = aoptions("subdir"),
-                                repoType = aoptions("repoType"), fixed = TRUE ){
-  stopifnot( is.character( pattern ) | is.list( pattern ) )
-  stopifnot( length( pattern ) == 1 | length( pattern ) == 2 )
+                                repoType = aoptions("repoType"), fixed = TRUE, intersect = TRUE ){
+  stopifnot( (is.list( pattern ) & length( pattern ) == 2 ) | is.character( pattern ) )
+  stopifnot( is.logical( c( fixed, intersect ) ), length( fixed ) == 1, length( intersect ) == 1 )
+  
+  if ( is.character( pattern ) & length( pattern ) > 1 ) {
+    return(multiSearchInRemoteRepo(patterns = pattern, repo = repo, user = user, branch = branch,
+                                   subdir = subdir, repoType = repoType, fixed = fixed, intersect = intersect))
+  }
   
   RemoteRepoCheck( repo, user, branch, subdir, repoType) # implemented in setRepo.R
   
@@ -183,10 +189,8 @@ searchInRemoteRepo <- function( pattern, repo = aoptions("repo"), user = aoption
   return( as.character( md5hashES[, 1] ) ) 
 }
 
-#' @rdname searchInRepo
-#' @export
+
 multiSearchInLocalRepo <- function( patterns, repoDir = aoptions("repoDir"), fixed = TRUE, intersect = TRUE ){
-  stopifnot( is.logical( intersect ) )      
   
   md5hs <- lapply(patterns, function(pattern) unique(searchInLocalRepo(pattern, repoDir=repoDir, fixed=fixed) ))
   if (intersect) {
@@ -196,12 +200,9 @@ multiSearchInLocalRepo <- function( patterns, repoDir = aoptions("repoDir"), fix
   unique(unlist(md5hs))
 }
 
-#' @rdname searchInRepo
-#' @export
 multiSearchInRemoteRepo <- function( patterns, repo = aoptions("repo"), user = aoptions("user"), branch = "master", subdir = aoptions("subdir"),
                                      repoType = aoptions("repoType"), 
                                      fixed = TRUE, intersect = TRUE ){
-  stopifnot( is.logical(  intersect ) )
   
   RemoteRepoCheck( repo, user, branch, subdir, repoType) # implemented in setRepo.R
   

@@ -43,10 +43,8 @@
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #' 
 #' @examples
-#' \dontrun{
 #' 
-#' createEmptyRepo("ahistory_check", default = TRUE)
-#' aoptions("silent", TRUE)
+#' createLocalRepo("ahistory_check", default = TRUE)
 #' library(dplyr)
 #' iris %a%
 #' filter(Sepal.Length < 6) %a%
@@ -61,9 +59,9 @@
 #' 
 #' 
 #' repoDir <- file.path(getwd(), "ahistory_check")
-#' deleteRepo(repoDir, deleteRoot = TRUE)
+#' deleteLocalRepo(repoDir, deleteRoot = TRUE)
+#' aoptions('repoDir', NULL, unset = TRUE)
 #' 
-#' }
 #' @family archivist
 #' @rdname ahistory
 #' @export

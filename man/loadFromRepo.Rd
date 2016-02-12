@@ -81,7 +81,7 @@ parameters you will receive an error message.
 #' exampleRepoDir <- tempfile()
 createLocalRepo(repoDir = exampleRepoDir)
 data(iris)
-saveToRepo(iris, repoDir=exampleRepoDir, archiveSessionInfo = TRUE)
+saveToLocalRepo(iris, repoDir=exampleRepoDir, archiveSessionInfo = TRUE)
 showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
 showLocalRepo(method = "tags", repoDir = exampleRepoDir)
 

@@ -30,12 +30,10 @@
 #' }
 #' Functions returning \code{md5hash} as a value are:
 #'\itemize{  
-#'  \item \link{saveToRepo},
+#'  \item \link{saveToLocalRepo},
 #'  \item \link{searchInLocalRepo},
 #'  \item \link{searchInRemoteRepo},
-#'  \item \link{shinySearchInLocalRepo},
-#'  \item \link{multiSearchInLocalRepo},
-#'  \item \link{multiSearchInRemoteRepo}.
+#'  \item \link{shinySearchInLocalRepo}.
 #' }
 #' Functions returning \code{md5hashes} as a \code{data.frame} are:
 #' \itemize{

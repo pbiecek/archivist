@@ -32,22 +32,8 @@ of the given \code{key} parameter.
 # data.frame object
 # data(iris)
 
-# Creating example repository - on which examples will work
-exampleRepoDir <- tempfile()
-createLocalRepo(repoDir = exampleRepoDir)
 
-## EXAMPLE 1 : TURN OFF warnings in saveToRepo() using aoptions() function
-aoptions(key = "silent", value = TRUE)
-iris1 <- saveToRepo(iris, exampleRepoDir)
-iris2 <- saveToRepo(iris, exampleRepoDir)
-# Note that there is no warning. Normally a user receives ani information
-# about another archivisation of the same artifact.
-
-# deleting example repoDir
-deleteLocalRepo(exampleRepoDir, deleteRoot = TRUE)
-rm(exampleRepoDir)
-
-## EXAMPLE 2 : SET default local repository using aoptions() function.
+## EXAMPLE 1 : SET default local repository using aoptions() function.
 
 # creating example repository
 exampleRepoDir <- tempfile()
@@ -59,8 +45,8 @@ aoptions(key = "repoDir", value = exampleRepoDir)
 data(iris)
 data(swiss)
 # From this moment repoDir parameter may be ommitted in the following functions
-saveToRepo(iris)
-saveToRepo(swiss) 
+saveToLocalRepo(iris)
+saveToLocalRepo(swiss) 
 showLocalRepo()
 showLocalRepo(method = "tags")
 zipLocalRepo()
@@ -68,7 +54,7 @@ file.remove(file.path(getwd(), "repository.zip"))
 iris2 <- loadFromLocalRepo( "ff575c2" , value = TRUE)
 searchInLocalRepo("name:i", fixed = F)
 getTagsLocal("ff575c261c949d073b2895b05d1097c3")
-rmFromRepo("4c43f")
+rmFromLocalRepo("4c43f")
 showLocalRepo()
 summaryLocalRepo()
 
@@ -77,7 +63,7 @@ summaryLocalRepo()
 deleteLocalRepo( exampleRepoDir, deleteRoot = TRUE)
 rm( exampleRepoDir )
 
-## EXAMPLE 3 : SET default Github repository using aoptions() function.
+## EXAMPLE 2 : SET default Github repository using aoptions() function.
 aoptions(key = "user", value = "pbiecek")
 aoptions(key = "repo", value = "archivist")
 
@@ -89,9 +75,9 @@ file.remove(file.path(getwd(), "repository.zip")) # We can remove this zip file
 searchInRemoteRepo( "name:", fixed= FALSE)
 getTagsGithub("ff575c261c949d073b2895b05d1097c3")
 summaryRemoteRepo( )
-multiSearchInRemoteRepo( patterns=c("varname:Sepal.Width", "class:lm", "name:myplot123"), 
+searchInRemoteRepo( pattern=c("varname:Sepal.Width", "class:lm", "name:myplot123"), 
                          intersect = FALSE ) 
-## EXAMPLE 4 : SET default Github repository using aoptions() function.
+## EXAMPLE 3 : SET default Github repository using aoptions() function.
 showRemoteRepo('Museum', 'MarcinKosinski', subdir = 'ex1')
 aoptions('repo', 'Museum')
 aoptions('user', 'MarcinKosinski')

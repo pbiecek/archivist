@@ -34,7 +34,7 @@ webpage.
 exampleRepoDir <- tempfile()
 createLocalRepo( repoDir = exampleRepoDir, default =  TRUE )
 data(iris)
-saveToRepo(iris)
+saveToLocalRepo(iris)
 deleteLocalRepo( repoDir = exampleRepoDir, unset = TRUE, deleteRoot = TRUE)
 
 }
