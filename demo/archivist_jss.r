@@ -156,11 +156,11 @@ digest::digest(model)
 
 # Removal of an object from repository
 
-rmFromLocalRepo("92ada1e052d4d963e5787bfc9c4b506c", repoDir = repo)
+rmFromLocalRepo("600bda83cb840947976bd1ce3a11879d", repoDir = repo)
 
 #Remove all older than 30 days
 
-obj2rm <- searchInLocalRepo(list(dateFrom = "2010-01-01", dateTo = Sys.Date()-30), repoDir = repo)
+obj2rm <- searchInLocalRepo(list(dateFrom = "2010-01-01", dateTo = Sys.Date()), repoDir = repo)
 
 rmFromLocalRepo(obj2rm, repoDir = repo, many = TRUE)
 
