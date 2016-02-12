@@ -25,7 +25,6 @@
 #' @param patterns  A character vector of \code{Tags}. Only artifacts that 
 #' contain all Tags are returned.  
 #' 
-#' @param repoType A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.
 #' 
 #' @return This function returns a list of artifacts (by their values).
 #' 
@@ -93,7 +92,7 @@
 #' ## Searching for objects of class:gg
 #' asearch(patterns = c("class:gg"))
 #' 
-#' ### Github version 
+#' ### Remote version 
 #' ## Note that repo argument is passed in the following way to asearch:
 #' ## repo = "GitHub user name/GitHub repository name"
 #' 
@@ -105,7 +104,7 @@
 #' @family archivist
 #' @rdname asearch
 #' @export
-asearch <- function( patterns, repo = NULL, repoType){
+asearch <- function( patterns, repo = NULL){
   stopifnot( (is.character( repo ) & length( repo ) == 1) | is.null( repo ) )
   stopifnot( is.character( patterns ) )
 
@@ -126,7 +125,7 @@ asearch <- function( patterns, repo = NULL, repoType){
     stopifnot( length(elements) >= 2 )
     
     oblist <- multiSearchInRemoteRepo(user = elements[1], repo=paste(elements[-1], collapse = "/"), 
-                                patterns = patterns, repoType = repoType)
+                                patterns = patterns)
     if (length(oblist)>0) {
       res <- lapply(paste0(repo, "/", oblist), aread)
       names(res) <- oblist
