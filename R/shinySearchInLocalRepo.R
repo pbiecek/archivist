@@ -79,9 +79,9 @@ shinySearchInLocalRepo <- function( repoDir=NULL, host = '0.0.0.0' ){
         sortTags <- grep(tags, pattern="^sort:")
         # Tags with sort: key should be removed from search
         if (length(sortTags) > 0) {
-          md5s <- multiSearchInLocalRepo( tags[-sortTags], repoDir, fixed = FALSE, intersect = TRUE )
+          md5s <- multiSearchInLocalRepoInternal( tags[-sortTags], repoDir, fixed = FALSE, intersect = TRUE )
         } else {
-          md5s <- multiSearchInLocalRepo( tags, repoDir, fixed = FALSE, intersect = TRUE )
+          md5s <- multiSearchInLocalRepoInternal( tags, repoDir, fixed = FALSE, intersect = TRUE )
         }
         # should we sort results
         if (length(sortTags) > 0 & length(md5s) > 0) {

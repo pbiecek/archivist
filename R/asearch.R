@@ -112,7 +112,7 @@ asearch <- function( patterns, repo = NULL){
   
   if (is.null(repo)) {
     # use default repo
-     oblist <- multiSearchInLocalRepo(patterns = patterns,
+     oblist <- multiSearchInLocalRepoInternal(patterns = patterns,
                                       intersect = TRUE)
     if (length(oblist) > 0) {
       res <- lapply(oblist, loadFromLocalRepo, value = TRUE)
@@ -124,7 +124,7 @@ asearch <- function( patterns, repo = NULL){
     elements <- strsplit(repo, "/")[[1]]
     stopifnot( length(elements) >= 2 )
     
-    oblist <- multiSearchInRemoteRepo(user = elements[1], repo=paste(elements[-1], collapse = "/"), 
+    oblist <- multiSearchInRemoteRepoInternal(user = elements[1], repo=paste(elements[-1], collapse = "/"), 
                                 patterns = patterns)
     if (length(oblist)>0) {
       res <- lapply(paste0(repo, "/", oblist), aread)

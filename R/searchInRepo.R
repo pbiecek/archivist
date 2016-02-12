@@ -57,6 +57,8 @@
 #' on which the Repository is stored. If the Repository is stored in the main folder of the Remote repository, this should be set 
 #' to \code{subdir = "/"} as default.
 #' 
+#' @param ... Used for old deprecated functions.
+#' 
 #' @note
 #' If \code{repo}, \code{user}, \code{subdir} and \code{repoType} are not specified in the Remote mode then global parameters
 #' set in \link{setRemoteRepo} function are used.
@@ -123,7 +125,7 @@ searchInLocalRepo <- function( pattern, repoDir = aoptions("repoDir"), fixed = T
   
   
   if ( is.character( pattern ) & length( pattern ) > 1 ) {
-    return(multiSearchInLocalRepo(patterns = pattern, repoDir = repoDir, fixed = fixed, intersect = intersect))
+    return(multiSearchInLocalRepoInternal(patterns = pattern, repoDir = repoDir, fixed = fixed, intersect = intersect))
   }
   
   repoDir <- checkDirectory( repoDir )
@@ -157,7 +159,7 @@ searchInRemoteRepo <- function( pattern, repo = aoptions("repo"), user = aoption
   stopifnot( is.logical( c( fixed, intersect ) ), length( fixed ) == 1, length( intersect ) == 1 )
   
   if ( is.character( pattern ) & length( pattern ) > 1 ) {
-    return(multiSearchInRemoteRepo(patterns = pattern, repo = repo, user = user, branch = branch,
+    return(multiSearchInRemoteRepoInternal(patterns = pattern, repo = repo, user = user, branch = branch,
                                    subdir = subdir, repoType = repoType, fixed = fixed, intersect = intersect))
   }
   
@@ -190,7 +192,7 @@ searchInRemoteRepo <- function( pattern, repo = aoptions("repo"), user = aoption
 }
 
 
-multiSearchInLocalRepo <- function( patterns, repoDir = aoptions("repoDir"), fixed = TRUE, intersect = TRUE ){
+multiSearchInLocalRepoInternal <- function( patterns, repoDir = aoptions("repoDir"), fixed = TRUE, intersect = TRUE ){
   
   md5hs <- lapply(patterns, function(pattern) unique(searchInLocalRepo(pattern, repoDir=repoDir, fixed=fixed) ))
   if (intersect) {
@@ -200,7 +202,7 @@ multiSearchInLocalRepo <- function( patterns, repoDir = aoptions("repoDir"), fix
   unique(unlist(md5hs))
 }
 
-multiSearchInRemoteRepo <- function( patterns, repo = aoptions("repo"), user = aoptions("user"), branch = "master", subdir = aoptions("subdir"),
+multiSearchInRemoteRepoInternal <- function( patterns, repo = aoptions("repo"), user = aoptions("user"), branch = "master", subdir = aoptions("subdir"),
                                      repoType = aoptions("repoType"), 
                                      fixed = TRUE, intersect = TRUE ){
   
@@ -209,7 +211,23 @@ multiSearchInRemoteRepo <- function( patterns, repo = aoptions("repo"), user = a
   remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, subdir=subdir)
   Temp <- downloadDB( remoteHook )
   on.exit( unlink( Temp, recursive = TRUE, force = TRUE))
-  m <- multiSearchInLocalRepo( patterns, repoDir = Temp, fixed=fixed,
+  m <- multiSearchInLocalRepoInternal( patterns, repoDir = Temp, fixed=fixed,
                                intersect=intersect)
   return( m )
+}
+
+#' @family archivist
+#' @rdname searchInRepo
+#' @export
+multiSearchInLocalRepo <- function(...) {
+  .Deprecated("multiSearchInLocalRepo is deprecated. Use searchInLocalRepo() instead.")
+  multiSearchInLocalRepoInternal(...)
+}
+
+#' @family archivist
+#' @rdname searchInRepo
+#' @export
+multiSearchInRemoteRepo <- function(...) {
+  .Deprecated("multiSearchInRemoteRepo is deprecated. Use searchInRemoteRepo() instead.")
+  multiSearchInRemoteRepoInternal(...)
 }
