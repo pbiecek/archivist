@@ -5,7 +5,7 @@
 \alias{getTagsRemote}
 \title{Return Tags Corresponding to md5hash}
 \usage{
-getTagsLocal(md5hash, repoDir = NULL, tag = "name")
+getTagsLocal(md5hash, repoDir = aoptions("repoDir"), tag = "name")
 
 getTagsRemote(md5hash, repo = aoptions("repo"), user = aoptions("user"),
   branch = aoptions("branch"), subdir = aoptions("subdir"),
@@ -16,8 +16,7 @@ getTagsRemote(md5hash, repo = aoptions("repo"), user = aoptions("user"),
 of artifacts which \code{Tags} are desired to be returned.}
 
 \item{repoDir}{A character denoting an existing directory in 
-which artifacts are stored. If set to \code{NULL} (by default),
-uses the \code{repoDir} specified in \link{setLocalRepo}.}
+which artifacts are stored.}
 
 \item{tag}{A regular expression denoting type of a \code{Tag} that we search for
 (see \code{Examples}). Default \code{tag = "name"}.}

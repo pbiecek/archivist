@@ -48,8 +48,7 @@
 #' md5hash will be a character vector.
 #' 
 #' @param repoDir A character denoting an existing directory from which an 
-#' artifact will be removed. If it is set to \code{NULL} (by default), it  will
-#' use the \code{repoDir} specified in \link{setLocalRepo}.
+#' artifact will be removed. 
 #' 
 #' @param removeData A logical value denoting whether to remove data along with
 #' the \code{artifact} specified by the \code{md5hash}. Defualt \code{FALSE}.
@@ -67,6 +66,7 @@
 #' 
 #' @author
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
+#' Witold Chodor , \email{witoldchodor@@gmail.com}
 #'
 #' @examples
 #' \dontrun{
@@ -314,10 +314,10 @@
 #' @family archivist
 #' @rdname rmFromLocalRepo
 #' @export
-rmFromLocalRepo <- function( md5hash, repoDir = NULL, removeData = FALSE, 
+rmFromLocalRepo <- function( md5hash, repoDir = aoptions('repoDir'), removeData = FALSE, 
                         removeMiniature = FALSE, force = FALSE, many = FALSE ){
   stopifnot( is.character( md5hash  ))
-  stopifnot( ( is.character( repoDir ) & length( repoDir ) == 1 ) | is.null( repoDir ) )
+  stopifnot( is.character( repoDir ) & length( repoDir ) == 1 )
   stopifnot( is.logical( c( removeData, removeMiniature, many ) ) )
   if (length( md5hash ) == 0) return(invisible(NULL))
   if (many){

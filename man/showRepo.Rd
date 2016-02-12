@@ -12,8 +12,7 @@ showRemoteRepo(repo = aoptions("repo"), user = aoptions("user"),
   repoType = aoptions("repoType"), method = "md5hashes")
 }
 \arguments{
-\item{repoDir}{A character denoting an existing directory of the Repository for which metadata will be returned.
-If it is set to \code{NULL} (by default), it will use the \code{repoDir} specified in \link{setLocalRepo}.}
+\item{repoDir}{A character denoting an existing directory of the Repository for which metadata will be returned.}
 
 \item{method}{A character specifying a method to be used to show the Repository. Available methods: 
 \code{md5hashes} (default), \code{tags} and \code{sets} - see \href{https://github.com/pbiecek/archivist2}{archivist2::saveSetToRepo}.}

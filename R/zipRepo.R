@@ -17,7 +17,7 @@
 #' @param repoType A character containing a type of the remote repository. Currently it can be 'Remote' or 'bitbucket'.
 #' 
 #' @param repoDir A character that specifies the directory of the Repository which
-#' will be zipped. If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.
+#' will be zipped. 
 #'
 #' @param repo While working with the Remote repository. A character containing
 #' a name of the Remote repository on which the Repository, which is to be zipped, is archived.
@@ -93,8 +93,8 @@
 #' @family archivist
 #' @rdname zipRepo
 #' @export
-zipLocalRepo <- function( repoDir = NULL, repoTo = getwd() , zipname="repository.zip"){
-  stopifnot( ( is.character( repoDir ) & length( repoDir ) == 1 ) | is.null( repoDir ) )
+zipLocalRepo <- function( repoDir = aoptions('repoDir'), repoTo = getwd() , zipname="repository.zip"){
+  stopifnot( is.character( repoDir ) & length( repoDir ) == 1 )
   stopifnot( is.character( repoTo ), length( repoTo ) == 1 )
   
 #   repoTo <- checkDirectory2( repoTo )

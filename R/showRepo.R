@@ -25,7 +25,6 @@
 #' @param repoType A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.
 #' 
 #' @param repoDir A character denoting an existing directory of the Repository for which metadata will be returned.
-#' If it is set to \code{NULL} (by default), it will use the \code{repoDir} specified in \link{setLocalRepo}.
 #' 
 #' @param repo While working with the Remote repository. A character containing a name of the Remote repository on which the Repository is stored.
 #' By default set to \code{NULL} - see \code{Note}.
@@ -106,7 +105,7 @@
 #' @export
 showLocalRepo <- function( repoDir = aoptions("repoDir"), method = "md5hashes"){
   stopifnot( is.character( method ), length( method ) == 1 )
-  stopifnot( ( is.character( repoDir ) & length( repoDir ) == 1 ) | is.null( repoDir ) )
+  stopifnot( is.character( repoDir ) & length( repoDir ) == 1 )
   
   repoDir <- checkDirectory( repoDir )
   

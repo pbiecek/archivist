@@ -5,15 +5,14 @@
 \alias{summaryRemoteRepo}
 \title{View the Summary of the Repository}
 \usage{
-summaryLocalRepo(repoDir = NULL)
+summaryLocalRepo(repoDir = aoptions("repoDir"))
 
 summaryRemoteRepo(repo = aoptions("repo"), user = aoptions("user"),
   branch = "master", subdir = aoptions("subdir"),
   repoType = aoptions("repoType"))
 }
 \arguments{
-\item{repoDir}{A character denoting an existing directory of the Repository for which a summary will be returned.
-If it is set to \code{NULL} (by default), it will use the \code{repoDir} specified in \link{setLocalRepo}.}
+\item{repoDir}{A character denoting an existing directory of the Repository for which a summary will be returned.}
 
 \item{repo}{While working with the Remote repository. A character containing a name of the Remote repository on which the Repository is stored.
 By default set to \code{NULL} - see \code{Note}.}

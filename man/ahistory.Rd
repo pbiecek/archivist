@@ -4,7 +4,7 @@
 \alias{ahistory}
 \title{Show Artifact's History}
 \usage{
-ahistory(artifact = NULL, md5hash = NULL, repoDir = NULL,
+ahistory(artifact = NULL, md5hash = NULL, repoDir = aoptions("repoDir"),
   format = "regular", alink = FALSE, ...)
 }
 \arguments{
@@ -13,8 +13,7 @@ It will be converted  into md5hash.}
 
 \item{md5hash}{If \code{artifact} is not specified then \code{md5hash} is used.}
 
-\item{repoDir}{A character denoting an existing directory in which an artifact will be saved.
-If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.}
+\item{repoDir}{A character denoting an existing directory in which an artifact will be saved.}
 
 \item{format}{A character denoting whether to print history in either a \code{"regular"} (default) way or like in a \code{"kable"} function.
 See Notes.}

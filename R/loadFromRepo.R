@@ -41,7 +41,6 @@
 #' @param repoType A character containing a type of the remote repository. Currently it can be 'Remote' or 'bitbucket'.
 #' 
 #' @param repoDir A character denoting an existing directory from which an artifact will be loaded.
-#' If it is set to \code{NULL} (by default), it will use the \code{repoDir} specified in \link{setLocalRepo}.
 #' 
 #' @param md5hash A character assigned to the artifact through the use of a cryptographical hash function with MD5 algorithm, or it's abbreviation.
 #' 
@@ -173,9 +172,9 @@
 #' @family archivist
 #' @rdname loadFromRepo
 #' @export
-loadFromLocalRepo <- function( md5hash, repoDir = NULL, value = FALSE ){
+loadFromLocalRepo <- function( md5hash, repoDir = aoptions('repoDir'), value = FALSE ){
   stopifnot( is.character( md5hash ), length( md5hash ) == 1 )
-  stopifnot( (is.character( repoDir ) & length( repoDir ) == 1) | is.null( repoDir ) )
+  stopifnot( is.character( repoDir ) & length( repoDir ) == 1) 
   stopifnot( is.logical( value ) )
   
   repoDir <- checkDirectory( repoDir )

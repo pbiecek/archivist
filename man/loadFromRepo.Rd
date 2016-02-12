@@ -5,7 +5,7 @@
 \alias{loadFromRemoteRepo}
 \title{Load Artifact Given as a md5hash from a Repository}
 \usage{
-loadFromLocalRepo(md5hash, repoDir = NULL, value = FALSE)
+loadFromLocalRepo(md5hash, repoDir = aoptions("repoDir"), value = FALSE)
 
 loadFromRemoteRepo(md5hash, repo = aoptions("repo"),
   user = aoptions("user"), branch = aoptions("branch"),
@@ -15,8 +15,7 @@ loadFromRemoteRepo(md5hash, repo = aoptions("repo"),
 \arguments{
 \item{md5hash}{A character assigned to the artifact through the use of a cryptographical hash function with MD5 algorithm, or it's abbreviation.}
 
-\item{repoDir}{A character denoting an existing directory from which an artifact will be loaded.
-If it is set to \code{NULL} (by default), it will use the \code{repoDir} specified in \link{setLocalRepo}.}
+\item{repoDir}{A character denoting an existing directory from which an artifact will be loaded.}
 
 \item{value}{If \code{FALSE} (default) then artifacts are loaded into the Global Environment with their original names, 
 if \code{TRUE} then artifacts are returned as a list of values (if there is more than one artifact)

@@ -110,7 +110,6 @@
 #' @param userTags A character vector with Tags. These Tags will be added to the repository along with the artifact.
 #'
 #' @param repoDir A character denoting an existing directory in which an artifact will be saved.
-#' If it is set to \code{NULL} (by default), it will use the \code{repoDir} specified in \link{setLocalRepo}.
 #'
 #' @param force A logical value denoting whether to archive \code{artifact} if it was already archived in
 #' a Repository.
@@ -153,7 +152,7 @@
 #' @family archivist
 #' @rdname saveToRepo
 #' @export
-saveToLocalRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
+saveToLocalRepo <- function( artifact, repoDir = aoptions('repoDir'), archiveData = TRUE,
                         archiveTags = TRUE,
                         archiveMiniature = TRUE, 
                         archiveSessionInfo = TRUE, 
@@ -162,7 +161,7 @@ saveToLocalRepo <- function( artifact, repoDir = NULL, archiveData = TRUE,
                         silent=aoptions("silent"), ascii = FALSE,
                         artifactName = deparse(substitute(artifact))) {
   stopifnot(is.logical(c(archiveData, archiveTags, archiveMiniature, force,  value, silent, ascii, archiveSessionInfo)))
-  stopifnot((is.character(repoDir) & length(repoDir) == 1 ) | is.null(repoDir))
+  stopifnot(is.character(repoDir) & length(repoDir) == 1 )
   stopifnot(is.null(artifactName) | is.character(artifactName))
   stopifnot(length(archiveData) == 1, length(archiveTags) == 1, length(archiveMiniature) == 1,
             length(archiveSessionInfo) == 1, length(force) == 1, 

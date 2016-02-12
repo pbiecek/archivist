@@ -6,28 +6,28 @@
 \alias{saveToRepo}
 \title{Save an Artifact into a Repository}
 \usage{
-saveToLocalRepo(artifact, repoDir = NULL, archiveData = TRUE,
+saveToLocalRepo(artifact, repoDir = aoptions("repoDir"), archiveData = TRUE,
   archiveTags = TRUE, archiveMiniature = TRUE, archiveSessionInfo = TRUE,
   force = TRUE, value = FALSE, ..., userTags = c(),
   silent = aoptions("silent"), ascii = FALSE,
   artifactName = deparse(substitute(artifact)))
 
-saveToRepo(artifact, repoDir = NULL, archiveData = TRUE,
+saveToRepo(artifact, repoDir = aoptions("repoDir"), archiveData = TRUE,
   archiveTags = TRUE, archiveMiniature = TRUE, archiveSessionInfo = TRUE,
   force = TRUE, value = FALSE, ..., userTags = c(),
   silent = aoptions("silent"), ascii = FALSE,
   artifactName = deparse(substitute(artifact)))
 
-asave(artifact, repoDir = NULL, archiveData = TRUE, archiveTags = TRUE,
-  archiveMiniature = TRUE, archiveSessionInfo = TRUE, force = TRUE,
-  value = FALSE, ..., userTags = c(), silent = aoptions("silent"),
-  ascii = FALSE, artifactName = deparse(substitute(artifact)))
+asave(artifact, repoDir = aoptions("repoDir"), archiveData = TRUE,
+  archiveTags = TRUE, archiveMiniature = TRUE, archiveSessionInfo = TRUE,
+  force = TRUE, value = FALSE, ..., userTags = c(),
+  silent = aoptions("silent"), ascii = FALSE,
+  artifactName = deparse(substitute(artifact)))
 }
 \arguments{
 \item{artifact}{An arbitrary R artifact to be saved. For supported artifacts see details.}
 
-\item{repoDir}{A character denoting an existing directory in which an artifact will be saved.
-If it is set to \code{NULL} (by default), it will use the \code{repoDir} specified in \link{setLocalRepo}.}
+\item{repoDir}{A character denoting an existing directory in which an artifact will be saved.}
 
 \item{archiveData}{A logical value denoting whether to archive the data from the \code{artifact}.}
 

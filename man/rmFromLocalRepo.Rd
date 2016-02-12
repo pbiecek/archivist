@@ -4,7 +4,7 @@
 \alias{rmFromLocalRepo}
 \title{Remove an Artifact Given as a md5hash from the Repository}
 \usage{
-rmFromLocalRepo(md5hash, repoDir = NULL, removeData = FALSE,
+rmFromLocalRepo(md5hash, repoDir = aoptions("repoDir"), removeData = FALSE,
   removeMiniature = FALSE, force = FALSE, many = FALSE)
 }
 \arguments{
@@ -14,8 +14,7 @@ This object will be removed. If \code{many} parameter is set to TRUE then
 md5hash will be a character vector.}
 
 \item{repoDir}{A character denoting an existing directory from which an 
-artifact will be removed. If it is set to \code{NULL} (by default), it  will
-use the \code{repoDir} specified in \link{setLocalRepo}.}
+artifact will be removed.}
 
 \item{removeData}{A logical value denoting whether to remove data along with
 the \code{artifact} specified by the \code{md5hash}. Defualt \code{FALSE}.}
@@ -316,6 +315,7 @@ rm( exampleRepoDir )
 }
 \author{
 Marcin Kosinski , \email{m.p.kosinski@gmail.com}
+Witold Chodor , \email{witoldchodor@gmail.com}
 }
 \seealso{
 Other archivist: \code{\link{Repository}},

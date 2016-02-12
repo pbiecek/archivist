@@ -17,8 +17,7 @@
 #'
 #' @param repoType A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.
 #' @param repoDir A character denoting an existing directory in 
-#' which artifacts are stored. If set to \code{NULL} (by default),
-#' uses the \code{repoDir} specified in \link{setLocalRepo}.
+#' which artifacts are stored. 
 #' 
 #' @param md5hash A character containing \code{md5hash} 
 #' of artifacts which \code{Tags} are desired to be returned.
@@ -125,9 +124,9 @@
 #' @family archivist
 #' @rdname getTags
 #' @export
-getTagsLocal <- function( md5hash, repoDir = NULL, tag ="name"){
+getTagsLocal <- function( md5hash, repoDir = aoptions('repoDir'), tag ="name"){
   stopifnot( is.character( c( md5hash, tag ) ), length( md5hash ) ==  1, length( tag ) == 1)
-  stopifnot( (is.character( repoDir ) & length( repoDir ) == 1) | is.null( repoDir ) )
+  stopifnot( is.character( repoDir ) & length( repoDir ) == 1)
   repoDir <- checkDirectory( repoDir ) 
   
 

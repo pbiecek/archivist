@@ -5,7 +5,8 @@
 \alias{zipRemoteRepo}
 \title{Create a zip Archive From an Existing Repository}
 \usage{
-zipLocalRepo(repoDir = NULL, repoTo = getwd(), zipname = "repository.zip")
+zipLocalRepo(repoDir = aoptions("repoDir"), repoTo = getwd(),
+  zipname = "repository.zip")
 
 zipRemoteRepo(repoTo = getwd(), user = aoptions("user"),
   repo = aoptions("repo"), branch = "master", subdir = aoptions("subdir"),
@@ -13,7 +14,7 @@ zipRemoteRepo(repoTo = getwd(), user = aoptions("user"),
 }
 \arguments{
 \item{repoDir}{A character that specifies the directory of the Repository which
-will be zipped. If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.}
+will be zipped.}
 
 \item{repoTo}{A character that specifies the directory in which there
 will be created zip archive from \code{Repository} stored in \code{repoDir} or Remote directory.

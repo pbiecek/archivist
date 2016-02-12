@@ -13,8 +13,7 @@ splitTagsRemote(repo = aoptions("repo"), user = aoptions("user"),
 }
 \arguments{
 \item{repoDir}{While working with the local repository. A character denoting 
-an existing directory of the Repository. If it is set to \code{NULL} (by default),
-it will use the \code{repoDir} specified in \link{setLocalRepo}.}
+an existing directory of the Repository.}
 
 \item{repo}{While working with the Github repository. A character containing
 a name of the Github repository on which the Repository is stored.

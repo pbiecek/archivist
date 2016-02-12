@@ -20,7 +20,6 @@
 #' It will be converted  into md5hash.
 #' @param md5hash  If \code{artifact} is not specified then \code{md5hash} is used.
 #' @param repoDir  A character denoting an existing directory in which an artifact will be saved.
-#' If set to \code{NULL} (by default), uses the \code{repoDir} specified in \link{setLocalRepo}.
 #' @param ...  Further parameters passed to \link{alink} function. Used when \code{format = "kable"} and \code{alink = TRUE}.
 #' @param format A character denoting whether to print history in either a \code{"regular"} (default) way or like in a \code{"kable"} function.
 #' See Notes.
@@ -66,7 +65,7 @@
 #' @rdname ahistory
 #' @export
 
-ahistory <- function(artifact = NULL, md5hash = NULL, repoDir = NULL, format = "regular", alink = FALSE, ...) {
+ahistory <- function(artifact = NULL, md5hash = NULL, repoDir = aoptions('repoDir'), format = "regular", alink = FALSE, ...) {
   # if artifact is set then calculate md5hash for it
   if (!is.null(artifact)) 
     md5hash = digest(artifact)
