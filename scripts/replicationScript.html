@@ -170,12 +170,12 @@ iris %a%
    summary() -&gt; tmp
 
 ahistory(tmp)</code></pre>
-<pre><code>##    iris                                  [ff575c261c949d073b2895b05d1097c3]
+<pre><code>##    env[[nm]]                             [ff575c261c949d073b2895b05d1097c3]
 ## -&gt; filter(Sepal.Length &lt; 6)              [d3696e13d15223c7d0bbccb33cc20a11]
 ## -&gt; lm(Petal.Length ~ Species, data = .)  [990861c7c27812ee959f10e5f76fe2c3]
 ## -&gt; summary()                             [050e41ec3bc40b3004bc6bdd356acae7]</code></pre>
 <pre class="r"><code>ahistory(md5hash = &quot;050e41ec3bc40b3004bc6bdd356acae7&quot;)</code></pre>
-<pre><code>##    iris                                  [ff575c261c949d073b2895b05d1097c3]
+<pre><code>##    env[[nm]]                             [ff575c261c949d073b2895b05d1097c3]
 ## -&gt; filter(Sepal.Length &lt; 6)              [d3696e13d15223c7d0bbccb33cc20a11]
 ## -&gt; lm(Petal.Length ~ Species, data = .)  [990861c7c27812ee959f10e5f76fe2c3]
 ## -&gt; summary()                             [050e41ec3bc40b3004bc6bdd356acae7]</code></pre>
@@ -183,7 +183,7 @@ ahistory(tmp)</code></pre>
 <pre class="r"><code>sinfo &lt;- asession(&quot;050e41ec3bc40b3004bc6bdd356acae7&quot;)
 head(sinfo$packages)</code></pre>
 <pre><code>##  package    * version date       source        
-##  archivist  * 2.0     2016-02-10 CRAN (R 3.2.2)
+##  archivist  * 2.0     2016-02-12 CRAN (R 3.2.2)
 ##  assertthat   0.1     2013-12-06 CRAN (R 3.1.0)
 ##  bitops       1.0-6   2013-08-17 CRAN (R 3.1.0)
 ##  colorspace   1.2-6   2015-03-11 CRAN (R 3.1.3)
@@ -262,6 +262,9 @@ saveToLocalRepo(iris)</code></pre>
 repo &lt;- &quot;arepo&quot;
 pl &lt;- qplot(Sepal.Length, Petal.Length, data = iris)
 saveToRepo(pl, repoDir = repo)</code></pre>
+<pre><code>## Warning in extractData.ggplot(artifact, parrentMd5hash = md5hash,
+## parentDir = repoDir, : This artifact's data was already archived. Another
+## archivisation executed with success.</code></pre>
 <pre><code>## [1] &quot;11127cc6ce69a89d11d0e30865a33c13&quot;
 ## attr(,&quot;data&quot;)
 ## [1] &quot;ff575c261c949d073b2895b05d1097c3&quot;</code></pre>
@@ -284,7 +287,7 @@ saveToRepo(pl, repoDir = repo)</code></pre>
 ## 15 ff575c261c949d073b2895b05d1097c3
 ## 16 ff575c261c949d073b2895b05d1097c3
 ## 17 ff575c261c949d073b2895b05d1097c3
-## 18 d3532b2dc2b3914324c493dee0665a3f
+## 18 030d7e729e9f7067e3143c7cfae3168c
 ## 19 ff575c261c949d073b2895b05d1097c3
 ## 20 ff575c261c949d073b2895b05d1097c3
 ## 21 11127cc6ce69a89d11d0e30865a33c13
@@ -294,14 +297,12 @@ saveToRepo(pl, repoDir = repo)</code></pre>
 ## 25 11127cc6ce69a89d11d0e30865a33c13
 ## 26 11127cc6ce69a89d11d0e30865a33c13
 ## 27 11127cc6ce69a89d11d0e30865a33c13
-## 28 5675c2785c34bf8cec026a580f6b6abd
+## 28 48633c2812b94077935faf4cf3ddc8b2
 ## 29 11127cc6ce69a89d11d0e30865a33c13
 ## 30 ff575c261c949d073b2895b05d1097c3
-## 31 5675c2785c34bf8cec026a580f6b6abd
+## 31 ff575c261c949d073b2895b05d1097c3
 ## 32 ff575c261c949d073b2895b05d1097c3
-## 33 ff575c261c949d073b2895b05d1097c3
-## 34 ff575c261c949d073b2895b05d1097c3
-## 35 11127cc6ce69a89d11d0e30865a33c13
+## 33 11127cc6ce69a89d11d0e30865a33c13
 ##                                              tag         createdDate
 ## 1                                     format:rda 2016-02-09 14:37:06
 ## 2                                       class:gg 2016-02-09 14:37:06
@@ -311,33 +312,31 @@ saveToRepo(pl, repoDir = repo)</code></pre>
 ## 6                       date:2016-02-09 14:37:06 2016-02-09 14:37:06
 ## 7  session_info:3b8c605199b8e36c8b06a193dd45c624 2016-02-09 14:37:06
 ## 8                                     format:png 2016-02-09 14:37:06
-## 9                                     format:rda 2016-02-10 17:01:44
-## 10                                     name:iris 2016-02-10 17:01:44
-## 11                              class:data.frame 2016-02-10 17:01:44
-## 12                          varname:Sepal.Length 2016-02-10 17:01:44
-## 13                           varname:Sepal.Width 2016-02-10 17:01:44
-## 14                          varname:Petal.Length 2016-02-10 17:01:44
-## 15                           varname:Petal.Width 2016-02-10 17:01:44
-## 16                               varname:Species 2016-02-10 17:01:44
-## 17                      date:2016-02-10 17:01:44 2016-02-10 17:01:44
-## 18                                    format:rda 2016-02-10 17:01:44
-## 19 session_info:d3532b2dc2b3914324c493dee0665a3f 2016-02-10 17:01:44
-## 20                                    format:txt 2016-02-10 17:01:44
-## 21                                    format:rda 2016-02-10 17:01:44
-## 22                                       name:pl 2016-02-10 17:01:44
-## 23                                      class:gg 2016-02-10 17:01:44
-## 24                                  class:ggplot 2016-02-10 17:01:44
-## 25                           labelx:Sepal.Length 2016-02-10 17:01:44
-## 26                           labely:Petal.Length 2016-02-10 17:01:44
-## 27                      date:2016-02-10 17:01:44 2016-02-10 17:01:44
-## 28                                    format:rda 2016-02-10 17:01:44
-## 29 session_info:5675c2785c34bf8cec026a580f6b6abd 2016-02-10 17:01:44
-## 30                                    format:rda 2016-02-10 17:01:44
-## 31                                    format:rda 2016-02-10 17:01:44
-## 32 session_info:5675c2785c34bf8cec026a580f6b6abd 2016-02-10 17:01:44
-## 33                                    format:txt 2016-02-10 17:01:44
-## 34 relationWith:11127cc6ce69a89d11d0e30865a33c13 2016-02-10 17:01:44
-## 35                                    format:png 2016-02-10 17:01:45</code></pre>
+## 9                                     format:rda 2016-02-12 19:21:53
+## 10                                     name:iris 2016-02-12 19:21:53
+## 11                              class:data.frame 2016-02-12 19:21:53
+## 12                          varname:Sepal.Length 2016-02-12 19:21:53
+## 13                           varname:Sepal.Width 2016-02-12 19:21:53
+## 14                          varname:Petal.Length 2016-02-12 19:21:53
+## 15                           varname:Petal.Width 2016-02-12 19:21:53
+## 16                               varname:Species 2016-02-12 19:21:53
+## 17                      date:2016-02-12 19:21:53 2016-02-12 19:21:53
+## 18                                    format:rda 2016-02-12 19:21:53
+## 19 session_info:030d7e729e9f7067e3143c7cfae3168c 2016-02-12 19:21:53
+## 20                                    format:txt 2016-02-12 19:21:53
+## 21                                    format:rda 2016-02-12 19:21:54
+## 22                                       name:pl 2016-02-12 19:21:54
+## 23                                      class:gg 2016-02-12 19:21:54
+## 24                                  class:ggplot 2016-02-12 19:21:54
+## 25                           labelx:Sepal.Length 2016-02-12 19:21:54
+## 26                           labely:Petal.Length 2016-02-12 19:21:54
+## 27                      date:2016-02-12 19:21:54 2016-02-12 19:21:54
+## 28                                    format:rda 2016-02-12 19:21:54
+## 29 session_info:48633c2812b94077935faf4cf3ddc8b2 2016-02-12 19:21:54
+## 30                                    format:rda 2016-02-12 19:21:54
+## 31                                    format:txt 2016-02-12 19:21:54
+## 32 relationWith:11127cc6ce69a89d11d0e30865a33c13 2016-02-12 19:21:54
+## 33                                    format:png 2016-02-12 19:21:54</code></pre>
 <pre class="r"><code># deleteLocalRepo(repo)</code></pre>
 <p>Session info for this obejct.</p>
 <pre class="r"><code>asession(&quot;11127cc6ce69a89d11d0e30865a33c13&quot;)</code></pre>
@@ -349,10 +348,10 @@ saveToRepo(pl, repoDir = repo)</code></pre>
 ##  language (EN)                        
 ##  collate  en_US.UTF-8                 
 ##  tz       Europe/Warsaw               
-##  date     2016-02-10</code></pre>
+##  date     2016-02-12</code></pre>
 <pre><code>## Packages ------------------------------------------------------------------</code></pre>
 <pre><code>##  package    * version  date       source                         
-##  archivist  * 2.0      2016-02-10 CRAN (R 3.2.2)                 
+##  archivist  * 2.0      2016-02-12 CRAN (R 3.2.2)                 
 ##  assertthat   0.1      2013-12-06 CRAN (R 3.1.0)                 
 ##  bitops       1.0-6    2013-08-17 CRAN (R 3.1.0)                 
 ##  colorspace   1.2-6    2015-03-11 CRAN (R 3.1.3)                 
@@ -422,12 +421,9 @@ model &lt;- aread(&quot;2a6e492cb6982f230e48cf46023e2e4f&quot;)
 digest::digest(model)</code></pre>
 <pre><code>## [1] &quot;2a6e492cb6982f230e48cf46023e2e4f&quot;</code></pre>
 <p>Removal of an object from repository</p>
-<pre class="r"><code>rmFromLocalRepo(&quot;92ada1e052d4d963e5787bfc9c4b506c&quot;, repoDir = repo)</code></pre>
-<pre><code>## Warning in rmFromLocalRepo(&quot;92ada1e052d4d963e5787bfc9c4b506c&quot;, repoDir = repo): Given md5hash is not in the Repository.
-## If you used artifact's md5hash that was recently deleted from repository then it's data or miniatures were removed.
-## Otherwise you used md5hash that was not stored in the repository. Try again with different md5hash.</code></pre>
+<pre class="r"><code>rmFromLocalRepo(&quot;600bda83cb840947976bd1ce3a11879d&quot;, repoDir = repo)</code></pre>
 <p>Remove all older than 30 days</p>
-<pre class="r"><code>obj2rm &lt;- searchInLocalRepo(list(dateFrom = &quot;2010-01-01&quot;, dateTo = Sys.Date()-30), repoDir = repo)
+<pre class="r"><code>obj2rm &lt;- searchInLocalRepo(list(dateFrom = &quot;2010-01-01&quot;, dateTo = Sys.Date()), repoDir = repo)
 
 rmFromLocalRepo(obj2rm, repoDir = repo, many = TRUE)</code></pre>
 <p>Search for an artifact Search in a local/GitHub repository</p>
@@ -440,7 +436,7 @@ rmFromLocalRepo(obj2rm, repoDir = repo, many = TRUE)</code></pre>
 <pre><code>## [1] &quot;600bda83cb840947976bd1ce3a11879d&quot; &quot;d9313a0de3e2980201a8971e3384ff26&quot;
 ## [3] &quot;ff575c261c949d073b2895b05d1097c3&quot; &quot;2a6e492cb6982f230e48cf46023e2e4f&quot;
 ## [5] &quot;93ecfdf1436932e2860c6dbdf2abc2ad&quot; &quot;afb2550d0f886f0cf3b050f04c5cd4f8&quot;</code></pre>
-<pre class="r"><code>multiSearchInLocalRepo(pattern=c(&quot;class:gg&quot;, &quot;labelx:Sepal.Length&quot;),
+<pre class="r"><code>searchInLocalRepo(pattern=c(&quot;class:gg&quot;, &quot;labelx:Sepal.Length&quot;),
          repoDir = system.file(&quot;graphGallery&quot;, package = &quot;archivist&quot;))  </code></pre>
 <pre><code>## [1] &quot;600bda83cb840947976bd1ce3a11879d&quot; &quot;70f4f83dbfef2a8afb2f495208d0a60f&quot;</code></pre>
 <p>Interactive search</p>
