@@ -1,0 +1,87 @@
+---
+title: "Speed of development of top 20 R packages"
+author: "Przemyslaw Biecek"
+date: "12 February 2016"
+output: 
+  html_document:
+    toc: TRUE
+---
+
+# List of top 20 R packages
+
+Taken from  http://www.kdnuggets.com/2015/06/top-20-r-packages.html
+
+```{r, message=FALSE, warning=FALSE}
+packages <- c("Rcpp", "ggplot2", "stringr", "plyr", "digest", "reshape2", 
+              "colorspace", "RColorBrewer", "manipulate", "scales", "labeling", 
+              "proto", "munsell", "gtable", "dichromat", "mime", "RCurl", "bitops", 
+              "zoo", "knitr")
+```
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+library(XML)
+library(lubridate)
+library(dplyr)
+library(knitr)
+library(ggplot2)
+library(archivist)
+library(DT)
+
+# options for chunks
+opts_chunk$set(comment=NA, fig.width=6, fig.height=6, results='asis', warning=FALSE, message=FALSE, cache=FALSE)
+
+# store everything in the archivist repo
+addHooksToPrint(class="ggplot",
+                 repoDir = "packDev", 
+                 repo = "archivist", user = "pbiecek", subdir = "scripts/packDev")
+
+```
+
+# Speed of development
+
+Times and dates of package downloads. 
+
+```{r, cache=TRUE, echo=FALSE}
+getCurrentVersions <- function(packages) {
+  tt <- readLines(url("https://cran.r-project.org/src/contrib/"))
+  currentList <- readHTMLTable(tt)[[1]]
+  currentList <- currentList[grepl(as.character(currentList[,2]), pattern="gz$"),]
+  currentPackages <- data.frame(package=gsub(currentList$Name, pattern = "_.*$", replacement=""),
+                                date = dmy_hm(as.character(currentList$`Last modified`)))
+  currentPackages[currentPackages$package %in% packages,] 
+}
+
+getOlderVersions <- function(packages) {
+  results <- list()
+  for (pak in packages) {
+    tt <- readLines(url(paste0("https://cran.r-project.org/src/contrib/Archive/",pak)))
+    if (!any(grepl(tt, pattern="Object not found!"))) {
+      results[[pak]] <- na.omit(data.frame(package=pak,
+                                           date=dmy_hm(as.character(readHTMLTable(tt)[[1]][,3]))))
+    }
+  }
+  do.call(rbind, results)
+}
+
+ov <- getOlderVersions(packages)
+cv <- getCurrentVersions(packages)
+selectedPackages <- rbind(ov, cv)
+
+selectedPackages$package <- reorder(selectedPackages$package,
+                                    selectedPackages$date,
+                                    function(x) max(x))
+
+ggplot(selectedPackages, aes(date, package)) +
+  geom_point()
+```
+
+# How many of them has changed recently?
+
+About 50% of packages have changed in last year.
+
+```{r}
+ggplot(cv, aes(date)) +
+  stat_ecdf(geom = "step") +
+  ggtitle("Distribution of times of uploads current verion of top 20 CRAN package")
+```
+

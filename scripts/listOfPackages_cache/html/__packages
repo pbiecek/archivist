@@ -1,0 +1,14 @@
+base
+methods
+datasets
+utils
+grDevices
+graphics
+stats
+XML
+lubridate
+dplyr
+knitr
+ggplot2
+archivist
+DT
