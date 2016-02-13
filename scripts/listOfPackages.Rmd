@@ -18,7 +18,7 @@ packages <- c("Rcpp", "ggplot2", "stringr", "plyr", "digest", "reshape2",
               "zoo", "knitr")
 ```
 
-```{r, message=FALSE, warning=FALSE, echo=FALSE}
+```{r, message=FALSE, warning=FALSE}
 library(XML)
 library(lubridate)
 library(dplyr)
@@ -41,7 +41,7 @@ addHooksToPrint(class="ggplot",
 
 Times and dates of package downloads. 
 
-```{r, cache=TRUE, echo=FALSE}
+```{r, message=FALSE, warning=FALSE}
 getCurrentVersions <- function(packages) {
   tt <- readLines(url("https://cran.r-project.org/src/contrib/"))
   currentList <- readHTMLTable(tt)[[1]]
@@ -75,11 +75,11 @@ ggplot(selectedPackages, aes(date, package)) +
   geom_point()
 ```
 
-# How many of them has changed recently?
+# How many of them have changed recently?
 
 About 50% of packages have changed in last year.
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 ggplot(cv, aes(date)) +
   stat_ecdf(geom = "step") +
   ggtitle("Distribution of times of uploads current verion of top 20 CRAN package")
