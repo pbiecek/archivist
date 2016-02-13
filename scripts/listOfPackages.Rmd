@@ -82,6 +82,6 @@ About 50% of packages have changed in last year.
 ```{r, message=FALSE, warning=FALSE}
 ggplot(cv, aes(date)) +
   stat_ecdf(geom = "step") +
-  ggtitle("Distribution of times of uploads current verion of top 20 CRAN package")
+  ggtitle("Times of uploads of current versions of top 20 CRAN packages")
 ```
 
