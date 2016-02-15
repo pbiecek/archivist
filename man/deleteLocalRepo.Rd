@@ -2,9 +2,12 @@
 % Please edit documentation in R/deleteRepo.R
 \name{deleteLocalRepo}
 \alias{deleteLocalRepo}
+\alias{deleteRepo}
 \title{Delete the Existing Repository from the Given Directory}
 \usage{
 deleteLocalRepo(repoDir, deleteRoot = FALSE, unset = FALSE)
+
+deleteRepo(...)
 }
 \arguments{
 \item{repoDir}{A character that specifies the directory for the Repository
@@ -15,6 +18,8 @@ should be deleted for Local Repository.}
 
 \item{unset}{A logical. If deleted \code{repoDir} was set to be default Local Repository
 and \code{unset} is TRUE, then \code{repoDir} is unset as a default Local  Repository (\code{aoptions('repoDir/repo', NULL, T)}).}
+
+\item{...}{All arguments are being passed to \code{deleteLocalRepo}.}
 }
 \description{
 \code{deleteLocalRepo} deletes the existing \link{Repository} from the given directory.
@@ -42,6 +47,28 @@ deleteLocalRepo( repoDir = exampleRepoDir, unset = TRUE, deleteRoot = TRUE)
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 }
 \seealso{
+Other archivist: \code{\link{Repository}},
+  \code{\link{Tags}}, \code{\link{\%a\%}},
+  \code{\link{addHooksToPrint}}, \code{\link{addTagsRepo}},
+  \code{\link{aformat}}, \code{\link{ahistory}},
+  \code{\link{alink}}, \code{\link{aoptions}},
+  \code{\link{archivist-package}}, \code{\link{aread}},
+  \code{\link{asearch}}, \code{\link{asession}},
+  \code{\link{cache}}, \code{\link{copyLocalRepo}},
+  \code{\link{createLocalRepo}},
+  \code{\link{createMDGallery}},
+  \code{\link{getRemoteHook}}, \code{\link{getTagsLocal}},
+  \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
+  \code{\link{rmFromLocalRepo}},
+  \code{\link{saveToLocalRepo}},
+  \code{\link{searchInLocalRepo}},
+  \code{\link{setLocalRepo}},
+  \code{\link{shinySearchInLocalRepo}},
+  \code{\link{showLocalRepo}},
+  \code{\link{splitTagsLocal}},
+  \code{\link{summaryLocalRepo}},
+  \code{\link{zipLocalRepo}}
+
 Other archivist: \code{\link{Repository}},
   \code{\link{Tags}}, \code{\link{\%a\%}},
   \code{\link{addHooksToPrint}}, \code{\link{addTagsRepo}},

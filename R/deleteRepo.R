@@ -14,6 +14,8 @@
 #' @param unset A logical. If deleted \code{repoDir} was set to be default Local Repository
 #' and \code{unset} is TRUE, then \code{repoDir} is unset as a default Local  Repository (\code{aoptions('repoDir/repo', NULL, T)}).
 #' 
+#' @param ... All arguments are being passed to \code{deleteLocalRepo}.
+#' 
 #' @note
 #' Remember that using \code{tempfile()} instead of \code{tempdir()}
 #' in examples section is crucial. \code{tempdir()} is existing directory
@@ -60,3 +62,10 @@ deleteLocalRepo <- function(repoDir, deleteRoot = FALSE, unset = FALSE){
   
 }
 
+#' @family archivist
+#' @rdname deleteLocalRepo
+#' @export
+deleteRepo <- function(...) {
+  .Deprecated("deleteRepo is deprecated. Use deleteLocalRepo() instead.")
+  deleteLocalRepo(...)
+}
