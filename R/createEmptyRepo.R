@@ -171,12 +171,6 @@ checkDirectory <- function( directory, create = FALSE ){
 
     directory <- aoptions("repoDir")
   }
-  # check whether it is second call of checkDirectory 
-  # (e.g CreatEmptyRepo + default = TRUE)
-#   if ( grepl("/$", x = directory , perl=TRUE) ){
-#     directory <- gsub(pattern = ".$", replacement = "",
-#                       x = directory, perl = TRUE)
-#   }
   # check property of directory
   if ( !create ){
     # check whether repository exists
@@ -188,17 +182,5 @@ checkDirectory <- function( directory, create = FALSE ){
       stop( paste0( directory, " is not a proper repository. There is neither backpack.db nor gallery." ) )
     }
   }
-  # check if repoDir has "/" at the end and add it if not
-#   if ( !grepl("/$", x = directory , perl=TRUE) ){
-#     directory <- paste0(  directory, "/"  )
-#   }
   return( directory )
 }
-
-# checkDirectory2 <- function( directory ){
-#   check if repoDir has "/" at the end and add it if not
-#   if ( !grepl("/$", x = directory , perl=TRUE) ){
-#     directory <- paste0(  directory, "/"  )
-#   }
-#   return( directory )
-# }
