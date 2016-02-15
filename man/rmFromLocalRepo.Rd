@@ -2,10 +2,13 @@
 % Please edit documentation in R/rmFromRepo.R
 \name{rmFromLocalRepo}
 \alias{rmFromLocalRepo}
+\alias{rmFromRepo}
 \title{Remove an Artifact Given as a md5hash from the Repository}
 \usage{
 rmFromLocalRepo(md5hash, repoDir = aoptions("repoDir"), removeData = FALSE,
   removeMiniature = FALSE, force = FALSE, many = FALSE)
+
+rmFromRepo(...)
 }
 \arguments{
 \item{md5hash}{A character assigned to the artifact through the use of a
@@ -29,6 +32,8 @@ Defualt \code{FALSE}.}
 you can set this parameter to \code{TRUE} and pass a vector of artifacts' \code{md5hashes}
 to a \code{md5hash} parameter. It is not possible to use a vector of artifacts' 
 \code{md5hashes} abbreviations - see \code{Note}. By default, set to \code{FALSE}.}
+
+\item{...}{All arguments are being passed to \code{rmFromLocalRepo}.}
 }
 \description{
 \code{rmFromLocalRepo} removes an artifact given as a \code{md5hash} from the \link{Repository}.
@@ -318,6 +323,28 @@ Marcin Kosinski , \email{m.p.kosinski@gmail.com}
 Witold Chodor , \email{witoldchodor@gmail.com}
 }
 \seealso{
+Other archivist: \code{\link{Repository}},
+  \code{\link{Tags}}, \code{\link{\%a\%}},
+  \code{\link{addHooksToPrint}}, \code{\link{addTagsRepo}},
+  \code{\link{aformat}}, \code{\link{ahistory}},
+  \code{\link{alink}}, \code{\link{aoptions}},
+  \code{\link{archivist-package}}, \code{\link{aread}},
+  \code{\link{asearch}}, \code{\link{asession}},
+  \code{\link{cache}}, \code{\link{copyLocalRepo}},
+  \code{\link{createLocalRepo}},
+  \code{\link{createMDGallery}},
+  \code{\link{deleteLocalRepo}},
+  \code{\link{getRemoteHook}}, \code{\link{getTagsLocal}},
+  \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
+  \code{\link{saveToLocalRepo}},
+  \code{\link{searchInLocalRepo}},
+  \code{\link{setLocalRepo}},
+  \code{\link{shinySearchInLocalRepo}},
+  \code{\link{showLocalRepo}},
+  \code{\link{splitTagsLocal}},
+  \code{\link{summaryLocalRepo}},
+  \code{\link{zipLocalRepo}}
+
 Other archivist: \code{\link{Repository}},
   \code{\link{Tags}}, \code{\link{\%a\%}},
   \code{\link{addHooksToPrint}}, \code{\link{addTagsRepo}},

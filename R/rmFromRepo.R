@@ -64,6 +64,8 @@
 #' to a \code{md5hash} parameter. It is not possible to use a vector of artifacts' 
 #' \code{md5hashes} abbreviations - see \code{Note}. By default, set to \code{FALSE}.
 #' 
+#' @param ... All arguments are being passed to \code{rmFromLocalRepo}.
+#' 
 #' @author
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
 #' Witold Chodor , \email{witoldchodor@@gmail.com}
@@ -489,3 +491,12 @@ Otherwise you used md5hash that was not stored in the repository. Try again with
 }
 invisible(NULL)
 }
+
+#' @family archivist
+#' @rdname rmFromLocalRepo
+#' @export
+rmFromRepo <- function(...) {
+  .Deprecated("rmFromRepo is deprecated. Use rmFromLocalRepo() instead.")
+  rmFromLocalRepo(...)
+}
+
