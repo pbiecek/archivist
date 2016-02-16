@@ -51,3 +51,10 @@ help(package="archivist")
 > Marcin Kosiński, m.p.kosinski@gmail.com
 >
 > Witold Chodor, witoldchodor@gmail.com
+
+# Extenstions
+
+### [archivist.github](https://github.com/MarcinKosinski/archivist.github): Archiving, Managing and Sharing R Objects via GitHub
+
+![Workflow of archivist.github package](https://raw.githubusercontent.com/MarcinKosinski/archivist.github/master/vignettes/archivist.github_workflow_ver2.png)
+
