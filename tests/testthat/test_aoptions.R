@@ -10,7 +10,7 @@ test_that("test aoptions", {
         lm(Petal.Length~Species, data=.) %a%
         summary() -> obj
 
-  expect_is(obj, "ahistory")
+  expect_is(obj, "summary.lm")
 
   deleteLocalRepo("arepo", deleteRoot = TRUE)
 })
