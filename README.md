@@ -5,7 +5,8 @@
 
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 [![Build Status](https://api.travis-ci.org/pbiecek/archivist.png)](https://travis-ci.org/pbiecek/archivist)
-[![Stories in Ready](https://badge.waffle.io/pbiecek/archivist.png?label=READY)](http://waffle.io/pbiecek/archivist)
+[![Pending Pull-Requests](http://githubbadges.herokuapp.com/pbiecek/archivist/pulls.svg?style=flat)](https://github.com/pbiecek/archivist/pulls)
+[![Github Issues](http://githubbadges.herokuapp.com/pbiecek/archivist/issues.svg)](https://github.com/pbiecek/archivist/issues)
 [![Coverage Status](https://coveralls.io/repos/pbiecek/archivist/badge.svg)](https://coveralls.io/r/pbiecek/archivist)
 
 A set of tools for datasets and plots archiving
