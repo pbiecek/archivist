@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "##    archivist package for R\n##\n#' @title Read Artifacts Given as md5hashes from the Repository\n#'\n#' @description\n#' \\code{aread} reads the artifact from the \\link{Repository}. It's a wrapper around \n#' \\link{loadFromLocalRepo} and \\link{loadFromRemoteRepo}.\n#' \n#' @details\n#' Function \\code{aread} reads artifacts (by \\code{md5hashes}) from Remote Repository.\n#' It uses \\link{loadFromLocalRepo} and \\link{loadFromRemoteRepo} functions\n#' with different parameter's specification.\n#' \n#' @note\n#' Before you start using this function, remember to set local or Remote repository\n#' to default by using \\code{setLocalRepo()} or \\code{setRemoteRepo} functions.\n#' \n#' @param md5hash One of the following:\n#' \n#' A character vector which elements  are consisting of at least three components separated with '/': Remote user name, Remote repository and name of the artifact (MD5 hash) or it's abbreviation.\n#' \n#' MD5 hashes of artifacts in current local default directory or its abbreviations.\n#' \n#' @author \n#' Przemyslaw Biecek, \\email{przemyslaw.biecek@@gmail.com}\n#' \n#' @examples\n#' # read the object from local directory\n#' setLocalRepo(system.file(\"graphGallery\", package = \"archivist\"))\n#' pl <- aread(\"600bda83cb840947976bd1ce3a11879d\")\n#' # plot it\n#' pl\n#' # read the object from Remote\n#' pl <- aread(\"pbiecek/graphGallery/600bda83cb840947976bd1ce3a11879d\")\n#' # plot it\n#' pl\n#' @family archivist\n#' @rdname aread\n#' @export\naread <- function(md5hash){\n  stopifnot( is.character( md5hash ) )\n\n  # work for vectors  \n  res <- list()\n  for (md5h in md5hash) {\n    # at least 3 elements\n    elements <- strsplit(md5h, \"/\")[[1]]\n    stopifnot( length(elements) >= 3 | length(elements) == 1)\n    if (length(elements) == 1) {\n      # local directory\n      res[[md5h]] <- loadFromLocalRepo(md5hash = elements, value = TRUE)\n    } else {\n      # Remote directory\n      res[[md5h]] <- loadFromRemoteRepo(md5hash = tail(elements,1), \n                                        repo = elements[2],\n                                        subdir = ifelse(length(elements) > 3, paste(elements[3:(length(elements)-1)], collapse=\"/\"), \"/\"),\n                                        user = elements[1], value = TRUE)\n    }\n  }\n  if (length(res) == 1) return(res[[1]]) else res\n}\n",
+    "created" : 1455225246849.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3066581284",
+    "id" : "C1822CBB",
+    "lastKnownWriteTime" : 1455204238,
+    "last_content_update" : 0,
+    "path" : "~/test1/archivist/R/aread.R",
+    "project_path" : "R/aread.R",
+    "properties" : {
+    },
+    "relative_order" : 0,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

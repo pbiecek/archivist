@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "# Dependencies\nmarkdown:         kramdown\nkramdown:\n  syntax-highlighter:  rouge\n\n# Permalinks\npermalink: /:year/:month/:day/:title.html\n# relative_permalinks: true\n\n# Setup\ntitle:            archivist\ntagline:          ''\ndescription:      'Archiving, Managing and Sharing R Objects'\nbaseurl: \"/archivist\" # If you are making a gh-pages project blog, this is\n                        # the name of your project repo, preceded by a /'\n                        # Set it to just \"\" if you are making a user page.\n                        \nbaseurlknitr:  \"/archivist/\" # This will always be your baseurl plus and extra '/'\n                                # at the end.  It's used only when knitr renders\n                                # your R Markdown files.\n                        \nurl: \"https://pbiecek.github.io\" # the base hostname & protocol for your site\n\n# set limit on number of post to appear on Home page\nhomepostlimit: 4\n\n# Disqus comments:\ndisqus:           true\nshortname:        archivist\n\n# Social Media\ntwitter:          true # add a twitter button to each post\nfacebook:         true # add a facebook share button to each post\n\nauthor:\n  name:           'Przemyslaw Biecek and Marcin Kosinski'\n  url:            https://pbiecek.github.io/\n\ngithub:\n  repo:           https://github.com/pbiecek/archivist\n",
+    "created" : 1456339454915.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1474245064",
+    "id" : "B8B2CA7C",
+    "lastKnownWriteTime" : 1456339704,
+    "last_content_update" : 1456339704035,
+    "path" : "~/test1/archivist/_config.yml",
+    "project_path" : "_config.yml",
+    "properties" : {
+    },
+    "relative_order" : 11,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "yaml"
+}
