@@ -1,0 +1,78 @@
+/* You can customize here without going too deep. */
+
+.commentcount {
+  display: block;
+  margin-top: -0.5rem;
+  margin-bottom: 0.5rem;
+  color: #9a9a9a !important; /* I'm such an amateur */
+}
+
+.tablecaption {
+  font-weight:  bolder;
+  text-align:  center;
+  margin-bottom:  20px;
+}
+
+.figcaption {
+  font-weight:  bolder;
+  text-align:  center;
+  margin-bottom:  30px;
+}
+
+p img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  border-style:  ridge;
+  border-color:  teal;
+  border-width:  thick;
+  padding:  5px 5px 5px 5px;
+}
+
+table, th, td
+{
+border: 1px solid black;
+}
+
+td
+{
+padding:15px;
+}
+
+table, td, th
+{
+border:1px solid green;
+}
+th
+{
+background-color: rgb(147,161,161);
+color:white;
+}
+
+table {
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:  30px;
+  }
+
+
+dt {
+  display:  block;
+  font-weight:  bolder;
+  margin-bottom:  15px;
+
+}
+
+dd {
+  display:  block;
+  border-style:  double;
+  border-color:  blue;
+  border-width:  medium;
+  padding:  5px 5px 5px 5px;
+  margin-bottom:  15px;
+}
+
+dl {
+  margin-bottom:  30px;
+}

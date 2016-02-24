@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "##    archivist package for R\n##\n#' @title Show Artifact's Session Info\n#'\n#' @description\n#' \\code{asession} extracts artifact's session info. This allows to check in what conditions \n#' the artifact was created.\n#' \n#' @param md5hash One of the following (see \\link{aread}):\n#' \n#' A character vector which elements  are consisting of at least three components separated with '/': Remote user name, Remote repository and name of the artifact (MD5 hash) or it's abbreviation.\n#' \n#' MD5 hashes of artifacts in current local default directory or its abbreviations.\n#' \n#' @return An object of the class \\code{session_info}.\n#' \n#' @author \n#' Przemyslaw Biecek, \\email{przemyslaw.biecek@@gmail.com}\n#' \n#' @examples\n#' \\dontrun{\n#' setLocalRepo(system.file(\"graphGallery\", package = \"archivist\"))\n#' asession(\"2a6e492cb6982f230e48cf46023e2e4f\")\n#' \n#' # no session info\n#' asession(\"pbiecek/graphGallery/2a6e492cb6982f230e48cf46023e2e4f\")\n#' # nice session info\n#' asession(\"pbiecek/graphGallery/600bda83cb840947976bd1ce3a11879d\")\n#' }\n#' @family archivist\n#' @rdname asession\n#' @export\n\nasession <- function( md5hash = NULL) {\n  elements <- strsplit(md5hash, \"/\")[[1]]\n  stopifnot( length(elements) >= 3 | length(elements) == 1)\n  if (length(elements) == 1) {\n    # local directory\n    tags <- getTagsLocal(md5hash, tag = \"\")\n    tagss <- grep(tags, pattern=\"^session_info:\", value = TRUE)\n    if (length(tagss) == 0) {\n      warning(paste0(\"No session info archived for \", md5hash))\n      return(NA)\n    }\n    return(loadFromLocalRepo(gsub(tagss[1], pattern = \"^session_info:\", replacement = \"\"), value = TRUE))\n  } else {\n    # Remote directory\n    tags <- getTagsRemote(tail(elements,1), repo = elements[2],\n                          subdir = ifelse(length(elements) > 3, paste(elements[3:(length(elements)-1)], collapse=\"/\"), \"/\"),\n                          user = elements[1], tag = \"\")\n    tagss <- grep(tags, pattern=\"^session_info:\", value = TRUE)\n    if (length(tagss) == 0) {\n      warning(paste0(\"No session info archived for \", md5hash))\n      return(NA)\n    }\n    return(loadFromRemoteRepo(gsub(tagss[1], pattern = \"^session_info:\", replacement = \"\"), \n                              repo = elements[2],\n                              subdir = ifelse(length(elements) > 3, paste(elements[3:(length(elements)-1)], collapse=\"/\"), \"/\"),\n                              user = elements[1],\n                              value = TRUE))\n  }\n}\n",
+    "created" : 1455207576844.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3302203379",
+    "id" : "7F84B668",
+    "lastKnownWriteTime" : 1455207585,
+    "last_content_update" : 0,
+    "path" : "~/test1/archivist/R/asession.R",
+    "project_path" : "R/asession.R",
+    "properties" : {
+    },
+    "relative_order" : 0,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

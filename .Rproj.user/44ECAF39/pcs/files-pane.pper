@@ -1,0 +1,9 @@
+{
+    "path" : "~/test1/archivist/R",
+    "sortOrder" : [
+        {
+            "ascending" : true,
+            "columnIndex" : 2
+        }
+    ]
+}

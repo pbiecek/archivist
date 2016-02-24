@@ -1,0 +1,40 @@
+# Dependencies
+markdown:         kramdown
+kramdown:
+  syntax-highlighter:  rouge
+
+# Permalinks
+permalink: /:year/:month/:day/:title.html
+# relative_permalinks: true
+
+# Setup
+title:            archivist
+tagline:          ''
+description:      'Archiving, Managing and Sharing R Objects'
+baseurl: "/archivist" # If you are making a gh-pages project blog, this is
+                        # the name of your project repo, preceded by a /'
+                        # Set it to just "" if you are making a user page.
+                        
+baseurlknitr:  "/archivist/" # This will always be your baseurl plus and extra '/'
+                                # at the end.  It's used only when knitr renders
+                                # your R Markdown files.
+                        
+url: "https://pbiecek.github.io" # the base hostname & protocol for your site
+
+# set limit on number of post to appear on Home page
+homepostlimit: 4
+
+# Disqus comments:
+disqus:           true
+shortname:        archivist
+
+# Social Media
+twitter:          true # add a twitter button to each post
+facebook:         true # add a facebook share button to each post
+
+author:
+  name:           'Przemyslaw Biecek and Marcin Kosinski'
+  url:            https://pbiecek.github.io/
+
+github:
+  repo:           https://github.com/pbiecek/archivist

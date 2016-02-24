@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Sample Post &middot; archivist
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/archivist/public/css/poole.css">
+  <link rel="stylesheet" href="/archivist/public/css/syntax.css">
+  <link rel="stylesheet" href="/archivist/public/css/hyde.css">
+  <link rel="stylesheet" href="/archivist/public/css/custom.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/archivistpublic/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/archivistpublic/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+  
+  <!-- Mathjax -->
+  <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+    <!--Disqus comment counts-->
+    <script id="dsq-count-scr" src="//archivist.disqus.com/count.js" async></script>
+    
+</head>
+
+
+  <body class="theme-base-00">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/archivist">
+          archivist
+        </a>
+      </h1>
+      <p class="lead">Archiving, Managing and Sharing R Objects</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/archivist">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/archivist/about.html">About</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/archivist/archive.html">Archives</a>
+          
+        
+      
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/archivist/categories.html">Categories</a>
+          
+        
+      
+        
+          
+        
+      
+      <a class="sidebar-nav-item" href="https://github.com/pbiecek/archivist">GitHub project</a>
+    </nav>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">Sample Post</h1>
+  <span class="post-date">12 Dec 2015</span>
+  <p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com">http://rmarkdown.rstudio.com</a>.</p>
+
+<p>When you click the <strong>Knit</strong> button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">summary</span><span class="p">(</span><span class="n">cars</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">##      speed           dist       
+##  Min.   : 4.0   Min.   :  2.00  
+##  1st Qu.:12.0   1st Qu.: 26.00  
+##  Median :15.0   Median : 36.00  
+##  Mean   :15.4   Mean   : 42.98  
+##  3rd Qu.:19.0   3rd Qu.: 56.00  
+##  Max.   :25.0   Max.   :120.00</code></pre></figure>
+
+<p>You can also embed plots, for example:</p>
+
+<p><img src="/knitr-hyde/figure/source/2015-12-12-sample-post/unnamed-chunk-3-1.png" alt="plot of chunk unnamed-chunk-3" /></p>
+
+<p class="figcaption">Here is a plot for you.</p>
+
+<p>The border around the graph above is due to custom CSS for this site (see <code class="highlighter-rouge">public/css/custom.css</code>).  The caption was produced with some HTML:</p>
+
+<blockquote>
+  <p><code class="highlighter-rouge">&lt;p class = "figcaption"&gt;Here is a plot for you.&lt;/p&gt;</code></p>
+</blockquote>
+
+<p>You can write mathematics, of course, but the syntax will be a bit different from R Mardown.  Here’s some inline math:  <script type="math/tex">\pi/2 \approx 1.57</script>.  There is displayed math as well:</p>
+
+<script type="math/tex; mode=display">\sum_{i=1}^{n} i = \frac{n(n+1)}{2}.</script>
+
+<p>Here’s the source so you can see how the above worked:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">You</span> <span class="n">can</span> <span class="n">write</span> <span class="n">mathematics</span><span class="p">,</span> <span class="n">of</span> <span class="n">course</span><span class="p">,</span> <span class="n">but</span> <span class="n">the</span> <span class="n">syntax</span> <span class="n">will</span> <span class="n">be</span> <span class="n">a</span> <span class="n">bit</span> <span class="n">different</span> <span class="n">from</span> <span class="n">R</span> <span class="n">Markdown.</span>  <span class="n">Here</span><span class="s1">'s some inline math:  $$ \pi/2 \approx 1.57 $$.  There is displayed math as well:
+
+$$ \sum_{i=1}^{n} i = \frac{n(n+1)}{2}.$$
+
+Here'</span><span class="n">s</span> <span class="n">the</span> <span class="n">source</span> <span class="k">...</span></code></pre></figure>
+
+<p>Happy blogging.</p>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2015/12/13/knitr-hyde-getting-started.html">
+            Getting Started with Knitr-Hyde
+            <small>13 Dec 2015</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+
+<a href="https://twitter.com/share" class="twitter-share-button"{count}>Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div class="fb-share-button" data-href="https://pbiecek.github.io/archivist" data-layout="button_count"></div>
+
+
+
+
+<div id="disqus_thread"></div>
+
+<script>(function() {
+        var d = document, s = d.createElement('script');
+        s.src = '//archivist.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+    </div>
+
+  </body>
+</html>
