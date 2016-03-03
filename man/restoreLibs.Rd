@@ -9,13 +9,15 @@ restoreLibs(md5hash, session_info = NULL)
 \arguments{
 \item{md5hash}{One of the following (see \link{aread}):
 
-A character vector which elements  are consisting of at least three components separated with '/': Remote user name, Remote repository and name of the artifact (MD5 hash) or it's abbreviation.
+A character vector which elements are consisting of at least three components separated with '/': Remote user name, Remote repository and name of the artifact (MD5 hash) or it's abbreviation.
 
 MD5 hashes of artifacts in current local default directory or its abbreviations.}
+
+\item{session_info}{Object with versions of packages to be installed. If not supplied then it will be extracted from md5hash \code{ md5hash }}
 }
 \description{
-Function \code{restoreLibrary} gets either session_info or artifact's id 
-and restore libraries to the version set in the object.
+Function \code{ restoreLibs } gets either \code{session_info} or artifact's \code{md5hash} 
+and restore libraries/packages to versions attached when the object was saved in the repo. Typical use case is following. We have saved an object and now we are restoring it, but with current version of packages something is not working. The function \code{restoreLibs()} revert all libraries that were attached previously to their previous versions.
 }
 \examples{
 \dontrun{
