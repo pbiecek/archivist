@@ -43,14 +43,14 @@ restoreLibs <- function( md5hash, session_info = NULL){
         } else {
           if (grepl(pkgs[i,"source"], pattern = "^CRAN")) {
           # CRAN inst
-            devtools::install_version(pkgs[i,"package"],
+            try(devtools::install_version(pkgs[i,"package"],
                              version = pkgs[i,"version"], 
                              repos = 'https://cran.rstudio.com/',
-                             type="source")
+                             type="source"), silent=TRUE)
             } else {
           # Github inst
             pkg <- gsub(gsub(pkgs[i,"source"], pattern=".*\\(", replacement=""), pattern="\\)", replacement="")
-            devtools::install_github(pkg)
+            try(devtools::install_github(pkg), silent=TRUE)
             }
         }
   }
