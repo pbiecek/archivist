@@ -1,3 +1,10 @@
+archivist 2.0.2
+----------------------------------------------------------------
+
+* **New functions**:
+    1. The `restoreLibs()` function is added. It recovers previous versions of R packages. Needed due to rapid changes in structure of `ggplot2` objects. Now one can restore version of the `ggplot2` package consistent with archived object.
+
+
 archivist 2.0
 ----------------------------------------------------------------
 

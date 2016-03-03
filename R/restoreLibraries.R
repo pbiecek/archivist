@@ -36,7 +36,7 @@ restoreLibs <- function( md5hash, session_info = NULL){
   pkgs <- session_info$packages
 
   for (i in seq_along(pkgs$package)) {
-    # check version, maybe we have it is already installed
+    # check version, maybe it is already installed
     devtools::session_info(pkgs[i,"package"])
     deps <- apply(devtools::session_info(pkgs[i,"package"])$packages[,c("package", "version")], 1, paste, collapse="")
 
