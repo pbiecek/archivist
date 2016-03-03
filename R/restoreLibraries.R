@@ -29,6 +29,10 @@
 restoreLibs <- function( md5hash, session_info = NULL){
   stopifnot( !is.null( md5hash ) | !is.null( session_info ) )
 
+    if (!requireNamespace("devtools", quietly = TRUE)) {
+      stop("devtools package required for restoreLibs function")
+    }
+
   if (is.null(session_info)) {
     session_info <- asession(md5hash)
   }
