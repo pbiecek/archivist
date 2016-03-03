@@ -12,8 +12,6 @@
 #' 
 #' MD5 hashes of artifacts in current local default directory or its abbreviations.
 #' 
-#' @return This function returns a list of artifacts (by their values).
-#' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #' Przemyslaw Biecek, \email{przemyslaw.biecek@@gmail.com}
@@ -40,7 +38,7 @@ restoreLibs <- function( md5hash, session_info = NULL){
     devtools::session_info(pkgs[i,"package"])
     deps <- apply(devtools::session_info(pkgs[i,"package"])$packages[,c("package", "version")], 1, paste, collapse="")
 
-    if (!(paste0(pkgs[i,"package"], pkgs[i,"version"]) %in% deps)) {
+    if (pkgs[i,"package"] != "archivist" & !(paste0(pkgs[i,"package"], pkgs[i,"version"]) %in% deps)) {
       if (pkgs[i,"*"] == "*") {
 # local inst
          cat("Package", pkgs[i,"package"], "will not be reinstalled.\n\n")

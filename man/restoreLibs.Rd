@@ -13,9 +13,6 @@ A character vector which elements  are consisting of at least three components s
 
 MD5 hashes of artifacts in current local default directory or its abbreviations.}
 }
-\value{
-This function returns a list of artifacts (by their values).
-}
 \description{
 Function \code{restoreLibrary} gets either session_info or artifact's id 
 and restore libraries to the version set in the object.
