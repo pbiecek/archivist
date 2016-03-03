@@ -35,11 +35,15 @@ restoreLibs <- function( md5hash, session_info = NULL){
 
   pkgs <- session_info$packages
 
-  i <- 14
   for (i in seq_along(pkgs$package)) {
+    # check version, maybe we have it is already installed
+    devtools::session_info(pkgs[i,"package"])
+    deps <- apply(devtools::session_info(pkgs[i,"package"])$packages[,c("package", "version")], 1, paste, collapse="")
+
+    if (!(paste0(pkgs[i,"package"], pkgs[i,"version"]) %in% deps)) {
       if (pkgs[i,"*"] == "*") {
 # local inst
-         cat("Package", pkgs[i,"package"], "will not be reinstalled.")
+         cat("Package", pkgs[i,"package"], "will not be reinstalled.\n\n")
         } else {
           if (grepl(pkgs[i,"source"], pattern = "^CRAN")) {
           # CRAN inst
@@ -53,5 +57,6 @@ restoreLibs <- function( md5hash, session_info = NULL){
             try(devtools::install_github(pkg), silent=TRUE)
             }
         }
+    }
   }
 }
