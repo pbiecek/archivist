@@ -47,7 +47,6 @@ restoreLibs <- function( md5hash, session_info = NULL){
           # CRAN inst
             try(devtools::install_version(pkgs[i,"package"],
                              version = pkgs[i,"version"], 
-                             repos = 'https://cran.rstudio.com/',
                              type="source"), silent=TRUE)
             } else {
           # Github inst
