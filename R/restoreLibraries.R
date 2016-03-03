@@ -41,12 +41,12 @@ restoreLibs <- function( md5hash, session_info = NULL){
 # local inst
          cat("Package", pkgs[i,"package"], "will not be reinstalled.")
         } else {
-          if (grepl(pkgs[i,"source"], "^CRAN")) {
+          if (grepl(pkgs[i,"source"], pattern = "^CRAN")) {
           # CRAN inst
             devtools::install_version(pkgs[i,"package"],
                              version = pkgs[i,"version"], 
                              repos = 'https://cran.rstudio.com/',
-                             type = "source")
+                             type="source")
             } else {
           # Github inst
             pkg <- gsub(gsub(pkgs[i,"source"], pattern=".*\\(", replacement=""), pattern="\\)", replacement="")
