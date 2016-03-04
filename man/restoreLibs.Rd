@@ -22,8 +22,8 @@ it will be extracted from md5hash \code{ md5hash }}
 Function \code{ restoreLibs } gets either \code{session info} or artifact's \code{md5hash} 
 and restore libraries/packages to versions attached when the object was saved in the repo. 
 Typical use case is following. We have saved an object and now we are restoring it, but
- with current version of packages something is not working. The function \code{restoreLibs()} 
- reverts all libraries that were attached previously to their previous versions.
+with current version of packages something is not working. The function \code{restoreLibs()} 
+reverts all libraries that were attached previously to their previous versions.
 }
 \examples{
 \dontrun{
