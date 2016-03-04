@@ -148,7 +148,7 @@ saveToLocalRepo(swiss, repoDir=exampleRepoDir, archiveSessionInfo = TRUE)
 showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
 showLocalRepo(method = "tags", repoDir = exampleRepoDir)
 
-loadFromLocalRepo(md5hash = '600bda83cb840947976bd1ce3a11879d',
+loadFromLocalRepo(md5hash = 'f05f0ed0662fe01850ec1b928830ef32',
   repoDir = system.file("graphGallery", package = "archivist"), value = TRUE) -> pl
 
 saveToLocalRepo(pl, repoDir=exampleRepoDir,

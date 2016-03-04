@@ -22,7 +22,7 @@ and restore libraries/packages to versions attached when the object was saved in
 \examples{
 \dontrun{
 ## objects preparation
-restoreLibs(md5hash = "pbiecek/graphGallery/600bda83cb840947976bd1ce3a11879d")
+restoreLibs(md5hash = "pbiecek/graphGallery/f05f0ed0662fe01850ec1b928830ef32")
 }
 }
 \author{
