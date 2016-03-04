@@ -74,7 +74,7 @@ test_that("object is properly serialized", {
 })
 
 test_that("search* functions does search", {
-  expect_equal(c("600bda83cb840947976bd1ce3a11879d", "70f4f83dbfef2a8afb2f495208d0a60f") %in%
+  expect_equal(c("13b2724139eb2c62578b4dab0d7b2cea", "f05f0ed0662fe01850ec1b928830ef32") %in%
   searchInRemoteRepo(pattern="class:gg", user="pbiecek", repo="graphGallery"), c(TRUE, TRUE))
   
   expect_equal(c("f9ebb370fa8fed2057be1bb11005f5fb", "6f6623ab33ae7f98bf8f5d7457c112eb") %in%
@@ -82,7 +82,7 @@ test_that("search* functions does search", {
                                      dateTo = "2014-09-30" ),
                      user="pbiecek", repo="graphGallery"), c(TRUE, TRUE))
   
-  expect_equal(c("600bda83cb840947976bd1ce3a11879d", "70f4f83dbfef2a8afb2f495208d0a60f") %in%
+  expect_equal(c("f05f0ed0662fe01850ec1b928830ef32", "13b2724139eb2c62578b4dab0d7b2cea") %in%
   searchInRemoteRepo(pattern=c("class:gg", "labelx:Sepal.Length"),
                           user="pbiecek", repo="graphGallery"), c(TRUE, TRUE))
 })
