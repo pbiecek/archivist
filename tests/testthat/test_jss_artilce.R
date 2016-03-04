@@ -1,7 +1,7 @@
 test_that("aread downloads files", {
   aoptions('repoDir', NULL, T) 
-  aread("pbiecek/graphGallery/600bda83cb840947976bd1ce3a11879d") -> ddl_ggplot
-  aread("pbiecek/graphGallery/600bda83cb") -> ddl_ggplot_abrv
+  aread("pbiecek/graphGallery/f05f0ed0662fe01850ec1b928830ef32") -> ddl_ggplot
+  aread("pbiecek/graphGallery/f05f0ed066") -> ddl_ggplot_abrv
   
   expect_is(ddl_ggplot, "ggplot")
   expect_is(ddl_ggplot_abrv, "ggplot")
@@ -38,7 +38,7 @@ test_that("createEmptyRepo creates repo", {
 test_that("copying from other repositories and showRepo", {
   repo <- "arepo"
   invisible(createLocalRepo(repoDir = repo))
-  copyRemoteRepo( repoTo = repo, md5hashes= "600bda83cb840947976bd1ce3a11879d", 
+  copyRemoteRepo( repoTo = repo, md5hashes= "f05f0ed0662fe01850ec1b928830ef32", 
                   user="pbiecek", repo="graphGallery" )
   expect_is(showLocalRepo(repoDir = repo, method = "tags"), "data.frame")
   expect_equal(names(showLocalRepo(repoDir = repo, method = "tags")), c("artifact", "tag", "createdDate"))
