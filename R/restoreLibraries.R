@@ -32,7 +32,7 @@
 #' @family archivist
 #' @rdname restoreLibs
 #' @export
-restoreLibs <- function( md5hash, session_info = NULL){
+restoreLibs <- function( md5hash, session_info = NULL) {
   stopifnot( !is.null( md5hash ) | !is.null( session_info ) )
 
     if (!requireNamespace("devtools", quietly = TRUE)) {
@@ -44,16 +44,17 @@ restoreLibs <- function( md5hash, session_info = NULL){
   }
 
   pkgs <- session_info$packages
+  installed_pkgs <- installed.packages()[,c("Package", "Version")]
 
   for (i in seq_along(pkgs$package)) {
     # check version, maybe it is already installed
-    devtools::session_info(pkgs[i,"package"])
-    deps <- apply(devtools::session_info(pkgs[i,"package"])$packages[,c("package", "version")], 1, paste, collapse="")
+    is_allready_installed <- paste0(pkgs[i,"package"], pkgs[i,"version"]) %in%
+                                      apply(installed_pkgs, 1, paste0, collapse="")
 
-    if (pkgs[i,"package"] != "archivist" & !(paste0(pkgs[i,"package"], pkgs[i,"version"]) %in% deps)) {
+    if (pkgs[i,"package"] != "archivist" & !is_allready_installed) {
       if (pkgs[i,"*"] == "*") {
 # local inst
-         cat("Package", pkgs[i,"package"], "will not be reinstalled.\n\n")
+         cat("Package", pkgs[i,"package"], "was installed from local file and will not be reinstalled.\n\n")
         } else {
           if (grepl(pkgs[i,"source"], pattern = "^CRAN")) {
           # CRAN inst
