@@ -61,12 +61,12 @@ restoreLibs <- function( md5hash, session_info = NULL) {
             try(devtools::install_version(pkgs[i,"package"],
                              version = pkgs[i,"version"], 
                              type="source",
-                             dependencies = FALSE), silent=TRUE)
+                             dependencies = FALSE, reload = FALSE), silent=TRUE)
             } else {
           # Github inst
             pkg <- gsub(gsub(pkgs[i,"source"], pattern=".*\\(", replacement=""), pattern="\\)", replacement="")
             try(devtools::install_github(pkg,
-                                         dependencies = FALSE), silent=TRUE)
+                                         dependencies = FALSE, reload = FALSE), silent=TRUE)
             }
         }
     }
