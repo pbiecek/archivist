@@ -59,11 +59,13 @@ restoreLibs <- function( md5hash, session_info = NULL){
           # CRAN inst
             try(devtools::install_version(pkgs[i,"package"],
                              version = pkgs[i,"version"], 
-                             type="source"), silent=TRUE)
+                             type="source",
+                             dependencies = FALSE), silent=TRUE)
             } else {
           # Github inst
             pkg <- gsub(gsub(pkgs[i,"source"], pattern=".*\\(", replacement=""), pattern="\\)", replacement="")
-            try(devtools::install_github(pkg), silent=TRUE)
+            try(devtools::install_github(pkg,
+                                         dependencies = FALSE), silent=TRUE)
             }
         }
     }
