@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Accessibility &middot; archivist
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/archivist/public/css/poole.css">
+  <link rel="stylesheet" href="/archivist/public/css/syntax.css">
+  <link rel="stylesheet" href="/archivist/public/css/hyde.css">
+  <link rel="stylesheet" href="/archivist/public/css/custom.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/archivistpublic/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/archivistpublic/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+  
+  <!-- Mathjax -->
+  <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+    <!--Disqus comment counts-->
+    <script id="dsq-count-scr" src="//archivist.disqus.com/count.js" async></script>
+    
+</head>
+
+
+  <body class="theme-base-00">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/archivist">
+          archivist
+        </a>
+      </h1>
+      <p class="lead">Archiving, Managing and Sharing R Objects</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/archivist">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item active" href="/archivist/Accessibility.html">Accessibility</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/archivist/Caching.html">Caching</a>
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+      <a class="sidebar-nav-item" href="https://github.com/pbiecek/archivist">GitHub project</a>
+    </nav>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">Accessibility</h1>
+  <p>The archivist package allows to store, restore and look for R objects in repositories stored on hard disk or remote repository. There are different strategies that can be used to find an object, through it’s name, date of creation of meta data. The package is mainly designed as a repository of artifacts, but it can be used in different use-cases.</p>
+
+<p>Open science rises new challenges, one of them is reproducibility yet another is availability of results.</p>
+
+<p>When working with data scientists should not only be able to reproduce others results 
+but also would like to make sure that they got 100% the same that others.</p>
+
+<p>Archivist helps in the accessibility part of open science.
+One can store partial results, search in repository of artifact, 
+share artifacts with others or himself.</p>
+
+<p>Below we are using some artifacts created during useR!2014 tutorial about dplyr given by Hadley Wickham.</p>
+
+<p>These artifacts are stored on my github repository.
+One can seek for all ggplots, plot them with their md5hashes,
+and choose the one that it’s looked for
+.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">archivist</span><span class="p">)</span>
+<span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+<span class="c1"># objects of class ggplot for which the session_info was archvied
+</span><span class="n">md5plots</span> <span class="o">&lt;-</span> <span class="n">searchInRemoteRepo</span><span class="p">(</span>
+	<span class="n">pattern</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="s2">"class:ggplot"</span><span class="p">,</span> <span class="s2">"session_info"</span><span class="p">),</span> 
+	<span class="n">intersect</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">,</span> <span class="n">repo</span> <span class="o">=</span> <span class="s2">"graphGallery"</span><span class="p">,</span> 
+	<span class="n">user</span> <span class="o">=</span> <span class="s2">"pbiecek"</span><span class="p">,</span> <span class="n">fixed</span> <span class="o">=</span> <span class="n">FALSE</span>
+	<span class="p">)</span>
+
+<span class="n">plots</span> <span class="o">&lt;-</span> <span class="n">lapply</span><span class="p">(</span><span class="n">md5plots</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="n">pl</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">loadFromRemoteRepo</span><span class="p">(</span>
+		<span class="n">md5hash</span> <span class="o">=</span> <span class="n">pl</span><span class="p">,</span> 
+		<span class="n">repo</span> <span class="o">=</span> <span class="s2">"graphGallery"</span><span class="p">,</span>
+		<span class="n">user</span> <span class="o">=</span> <span class="s2">"pbiecek"</span><span class="p">,</span>
+		<span class="n">value</span> <span class="o">=</span> <span class="n">TRUE</span>
+		<span class="p">)</span> <span class="o">+</span> 
+		<span class="n">ggtitle</span><span class="p">(</span><span class="n">pl</span><span class="p">)</span>
+<span class="p">})</span>
+	  
+<span class="n">library</span><span class="p">(</span><span class="n">gridExtra</span><span class="p">)</span>
+<span class="n">do.call</span><span class="p">(</span>
+	<span class="s2">"grid.arrange"</span><span class="p">,</span>
+	<span class="n">c</span><span class="p">(</span><span class="n">plots</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="n">round</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">md5plots</span><span class="p">))))</span>
+	<span class="p">)</span></code></pre></figure>
+
+<p><img src="/archivist/figure/source/Accessibility/unnamed-chunk-2-1.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" style="display: block; margin: auto;" /></p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">summaryRemoteRepo</span><span class="p">(</span>
+	<span class="n">repo</span> <span class="o">=</span> <span class="s2">"graphGallery"</span><span class="p">,</span>
+	<span class="n">user</span> <span class="o">=</span> <span class="s2">"pbiecek"</span>
+	<span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">Number of archived artifacts in Repository:  53 
+Number of archived datasets in Repository:  24 
+Number of various classes archived in Repository: 
+              Number
+ggplot            6
+tbl_df            3
+grouped_df        3
+area              1
+proto             1
+lm                9
+numeric           2
+list              3
+summary.lm        4
+data.frame       16
+matrix            1
+igraph            1
+communities       1
+character         1
+table             1
+intsvy.mean       2
+intsvy.table      2
+intsvy.reg        1
+gg                2
+Saves per day in Repository: 
+            Saves
+2014-08-21     4
+2014-09-03    11
+2015-06-22     4
+2015-06-24    16
+2015-06-25    17
+2015-06-27     1
+2015-06-28     4
+2015-06-29     4
+2015-06-30     4
+2015-07-01     4
+2015-07-09     4
+2015-07-10     5
+2015-07-15     1
+2015-07-16     3
+2015-07-20     2
+2015-08-12     3
+2015-08-25     3
+2015-08-29     1
+2015-09-12     4
+2015-09-14     4
+2015-09-20     2
+2015-09-22     1
+2015-10-08     2
+2015-10-12     1
+2015-11-15     3
+2015-11-27     4
+2015-11-30    11
+2016-02-07     2
+2016-02-09     3
+2016-03-04     4</code></pre></figure>
+
+
+</div>
+
+
+<a href="https://twitter.com/share" class="twitter-share-button"{count}>Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div class="fb-share-button" data-href="https://pbiecek.github.io/archivist" data-layout="button_count"></div>
+
+
+
+
+<div id="disqus_thread"></div>
+
+<script>(function() {
+        var d = document, s = d.createElement('script');
+        s.src = '//archivist.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+    </div>
+
+  </body>
+</html>

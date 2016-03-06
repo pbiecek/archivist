@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Caching &middot; archivist
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/archivist/public/css/poole.css">
+  <link rel="stylesheet" href="/archivist/public/css/syntax.css">
+  <link rel="stylesheet" href="/archivist/public/css/hyde.css">
+  <link rel="stylesheet" href="/archivist/public/css/custom.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/archivistpublic/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/archivistpublic/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+  
+  <!-- Mathjax -->
+  <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+    <!--Disqus comment counts-->
+    <script id="dsq-count-scr" src="//archivist.disqus.com/count.js" async></script>
+    
+</head>
+
+
+  <body class="theme-base-00">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/archivist">
+          archivist
+        </a>
+      </h1>
+      <p class="lead">Archiving, Managing and Sharing R Objects</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/archivist">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/archivist/Accessibility.html">Accessibility</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item active" href="/archivist/Caching.html">Caching</a>
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+      <a class="sidebar-nav-item" href="https://github.com/pbiecek/archivist">GitHub project</a>
+    </nav>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">Caching</h1>
+  <p>The archivist package allows to store, restore and look for R objects in repositories stored on hard disk. There are different strategies that can be used to find an object, through it’s name, date of creation of meta data. The package is mainly designed as a repository of artifacts, but it can be used in different use-cases.</p>
+
+<p>Let’s see how it can be used as caching engine.</p>
+
+<p>Let’s consider a function with few arguments, which evaluation may takes a significant amount of time. If there is a chance that the function will be executed with same parameteres more than just one, it would be desireble to cache results to avoid unncessary evaluations.</p>
+
+<p>Such cache can be easily constructed with the <code class="highlighter-rouge">archivist</code> package.</p>
+
+<h1 id="heavyweight-function">Heavyweight function</h1>
+
+<p>Let’s see an example. The <code class="highlighter-rouge">Heavyweight</code> function <code class="highlighter-rouge">getMaxDistribution</code> summarizes the distribution of maximum from N draw of random variables from distribuition D with the use of R replications.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">getMaxDistribution</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span>
+	<span class="n">D</span> <span class="o">=</span> <span class="n">rnorm</span><span class="p">,</span> 
+	<span class="n">N</span> <span class="o">=</span> <span class="m">10</span><span class="p">,</span>
+	<span class="n">R</span> <span class="o">=</span> <span class="m">1000000</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">res</span> <span class="o">&lt;-</span> <span class="n">replicate</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">max</span><span class="p">(</span><span class="n">D</span><span class="p">(</span><span class="n">N</span><span class="p">)))</span>
+  <span class="n">summary</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">system.time</span><span class="p">(</span><span class="n">getMaxDistribution</span><span class="p">(</span><span class="n">rnorm</span><span class="p">,</span> <span class="m">10</span><span class="p">))</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">   user  system elapsed 
+  4.925   0.018   4.941 </code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">system.time</span><span class="p">(</span><span class="n">getMaxDistribution</span><span class="p">(</span><span class="n">rexp</span><span class="p">,</span> <span class="m">20</span><span class="p">))</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">   user  system elapsed 
+  4.840   0.005   4.842 </code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">system.time</span><span class="p">(</span><span class="n">getMaxDistribution</span><span class="p">(</span><span class="n">rnorm</span><span class="p">,</span> <span class="m">10</span><span class="p">))</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">   user  system elapsed 
+  4.533   0.000   4.530 </code></pre></figure>
+
+<p>Now, let’s load the archivist package and prepare a repository for cached objects.</p>
+
+<h1 id="cache-preparation">Cache preparation</h1>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">archivist</span><span class="p">)</span>
+<span class="n">cacheRepo</span> <span class="o">&lt;-</span> <span class="n">tempfile</span><span class="p">()</span>
+<span class="n">createLocalRepo</span><span class="p">(</span><span class="n">cacheRepo</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">Directory /tmp/RtmpZE9Gag/file27d673051be1 did not exist. Forced to create a new directory.</code></pre></figure>
+
+<h1 id="how-to-work-with-cache">How to work with cache</h1>
+
+<p>The <code class="highlighter-rouge">cacheRepo</code> is a folder with already evaluated function calls. 
+How to use it?</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">system.time</span><span class="p">(</span><span class="n">cache</span><span class="p">(</span><span class="n">cacheRepo</span><span class="p">,</span> <span class="n">getMaxDistribution</span><span class="p">,</span> <span class="n">rnorm</span><span class="p">,</span> <span class="m">10</span><span class="p">))</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">   user  system elapsed 
+  4.420   0.004   4.422 </code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">system.time</span><span class="p">(</span><span class="n">cache</span><span class="p">(</span><span class="n">cacheRepo</span><span class="p">,</span> <span class="n">getMaxDistribution</span><span class="p">,</span> <span class="n">rexp</span><span class="p">,</span> <span class="m">10</span><span class="p">))</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">   user  system elapsed 
+  4.333   0.005   4.335 </code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">system.time</span><span class="p">(</span><span class="n">cache</span><span class="p">(</span><span class="n">cacheRepo</span><span class="p">,</span> <span class="n">getMaxDistribution</span><span class="p">,</span> <span class="n">rnorm</span><span class="p">,</span> <span class="m">10</span><span class="p">))</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">   user  system elapsed 
+  0.002   0.000   0.002 </code></pre></figure>
+
+<p>The second evaluation of <code class="highlighter-rouge">getMaxDistribution</code> is much, much faster. Results are just read from disk.</p>
+
+<h1 id="how-the-cache-function-works">How the <code class="highlighter-rouge">cache</code> function works?</h1>
+
+<p>It create a md5 signature of the function FUN and it’s arguments and use this signature as a key.
+If such key is present in the cache repository, then the object is just restored.
+If it’s not present then the call is evaluated and result is stored.
+Note that, if <code class="highlighter-rouge">cacheRepo</code> is a shared folder, then you get a shared cache repository!</p>
+
+</div>
+
+
+<a href="https://twitter.com/share" class="twitter-share-button"{count}>Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div class="fb-share-button" data-href="https://pbiecek.github.io/archivist" data-layout="button_count"></div>
+
+
+
+
+<div id="disqus_thread"></div>
+
+<script>(function() {
+        var d = document, s = d.createElement('script');
+        s.src = '//archivist.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+    </div>
+
+  </body>
+</html>
