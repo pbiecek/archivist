@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Chaining &middot; archivist
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/archivist/public/css/poole.css">
+  <link rel="stylesheet" href="/archivist/public/css/syntax.css">
+  <link rel="stylesheet" href="/archivist/public/css/hyde.css">
+  <link rel="stylesheet" href="/archivist/public/css/custom.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/archivistpublic/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/archivistpublic/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+  
+  <!-- Mathjax -->
+  <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+    <!--Disqus comment counts-->
+    <script id="dsq-count-scr" src="//archivist.disqus.com/count.js" async></script>
+    
+</head>
+
+
+  <body class="theme-base-00">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/archivist">
+          archivist
+        </a>
+      </h1>
+      <p class="lead">Archiving, Managing and Sharing R Objects</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/archivist">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/archivist/Accessibility.html">Accessibility</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/archivist/Caching.html">Caching</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item active" href="/archivist/Chaining.html">Chaining</a>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/archivist/.html">Installation</a>
+          
+        
+      
+        
+          
+        
+      
+      <a class="sidebar-nav-item" href="https://github.com/pbiecek/archivist">GitHub project</a>
+    </nav>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">Chaining</h1>
+  <p>The <strong>archivist</strong> package is very efficient and advantageous when archived artifacts were created with a chaining code offered by the <a href="http://cran.r-project.org/web/packages/magrittr/index.html">magrittr</a> package. It is higly useful because the origin of the artifact is archived, which means that the artifact can be easly reproduced and it’s origin code is stored for future use.</p>
+
+<p>Below are examples of creating artifacts with a chaining code, that requires using a <code class="highlighter-rouge">%&gt;%</code> and  a <code class="highlighter-rouge">%.%</code> operators, offered by the <strong>magrittr</strong> and the <strong>dplyr</strong> package.</p>
+
+<p>Since the version 1.5 of the <strong>magrittr</strong> package has changed functionality of a mentioned pipe operator <code class="highlighter-rouge">%&gt;%</code>, we copied (in version 1.3 of the <strong>archivist</strong>) functionality from version 1.0.1 and added old operator to the <strong>archivist</strong> package as <code class="highlighter-rouge">%a%</code> operator.</p>
+
+<p>Let us prepare a <a href="https://github.com/pbiecek/archivist/wiki/archivist-package-Repository"><strong>Repository</strong></a> where archived artifacts will be stored.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">archivist</span><span class="p">)</span>
+<span class="n">exampleRepoDir</span> <span class="o">&lt;-</span> <span class="n">getwd</span><span class="p">()</span>
+<span class="n">createLocalRepo</span><span class="p">(</span><span class="n">exampleRepoDir</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">)</span></code></pre></figure>
+
+<h1 id="chaining-code">Chaining code</h1>
+
+<p>Then one might create artifacts like those below. The code lines are ordered in chaining code, which will be used by the <code class="highlighter-rouge">asave</code> function to store an artifact and archive it’s origin code as a <code class="highlighter-rouge">name</code> of this artifact.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># example 1
+</span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
+
+<span class="n">data</span><span class="p">(</span><span class="s2">"hflights"</span><span class="p">,</span> <span class="n">package</span> <span class="o">=</span> <span class="s2">"hflights"</span><span class="p">)</span>
+<span class="n">hflights</span> <span class="o">%</span><span class="n">a</span><span class="o">%</span>
+   <span class="n">group_by</span><span class="p">(</span><span class="n">Year</span><span class="p">,</span> <span class="n">Month</span><span class="p">,</span> <span class="n">DayofMonth</span><span class="p">)</span> <span class="o">%</span><span class="n">a</span><span class="o">%</span>
+   <span class="n">select</span><span class="p">(</span><span class="n">Year</span><span class="o">:</span><span class="n">DayofMonth</span><span class="p">,</span> <span class="n">ArrDelay</span><span class="p">,</span> <span class="n">DepDelay</span><span class="p">)</span> <span class="o">%</span><span class="n">a</span><span class="o">%</span>
+   <span class="n">summarise</span><span class="p">(</span>
+      <span class="n">arr</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">ArrDelay</span><span class="p">,</span> <span class="n">na.rm</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">),</span>
+      <span class="n">dep</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">DepDelay</span><span class="p">,</span> <span class="n">na.rm</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">)</span>
+   <span class="p">)</span> <span class="o">%</span><span class="n">a</span><span class="o">%</span>
+   <span class="n">filter</span><span class="p">(</span><span class="n">arr</span> <span class="o">&gt;</span> <span class="m">30</span> <span class="o">|</span> <span class="n">dep</span> <span class="o">&gt;</span> <span class="m">30</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">example1</span></code></pre></figure>
+
+<p>One may see a vast difference in code evalution when using chaining code.
+Here is an example of a traditional <code class="highlighter-rouge">R</code> call and one that uses the <code class="highlighter-rouge">chaining code</code> philosophy.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># example 2
+</span><span class="n">library</span><span class="p">(</span><span class="n">Lahman</span><span class="p">)</span>
+
+<span class="c1"># Traditional R code
+</span><span class="n">players</span> <span class="o">&lt;-</span> <span class="n">group_by</span><span class="p">(</span><span class="n">Batting</span><span class="p">,</span> <span class="n">playerID</span><span class="p">)</span>
+<span class="n">games</span> <span class="o">&lt;-</span> <span class="n">summarise</span><span class="p">(</span><span class="n">players</span><span class="p">,</span> <span class="n">total</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">G</span><span class="p">))</span>
+<span class="n">head</span><span class="p">(</span><span class="n">arrange</span><span class="p">(</span><span class="n">games</span><span class="p">,</span> <span class="n">desc</span><span class="p">(</span><span class="n">total</span><span class="p">)),</span> <span class="m">5</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">Source: local data frame [5 x 2]
+
+   playerID total
+      (chr) (int)
+1  rosepe01  3562
+2 yastrca01  3308
+3 aaronha01  3298
+4 henderi01  3081
+5  cobbty01  3035</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># Corresponding chaining code
+</span><span class="n">Batting</span> <span class="o">%</span><span class="n">a</span><span class="o">%</span>
+   <span class="n">group_by</span><span class="p">(</span><span class="n">playerID</span><span class="p">)</span> <span class="o">%</span><span class="n">a</span><span class="o">%</span>
+   <span class="n">summarise</span><span class="p">(</span><span class="n">total</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">G</span><span class="p">))</span> <span class="o">%</span><span class="n">a</span><span class="o">%</span>
+   <span class="n">arrange</span><span class="p">(</span><span class="n">desc</span><span class="p">(</span><span class="n">total</span><span class="p">))</span> <span class="o">%</span><span class="n">a</span><span class="o">%</span>
+   <span class="n">head</span><span class="p">(</span><span class="m">5</span><span class="p">)</span> <span class="o">%</span><span class="n">a</span><span class="o">%</span>
+   <span class="n">asave</span><span class="p">(</span> <span class="n">repoDir</span> <span class="o">=</span> <span class="n">exampleRepoDir</span> <span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">[1] "b5ba48251904ce231c382594cdc75bb2"</code></pre></figure>
+
+<h1 id="setlocalrepo"><code class="highlighter-rouge">setLocalRepo</code></h1>
+
+<p>To simplify the code one can set globally the path to <strong>Repository</strong> using code as below. Now one no longer need to specify the <code class="highlighter-rouge">repoDir</code> parameter with every call.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">setLocalRepo</span><span class="p">(</span> <span class="n">exampleRepoDir</span> <span class="p">)</span></code></pre></figure>
+
+<h1 id="archiving-artifacts">Archiving artifacts</h1>
+
+<p>Many of various operations can be performed on a single <code class="highlighter-rouge">data.frame</code> before one consideres to archive these artifacts. <strong>Archivist</strong> guarantees that all of them will be <code class="highlighter-rouge">archived</code>, which means a code alone will no longer be needed to be stored in a separate file. Also an artifact may be saved during operations are performed and used in further code evaluations. This can be done when
+argument \code{value = TRUE} in <code class="highlighter-rouge">asave</code> is specified.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># example 3
+</span><span class="n">aread</span><span class="p">(</span><span class="s1">'MarcinKosinski/Museum/3374db20ecaf2fa0d070d'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">crime.by.state</span>
+<span class="n">crime.by.state</span> <span class="o">%</span><span class="n">a</span><span class="o">%</span>
+   <span class="n">filter</span><span class="p">(</span><span class="n">State</span><span class="o">==</span><span class="s2">"New York"</span><span class="p">,</span> <span class="n">Year</span><span class="o">==</span><span class="m">2005</span><span class="p">)</span> <span class="o">%</span><span class="n">a</span><span class="o">%</span>
+   <span class="n">arrange</span><span class="p">(</span><span class="n">desc</span><span class="p">(</span><span class="n">Count</span><span class="p">))</span> <span class="o">%</span><span class="n">a</span><span class="o">%</span>
+   <span class="n">select</span><span class="p">(</span><span class="n">Type.of.Crime</span><span class="p">,</span> <span class="n">Count</span><span class="p">)</span> <span class="o">%</span><span class="n">a</span><span class="o">%</span>
+   <span class="n">mutate</span><span class="p">(</span><span class="n">Proportion</span><span class="o">=</span><span class="n">Count</span><span class="o">/</span><span class="n">sum</span><span class="p">(</span><span class="n">Count</span><span class="p">))</span> <span class="o">%</span><span class="n">a</span><span class="o">%</span>
+   <span class="n">asave</span><span class="p">(</span> <span class="n">exampleRepoDir</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">)</span> <span class="o">%</span><span class="n">a</span><span class="o">%</span>
+   <span class="n">group_by</span><span class="p">(</span><span class="n">Type.of.Crime</span><span class="p">)</span> <span class="o">%</span><span class="n">a</span><span class="o">%</span>
+   <span class="n">summarise</span><span class="p">(</span><span class="n">num.types</span> <span class="o">=</span> <span class="n">n</span><span class="p">(),</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">Count</span><span class="p">))</span> <span class="o">%</span><span class="n">a</span><span class="o">%</span>
+   <span class="n">asave</span><span class="p">(</span> <span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">[1] "9a3dd58b75558273c53a441ec823b219"</code></pre></figure>
+
+<p>Dozens of artifacts may now be stored in one <strong>Repository</strong>. Every artifact
+may have an additional Tag specified by an user. This will simplify searching for this artifact in the future.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># example 4
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+
+<span class="n">diamonds</span> <span class="o">%</span><span class="n">a</span><span class="o">%</span> 
+   <span class="n">group_by</span><span class="p">(</span><span class="n">cut</span><span class="p">,</span> <span class="n">clarity</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span> <span class="o">%</span><span class="n">a</span><span class="o">%</span>  
+   <span class="n">summarize</span><span class="p">(</span>
+      <span class="n">meancarat</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">carat</span><span class="p">,</span> <span class="n">na.rm</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">),</span> 
+      <span class="n">ndiamonds</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">carat</span><span class="p">)</span>
+   <span class="p">)</span> <span class="o">%</span><span class="n">a</span><span class="o">%</span> 
+   <span class="n">head</span><span class="p">(</span> <span class="m">10</span><span class="p">)</span> <span class="o">%</span><span class="n">a</span><span class="o">%</span>
+   <span class="n">asave</span><span class="p">(</span><span class="n">userTags</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="s2">"tags"</span><span class="p">,</span> <span class="s2">"operations on diamonds"</span><span class="p">))</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">[1] "33576ab6aa88e5aedb4887aeffd84fa9"</code></pre></figure>
+
+<h1 id="restoring-origin-code---artifacts-pedigree">Restoring origin code - Artifact’s Pedigree</h1>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># results = 'asis'
+</span><span class="n">hash2</span> <span class="o">&lt;-</span> <span class="n">searchInLocalRepo</span><span class="p">(</span> <span class="n">pattern</span> <span class="o">=</span> <span class="s2">"operations on diamonds"</span> <span class="p">)</span>
+<span class="n">ahistory</span><span class="p">(</span><span class="n">hash2</span><span class="p">,</span> <span class="n">format</span> <span class="o">=</span> <span class="s2">"kable"</span><span class="p">)</span></code></pre></figure>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"> </th>
+      <th style="text-align: left">call</th>
+      <th style="text-align: left">md5hash</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">5</td>
+      <td style="text-align: left">env[[nm]]</td>
+      <td style="text-align: left">926dab1fe6e71b197a17909fcd0e5995</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">4</td>
+      <td style="text-align: left">group_by(cut, clarity, color)</td>
+      <td style="text-align: left">860466a792815080957a34021d04c5c6</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">3</td>
+      <td style="text-align: left">summarize(meancarat = mean(carat, na.rm = TRUE), ndiamonds = length(carat))</td>
+      <td style="text-align: left">820c5bf2ce98bbb4b787830fe52d98f3</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">2</td>
+      <td style="text-align: left">head(10)</td>
+      <td style="text-align: left">33576ab6aa88e5aedb4887aeffd84fa9</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">1</td>
+      <td style="text-align: left">asave(userTags = c(“tags”, “operations on diamonds”))</td>
+      <td style="text-align: left">434d4891ac1569883f80b2ec9fef0b95</td>
+    </tr>
+  </tbody>
+</table>
+
+
+</div>
+
+
+<a href="https://twitter.com/share" class="twitter-share-button"{count}>Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div class="fb-share-button" data-href="https://pbiecek.github.io/archivist" data-layout="button_count"></div>
+
+
+
+
+<div id="disqus_thread"></div>
+
+<script>(function() {
+        var d = document, s = d.createElement('script');
+        s.src = '//archivist.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+    </div>
+
+  </body>
+</html>

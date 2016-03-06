@@ -1,0 +1,170 @@
+---
+layout:  page
+title: "Chaining"
+comments:  true
+published:  true
+categories: [Use Case]
+output:
+  html_document:
+    mathjax:  default
+    fig_caption:  true
+---
+
+
+The **archivist** package is very efficient and advantageous when archived artifacts were created with a chaining code offered by the [magrittr](http://cran.r-project.org/web/packages/magrittr/index.html) package. It is higly useful because the origin of the artifact is archived, which means that the artifact can be easly reproduced and it's origin code is stored for future use. 
+
+Below are examples of creating artifacts with a chaining code, that requires using a `%>%` and  a `%.%` operators, offered by the **magrittr** and the **dplyr** package.
+
+Since the version 1.5 of the **magrittr** package has changed functionality of a mentioned pipe operator `%>%`, we copied (in version 1.3 of the **archivist**) functionality from version 1.0.1 and added old operator to the **archivist** package as `%a%` operator.
+
+
+
+Let us prepare a [**Repository**](https://github.com/pbiecek/archivist/wiki/archivist-package-Repository) where archived artifacts will be stored.
+
+{% highlight r %}
+library(archivist)
+exampleRepoDir <- getwd()
+createLocalRepo(exampleRepoDir, default = TRUE)
+{% endhighlight %}
+
+# Chaining code
+
+Then one might create artifacts like those below. The code lines are ordered in chaining code, which will be used by the `asave` function to store an artifact and archive it's origin code as a `name` of this artifact.
+
+{% highlight r %}
+# example 1
+library(dplyr)
+
+data("hflights", package = "hflights")
+hflights %a%
+   group_by(Year, Month, DayofMonth) %a%
+   select(Year:DayofMonth, ArrDelay, DepDelay) %a%
+   summarise(
+      arr = mean(ArrDelay, na.rm = TRUE),
+      dep = mean(DepDelay, na.rm = TRUE)
+   ) %a%
+   filter(arr > 30 | dep > 30) -> example1
+{% endhighlight %}
+
+One may see a vast difference in code evalution when using chaining code.
+Here is an example of a traditional `R` call and one that uses the `chaining code` philosophy.
+
+{% highlight r %}
+# example 2
+library(Lahman)
+
+# Traditional R code
+players <- group_by(Batting, playerID)
+games <- summarise(players, total = sum(G))
+head(arrange(games, desc(total)), 5)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+Source: local data frame [5 x 2]
+
+   playerID total
+      (chr) (int)
+1  rosepe01  3562
+2 yastrca01  3308
+3 aaronha01  3298
+4 henderi01  3081
+5  cobbty01  3035
+{% endhighlight %}
+
+
+
+{% highlight r %}
+# Corresponding chaining code
+Batting %a%
+   group_by(playerID) %a%
+   summarise(total = sum(G)) %a%
+   arrange(desc(total)) %a%
+   head(5) %a%
+   asave( repoDir = exampleRepoDir )
+{% endhighlight %}
+
+
+
+{% highlight text %}
+[1] "b5ba48251904ce231c382594cdc75bb2"
+{% endhighlight %}
+
+# `setLocalRepo`
+
+To simplify the code one can set globally the path to **Repository** using code as below. Now one no longer need to specify the `repoDir` parameter with every call.
+
+{% highlight r %}
+setLocalRepo( exampleRepoDir )
+{% endhighlight %}
+
+# Archiving artifacts
+
+
+Many of various operations can be performed on a single `data.frame` before one consideres to archive these artifacts. **Archivist** guarantees that all of them will be `archived`, which means a code alone will no longer be needed to be stored in a separate file. Also an artifact may be saved during operations are performed and used in further code evaluations. This can be done when
+argument \code{value = TRUE} in `asave` is specified.
+
+{% highlight r %}
+# example 3
+aread('MarcinKosinski/Museum/3374db20ecaf2fa0d070d') -> crime.by.state
+crime.by.state %a%
+   filter(State=="New York", Year==2005) %a%
+   arrange(desc(Count)) %a%
+   select(Type.of.Crime, Count) %a%
+   mutate(Proportion=Count/sum(Count)) %a%
+   asave( exampleRepoDir, value = TRUE) %a%
+   group_by(Type.of.Crime) %a%
+   summarise(num.types = n(), counts = sum(Count)) %a%
+   asave( )
+{% endhighlight %}
+
+
+
+{% highlight text %}
+[1] "9a3dd58b75558273c53a441ec823b219"
+{% endhighlight %}
+
+
+Dozens of artifacts may now be stored in one **Repository**. Every artifact
+may have an additional Tag specified by an user. This will simplify searching for this artifact in the future.
+
+{% highlight r %}
+# example 4
+library(ggplot2)
+
+diamonds %a% 
+   group_by(cut, clarity, color) %a%  
+   summarize(
+      meancarat = mean(carat, na.rm = TRUE), 
+      ndiamonds = length(carat)
+   ) %a% 
+   head( 10) %a%
+   asave(userTags = c("tags", "operations on diamonds"))
+{% endhighlight %}
+
+
+
+{% highlight text %}
+[1] "33576ab6aa88e5aedb4887aeffd84fa9"
+{% endhighlight %}
+
+# Restoring origin code - Artifact's Pedigree
+
+
+{% highlight r %}
+# results = 'asis'
+hash2 <- searchInLocalRepo( pattern = "operations on diamonds" )
+ahistory(hash2, format = "kable")
+{% endhighlight %}
+
+|   |call                                                                        |md5hash                          |
+|:--|:---------------------------------------------------------------------------|:--------------------------------|
+|5  |env[[nm]]                                                                   |926dab1fe6e71b197a17909fcd0e5995 |
+|4  |group_by(cut, clarity, color)                                               |860466a792815080957a34021d04c5c6 |
+|3  |summarize(meancarat = mean(carat, na.rm = TRUE), ndiamonds = length(carat)) |820c5bf2ce98bbb4b787830fe52d98f3 |
+|2  |head(10)                                                                    |33576ab6aa88e5aedb4887aeffd84fa9 |
+|1  |asave(userTags = c("tags", "operations on diamonds"))                       |434d4891ac1569883f80b2ec9fef0b95 |
+
+
+
