@@ -1,9 +1,9 @@
 ---
 layout:  page
-title: "Installation"
+title: "asd"
 comments:  true
 published:  true
-categories: [RTCGA]
+categories: [Home]
 output:
   html_document:
     mathjax:  default
@@ -31,7 +31,7 @@ Archivist is a set of tools for datasets and plots archiving.
 
 ## Installation
 
-### Please see the  [archivist wiki](https://github.com/pbiecek/archivist/wiki) for information. 
+### Please see the  [archivist wiki](https://github.com/pbiecek/archivist/wiki) for more information. 
 
 ### Information for [developers](https://github.com/pbiecek/archivist/wiki/For-developers)
 
@@ -53,13 +53,6 @@ if (!require(devtools)) {
 install_github("pbiecek/archivist")
 {% endhighlight %}
 Make sure you have [rtools](http://cran.r-project.org/bin/windows/Rtools/) installed on your computer.
-
-<h5> The list of available functions: </h5>
-
-{% highlight ruby %}
-help(package="archivist")
-{% endhighlight %}
-<h4> The list of use-cases: is available on archivist webpage http://pbiecek.github.io/archivist/</h4>
 
 
 <h5> Authors of the project: </h5>

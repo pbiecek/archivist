@@ -1,0 +1,24 @@
+---
+layout:  page
+title: "Extensions"
+comments:  true
+published:  true
+categories: [Use Case]
+output:
+  html_document:
+    mathjax:  default
+    fig_caption:  true
+---
+
+```{r, echo=FALSE}
+library(knitr)
+opts_chunk$set(comment="", message=FALSE, warning = FALSE, 
+							 tidy.opts=list(keep.blank.line=TRUE,
+							 							 width.cutoff=150),
+							 options(width=150))
+```
+
+
+### [archivist.github](http://marcinkosinski.github.io/archivist.github/): Archiving, Managing and Sharing R Objects via GitHub
+
+![Workflow of archivist.github package](https://raw.githubusercontent.com/MarcinKosinski/archivist.github/master/scripts/archivist.github_workflow_ver2.png)
