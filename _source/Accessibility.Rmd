@@ -1,0 +1,75 @@
+---
+layout:  page
+title: "Accessibility"
+comments:  true
+published:  true
+categories: [Use Case]
+output:
+  html_document:
+    mathjax:  default
+    fig_caption:  true
+---
+
+```{r, echo=FALSE}
+library(knitr)
+opts_chunk$set(comment="", message=FALSE, warning = FALSE, 
+							 tidy.opts=list(keep.blank.line=TRUE,
+							 							 width.cutoff=150),
+							 options(width=150))
+```
+
+
+The archivist package allows to store, restore and look for R objects in repositories stored on hard disk or remote repository. There are different strategies that can be used to find an object, through it's name, date of creation of meta data. The package is mainly designed as a repository of artifacts, but it can be used in different use-cases.
+
+
+Open science rises new challenges, one of them is reproducibility yet another is availability of results.
+
+When working with data scientists should not only be able to reproduce others results 
+but also would like to make sure that they got 100% the same that others.
+
+Archivist helps in the accessibility part of open science.
+One can store partial results, search in repository of artifact, 
+share artifacts with others or himself.
+
+Below we are using some artifacts created during useR!2014 tutorial about dplyr given by Hadley Wickham.
+
+These artifacts are stored on my github repository.
+One can seek for all ggplots, plot them with their md5hashes,
+and choose the one that it's looked for
+.
+
+
+```{r, fig.align='center'}
+
+library(archivist)
+library(ggplot2)
+# objects of class ggplot for which the session_info was archvied
+md5plots <- searchInRemoteRepo(
+	pattern = c("class:ggplot", "session_info"), 
+	intersect = TRUE, repo = "graphGallery", 
+	user = "pbiecek", fixed = FALSE
+	)
+
+plots <- lapply(md5plots, function(pl) {
+	loadFromRemoteRepo(
+		md5hash = pl, 
+		repo = "graphGallery",
+		user = "pbiecek",
+		value = TRUE
+		) + 
+		ggtitle(pl)
+})
+	  
+library(gridExtra)
+do.call(
+	"grid.arrange",
+	c(plots, ncol=round(sqrt(length(md5plots))))
+	)
+
+summaryRemoteRepo(
+	repo = "graphGallery",
+	user = "pbiecek"
+	)
+
+```
+
