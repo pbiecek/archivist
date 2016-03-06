@@ -1,6 +1,6 @@
 ---
 layout:  page
-title: "asd"
+title: "Home"
 comments:  true
 published:  true
 categories: [Home]
