@@ -9,6 +9,10 @@
 #' with current version of packages something is not working. The function \code{restoreLibs()} 
 #' reverts all libraries that were attached previously to their previous versions.
 #' 
+#' @param lib.loc A character vector describing the location of \code{R} library trees to restore archived libraries, or \code{NULL}.
+#'  The default value of \code{NULL} corresponds to all libraries currently known to \link{.libPaths}(). 
+#'  Non-existent library trees are silently ignored.
+#' 
 #' @param session_info Object with versions of packages to be installed. If not supplied then 
 #' it will be extracted from md5hash \code{ md5hash }
 #' 
@@ -21,7 +25,7 @@
 #' MD5 hashes of artifacts in current local default directory or its abbreviations.
 #' 
 #' @author 
-#' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
+#' Marcin Kosinski, \email{m.p.kosinski@@gmail.com} \\
 #' Przemyslaw Biecek, \email{przemyslaw.biecek@@gmail.com}
 #' 
 #' @examples
@@ -32,7 +36,7 @@
 #' @family archivist
 #' @rdname restoreLibs
 #' @export
-restoreLibs <- function( md5hash, session_info = NULL) {
+restoreLibs <- function( md5hash, session_info = NULL, lib.loc = NULL) {
   stopifnot( !is.null( md5hash ) | !is.null( session_info ) )
 
     if (!requireNamespace("devtools", quietly = TRUE)) {
@@ -41,6 +45,12 @@ restoreLibs <- function( md5hash, session_info = NULL) {
 
   if (is.null(session_info)) {
     session_info <- asession(md5hash)
+  }
+  
+  if (!is.null(lib.loc)) {
+    oldPaths <- .libPaths()
+    .libPaths(c(lib.loc, .libPaths()))
+    on.exit(.libPaths(oldPaths))
   }
 
   pkgs <- session_info$packages

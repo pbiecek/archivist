@@ -4,7 +4,7 @@
 \alias{restoreLibs}
 \title{Restore Versions of Libraries}
 \usage{
-restoreLibs(md5hash, session_info = NULL)
+restoreLibs(md5hash, session_info = NULL, lib.loc = NULL)
 }
 \arguments{
 \item{md5hash}{One of the following (see \link{aread}):
@@ -17,6 +17,10 @@ MD5 hashes of artifacts in current local default directory or its abbreviations.
 
 \item{session_info}{Object with versions of packages to be installed. If not supplied then 
 it will be extracted from md5hash \code{ md5hash }}
+
+\item{lib.loc}{A character vector describing the location of \code{R} library trees to restore archived libraries, or \code{NULL}.
+The default value of \code{NULL} corresponds to all libraries currently known to \link{.libPaths}(). 
+Non-existent library trees are silently ignored.}
 }
 \description{
 Function \code{ restoreLibs } gets either \code{session info} or artifact's \code{md5hash} 
@@ -32,7 +36,7 @@ restoreLibs(md5hash = "pbiecek/graphGallery/f05f0ed0662fe01850ec1b928830ef32")
 }
 }
 \author{
-Marcin Kosinski, \email{m.p.kosinski@gmail.com}
+Marcin Kosinski, \email{m.p.kosinski@gmail.com} \\
 Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
 }
 \seealso{
