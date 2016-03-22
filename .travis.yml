@@ -12,4 +12,5 @@ r_packages:
  - dplyr
  - knitr
  - devtools
+ - archivist.github
 sudo: required
