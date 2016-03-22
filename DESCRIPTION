@@ -44,5 +44,7 @@ Suggests:
     ggplot2,
     devtools,
     knitr
+Enhances:
+    archivist.github
 BugReports: https://github.com/pbiecek/archivist/issues
 RoxygenNote: 5.0.1
