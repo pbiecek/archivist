@@ -1,11 +1,12 @@
-[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.31445.svg)](http://dx.doi.org/10.5281/zenodo.31445)
+[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.46016.svg)](http://dx.doi.org/10.5281/zenodo.46016)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/archivist)](http://cran.r-project.org/web/packages/archivist)
 [![Downloads](http://cranlogs.r-pkg.org/badges/archivist)](http://cran.rstudio.com/package=archivist)
 [![Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/archivist?color=orange)](http://cranlogs.r-pkg.org/badges/grand-total/archivist)
 
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 [![Build Status](https://api.travis-ci.org/pbiecek/archivist.png)](https://travis-ci.org/pbiecek/archivist)
-[![Stories in Ready](https://badge.waffle.io/pbiecek/archivist.png?label=READY)](http://waffle.io/pbiecek/archivist)
+[![Pending Pull-Requests](http://githubbadges.herokuapp.com/pbiecek/archivist/pulls.svg?style=flat)](https://github.com/pbiecek/archivist/pulls)
+[![Github Issues](http://githubbadges.herokuapp.com/pbiecek/archivist/issues.svg)](https://github.com/pbiecek/archivist/issues)
 [![Coverage Status](https://coveralls.io/repos/pbiecek/archivist/badge.svg)](https://coveralls.io/r/pbiecek/archivist)
 
 A set of tools for datasets and plots archiving
@@ -54,7 +55,7 @@ help(package="archivist")
 
 # Extenstions
 
-### [archivist.github](https://github.com/MarcinKosinski/archivist.github): Archiving, Managing and Sharing R Objects via GitHub
+### [archivist.github](http://marcinkosinski.github.io/archivist.github/): Archiving, Managing and Sharing R Objects via GitHub
 
-![Workflow of archivist.github package](https://raw.githubusercontent.com/MarcinKosinski/archivist.github/master/vignettes/archivist.github_workflow_ver2.png)
+![Workflow of archivist.github package](https://raw.githubusercontent.com/MarcinKosinski/archivist.github/master/scripts/archivist.github_workflow_ver2.png)
 

@@ -84,7 +84,7 @@ saveToLocalRepo(iris, repoDir=exampleRepoDir, archiveSessionInfo = TRUE)
 showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
 showLocalRepo(method = "tags", repoDir = exampleRepoDir)
 
-loadFromLocalRepo(md5hash = '600bda83cb840947976bd1ce3a11879d',
+loadFromLocalRepo(md5hash = 'f05f0ed0662fe01850ec1b928830ef32',
   repoDir = system.file("graphGallery", package = "archivist"), value = TRUE) -> pl
 deleteLocalRepo(exampleRepoDir, TRUE)
 rm(exampleRepoDir)
@@ -196,7 +196,8 @@ Other archivist: \code{\link{Repository}},
   \code{\link{createMDGallery}},
   \code{\link{deleteLocalRepo}},
   \code{\link{getRemoteHook}}, \code{\link{getTagsLocal}},
-  \code{\link{md5hash}}, \code{\link{rmFromLocalRepo}},
+  \code{\link{md5hash}}, \code{\link{restoreLibs}},
+  \code{\link{rmFromLocalRepo}},
   \code{\link{saveToLocalRepo}},
   \code{\link{searchInLocalRepo}},
   \code{\link{setLocalRepo}},

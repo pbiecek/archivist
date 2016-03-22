@@ -53,6 +53,7 @@
 #' @importFrom utils zip
 #' @importFrom utils tail
 #' @importFrom utils getAnywhere
+#' @importFrom utils installed.packages
 #'
 #' @family archivist
 #' @name archivist-package
