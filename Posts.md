@@ -1,27 +1,20 @@
 ---
 layout:  page
-title: "Posts and Talks"
+title: "Posts"
 comments:  true
 published:  true
 categories: [Use Case]
 output:
-	html_document:
-	  mathjax:  default
-	  fig_caption:  true
+  html_document:
+    mathjax:  default
+    fig_caption:  true
 ---
-	
-```{r, echo=FALSE}
-library(knitr)
-opts_chunk$set(comment="", message=FALSE, warning = FALSE, 
-							 tidy.opts=list(keep.blank.line=TRUE,
-							 							 width.cutoff=150),
-							 options(width=150))
-```	
+
 	
 ###  The list of blob-posts and conference talks about `archivist`
 
 - 2016-02 Ver 2.0 [Why should you backup your objects? (Przemysław Biecek)](http://www.r-bloggers.com/why-should-you-backup-your-r-objects/)
-- 2016-02 Ver 0.1 First extenstion: `archivist.github` Publication, [Tools for Archiving, Managing and Sharing R Objects via GitHub](https://cran.r-project.org/web/packages/archivist.github/index.html) CRAN
+- 2016-02 Ver 0.1 First extenstion: `archivist.github` Publication, [Tools for Archiving, Managing and Sharing R Objects via GitHub](http://marcinkosinski.github.io/archivist.github/) CRAN
 - 2016-02 Ver 2.0 CRAN Publication 
 - 2015-11 Ver 1.7 [BI Forum Conference, Hungary](https://budapestbi2015.sched.org/event/4JA8/archivist-managing-data-analysis-results), [
 archivist: Managing Data Analysis Results
