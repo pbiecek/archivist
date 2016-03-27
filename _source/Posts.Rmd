@@ -17,7 +17,7 @@ opts_chunk$set(comment="", message=FALSE, warning = FALSE,
 							 options(width=150))
 ```	
 	
-###  The list of blob-posts and conference talks about `archivist`
+###  The list of blog-posts and conference talks about `archivist`
 
 - 2016-02 Ver 2.0 [Why should you backup your objects? (Przemysław Biecek)](http://www.r-bloggers.com/why-should-you-backup-your-r-objects/)
 - 2016-02 Ver 0.1 First extenstion: `archivist.github` CRAN Publication, [Tools for Archiving, Managing and Sharing R Objects via GitHub](http://marcinkosinski.github.io/archivist.github/)
