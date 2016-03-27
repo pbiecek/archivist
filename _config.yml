@@ -1,7 +1,7 @@
 # Dependencies
 markdown:         kramdown
 kramdown:
-  syntax-highlighter:  rouge
+  syntax-highlighter:  pygments
 
 # Permalinks
 permalink: /:year/:month/:day/:title.html
@@ -26,7 +26,7 @@ homepostlimit: 4
 
 # Disqus comments:
 disqus:           true
-shortname:        archivist
+shortname:        Rarchivist
 
 # Social Media
 twitter:          true # add a twitter button to each post
