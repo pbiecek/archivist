@@ -29,6 +29,9 @@ Typical use case is following. We have saved an object and now we are restoring 
 with current version of packages something is not working. The function \code{restoreLibs()} 
 reverts all libraries that were attached previously to their previous versions.
 }
+\note{
+Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+}
 \examples{
 \dontrun{
 ## objects preparation

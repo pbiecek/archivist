@@ -30,9 +30,13 @@
 #' For more detailed information visit \pkg{archivist} \code{wiki} on 
 #' \href{https://github.com/pbiecek/archivist/wiki}{Github}.
 #'
+#' @note 
+#' Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+#'
 #' @author
 #' Przemyslaw Biecek [aut, cre] \email{przemyslaw.biecek@@gmail.com} \cr
-#' Marcin Kosinski [aut] \email{m.p.kosinski@@gmail.com}
+#' Marcin Kosinski [aut] \email{m.p.kosinski@@gmail.com} \cr
+#' Witold Chodor [ctb] \email{witold.chodor@@gmail.com}
 #' 
 #' @importFrom RCurl getBinaryURL
 #' @importFrom RCurl url.exists

@@ -74,6 +74,8 @@ while using \code{many = TRUE} argument. This assumption was made
 to protect a user from removing, by accident, too many artifacts from the Repository.
 
 For more information about \code{Tags} check \link{Tags}.
+
+Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 }
 \examples{
 \dontrun{

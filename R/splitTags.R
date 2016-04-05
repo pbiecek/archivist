@@ -53,6 +53,9 @@
 #' 
 #' To learn more about \code{Tags} and \code{Repository} structure check 
 #' \link{Tags} and \link{Repository}.
+#' 
+#' Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+#' 
 #' @author 
 #' Witold Chodor , \email{witoldchodor@@gmail.com}
 #'

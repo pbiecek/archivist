@@ -23,6 +23,8 @@
 #' @note
 #' One can specify \code{userTags} as in \link{saveToLocalRepo} for artifacts by adding code{"tags"} attribute.
 #' See note secion about that in \link{saveToLocalRepo}.
+#' 
+#' Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 #'  
 #' @examples
 #' 

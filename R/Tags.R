@@ -213,6 +213,8 @@
 #'  }
 #'  Specifing additional \code{Tags} by attributes can be beneficial when one uses \link{addHooksToPrint}.
 #' 
+#' Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+#' 
 #' @examples
 #' 
 #' \dontrun{

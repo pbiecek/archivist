@@ -25,6 +25,8 @@ with different parameter's specification.
 \note{
 Before you start using this function, remember to set local or Remote repository
 to default by using \code{setLocalRepo()} or \code{setRemoteRepo} functions.
+
+Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 }
 \examples{
 # read the object from local directory

@@ -33,6 +33,8 @@ in which R works so calling \code{deleteLocalRepo(exampleRepoDir, deleteRoot=TRU
 removes important R files. You can find out more information about this problem at 
 \href{http://stackoverflow.com/questions/22325820/unlink-function-causing-an-error-for-consequent-and-plot-functions}{stackoverflow}
 webpage.
+
+Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 }
 \examples{
 

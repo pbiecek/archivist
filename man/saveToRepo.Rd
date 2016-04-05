@@ -111,6 +111,8 @@ possible to set the miniature's \code{width} and \code{height} parameters. By de
 Supported artifact's classes are listed here \link{Tags}.
 }
 \note{
+Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+
 In the following way one can specify his own \code{Tags} for artifacts by setting artifact's attribute
 before call of the \code{saveToLocalRepo} function:
 \code{attr(x, "tags" ) = c( "name1", "name2" )}, where \code{x} is an artifact

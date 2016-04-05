@@ -39,6 +39,9 @@
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #' 
+#' @note 
+#' Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+#' 
 #' @examples
 #' # link in markdown format
 #' alink('pbiecek/archivist/134ecbbe2a8814d98f0c2758000c408e')

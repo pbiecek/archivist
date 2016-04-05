@@ -14,6 +14,8 @@
 #' If \code{repo} and \code{user} are set to \code{NULL} (as default) in Github mode then global parameters
 #' set in \link{setRemoteRepo} function are used.
 #'
+#' Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+#'
 #' @param repoType A character containing a type of the remote repository. Currently it can be 'Remote' or 'bitbucket'.
 #' 
 #' @param repoDir A character that specifies the directory of the Repository which

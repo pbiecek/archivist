@@ -20,6 +20,9 @@ An object of the class \code{session_info}.
 \code{asession} extracts artifact's session info. This allows to check in what conditions 
 the artifact was created.
 }
+\note{
+Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+}
 \examples{
 \dontrun{
 setLocalRepo(system.file("graphGallery", package = "archivist"))

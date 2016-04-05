@@ -48,6 +48,8 @@ in \code{.Rmd} files using \link[rmarkdown]{rmarkdown}.
 Moreover when user passes \code{format = 'kable'} and \code{alink = TRUE} then one can use links for remote Repository. 
 Then mdhashes are taken from Local Repository, so user has to specify \code{repo}, \code{user} and \code{repoDir} even though 
 they are set globally, because \code{repo} is a substring of \code{repoDir} and during evalutation of \code{...} R treats \code{repo} as \code{repoDir}.
+
+Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 }
 \examples{
 

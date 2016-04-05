@@ -37,6 +37,9 @@ Note that \code{cache} is a good solution if objects are not that big but calcul
 are time consuming (see \code{Examples}). If objects are big and calculations are easy, then
 disk input-output operations may take more time than calculations itself.
 }
+\note{
+Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+}
 \examples{
 
 # objects preparation

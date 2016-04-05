@@ -40,6 +40,8 @@ corresponding to \code{md5hashes}. To learn more about artifacts visit
 One should remember that \code{length(tags)} modulo \code{length(md5hashes)} 
 must be equal to 0 or \code{length(md5hashes)} modulo \code{length(tags)}
 must be equal to 0.
+
+Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 }
 \examples{
 \dontrun{

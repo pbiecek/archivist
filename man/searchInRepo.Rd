@@ -78,6 +78,8 @@ format: \code{"TagKey:TagValue"} - see examples.
 \note{
 If \code{repo}, \code{user}, \code{subdir} and \code{repoType} are not specified in the Remote mode then global parameters
 set in \link{setRemoteRepo} function are used.
+
+Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 }
 \examples{
 \dontrun{

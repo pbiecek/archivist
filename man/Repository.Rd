@@ -33,6 +33,9 @@ while \emph{tag} table consists of the following three columns:
  \item artifacts' miniatures saved as \code{.txt} and \code{.png} files.
 }
 }
+\note{
+Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+}
 \seealso{
 Functions using \code{Repository} are:
 \itemize{

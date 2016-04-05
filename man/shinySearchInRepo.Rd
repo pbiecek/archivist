@@ -39,6 +39,9 @@ sort \code{class} tags backwards. \code{sort:createdDate} will sort \code{create
 \code{Tags}, submitted in the text field, should be given according to the 
 format: \code{"TagKey:TagValue"} - see examples.
 }
+\note{
+Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+}
 \section{shiny}{
 
 

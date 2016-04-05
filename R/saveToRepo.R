@@ -64,7 +64,9 @@
 #' \href{https://github.com/pbiecek/archivist/wiki/archivist-package---Tags}{Github Repository}.
 #'
 #'
-#' @note
+#' @note 
+#' Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+#' 
 #' In the following way one can specify his own \code{Tags} for artifacts by setting artifact's attribute
 #' before call of the \code{saveToLocalRepo} function:
 #' \code{attr(x, "tags" ) = c( "name1", "name2" )}, where \code{x} is an artifact
