@@ -57,6 +57,8 @@ artifacts visit \link[archivist]{archivist-package}.
 \note{
 If \code{repo} and \code{user} are set to \code{NULL} (as default) in Remote mode then global parameters
 set in \link{setRemoteRepo} function are used.
+
+Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 }
 \examples{
 

@@ -60,6 +60,9 @@ in the following function calls:
 \link{copyRemoteRepo}
 parameters \code{user}, \code{repo}, \code{branch}, \code{subdir}  may be omitted.
 }
+\note{
+Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+}
 \examples{
 
 ## Local version

@@ -63,6 +63,8 @@ in \code{saveToRepo} to specify a \code{Tag} which might not match
 
 To learn more about \code{Tags} and \code{Repository} structure check 
 \link{Tags} and \link{Repository}.
+
+Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 }
 \examples{
 \dontrun{

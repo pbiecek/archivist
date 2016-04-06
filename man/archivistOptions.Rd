@@ -27,6 +27,9 @@ of \code{key} parameter for other \code{archivist} functions. The function
 \code{aoptions} with one parameter returns value (stored in an internal environment))
 of the given \code{key} parameter.
 }
+\note{
+Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+}
 \examples{
 \dontrun{
 # data.frame object

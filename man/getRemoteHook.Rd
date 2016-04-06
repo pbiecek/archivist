@@ -26,6 +26,9 @@ to \code{subdir = "/"} as default.}
 \code{getRemoteHook} returns http adress of the remote \link{Repository}.
 Then it can be used to download artifacts from the remote \link{Repository}.
 }
+\note{
+Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+}
 \examples{
 
 \dontrun{

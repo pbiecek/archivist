@@ -38,6 +38,8 @@
 #' \code{branch} and \code{subdir} are used only in \code{loadFromRemoteRepo}. When you mix those
 #' parameters you will receive an error message.
 #' 
+#' Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+#' 
 #' @param repoType A character containing a type of the remote repository. Currently it can be 'Remote' or 'bitbucket'.
 #' 
 #' @param repoDir A character denoting an existing directory from which an artifact will be loaded.

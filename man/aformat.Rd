@@ -20,6 +20,9 @@ A vector of characters.
 \code{aformat} extracts artifact's formats. Having formats one may decide which should he read.
 Currently only rda format is supported for artifact and txt/png for miniatures.
 }
+\note{
+Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+}
 \examples{
 \dontrun{
 setLocalRepo(system.file("graphGallery", package = "archivist"))

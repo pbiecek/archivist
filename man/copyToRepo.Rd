@@ -57,6 +57,8 @@ in \code{md5hashes} parameter. For more information about \code{md5hash} see \li
 If \code{repo} and \code{user} are set to \code{NULL} (as default) in remote mode then global parameters
 set in \link{setRemoteRepo} function are used. If one would like to copy whole Repository we suggest to 
 extract all \code{md5hashes} in this way \code{unique(showLocalRepo(repoDir)[,1])}.
+
+Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 }
 \examples{
 \dontrun{

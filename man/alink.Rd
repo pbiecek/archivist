@@ -44,6 +44,9 @@ To learn more about artifacts visit \link[archivist]{archivist-package}.
 \details{
 For more information about \code{md5hash} see \link{md5hash}.
 }
+\note{
+Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+}
 \examples{
 # link in markdown format
 alink('pbiecek/archivist/134ecbbe2a8814d98f0c2758000c408e')
