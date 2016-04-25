@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>Replication script for JSS submission. archivist 2.0.4</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">archivist 2.0.4</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Tools for Storing, Restoring and Searching for R Objects</h1>
+
+<div class="row"><div class="span8">
+  <pre>
+  <div class='input'># Intro
+  
+#This is the replication script for &#39;archivist: An R Package for Managing, Recording and Restoring Data Analysis Results&#39; (Przemyslaw Biecek, Marcin Kosinski) submitted to JSS. 
+
+#First, make sure that `archivist` is installed.
+
+if (!require(archivist)) {
+  install.packages(&quot;archivist&quot;)
+  library(archivist)
+}
+
+# Section 2.1
+
+# Creation of hooks to R objects.
+# Following lines download R objects from remote repository.
+
+archivist::aread(&quot;pbiecek/graphGallery/f05f0ed0662fe01850ec1b928830ef32&quot;)
+archivist::aread(&quot;pbiecek/graphGallery/f05f0ed066&quot;)
+</div>
+<p><img src='archivist_jss-2.png' alt='' width='540' height='400' /></p>
+<p><img src='archivist_jss-3.png' alt='' width='540' height='400' /></p>
+<div class='input'>setLocalRepo(system.file(&quot;graphGallery&quot;, package = &quot;archivist&quot;))
+aread(&quot;f05f0ed0662fe01850ec1b928830ef32&quot;)
+</div>
+<p><img src='archivist_jss-5.png' alt='' width='540' height='400' /></p>
+<div class='input'>
+# regression model
+
+model &lt;- archivist::aread(&quot;2a6e492cb6982f230e48cf46023e2e4f&quot;)
+summary(model)
+</div>
+<div class='output'>
+Call:
+lm(formula = Petal.Length ~ Sepal.Length + Species, data = iris)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.76390 -0.17875  0.00716  0.17461  0.79954 
+
+Coefficients:
+                  Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)       -1.70234    0.23013  -7.397 1.01e-11 ***
+Sepal.Length       0.63211    0.04527  13.962  &lt; 2e-16 ***
+Speciesversicolor  2.21014    0.07047  31.362  &lt; 2e-16 ***
+Speciesvirginica   3.09000    0.09123  33.870  &lt; 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.2826 on 146 degrees of freedom
+Multiple R-squared:  0.9749,	Adjusted R-squared:  0.9744 
+F-statistic:  1890 on 3 and 146 DF,  p-value: &lt; 2.2e-16
+
+</div>
+<div class='input'>
+
+# Section 2.2
+
+# Retrieval of a list of R objects with given tags.
+
+# Following lines search within remote repositories and download objects with given properties.
+
+models &lt;- asearch(&quot;pbiecek/graphGallery&quot;, patterns = c(&quot;class:lm&quot;, &quot;coefname:Sepal.Length&quot;))
+
+lapply(models, coef)
+</div>
+<div class='output'>$`18a98048f0584469483afb65294ce3ed`
+ (Intercept) Sepal.Length 
+   -7.101443     1.858433 
+
+$`2a6e492cb6982f230e48cf46023e2e4f`
+      (Intercept)      Sepal.Length Speciesversicolor  Speciesvirginica 
+       -1.7023422         0.6321099         2.2101378         3.0900021 
+
+</div>
+<div class='input'>
+plots &lt;- asearch(&quot;pbiecek/graphGallery&quot;, 
+                 patterns = c(&quot;class:gg&quot;, &quot;labelx:Sepal.Length&quot;))
+length(plots)
+</div>
+<div class='output'>[1] 2
+</div>
+<div class='input'>
+library(&quot;gridExtra&quot;)
+</div>
+<strong class='message'>
+Attaching package: ‘gridExtra’
+</strong>
+<strong class='message'>The following object is masked from ‘package:dplyr’:
+
+    combine
+</strong>
+<div class='input'>
+do.call(grid.arrange,  plots)
+</div>
+<p><img src='archivist_jss-16.png' alt='' width='540' height='400' /></p>
+<div class='input'>
+# from local
+plots &lt;- asearch(patterns = c(&quot;class:gg&quot;, &quot;labelx:Sepal.Length&quot;))
+length(plots)
+</div>
+<div class='output'>[1] 2
+</div>
+<div class='input'>
+do.call(grid.arrange,  plots)
+</div>
+<p><img src='archivist_jss-20.png' alt='' width='540' height='400' /></p>
+<div class='input'>
+# Section 2.3
+
+# Retrieval of the object&#39;s pedigree.
+
+library(&quot;archivist&quot;)
+library(&quot;dplyr&quot;)
+createLocalRepo(&quot;arepo&quot;, default = TRUE)
+</div>
+<div class='output'>Directory arepo did not exist. Forced to create a new directory.</div>
+<div class='input'>
+data(iris)
+
+iris %a%
+  filter(Sepal.Length &lt; 6) %a%
+  lm(Petal.Length~Species, data=.) %a%
+  summary() -&gt; tmp
+
+ahistory(tmp)
+</div>
+<div class='output'>     [e248b6a8852a4ecc3ceca0ba06f2073d]
+</div>
+<div class='input'>
+ahistory(md5hash = &quot;050e41ec3bc40b3004bc6bdd356acae7&quot;)
+</div>
+<div class='output'>     [050e41ec3bc40b3004bc6bdd356acae7]
+</div>
+<div class='input'># this is not always this hash
+
+#Session info
+
+sinfo &lt;- asession(&quot;050e41ec3bc40b3004bc6bdd356acae7&quot;)
+</div>
+<strong class='warning'>Warning message:
+No session info archived for 050e41ec3bc40b3004bc6bdd356acae7</strong>
+<div class='input'>head(sinfo$packages)
+</div>
+<strong class='error'>Error in sinfo$packages: $ operator is invalid for atomic vectors</strong>
+<div class='input'>
+
+
+# Section 3.1
+
+# Repository management.
+
+# Creation of a new empty repository.
+
+# local path
+repo &lt;- &quot;arepo&quot;
+createLocalRepo(repoDir = repo)
+
+# Deletion of an existing repository
+
+repo &lt;- &quot;arepo&quot;
+deleteLocalRepo(repoDir = repo, deleteRoot = TRUE)
+
+
+# Copying artifacts from other repositories.
+
+repo &lt;- &quot;arepo&quot;
+createLocalRepo(repoDir = repo, default = TRUE)
+</div>
+<div class='output'>Directory arepo did not exist. Forced to create a new directory.</div>
+<div class='input'>copyRemoteRepo(repoTo = repo, md5hashes= &quot;f05f0ed0662fe01850ec1b928830ef32&quot;, 
+               user = &quot;pbiecek&quot;, repo = &quot;graphGallery&quot;, repoType = &quot;github&quot;)
+
+# Showing repository statistics
+
+showLocalRepo(repoDir = repo, method = &quot;tags&quot;)
+</div>
+<div class='output'>                          artifact
+1 f05f0ed0662fe01850ec1b928830ef32
+2 f05f0ed0662fe01850ec1b928830ef32
+3 f05f0ed0662fe01850ec1b928830ef32
+4 f05f0ed0662fe01850ec1b928830ef32
+5 f05f0ed0662fe01850ec1b928830ef32
+6 f05f0ed0662fe01850ec1b928830ef32
+7 f05f0ed0662fe01850ec1b928830ef32
+8 f05f0ed0662fe01850ec1b928830ef32
+9 f05f0ed0662fe01850ec1b928830ef32
+                                            tag         createdDate
+1                                    format:rda 2016-03-04 20:00:45
+2                                      name:pl1 2016-03-04 20:00:45
+3                                      class:gg 2016-03-04 20:00:45
+4                                  class:ggplot 2016-03-04 20:00:45
+5                           labelx:Sepal.Length 2016-03-04 20:00:45
+6                           labely:Petal.Length 2016-03-04 20:00:45
+7                      date:2016-03-04 20:00:45 2016-03-04 20:00:45
+8 session_info:c77057faf5d26bc12c402b2a78a23fb7 2016-03-04 20:00:45
+9                                    format:png 2016-03-04 20:00:45
+</div>
+<div class='input'>
+summaryRemoteRepo(user=&quot;pbiecek&quot;, repo=&quot;graphGallery&quot;) 
+</div>
+<div class='output'>Number of archived artifacts in Repository:  53 
+Number of archived datasets in Repository:  24 
+Number of various classes archived in Repository: 
+              Number
+ggplot            6
+tbl_df            3
+grouped_df        3
+area              1
+proto             1
+lm                9
+numeric           2
+list              3
+summary.lm        4
+data.frame       16
+matrix            1
+igraph            1
+communities       1
+character         1
+table             1
+intsvy.mean       2
+intsvy.table      2
+intsvy.reg        1
+gg                2
+Saves per day in Repository: 
+            Saves
+2014-08-21     4
+2014-09-03    11
+2015-06-22     4
+2015-06-24    16
+2015-06-25    17
+2015-06-27     1
+2015-06-28     4
+2015-06-29     4
+2015-06-30     4
+2015-07-01     4
+2015-07-09     4
+2015-07-10     5
+2015-07-15     1
+2015-07-16     3
+2015-07-20     2
+2015-08-12     3
+2015-08-25     3
+2015-08-29     1
+2015-09-12     4
+2015-09-14     4
+2015-09-20     2
+2015-09-22     1
+2015-10-08     2
+2015-10-12     1
+2015-11-15     3
+2015-11-27     4
+2015-11-30    11
+2016-02-07     2
+2016-02-09     3
+2016-03-04     4
+</div>
+<div class='input'>
+# Setting default repository
+
+setRemoteRepo(user = &quot;pbiecek&quot;, repo = &quot;graphGallery&quot;)
+
+# Section 3.2
+
+# Artifact management
+
+# Saving an R object into a repository
+
+library(&quot;ggplot2&quot;)
+repo &lt;- &quot;arepo&quot;
+pl &lt;- qplot(Sepal.Length, Petal.Length, data = iris)
+saveToLocalRepo(pl, repoDir = repo)
+</div>
+<div class='output'>[1] &quot;b656dbc388dfb041d32efe81f36bcddd&quot;
+attr(,&quot;data&quot;)
+[1] &quot;ff575c261c949d073b2895b05d1097c3&quot;
+</div>
+<div class='input'>
+showLocalRepo(repoDir = repo, &quot;tags&quot;)
+</div>
+<div class='output'>                           artifact
+1  f05f0ed0662fe01850ec1b928830ef32
+2  f05f0ed0662fe01850ec1b928830ef32
+3  f05f0ed0662fe01850ec1b928830ef32
+4  f05f0ed0662fe01850ec1b928830ef32
+5  f05f0ed0662fe01850ec1b928830ef32
+6  f05f0ed0662fe01850ec1b928830ef32
+7  f05f0ed0662fe01850ec1b928830ef32
+8  f05f0ed0662fe01850ec1b928830ef32
+9  f05f0ed0662fe01850ec1b928830ef32
+10 b656dbc388dfb041d32efe81f36bcddd
+11 b656dbc388dfb041d32efe81f36bcddd
+12 b656dbc388dfb041d32efe81f36bcddd
+13 b656dbc388dfb041d32efe81f36bcddd
+14 b656dbc388dfb041d32efe81f36bcddd
+15 b656dbc388dfb041d32efe81f36bcddd
+16 b656dbc388dfb041d32efe81f36bcddd
+17 29dc59f0842c73bfcd78ce95fdce7af7
+18 b656dbc388dfb041d32efe81f36bcddd
+19 ff575c261c949d073b2895b05d1097c3
+20 ff575c261c949d073b2895b05d1097c3
+21 ff575c261c949d073b2895b05d1097c3
+22 b656dbc388dfb041d32efe81f36bcddd
+                                             tag         createdDate
+1                                     format:rda 2016-03-04 20:00:45
+2                                       name:pl1 2016-03-04 20:00:45
+3                                       class:gg 2016-03-04 20:00:45
+4                                   class:ggplot 2016-03-04 20:00:45
+5                            labelx:Sepal.Length 2016-03-04 20:00:45
+6                            labely:Petal.Length 2016-03-04 20:00:45
+7                       date:2016-03-04 20:00:45 2016-03-04 20:00:45
+8  session_info:c77057faf5d26bc12c402b2a78a23fb7 2016-03-04 20:00:45
+9                                     format:png 2016-03-04 20:00:45
+10                                    format:rda 2016-04-25 18:48:47
+11                                       name:pl 2016-04-25 18:48:47
+12                                      class:gg 2016-04-25 18:48:47
+13                                  class:ggplot 2016-04-25 18:48:47
+14                           labelx:Sepal.Length 2016-04-25 18:48:47
+15                           labely:Petal.Length 2016-04-25 18:48:47
+16                      date:2016-04-25 18:48:47 2016-04-25 18:48:47
+17                                    format:rda 2016-04-25 18:48:47
+18 session_info:29dc59f0842c73bfcd78ce95fdce7af7 2016-04-25 18:48:47
+19                                    format:rda 2016-04-25 18:48:47
+20                                    format:txt 2016-04-25 18:48:47
+21 relationWith:b656dbc388dfb041d32efe81f36bcddd 2016-04-25 18:48:47
+22                                    format:png 2016-04-25 18:48:47
+</div>
+<div class='input'>
+#deleteLocalRepo(&quot;arepo&quot;, deleteRoot = TRUE)
+
+
+# Serialization of an object creation event into repository
+
+library(&quot;dplyr&quot;)
+iris %a%
+filter(Sepal.Length &lt; 6) %a%
+lm(Petal.Length~Species, data=.) %a%
+summary() -&gt; tmp
+
+ahistory(tmp)
+</div>
+<div class='output'>   env[[nm]]  [817057e6c60fea315d23660a66041ffc]
+-&gt; summary()  [5aac8e438ab6f48d0ef5c8c5addb3f0b]
+</div>
+<div class='input'>ahistory(md5hash = &quot;050e41ec3bc40b3004bc6bdd356acae7&quot;)
+</div>
+<div class='output'>     [050e41ec3bc40b3004bc6bdd356acae7]
+</div>
+<div class='input'>
+# Loading an object from repository
+
+pl2 &lt;- loadFromRemoteRepo(&quot;f05f0ed0662fe01850ec1b928830ef32&quot;, repo=&quot;graphGallery&quot;, user=&quot;pbiecek&quot;, 
+                          value=TRUE)
+pl3 &lt;- loadFromLocalRepo(&quot;f05f0ed0662&quot;, system.file(&quot;graphGallery&quot;, package = &quot;archivist&quot;), value=TRUE)
+
+archivist::aread(&quot;pbiecek/graphGallery/f05f0ed0662fe01850ec1b928830ef32&quot;)
+</div>
+<p><img src='archivist_jss-46.png' alt='' width='540' height='400' /></p>
+<div class='input'>
+setLocalRepo(system.file(&quot;graphGallery&quot;, package = &quot;archivist&quot;))
+
+pl3 &lt;- loadFromLocalRepo(&quot;f05f0ed&quot;, value=TRUE)
+
+archivist::aread(&quot;f05f0ed&quot;)
+</div>
+<p><img src='archivist_jss-48.png' alt='' width='540' height='400' /></p>
+<div class='input'>
+setLocalRepo(system.file(&quot;graphGallery&quot;, package = &quot;archivist&quot;))
+model &lt;- aread(&quot;2a6e492cb6982f230e48cf46023e2e4f&quot;)
+digest::digest(model)
+</div>
+<div class='output'>[1] &quot;2a6e492cb6982f230e48cf46023e2e4f&quot;
+</div>
+<div class='input'>
+# Removal of an object from repository
+
+rmFromLocalRepo(&quot;f05f0ed0662fe01850ec1b928830ef32&quot;, repoDir = repo)
+
+#Remove all older than 30 days
+
+obj2rm &lt;- searchInLocalRepo(list(dateFrom = &quot;2010-01-01&quot;, dateTo = Sys.Date()), repoDir = repo)
+
+rmFromLocalRepo(obj2rm, repoDir = repo, many = TRUE)
+
+
+# Search for an artifact
+
+# Search in a local/GitHub repository
+
+searchInLocalRepo(pattern = &quot;class:gg&quot;, 
+                  repoDir = system.file(&quot;graphGallery&quot;, package = &quot;archivist&quot;))
+</div>
+<div class='output'>[1] &quot;f05f0ed0662fe01850ec1b928830ef32&quot; &quot;13b2724139eb2c62578b4dab0d7b2cea&quot;
+</div>
+<div class='input'>
+searchInLocalRepo(pattern = list(dateFrom = &quot;2016-01-01&quot;,
+                                 dateTo = &quot;2016-02-07&quot; ), 
+                  repoDir = system.file(&quot;graphGallery&quot;, package = &quot;archivist&quot;))
+</div>
+<div class='output'>[1] &quot;d9313a0de3e2980201a8971e3384ff26&quot; &quot;ff575c261c949d073b2895b05d1097c3&quot;
+[3] &quot;2a6e492cb6982f230e48cf46023e2e4f&quot; &quot;93ecfdf1436932e2860c6dbdf2abc2ad&quot;
+[5] &quot;afb2550d0f886f0cf3b050f04c5cd4f8&quot;
+</div>
+<div class='input'>
+
+searchInLocalRepo(pattern=c(&quot;class:gg&quot;, &quot;labelx:Sepal.Length&quot;),
+                       repoDir = system.file(&quot;graphGallery&quot;, package = &quot;archivist&quot;))	</div>
+<div class='output'>[1] &quot;13b2724139eb2c62578b4dab0d7b2cea&quot; &quot;f05f0ed0662fe01850ec1b928830ef32&quot;
+</div>
+  </pre>
+</div></div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

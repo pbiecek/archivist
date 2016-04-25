@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>getRemoteHook. archivist 2.0.4</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+Przemyslaw Biecek, &lt;a href='mailto:przemyslaw.biecek@gmail.com'&gt;przemyslaw.biecek@gmail.com&lt;/a&gt;
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">archivist 2.0.4</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Get http Hook for Remote Repo</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>getRemoteHook(repo&nbsp;=&nbsp;aoptions("repo"), user&nbsp;=&nbsp;aoptions("user"), branch&nbsp;=&nbsp;aoptions("branch"), subdir&nbsp;=&nbsp;aoptions("subdir"), repoType&nbsp;=&nbsp;aoptions("repoType"))</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>repo</dt>
+      <dd>A character containing a name of a Git repository on which the Repository is archived.</dd>
+      <dt>user</dt>
+      <dd>A character containing a name of a Git user on whose account the <code>repo</code> is created.</dd>
+      <dt>branch</dt>
+      <dd>A character containing a name of Git Repository's branch on which the Repository is archived. 
+Default <code>branch</code> is <code>master</code>.</dd>
+      <dt>subdir</dt>
+      <dd>A character containing a name of a directory on Git repository 
+on which the Repository is stored. If the Repository is stored in main folder on Git repository, this should be set 
+to <code>subdir = "/"</code> as default.</dd>
+      <dt>repoType</dt>
+      <dd>A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.</dd>
+    </dl>
+    
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p><code>getRemoteHook</code> returns http adress of the remote <a href='Repository.html'>Repository</a>.
+Then it can be used to download artifacts from the remote <a href='Repository.html'>Repository</a>.</p>
+  
+    </div>
+
+    <div class="Note">
+      <h2>Note</h2>
+
+      <p>Bug reports and feature requests can be sent to <a href = 'https://github.com/pbiecek/archivist/issues'>https://github.com/pbiecek/archivist/issues</a></p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>
+## Not run: 
+# # objects preparation
+# getRemoteHook(&quot;graphGallery&quot;, &quot;pbiecek&quot;)
+# ## End(Not run)
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>getRemoteHook</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+Other archivist: <code><a href='Repository.html'>Repository</a></code>,
+  <code><a href='Tags.html'>Tags</a></code>, <code><a href='magrittr.html'>%a%</a></code>,
+  <code><a href='addHooksToPrint.html'>addHooksToPrint</a></code>, <code><a href='addTagsRepo.html'>addTagsRepo</a></code>,
+  <code><a href='aformat.html'>aformat</a></code>, <code><a href='ahistory.html'>ahistory</a></code>,
+  <code><a href='alink.html'>alink</a></code>, <code><a href='archivistOptions.html'>aoptions</a></code>,
+  <code><a href='archivist-package.html'>archivist-package</a></code>, <code><a href='aread.html'>aread</a></code>,
+  <code><a href='asearch.html'>asearch</a></code>, <code><a href='asession.html'>asession</a></code>,
+  <code><a href='cache.html'>cache</a></code>, <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
+  <code><a href='createEmptyRepo.html'>createLocalRepo</a></code>,
+  <code><a href='createMDGallery.html'>createMDGallery</a></code>,
+  <code><a href='deleteLocalRepo.html'>deleteLocalRepo</a></code>,
+  <code><a href='getTags.html'>getTagsLocal</a></code>,
+  <code><a href='loadFromRepo.html'>loadFromLocalRepo</a></code>, <code><a href='md5hash.html'>md5hash</a></code>,
+  <code><a href='restoreLibs.html'>restoreLibs</a></code>, <code><a href='rmFromLocalRepo.html'>rmFromLocalRepo</a></code>,
+  <code><a href='saveToRepo.html'>saveToLocalRepo</a></code>,
+  <code><a href='searchInRepo.html'>searchInLocalRepo</a></code>,
+  <code><a href='setRepo.html'>setLocalRepo</a></code>,
+  <code><a href='shinySearchInRepo.html'>shinySearchInLocalRepo</a></code>,
+  <code><a href='showRepo.html'>showLocalRepo</a></code>,
+  <code><a href='splitTags.html'>splitTagsLocal</a></code>,
+  <code><a href='summaryRepo.html'>summaryLocalRepo</a></code>,
+  <code><a href='zipRepo.html'>zipLocalRepo</a></code>
+
+    
+    <h2>Author</h2>
+    
+Przemyslaw Biecek, <a href='mailto:przemyslaw.biecek@gmail.com'>przemyslaw.biecek@gmail.com</a>
+
+    
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

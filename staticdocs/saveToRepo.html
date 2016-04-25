@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>saveToLocalRepo. archivist 2.0.4</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+Marcin Kosinski , &lt;a href='mailto:m.p.kosinski@gmail.com'&gt;m.p.kosinski@gmail.com&lt;/a&gt;
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">archivist 2.0.4</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Save an Artifact into a Repository</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>saveToLocalRepo(artifact, repoDir&nbsp;=&nbsp;aoptions("repoDir"), archiveData&nbsp;=&nbsp;TRUE, archiveTags&nbsp;=&nbsp;TRUE, archiveMiniature&nbsp;=&nbsp;TRUE, archiveSessionInfo&nbsp;=&nbsp;TRUE, force&nbsp;=&nbsp;TRUE, value&nbsp;=&nbsp;FALSE, ..., userTags&nbsp;=&nbsp;c(), silent&nbsp;=&nbsp;aoptions("silent"), ascii&nbsp;=&nbsp;FALSE, artifactName&nbsp;=&nbsp;deparse(substitute(artifact)))</div>
+<div>saveToRepo(artifact, repoDir&nbsp;=&nbsp;aoptions("repoDir"), archiveData&nbsp;=&nbsp;TRUE, archiveTags&nbsp;=&nbsp;TRUE, archiveMiniature&nbsp;=&nbsp;TRUE, archiveSessionInfo&nbsp;=&nbsp;TRUE, force&nbsp;=&nbsp;TRUE, value&nbsp;=&nbsp;FALSE, ..., userTags&nbsp;=&nbsp;c(), silent&nbsp;=&nbsp;aoptions("silent"), ascii&nbsp;=&nbsp;FALSE, artifactName&nbsp;=&nbsp;deparse(substitute(artifact)))</div>
+<div>asave(artifact, repoDir&nbsp;=&nbsp;aoptions("repoDir"), archiveData&nbsp;=&nbsp;TRUE, archiveTags&nbsp;=&nbsp;TRUE, archiveMiniature&nbsp;=&nbsp;TRUE, archiveSessionInfo&nbsp;=&nbsp;TRUE, force&nbsp;=&nbsp;TRUE, value&nbsp;=&nbsp;FALSE, ..., userTags&nbsp;=&nbsp;c(), silent&nbsp;=&nbsp;aoptions("silent"), ascii&nbsp;=&nbsp;FALSE, artifactName&nbsp;=&nbsp;deparse(substitute(artifact)))</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>artifact</dt>
+      <dd>An arbitrary R artifact to be saved. For supported artifacts see details.</dd>
+      <dt>repoDir</dt>
+      <dd>A character denoting an existing directory in which an artifact will be saved.</dd>
+      <dt>archiveData</dt>
+      <dd>A logical value denoting whether to archive the data from the <code>artifact</code>.</dd>
+      <dt>archiveTags</dt>
+      <dd>A logical value denoting whether to archive Tags from the <code>artifact</code>.</dd>
+      <dt>archiveMiniature</dt>
+      <dd>A logical value denoting whether to archive a miniature of the <code>artifact</code>.</dd>
+      <dt>archiveSessionInfo</dt>
+      <dd>A logical value denoting whether to archive the session info that describes the context in this given artifact was created.</dd>
+      <dt>force</dt>
+      <dd>A logical value denoting whether to archive <code>artifact</code> if it was already archived in
+a Repository.</dd>
+      <dt>value</dt>
+      <dd>A logical value. Should the result be (default <code>value = FALSE</code>) the <code>md5hash</code>
+of a stored artifact or should the result be an input artifact (<code>value = TRUE</code>), so that valueing code
+can be used. See examples.</dd>
+      <dt>...</dt>
+      <dd>Graphical parameters denoting width and height of a miniature. See details.
+Further arguments passed to <a href='http://www.inside-r.org/r-doc/utils/head'>head</a>. See Details section about <code>firtsRows</code> parameter</dd>
+      <dt>userTags</dt>
+      <dd>A character vector with Tags. These Tags will be added to the repository along with the artifact.</dd>
+      <dt>silent</dt>
+      <dd>If TRUE produces no warnings.</dd>
+      <dt>ascii</dt>
+      <dd>A logical value. An <code>ascii</code> argument is passed to <a href='http://www.inside-r.org/r-doc/base/save'>save</a> function.</dd>
+      <dt>artifactName</dt>
+      <dd>The name of the artifact with which it should be archived. If <code>NULL</code> then object's MD5 hash will be used instead.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+As a result of calling this function a character string is returned, which determines
+the <code>md5hash</code> of the artifact. If
+<code>archiveData</code> is <code>TRUE</code>, the result will also
+have an attribute, named <code>data</code>, which determines <code>md5hash</code> of the data needed
+to compute the artifact.
+</dl></p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p><code>saveToLocalRepo</code> function saves desired artifacts to the local <a href='Repository.html'>Repository</a> in a given directory.
+To learn more about artifacts visit archivist-package.</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+
+      <p><code>saveToLocalRepo</code> function saves desired artifacts to the local Repository in a given directory.
+Artifacts are saved in the local Repository, which is a SQLite database named <code>backpack</code>.
+After every <code>saveToLocalRepo</code> call the database is refreshed, so the artifact is available
+immediately in the database for other collaborators.
+Each artifact is archived in a <code>md5hash.rda</code> file. This file will be saved in a folder
+(under <code>repoDir</code> directory) named <code>gallery</code>. For each artifact, <code>md5hash</code> is a
+unique string of length 32 that is produced by
+<a href='http://www.inside-r.org/packages/cran/digest/docs/digest'>digest</a> function, which uses a cryptographical MD5 hash algorithm.</p>
+  
+      <p>By default, a miniature of an artifact and (if possible) a data set needed to compute this artifact are extracted.
+They are also going to be saved in a file named by their <code>md5hash</code> in the <code>gallery</code> folder
+that exists in the directory specified in the <code>repoDir</code> argument. Moreover, a specific <code>Tag</code>-relation
+is going to be added to the <code>backpack</code> dataset in case there is a need to load
+the artifact with it's related data set - see <a href='loadFromRepo.html'>loadFromLocalRepo</a> or <a href='loadFromRepo.html'>loadFromRemoteRepo</a>. Default settings
+may be changed by using the <code>archiveData</code>, <code>archiveTag</code> or <code>archiveMiniature</code> arguments with the
+<code>FALSE</code> value.</p>
+  
+      <p><code>Tags</code> are artifact's attributes, different for various artifact's classes. For more detailed
+information check <a href='Tags.html'>Tags</a></p>
+  
+      <p>Archived artifact can be searched in the <code>backpack</code> dataset by using the
+<a href='searchInRepo.html'>searchInLocalRepo</a> or <a href='searchInRepo.html'>searchInRemoteRepo</a> functions. Artifacts can be searched by their <a href='Tags.html'>Tags</a>,
+<code>names</code>, <code>classes</code> or <code>archiving date</code>.</p>
+  
+      <p><code>firstRows</code> parameter.</p>
+  
+      <p>If the artifact is of class <code>data.frame</code> or user set <code>archiveData = TRUE</code> for artifact that stores data within it,
+ it is possible to specify
+how many rows of that data (or that <code>data.frame</code>) should be archived in a <code>miniature</code>.
+ This can be done by adding the argument <code>firstRows</code> with the
+n corresponding to the number of rows (as in <a href='http://www.inside-r.org/r-doc/utils/head'>head</a>).
+Note that, the data can be extracted only from the artifacts that are supported by
+the <span class = "pkg">archivist</span> package; see <a href='Tags.html'>Tags</a>.</p>
+  
+      <p>Graphical parameters.</p>
+  
+      <p>If the artifact is of class <code>lattice</code> or <code>ggplot</code>, and
+<code>archiveMiniature = TRUE</code>, then it is
+possible to set the miniature's <code>width</code> and <code>height</code> parameters. By default they are set to
+<code>width = 800</code>, <code>height = 600</code>.</p>
+  
+      <p>Supported artifact's classes are listed here <a href='Tags.html'>Tags</a>.</p>
+  
+    </div>
+
+    <div class="Note">
+      <h2>Note</h2>
+
+      <p>Bug reports and feature requests can be sent to <a href = 'https://github.com/pbiecek/archivist/issues'>https://github.com/pbiecek/archivist/issues</a></p>
+  
+      <p>In the following way one can specify his own <code>Tags</code> for artifacts by setting artifact's attribute
+before call of the <code>saveToLocalRepo</code> function:
+<code>attr(x, "tags" ) = c( "name1", "name2" )</code>, where <code>x</code> is an artifact
+and <code>name1, name2</code> are <code>Tags</code> specified by a user.
+It can be also done in a new, simpler way by using <code>userTags</code> parameter like this:
+ <ul>
+<li> <code>saveToLocalRepo(model, repoDir, userTags = c("my_model", "do not delete"))</code>.
+ </li>
+</ul></p>
+  
+      <p>Specifing additional <code>Tags</code> by attributes can be beneficial when one uses <a href='addHooksToPrint.html'>addHooksToPrint</a>.</p>
+  
+      <p>Important: if one wants to archive data from artifacts which is one of:
+<code>survfit, glmnet, qda, lda, trellis, htest</code> class, and this dataset is transformed within
+the artifact's formula then <code>saveToLocalRepo</code> will not archive this dataset. <code>saveToLocalRepo</code>
+only archives datasets that already exist in any of R environments.</p>
+  
+      <p>Example: The data set will not be archived here.
+<ul>
+<li> <code>z <- lda(Sp ~ ., Iris, prior = c(1,1,1)/3, subset = train[,-8])</code>
+   </li>
+<li> <code>saveToLocalRepo( z, repoDir )</code>
+</li>
+</ul></p>
+  
+      <p>Example: The data set will be archived here.
+<ul>
+<li> <code>train2 <- train[,-8]</code>
+   </li>
+<li> <code>z <- lda(Sp ~ ., Iris, prior = c(1,1,1)/3, subset = train2)</code>
+   </li>
+<li> <code>saveToLocalRepo( z, repoDir )</code>
+</li>
+</ul></p>
+  
+      <p></p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>exampleRepoDir &lt;- tempfile()
+createLocalRepo(repoDir = exampleRepoDir)
+</div>
+<div class='output'>Directory /tmp/Rtmp8itQ6j/file516f57faafb0 did not exist. Forced to create a new directory.</div>
+<div class='input'>data(swiss)
+saveToLocalRepo(swiss, repoDir=exampleRepoDir, archiveSessionInfo = TRUE)
+</div>
+<div class='output'>[1] &quot;4c43fa8a4d8f0cbf65353e397f37338c&quot;
+</div>
+<div class='input'>showLocalRepo(method = &quot;md5hashes&quot;, repoDir = exampleRepoDir)
+</div>
+<div class='output'>                           md5hash                             name
+1 4c43fa8a4d8f0cbf65353e397f37338c                            swiss
+2 7a6a0ea6fd604c294097691f5cd65a05 7a6a0ea6fd604c294097691f5cd65a05
+          createdDate
+1 2016-04-25 18:48:32
+2 2016-04-25 18:48:32
+</div>
+<div class='input'>showLocalRepo(method = &quot;tags&quot;, repoDir = exampleRepoDir)
+</div>
+<div class='output'>                           artifact
+1  4c43fa8a4d8f0cbf65353e397f37338c
+2  4c43fa8a4d8f0cbf65353e397f37338c
+3  4c43fa8a4d8f0cbf65353e397f37338c
+4  4c43fa8a4d8f0cbf65353e397f37338c
+5  4c43fa8a4d8f0cbf65353e397f37338c
+6  4c43fa8a4d8f0cbf65353e397f37338c
+7  4c43fa8a4d8f0cbf65353e397f37338c
+8  4c43fa8a4d8f0cbf65353e397f37338c
+9  4c43fa8a4d8f0cbf65353e397f37338c
+10 4c43fa8a4d8f0cbf65353e397f37338c
+11 7a6a0ea6fd604c294097691f5cd65a05
+12 4c43fa8a4d8f0cbf65353e397f37338c
+13 4c43fa8a4d8f0cbf65353e397f37338c
+                                             tag         createdDate
+1                                     format:rda 2016-04-25 18:48:32
+2                                     name:swiss 2016-04-25 18:48:32
+3                               class:data.frame 2016-04-25 18:48:32
+4                              varname:Fertility 2016-04-25 18:48:32
+5                            varname:Agriculture 2016-04-25 18:48:32
+6                            varname:Examination 2016-04-25 18:48:32
+7                              varname:Education 2016-04-25 18:48:32
+8                               varname:Catholic 2016-04-25 18:48:32
+9                       varname:Infant.Mortality 2016-04-25 18:48:32
+10                      date:2016-04-25 18:48:32 2016-04-25 18:48:32
+11                                    format:rda 2016-04-25 18:48:32
+12 session_info:7a6a0ea6fd604c294097691f5cd65a05 2016-04-25 18:48:32
+13                                    format:txt 2016-04-25 18:48:32
+</div>
+<div class='input'>
+loadFromLocalRepo(md5hash = &#39;f05f0ed0662fe01850ec1b928830ef32&#39;,
+  repoDir = system.file(&quot;graphGallery&quot;, package = &quot;archivist&quot;), value = TRUE) -&gt; pl
+
+saveToLocalRepo(pl, repoDir=exampleRepoDir,
+             userTags = c(&quot;do not delete&quot;, &quot;my favourite graph&quot;))
+</div>
+<div class='output'>[1] &quot;f05f0ed0662fe01850ec1b928830ef32&quot;
+attr(,&quot;data&quot;)
+[1] &quot;ff575c261c949d073b2895b05d1097c3&quot;
+</div>
+<div class='input'>aoptions(&#39;repoDir&#39;, system.file(&quot;graphGallery&quot;, package = &quot;archivist&quot;))
+</div>
+<div class='output'>[1] &quot;/home/mkosinski/archivist/inst/graphGallery&quot;
+</div>
+<div class='input'>showLocalRepo(method = &quot;tags&quot;)
+</div>
+<div class='output'>                            artifact
+1   d9313a0de3e2980201a8971e3384ff26
+2   ff575c261c949d073b2895b05d1097c3
+3   ff575c261c949d073b2895b05d1097c3
+4   ff575c261c949d073b2895b05d1097c3
+5   2a6e492cb6982f230e48cf46023e2e4f
+6   2a6e492cb6982f230e48cf46023e2e4f
+7   2a6e492cb6982f230e48cf46023e2e4f
+8   2a6e492cb6982f230e48cf46023e2e4f
+9   2a6e492cb6982f230e48cf46023e2e4f
+10  2a6e492cb6982f230e48cf46023e2e4f
+11  2a6e492cb6982f230e48cf46023e2e4f
+12  2a6e492cb6982f230e48cf46023e2e4f
+13  2a6e492cb6982f230e48cf46023e2e4f
+14  2a6e492cb6982f230e48cf46023e2e4f
+15  93ecfdf1436932e2860c6dbdf2abc2ad
+16  2a6e492cb6982f230e48cf46023e2e4f
+17  afb2550d0f886f0cf3b050f04c5cd4f8
+18  afb2550d0f886f0cf3b050f04c5cd4f8
+19  afb2550d0f886f0cf3b050f04c5cd4f8
+20  2a6e492cb6982f230e48cf46023e2e4f
+21  18a98048f0584469483afb65294ce3ed
+22  18a98048f0584469483afb65294ce3ed
+23  18a98048f0584469483afb65294ce3ed
+24  18a98048f0584469483afb65294ce3ed
+25  18a98048f0584469483afb65294ce3ed
+26  18a98048f0584469483afb65294ce3ed
+27  18a98048f0584469483afb65294ce3ed
+28  18a98048f0584469483afb65294ce3ed
+29  2b1fe80a89976f859ee2247723889256
+30  18a98048f0584469483afb65294ce3ed
+31  9325d4e26da1002bbb0ee75d099e6722
+32  b17388f623ba94ef7ca4254ed39c92a7
+33  9325d4e26da1002bbb0ee75d099e6722
+34  9325d4e26da1002bbb0ee75d099e6722
+35  9325d4e26da1002bbb0ee75d099e6722
+36  18a98048f0584469483afb65294ce3ed
+37  b17388f623ba94ef7ca4254ed39c92a7
+38  ff575c261c949d073b2895b05d1097c3
+39  b17388f623ba94ef7ca4254ed39c92a7
+40  ff575c261c949d073b2895b05d1097c3
+41  ff575c261c949d073b2895b05d1097c3
+42  ff575c261c949d073b2895b05d1097c3
+43  ff575c261c949d073b2895b05d1097c3
+44  ff575c261c949d073b2895b05d1097c3
+45  ff575c261c949d073b2895b05d1097c3
+46  ff575c261c949d073b2895b05d1097c3
+47  ff575c261c949d073b2895b05d1097c3
+48  ff575c261c949d073b2895b05d1097c3
+49  ff575c261c949d073b2895b05d1097c3
+50  ff575c261c949d073b2895b05d1097c3
+51  ff575c261c949d073b2895b05d1097c3
+52  fe1dd03597308686a7fff7161f644b6b
+53  ff575c261c949d073b2895b05d1097c3
+54  ff575c261c949d073b2895b05d1097c3
+55  d3696e13d15223c7d0bbccb33cc20a11
+56  d3696e13d15223c7d0bbccb33cc20a11
+57  d3696e13d15223c7d0bbccb33cc20a11
+58  d3696e13d15223c7d0bbccb33cc20a11
+59  d3696e13d15223c7d0bbccb33cc20a11
+60  d3696e13d15223c7d0bbccb33cc20a11
+61  d3696e13d15223c7d0bbccb33cc20a11
+62  d3696e13d15223c7d0bbccb33cc20a11
+63  d3696e13d15223c7d0bbccb33cc20a11
+64  d3696e13d15223c7d0bbccb33cc20a11
+65  fe1dd03597308686a7fff7161f644b6b
+66  d3696e13d15223c7d0bbccb33cc20a11
+67  d3696e13d15223c7d0bbccb33cc20a11
+68  d3696e13d15223c7d0bbccb33cc20a11
+69  d3696e13d15223c7d0bbccb33cc20a11
+70  d3696e13d15223c7d0bbccb33cc20a11
+71  d3696e13d15223c7d0bbccb33cc20a11
+72  d3696e13d15223c7d0bbccb33cc20a11
+73  d3696e13d15223c7d0bbccb33cc20a11
+74  d3696e13d15223c7d0bbccb33cc20a11
+75  d3696e13d15223c7d0bbccb33cc20a11
+76  d3696e13d15223c7d0bbccb33cc20a11
+77  fe1dd03597308686a7fff7161f644b6b
+78  d3696e13d15223c7d0bbccb33cc20a11
+79  d3696e13d15223c7d0bbccb33cc20a11
+80  990861c7c27812ee959f10e5f76fe2c3
+81  990861c7c27812ee959f10e5f76fe2c3
+82  990861c7c27812ee959f10e5f76fe2c3
+83  990861c7c27812ee959f10e5f76fe2c3
+84  990861c7c27812ee959f10e5f76fe2c3
+85  990861c7c27812ee959f10e5f76fe2c3
+86  990861c7c27812ee959f10e5f76fe2c3
+87  990861c7c27812ee959f10e5f76fe2c3
+88  990861c7c27812ee959f10e5f76fe2c3
+89  990861c7c27812ee959f10e5f76fe2c3
+90  fe1dd03597308686a7fff7161f644b6b
+91  990861c7c27812ee959f10e5f76fe2c3
+92  990861c7c27812ee959f10e5f76fe2c3
+93  990861c7c27812ee959f10e5f76fe2c3
+94  990861c7c27812ee959f10e5f76fe2c3
+95  990861c7c27812ee959f10e5f76fe2c3
+96  990861c7c27812ee959f10e5f76fe2c3
+97  990861c7c27812ee959f10e5f76fe2c3
+98  990861c7c27812ee959f10e5f76fe2c3
+99  990861c7c27812ee959f10e5f76fe2c3
+100 990861c7c27812ee959f10e5f76fe2c3
+101 990861c7c27812ee959f10e5f76fe2c3
+102 fe1dd03597308686a7fff7161f644b6b
+103 990861c7c27812ee959f10e5f76fe2c3
+104 990861c7c27812ee959f10e5f76fe2c3
+105 050e41ec3bc40b3004bc6bdd356acae7
+106 050e41ec3bc40b3004bc6bdd356acae7
+107 050e41ec3bc40b3004bc6bdd356acae7
+108 050e41ec3bc40b3004bc6bdd356acae7
+109 050e41ec3bc40b3004bc6bdd356acae7
+110 050e41ec3bc40b3004bc6bdd356acae7
+111 050e41ec3bc40b3004bc6bdd356acae7
+112 050e41ec3bc40b3004bc6bdd356acae7
+113 050e41ec3bc40b3004bc6bdd356acae7
+114 050e41ec3bc40b3004bc6bdd356acae7
+115 050e41ec3bc40b3004bc6bdd356acae7
+116 050e41ec3bc40b3004bc6bdd356acae7
+117 050e41ec3bc40b3004bc6bdd356acae7
+118 050e41ec3bc40b3004bc6bdd356acae7
+119 fe1dd03597308686a7fff7161f644b6b
+120 050e41ec3bc40b3004bc6bdd356acae7
+121 f05f0ed0662fe01850ec1b928830ef32
+122 f05f0ed0662fe01850ec1b928830ef32
+123 f05f0ed0662fe01850ec1b928830ef32
+124 f05f0ed0662fe01850ec1b928830ef32
+125 f05f0ed0662fe01850ec1b928830ef32
+126 f05f0ed0662fe01850ec1b928830ef32
+127 f05f0ed0662fe01850ec1b928830ef32
+128 2362b67ee86693d7326c95d3526a5cd8
+129 f05f0ed0662fe01850ec1b928830ef32
+130 ff575c261c949d073b2895b05d1097c3
+131 ff575c261c949d073b2895b05d1097c3
+132 ff575c261c949d073b2895b05d1097c3
+133 f05f0ed0662fe01850ec1b928830ef32
+134 1862bb3adaf78b7b3b9a30b46526bf7e
+135 ff575c261c949d073b2895b05d1097c3
+136 ff575c261c949d073b2895b05d1097c3
+137 ff575c261c949d073b2895b05d1097c3
+138 13b2724139eb2c62578b4dab0d7b2cea
+139 13b2724139eb2c62578b4dab0d7b2cea
+140 13b2724139eb2c62578b4dab0d7b2cea
+141 13b2724139eb2c62578b4dab0d7b2cea
+142 13b2724139eb2c62578b4dab0d7b2cea
+143 13b2724139eb2c62578b4dab0d7b2cea
+144 13b2724139eb2c62578b4dab0d7b2cea
+145 1862bb3adaf78b7b3b9a30b46526bf7e
+146 13b2724139eb2c62578b4dab0d7b2cea
+147 ff575c261c949d073b2895b05d1097c3
+148 ff575c261c949d073b2895b05d1097c3
+149 ff575c261c949d073b2895b05d1097c3
+150 13b2724139eb2c62578b4dab0d7b2cea
+                                                                                    tag
+1                                                                            format:rda
+2                                                                            format:rda
+3                                                                            format:txt
+4                                         relationWith:600bda83cb840947976bd1ce3a11879d
+5                                                                            format:rda
+6                                                                            name:model
+7                                                                              class:lm
+8                                                                  coefname:(Intercept)
+9                                                                 coefname:Sepal.Length
+10                                                           coefname:Speciesversicolor
+11                                                            coefname:Speciesvirginica
+12                                                                               rank:4
+13                                                                      df.residual:146
+14                                                             date:2016-02-07 01:00:33
+15                                                                           format:rda
+16                                        session_info:93ecfdf1436932e2860c6dbdf2abc2ad
+17                                                                           format:rda
+18                                                                           format:txt
+19                                        relationWith:2a6e492cb6982f230e48cf46023e2e4f
+20                                                                           format:txt
+21                                                                           format:rda
+22                                                                          name:model2
+23                                                                             class:lm
+24                                                                 coefname:(Intercept)
+25                                                                coefname:Sepal.Length
+26                                                                               rank:2
+27                                                                      df.residual:148
+28                                                             date:2016-02-08 15:22:15
+29                                                                           format:rda
+30                                        session_info:2b1fe80a89976f859ee2247723889256
+31                                                                           format:rda
+32                                                                           format:rda
+33                                        session_info:b17388f623ba94ef7ca4254ed39c92a7
+34                                                                           format:txt
+35                                        relationWith:18a98048f0584469483afb65294ce3ed
+36                                                                           format:txt
+37                                                                           format:rda
+38                                                                           format:rda
+39                                                                           format:rda
+40                                        session_info:b17388f623ba94ef7ca4254ed39c92a7
+41                                                                           format:txt
+42                                        relationWith:70f4f83dbfef2a8afb2f495208d0a60f
+43                                                                           format:rda
+44                                                                     class:data.frame
+45                                                                 varname:Sepal.Length
+46                                                                  varname:Sepal.Width
+47                                                                 varname:Petal.Length
+48                                                                  varname:Petal.Width
+49                                                                      varname:Species
+50                                                             date:2016-02-08 15:57:32
+51                                                                            name:iris
+52                                                                           format:rda
+53                                        session_info:fe1dd03597308686a7fff7161f644b6b
+54                                                                           format:txt
+55                                                                           format:rda
+56                                                                     class:data.frame
+57                                                                 varname:Sepal.Length
+58                                                                  varname:Sepal.Width
+59                                                                 varname:Petal.Length
+60                                                                  varname:Petal.Width
+61                                                                      varname:Species
+62                                                             date:2016-02-08 15:57:32
+63                                                 LHS:ff575c261c949d073b2895b05d1097c3
+64                                                         RHS:filter(Sepal.Length &lt; 6)
+65                                                                           format:rda
+66                                        session_info:fe1dd03597308686a7fff7161f644b6b
+67                                                                           format:txt
+68                                                                           format:rda
+69                                                                     class:data.frame
+70                                                                 varname:Sepal.Length
+71                                                                  varname:Sepal.Width
+72                                                                 varname:Petal.Length
+73                                                                  varname:Petal.Width
+74                                                                      varname:Species
+75                                                             date:2016-02-08 15:57:32
+76                                               name:iris %a% filter(Sepal.Length &lt; 6)
+77                                                                           format:rda
+78                                        session_info:fe1dd03597308686a7fff7161f644b6b
+79                                                                           format:txt
+80                                                                           format:rda
+81                                                                             class:lm
+82                                                                 coefname:(Intercept)
+83                                                           coefname:Speciesversicolor
+84                                                            coefname:Speciesvirginica
+85                                                                               rank:3
+86                                                                       df.residual:80
+87                                                             date:2016-02-08 15:57:32
+88                                                 LHS:d3696e13d15223c7d0bbccb33cc20a11
+89                                             RHS:lm(Petal.Length ~ Species, data = .)
+90                                                                           format:rda
+91                                        session_info:fe1dd03597308686a7fff7161f644b6b
+92                                                                           format:txt
+93                                                                           format:rda
+94                                                                             class:lm
+95                                                                 coefname:(Intercept)
+96                                                           coefname:Speciesversicolor
+97                                                            coefname:Speciesvirginica
+98                                                                               rank:3
+99                                                                       df.residual:80
+100                                                            date:2016-02-08 15:57:32
+101 name:iris %a% filter(Sepal.Length &lt; 6) %a% lm(Petal.Length ~ Species,     data = .)
+102                                                                          format:rda
+103                                       session_info:fe1dd03597308686a7fff7161f644b6b
+104                                                                          format:txt
+105                                                                          format:rda
+106                                                                    class:summary.lm
+107                                                                        sigma:0.2803
+108                                                                                df:3
+109                                                                               df:80
+110                                                                                df:3
+111                                                                          R^2:0.9604
+112                                                                 adjusted R^2:0.9594
+113                                                                    fstatistic:970.8
+114                                                                     fstatistic.df:2
+115                                                                    fstatistic.df:80
+116                                                            date:2016-02-08 15:57:32
+117                                                LHS:990861c7c27812ee959f10e5f76fe2c3
+118                                                                       RHS:summary()
+119                                                                          format:rda
+120                                       session_info:fe1dd03597308686a7fff7161f644b6b
+121                                                                          format:rda
+122                                                                            name:pl1
+123                                                                            class:gg
+124                                                                        class:ggplot
+125                                                                 labelx:Sepal.Length
+126                                                                 labely:Petal.Length
+127                                                            date:2016-03-04 19:52:24
+128                                                                          format:rda
+129                                       session_info:2362b67ee86693d7326c95d3526a5cd8
+130                                                                          format:rda
+131                                                                          format:txt
+132                                       relationWith:f05f0ed0662fe01850ec1b928830ef32
+133                                                                          format:png
+134                                                                          format:rda
+135                                                                          format:rda
+136                                                                          format:txt
+137                                       relationWith:13b2724139eb2c62578b4dab0d7b2cea
+138                                                                          format:rda
+139                                                                            name:pl2
+140                                                                            class:gg
+141                                                                        class:ggplot
+142                                                                 labelx:Sepal.Length
+143                                                                 labely:Petal.Length
+144                                                            date:2016-03-04 19:55:05
+145                                                                          format:rda
+146                                       session_info:1862bb3adaf78b7b3b9a30b46526bf7e
+147                                                                          format:rda
+148                                                                          format:txt
+149                                       relationWith:13b2724139eb2c62578b4dab0d7b2cea
+150                                                                          format:png
+            createdDate
+1   2016-02-07 00:48:44
+2   2016-02-07 00:48:44
+3   2016-02-07 00:48:44
+4   2016-02-07 00:48:44
+5   2016-02-07 01:00:33
+6   2016-02-07 01:00:33
+7   2016-02-07 01:00:33
+8   2016-02-07 01:00:33
+9   2016-02-07 01:00:33
+10  2016-02-07 01:00:33
+11  2016-02-07 01:00:33
+12  2016-02-07 01:00:33
+13  2016-02-07 01:00:33
+14  2016-02-07 01:00:33
+15  2016-02-07 01:00:33
+16  2016-02-07 01:00:33
+17  2016-02-07 01:00:33
+18  2016-02-07 01:00:33
+19  2016-02-07 01:00:33
+20  2016-02-07 01:00:33
+21  2016-02-08 15:22:15
+22  2016-02-08 15:22:15
+23  2016-02-08 15:22:15
+24  2016-02-08 15:22:15
+25  2016-02-08 15:22:15
+26  2016-02-08 15:22:15
+27  2016-02-08 15:22:15
+28  2016-02-08 15:22:15
+29  2016-02-08 15:22:15
+30  2016-02-08 15:22:15
+31  2016-02-08 15:22:15
+32  2016-02-08 15:22:15
+33  2016-02-08 15:22:15
+34  2016-02-08 15:22:15
+35  2016-02-08 15:22:15
+36  2016-02-08 15:22:15
+37  2016-02-08 15:34:53
+38  2016-02-08 15:34:53
+39  2016-02-08 15:34:53
+40  2016-02-08 15:34:53
+41  2016-02-08 15:34:53
+42  2016-02-08 15:34:53
+43  2016-02-08 15:57:32
+44  2016-02-08 15:57:32
+45  2016-02-08 15:57:32
+46  2016-02-08 15:57:32
+47  2016-02-08 15:57:32
+48  2016-02-08 15:57:32
+49  2016-02-08 15:57:32
+50  2016-02-08 15:57:32
+51  2016-02-08 15:57:32
+52  2016-02-08 15:57:32
+53  2016-02-08 15:57:32
+54  2016-02-08 15:57:32
+55  2016-02-08 15:57:32
+56  2016-02-08 15:57:32
+57  2016-02-08 15:57:32
+58  2016-02-08 15:57:32
+59  2016-02-08 15:57:32
+60  2016-02-08 15:57:32
+61  2016-02-08 15:57:32
+62  2016-02-08 15:57:32
+63  2016-02-08 15:57:32
+64  2016-02-08 15:57:32
+65  2016-02-08 15:57:32
+66  2016-02-08 15:57:32
+67  2016-02-08 15:57:32
+68  2016-02-08 15:57:32
+69  2016-02-08 15:57:32
+70  2016-02-08 15:57:32
+71  2016-02-08 15:57:32
+72  2016-02-08 15:57:32
+73  2016-02-08 15:57:32
+74  2016-02-08 15:57:32
+75  2016-02-08 15:57:32
+76  2016-02-08 15:57:32
+77  2016-02-08 15:57:32
+78  2016-02-08 15:57:32
+79  2016-02-08 15:57:32
+80  2016-02-08 15:57:32
+81  2016-02-08 15:57:32
+82  2016-02-08 15:57:32
+83  2016-02-08 15:57:32
+84  2016-02-08 15:57:32
+85  2016-02-08 15:57:32
+86  2016-02-08 15:57:32
+87  2016-02-08 15:57:32
+88  2016-02-08 15:57:32
+89  2016-02-08 15:57:32
+90  2016-02-08 15:57:32
+91  2016-02-08 15:57:32
+92  2016-02-08 15:57:32
+93  2016-02-08 15:57:32
+94  2016-02-08 15:57:32
+95  2016-02-08 15:57:32
+96  2016-02-08 15:57:32
+97  2016-02-08 15:57:32
+98  2016-02-08 15:57:32
+99  2016-02-08 15:57:32
+100 2016-02-08 15:57:32
+101 2016-02-08 15:57:32
+102 2016-02-08 15:57:32
+103 2016-02-08 15:57:32
+104 2016-02-08 15:57:32
+105 2016-02-08 15:57:32
+106 2016-02-08 15:57:32
+107 2016-02-08 15:57:32
+108 2016-02-08 15:57:32
+109 2016-02-08 15:57:32
+110 2016-02-08 15:57:32
+111 2016-02-08 15:57:32
+112 2016-02-08 15:57:32
+113 2016-02-08 15:57:32
+114 2016-02-08 15:57:32
+115 2016-02-08 15:57:32
+116 2016-02-08 15:57:32
+117 2016-02-08 15:57:32
+118 2016-02-08 15:57:32
+119 2016-02-08 15:57:32
+120 2016-02-08 15:57:32
+121 2016-03-04 19:52:24
+122 2016-03-04 19:52:24
+123 2016-03-04 19:52:24
+124 2016-03-04 19:52:24
+125 2016-03-04 19:52:24
+126 2016-03-04 19:52:24
+127 2016-03-04 19:52:24
+128 2016-03-04 19:52:25
+129 2016-03-04 19:52:25
+130 2016-03-04 19:52:25
+131 2016-03-04 19:52:25
+132 2016-03-04 19:52:25
+133 2016-03-04 19:52:25
+134 2016-03-04 19:52:31
+135 2016-03-04 19:52:31
+136 2016-03-04 19:52:31
+137 2016-03-04 19:52:31
+138 2016-03-04 19:55:05
+139 2016-03-04 19:55:05
+140 2016-03-04 19:55:05
+141 2016-03-04 19:55:05
+142 2016-03-04 19:55:05
+143 2016-03-04 19:55:05
+144 2016-03-04 19:55:05
+145 2016-03-04 19:55:05
+146 2016-03-04 19:55:05
+147 2016-03-04 19:55:05
+148 2016-03-04 19:55:05
+149 2016-03-04 19:55:05
+150 2016-03-04 19:55:06
+</div>
+<div class='input'>data(iris)
+asave(iris, silent = FALSE) # iris was used in pl
+</div>
+<strong class='warning'>Warning message:
+Artifact ff575c261c949d073b2895b05d1097c3 was already archived. Another archivisation executed with success.</strong>
+<div class='output'>[1] &quot;ff575c261c949d073b2895b05d1097c3&quot;
+</div>
+<div class='input'>aoptions(&#39;repoDir&#39;, NULL, unset = TRUE)
+</div>
+<div class='output'>NULL
+</div>
+<div class='input'>deleteLocalRepo(exampleRepoDir, TRUE)
+rm(exampleRepoDir)
+
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>asave</li><li>saveToLocalRepo</li><li>saveToRepo</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+For more detailed information check the <span class = "pkg">archivist</span> package
+<a href = 'http://pbiecek.github.io/archivist/'>Use Cases</a>.
+The list of supported artifacts and their tags is available on <code>wiki</code> on <span class = "pkg">archivist</span>
+<a href = 'https://github.com/pbiecek/archivist/wiki/archivist-package---Tags'>Github Repository</a>.
+
+Other archivist: <code><a href='Repository.html'>Repository</a></code>,
+  <code><a href='Tags.html'>Tags</a></code>, <code><a href='magrittr.html'>%a%</a></code>,
+  <code><a href='addHooksToPrint.html'>addHooksToPrint</a></code>, <code><a href='addTagsRepo.html'>addTagsRepo</a></code>,
+  <code><a href='aformat.html'>aformat</a></code>, <code><a href='ahistory.html'>ahistory</a></code>,
+  <code><a href='alink.html'>alink</a></code>, <code><a href='archivistOptions.html'>aoptions</a></code>,
+  <code><a href='archivist-package.html'>archivist-package</a></code>, <code><a href='aread.html'>aread</a></code>,
+  <code><a href='asearch.html'>asearch</a></code>, <code><a href='asession.html'>asession</a></code>,
+  <code><a href='cache.html'>cache</a></code>, <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
+  <code><a href='createEmptyRepo.html'>createLocalRepo</a></code>,
+  <code><a href='createMDGallery.html'>createMDGallery</a></code>,
+  <code><a href='deleteLocalRepo.html'>deleteLocalRepo</a></code>,
+  <code><a href='getRemoteHook.html'>getRemoteHook</a></code>, <code><a href='getTags.html'>getTagsLocal</a></code>,
+  <code><a href='loadFromRepo.html'>loadFromLocalRepo</a></code>, <code><a href='md5hash.html'>md5hash</a></code>,
+  <code><a href='restoreLibs.html'>restoreLibs</a></code>, <code><a href='rmFromLocalRepo.html'>rmFromLocalRepo</a></code>,
+  <code><a href='searchInRepo.html'>searchInLocalRepo</a></code>,
+  <code><a href='setRepo.html'>setLocalRepo</a></code>,
+  <code><a href='shinySearchInRepo.html'>shinySearchInLocalRepo</a></code>,
+  <code><a href='showRepo.html'>showLocalRepo</a></code>,
+  <code><a href='splitTags.html'>splitTagsLocal</a></code>,
+  <code><a href='summaryRepo.html'>summaryLocalRepo</a></code>,
+  <code><a href='zipRepo.html'>zipLocalRepo</a></code>
+
+    
+    <h2>Author</h2>
+    
+Marcin Kosinski , <a href='mailto:m.p.kosinski@gmail.com'>m.p.kosinski@gmail.com</a>
+
+    
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

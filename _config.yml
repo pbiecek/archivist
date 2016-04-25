@@ -31,6 +31,8 @@ shortname:        Rarchivist
 # Social Media
 twitter:          true # add a twitter button to each post
 facebook:         true # add a facebook share button to each post
+linkedin:					true
+googleplus:				true
 
 author:
   name:           'Przemyslaw Biecek and Marcin Kosinski'

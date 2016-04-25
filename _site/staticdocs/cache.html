@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>cache. archivist 2.0.4</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+Przemyslaw Biecek, &lt;a href='mailto:Przemyslaw.Biecek@gmail.com'&gt;Przemyslaw.Biecek@gmail.com&lt;/a&gt;
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">archivist 2.0.4</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Enable Caching of the Function Results with the use of Archivist</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>cache(cacheRepo&nbsp;=&nbsp;NULL, FUN, ..., notOlderThan&nbsp;=&nbsp;NULL)</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>cacheRepo</dt>
+      <dd>A repository used for storing cached objects.</dd>
+      <dt>FUN</dt>
+      <dd>A function to be called.</dd>
+      <dt>...</dt>
+      <dd>Arguments of <code>FUN</code> function .</dd>
+      <dt>notOlderThan</dt>
+      <dd>load an artifact from the database only if it was created after notOlderThan.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+Result of the function call with additional attributes: <code>tags</code> - md5 hash of the
+function call and <code>call</code> - "".
+</dl></p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p><code>cache</code> function stores all results of function calls in local <a href='Repository.html'>Repository</a>.
+All results are stored together with md5 hashes of the function calls.
+If a function is called with the same arguments, then its results can be loaded
+from the repository.</p>
+  
+      <p>One may specify expiration date for live objects. 
+It may be useful for objects that can be changed externally (like queries to database).</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+
+      <p><code>cache</code> function stores all results of function calls in local <a href='Repository.html'>Repository</a> 
+specified by the <code>cacheRepo</code> argument.
+The md5 hash of <code>FUN</code> and it's arguments is added as a Tag to the repository.
+This Tag has the following structure "cacheId:md5hash".
+Note that <code>cache</code> is a good solution if objects are not that big but calculations
+are time consuming (see <code>Examples</code>). If objects are big and calculations are easy, then
+disk input-output operations may take more time than calculations itself.</p>
+  
+    </div>
+
+    <div class="Note">
+      <h2>Note</h2>
+
+      <p>Bug reports and feature requests can be sent to <a href = 'https://github.com/pbiecek/archivist/issues'>https://github.com/pbiecek/archivist/issues</a></p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>
+# objects preparation
+library(lubridate)
+cacheRepo &lt;- tempfile()
+createLocalRepo( cacheRepo )
+</div>
+<div class='output'>Directory /tmp/Rtmp8itQ6j/file516f3e9e046f did not exist. Forced to create a new directory.</div>
+<div class='input'>
+## Example 1:
+# cache is useful when objects used by FUN are not that big but calculations
+# are time-comsuming. Take a look at this example:
+fun &lt;- function(n) {replicate(n, summary(lm(Sepal.Length~Species, iris))$r.squared)}
+
+# let&#39;s check time of two evaluations of cache function
+system.time( res &lt;- cache(cacheRepo, fun, 1000) )
+</div>
+<div class='output'>   user  system elapsed 
+  2.731  13.676   2.276 
+</div>
+<div class='input'>system.time( res &lt;- cache(cacheRepo, fun, 1000) ) 
+</div>
+<div class='output'>   user  system elapsed 
+  2.845  16.651   2.604 
+</div>
+<div class='input'># The second call is much faster. Why is it so? Because the result of fun
+# function evaluation has been stored in local cacheRepo during the first evaluation
+# of cache. In the second call of cache we are simply loading the result of fun
+# from local cacheRepo Repository.
+
+## Example 2:
+testFun &lt;- function(x) {cat(x);x}
+
+# testFun will be executed and saved to cacheRepo
+tmp &lt;- cache(cacheRepo, testFun, &quot;Say hallo!&quot;)
+</div>
+<div class='output'>Say hallo!</div>
+<div class='input'>
+# testFun execution will be loaded from repository
+tmp &lt;- cache(cacheRepo, testFun, &quot;Say hallo!&quot;)
+</div>
+<div class='output'>Say hallo!</div>
+<div class='input'>
+# testFun will be executed once again as it fails with expiration date. It will
+# be saved to cacheRepo.
+tmp &lt;- cache(cacheRepo, testFun, &quot;Say hallo!&quot;, notOlderThan = now())
+</div>
+<div class='output'>Say hallo!</div>
+<div class='input'>
+# testFun execution will be loaded from repository as it
+# passes with expiration date [within hour]
+tmp &lt;- cache(cacheRepo, testFun, &quot;Say hallo!&quot;, notOlderThan = now() - hours(1))
+</div>
+<div class='output'>Say hallo!</div>
+<div class='input'>
+deleteLocalRepo( cacheRepo, TRUE)
+rm( cacheRepo )
+
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>cache</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+For more detailed information, check the <span class = "pkg">archivist</span> package 
+<a href = 'https://github.com/pbiecek/archivist#-the-list-of-use-cases-'>Use Cases</a>.
+
+Other archivist: <code><a href='Repository.html'>Repository</a></code>,
+  <code><a href='Tags.html'>Tags</a></code>, <code><a href='magrittr.html'>%a%</a></code>,
+  <code><a href='addHooksToPrint.html'>addHooksToPrint</a></code>, <code><a href='addTagsRepo.html'>addTagsRepo</a></code>,
+  <code><a href='aformat.html'>aformat</a></code>, <code><a href='ahistory.html'>ahistory</a></code>,
+  <code><a href='alink.html'>alink</a></code>, <code><a href='archivistOptions.html'>aoptions</a></code>,
+  <code><a href='archivist-package.html'>archivist-package</a></code>, <code><a href='aread.html'>aread</a></code>,
+  <code><a href='asearch.html'>asearch</a></code>, <code><a href='asession.html'>asession</a></code>,
+  <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
+  <code><a href='createEmptyRepo.html'>createLocalRepo</a></code>,
+  <code><a href='createMDGallery.html'>createMDGallery</a></code>,
+  <code><a href='deleteLocalRepo.html'>deleteLocalRepo</a></code>,
+  <code><a href='getRemoteHook.html'>getRemoteHook</a></code>, <code><a href='getTags.html'>getTagsLocal</a></code>,
+  <code><a href='loadFromRepo.html'>loadFromLocalRepo</a></code>, <code><a href='md5hash.html'>md5hash</a></code>,
+  <code><a href='restoreLibs.html'>restoreLibs</a></code>, <code><a href='rmFromLocalRepo.html'>rmFromLocalRepo</a></code>,
+  <code><a href='saveToRepo.html'>saveToLocalRepo</a></code>,
+  <code><a href='searchInRepo.html'>searchInLocalRepo</a></code>,
+  <code><a href='setRepo.html'>setLocalRepo</a></code>,
+  <code><a href='shinySearchInRepo.html'>shinySearchInLocalRepo</a></code>,
+  <code><a href='showRepo.html'>showLocalRepo</a></code>,
+  <code><a href='splitTags.html'>splitTagsLocal</a></code>,
+  <code><a href='summaryRepo.html'>summaryLocalRepo</a></code>,
+  <code><a href='zipRepo.html'>zipLocalRepo</a></code>
+
+    
+    <h2>Author</h2>
+    
+Przemyslaw Biecek, <a href='mailto:Przemyslaw.Biecek@gmail.com'>Przemyslaw.Biecek@gmail.com</a>
+
+    
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

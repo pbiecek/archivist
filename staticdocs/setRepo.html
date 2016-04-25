@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>setLocalRepo. archivist 2.0.4</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+Marcin Kosinski , &lt;a href='mailto:m.p.kosinski@gmail.com'&gt;m.p.kosinski@gmail.com&lt;/a&gt;
+
+Przemyslaw Biecek, &lt;a href='mailto:przemyslaw.biecek@gmail.com'&gt;przemyslaw.biecek@gmail.com&lt;/a&gt;
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">archivist 2.0.4</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Set Repository's Global Path</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>setLocalRepo(repoDir)</div>
+<div>setRemoteRepo(user, repo, branch&nbsp;=&nbsp;"master", subdir&nbsp;=&nbsp;"/", repoType&nbsp;=&nbsp;"github")</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>repoDir</dt>
+      <dd>A character denoting a directory of a Repository that we want to
+make dafault.</dd>
+      <dt>user</dt>
+      <dd>While working with the Remote repository. A character containing
+a name of the Remote user that we want to make default.</dd>
+      <dt>repo</dt>
+      <dd>While working with the Remote repository. A character containing
+a name of the Remote repository that we want to make default.</dd>
+      <dt>branch</dt>
+      <dd>While working with the Remote repository. A character containing a name of 
+the Remote Repository's branch that we want to make default. Default <code>branch</code> is <code>master</code>.</dd>
+      <dt>subdir</dt>
+      <dd>While working with the Remote repository. A character containing a name
+of the Repository's directory on Remote that we want to make default.
+If the Repository is stored in the main folder on the Remote repository,
+this should be set to <code>subdir = "/"</code> as default.</dd>
+      <dt>repoType</dt>
+      <dd>A character containing a type of the remote repository. 
+Currently it can be 'github' or 'bitbucket'.</dd>
+    </dl>
+    
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p><code>setLocalRepo</code> sets local <a href='Repository.html'>Repository</a>'s global path.
+<code>setRemoteRepo</code> similarly sets Remote Repository's path.
+See examples.</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+
+      <p>If you are working on a local Repository and you are tired of specifying <code>repoDir</code>
+parameter in every function call that uses this parameter, you can set Repository's path
+globally using <code>setLocalRepo</code> function and omit <code>repoDir</code> parameter
+in future function calls.</p>
+  
+      <p>If you are working on the Remote Repository and you are tired of specifying <code>user</code>, 
+<code>repo</code>, <code>branch</code> and <code>subdir</code> parameters in every function call
+that uses these parameters, you can set Remote Repository's path globally using
+<code>setRemoteRepo</code> function and omit <code>user</code>, <code>repo</code>, <code>branch</code>
+and <code>subdir</code> parameters in future function calls. See examples.</p>
+  
+      <p>For local repositories, in this way, in the following function calls: 
+<a href='loadFromRepo.html'>loadFromLocalRepo</a>,<a href='searchInRepo.html'>searchInLocalRepo</a>, <a href='rmFromLocalRepo.html'>rmFromLocalRepo</a>, <a href='zipRepo.html'>zipLocalRepo</a>, 
+<a href='addTagsRepo.html'>addTagsRepo</a>, <a href='shinySearchInRepo.html'>shinySearchInLocalRepo</a>,
+<a href='getTags.html'>getTagsLocal</a>, <a href='showRepo.html'>showLocalRepo</a>, <a href='summaryRepo.html'>summaryLocalRepo</a> 
+<code>repoDir</code> parameter may be omitted. 
+For remote repositories, in this way,
+in the following function calls:
+<a href='zipRepo.html'>zipRemoteRepo</a>, <a href='loadFromRepo.html'>loadFromRemoteRepo</a>, <a href='searchInRepo.html'>searchInRemoteRepo</a>,
+<a href='getTags.html'>getTagsRemote</a>, <a href='showRepo.html'>showRemoteRepo</a>, <a href='summaryRepo.html'>summaryRemoteRepo</a>,
+<a href='copyToRepo.html'>copyRemoteRepo</a>
+parameters <code>user</code>, <code>repo</code>, <code>branch</code>, <code>subdir</code>  may be omitted.</p>
+  
+    </div>
+
+    <div class="Note">
+      <h2>Note</h2>
+
+      <p>Bug reports and feature requests can be sent to <a href = 'https://github.com/pbiecek/archivist/issues'>https://github.com/pbiecek/archivist/issues</a></p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>
+## Local version
+exampleRepoDir &lt;- tempfile()
+createLocalRepo(repoDir = exampleRepoDir)
+</div>
+<div class='output'>Directory /tmp/Rtmp8itQ6j/file516f25992611 did not exist. Forced to create a new directory.</div>
+<div class='input'>setLocalRepo(exampleRepoDir) 
+
+data(iris)
+data(swiss)
+
+# From this moment repoDir parameter may be ommitted in the following functions
+saveToRepo(iris)
+</div>
+<div class='output'>[1] &quot;ff575c261c949d073b2895b05d1097c3&quot;
+</div>
+<div class='input'>saveToRepo(swiss) 
+</div>
+<div class='output'>[1] &quot;4c43fa8a4d8f0cbf65353e397f37338c&quot;
+</div>
+<div class='input'>showLocalRepo()
+</div>
+<div class='output'>                           md5hash                             name
+1 ff575c261c949d073b2895b05d1097c3                             iris
+2 7a6a0ea6fd604c294097691f5cd65a05 7a6a0ea6fd604c294097691f5cd65a05
+3 4c43fa8a4d8f0cbf65353e397f37338c                            swiss
+4 7a6a0ea6fd604c294097691f5cd65a05 7a6a0ea6fd604c294097691f5cd65a05
+          createdDate
+1 2016-04-25 18:48:33
+2 2016-04-25 18:48:33
+3 2016-04-25 18:48:33
+4 2016-04-25 18:48:33
+</div>
+<div class='input'>showLocalRepo(method = &quot;tags&quot;)
+</div>
+<div class='output'>                           artifact
+1  ff575c261c949d073b2895b05d1097c3
+2  ff575c261c949d073b2895b05d1097c3
+3  ff575c261c949d073b2895b05d1097c3
+4  ff575c261c949d073b2895b05d1097c3
+5  ff575c261c949d073b2895b05d1097c3
+6  ff575c261c949d073b2895b05d1097c3
+7  ff575c261c949d073b2895b05d1097c3
+8  ff575c261c949d073b2895b05d1097c3
+9  ff575c261c949d073b2895b05d1097c3
+10 7a6a0ea6fd604c294097691f5cd65a05
+11 ff575c261c949d073b2895b05d1097c3
+12 ff575c261c949d073b2895b05d1097c3
+13 4c43fa8a4d8f0cbf65353e397f37338c
+14 4c43fa8a4d8f0cbf65353e397f37338c
+15 4c43fa8a4d8f0cbf65353e397f37338c
+16 4c43fa8a4d8f0cbf65353e397f37338c
+17 4c43fa8a4d8f0cbf65353e397f37338c
+18 4c43fa8a4d8f0cbf65353e397f37338c
+19 4c43fa8a4d8f0cbf65353e397f37338c
+20 4c43fa8a4d8f0cbf65353e397f37338c
+21 4c43fa8a4d8f0cbf65353e397f37338c
+22 4c43fa8a4d8f0cbf65353e397f37338c
+23 7a6a0ea6fd604c294097691f5cd65a05
+24 4c43fa8a4d8f0cbf65353e397f37338c
+25 4c43fa8a4d8f0cbf65353e397f37338c
+                                             tag         createdDate
+1                                     format:rda 2016-04-25 18:48:33
+2                                      name:iris 2016-04-25 18:48:33
+3                               class:data.frame 2016-04-25 18:48:33
+4                           varname:Sepal.Length 2016-04-25 18:48:33
+5                            varname:Sepal.Width 2016-04-25 18:48:33
+6                           varname:Petal.Length 2016-04-25 18:48:33
+7                            varname:Petal.Width 2016-04-25 18:48:33
+8                                varname:Species 2016-04-25 18:48:33
+9                       date:2016-04-25 18:48:33 2016-04-25 18:48:33
+10                                    format:rda 2016-04-25 18:48:33
+11 session_info:7a6a0ea6fd604c294097691f5cd65a05 2016-04-25 18:48:33
+12                                    format:txt 2016-04-25 18:48:33
+13                                    format:rda 2016-04-25 18:48:33
+14                                    name:swiss 2016-04-25 18:48:33
+15                              class:data.frame 2016-04-25 18:48:33
+16                             varname:Fertility 2016-04-25 18:48:33
+17                           varname:Agriculture 2016-04-25 18:48:33
+18                           varname:Examination 2016-04-25 18:48:33
+19                             varname:Education 2016-04-25 18:48:33
+20                              varname:Catholic 2016-04-25 18:48:33
+21                      varname:Infant.Mortality 2016-04-25 18:48:33
+22                      date:2016-04-25 18:48:33 2016-04-25 18:48:33
+23                                    format:rda 2016-04-25 18:48:33
+24 session_info:7a6a0ea6fd604c294097691f5cd65a05 2016-04-25 18:48:33
+25                                    format:txt 2016-04-25 18:48:33
+</div>
+<div class='input'>iris2 &lt;- loadFromLocalRepo( &quot;ff575c2&quot; , value = TRUE)
+searchInLocalRepo(&quot;name:i&quot;, fixed = FALSE)
+</div>
+<div class='output'>[1] &quot;ff575c261c949d073b2895b05d1097c3&quot;
+</div>
+<div class='input'>getTagsLocal(&quot;ff575c261c949d073b2895b05d1097c3&quot;)
+</div>
+<div class='output'>[1] &quot;name:iris&quot;
+</div>
+<div class='input'>rmFromLocalRepo(&quot;4c43f&quot;)
+showLocalRepo()
+</div>
+<div class='output'>                           md5hash                             name
+1 ff575c261c949d073b2895b05d1097c3                             iris
+2 7a6a0ea6fd604c294097691f5cd65a05 7a6a0ea6fd604c294097691f5cd65a05
+3 7a6a0ea6fd604c294097691f5cd65a05 7a6a0ea6fd604c294097691f5cd65a05
+          createdDate
+1 2016-04-25 18:48:33
+2 2016-04-25 18:48:33
+3 2016-04-25 18:48:33
+</div>
+<div class='input'>summaryLocalRepo()
+</div>
+<div class='output'>Number of archived artifacts in Repository:  1 
+Number of archived datasets in Repository:  0 
+Saves per day in Repository: 
+            Saves
+2016-04-25     2
+</div>
+<div class='input'>
+# REMEMBER that in deleteLocalRepo you MUST specify repoDir parameter!
+# deleteRepo doesn&#39;t take setLocalRepo&#39;s settings into consideration
+deleteLocalRepo( exampleRepoDir, deleteRoot=TRUE)
+rm( exampleRepoDir )
+
+## Github version
+setRemoteRepo( user=&quot;MarcinKosinski&quot;, repo=&quot;Museum&quot;, branch=&quot;master&quot;,
+               subdir=&quot;ex1&quot; )
+               
+# From this moment user, repo, branch, subdir parameters may be ommitted
+# in the following functions:
+showRemoteRepo()
+</div>
+<div class='output'>                           md5hash                             name
+1 ff575c261c949d073b2895b05d1097c3 ff575c261c949d073b2895b05d1097c3
+          createdDate
+1 2014-09-08 11:42:24
+</div>
+<div class='input'>loadFromRemoteRepo( &quot;ff575c261c949d073b2895b05d1097c3&quot;)
+this &lt;- loadFromRemoteRepo( &quot;ff&quot;, value = TRUE)
+zipRemoteRepo()
+</div>
+<div class='output'>Directory repository did not exist. Forced to create a new directory.</div>
+<div class='input'>file.remove(file.path(getwd(), &quot;repository.zip&quot;)) # We can remove this zip file
+</div>
+<div class='output'>[1] TRUE
+</div>
+<div class='input'>searchInRemoteRepo( &quot;name:&quot;, fixed= FALSE)
+</div>
+<div class='output'>[1] &quot;ff575c261c949d073b2895b05d1097c3&quot;
+</div>
+<div class='input'>getTagsRemote(&quot;ff575c261c949d073b2895b05d1097c3&quot;)
+</div>
+<div class='output'>[1] &quot;name:iris&quot;
+</div>
+<div class='input'>summaryRemoteRepo( )
+</div>
+<div class='output'>Number of archived artifacts in Repository:  1 
+Number of archived datasets in Repository:  0 
+Saves per day in Repository: 
+            Saves
+2014-09-08     1
+</div>
+<div class='input'>
+# To use multisearchInRemoteRepo we should use repository with more than one artifact. 
+setRemoteRepo( user=&quot;pbiecek&quot;, repo=&quot;archivist&quot;  )
+
+# From this moment user and repo parameters may be ommitted in the following functions
+showRemoteRepo()
+</div>
+<div class='output'>                            md5hash                             name
+1  ff575c261c949d073b2895b05d1097c3                             iris
+2  f7804cb74efa70d9795ace8c32e333c3                        myplot123
+3  5c3b6d82ab29e7b3a2137b6a537e55ec 5c3b6d82ab29e7b3a2137b6a537e55ec
+4  cd6557c6163a6f9800f308f343e75e72                            model
+5  7a761a2ae54f3d90060a9f6ca04b3506 7a761a2ae54f3d90060a9f6ca04b3506
+6  db864b3dcc09888f5f7f2750b4ab553d                             agn1
+7  c2380a7b8c090d6564ff12cdd60aaf7f c2380a7b8c090d6564ff12cdd60aaf7f
+8  c1ce897de77e8cb793a69b54e7f2b8b5                           fannyx
+9  ebe92bb4f9af6c343da4986f84c42b9b ebe92bb4f9af6c343da4986f84c42b9b
+10 2ae5f73c0b979532555fb3800458a4d4                             lda1
+11 53a9f3aa4235e111524dda17aad2ee3a 53a9f3aa4235e111524dda17aad2ee3a
+12 fdf1922d88bb7369896886dfa7da16f6                             qda1
+13 4d504b6c315c9be389f2e84186fa64c5 4d504b6c315c9be389f2e84186fa64c5
+14 1e05d1a3f103da0d99fba79643f71487                          glmnet1
+15 942ca3ecb05524e95375728c114bf619 942ca3ecb05524e95375728c114bf619
+16 134ecbbe2a8814d98f0c2758000c408e                     trellis.plot
+17 f49104cd336e6417f89141855c0fe4a7 f49104cd336e6417f89141855c0fe4a7
+18 df598bf17a3f149e004eede9c68313fa                        this.test
+19 3c6ee510336926b494cf8375b903246a 3c6ee510336926b494cf8375b903246a
+20 1d85e04b24e5129f0b7577b270d24ab4                            myFit
+21 917b56fd9edd81e088f8f7ada48cda95 917b56fd9edd81e088f8f7ada48cda95
+22 617ded4953ac986524a1c24703363980 617ded4953ac986524a1c24703363980
+23 5629bc43e36d219b613076b17c665eda 5629bc43e36d219b613076b17c665eda
+           createdDate
+1  2015-11-16 12:47:13
+2  2015-11-16 12:47:14
+3  2015-11-16 12:47:14
+4  2015-11-16 12:47:14
+5  2015-11-16 12:47:14
+6  2015-11-16 12:47:14
+7  2015-11-16 12:47:14
+8  2015-11-16 12:47:14
+9  2015-11-16 12:47:14
+10 2015-11-16 12:47:15
+11 2015-11-16 12:47:15
+12 2015-11-16 12:47:15
+13 2015-11-16 12:47:15
+14 2015-11-16 12:47:16
+15 2015-11-16 12:47:16
+16 2015-11-16 12:47:18
+17 2015-11-16 12:47:18
+18 2015-11-16 12:47:19
+19 2015-11-16 12:47:19
+20 2015-11-16 12:47:19
+21 2015-11-16 12:47:19
+22 2015-11-16 12:47:24
+23 2015-11-16 12:47:24
+</div>
+<div class='input'>searchInRemoteRepo( pattern=c(&quot;varname:Sepal.Width&quot;, &quot;class:lm&quot;, &quot;name:myplot123&quot;), 
+                         intersect = FALSE )
+</div>
+<div class='output'>[1] &quot;ff575c261c949d073b2895b05d1097c3&quot; &quot;cd6557c6163a6f9800f308f343e75e72&quot;
+[3] &quot;f7804cb74efa70d9795ace8c32e333c3&quot;
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>setLocalRepo</li><li>setRemoteRepo</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+<a href = 'https://github.com/pbiecek/archivist/wiki'>https://github.com/pbiecek/archivist/wiki</a>
+
+Other archivist: <code><a href='Repository.html'>Repository</a></code>,
+  <code><a href='Tags.html'>Tags</a></code>, <code><a href='magrittr.html'>%a%</a></code>,
+  <code><a href='addHooksToPrint.html'>addHooksToPrint</a></code>, <code><a href='addTagsRepo.html'>addTagsRepo</a></code>,
+  <code><a href='aformat.html'>aformat</a></code>, <code><a href='ahistory.html'>ahistory</a></code>,
+  <code><a href='alink.html'>alink</a></code>, <code><a href='archivistOptions.html'>aoptions</a></code>,
+  <code><a href='archivist-package.html'>archivist-package</a></code>, <code><a href='aread.html'>aread</a></code>,
+  <code><a href='asearch.html'>asearch</a></code>, <code><a href='asession.html'>asession</a></code>,
+  <code><a href='cache.html'>cache</a></code>, <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
+  <code><a href='createEmptyRepo.html'>createLocalRepo</a></code>,
+  <code><a href='createMDGallery.html'>createMDGallery</a></code>,
+  <code><a href='deleteLocalRepo.html'>deleteLocalRepo</a></code>,
+  <code><a href='getRemoteHook.html'>getRemoteHook</a></code>, <code><a href='getTags.html'>getTagsLocal</a></code>,
+  <code><a href='loadFromRepo.html'>loadFromLocalRepo</a></code>, <code><a href='md5hash.html'>md5hash</a></code>,
+  <code><a href='restoreLibs.html'>restoreLibs</a></code>, <code><a href='rmFromLocalRepo.html'>rmFromLocalRepo</a></code>,
+  <code><a href='saveToRepo.html'>saveToLocalRepo</a></code>,
+  <code><a href='searchInRepo.html'>searchInLocalRepo</a></code>,
+  <code><a href='shinySearchInRepo.html'>shinySearchInLocalRepo</a></code>,
+  <code><a href='showRepo.html'>showLocalRepo</a></code>,
+  <code><a href='splitTags.html'>splitTagsLocal</a></code>,
+  <code><a href='summaryRepo.html'>summaryLocalRepo</a></code>,
+  <code><a href='zipRepo.html'>zipLocalRepo</a></code>
+
+Other archivist: <code><a href='Repository.html'>Repository</a></code>,
+  <code><a href='Tags.html'>Tags</a></code>, <code><a href='magrittr.html'>%a%</a></code>,
+  <code><a href='addHooksToPrint.html'>addHooksToPrint</a></code>, <code><a href='addTagsRepo.html'>addTagsRepo</a></code>,
+  <code><a href='aformat.html'>aformat</a></code>, <code><a href='ahistory.html'>ahistory</a></code>,
+  <code><a href='alink.html'>alink</a></code>, <code><a href='archivistOptions.html'>aoptions</a></code>,
+  <code><a href='archivist-package.html'>archivist-package</a></code>, <code><a href='aread.html'>aread</a></code>,
+  <code><a href='asearch.html'>asearch</a></code>, <code><a href='asession.html'>asession</a></code>,
+  <code><a href='cache.html'>cache</a></code>, <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
+  <code><a href='createEmptyRepo.html'>createLocalRepo</a></code>,
+  <code><a href='createMDGallery.html'>createMDGallery</a></code>,
+  <code><a href='deleteLocalRepo.html'>deleteLocalRepo</a></code>,
+  <code><a href='getRemoteHook.html'>getRemoteHook</a></code>, <code><a href='getTags.html'>getTagsLocal</a></code>,
+  <code><a href='loadFromRepo.html'>loadFromLocalRepo</a></code>, <code><a href='md5hash.html'>md5hash</a></code>,
+  <code><a href='restoreLibs.html'>restoreLibs</a></code>, <code><a href='rmFromLocalRepo.html'>rmFromLocalRepo</a></code>,
+  <code><a href='saveToRepo.html'>saveToLocalRepo</a></code>,
+  <code><a href='searchInRepo.html'>searchInLocalRepo</a></code>,
+  <code><a href='shinySearchInRepo.html'>shinySearchInLocalRepo</a></code>,
+  <code><a href='showRepo.html'>showLocalRepo</a></code>,
+  <code><a href='splitTags.html'>splitTagsLocal</a></code>,
+  <code><a href='summaryRepo.html'>summaryLocalRepo</a></code>,
+  <code><a href='zipRepo.html'>zipLocalRepo</a></code>
+
+    
+    <h2>Author</h2>
+    
+Marcin Kosinski , <a href='mailto:m.p.kosinski@gmail.com'>m.p.kosinski@gmail.com</a>
+
+Przemyslaw Biecek, <a href='mailto:przemyslaw.biecek@gmail.com'>przemyslaw.biecek@gmail.com</a>
+
+    
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

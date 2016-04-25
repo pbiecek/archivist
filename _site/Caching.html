@@ -110,6 +110,7 @@
       
         
       
+      <a class="sidebar-nav-item" href="/staticdocs/">Static Docs</a>
       <a class="sidebar-nav-item" href="https://github.com/pbiecek/archivist">GitHub project</a>
     </nav>
   </div>
@@ -142,17 +143,17 @@
 <span class="n">system.time</span><span class="p">(</span><span class="n">getMaxDistribution</span><span class="p">(</span><span class="n">rnorm</span><span class="p">,</span> <span class="m">10</span><span class="p">))</span></code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-text" data-lang="text">   user  system elapsed 
-  4.925   0.018   4.941 </code></pre></figure>
+  5.477   0.035   5.511 </code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">system.time</span><span class="p">(</span><span class="n">getMaxDistribution</span><span class="p">(</span><span class="n">rexp</span><span class="p">,</span> <span class="m">20</span><span class="p">))</span></code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-text" data-lang="text">   user  system elapsed 
-  4.840   0.005   4.842 </code></pre></figure>
+  5.156   0.008   5.164 </code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">system.time</span><span class="p">(</span><span class="n">getMaxDistribution</span><span class="p">(</span><span class="n">rnorm</span><span class="p">,</span> <span class="m">10</span><span class="p">))</span></code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-text" data-lang="text">   user  system elapsed 
-  4.533   0.000   4.530 </code></pre></figure>
+  4.845   0.001   4.844 </code></pre></figure>
 
 <p>Now, let’s load the archivist package and prepare a repository for cached objects.</p>
 
@@ -162,7 +163,7 @@
 <span class="n">cacheRepo</span> <span class="o">&lt;-</span> <span class="n">tempfile</span><span class="p">()</span>
 <span class="n">createLocalRepo</span><span class="p">(</span><span class="n">cacheRepo</span><span class="p">)</span></code></pre></figure>
 
-<figure class="highlight"><pre><code class="language-text" data-lang="text">Directory /tmp/RtmpZE9Gag/file27d673051be1 did not exist. Forced to create a new directory.</code></pre></figure>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">Directory /tmp/Rtmp45GZsm/file65d3676f9387 did not exist. Forced to create a new directory.</code></pre></figure>
 
 <h1 id="how-to-work-with-cache">How to work with cache</h1>
 
@@ -172,17 +173,17 @@ How to use it?</p>
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">system.time</span><span class="p">(</span><span class="n">cache</span><span class="p">(</span><span class="n">cacheRepo</span><span class="p">,</span> <span class="n">getMaxDistribution</span><span class="p">,</span> <span class="n">rnorm</span><span class="p">,</span> <span class="m">10</span><span class="p">))</span></code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-text" data-lang="text">   user  system elapsed 
-  4.420   0.004   4.422 </code></pre></figure>
+  4.738   0.004   4.740 </code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">system.time</span><span class="p">(</span><span class="n">cache</span><span class="p">(</span><span class="n">cacheRepo</span><span class="p">,</span> <span class="n">getMaxDistribution</span><span class="p">,</span> <span class="n">rexp</span><span class="p">,</span> <span class="m">10</span><span class="p">))</span></code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-text" data-lang="text">   user  system elapsed 
-  4.333   0.005   4.335 </code></pre></figure>
+  4.950   0.008   4.955 </code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">system.time</span><span class="p">(</span><span class="n">cache</span><span class="p">(</span><span class="n">cacheRepo</span><span class="p">,</span> <span class="n">getMaxDistribution</span><span class="p">,</span> <span class="n">rnorm</span><span class="p">,</span> <span class="m">10</span><span class="p">))</span></code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-text" data-lang="text">   user  system elapsed 
-  0.002   0.000   0.002 </code></pre></figure>
+  0.003   0.000   0.003 </code></pre></figure>
 
 <p>The second evaluation of <code class="highlighter-rouge">getMaxDistribution</code> is much, much faster. Results are just read from disk.</p>
 
@@ -195,13 +196,8 @@ Note that, if <code class="highlighter-rouge">cacheRepo</code> is a shared folde
 
 </div>
 
-
-<a href="https://twitter.com/share" class="twitter-share-button"{count}>Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-
-
-
-<div id="fb-root"></div>
+  
+  <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
@@ -211,10 +207,25 @@ Note that, if <code class="highlighter-rouge">cacheRepo</code> is a shared folde
 }(document, 'script', 'facebook-jssdk'));</script>
 
 <div class="fb-share-button" data-href="https://pbiecek.github.io/archivist" data-layout="button_count"></div>
+  
+
+  
+  <a href="https://twitter.com/share" class="twitter-share-button"{count}>Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  
+
+  
+  <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
+<script type="IN/Share" data-url="https://pbiecek.github.io/archivist" data-counter="right"></script>
+  
+  
+  
+  <a class="g-plus" data-action="share" data-annotation="none" data-href="https://pbiecek.github.io/archivist"></a>
+  
 
 
-
-
+  
+  
 <div id="disqus_thread"></div>
 
 <script>(function() {
@@ -225,7 +236,7 @@ Note that, if <code class="highlighter-rouge">cacheRepo</code> is a shared folde
     })();</script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 
-
+  
 
     </div>
 

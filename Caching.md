@@ -40,7 +40,7 @@ system.time(getMaxDistribution(rnorm, 10))
 
 {% highlight text %}
    user  system elapsed 
-  4.925   0.018   4.941 
+  5.477   0.035   5.511 
 {% endhighlight %}
 
 
@@ -53,7 +53,7 @@ system.time(getMaxDistribution(rexp, 20))
 
 {% highlight text %}
    user  system elapsed 
-  4.840   0.005   4.842 
+  5.156   0.008   5.164 
 {% endhighlight %}
 
 
@@ -66,7 +66,7 @@ system.time(getMaxDistribution(rnorm, 10))
 
 {% highlight text %}
    user  system elapsed 
-  4.533   0.000   4.530 
+  4.845   0.001   4.844 
 {% endhighlight %}
 
 Now, let's load the archivist package and prepare a repository for cached objects.
@@ -82,7 +82,7 @@ createLocalRepo(cacheRepo)
 
 
 {% highlight text %}
-Directory /tmp/RtmpZE9Gag/file27d673051be1 did not exist. Forced to create a new directory.
+Directory /tmp/Rtmp45GZsm/file65d3676f9387 did not exist. Forced to create a new directory.
 {% endhighlight %}
 
 # How to work with cache
@@ -99,7 +99,7 @@ system.time(cache(cacheRepo, getMaxDistribution, rnorm, 10))
 
 {% highlight text %}
    user  system elapsed 
-  4.420   0.004   4.422 
+  4.738   0.004   4.740 
 {% endhighlight %}
 
 
@@ -112,7 +112,7 @@ system.time(cache(cacheRepo, getMaxDistribution, rexp, 10))
 
 {% highlight text %}
    user  system elapsed 
-  4.333   0.005   4.335 
+  4.950   0.008   4.955 
 {% endhighlight %}
 
 
@@ -125,7 +125,7 @@ system.time(cache(cacheRepo, getMaxDistribution, rnorm, 10))
 
 {% highlight text %}
    user  system elapsed 
-  0.002   0.000   0.002 
+  0.003   0.000   0.003 
 {% endhighlight %}
 
 The second evaluation of `getMaxDistribution` is much, much faster. Results are just read from disk.

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>aoptions. archivist 2.0.4</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+Przemyslaw Biecek, &lt;a href='mailto:przemyslaw.biecek@gmail.com'&gt;przemyslaw.biecek@gmail.com&lt;/a&gt;
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">archivist 2.0.4</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Default Options for Archivist</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>aoptions(key, value&nbsp;=&nbsp;NULL, unset&nbsp;=&nbsp;FALSE)</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>key</dt>
+      <dd>A character denoting name of the parameter.</dd>
+      <dt>value</dt>
+      <dd>New value for the 'key' parameter.</dd>
+      <dt>unset</dt>
+      <dd>Set to <code>TRUE</code> if want to set parameter to <code>NULL</code>, 
+i.e. when unsetting Repository <code>aoptions('repoDir', NULL, T)</code>.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+The function returns value that corresponds to a selected key.
+</dl></p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>The function <code>aoptions</code> sets and gets default options
+for other <code>archivist</code> functions.</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+
+      <p>The function <code>aoptions</code> with two parameters sets default <code>value</code> 
+of <code>key</code> parameter for other <code>archivist</code> functions. The function
+<code>aoptions</code> with one parameter returns value (stored in an internal environment))
+of the given <code>key</code> parameter.</p>
+  
+    </div>
+
+    <div class="Note">
+      <h2>Note</h2>
+
+      <p>Bug reports and feature requests can be sent to <a href = 'https://github.com/pbiecek/archivist/issues'>https://github.com/pbiecek/archivist/issues</a></p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>## Not run: 
+# # data.frame object
+# # data(iris)
+# 
+# 
+# ## EXAMPLE 1 : SET default local repository using aoptions() function.
+# 
+# # creating example repository
+# exampleRepoDir &lt;- tempfile()
+# createLocalRepo(exampleRepoDir)
+# 
+# # &quot;repodDir&quot; parameter in each archivist function will be default and set to exampleRepoDir.
+# aoptions(key = &quot;repoDir&quot;, value = exampleRepoDir)
+# 
+# data(iris)
+# data(swiss)
+# # From this moment repoDir parameter may be ommitted in the following functions
+# saveToLocalRepo(iris)
+# saveToLocalRepo(swiss) 
+# showLocalRepo()
+# showLocalRepo(method = &quot;tags&quot;)
+# zipLocalRepo()
+# file.remove(file.path(getwd(), &quot;repository.zip&quot;))
+# iris2 &lt;- loadFromLocalRepo( &quot;ff575c2&quot; , value = TRUE)
+# searchInLocalRepo(&quot;name:i&quot;, fixed = F)
+# getTagsLocal(&quot;ff575c261c949d073b2895b05d1097c3&quot;)
+# rmFromLocalRepo(&quot;4c43f&quot;)
+# showLocalRepo()
+# summaryLocalRepo()
+# 
+# # REMEMBER that in deleteRepo you MUST specify repoDir parameter!
+# # deleteLocalRepo doesn&#39;t take setLocalRepo&#39;s settings into consideration
+# deleteLocalRepo( exampleRepoDir, deleteRoot = TRUE)
+# rm( exampleRepoDir )
+# 
+# ## EXAMPLE 2 : SET default Github repository using aoptions() function.
+# aoptions(key = &quot;user&quot;, value = &quot;pbiecek&quot;)
+# aoptions(key = &quot;repo&quot;, value = &quot;archivist&quot;)
+# 
+# # From this moment user and repo parameters may be ommitted in the following functions:
+# showRemoteRepo() 
+# loadFromRemoteRepo( &quot;ff575c261c949d073b2895b05d1097c3&quot;)
+# this &lt;- loadFromRemoteRepo( &quot;ff&quot;, value = T)
+# file.remove(file.path(getwd(), &quot;repository.zip&quot;)) # We can remove this zip file
+# searchInRemoteRepo( &quot;name:&quot;, fixed= FALSE)
+# getTagsGithub(&quot;ff575c261c949d073b2895b05d1097c3&quot;)
+# summaryRemoteRepo( )
+# searchInRemoteRepo( pattern=c(&quot;varname:Sepal.Width&quot;, &quot;class:lm&quot;, &quot;name:myplot123&quot;), 
+#                          intersect = FALSE ) 
+# ## EXAMPLE 3 : SET default Github repository using aoptions() function.
+# showRemoteRepo(&#39;Museum&#39;, &#39;MarcinKosinski&#39;, subdir = &#39;ex1&#39;)
+# aoptions(&#39;repo&#39;, &#39;Museum&#39;)
+# aoptions(&#39;user&#39;, &#39;MarcinKosinski&#39;)
+# aoptions(&#39;subdir&#39;, &#39;ex1&#39;)
+# aoptions(&#39;branch&#39;, &#39;master&#39;)
+# showRemoteRepo()
+# showRemoteRepo(subdir = &#39;ex2&#39;)
+# 
+# aoptions(&#39;subdir&#39;)
+# ## End(Not run)
+
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>aoptions</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+Other archivist: <code><a href='Repository.html'>Repository</a></code>,
+  <code><a href='Tags.html'>Tags</a></code>, <code><a href='magrittr.html'>%a%</a></code>,
+  <code><a href='addHooksToPrint.html'>addHooksToPrint</a></code>, <code><a href='addTagsRepo.html'>addTagsRepo</a></code>,
+  <code><a href='aformat.html'>aformat</a></code>, <code><a href='ahistory.html'>ahistory</a></code>,
+  <code><a href='alink.html'>alink</a></code>, <code><a href='archivist-package.html'>archivist-package</a></code>,
+  <code><a href='aread.html'>aread</a></code>, <code><a href='asearch.html'>asearch</a></code>,
+  <code><a href='asession.html'>asession</a></code>, <code><a href='cache.html'>cache</a></code>,
+  <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
+  <code><a href='createEmptyRepo.html'>createLocalRepo</a></code>,
+  <code><a href='createMDGallery.html'>createMDGallery</a></code>,
+  <code><a href='deleteLocalRepo.html'>deleteLocalRepo</a></code>,
+  <code><a href='getRemoteHook.html'>getRemoteHook</a></code>, <code><a href='getTags.html'>getTagsLocal</a></code>,
+  <code><a href='loadFromRepo.html'>loadFromLocalRepo</a></code>, <code><a href='md5hash.html'>md5hash</a></code>,
+  <code><a href='restoreLibs.html'>restoreLibs</a></code>, <code><a href='rmFromLocalRepo.html'>rmFromLocalRepo</a></code>,
+  <code><a href='saveToRepo.html'>saveToLocalRepo</a></code>,
+  <code><a href='searchInRepo.html'>searchInLocalRepo</a></code>,
+  <code><a href='setRepo.html'>setLocalRepo</a></code>,
+  <code><a href='shinySearchInRepo.html'>shinySearchInLocalRepo</a></code>,
+  <code><a href='showRepo.html'>showLocalRepo</a></code>,
+  <code><a href='splitTags.html'>splitTagsLocal</a></code>,
+  <code><a href='summaryRepo.html'>summaryLocalRepo</a></code>,
+  <code><a href='zipRepo.html'>zipLocalRepo</a></code>
+
+    
+    <h2>Author</h2>
+    
+Przemyslaw Biecek, <a href='mailto:przemyslaw.biecek@gmail.com'>przemyslaw.biecek@gmail.com</a>
+
+    
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>showLocalRepo. archivist 2.0.4</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+Marcin Kosinski , &lt;a href='mailto:m.p.kosinski@gmail.com'&gt;m.p.kosinski@gmail.com&lt;/a&gt;
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">archivist 2.0.4</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>View the List of Artifacts from the Repository</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>showLocalRepo(repoDir&nbsp;=&nbsp;aoptions("repoDir"), method&nbsp;=&nbsp;"md5hashes")</div>
+<div>showRemoteRepo(repo&nbsp;=&nbsp;aoptions("repo"), user&nbsp;=&nbsp;aoptions("user"), branch&nbsp;=&nbsp;aoptions("branch"), subdir&nbsp;=&nbsp;aoptions("subdir"), repoType&nbsp;=&nbsp;aoptions("repoType"), method&nbsp;=&nbsp;"md5hashes")</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>repoDir</dt>
+      <dd>A character denoting an existing directory of the Repository for which metadata will be returned.</dd>
+      <dt>method</dt>
+      <dd>A character specifying a method to be used to show the Repository. Available methods: 
+<code>md5hashes</code> (default), <code>tags</code> and <code>sets</code> - see <a href = 'https://github.com/pbiecek/archivist2'>archivist2::saveSetToRepo</a>.</dd>
+      <dt>repo</dt>
+      <dd>While working with the Remote repository. A character containing a name of the Remote repository on which the Repository is stored.
+By default set to <code>NULL</code> - see <code>Note</code>.</dd>
+      <dt>user</dt>
+      <dd>While working with the Remote repository. A character containing a name of the Remote user on whose account the <code>repo</code> is created.
+By default set to <code>NULL</code> - see <code>Note</code>.</dd>
+      <dt>branch</dt>
+      <dd>While working with the Remote repository. A character containing a name of 
+the Remote Repository's branch on which the Repository is stored. Default <code>branch</code> is <code>master</code>.</dd>
+      <dt>subdir</dt>
+      <dd>While working with the Remote repository. A character containing a name of a directory on the Remote repository 
+on which the Repository is stored. If the Repository is stored in the main folder of the Remote repository, this should be set 
+to <code>subdir = "/"</code> as default.</dd>
+      <dt>repoType</dt>
+      <dd>A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+If parameter <code>method</code> is set as <code>md5hashes</code> then a <code>data.frame</code> with artifacts' names and
+artifacts'<code>md5hashes</code> will be returned.</p>
+  
+      <p>If parameter <code>method</code> is set as <code>tags</code> then a <code>data.frame</code> with <code>Tags</code> and
+artifacts' <code>md5hashes</code> will be returned.</p>
+  
+      <p>Also in both cases a <code>data.frame</code> contains an extra column with the date of creation
+of the <code>Tag</code> or <code>md5hash</code>.</p>
+  
+      <p>To learn more about <code>Tags</code> or <code>md5hashes</code> check: <a href='Tags.html'>Tags</a> or <a href='md5hash.html'>md5hash</a>.
+</dl></p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p><code>showLocalRepo</code> and <code>showRemoteRepo</code> functions produce the <code>data.frame</code> of the artifacts from
+the <a href='Repository.html'>Repository</a> saved in a given <code>repoDir</code> (directory). <code>showLocalRepo</code>
+shows the artifacts from the <code>Repository</code> that exists on the user's computer whereas <code>showRemoteRepo</code>
+shows the artifacts of the <code>Repository</code> existing on the remote repository.
+To learn more about artifacts visit archivist-package.</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+
+      <p><code>showLocalRepo</code> and <code>showRemoteRepo</code> functions produce the <code>data.frame</code> of the artifacts from
+a <a href='Repository.html'>Repository</a> saved in a given <code>repoDir</code> (directory). <code>showLocalRepo</code>
+shows the artifacts from the <code>Repository</code> that exists on the user's computer whereas <code>showRemoteRepo</code>
+shows the artifacts of the <code>Repository</code> existing on the remote repository.</p>
+  
+      <p>Both functions show the current state of a <code>Repository</code>, inter alia, all archived artifacts can
+be seen with their unique <a href='md5hash.html'>md5hash</a> or a <code>data.frame</code> with archived <a href='Tags.html'>Tags</a> can 
+be obtained.</p>
+  
+    </div>
+
+    <div class="Note">
+      <h2>Note</h2>
+
+      <p>If <code>repo</code> and <code>user</code> are set to <code>NULL</code> (as default) in the Remote mode then global parameters
+set in <a href='setRepo.html'>setRemoteRepo</a> (or via <a href='archivistOptions.html'>aoptions</a>) function are used.</p>
+  
+      <p>Bug reports and feature requests can be sent to <a href = 'https://github.com/pbiecek/archivist/issues'>https://github.com/pbiecek/archivist/issues</a></p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>## Not run: 
+# # objects preparation
+# 
+# showLocalRepo(method = &quot;md5hashes&quot;, 
+#    repoDir = system.file(&quot;graphGallery&quot;, package = &quot;archivist&quot;))
+# showLocalRepo(method = &quot;tags&quot;, 
+#    repoDir = system.file(&quot;graphGallery&quot;, package = &quot;archivist&quot;))
+# 
+# 
+# # Remote version
+# 
+# showRemoteRepo(method = &quot;md5hashes&quot;, user = &quot;pbiecek&quot;, repo = &quot;archivist&quot;)
+# showRemoteRepo(method = &quot;tags&quot;, user = &quot;pbiecek&quot;, repo = &quot;archivist&quot;, branch = &quot;master&quot;)
+# 
+# # many archivist-like Repositories on one Remote repository
+# 
+# showRemoteRepo( user=&quot;MarcinKosinski&quot;, repo=&quot;Museum&quot;, branch=&quot;master&quot;,
+#                 subdir=&quot;ex1&quot;)
+# showRemoteRepo( user=&quot;MarcinKosinski&quot;, repo=&quot;Museum&quot;, branch=&quot;master&quot;,
+#                 subdir=&quot;ex2&quot;)
+#                 
+# ## Remote options
+# showRemoteRepo(&#39;archivist&#39;, &#39;pbiecek&#39;)
+# aoptions(&#39;user&#39;, &#39;pbiecek&#39;)
+# aoptions(&#39;repo&#39;, &#39;archivist&#39;)
+# loadFromRemoteRepo(&quot;ff575c261c&quot;, value = TRUE) -&gt; iris123
+# 
+# showRemoteRepo(&#39;Museum&#39;, &#39;MarcinKosinski&#39;, subdir = &#39;ex1&#39;)
+# aoptions(&#39;repo&#39;, &#39;Museum&#39;)
+# aoptions(&#39;user&#39;, &#39;MarcinKosinski&#39;)
+# aoptions(&#39;subdir&#39;, &#39;ex1&#39;)
+# aoptions(&#39;branch&#39;, &#39;master&#39;)
+# showRemoteRepo()
+# showRemoteRepo(subdir = &#39;ex2&#39;)
+# 
+# aoptions(&#39;subdir&#39;)
+# 
+# 
+# ## End(Not run)
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>showLocalRepo</li><li>showRemoteRepo</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+Other archivist: <code><a href='Repository.html'>Repository</a></code>,
+  <code><a href='Tags.html'>Tags</a></code>, <code><a href='magrittr.html'>%a%</a></code>,
+  <code><a href='addHooksToPrint.html'>addHooksToPrint</a></code>, <code><a href='addTagsRepo.html'>addTagsRepo</a></code>,
+  <code><a href='aformat.html'>aformat</a></code>, <code><a href='ahistory.html'>ahistory</a></code>,
+  <code><a href='alink.html'>alink</a></code>, <code><a href='archivistOptions.html'>aoptions</a></code>,
+  <code><a href='archivist-package.html'>archivist-package</a></code>, <code><a href='aread.html'>aread</a></code>,
+  <code><a href='asearch.html'>asearch</a></code>, <code><a href='asession.html'>asession</a></code>,
+  <code><a href='cache.html'>cache</a></code>, <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
+  <code><a href='createEmptyRepo.html'>createLocalRepo</a></code>,
+  <code><a href='createMDGallery.html'>createMDGallery</a></code>,
+  <code><a href='deleteLocalRepo.html'>deleteLocalRepo</a></code>,
+  <code><a href='getRemoteHook.html'>getRemoteHook</a></code>, <code><a href='getTags.html'>getTagsLocal</a></code>,
+  <code><a href='loadFromRepo.html'>loadFromLocalRepo</a></code>, <code><a href='md5hash.html'>md5hash</a></code>,
+  <code><a href='restoreLibs.html'>restoreLibs</a></code>, <code><a href='rmFromLocalRepo.html'>rmFromLocalRepo</a></code>,
+  <code><a href='saveToRepo.html'>saveToLocalRepo</a></code>,
+  <code><a href='searchInRepo.html'>searchInLocalRepo</a></code>,
+  <code><a href='setRepo.html'>setLocalRepo</a></code>,
+  <code><a href='shinySearchInRepo.html'>shinySearchInLocalRepo</a></code>,
+  <code><a href='splitTags.html'>splitTagsLocal</a></code>,
+  <code><a href='summaryRepo.html'>summaryLocalRepo</a></code>,
+  <code><a href='zipRepo.html'>zipLocalRepo</a></code>
+
+    
+    <h2>Author</h2>
+    
+Marcin Kosinski , <a href='mailto:m.p.kosinski@gmail.com'>m.p.kosinski@gmail.com</a>
+
+    
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

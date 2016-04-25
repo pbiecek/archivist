@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>getTagsLocal. archivist 2.0.4</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+Marcin Kosinski, &lt;a href='mailto:m.p.kosinski@gmail.com'&gt;m.p.kosinski@gmail.com&lt;/a&gt;
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">archivist 2.0.4</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Return Tags Corresponding to md5hash</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>getTagsLocal(md5hash, repoDir&nbsp;=&nbsp;aoptions("repoDir"), tag&nbsp;=&nbsp;"name")</div>
+<div>getTagsRemote(md5hash, repo&nbsp;=&nbsp;aoptions("repo"), user&nbsp;=&nbsp;aoptions("user"), branch&nbsp;=&nbsp;aoptions("branch"), subdir&nbsp;=&nbsp;aoptions("subdir"), repoType&nbsp;=&nbsp;aoptions("repoType"), tag&nbsp;=&nbsp;"name")</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>md5hash</dt>
+      <dd>A character containing <code>md5hash</code> 
+of artifacts which <code>Tags</code> are desired to be returned.</dd>
+      <dt>repoDir</dt>
+      <dd>A character denoting an existing directory in 
+which artifacts are stored.</dd>
+      <dt>tag</dt>
+      <dd>A regular expression denoting type of a <code>Tag</code> that we search for
+(see <code>Examples</code>). Default <code>tag = "name"</code>.</dd>
+      <dt>repo</dt>
+      <dd>While working with the Remote repository. A character containing
+a name of the Remote repository on which the Repository is stored.
+By default set to <code>NULL</code> - see <code>Note</code>.</dd>
+      <dt>user</dt>
+      <dd>While working with the Remote repository. A character containing
+a name of the Remote user on whose account the <code>repo</code> is created.
+By default set to <code>NULL</code> - see <code>Note</code>.</dd>
+      <dt>branch</dt>
+      <dd>While working with the Remote repository. A character containing
+a name of the Remote repository's branch on which the Repository is stored.
+Default <code>branch</code> is <code>master</code>.</dd>
+      <dt>subdir</dt>
+      <dd>While working with the Remote repository. A character containing
+a name of a directory on the Remote repository on which the Repository is stored.
+If the Repository is stored in main folder on the Remote repository, this should be set 
+to <code>subdir = "/"</code> as default.</dd>
+      <dt>repoType</dt>
+      <dd>A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+The character vector of <code>Tags</code> (see <a href='Tags.html'>Tags</a>) related to <a href='md5hash.html'>md5hash</a> 
+of an artifact.
+</dl></p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p><code>getTagsLocal</code> and <code>getTagsRemote</code> return <code>Tags</code> (see <a href='Tags.html'>Tags</a>)
+related to <a href='md5hash.html'>md5hash</a> of an artifact. To learn more about artifacts visit
+archivist-package.</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+
+      <p><code>getTagsLocal</code> and <code>getTagsRemote</code> return <code>Tags</code>, of a specific type described
+by <code>tag</code> parameter, related to <a href='md5hash.html'>md5hash</a> of an artifact. To learn more about 
+artifacts visit archivist-package.</p>
+  
+    </div>
+
+    <div class="Note">
+      <h2>Note</h2>
+
+      <p>If <code>repo</code> and <code>user</code> are set to <code>NULL</code> (as default) in Remote mode then global parameters
+set in <a href='setRepo.html'>setRemoteRepo</a> function are used.</p>
+  
+      <p>Bug reports and feature requests can be sent to <a href = 'https://github.com/pbiecek/archivist/issues'>https://github.com/pbiecek/archivist/issues</a></p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>
+### Local version
+
+## EXAMPLE with pipe operator %a%
+
+# Creating empty repository
+exampleRepoDir &lt;- tempfile()
+createLocalRepo( exampleRepoDir )
+</div>
+<div class='output'>Directory /tmp/Rtmp8itQ6j/file516f78acefac did not exist. Forced to create a new directory.</div>
+<div class='input'>
+library(dplyr)
+data(mtcars)
+setLocalRepo(repoDir = exampleRepoDir)
+hash &lt;- mtcars %a% 
+ group_by(cyl, am) %a%
+   select(mpg, cyl, wt, am) %a%
+     summarise(avgmpg = mean(mpg), avgwt = mean(wt)) %a%
+       filter(avgmpg &gt; 20) %a%
+       saveToRepo( exampleRepoDir )
+       
+showLocalRepo(exampleRepoDir)
+</div>
+<div class='output'>                            md5hash                             name
+1  a63c70e73b58d0823ab3bcbd3b543d6f                        env[[nm]]
+2  7a6a0ea6fd604c294097691f5cd65a05 7a6a0ea6fd604c294097691f5cd65a05
+3  0de93da714e397a9640cb5bac6d85ecf                          res_val
+4  7a6a0ea6fd604c294097691f5cd65a05 7a6a0ea6fd604c294097691f5cd65a05
+5  0de93da714e397a9640cb5bac6d85ecf                        env[[nm]]
+6  7a6a0ea6fd604c294097691f5cd65a05 7a6a0ea6fd604c294097691f5cd65a05
+7  0794e49145b4a2467a9986026c710498                          res_val
+8  7a6a0ea6fd604c294097691f5cd65a05 7a6a0ea6fd604c294097691f5cd65a05
+9  0794e49145b4a2467a9986026c710498                        env[[nm]]
+10 7a6a0ea6fd604c294097691f5cd65a05 7a6a0ea6fd604c294097691f5cd65a05
+11 c3be68c919026e0876e4ba8b783945db                          res_val
+12 7a6a0ea6fd604c294097691f5cd65a05 7a6a0ea6fd604c294097691f5cd65a05
+13 40554c7e8cff1adbacf3405624fd58ce                        env[[nm]]
+14 7a6a0ea6fd604c294097691f5cd65a05 7a6a0ea6fd604c294097691f5cd65a05
+15 177cbfc0062d297ae58cd38566014ba8                          res_val
+16 7a6a0ea6fd604c294097691f5cd65a05 7a6a0ea6fd604c294097691f5cd65a05
+17 177cbfc0062d297ae58cd38566014ba8                            __LHS
+18 7a6a0ea6fd604c294097691f5cd65a05 7a6a0ea6fd604c294097691f5cd65a05
+19 177cbfc0062d297ae58cd38566014ba8                        env[[nm]]
+20 7a6a0ea6fd604c294097691f5cd65a05 7a6a0ea6fd604c294097691f5cd65a05
+21 6d3b822cfee0fa27333a854c10a4db4c                          res_val
+22 7a6a0ea6fd604c294097691f5cd65a05 7a6a0ea6fd604c294097691f5cd65a05
+           createdDate
+1  2016-04-25 18:48:28
+2  2016-04-25 18:48:28
+3  2016-04-25 18:48:28
+4  2016-04-25 18:48:28
+5  2016-04-25 18:48:28
+6  2016-04-25 18:48:28
+7  2016-04-25 18:48:28
+8  2016-04-25 18:48:28
+9  2016-04-25 18:48:28
+10 2016-04-25 18:48:28
+11 2016-04-25 18:48:28
+12 2016-04-25 18:48:28
+13 2016-04-25 18:48:28
+14 2016-04-25 18:48:28
+15 2016-04-25 18:48:28
+16 2016-04-25 18:48:28
+17 2016-04-25 18:48:28
+18 2016-04-25 18:48:28
+19 2016-04-25 18:48:28
+20 2016-04-25 18:48:28
+21 2016-04-25 18:48:28
+22 2016-04-25 18:48:28
+</div>
+<div class='input'>showLocalRepo(exampleRepoDir, method = &quot;tags&quot;)
+</div>
+<div class='output'>                            artifact
+1   a63c70e73b58d0823ab3bcbd3b543d6f
+2   a63c70e73b58d0823ab3bcbd3b543d6f
+3   a63c70e73b58d0823ab3bcbd3b543d6f
+4   a63c70e73b58d0823ab3bcbd3b543d6f
+5   a63c70e73b58d0823ab3bcbd3b543d6f
+6   a63c70e73b58d0823ab3bcbd3b543d6f
+7   a63c70e73b58d0823ab3bcbd3b543d6f
+8   a63c70e73b58d0823ab3bcbd3b543d6f
+9   a63c70e73b58d0823ab3bcbd3b543d6f
+10  a63c70e73b58d0823ab3bcbd3b543d6f
+11  a63c70e73b58d0823ab3bcbd3b543d6f
+12  a63c70e73b58d0823ab3bcbd3b543d6f
+13  a63c70e73b58d0823ab3bcbd3b543d6f
+14  a63c70e73b58d0823ab3bcbd3b543d6f
+15  a63c70e73b58d0823ab3bcbd3b543d6f
+16  a63c70e73b58d0823ab3bcbd3b543d6f
+17  7a6a0ea6fd604c294097691f5cd65a05
+18  a63c70e73b58d0823ab3bcbd3b543d6f
+19  a63c70e73b58d0823ab3bcbd3b543d6f
+20  0de93da714e397a9640cb5bac6d85ecf
+21  0de93da714e397a9640cb5bac6d85ecf
+22  0de93da714e397a9640cb5bac6d85ecf
+23  0de93da714e397a9640cb5bac6d85ecf
+24  0de93da714e397a9640cb5bac6d85ecf
+25  0de93da714e397a9640cb5bac6d85ecf
+26  0de93da714e397a9640cb5bac6d85ecf
+27  0de93da714e397a9640cb5bac6d85ecf
+28  0de93da714e397a9640cb5bac6d85ecf
+29  0de93da714e397a9640cb5bac6d85ecf
+30  0de93da714e397a9640cb5bac6d85ecf
+31  0de93da714e397a9640cb5bac6d85ecf
+32  0de93da714e397a9640cb5bac6d85ecf
+33  0de93da714e397a9640cb5bac6d85ecf
+34  0de93da714e397a9640cb5bac6d85ecf
+35  0de93da714e397a9640cb5bac6d85ecf
+36  0de93da714e397a9640cb5bac6d85ecf
+37  0de93da714e397a9640cb5bac6d85ecf
+38  0de93da714e397a9640cb5bac6d85ecf
+39  0de93da714e397a9640cb5bac6d85ecf
+40  7a6a0ea6fd604c294097691f5cd65a05
+41  0de93da714e397a9640cb5bac6d85ecf
+42  0de93da714e397a9640cb5bac6d85ecf
+43  0de93da714e397a9640cb5bac6d85ecf
+44  0de93da714e397a9640cb5bac6d85ecf
+45  0de93da714e397a9640cb5bac6d85ecf
+46  0de93da714e397a9640cb5bac6d85ecf
+47  0de93da714e397a9640cb5bac6d85ecf
+48  0de93da714e397a9640cb5bac6d85ecf
+49  0de93da714e397a9640cb5bac6d85ecf
+50  0de93da714e397a9640cb5bac6d85ecf
+51  0de93da714e397a9640cb5bac6d85ecf
+52  0de93da714e397a9640cb5bac6d85ecf
+53  0de93da714e397a9640cb5bac6d85ecf
+54  0de93da714e397a9640cb5bac6d85ecf
+55  0de93da714e397a9640cb5bac6d85ecf
+56  0de93da714e397a9640cb5bac6d85ecf
+57  0de93da714e397a9640cb5bac6d85ecf
+58  0de93da714e397a9640cb5bac6d85ecf
+59  0de93da714e397a9640cb5bac6d85ecf
+60  0de93da714e397a9640cb5bac6d85ecf
+61  0de93da714e397a9640cb5bac6d85ecf
+62  7a6a0ea6fd604c294097691f5cd65a05
+63  0de93da714e397a9640cb5bac6d85ecf
+64  0de93da714e397a9640cb5bac6d85ecf
+65  0794e49145b4a2467a9986026c710498
+66  0794e49145b4a2467a9986026c710498
+67  0794e49145b4a2467a9986026c710498
+68  0794e49145b4a2467a9986026c710498
+69  0794e49145b4a2467a9986026c710498
+70  0794e49145b4a2467a9986026c710498
+71  0794e49145b4a2467a9986026c710498
+72  0794e49145b4a2467a9986026c710498
+73  0794e49145b4a2467a9986026c710498
+74  0794e49145b4a2467a9986026c710498
+75  0794e49145b4a2467a9986026c710498
+76  0794e49145b4a2467a9986026c710498
+77  0794e49145b4a2467a9986026c710498
+78  7a6a0ea6fd604c294097691f5cd65a05
+79  0794e49145b4a2467a9986026c710498
+80  0794e49145b4a2467a9986026c710498
+81  0794e49145b4a2467a9986026c710498
+82  0794e49145b4a2467a9986026c710498
+83  0794e49145b4a2467a9986026c710498
+84  0794e49145b4a2467a9986026c710498
+85  0794e49145b4a2467a9986026c710498
+86  0794e49145b4a2467a9986026c710498
+87  0794e49145b4a2467a9986026c710498
+88  0794e49145b4a2467a9986026c710498
+89  0794e49145b4a2467a9986026c710498
+90  0794e49145b4a2467a9986026c710498
+91  0794e49145b4a2467a9986026c710498
+92  0794e49145b4a2467a9986026c710498
+93  7a6a0ea6fd604c294097691f5cd65a05
+94  0794e49145b4a2467a9986026c710498
+95  0794e49145b4a2467a9986026c710498
+96  c3be68c919026e0876e4ba8b783945db
+97  c3be68c919026e0876e4ba8b783945db
+98  c3be68c919026e0876e4ba8b783945db
+99  c3be68c919026e0876e4ba8b783945db
+100 c3be68c919026e0876e4ba8b783945db
+101 c3be68c919026e0876e4ba8b783945db
+102 c3be68c919026e0876e4ba8b783945db
+103 c3be68c919026e0876e4ba8b783945db
+104 c3be68c919026e0876e4ba8b783945db
+105 c3be68c919026e0876e4ba8b783945db
+106 c3be68c919026e0876e4ba8b783945db
+107 c3be68c919026e0876e4ba8b783945db
+108 c3be68c919026e0876e4ba8b783945db
+109 7a6a0ea6fd604c294097691f5cd65a05
+110 c3be68c919026e0876e4ba8b783945db
+111 c3be68c919026e0876e4ba8b783945db
+112 40554c7e8cff1adbacf3405624fd58ce
+113 40554c7e8cff1adbacf3405624fd58ce
+114 40554c7e8cff1adbacf3405624fd58ce
+115 40554c7e8cff1adbacf3405624fd58ce
+116 40554c7e8cff1adbacf3405624fd58ce
+117 40554c7e8cff1adbacf3405624fd58ce
+118 40554c7e8cff1adbacf3405624fd58ce
+119 40554c7e8cff1adbacf3405624fd58ce
+120 40554c7e8cff1adbacf3405624fd58ce
+121 40554c7e8cff1adbacf3405624fd58ce
+122 40554c7e8cff1adbacf3405624fd58ce
+123 40554c7e8cff1adbacf3405624fd58ce
+124 7a6a0ea6fd604c294097691f5cd65a05
+125 40554c7e8cff1adbacf3405624fd58ce
+126 40554c7e8cff1adbacf3405624fd58ce
+127 177cbfc0062d297ae58cd38566014ba8
+128 177cbfc0062d297ae58cd38566014ba8
+129 177cbfc0062d297ae58cd38566014ba8
+130 177cbfc0062d297ae58cd38566014ba8
+131 177cbfc0062d297ae58cd38566014ba8
+132 177cbfc0062d297ae58cd38566014ba8
+133 177cbfc0062d297ae58cd38566014ba8
+134 177cbfc0062d297ae58cd38566014ba8
+135 177cbfc0062d297ae58cd38566014ba8
+136 177cbfc0062d297ae58cd38566014ba8
+137 177cbfc0062d297ae58cd38566014ba8
+138 177cbfc0062d297ae58cd38566014ba8
+139 177cbfc0062d297ae58cd38566014ba8
+140 7a6a0ea6fd604c294097691f5cd65a05
+141 177cbfc0062d297ae58cd38566014ba8
+142 177cbfc0062d297ae58cd38566014ba8
+143 177cbfc0062d297ae58cd38566014ba8
+144 177cbfc0062d297ae58cd38566014ba8
+145 177cbfc0062d297ae58cd38566014ba8
+146 177cbfc0062d297ae58cd38566014ba8
+147 177cbfc0062d297ae58cd38566014ba8
+148 177cbfc0062d297ae58cd38566014ba8
+149 177cbfc0062d297ae58cd38566014ba8
+150 177cbfc0062d297ae58cd38566014ba8
+151 177cbfc0062d297ae58cd38566014ba8
+152 177cbfc0062d297ae58cd38566014ba8
+153 177cbfc0062d297ae58cd38566014ba8
+154 7a6a0ea6fd604c294097691f5cd65a05
+155 177cbfc0062d297ae58cd38566014ba8
+156 177cbfc0062d297ae58cd38566014ba8
+157 177cbfc0062d297ae58cd38566014ba8
+158 177cbfc0062d297ae58cd38566014ba8
+159 177cbfc0062d297ae58cd38566014ba8
+160 177cbfc0062d297ae58cd38566014ba8
+161 177cbfc0062d297ae58cd38566014ba8
+162 177cbfc0062d297ae58cd38566014ba8
+163 177cbfc0062d297ae58cd38566014ba8
+164 177cbfc0062d297ae58cd38566014ba8
+165 177cbfc0062d297ae58cd38566014ba8
+166 177cbfc0062d297ae58cd38566014ba8
+167 177cbfc0062d297ae58cd38566014ba8
+168 177cbfc0062d297ae58cd38566014ba8
+169 7a6a0ea6fd604c294097691f5cd65a05
+170 177cbfc0062d297ae58cd38566014ba8
+171 177cbfc0062d297ae58cd38566014ba8
+172 6d3b822cfee0fa27333a854c10a4db4c
+173 6d3b822cfee0fa27333a854c10a4db4c
+174 6d3b822cfee0fa27333a854c10a4db4c
+175 6d3b822cfee0fa27333a854c10a4db4c
+176 6d3b822cfee0fa27333a854c10a4db4c
+177 6d3b822cfee0fa27333a854c10a4db4c
+178 7a6a0ea6fd604c294097691f5cd65a05
+179 6d3b822cfee0fa27333a854c10a4db4c
+                                                                                                                                                   tag
+1                                                                                                                                           format:rda
+2                                                                                                                                       name:env[[nm]]
+3                                                                                                                                     class:data.frame
+4                                                                                                                                          varname:mpg
+5                                                                                                                                          varname:cyl
+6                                                                                                                                         varname:disp
+7                                                                                                                                           varname:hp
+8                                                                                                                                         varname:drat
+9                                                                                                                                           varname:wt
+10                                                                                                                                        varname:qsec
+11                                                                                                                                          varname:vs
+12                                                                                                                                          varname:am
+13                                                                                                                                        varname:gear
+14                                                                                                                                        varname:carb
+15                                                                                                                            date:2016-04-25 18:48:28
+16                                                                                                                                         name:mtcars
+17                                                                                                                                          format:rda
+18                                                                                                       session_info:7a6a0ea6fd604c294097691f5cd65a05
+19                                                                                                                                          format:txt
+20                                                                                                                                          format:rda
+21                                                                                                                                        name:res_val
+22                                                                                                                                    class:grouped_df
+23                                                                                                                                        class:tbl_df
+24                                                                                                                                           class:tbl
+25                                                                                                                                    class:data.frame
+26                                                                                                                                         varname:mpg
+27                                                                                                                                         varname:cyl
+28                                                                                                                                        varname:disp
+29                                                                                                                                          varname:hp
+30                                                                                                                                        varname:drat
+31                                                                                                                                          varname:wt
+32                                                                                                                                        varname:qsec
+33                                                                                                                                          varname:vs
+34                                                                                                                                          varname:am
+35                                                                                                                                        varname:gear
+36                                                                                                                                        varname:carb
+37                                                                                                                            date:2016-04-25 18:48:28
+38                                                                                                                LHS:a63c70e73b58d0823ab3bcbd3b543d6f
+39                                                                                                                               RHS:group_by(cyl, am)
+40                                                                                                                                          format:rda
+41                                                                                                       session_info:7a6a0ea6fd604c294097691f5cd65a05
+42                                                                                                                                          format:txt
+43                                                                                                                                          format:rda
+44                                                                                                                                      name:env[[nm]]
+45                                                                                                                                    class:grouped_df
+46                                                                                                                                        class:tbl_df
+47                                                                                                                                           class:tbl
+48                                                                                                                                    class:data.frame
+49                                                                                                                                         varname:mpg
+50                                                                                                                                         varname:cyl
+51                                                                                                                                        varname:disp
+52                                                                                                                                          varname:hp
+53                                                                                                                                        varname:drat
+54                                                                                                                                          varname:wt
+55                                                                                                                                        varname:qsec
+56                                                                                                                                          varname:vs
+57                                                                                                                                          varname:am
+58                                                                                                                                        varname:gear
+59                                                                                                                                        varname:carb
+60                                                                                                                            date:2016-04-25 18:48:28
+61                                                                                                                   name:mtcars %a% group_by(cyl, am)
+62                                                                                                                                          format:rda
+63                                                                                                       session_info:7a6a0ea6fd604c294097691f5cd65a05
+64                                                                                                                                          format:txt
+65                                                                                                                                          format:rda
+66                                                                                                                                        name:res_val
+67                                                                                                                                    class:grouped_df
+68                                                                                                                                        class:tbl_df
+69                                                                                                                                           class:tbl
+70                                                                                                                                    class:data.frame
+71                                                                                                                                         varname:mpg
+72                                                                                                                                         varname:cyl
+73                                                                                                                                          varname:wt
+74                                                                                                                                          varname:am
+75                                                                                                                            date:2016-04-25 18:48:28
+76                                                                                                                LHS:0de93da714e397a9640cb5bac6d85ecf
+77                                                                                                                        RHS:select(mpg, cyl, wt, am)
+78                                                                                                                                          format:rda
+79                                                                                                       session_info:7a6a0ea6fd604c294097691f5cd65a05
+80                                                                                                                                          format:txt
+81                                                                                                                                          format:rda
+82                                                                                                                                      name:env[[nm]]
+83                                                                                                                                    class:grouped_df
+84                                                                                                                                        class:tbl_df
+85                                                                                                                                           class:tbl
+86                                                                                                                                    class:data.frame
+87                                                                                                                                         varname:mpg
+88                                                                                                                                         varname:cyl
+89                                                                                                                                          varname:wt
+90                                                                                                                                          varname:am
+91                                                                                                                            date:2016-04-25 18:48:28
+92                                                                                      name:mtcars %a% group_by(cyl, am) %a% select(mpg, cyl, wt, am)
+93                                                                                                                                          format:rda
+94                                                                                                       session_info:7a6a0ea6fd604c294097691f5cd65a05
+95                                                                                                                                          format:txt
+96                                                                                                                                          format:rda
+97                                                                                                                                        name:res_val
+98                                                                                                                                    class:grouped_df
+99                                                                                                                                        class:tbl_df
+100                                                                                                                                          class:tbl
+101                                                                                                                                   class:data.frame
+102                                                                                                                                        varname:cyl
+103                                                                                                                                         varname:am
+104                                                                                                                                     varname:avgmpg
+105                                                                                                                                      varname:avgwt
+106                                                                                                                           date:2016-04-25 18:48:28
+107                                                                                                               LHS:0794e49145b4a2467a9986026c710498
+108                                                                                                RHS:summarise(avgmpg = mean(mpg), avgwt = mean(wt))
+109                                                                                                                                         format:rda
+110                                                                                                      session_info:7a6a0ea6fd604c294097691f5cd65a05
+111                                                                                                                                         format:txt
+112                                                                                                                                         format:rda
+113                                                                                                                                     name:env[[nm]]
+114                                                                                                                                   class:grouped_df
+115                                                                                                                                       class:tbl_df
+116                                                                                                                                          class:tbl
+117                                                                                                                                   class:data.frame
+118                                                                                                                                        varname:cyl
+119                                                                                                                                         varname:am
+120                                                                                                                                     varname:avgmpg
+121                                                                                                                                      varname:avgwt
+122                                                                                                                           date:2016-04-25 18:48:28
+123                             name:mtcars %a% group_by(cyl, am) %a% select(mpg, cyl, wt, am) %a%     summarise(avgmpg = mean(mpg), avgwt = mean(wt))
+124                                                                                                                                         format:rda
+125                                                                                                      session_info:7a6a0ea6fd604c294097691f5cd65a05
+126                                                                                                                                         format:txt
+127                                                                                                                                         format:rda
+128                                                                                                                                       name:res_val
+129                                                                                                                                   class:grouped_df
+130                                                                                                                                       class:tbl_df
+131                                                                                                                                          class:tbl
+132                                                                                                                                   class:data.frame
+133                                                                                                                                        varname:cyl
+134                                                                                                                                         varname:am
+135                                                                                                                                     varname:avgmpg
+136                                                                                                                                      varname:avgwt
+137                                                                                                                           date:2016-04-25 18:48:28
+138                                                                                                               LHS:40554c7e8cff1adbacf3405624fd58ce
+139                                                                                                                            RHS:filter(avgmpg &gt; 20)
+140                                                                                                                                         format:rda
+141                                                                                                      session_info:7a6a0ea6fd604c294097691f5cd65a05
+142                                                                                                                                         format:txt
+143                                                                                                                                         format:rda
+144                                                                                                                                         name:__LHS
+145                                                                                                                                   class:grouped_df
+146                                                                                                                                       class:tbl_df
+147                                                                                                                                          class:tbl
+148                                                                                                                                   class:data.frame
+149                                                                                                                                        varname:cyl
+150                                                                                                                                         varname:am
+151                                                                                                                                     varname:avgmpg
+152                                                                                                                                      varname:avgwt
+153                                                                                                                           date:2016-04-25 18:48:28
+154                                                                                                                                         format:rda
+155                                                                                                      session_info:7a6a0ea6fd604c294097691f5cd65a05
+156                                                                                                                                         format:txt
+157                                                                                                                                         format:rda
+158                                                                                                                                     name:env[[nm]]
+159                                                                                                                                   class:grouped_df
+160                                                                                                                                       class:tbl_df
+161                                                                                                                                          class:tbl
+162                                                                                                                                   class:data.frame
+163                                                                                                                                        varname:cyl
+164                                                                                                                                         varname:am
+165                                                                                                                                     varname:avgmpg
+166                                                                                                                                      varname:avgwt
+167                                                                                                                           date:2016-04-25 18:48:28
+168 name:mtcars %a% group_by(cyl, am) %a% select(mpg, cyl, wt, am) %a%     summarise(avgmpg = mean(mpg), avgwt = mean(wt)) %a% filter(avgmpg &gt;     20)
+169                                                                                                                                         format:rda
+170                                                                                                      session_info:7a6a0ea6fd604c294097691f5cd65a05
+171                                                                                                                                         format:txt
+172                                                                                                                                         format:rda
+173                                                                                                                                       name:res_val
+174                                                                                                                                    class:character
+175                                                                                                                           date:2016-04-25 18:48:28
+176                                                                                                               LHS:177cbfc0062d297ae58cd38566014ba8
+177                                                                                                                     RHS:saveToRepo(exampleRepoDir)
+178                                                                                                                                         format:rda
+179                                                                                                      session_info:7a6a0ea6fd604c294097691f5cd65a05
+            createdDate
+1   2016-04-25 18:48:28
+2   2016-04-25 18:48:28
+3   2016-04-25 18:48:28
+4   2016-04-25 18:48:28
+5   2016-04-25 18:48:28
+6   2016-04-25 18:48:28
+7   2016-04-25 18:48:28
+8   2016-04-25 18:48:28
+9   2016-04-25 18:48:28
+10  2016-04-25 18:48:28
+11  2016-04-25 18:48:28
+12  2016-04-25 18:48:28
+13  2016-04-25 18:48:28
+14  2016-04-25 18:48:28
+15  2016-04-25 18:48:28
+16  2016-04-25 18:48:28
+17  2016-04-25 18:48:28
+18  2016-04-25 18:48:28
+19  2016-04-25 18:48:28
+20  2016-04-25 18:48:28
+21  2016-04-25 18:48:28
+22  2016-04-25 18:48:28
+23  2016-04-25 18:48:28
+24  2016-04-25 18:48:28
+25  2016-04-25 18:48:28
+26  2016-04-25 18:48:28
+27  2016-04-25 18:48:28
+28  2016-04-25 18:48:28
+29  2016-04-25 18:48:28
+30  2016-04-25 18:48:28
+31  2016-04-25 18:48:28
+32  2016-04-25 18:48:28
+33  2016-04-25 18:48:28
+34  2016-04-25 18:48:28
+35  2016-04-25 18:48:28
+36  2016-04-25 18:48:28
+37  2016-04-25 18:48:28
+38  2016-04-25 18:48:28
+39  2016-04-25 18:48:28
+40  2016-04-25 18:48:28
+41  2016-04-25 18:48:28
+42  2016-04-25 18:48:28
+43  2016-04-25 18:48:28
+44  2016-04-25 18:48:28
+45  2016-04-25 18:48:28
+46  2016-04-25 18:48:28
+47  2016-04-25 18:48:28
+48  2016-04-25 18:48:28
+49  2016-04-25 18:48:28
+50  2016-04-25 18:48:28
+51  2016-04-25 18:48:28
+52  2016-04-25 18:48:28
+53  2016-04-25 18:48:28
+54  2016-04-25 18:48:28
+55  2016-04-25 18:48:28
+56  2016-04-25 18:48:28
+57  2016-04-25 18:48:28
+58  2016-04-25 18:48:28
+59  2016-04-25 18:48:28
+60  2016-04-25 18:48:28
+61  2016-04-25 18:48:28
+62  2016-04-25 18:48:28
+63  2016-04-25 18:48:28
+64  2016-04-25 18:48:28
+65  2016-04-25 18:48:28
+66  2016-04-25 18:48:28
+67  2016-04-25 18:48:28
+68  2016-04-25 18:48:28
+69  2016-04-25 18:48:28
+70  2016-04-25 18:48:28
+71  2016-04-25 18:48:28
+72  2016-04-25 18:48:28
+73  2016-04-25 18:48:28
+74  2016-04-25 18:48:28
+75  2016-04-25 18:48:28
+76  2016-04-25 18:48:28
+77  2016-04-25 18:48:28
+78  2016-04-25 18:48:28
+79  2016-04-25 18:48:28
+80  2016-04-25 18:48:28
+81  2016-04-25 18:48:28
+82  2016-04-25 18:48:28
+83  2016-04-25 18:48:28
+84  2016-04-25 18:48:28
+85  2016-04-25 18:48:28
+86  2016-04-25 18:48:28
+87  2016-04-25 18:48:28
+88  2016-04-25 18:48:28
+89  2016-04-25 18:48:28
+90  2016-04-25 18:48:28
+91  2016-04-25 18:48:28
+92  2016-04-25 18:48:28
+93  2016-04-25 18:48:28
+94  2016-04-25 18:48:28
+95  2016-04-25 18:48:28
+96  2016-04-25 18:48:28
+97  2016-04-25 18:48:28
+98  2016-04-25 18:48:28
+99  2016-04-25 18:48:28
+100 2016-04-25 18:48:28
+101 2016-04-25 18:48:28
+102 2016-04-25 18:48:28
+103 2016-04-25 18:48:28
+104 2016-04-25 18:48:28
+105 2016-04-25 18:48:28
+106 2016-04-25 18:48:28
+107 2016-04-25 18:48:28
+108 2016-04-25 18:48:28
+109 2016-04-25 18:48:28
+110 2016-04-25 18:48:28
+111 2016-04-25 18:48:28
+112 2016-04-25 18:48:28
+113 2016-04-25 18:48:28
+114 2016-04-25 18:48:28
+115 2016-04-25 18:48:28
+116 2016-04-25 18:48:28
+117 2016-04-25 18:48:28
+118 2016-04-25 18:48:28
+119 2016-04-25 18:48:28
+120 2016-04-25 18:48:28
+121 2016-04-25 18:48:28
+122 2016-04-25 18:48:28
+123 2016-04-25 18:48:28
+124 2016-04-25 18:48:28
+125 2016-04-25 18:48:28
+126 2016-04-25 18:48:28
+127 2016-04-25 18:48:28
+128 2016-04-25 18:48:28
+129 2016-04-25 18:48:28
+130 2016-04-25 18:48:28
+131 2016-04-25 18:48:28
+132 2016-04-25 18:48:28
+133 2016-04-25 18:48:28
+134 2016-04-25 18:48:28
+135 2016-04-25 18:48:28
+136 2016-04-25 18:48:28
+137 2016-04-25 18:48:28
+138 2016-04-25 18:48:28
+139 2016-04-25 18:48:28
+140 2016-04-25 18:48:28
+141 2016-04-25 18:48:28
+142 2016-04-25 18:48:28
+143 2016-04-25 18:48:28
+144 2016-04-25 18:48:28
+145 2016-04-25 18:48:28
+146 2016-04-25 18:48:28
+147 2016-04-25 18:48:28
+148 2016-04-25 18:48:28
+149 2016-04-25 18:48:28
+150 2016-04-25 18:48:28
+151 2016-04-25 18:48:28
+152 2016-04-25 18:48:28
+153 2016-04-25 18:48:28
+154 2016-04-25 18:48:28
+155 2016-04-25 18:48:28
+156 2016-04-25 18:48:28
+157 2016-04-25 18:48:28
+158 2016-04-25 18:48:28
+159 2016-04-25 18:48:28
+160 2016-04-25 18:48:28
+161 2016-04-25 18:48:28
+162 2016-04-25 18:48:28
+163 2016-04-25 18:48:28
+164 2016-04-25 18:48:28
+165 2016-04-25 18:48:28
+166 2016-04-25 18:48:28
+167 2016-04-25 18:48:28
+168 2016-04-25 18:48:28
+169 2016-04-25 18:48:28
+170 2016-04-25 18:48:28
+171 2016-04-25 18:48:28
+172 2016-04-25 18:48:28
+173 2016-04-25 18:48:28
+174 2016-04-25 18:48:28
+175 2016-04-25 18:48:28
+176 2016-04-25 18:48:28
+177 2016-04-25 18:48:28
+178 2016-04-25 18:48:28
+179 2016-04-25 18:48:28
+</div>
+<div class='input'>
+# We search for a Tag with default &quot;name&quot; regular expression corresponding to 
+# hash md5hash.
+getTagsLocal( md5hash = hash, exampleRepoDir )
+</div>
+<div class='output'>[1] &quot;name:res_val&quot;                                                                                                                                      
+[2] &quot;name:__LHS&quot;                                                                                                                                        
+[3] &quot;name:env[[nm]]&quot;                                                                                                                                    
+[4] &quot;name:mtcars %a% group_by(cyl, am) %a% select(mpg, cyl, wt, am) %a%     summarise(avgmpg = mean(mpg), avgwt = mean(wt)) %a% filter(avgmpg &gt;     20)&quot;
+</div>
+<div class='input'>
+# Deleting example respository
+deleteLocalRepo( exampleRepoDir, TRUE) 
+rm( exampleRepoDir ) 
+
+## EXAMPLE with data iris
+exampleRepoDir &lt;- tempfile()
+createLocalRepo( exampleRepoDir )
+</div>
+<div class='output'>Directory /tmp/Rtmp8itQ6j/file516f4d83c775 did not exist. Forced to create a new directory.</div>
+<div class='input'>
+data(iris)
+saveToRepo(iris, repoDir = exampleRepoDir )
+</div>
+<div class='output'>[1] &quot;ff575c261c949d073b2895b05d1097c3&quot;
+</div>
+<div class='input'>showLocalRepo(exampleRepoDir)
+</div>
+<div class='output'>                           md5hash                             name
+1 ff575c261c949d073b2895b05d1097c3                             iris
+2 7a6a0ea6fd604c294097691f5cd65a05 7a6a0ea6fd604c294097691f5cd65a05
+          createdDate
+1 2016-04-25 18:48:29
+2 2016-04-25 18:48:29
+</div>
+<div class='input'>showLocalRepo(exampleRepoDir, method = &quot;tags&quot;)
+</div>
+<div class='output'>                           artifact
+1  ff575c261c949d073b2895b05d1097c3
+2  ff575c261c949d073b2895b05d1097c3
+3  ff575c261c949d073b2895b05d1097c3
+4  ff575c261c949d073b2895b05d1097c3
+5  ff575c261c949d073b2895b05d1097c3
+6  ff575c261c949d073b2895b05d1097c3
+7  ff575c261c949d073b2895b05d1097c3
+8  ff575c261c949d073b2895b05d1097c3
+9  ff575c261c949d073b2895b05d1097c3
+10 7a6a0ea6fd604c294097691f5cd65a05
+11 ff575c261c949d073b2895b05d1097c3
+12 ff575c261c949d073b2895b05d1097c3
+                                             tag         createdDate
+1                                     format:rda 2016-04-25 18:48:29
+2                                      name:iris 2016-04-25 18:48:29
+3                               class:data.frame 2016-04-25 18:48:29
+4                           varname:Sepal.Length 2016-04-25 18:48:29
+5                            varname:Sepal.Width 2016-04-25 18:48:29
+6                           varname:Petal.Length 2016-04-25 18:48:29
+7                            varname:Petal.Width 2016-04-25 18:48:29
+8                                varname:Species 2016-04-25 18:48:29
+9                       date:2016-04-25 18:48:29 2016-04-25 18:48:29
+10                                    format:rda 2016-04-25 18:48:29
+11 session_info:7a6a0ea6fd604c294097691f5cd65a05 2016-04-25 18:48:29
+12                                    format:txt 2016-04-25 18:48:29
+</div>
+<div class='input'>
+# We can notice that there is only one md5hash 
+# (and second for archiveSessionInfo) in repo so we will use it
+hash &lt;- showLocalRepo(exampleRepoDir)[1,1]
+
+# We search for a Tag with &quot;varname&quot; regular expression corresponding to 
+# hash md5hash.
+getTagsLocal( md5hash = hash, exampleRepoDir, tag = &quot;varname&quot; ) 
+</div>
+<div class='output'>[1] &quot;varname:Sepal.Length&quot; &quot;varname:Sepal.Width&quot;  &quot;varname:Petal.Length&quot;
+[4] &quot;varname:Petal.Width&quot;  &quot;varname:Species&quot;     
+</div>
+<div class='input'># There are 5 different Tags with &quot;varname&quot; regular expression
+
+# We needn&#39;t use the whole expression &quot;varname&quot;. We may use its abbreviation
+# and get the same result.
+getTagsLocal( md5hash = hash, exampleRepoDir, tag = &quot;varna&quot; ) 
+</div>
+<div class='output'>[1] &quot;varname:Sepal.Length&quot; &quot;varname:Sepal.Width&quot;  &quot;varname:Petal.Length&quot;
+[4] &quot;varname:Petal.Width&quot;  &quot;varname:Species&quot;     
+</div>
+<div class='input'>
+deleteLocalRepo( exampleRepoDir, TRUE) 
+rm( exampleRepoDir ) 
+
+### Remote version
+## EXAMPLE: pbiecek archivist repository on GitHub
+
+showRemoteRepo(user=&quot;pbiecek&quot;, repo=&quot;archivist&quot;)
+</div>
+<div class='output'>                            md5hash                             name
+1  ff575c261c949d073b2895b05d1097c3                             iris
+2  f7804cb74efa70d9795ace8c32e333c3                        myplot123
+3  5c3b6d82ab29e7b3a2137b6a537e55ec 5c3b6d82ab29e7b3a2137b6a537e55ec
+4  cd6557c6163a6f9800f308f343e75e72                            model
+5  7a761a2ae54f3d90060a9f6ca04b3506 7a761a2ae54f3d90060a9f6ca04b3506
+6  db864b3dcc09888f5f7f2750b4ab553d                             agn1
+7  c2380a7b8c090d6564ff12cdd60aaf7f c2380a7b8c090d6564ff12cdd60aaf7f
+8  c1ce897de77e8cb793a69b54e7f2b8b5                           fannyx
+9  ebe92bb4f9af6c343da4986f84c42b9b ebe92bb4f9af6c343da4986f84c42b9b
+10 2ae5f73c0b979532555fb3800458a4d4                             lda1
+11 53a9f3aa4235e111524dda17aad2ee3a 53a9f3aa4235e111524dda17aad2ee3a
+12 fdf1922d88bb7369896886dfa7da16f6                             qda1
+13 4d504b6c315c9be389f2e84186fa64c5 4d504b6c315c9be389f2e84186fa64c5
+14 1e05d1a3f103da0d99fba79643f71487                          glmnet1
+15 942ca3ecb05524e95375728c114bf619 942ca3ecb05524e95375728c114bf619
+16 134ecbbe2a8814d98f0c2758000c408e                     trellis.plot
+17 f49104cd336e6417f89141855c0fe4a7 f49104cd336e6417f89141855c0fe4a7
+18 df598bf17a3f149e004eede9c68313fa                        this.test
+19 3c6ee510336926b494cf8375b903246a 3c6ee510336926b494cf8375b903246a
+20 1d85e04b24e5129f0b7577b270d24ab4                            myFit
+21 917b56fd9edd81e088f8f7ada48cda95 917b56fd9edd81e088f8f7ada48cda95
+22 617ded4953ac986524a1c24703363980 617ded4953ac986524a1c24703363980
+23 5629bc43e36d219b613076b17c665eda 5629bc43e36d219b613076b17c665eda
+           createdDate
+1  2015-11-16 12:47:13
+2  2015-11-16 12:47:14
+3  2015-11-16 12:47:14
+4  2015-11-16 12:47:14
+5  2015-11-16 12:47:14
+6  2015-11-16 12:47:14
+7  2015-11-16 12:47:14
+8  2015-11-16 12:47:14
+9  2015-11-16 12:47:14
+10 2015-11-16 12:47:15
+11 2015-11-16 12:47:15
+12 2015-11-16 12:47:15
+13 2015-11-16 12:47:15
+14 2015-11-16 12:47:16
+15 2015-11-16 12:47:16
+16 2015-11-16 12:47:18
+17 2015-11-16 12:47:18
+18 2015-11-16 12:47:19
+19 2015-11-16 12:47:19
+20 2015-11-16 12:47:19
+21 2015-11-16 12:47:19
+22 2015-11-16 12:47:24
+23 2015-11-16 12:47:24
+</div>
+<div class='input'># We search for a Tag with default &quot;name&quot; regular expression corresponding to 
+# &quot;cd6557c6163a6f9800f308f343e75e72&quot; md5hash.
+getTagsRemote( &quot;cd6557c6163a6f9800f308f343e75e72&quot;,
+                user=&quot;pbiecek&quot;, repo=&quot;archivist&quot;)
+</div>
+<div class='output'>[1] &quot;name:model&quot;
+</div>
+<div class='input'>                
+## EXAMPLE: many archivist-like Repositories on one Github repository
+# We search for a Tag with default &quot;name&quot; regular expression corresponding to 
+# &quot;ff575c261c949d073b2895b05d1097c3&quot; md5hash.
+getTagsRemote(&quot;ff575c261c949d073b2895b05d1097c3&quot;, user=&quot;MarcinKosinski&quot;,
+               repo=&quot;Museum&quot;, branch=&quot;master&quot;, subdir=&quot;ex1&quot;)
+</div>
+<div class='output'>[1] &quot;name:iris&quot;
+</div>
+<div class='input'></div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>getTagsLocal</li><li>getTagsRemote</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+Other archivist: <code><a href='Repository.html'>Repository</a></code>,
+  <code><a href='Tags.html'>Tags</a></code>, <code><a href='magrittr.html'>%a%</a></code>,
+  <code><a href='addHooksToPrint.html'>addHooksToPrint</a></code>, <code><a href='addTagsRepo.html'>addTagsRepo</a></code>,
+  <code><a href='aformat.html'>aformat</a></code>, <code><a href='ahistory.html'>ahistory</a></code>,
+  <code><a href='alink.html'>alink</a></code>, <code><a href='archivistOptions.html'>aoptions</a></code>,
+  <code><a href='archivist-package.html'>archivist-package</a></code>, <code><a href='aread.html'>aread</a></code>,
+  <code><a href='asearch.html'>asearch</a></code>, <code><a href='asession.html'>asession</a></code>,
+  <code><a href='cache.html'>cache</a></code>, <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
+  <code><a href='createEmptyRepo.html'>createLocalRepo</a></code>,
+  <code><a href='createMDGallery.html'>createMDGallery</a></code>,
+  <code><a href='deleteLocalRepo.html'>deleteLocalRepo</a></code>,
+  <code><a href='getRemoteHook.html'>getRemoteHook</a></code>,
+  <code><a href='loadFromRepo.html'>loadFromLocalRepo</a></code>, <code><a href='md5hash.html'>md5hash</a></code>,
+  <code><a href='restoreLibs.html'>restoreLibs</a></code>, <code><a href='rmFromLocalRepo.html'>rmFromLocalRepo</a></code>,
+  <code><a href='saveToRepo.html'>saveToLocalRepo</a></code>,
+  <code><a href='searchInRepo.html'>searchInLocalRepo</a></code>,
+  <code><a href='setRepo.html'>setLocalRepo</a></code>,
+  <code><a href='shinySearchInRepo.html'>shinySearchInLocalRepo</a></code>,
+  <code><a href='showRepo.html'>showLocalRepo</a></code>,
+  <code><a href='splitTags.html'>splitTagsLocal</a></code>,
+  <code><a href='summaryRepo.html'>summaryLocalRepo</a></code>,
+  <code><a href='zipRepo.html'>zipLocalRepo</a></code>
+
+Other archivist: <code><a href='Repository.html'>Repository</a></code>,
+  <code><a href='Tags.html'>Tags</a></code>, <code><a href='magrittr.html'>%a%</a></code>,
+  <code><a href='addHooksToPrint.html'>addHooksToPrint</a></code>, <code><a href='addTagsRepo.html'>addTagsRepo</a></code>,
+  <code><a href='aformat.html'>aformat</a></code>, <code><a href='ahistory.html'>ahistory</a></code>,
+  <code><a href='alink.html'>alink</a></code>, <code><a href='archivistOptions.html'>aoptions</a></code>,
+  <code><a href='archivist-package.html'>archivist-package</a></code>, <code><a href='aread.html'>aread</a></code>,
+  <code><a href='asearch.html'>asearch</a></code>, <code><a href='asession.html'>asession</a></code>,
+  <code><a href='cache.html'>cache</a></code>, <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
+  <code><a href='createEmptyRepo.html'>createLocalRepo</a></code>,
+  <code><a href='createMDGallery.html'>createMDGallery</a></code>,
+  <code><a href='deleteLocalRepo.html'>deleteLocalRepo</a></code>,
+  <code><a href='getRemoteHook.html'>getRemoteHook</a></code>,
+  <code><a href='loadFromRepo.html'>loadFromLocalRepo</a></code>, <code><a href='md5hash.html'>md5hash</a></code>,
+  <code><a href='restoreLibs.html'>restoreLibs</a></code>, <code><a href='rmFromLocalRepo.html'>rmFromLocalRepo</a></code>,
+  <code><a href='saveToRepo.html'>saveToLocalRepo</a></code>,
+  <code><a href='searchInRepo.html'>searchInLocalRepo</a></code>,
+  <code><a href='setRepo.html'>setLocalRepo</a></code>,
+  <code><a href='shinySearchInRepo.html'>shinySearchInLocalRepo</a></code>,
+  <code><a href='showRepo.html'>showLocalRepo</a></code>,
+  <code><a href='splitTags.html'>splitTagsLocal</a></code>,
+  <code><a href='summaryRepo.html'>summaryLocalRepo</a></code>,
+  <code><a href='zipRepo.html'>zipLocalRepo</a></code>
+
+    
+    <h2>Author</h2>
+    
+Marcin Kosinski, <a href='mailto:m.p.kosinski@gmail.com'>m.p.kosinski@gmail.com</a>
+
+    
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>searchInLocalRepo. archivist 2.0.4</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+Marcin Kosinski, &lt;a href='mailto:m.p.kosinski@gmail.com'&gt;m.p.kosinski@gmail.com&lt;/a&gt;
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">archivist 2.0.4</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Search for an Artifact in the Repository Using Tags</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>searchInLocalRepo(pattern, repoDir&nbsp;=&nbsp;aoptions("repoDir"), fixed&nbsp;=&nbsp;TRUE, intersect&nbsp;=&nbsp;TRUE)</div>
+<div>searchInRemoteRepo(pattern, repo&nbsp;=&nbsp;aoptions("repo"), user&nbsp;=&nbsp;aoptions("user"), branch&nbsp;=&nbsp;"master", subdir&nbsp;=&nbsp;aoptions("subdir"), repoType&nbsp;=&nbsp;aoptions("repoType"), fixed&nbsp;=&nbsp;TRUE, intersect&nbsp;=&nbsp;TRUE)</div>
+<div>multiSearchInLocalRepo(...)</div>
+<div>multiSearchInRemoteRepo(...)</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>pattern</dt>
+      <dd>If <code>fixed = TRUE</code>: a character denoting a <code>Tag</code> which is to be searched for in the Repository.
+It is also possible to specify <code>pattern</code> as a list of 
+length 2 with <code>dateFrom</code> and <code>dateTo</code>; see details. If <code>fixed = FALSE</code>: a regular expression 
+specifying the beginning of a <code>Tag</code>, which will be used to search for artifacts. If of length more than one and if 
+<code>intersect = TRUE</code> then artifacts that match all conditions are returned. If <code>intersect = FALSE</code> then artifacts that match any condition
+are returned. See examples.</dd>
+      <dt>repoDir</dt>
+      <dd>A character denoting an existing directory in which artifacts will be searched for.</dd>
+      <dt>fixed</dt>
+      <dd>A logical value specifying how <code>artifacts</code> should be searched for.
+If <code>fixed = TRUE</code> (default) then artifacts are searched for by using <code>pattern = "Tag"</code> argument.
+If <code>fixed = FALSE</code> then artifacts are searched for by using <code>pattern = "regular expression"</code> argument.
+The latter is wider and more flexible method, e.g.,
+using <code>pattern = "name", fixed = FALSE</code> arguments enables to search for all artifacts in the <code>Repository</code>.</dd>
+      <dt>intersect</dt>
+      <dd>A logical value. Used only when <code>length(pattern) > 1 & is.character(pattern)</code>.
+See <code>pattern</code> for more details.</dd>
+      <dt>repo</dt>
+      <dd>While working with the Remote repository. A character containing a name of the Remote repository on which the Repository is stored.
+By default set to <code>NULL</code> - see <code>Note</code>.</dd>
+      <dt>user</dt>
+      <dd>While working with the Remote repository. A character containing a name of the Remote user on whose account the <code>repo</code> is created.
+By default set to <code>NULL</code> - see <code>Note</code>.</dd>
+      <dt>branch</dt>
+      <dd>While working with the Remote repository. A character containing a name of 
+the Remote Repository's branch on which the Repository is stored. Default <code>branch</code> is <code>master</code>.</dd>
+      <dt>subdir</dt>
+      <dd>While working with the Remote repository. A character containing a name of a directory on the Remote repository 
+on which the Repository is stored. If the Repository is stored in the main folder of the Remote repository, this should be set 
+to <code>subdir = "/"</code> as default.</dd>
+      <dt>repoType</dt>
+      <dd>A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.</dd>
+      <dt>...</dt>
+      <dd>Used for old deprecated functions.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+<code>searchInRepo</code> returns character vector of <code>md5hashes</code> of artifacts that were searched for.
+Those are hashes assigned to artifacts while they were saved in the Repository
+by the <a href='saveToRepo.html'>saveToLocalRepo</a> function. If the artifact
+is not in the Repository then a logical value <code>FALSE</code> is returned.
+</dl></p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p><code>searchInRepo</code> searches for an artifact in the <a href='Repository.html'>Repository</a> using it's <a href='Tags.html'>Tags</a>.
+To learn more about artifacts visit archivist-package.</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+
+      <p><code>searchInRepo</code> searches for an artifact in the Repository using it's <code>Tag</code> 
+(e.g., <code>name</code>, <code>class</code> or <code>archiving date</code>). <code>Tags</code> are used in a <code>pattern</code>
+parameter. For various artifact classes different <code>Tags</code> can be searched for. 
+See <a href='Tags.html'>Tags</a>. If a <code>pattern</code> is a list of length 2 then <code>md5hashes</code> of all 
+artifacts created from date <code>dateFrom</code> to date <code>dateTo</code> are returned. The date 
+should be formatted according to the YYYY-MM-DD format, e.g., <code>"2014-07-31"</code>.</p>
+  
+      <p><code>Tags</code>, used in a <code>pattern</code> parameter, should be determined according to the 
+format: <code>"TagKey:TagValue"</code> - see examples.</p>
+  
+    </div>
+
+    <div class="Note">
+      <h2>Note</h2>
+
+      <p>If <code>repo</code>, <code>user</code>, <code>subdir</code> and <code>repoType</code> are not specified in the Remote mode then global parameters
+set in <a href='setRepo.html'>setRemoteRepo</a> function are used.</p>
+  
+      <p>Bug reports and feature requests can be sent to <a href = 'https://github.com/pbiecek/archivist/issues'>https://github.com/pbiecek/archivist/issues</a></p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>## Not run: 
+# # objects preparation
+# 
+#   showLocalRepo(method = &quot;md5hashes&quot;, 
+#      repoDir = system.file(&quot;graphGallery&quot;, package = &quot;archivist&quot;))
+#   showLocalRepo(method = &quot;tags&quot;, 
+#      repoDir = system.file(&quot;graphGallery&quot;, package = &quot;archivist&quot;))
+#   
+#   # Tag search, fixed version
+#   searchInLocalRepo( &quot;class:ggplot&quot;, repoDir = exampleRepoDir )
+#   searchInLocalRepo( &quot;name:&quot;, repoDir = exampleRepoDir )
+#   # Tag search, regex version
+#   searchInLocalRepo( &quot;class&quot;, repoDir = exampleRepoDir, fixed = FALSE )
+#   
+#   # Github version
+#   # check the state of the Repository
+#   summaryRemoteRepo( user=&quot;pbiecek&quot;, repo=&quot;archivist&quot; )
+#   showRemoteRepo( user=&quot;pbiecek&quot;, repo=&quot;archivist&quot; )
+#   showRemoteRepo( user=&quot;pbiecek&quot;, repo=&quot;archivist&quot;, method = &quot;tags&quot; )
+#   # Tag search, fixed version
+#   searchInRemoteRepo( &quot;varname:Sepal.Width&quot;, user=&quot;pbiecek&quot;, repo=&quot;archivist&quot; )
+#   searchInRemoteRepo( &quot;class:lm&quot;, user=&quot;pbiecek&quot;, repo=&quot;archivist&quot;, branch=&quot;master&quot; )
+#   searchInRemoteRepo( &quot;name:myplot123&quot;, user=&quot;pbiecek&quot;, repo=&quot;archivist&quot; )
+#   
+#   # Tag search, regex version
+#   searchInRemoteRepo( &quot;class&quot;, user=&quot;pbiecek&quot;, repo=&quot;archivist&quot;,  fixed = FALSE )
+#   searchInRemoteRepo( &quot;name&quot;, user=&quot;pbiecek&quot;, repo=&quot;archivist&quot;, fixed = FALSE )
+#   
+#   # also on Github
+#   
+#   # Remeber to set dateTo parameter to actual date because sometimes we update datasets.
+#   searchInRemoteRepo( pattern = list( dateFrom = &quot;2015-10-01&quot;, dateTo = &quot;2015-11-30&quot; ), 
+#                       user=&quot;pbiecek&quot;, repo=&quot;archivist&quot;, branch=&quot;master&quot; )
+#   
+#   
+#   # many archivist-like Repositories on one Remote repository
+#   
+#   searchInRemoteRepo( pattern = &quot;name&quot;, user=&quot;MarcinKosinski&quot;, repo=&quot;Museum&quot;, 
+#   branch=&quot;master&quot;, subdir=&quot;ex1&quot;, fixed = FALSE )
+# 
+#   searchInRemoteRepo( pattern = &quot;name&quot;, user=&quot;MarcinKosinski&quot;, repo=&quot;Museum&quot;, 
+#                    branch=&quot;master&quot;, subdir=&quot;ex2&quot;, fixed = FALSE )
+#  
+#  # multi versions
+#  searchInRemoteRepo( pattern=c(&quot;varname:Sepal.Width&quot;, &quot;class:lm&quot;, &quot;name:myplot123&quot;), 
+#                          user=&quot;pbiecek&quot;, repo=&quot;archivist&quot;, intersect = FALSE )
+#   
+# ## End(Not run)
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>multiSearchInLocalRepo</li><li>multiSearchInRemoteRepo</li><li>searchInLocalRepo</li><li>searchInRemoteRepo</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+Other archivist: <code><a href='Repository.html'>Repository</a></code>,
+  <code><a href='Tags.html'>Tags</a></code>, <code><a href='magrittr.html'>%a%</a></code>,
+  <code><a href='addHooksToPrint.html'>addHooksToPrint</a></code>, <code><a href='addTagsRepo.html'>addTagsRepo</a></code>,
+  <code><a href='aformat.html'>aformat</a></code>, <code><a href='ahistory.html'>ahistory</a></code>,
+  <code><a href='alink.html'>alink</a></code>, <code><a href='archivistOptions.html'>aoptions</a></code>,
+  <code><a href='archivist-package.html'>archivist-package</a></code>, <code><a href='aread.html'>aread</a></code>,
+  <code><a href='asearch.html'>asearch</a></code>, <code><a href='asession.html'>asession</a></code>,
+  <code><a href='cache.html'>cache</a></code>, <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
+  <code><a href='createEmptyRepo.html'>createLocalRepo</a></code>,
+  <code><a href='createMDGallery.html'>createMDGallery</a></code>,
+  <code><a href='deleteLocalRepo.html'>deleteLocalRepo</a></code>,
+  <code><a href='getRemoteHook.html'>getRemoteHook</a></code>, <code><a href='getTags.html'>getTagsLocal</a></code>,
+  <code><a href='loadFromRepo.html'>loadFromLocalRepo</a></code>, <code><a href='md5hash.html'>md5hash</a></code>,
+  <code><a href='restoreLibs.html'>restoreLibs</a></code>, <code><a href='rmFromLocalRepo.html'>rmFromLocalRepo</a></code>,
+  <code><a href='saveToRepo.html'>saveToLocalRepo</a></code>,
+  <code><a href='setRepo.html'>setLocalRepo</a></code>,
+  <code><a href='shinySearchInRepo.html'>shinySearchInLocalRepo</a></code>,
+  <code><a href='showRepo.html'>showLocalRepo</a></code>,
+  <code><a href='splitTags.html'>splitTagsLocal</a></code>,
+  <code><a href='summaryRepo.html'>summaryLocalRepo</a></code>,
+  <code><a href='zipRepo.html'>zipLocalRepo</a></code>
+
+Other archivist: <code><a href='Repository.html'>Repository</a></code>,
+  <code><a href='Tags.html'>Tags</a></code>, <code><a href='magrittr.html'>%a%</a></code>,
+  <code><a href='addHooksToPrint.html'>addHooksToPrint</a></code>, <code><a href='addTagsRepo.html'>addTagsRepo</a></code>,
+  <code><a href='aformat.html'>aformat</a></code>, <code><a href='ahistory.html'>ahistory</a></code>,
+  <code><a href='alink.html'>alink</a></code>, <code><a href='archivistOptions.html'>aoptions</a></code>,
+  <code><a href='archivist-package.html'>archivist-package</a></code>, <code><a href='aread.html'>aread</a></code>,
+  <code><a href='asearch.html'>asearch</a></code>, <code><a href='asession.html'>asession</a></code>,
+  <code><a href='cache.html'>cache</a></code>, <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
+  <code><a href='createEmptyRepo.html'>createLocalRepo</a></code>,
+  <code><a href='createMDGallery.html'>createMDGallery</a></code>,
+  <code><a href='deleteLocalRepo.html'>deleteLocalRepo</a></code>,
+  <code><a href='getRemoteHook.html'>getRemoteHook</a></code>, <code><a href='getTags.html'>getTagsLocal</a></code>,
+  <code><a href='loadFromRepo.html'>loadFromLocalRepo</a></code>, <code><a href='md5hash.html'>md5hash</a></code>,
+  <code><a href='restoreLibs.html'>restoreLibs</a></code>, <code><a href='rmFromLocalRepo.html'>rmFromLocalRepo</a></code>,
+  <code><a href='saveToRepo.html'>saveToLocalRepo</a></code>,
+  <code><a href='setRepo.html'>setLocalRepo</a></code>,
+  <code><a href='shinySearchInRepo.html'>shinySearchInLocalRepo</a></code>,
+  <code><a href='showRepo.html'>showLocalRepo</a></code>,
+  <code><a href='splitTags.html'>splitTagsLocal</a></code>,
+  <code><a href='summaryRepo.html'>summaryLocalRepo</a></code>,
+  <code><a href='zipRepo.html'>zipLocalRepo</a></code>
+
+Other archivist: <code><a href='Repository.html'>Repository</a></code>,
+  <code><a href='Tags.html'>Tags</a></code>, <code><a href='magrittr.html'>%a%</a></code>,
+  <code><a href='addHooksToPrint.html'>addHooksToPrint</a></code>, <code><a href='addTagsRepo.html'>addTagsRepo</a></code>,
+  <code><a href='aformat.html'>aformat</a></code>, <code><a href='ahistory.html'>ahistory</a></code>,
+  <code><a href='alink.html'>alink</a></code>, <code><a href='archivistOptions.html'>aoptions</a></code>,
+  <code><a href='archivist-package.html'>archivist-package</a></code>, <code><a href='aread.html'>aread</a></code>,
+  <code><a href='asearch.html'>asearch</a></code>, <code><a href='asession.html'>asession</a></code>,
+  <code><a href='cache.html'>cache</a></code>, <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
+  <code><a href='createEmptyRepo.html'>createLocalRepo</a></code>,
+  <code><a href='createMDGallery.html'>createMDGallery</a></code>,
+  <code><a href='deleteLocalRepo.html'>deleteLocalRepo</a></code>,
+  <code><a href='getRemoteHook.html'>getRemoteHook</a></code>, <code><a href='getTags.html'>getTagsLocal</a></code>,
+  <code><a href='loadFromRepo.html'>loadFromLocalRepo</a></code>, <code><a href='md5hash.html'>md5hash</a></code>,
+  <code><a href='restoreLibs.html'>restoreLibs</a></code>, <code><a href='rmFromLocalRepo.html'>rmFromLocalRepo</a></code>,
+  <code><a href='saveToRepo.html'>saveToLocalRepo</a></code>,
+  <code><a href='setRepo.html'>setLocalRepo</a></code>,
+  <code><a href='shinySearchInRepo.html'>shinySearchInLocalRepo</a></code>,
+  <code><a href='showRepo.html'>showLocalRepo</a></code>,
+  <code><a href='splitTags.html'>splitTagsLocal</a></code>,
+  <code><a href='summaryRepo.html'>summaryLocalRepo</a></code>,
+  <code><a href='zipRepo.html'>zipLocalRepo</a></code>
+
+    
+    <h2>Author</h2>
+    
+Marcin Kosinski, <a href='mailto:m.p.kosinski@gmail.com'>m.p.kosinski@gmail.com</a>
+
+    
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

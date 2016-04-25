@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>addTagsRepo. archivist 2.0.4</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+Marcin Kosinski, &lt;a href='mailto:m.p.kosinski@gmail.com'&gt;m.p.kosinski@gmail.com&lt;/a&gt;, 
+Przemyslaw Biecek, &lt;a href='mailto:przemyslaw.biecek@gmail.com'&gt;przemyslaw.biecek@gmail.com&lt;/a&gt;
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">archivist 2.0.4</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Add new Tags to the Existing Repository</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>addTagsRepo(md5hashes, repoDir&nbsp;=&nbsp;NULL, FUN&nbsp;=&nbsp;NULL, tags&nbsp;=&nbsp;NULL, ...)</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>md5hashes</dt>
+      <dd>a character vector of <code>md5hashes</code> specifying to which
+corresponding artifacts new <code>Tags</code> should be added. See <code>Note</code> 
+to get to know about the length of <code>tags</code> and <code>md5hashes</code> parameters.</dd>
+      <dt>repoDir</dt>
+      <dd>A character that specifies the directory of the Repository to which
+new <code>Tags</code> will be added. If it is set to <code>NULL</code> (by default),
+it uses the <code>repoDir</code> specified in <a href='setRepo.html'>setLocalRepo</a>.</dd>
+      <dt>FUN</dt>
+      <dd>A function which is evaluated on the artifacts for which <code>md5hashes</code>
+are given. The result of this function evaluation are <code>Tags</code> which will
+be added to the local Repository.</dd>
+      <dt>tags</dt>
+      <dd>A character vector which specifies what kind of Tags should be added to
+artifacts corresponding to given <code>md5hashes</code>. See <code>Note</code> to get to know about
+the length of <code>tags</code> and <code>md5hashes</code> parameters.
+One can specify either <code>FUN</code> or <code>tags</code>.</dd>
+      <dt>...</dt>
+      <dd>Other arguments that will be passed to FUN.</dd>
+    </dl>
+    
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p><code>addTagsRepo</code> adds new <a href='Tags.html'>Tags</a> to the existing <a href='Repository.html'>Repository</a>.</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+
+      <p><code>addTagsRepo</code> function adds new Tags to artifacts that are already stored
+in the repository. One can add new <code>Tags</code> either explicitly with <code>tags</code> parameter
+or by passing a function which extracts <code>Tags</code> from selected artifacts
+corresponding to <code>md5hashes</code>. To learn more about artifacts visit
+archivist-package.</p>
+  
+    </div>
+
+    <div class="Note">
+      <h2>Note</h2>
+
+      <p>One should remember that <code>length(tags)</code> modulo <code>length(md5hashes)</code> 
+must be equal to 0 or <code>length(md5hashes)</code> modulo <code>length(tags)</code>
+must be equal to 0.</p>
+  
+      <p>Bug reports and feature requests can be sent to <a href = 'https://github.com/pbiecek/archivist/issues'>https://github.com/pbiecek/archivist/issues</a></p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>## Not run: 
+# 
+# ## We Take all artifacts of lm class from repository, 
+# ## extract R^2 for them and store as R^2:number Tags
+# 
+# # Creating empty repository
+# exampleRepoDir &lt;- tempfile()
+# createLocalRepo(exampleRepoDir, force=TRUE)
+# 
+# # Saving lm artifacts into repository
+# m1 &lt;- lm(Sepal.Length~Species, iris)
+# saveToLocalRepo(m1, exampleRepoDir)
+# m2 &lt;- lm(Sepal.Width~Species, iris)
+# saveToLocalRepo(m2, exampleRepoDir)
+# 
+# # We may see what kind of Tags are related to &quot;m1&quot; artifact corresponding to
+# # &quot;9e66edd297c2f291446f3503c01d443a&quot; md5hash
+# getTagsLocal(&quot;9e66edd297c2f291446f3503c01d443a&quot;, exampleRepoDir, &quot;&quot;)
+# 
+# # We may see what kind of Tags are related to &quot;m2&quot; artifact corresponding to
+# # &quot;da1bcaf68752c146903f700c1a458438&quot; md5hash
+# getTagsLocal(&quot;da1bcaf68752c146903f700c1a458438&quot;, exampleRepoDir, &quot;&quot;)
+# 
+# # We Take all objects of lm class from repository
+# md5hashes &lt;- searchInLocalRepo(repoDir=exampleRepoDir, &quot;class:lm&quot;)
+# 
+# # Adding new tag &quot;test&quot; explicitly
+# addTagsRepo(md5hashes, exampleRepoDir, tags = &quot;test&quot;)
+# 
+# # Adding new tag &quot;R^2: &quot; using FUN parameter
+# addTagsRepo(md5hashes, exampleRepoDir, function(x) paste0(&quot;R^2:&quot;,summary(x)$r.square))
+# 
+# # And now: Tags related to &quot;m1&quot; artifact are
+# getTagsLocal(&quot;9e66edd297c2f291446f3503c01d443a&quot;, exampleRepoDir, &quot;&quot;)
+# 
+# # And now: Tags related to &quot;m2&quot; artifact are
+# getTagsLocal(&quot;da1bcaf68752c146903f700c1a458438&quot;, exampleRepoDir, &quot;&quot;)
+# 
+# # One more look at our Repo
+# showLocalRepo(exampleRepoDir, method = &quot;tags&quot;)
+# 
+# # Deleting example repository
+# deleteLocalRepo(exampleRepoDir, deleteRoot=TRUE)
+# rm(exampleRepoDir)
+# ## End(Not run)
+
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>addTagsRepo</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+Other archivist: <code><a href='Repository.html'>Repository</a></code>,
+  <code><a href='Tags.html'>Tags</a></code>, <code><a href='magrittr.html'>%a%</a></code>,
+  <code><a href='addHooksToPrint.html'>addHooksToPrint</a></code>, <code><a href='aformat.html'>aformat</a></code>,
+  <code><a href='ahistory.html'>ahistory</a></code>, <code><a href='alink.html'>alink</a></code>,
+  <code><a href='archivistOptions.html'>aoptions</a></code>, <code><a href='archivist-package.html'>archivist-package</a></code>,
+  <code><a href='aread.html'>aread</a></code>, <code><a href='asearch.html'>asearch</a></code>,
+  <code><a href='asession.html'>asession</a></code>, <code><a href='cache.html'>cache</a></code>,
+  <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
+  <code><a href='createEmptyRepo.html'>createLocalRepo</a></code>,
+  <code><a href='createMDGallery.html'>createMDGallery</a></code>,
+  <code><a href='deleteLocalRepo.html'>deleteLocalRepo</a></code>,
+  <code><a href='getRemoteHook.html'>getRemoteHook</a></code>, <code><a href='getTags.html'>getTagsLocal</a></code>,
+  <code><a href='loadFromRepo.html'>loadFromLocalRepo</a></code>, <code><a href='md5hash.html'>md5hash</a></code>,
+  <code><a href='restoreLibs.html'>restoreLibs</a></code>, <code><a href='rmFromLocalRepo.html'>rmFromLocalRepo</a></code>,
+  <code><a href='saveToRepo.html'>saveToLocalRepo</a></code>,
+  <code><a href='searchInRepo.html'>searchInLocalRepo</a></code>,
+  <code><a href='setRepo.html'>setLocalRepo</a></code>,
+  <code><a href='shinySearchInRepo.html'>shinySearchInLocalRepo</a></code>,
+  <code><a href='showRepo.html'>showLocalRepo</a></code>,
+  <code><a href='splitTags.html'>splitTagsLocal</a></code>,
+  <code><a href='summaryRepo.html'>summaryLocalRepo</a></code>,
+  <code><a href='zipRepo.html'>zipLocalRepo</a></code>
+
+    
+    <h2>Author</h2>
+    
+Marcin Kosinski, <a href='mailto:m.p.kosinski@gmail.com'>m.p.kosinski@gmail.com</a>, 
+Przemyslaw Biecek, <a href='mailto:przemyslaw.biecek@gmail.com'>przemyslaw.biecek@gmail.com</a>
+
+    
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -7,14 +7,23 @@ layout: default
   {{ content }}
 </div>
 
-{% if site.twitter %}
-{% include twitter_button.html %}
-{% endif %}
+  {% if site.facebook %}
+  {% include facebook_button.html %}
+  {% endif %}
 
-{% if site.facebook %}
-{% include facebook_button.html %}
-{% endif %}
+  {% if site.twitter %}
+  {% include twitter_button.html %}
+  {% endif %}
 
-{% if site.disqus %}
-{% include disqus_comments.html %}
-{% endif %}
+  {% if site.linkedin %}
+  {% include linkedin_button.html %}
+  {% endif %}
+  
+  {% if site.googleplus %}
+  {% include googleplus_button.html %}
+  {% endif %}
+
+
+  {% if site.disqus %}
+  {% include disqus_comments.html %}
+  {% endif %}

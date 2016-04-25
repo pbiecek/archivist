@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>zipLocalRepo. archivist 2.0.4</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+Marcin Kosinski, &lt;a href='mailto:m.p.kosinski@gmail.com'&gt;m.p.kosinski@gmail.com&lt;/a&gt;, Przemyslaw Biecek
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">archivist 2.0.4</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Create a zip Archive From an Existing Repository</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>zipLocalRepo(repoDir&nbsp;=&nbsp;aoptions("repoDir"), repoTo&nbsp;=&nbsp;getwd(), zipname&nbsp;=&nbsp;"repository.zip")</div>
+<div>zipRemoteRepo(repoTo&nbsp;=&nbsp;getwd(), user&nbsp;=&nbsp;aoptions("user"), repo&nbsp;=&nbsp;aoptions("repo"), branch&nbsp;=&nbsp;"master", subdir&nbsp;=&nbsp;aoptions("subdir"), repoType&nbsp;=&nbsp;aoptions("repoType"), zipname&nbsp;=&nbsp;"repository.zip")</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>repoDir</dt>
+      <dd>A character that specifies the directory of the Repository which
+will be zipped.</dd>
+      <dt>repoTo</dt>
+      <dd>A character that specifies the directory in which there
+will be created zip archive from <code>Repository</code> stored in <code>repoDir</code> or Remote directory.
+By default set to working directory (<code>getwd()</code>).</dd>
+      <dt>zipname</dt>
+      <dd>A character that specifies name of the zipped repository.
+It is assumed that this file does not exist or does not contain backpack.db file.
+An attempt to override will produce an error.</dd>
+      <dt>user</dt>
+      <dd>While working with the Remote repository. A character containing
+a name of the Remote user on whose account the <code>repo</code> is created.
+By default set to <code>NULL</code> - see <code>Note</code>.</dd>
+      <dt>repo</dt>
+      <dd>While working with the Remote repository. A character containing
+a name of the Remote repository on which the Repository, which is to be zipped, is archived.
+By default set to <code>NULL</code> - see <code>Note</code>.</dd>
+      <dt>branch</dt>
+      <dd>While working with the Remote repository. A character containing a name of the
+Remote repository's branch on which Repository, which is to be zipped, is archived.
+Default <code>branch</code> is <code>master</code>.</dd>
+      <dt>subdir</dt>
+      <dd>While working with a Remote repository. A character containing a name of
+a directory on Remote repository on which the Repository, which is to be zipped, is stored.
+If the Repository is stored in the main folder on the Remote repository, this should be set 
+to FALSE as default.</dd>
+      <dt>repoType</dt>
+      <dd>A character containing a type of the remote repository. Currently it can be 'Remote' or 'bitbucket'.</dd>
+    </dl>
+    
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p><code>zipLocalRepo</code> and <code>zipRemoteRepo</code> create a zip archive from an
+existing <a href='Repository.html'>Repository</a>. <code>zipLocalRepo</code> zips local <code>Repository</code>,
+<code>zipRemoteRepo</code> zips <code>Repository</code> stored on Github.</p>
+  
+    </div>
+
+    <div class="Note">
+      <h2>Note</h2>
+
+      <p>The function might not work if <code>Rtools</code> are not installed.
+To solve this problem follow these <a href = 'http://cran.r-project.org/web/packages/openxlsx/vignettes/Introduction.pdf'>Instructions.</a></p>
+  
+      <p>If <code>repo</code> and <code>user</code> are set to <code>NULL</code> (as default) in Github mode then global parameters
+set in <a href='setRepo.html'>setRemoteRepo</a> function are used.</p>
+  
+      <p>Bug reports and feature requests can be sent to <a href = 'https://github.com/pbiecek/archivist/issues'>https://github.com/pbiecek/archivist/issues</a></p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'># objects preparation
+## Not run: 
+# # data.frame object
+# data(iris)
+# 
+# # ggplot/gg object
+# library(ggplot2)
+# df &lt;- data.frame(gp = factor(rep(letters[1:3], each = 10)),y = rnorm(30))
+# library(plyr)
+# ds &lt;- ddply(df, .(gp), summarise, mean = mean(y), sd = sd(y))
+# myplot123 &lt;- ggplot(df, aes(x = gp, y = y)) +
+#   geom_point() +  geom_point(data = ds, aes(y = mean),
+#                colour = &#39;red&#39;, size = 3)
+#                
+# # lm object                
+# model &lt;- lm(Sepal.Length~ Sepal.Width + Petal.Length + Petal.Width, data= iris)
+# 
+# # Local version
+# 
+# exampleRepoDir &lt;- tempfile()
+# createLocalRepo( repoDir = exampleRepoDir )
+# saveToLocalRepo( myplot123, repoDir=exampleRepoDir )
+# saveToLocalRepo( iris, repoDir=exampleRepoDir )
+# saveToLocalRepo( model, repoDir=exampleRepoDir )
+# 
+# 
+#  
+# zipLocalRepo( exampleRepoDir )
+# 
+# deleteLocalRepo( exampleRepoDir, TRUE)
+# 
+# rm( exampleRepoDir )
+# 
+# # Remote version
+# 
+# zipRemoteRepo( user=&quot;MarcinKosinski&quot;, 
+# repo=&quot;Museum&quot;, branch=&quot;master&quot;, subdir=&quot;ex1&quot; )
+# 
+# zipRemoteRepo( user=&quot;pbiecek&quot;, repo=&quot;archivist&quot;, repoTo = getwd( ) )
+# 
+# ## End(Not run)
+
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>zipLocalRepo</li><li>zipRemoteRepo</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+Other archivist: <code><a href='Repository.html'>Repository</a></code>,
+  <code><a href='Tags.html'>Tags</a></code>, <code><a href='magrittr.html'>%a%</a></code>,
+  <code><a href='addHooksToPrint.html'>addHooksToPrint</a></code>, <code><a href='addTagsRepo.html'>addTagsRepo</a></code>,
+  <code><a href='aformat.html'>aformat</a></code>, <code><a href='ahistory.html'>ahistory</a></code>,
+  <code><a href='alink.html'>alink</a></code>, <code><a href='archivistOptions.html'>aoptions</a></code>,
+  <code><a href='archivist-package.html'>archivist-package</a></code>, <code><a href='aread.html'>aread</a></code>,
+  <code><a href='asearch.html'>asearch</a></code>, <code><a href='asession.html'>asession</a></code>,
+  <code><a href='cache.html'>cache</a></code>, <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
+  <code><a href='createEmptyRepo.html'>createLocalRepo</a></code>,
+  <code><a href='createMDGallery.html'>createMDGallery</a></code>,
+  <code><a href='deleteLocalRepo.html'>deleteLocalRepo</a></code>,
+  <code><a href='getRemoteHook.html'>getRemoteHook</a></code>, <code><a href='getTags.html'>getTagsLocal</a></code>,
+  <code><a href='loadFromRepo.html'>loadFromLocalRepo</a></code>, <code><a href='md5hash.html'>md5hash</a></code>,
+  <code><a href='restoreLibs.html'>restoreLibs</a></code>, <code><a href='rmFromLocalRepo.html'>rmFromLocalRepo</a></code>,
+  <code><a href='saveToRepo.html'>saveToLocalRepo</a></code>,
+  <code><a href='searchInRepo.html'>searchInLocalRepo</a></code>,
+  <code><a href='setRepo.html'>setLocalRepo</a></code>,
+  <code><a href='shinySearchInRepo.html'>shinySearchInLocalRepo</a></code>,
+  <code><a href='showRepo.html'>showLocalRepo</a></code>,
+  <code><a href='splitTags.html'>splitTagsLocal</a></code>,
+  <code><a href='summaryRepo.html'>summaryLocalRepo</a></code>
+
+Other archivist: <code><a href='Repository.html'>Repository</a></code>,
+  <code><a href='Tags.html'>Tags</a></code>, <code><a href='magrittr.html'>%a%</a></code>,
+  <code><a href='addHooksToPrint.html'>addHooksToPrint</a></code>, <code><a href='addTagsRepo.html'>addTagsRepo</a></code>,
+  <code><a href='aformat.html'>aformat</a></code>, <code><a href='ahistory.html'>ahistory</a></code>,
+  <code><a href='alink.html'>alink</a></code>, <code><a href='archivistOptions.html'>aoptions</a></code>,
+  <code><a href='archivist-package.html'>archivist-package</a></code>, <code><a href='aread.html'>aread</a></code>,
+  <code><a href='asearch.html'>asearch</a></code>, <code><a href='asession.html'>asession</a></code>,
+  <code><a href='cache.html'>cache</a></code>, <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
+  <code><a href='createEmptyRepo.html'>createLocalRepo</a></code>,
+  <code><a href='createMDGallery.html'>createMDGallery</a></code>,
+  <code><a href='deleteLocalRepo.html'>deleteLocalRepo</a></code>,
+  <code><a href='getRemoteHook.html'>getRemoteHook</a></code>, <code><a href='getTags.html'>getTagsLocal</a></code>,
+  <code><a href='loadFromRepo.html'>loadFromLocalRepo</a></code>, <code><a href='md5hash.html'>md5hash</a></code>,
+  <code><a href='restoreLibs.html'>restoreLibs</a></code>, <code><a href='rmFromLocalRepo.html'>rmFromLocalRepo</a></code>,
+  <code><a href='saveToRepo.html'>saveToLocalRepo</a></code>,
+  <code><a href='searchInRepo.html'>searchInLocalRepo</a></code>,
+  <code><a href='setRepo.html'>setLocalRepo</a></code>,
+  <code><a href='shinySearchInRepo.html'>shinySearchInLocalRepo</a></code>,
+  <code><a href='showRepo.html'>showLocalRepo</a></code>,
+  <code><a href='splitTags.html'>splitTagsLocal</a></code>,
+  <code><a href='summaryRepo.html'>summaryLocalRepo</a></code>
+
+    
+    <h2>Author</h2>
+    
+Marcin Kosinski, <a href='mailto:m.p.kosinski@gmail.com'>m.p.kosinski@gmail.com</a>, Przemyslaw Biecek
+
+    
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

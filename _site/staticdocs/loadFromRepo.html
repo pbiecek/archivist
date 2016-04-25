@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>loadFromLocalRepo. archivist 2.0.4</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+Marcin Kosinski , &lt;a href='mailto:m.p.kosinski@gmail.com'&gt;m.p.kosinski@gmail.com&lt;/a&gt;
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">archivist 2.0.4</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Load Artifact Given as a md5hash from a Repository</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>loadFromLocalRepo(md5hash, repoDir&nbsp;=&nbsp;aoptions("repoDir"), value&nbsp;=&nbsp;FALSE)</div>
+<div>loadFromRemoteRepo(md5hash, repo&nbsp;=&nbsp;aoptions("repo"), user&nbsp;=&nbsp;aoptions("user"), branch&nbsp;=&nbsp;aoptions("branch"), subdir&nbsp;=&nbsp;aoptions("subdir"), repoType&nbsp;=&nbsp;aoptions("repoType"), value&nbsp;=&nbsp;FALSE)</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>md5hash</dt>
+      <dd>A character assigned to the artifact through the use of a cryptographical hash function with MD5 algorithm, or it's abbreviation.</dd>
+      <dt>repoDir</dt>
+      <dd>A character denoting an existing directory from which an artifact will be loaded.</dd>
+      <dt>value</dt>
+      <dd>If <code>FALSE</code> (default) then artifacts are loaded into the Global Environment with their original names, 
+if <code>TRUE</code> then artifacts are returned as a list of values (if there is more than one artifact)
+or as a single value (if there is only one arfifact that matches md5hash).</dd>
+      <dt>repo</dt>
+      <dd>While working with a Remote repository. A character containing a name of a Remote repository on which the Repository is archived.
+By default set to <code>NULL</code> - see <code>Note</code>.</dd>
+      <dt>user</dt>
+      <dd>While working with a Remote repository. A character containing a name of a Remote user on whose account the <code>repo</code> is created.
+By default set to <code>NULL</code> - see <code>Note</code>.</dd>
+      <dt>branch</dt>
+      <dd>While working with a Remote repository. A character containing a name of 
+Remote Repository's branch on which the Repository is archived. Default <code>branch</code> is <code>master</code>.</dd>
+      <dt>subdir</dt>
+      <dd>While working with a Remote repository. A character containing a name of a directory on Remote repository 
+on which the Repository is stored. If the Repository is stored in main folder on Remote repository, this should be set 
+to <code>subdir = "/"</code> as default.</dd>
+      <dt>repoType</dt>
+      <dd>A character containing a type of the remote repository. Currently it can be 'Remote' or 'bitbucket'.</dd>
+    </dl>
+    
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p><code>loadFromLocalRepo</code> loads an artifact from a local <a href='Repository.html'>Repository</a> into the workspace.
+<code>loadFromRemoteRepo</code> loads an artifact from a github / git / mercurial <a href='Repository.html'>Repository</a> into the workspace.
+To learn more about artifacts visit archivist-package.</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+
+      <p>Functions <code>loadFromLocalRepo</code> and <code>loadFromRemoteRepo</code> load artifacts from the archivist Repositories 
+stored in a local folder or on git. Both of them take <code>md5hash</code> as a
+parameter, which is a result of <a href='saveToRepo.html'>saveToRepo</a> function.
+For each artifact, <code>md5hash</code> is a unique string of length 32 that is produced by
+<a href='http://www.inside-r.org/packages/cran/digest/docs/digest'>digest</a> function, which uses a cryptographical MD5 hash algorithm. For more information see <a href='md5hash.html'>md5hash</a>.</p>
+  
+      <p>Important: instead of giving the whole <code>md5hash</code> character, the user can simply give first few characters of the <code>md5hash</code>.
+For example, <code>a09dd</code> instead of <code>a09ddjdkf9kj33dcjdnfjgos9jd9jkcv</code>. All artifacts with the same <code>md5hash</code> 
+abbreviation will be loaded from <a href='Repository.html'>Repository</a>.</p>
+  
+      <p>Note that <code>user</code> and <code>repo</code> should be used only when working with a git repository and should be omitted in the local mode. 
+<code>repoDir</code> should only be used when working on a local Repository and should be omitted in the git mode.</p>
+  
+      <p>One may notice that <code>loadFromRemoteRepo</code> and <code>loadFromLocalRepo</code> load artifacts to the Global
+Environment with their original names. Alternatively,
+a parameter <code>value = TRUE</code> can be specified so that these functions may return artifacts as a value. As a result loaded artifacts
+can be attributed to new names. Note that, when an abbreviation of <code>md5hash</code> was given then a list of artifacts corresponding to this
+abbreviation will be loaded.</p>
+  
+    </div>
+
+    <div class="Note">
+      <h2>Note</h2>
+
+      <p>You can specify one <code>md5hash</code> (or its abbreviation) per function call.</p>
+  
+      <p>If <code>repo</code> and <code>user</code> are set to <code>NULL</code> (as default) in Remote mode then global parameters
+set in <a href='setRepo.html'>setRemoteRepo</a> function are used.</p>
+  
+      <p>You should remember while using <code>loadFromRepo</code> wrapper that <code>repoDir</code> is
+a parameter used only in <code>loadFromLocalRepo</code> while <code>repo</code>, <code>user</code>,
+<code>branch</code> and <code>subdir</code> are used only in <code>loadFromRemoteRepo</code>. When you mix those
+parameters you will receive an error message.</p>
+  
+      <p>Bug reports and feature requests can be sent to <a href = 'https://github.com/pbiecek/archivist/issues'>https://github.com/pbiecek/archivist/issues</a></p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>
+## Not run: 
+# # objects preparation
+# 
+# #&#39; exampleRepoDir &lt;- tempfile()
+# createLocalRepo(repoDir = exampleRepoDir)
+# data(iris)
+# saveToLocalRepo(iris, repoDir=exampleRepoDir, archiveSessionInfo = TRUE)
+# showLocalRepo(method = &quot;md5hashes&quot;, repoDir = exampleRepoDir)
+# showLocalRepo(method = &quot;tags&quot;, repoDir = exampleRepoDir)
+# 
+# loadFromLocalRepo(md5hash = &#39;f05f0ed0662fe01850ec1b928830ef32&#39;,
+#   repoDir = system.file(&quot;graphGallery&quot;, package = &quot;archivist&quot;), value = TRUE) -&gt; pl
+# deleteLocalRepo(exampleRepoDir, TRUE)
+# rm(exampleRepoDir)
+# 
+# 
+# #
+# #Remote Version
+# #
+# 
+# # check the state of the Repository
+# summaryRemoteRepo( user=&quot;pbiecek&quot;, repo=&quot;archivist&quot; )
+# showRemoteRepo( user=&quot;pbiecek&quot;, repo=&quot;archivist&quot; )
+# showRemoteRepo( user=&quot;pbiecek&quot;, repo=&quot;archivist&quot;, method = &quot;tags&quot; )
+# 
+# rm( model )
+# rm( myplot123 )
+# rm( qda1 )
+# (VARmd5hash &lt;- searchInRemoteRepo( &quot;varname:Sepal.Width&quot;, 
+#                    user=&quot;pbiecek&quot;, repo=&quot;archivist&quot; ))
+# (NAMEmd5hash &lt;- searchInRemoteRepo( &quot;name:qda1&quot;, 
+#                    user=&quot;pbiecek&quot;, repo=&quot;archivist&quot;, branch=&quot;master&quot; ))
+# (CLASSmd5hash &lt;- searchInRemoteRepo( &quot;class:ggplot&quot;, 
+#                    user=&quot;pbiecek&quot;, repo=&quot;archivist&quot;, branch=&quot;master&quot; ))
+# 
+# 
+# loadFromRemoteRepo( &quot;ff575c261c&quot;, user=&quot;pbiecek&quot;, repo=&quot;archivist&quot;)
+# NewObjects &lt;- loadFromRemoteRepo( NAMEmd5hash, user=&quot;pbiecek&quot;, repo=&quot;archivist&quot;, value = TRUE )
+# loadFromRemoteRepo( CLASSmd5hash, user=&quot;pbiecek&quot;, repo=&quot;archivist&quot;)
+# 
+# 
+# ## Loading artifacts from the repository which is built in the archivist package 
+# ## and saving them on the example repository
+# 
+# # Creating an example Repository - on which artifacts loaded from the
+# # archivist package repository will be saved
+# exampleRepoDir &lt;- tempfile()
+# createLocalRepo(repoDir = exampleRepoDir)
+# 
+# # Directory of the archivist package repository
+# repo_archivist &lt;- system.file(&quot;graphGallery&quot;, package = &quot;archivist&quot;) 
+# 
+# # We are checking what kind of objects
+# # are stored in the archivist package repository
+# summaryLocalRepo(repoDir = repo_archivist)
+# 
+# # Let&#39;s say that we are interested in 
+# # an artifact of class ggplot.
+# GGPLOTmd5hash &lt;- searchInLocalRepo(pattern = &quot;class:ggplot&quot;,
+#                                    repoDir = repo_archivist) 
+# # There are eight of them.
+# # We load the first one by its value (parameter value = TRUE)
+# # and assign it to the p variable.
+# p &lt;- loadFromLocalRepo(GGPLOTmd5hash[1], repoDir = repo_archivist,
+#                        value = TRUE)
+# 
+# # Finally, we may save the artifact on the example Repository.
+# # Note that md5hash is different from the one which is stored in
+# # the archivist package repository.
+# saveToRepo(p, repoDir = exampleRepoDir) 
+# 
+# # Making sure that the artifact is stored on the example repository
+# showLocalRepo(repoDir = exampleRepoDir, method = &quot;tags&quot;)
+# 
+# # removing an example Repository
+# 
+# deleteLocalRepo( exampleRepoDir, TRUE)
+# 
+# rm( exampleRepoDir )
+# 
+# # many archivist-like Repositories on one Remote repository
+# 
+# loadFromRemoteRepo( &quot;ff575c261c949d073b2895b05d1097c3&quot;, 
+# user=&quot;MarcinKosinski&quot;, repo=&quot;Museum&quot;, branch=&quot;master&quot;, subdir=&quot;ex2&quot;)
+# 
+# 
+# loadFromRemoteRepo( &quot;ff575c261c949d073b2895b05d1097c3&quot;, 
+#                     user=&quot;MarcinKosinski&quot;, repo=&quot;Museum&quot;, branch=&quot;master&quot;,
+#                     subdir=&quot;ex1&quot;)
+#                     
+# #github
+# loadFromRemoteRepo(md5hash = &quot;08dc0b66975cded92b5cd8291ebdc955&quot;, 
+#                repo = &quot;graphGallery&quot;, user = &quot;pbiecek&quot;, 
+#                repoType = &quot;github&quot;, value = TRUE)
+#            
+# #git
+# loadFromRemoteRepo(md5hash = &quot;08dc0b66975cded92b5cd8291ebdc955&quot;, 
+#                repo = &quot;graphGalleryGit&quot;, user = &quot;pbiecek&quot;, 
+#                repoType = &quot;bitbucket&quot;, value = TRUE)
+# 
+# # mercurial               
+# loadFromRemoteRepo(md5hash = &quot;08dc0b66975cded92b5cd8291ebdc955&quot;, 
+#                repo = &quot;graphGalleryM&quot;, user = &quot;pbiecek&quot;, 
+#                repoType = &quot;bitbucket&quot;, value = TRUE)
+# ## End(Not run)
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>loadFromLocalRepo</li><li>loadFromRemoteRepo</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+Other archivist: <code><a href='Repository.html'>Repository</a></code>,
+  <code><a href='Tags.html'>Tags</a></code>, <code><a href='magrittr.html'>%a%</a></code>,
+  <code><a href='addHooksToPrint.html'>addHooksToPrint</a></code>, <code><a href='addTagsRepo.html'>addTagsRepo</a></code>,
+  <code><a href='aformat.html'>aformat</a></code>, <code><a href='ahistory.html'>ahistory</a></code>,
+  <code><a href='alink.html'>alink</a></code>, <code><a href='archivistOptions.html'>aoptions</a></code>,
+  <code><a href='archivist-package.html'>archivist-package</a></code>, <code><a href='aread.html'>aread</a></code>,
+  <code><a href='asearch.html'>asearch</a></code>, <code><a href='asession.html'>asession</a></code>,
+  <code><a href='cache.html'>cache</a></code>, <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
+  <code><a href='createEmptyRepo.html'>createLocalRepo</a></code>,
+  <code><a href='createMDGallery.html'>createMDGallery</a></code>,
+  <code><a href='deleteLocalRepo.html'>deleteLocalRepo</a></code>,
+  <code><a href='getRemoteHook.html'>getRemoteHook</a></code>, <code><a href='getTags.html'>getTagsLocal</a></code>,
+  <code><a href='md5hash.html'>md5hash</a></code>, <code><a href='restoreLibs.html'>restoreLibs</a></code>,
+  <code><a href='rmFromLocalRepo.html'>rmFromLocalRepo</a></code>,
+  <code><a href='saveToRepo.html'>saveToLocalRepo</a></code>,
+  <code><a href='searchInRepo.html'>searchInLocalRepo</a></code>,
+  <code><a href='setRepo.html'>setLocalRepo</a></code>,
+  <code><a href='shinySearchInRepo.html'>shinySearchInLocalRepo</a></code>,
+  <code><a href='showRepo.html'>showLocalRepo</a></code>,
+  <code><a href='splitTags.html'>splitTagsLocal</a></code>,
+  <code><a href='summaryRepo.html'>summaryLocalRepo</a></code>,
+  <code><a href='zipRepo.html'>zipLocalRepo</a></code>
+
+    
+    <h2>Author</h2>
+    
+Marcin Kosinski , <a href='mailto:m.p.kosinski@gmail.com'>m.p.kosinski@gmail.com</a>
+
+    
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

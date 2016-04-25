@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>Repository. archivist 2.0.4</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">archivist 2.0.4</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Repository</h1>
+
+<div class="row">
+  <div class="span8">
+        
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p><code>Repository</code> stores specific values of an artifact, different for 
+various artifact's classes and artifacts themselves.
+To learn more about artifacts visit archivist-package.</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+
+      <p><code>Repository</code> is a folder with an SQLite database stored in a file named <code>backpack</code>
+and a subdirectory named <code>gallery</code>.</p>
+  
+      <p><code>backpack</code> contains two tables:<em>artifact</em> and <em>tag</em>.
+<em>artifact</em> table consists of three columns:
+<ul>
+<li> <code>md5hash</code>,
+ </li>
+<li> <code>name</code>,
+ </li>
+<li> <code>createdDate</code>,
+</li>
+</ul></p>
+  
+      <p>while <em>tag</em> table consists of the following three columns:
+<ul>
+<li> <code>artifact</code>,
+ </li>
+<li> <code>tag</code>,
+ </li>
+<li> <code>createdDate</code>.
+</li>
+</ul></p>
+  
+      <p><code>gallery</code> collects the following objects:
+<ul>
+<li> artifacts and artifacts' data saved as <code>.rda</code> files,
+ </li>
+<li> artifacts' miniatures saved as <code>.txt</code> and <code>.png</code> files.
+</li>
+</ul></p>
+  
+      <p></p>
+  
+    </div>
+
+    <div class="Note">
+      <h2>Note</h2>
+
+      <p>Bug reports and feature requests can be sent to <a href = 'https://github.com/pbiecek/archivist/issues'>https://github.com/pbiecek/archivist/issues</a></p>
+  
+    </div>
+      </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>Repository</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+Functions using <code>Repository</code> are:
+<ul>
+<li> <a href='addTagsRepo.html'>addTagsRepo</a>,
+ </li>
+<li> <a href='ahistory.html'>ahistory</a>,
+ </li>
+<li> <a href='aread.html'>aread</a>,
+ </li>
+<li> <a href='asearch.html'>asearch</a>,
+ </li>
+<li> <a href='cache.html'>cache</a>,
+ </li>
+<li> <a href='getTags.html'>getTagsLocal</a>,
+ </li>
+<li> <a href='getTags.html'>getTagsRemote</a>,
+ </li>
+<li> <a href='splitTags.html'>splitTagsLocal</a>,
+ </li>
+<li> <a href='splitTags.html'>splitTagsRemote</a>,
+ </li>
+<li> <a href='loadFromRepo.html'>loadFromLocalRepo</a>, 
+ </li>
+<li> <a href='loadFromRepo.html'>loadFromRemoteRepo</a>,
+ </li>
+<li> <a href='rmFromLocalRepo.html'>rmFromLocalRepo</a>,
+ </li>
+<li> <a href='saveToRepo.html'>saveToRepo</a>,
+ </li>
+<li> <a href='searchInRepo.html'>searchInLocalRepo</a>,
+ </li>
+<li> <a href='searchInRepo.html'>searchInRemoteRepo</a>, 
+ </li>
+<li> <a href='shinySearchInRepo.html'>shinySearchInLocalRepo</a>,
+ </li>
+<li> <a href='showRepo.html'>showLocalRepo</a>,
+ </li>
+<li> <a href='showRepo.html'>showRemoteRepo</a>,
+ </li>
+<li> <a href='summaryRepo.html'>summaryLocalRepo</a>,
+ </li>
+<li> <a href='summaryRepo.html'>summaryRemoteRepo</a>.  
+ </li>
+</ul>
+
+Function creating <code>Repository</code> is:
+<ul>
+<li> <a href='createEmptyRepo.html'>createLocalRepo</a>.
+</li>
+</ul>
+
+Function deleting <code>Repository</code> is:
+<ul>
+<li> <a href='deleteLocalRepo.html'>deleteLocalRepo</a>.
+</li>
+</ul>
+
+Functions coping <code>Repository</code> are:
+<ul>
+<li> <a href='copyToRepo.html'>copyLocalRepo</a>,
+ </li>
+<li> <a href='copyToRepo.html'>copyRemoteRepo</a>.
+</li>
+</ul>
+
+Functions creating a zip archive from an existing <code>Repository</code> are:
+<ul>
+<li> <a href='zipRepo.html'>zipLocalRepo</a>,
+ </li>
+<li> <a href='zipRepo.html'>zipRemoteRepo</a>.
+</li>
+</ul>
+
+Functions setting global path to the <code>Repository</code> are:
+<ul>
+<li> <a href='setRepo.html'>setLocalRepo</a>,
+ </li>
+<li> <a href='setRepo.html'>setRemoteRepo</a>.
+</li>
+</ul>
+
+Learn more about <code>Repository</code> at <span class = "pkg">archivist</span> <code>wiki</code> webpage on 
+<a href = 'https://github.com/pbiecek/archivist/wiki/archivist-package-Repository'>Github</a>.
+
+Other archivist: <code><a href='Tags.html'>Tags</a></code>, <code><a href='magrittr.html'>%a%</a></code>,
+  <code><a href='addHooksToPrint.html'>addHooksToPrint</a></code>, <code><a href='addTagsRepo.html'>addTagsRepo</a></code>,
+  <code><a href='aformat.html'>aformat</a></code>, <code><a href='ahistory.html'>ahistory</a></code>,
+  <code><a href='alink.html'>alink</a></code>, <code><a href='archivistOptions.html'>aoptions</a></code>,
+  <code><a href='archivist-package.html'>archivist-package</a></code>, <code><a href='aread.html'>aread</a></code>,
+  <code><a href='asearch.html'>asearch</a></code>, <code><a href='asession.html'>asession</a></code>,
+  <code><a href='cache.html'>cache</a></code>, <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
+  <code><a href='createEmptyRepo.html'>createLocalRepo</a></code>,
+  <code><a href='createMDGallery.html'>createMDGallery</a></code>,
+  <code><a href='deleteLocalRepo.html'>deleteLocalRepo</a></code>,
+  <code><a href='getRemoteHook.html'>getRemoteHook</a></code>, <code><a href='getTags.html'>getTagsLocal</a></code>,
+  <code><a href='loadFromRepo.html'>loadFromLocalRepo</a></code>, <code><a href='md5hash.html'>md5hash</a></code>,
+  <code><a href='restoreLibs.html'>restoreLibs</a></code>, <code><a href='rmFromLocalRepo.html'>rmFromLocalRepo</a></code>,
+  <code><a href='saveToRepo.html'>saveToLocalRepo</a></code>,
+  <code><a href='searchInRepo.html'>searchInLocalRepo</a></code>,
+  <code><a href='setRepo.html'>setLocalRepo</a></code>,
+  <code><a href='shinySearchInRepo.html'>shinySearchInLocalRepo</a></code>,
+  <code><a href='showRepo.html'>showLocalRepo</a></code>,
+  <code><a href='splitTags.html'>splitTagsLocal</a></code>,
+  <code><a href='summaryRepo.html'>summaryLocalRepo</a></code>,
+  <code><a href='zipRepo.html'>zipLocalRepo</a></code>
+
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

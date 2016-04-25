@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>shinySearchInLocalRepo. archivist 2.0.4</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+Przemyslaw Biecek, &lt;a href='mailto:przemyslaw.biecek@gmail.com'&gt;przemyslaw.biecek@gmail.com&lt;/a&gt;
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">archivist 2.0.4</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Shiny Based Live Search for an Artifact in a Repository Using Tags</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>shinySearchInLocalRepo(repoDir&nbsp;=&nbsp;NULL, host&nbsp;=&nbsp;"0.0.0.0")</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>repoDir</dt>
+      <dd>A character denoting an existing directory in which artifacts will be searched.
+If set to <code>NULL</code> (by default), uses the <code>repoDir</code> specified in <a href='setRepo.html'>setLocalRepo</a>.</dd>
+      <dt>host</dt>
+      <dd>A host IP adress, see the <code>host</code> argument in <code>shiny::runApp</code>.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+<code>shinySearchInLocalRepo</code> runs a shiny application.
+</dl></p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p><code>shinySearchInLocalRepo</code> searches for an artifact in a <a href='Repository.html'>Repository</a> using <a href='Tags.html'>Tags</a>.
+To create an application one needs to point the name of artifacts' repository.
+The application is generated on the run. As for now there are two controllers exposed. 
+A text input field and a slider. Tags that are typed into text field are used for searching in repository. 
+Objects that have the same Tags are presented on the right panel.
+These object might be also downloaded just by click.
+To learn more about artifacts visit archivist-package.</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+
+      <p><code>shinySearchInLocalRepo</code> searches for artifacts in a Repository using their <code>Tags</code> 
+(e.g., <code>name</code>, <code>class</code> or <code>archiving date</code>). <code>Tags</code> are submitted in a 
+text input in a shiny application. Many Tags may be specified, they should be comma separated. 
+User can specify more Tags like phase, project, author etc. when artifact is created.</p>
+  
+      <p>In the search query one can add Tags starting with <code>sort:</code> or <code>sort:-</code>.
+As a result, miniatures will be sorted appropriately.
+For example <code>sort:class</code> will sort <code>class</code> Tags, while <code>sort:-class</code> will
+sort <code>class</code> tags backwards. <code>sort:createdDate</code> will sort <code>createdDate</code> Tag and
+<code>sort:-createdDate</code> will sort <code>createdDate</code> Tag backwards.</p>
+  
+      <p><code>Tags</code>, submitted in the text field, should be given according to the 
+format: <code>"TagKey:TagValue"</code> - see examples.</p>
+  
+    </div>
+
+    <div class="Note">
+      <h2>Note</h2>
+
+      <p>Bug reports and feature requests can be sent to <a href = 'https://github.com/pbiecek/archivist/issues'>https://github.com/pbiecek/archivist/issues</a></p>
+  
+    </div>
+
+    <div class="shiny">
+      <h2>shiny</h2>
+
+      <p></p>
+  
+      <p>This function use tools from the fantastic <span class = "pkg">shiny</span>
+package, so you'll need to make sure to have it installed.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>## Not run: 
+#   # assuming that there is a &#39;repo&#39; dir with a valid archivist repository
+#   shinySearchInLocalRepo( repoDir = &#39;repo&#39; )
+# ## End(Not run)
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>shinySearchInLocalRepo</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+Other archivist: <code><a href='Repository.html'>Repository</a></code>,
+  <code><a href='Tags.html'>Tags</a></code>, <code><a href='magrittr.html'>%a%</a></code>,
+  <code><a href='addHooksToPrint.html'>addHooksToPrint</a></code>, <code><a href='addTagsRepo.html'>addTagsRepo</a></code>,
+  <code><a href='aformat.html'>aformat</a></code>, <code><a href='ahistory.html'>ahistory</a></code>,
+  <code><a href='alink.html'>alink</a></code>, <code><a href='archivistOptions.html'>aoptions</a></code>,
+  <code><a href='archivist-package.html'>archivist-package</a></code>, <code><a href='aread.html'>aread</a></code>,
+  <code><a href='asearch.html'>asearch</a></code>, <code><a href='asession.html'>asession</a></code>,
+  <code><a href='cache.html'>cache</a></code>, <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
+  <code><a href='createEmptyRepo.html'>createLocalRepo</a></code>,
+  <code><a href='createMDGallery.html'>createMDGallery</a></code>,
+  <code><a href='deleteLocalRepo.html'>deleteLocalRepo</a></code>,
+  <code><a href='getRemoteHook.html'>getRemoteHook</a></code>, <code><a href='getTags.html'>getTagsLocal</a></code>,
+  <code><a href='loadFromRepo.html'>loadFromLocalRepo</a></code>, <code><a href='md5hash.html'>md5hash</a></code>,
+  <code><a href='restoreLibs.html'>restoreLibs</a></code>, <code><a href='rmFromLocalRepo.html'>rmFromLocalRepo</a></code>,
+  <code><a href='saveToRepo.html'>saveToLocalRepo</a></code>,
+  <code><a href='searchInRepo.html'>searchInLocalRepo</a></code>,
+  <code><a href='setRepo.html'>setLocalRepo</a></code>, <code><a href='showRepo.html'>showLocalRepo</a></code>,
+  <code><a href='splitTags.html'>splitTagsLocal</a></code>,
+  <code><a href='summaryRepo.html'>summaryLocalRepo</a></code>,
+  <code><a href='zipRepo.html'>zipLocalRepo</a></code>
+
+    
+    <h2>Author</h2>
+    
+Przemyslaw Biecek, <a href='mailto:przemyslaw.biecek@gmail.com'>przemyslaw.biecek@gmail.com</a>
+
+    
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

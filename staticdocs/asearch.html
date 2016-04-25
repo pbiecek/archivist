@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>asearch. archivist 2.0.4</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+Przemyslaw Biecek, &lt;a href='mailto:przemyslaw.biecek@gmail.com'&gt;przemyslaw.biecek@gmail.com&lt;/a&gt;
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">archivist 2.0.4</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Read Artifacts Given as a List of Tags</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>asearch(patterns, repo&nbsp;=&nbsp;NULL)</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>patterns</dt>
+      <dd>A character vector of <code>Tags</code>. Only artifacts that 
+contain all Tags are returned.</dd>
+      <dt>repo</dt>
+      <dd>One of following:
+
+A character with Remote user name and Remote repository name separated by `/`.
+
+NULL in this case search will be performed in the default repo, either local or Remote</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+This function returns a list of artifacts (by their values).
+</dl></p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p><code>asearch</code> searches for artifacts that contain all specified <a href='Tags.html'>Tags</a>
+and reads all of them from a default or Remote <a href='Repository.html'>Repository</a>. It's a wrapper around 
+<a href='searchInRepo.html'>searchInLocalRepo</a> and <a href='loadFromRepo.html'>loadFromLocalRepo</a> and their Remote versions.</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+
+      <p>Function <code>asearch</code> reads all artifacts that contain given list of <code>Tags</code>
+from default or Remote Repository.
+It uses both <a href='loadFromRepo.html'>loadFromLocalRepo</a> and <a href='searchInRepo.html'>searchInLocalRepo</a> functions (or their Remote versions)
+but has shorter name and different parameter's specification.</p>
+  
+    </div>
+
+    <div class="Note">
+      <h2>Note</h2>
+
+      <p>Remember that if you want to use local repository you should set it to default.</p>
+  
+      <p>Bug reports and feature requests can be sent to <a href = 'https://github.com/pbiecek/archivist/issues'>https://github.com/pbiecek/archivist/issues</a></p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>## Not run: 
+# ### default LOCAL version
+# ## objects preparation
+# 
+# # data.frame object
+# data(iris)
+# 
+# # ggplot/gg object
+# library(ggplot2)
+# df &lt;- data.frame(gp = factor(rep(letters[1:3], each = 10)),y = rnorm(30))
+# library(plyr)
+# ds &lt;- ddply(df, .(gp), summarise, mean = mean(y), sd = sd(y))
+# myplot123 &lt;- ggplot(df, aes(x = gp, y = y)) +
+#   geom_point() +  geom_point(data = ds, aes(y = mean),
+#                              colour = &#39;red&#39;, size = 3)
+# 
+# # lm object
+# model &lt;- lm(Sepal.Length~ Sepal.Width + Petal.Length + Petal.Width, data= iris)
+# model2 &lt;- lm(Sepal.Length~ Sepal.Width + Petal.Width, data= iris)
+# model3 &lt;- lm(Sepal.Length~ Sepal.Width, data= iris)
+# 
+# ## creating example default local repository
+# exampleRepoDir &lt;- tempfile()
+# createLocalRepo(repoDir = exampleRepoDir)
+# ## setting default local repository
+# setLocalRepo( repoDir = exampleRepoDir )
+# 
+# saveToLocalRepo(myplot123)
+# saveToLocalRepo(iris)
+# saveToLocalRepo(model)
+# saveToLocalRepo(model2)
+# saveToLocalRepo(model3)
+# 
+# ## Searching for objects of class:lm
+# lm &lt;- asearch(patterns = &quot;class:lm&quot;)
+# 
+# ## Searching for objects of class:lm with coefname:Petal.Width
+# lm_c_PW &lt;- asearch(patterns = c(&quot;class:lm&quot;,&quot;coefname:Petal.Width&quot;))
+# 
+# # Note that we searched for objects. Then loaded them from repository by their value.
+# 
+# 
+# ## deleting example repository
+# deleteLocalRepo(repoDir = exampleRepoDir, deleteRoot = TRUE)
+# rm(exampleRepoDir)
+# 
+# ### default GitHub version
+# ## Setting default github repository
+# setRemoteRepo( user = &quot;pbiecek&quot;, repo = &quot;archivist&quot;)
+# 
+# showRemoteRepo(method = &quot;tags&quot;)$tag
+# searchInRemoteRepo(pattern = &quot;class:lm&quot;)
+# searchInRemoteRepo(pattern = &quot;class:gg&quot;)
+# getTagsRemote(md5hash = &quot;cd6557c6163a6f9800f308f343e75e72&quot;, tag = &quot;&quot;)
+# 
+# ## Searching for objects of class:lm
+# asearch(patterns = c(&quot;class:lm&quot;))
+# ## Searching for objects of class:gg
+# asearch(patterns = c(&quot;class:gg&quot;))
+# 
+# ### Remote version 
+# ## Note that repo argument is passed in the following way to asearch:
+# ## repo = &quot;GitHub user name/GitHub repository name&quot;
+# 
+# ## Searching for objects of class:gg
+# asearch(&quot;pbiecek/graphGallery&quot;, 
+#         patterns = c(&quot;class:gg&quot;,
+#                      &quot;labelx:Sepal.Length&quot;))
+# ## End(Not run)
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>asearch</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+Other archivist: <code><a href='Repository.html'>Repository</a></code>,
+  <code><a href='Tags.html'>Tags</a></code>, <code><a href='magrittr.html'>%a%</a></code>,
+  <code><a href='addHooksToPrint.html'>addHooksToPrint</a></code>, <code><a href='addTagsRepo.html'>addTagsRepo</a></code>,
+  <code><a href='aformat.html'>aformat</a></code>, <code><a href='ahistory.html'>ahistory</a></code>,
+  <code><a href='alink.html'>alink</a></code>, <code><a href='archivistOptions.html'>aoptions</a></code>,
+  <code><a href='archivist-package.html'>archivist-package</a></code>, <code><a href='aread.html'>aread</a></code>,
+  <code><a href='asession.html'>asession</a></code>, <code><a href='cache.html'>cache</a></code>,
+  <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
+  <code><a href='createEmptyRepo.html'>createLocalRepo</a></code>,
+  <code><a href='createMDGallery.html'>createMDGallery</a></code>,
+  <code><a href='deleteLocalRepo.html'>deleteLocalRepo</a></code>,
+  <code><a href='getRemoteHook.html'>getRemoteHook</a></code>, <code><a href='getTags.html'>getTagsLocal</a></code>,
+  <code><a href='loadFromRepo.html'>loadFromLocalRepo</a></code>, <code><a href='md5hash.html'>md5hash</a></code>,
+  <code><a href='restoreLibs.html'>restoreLibs</a></code>, <code><a href='rmFromLocalRepo.html'>rmFromLocalRepo</a></code>,
+  <code><a href='saveToRepo.html'>saveToLocalRepo</a></code>,
+  <code><a href='searchInRepo.html'>searchInLocalRepo</a></code>,
+  <code><a href='setRepo.html'>setLocalRepo</a></code>,
+  <code><a href='shinySearchInRepo.html'>shinySearchInLocalRepo</a></code>,
+  <code><a href='showRepo.html'>showLocalRepo</a></code>,
+  <code><a href='splitTags.html'>splitTagsLocal</a></code>,
+  <code><a href='summaryRepo.html'>summaryLocalRepo</a></code>,
+  <code><a href='zipRepo.html'>zipLocalRepo</a></code>
+
+    
+    <h2>Author</h2>
+    
+Przemyslaw Biecek, <a href='mailto:przemyslaw.biecek@gmail.com'>przemyslaw.biecek@gmail.com</a>
+
+    
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>
