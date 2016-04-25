@@ -1,3 +1,10 @@
+archivist 2.0.4
+----------------------------------------------------------------
+* **New feature**:
+  1. `restoreLibs()` can now restore libraries in custom directory. [a23d053](https://github.com/pbiecek/archivist/commit/a23d053e2d6841e3de733446998260ca71c3ddb1)
+  2. `createMDGallery` has new `maxTags` parameter so that gallery's summaries in the `README.md` files now has limited chunk's length. [[#249](https://github.com/pbiecek/archivist/issues/249)]
+
+
 archivist 2.0.2
 ----------------------------------------------------------------
 
