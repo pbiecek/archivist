@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.46016.svg)](http://dx.doi.org/10.5281/zenodo.46016)
+[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.47154.svg)](http://dx.doi.org/10.5281/zenodo.47154)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/archivist)](http://cran.r-project.org/web/packages/archivist)
 [![Downloads](http://cranlogs.r-pkg.org/badges/archivist)](http://cran.rstudio.com/package=archivist)
 [![Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/archivist?color=orange)](http://cranlogs.r-pkg.org/badges/grand-total/archivist)
