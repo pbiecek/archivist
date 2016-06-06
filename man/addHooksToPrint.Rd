@@ -30,7 +30,7 @@ to \code{subdir = "/"} as default.}
 The overloaded function will add all objects of selected class to the \link{Repository} and then will add hooks to the HTML report (generated in \pkg{rmarkdown}) for these objects (\code{artifacts} - \link{archivist-package}).
 }
 \note{
-One can specify \code{userTags} as in \link{saveToLocalRepo} for artifacts by adding code{"tags"} attribute.
+One can specify \code{userTags} as in \link{saveToLocalRepo} for artifacts by adding \code{"tags"} attribute.
 See note secion about that in \link{saveToLocalRepo}.
 
 Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
