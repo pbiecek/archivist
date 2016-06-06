@@ -2,7 +2,7 @@
 % Please edit documentation in R/addArchivistHooks.R
 \name{addHooksToPrint}
 \alias{addHooksToPrint}
-\title{Add Archivist Hooks to Report}
+\title{Add \pkg{archivist} Hooks to \pkg{rmarkdown} HTML Report}
 \usage{
 addHooksToPrint(class = "ggplot", repoDir = aoptions("repoDir"),
   repo = aoptions("repo"), user = aoptions("user"), branch = "master",
@@ -27,7 +27,7 @@ to \code{subdir = "/"} as default.}
 }
 \description{
 \code{addHooksToPrint} adds an overloaded version of the print function for objects of selected class. 
-The overloaded function will add all object of selected class to the repo and then add hooks to the report for these objects .
+The overloaded function will add all objects of selected class to the \link{Repository} and then will add hooks to the HTML report (generated in \pkg{rmarkdown}) for these objects (\code{artifacts} - \link{archivist-package}).
 }
 \note{
 One can specify \code{userTags} as in \link{saveToLocalRepo} for artifacts by adding code{"tags"} attribute.
