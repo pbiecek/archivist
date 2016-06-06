@@ -9,7 +9,7 @@ addHooksToPrint(class = "ggplot", repoDir = aoptions("repoDir"),
   subdir = aoptions("subdir"))
 }
 \arguments{
-\item{class}{A character containing a name of class (one or more) that should be archivised.}
+\item{class}{A character containing a name of class (one or more) that should be archived.}
 
 \item{repoDir}{A character containing a name of Local Repository.}
 
