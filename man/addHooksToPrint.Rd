@@ -9,25 +9,27 @@ addHooksToPrint(class = "ggplot", repoDir = aoptions("repoDir"),
   subdir = aoptions("subdir"))
 }
 \arguments{
-\item{class}{A character containing a name of class (one or more) that should be archived.}
+\item{class}{A character with a name of class (one or more) that should be archived.}
 
-\item{repoDir}{A character containing a name of Local Repository.}
+\item{repoDir}{A character containing a name of a Local Repository.}
 
-\item{repo}{A character containing a name of a Git repository on which the Repository is archived.
+\item{repo}{A character with a name of a Remote repository on which the Repository is archived.
 If \code{repo = NULL} then hooks will be added to files in local directories.}
 
-\item{user}{A character containing a name of a Git user on whose account the \code{repo} is created.}
+\item{user}{A character with a name of a Remote-repository user on whose account the \code{repo} is created.}
 
-\item{branch}{A character containing a name of Git Repository's branch on which the Repository is archived. 
+\item{branch}{A character with a name of Remote-repository's branch on which the Repository is archived. 
 Default \code{branch} is \code{master}.}
 
-\item{subdir}{A character containing a name of a directory on Git repository 
-on which the Repository is stored. If the Repository is stored in main folder on Git repository, this should be set 
+\item{subdir}{A character with a name of a subdirectory on a Remote repository 
+on which the Repository is stored. If the Repository is stored in main folder on a Remote repository, this should be set 
 to \code{subdir = "/"} as default.}
 }
 \description{
 \code{addHooksToPrint} adds an overloaded version of the print function for objects of selected class. 
-The overloaded function will add all objects of selected class to the \link{Repository} and then will add hooks to the HTML report (generated in \pkg{rmarkdown}) for these objects (\code{artifacts} - \link{archivist-package}).
+The overloaded function will add all objects of selected class to the \link{Repository} and then will add hooks (to the Remote or Local Repository) 
+to the HTML report (generated in \pkg{rmarkdown}) for these objects (\code{artifacts} - \link{archivist-package}).
+The great example can be seen in this blogpost \href{http://www.r-bloggers.com/why-should-you-backup-your-r-objects/}{http://www.r-bloggers.com/why-should-you-backup-your-r-objects/}.
 }
 \note{
 One can specify \code{userTags} as in \link{saveToLocalRepo} for artifacts by adding \code{"tags"} attribute.
