@@ -13,6 +13,7 @@ output:
 	
 ###  The list of blog-posts and conference talks about `archivist`
 
+- 2016-05 Ver 2.0.3 [All your models belong to us: how to combine package archivist and function trace() (Przemysław Biecek)](http://www.r-bloggers.com/all-your-models-belong-to-us-how-to-combine-package-archivist-and-function-trace/)
 - 2016-02 Ver 2.0 [Why should you backup your objects? (Przemysław Biecek)](http://www.r-bloggers.com/why-should-you-backup-your-r-objects/)
 - 2016-02 Ver 0.1 First extenstion: `archivist.github` CRAN Publication, [Tools for Archiving, Managing and Sharing R Objects via GitHub](http://marcinkosinski.github.io/archivist.github/)
 - 2016-02 Ver 2.0 CRAN Publication 
