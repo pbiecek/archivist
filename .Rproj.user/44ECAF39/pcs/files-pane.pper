@@ -1,9 +1,0 @@
-{
-    "path" : "~/archivist",
-    "sortOrder" : [
-        {
-            "ascending" : true,
-            "columnIndex" : 2
-        }
-    ]
-}
