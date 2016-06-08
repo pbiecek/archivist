@@ -1,6 +1,6 @@
 ##    archivist package for R
 ##
-#' @title Add \pkg{archivist} Hooks to \pkg{rmarkdown} HTML Report
+#' @title Add \pkg{archivist} Hooks to \pkg{rmarkdown} Reports
 #'
 #' @description
 #' \code{addHooksToPrint} adds an overloaded version of the print function for objects of selected class. 

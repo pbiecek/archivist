@@ -2,7 +2,7 @@
 % Please edit documentation in R/addArchivistHooks.R
 \name{addHooksToPrint}
 \alias{addHooksToPrint}
-\title{Add \pkg{archivist} Hooks to \pkg{rmarkdown} HTML Report}
+\title{Add \pkg{archivist} Hooks to \pkg{rmarkdown} Reports}
 \usage{
 addHooksToPrint(class = "ggplot", repoDir = aoptions("repoDir"),
   repo = aoptions("repo"), user = aoptions("user"), branch = "master",
