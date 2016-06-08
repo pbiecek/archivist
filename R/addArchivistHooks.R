@@ -62,7 +62,7 @@ addHooksToPrint <- function(class = "ggplot",
                       pattern="namespace:", replacement="")
     
     if (length(namespace) == 0) {
-      stop(paste0("The function print.", class1, " has not been found."))
+      stop(paste0("The function print.", class1, " has not been found. Evaluation stopped for further classes."))
     }
     
     if (is.null(repo)) { # local version
