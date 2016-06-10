@@ -51,6 +51,11 @@ they are set globally, because \code{repo} is a substring of \code{repoDir} and 
 
 Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 }
+\section{Demonstration}{
+
+ 
+This function is well explained on this \href{http://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github}{http://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github} blog post.
+}
 \examples{
 
 createLocalRepo("ahistory_check", default = TRUE)

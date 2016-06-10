@@ -33,6 +33,11 @@
 #' @note 
 #' Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 #'
+#' @section Blogging:
+#'  
+#' We have prepared history of blog posts and conference talks about \pkg{archivist} under this link 
+#' \href{http://pbiecek.github.io/archivist/Posts.html}{http://pbiecek.github.io/archivist/Posts.html}
+#'
 #' @author
 #' Przemyslaw Biecek [aut, cre] \email{przemyslaw.biecek@@gmail.com} \cr
 #' Marcin Kosinski [aut] \email{m.p.kosinski@@gmail.com} \cr

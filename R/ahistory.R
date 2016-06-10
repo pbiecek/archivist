@@ -43,6 +43,10 @@
 #' 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #' 
+#' @section Demonstration:
+#'  
+#' This function is well explained on this \href{http://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github}{http://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github} blog post.
+#' 
 #' @examples
 #' 
 #' createLocalRepo("ahistory_check", default = TRUE)
