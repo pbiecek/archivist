@@ -1,0 +1,194 @@
+---
+title: "How to use [archivist](https://cran.r-project.org/web/packages/archivist/index.html)"
+subtitle: "to boost reproducibility"
+author: "[Przemyslaw Biecek](http://biecek.pl/)"
+date: "[useR 2016](http://user2016.org/)"
+output:
+  revealjs::revealjs_presentation:
+    theme: night
+    highlight: espresso
+    center: true
+---
+
+# What and why?
+
+## Everything in R is an object
+
+<br/>
+
+*What if* we store all R objects that have been ever created? 
+
+<br/>
+
+Goals for the [archivist](http://pbiecek.github.io/archivist/) package:
+
+* keep trace of (every) created object, 
+* keep trace of relations between objects, 
+* keep meta-information/properties of objects,
+* provide a way to seek objects that match some conditions,
+* provide a way to restore specific objects.
+
+## What the archivist is doing?
+
+<br/>
+
+The [archivist](http://pbiecek.github.io/archivist/) is an R package for management of R objects outside R session. It stores binary copies of R objects in rda files and provides easy access for seeking and restoring these objects based on timestamps, classes or other properties
+
+<br/>
+
+But, why anybody would like to store copies of all R objects?
+
+## Example 1: archivist + knitr
+
+Enrich knitr reports with hooks for selected objects. [Example](https://rawgithub.com/pbiecek/Eseje/master/GrammarOfGraphics.html).
+
+<img width="500" src="addHooks.png">
+
+<small>
+>archivist::aread("pbiecek/Eseje/arepo/e10f9d223df408fca73ea548456493f4")
+</small>
+
+## Example 2: archivist + shiny
+
+Enrich shiny applications with hooks to displayed plots. [Example](http://mi2.mini.pw.edu.pl:8080/archivist/).
+
+<img width="700" src="http://biecek.pl/archivist/shinyHooks.png">
+
+[More about this example.](http://smarterpoland.pl/index.php/2016/06/shiny-archivist-reproducible-interactive-exploration/)
+
+# How does it work? 
+
+## Basics
+
+* Artifacts are stored in repositories. 
+* Use [createLocalRepo()](http://search.r-project.org/library/archivist/html/createEmptyRepo.html) to initialize a new repo. 
+* Add new artifacts with [saveToLocalRepo()](http://search.r-project.org/library/archivist/html/saveToRepo.html).
+* Artifacts are identified by their md5hash.
+
+```{r, message=FALSE, warning=FALSE}
+library(archivist)
+
+createLocalRepo("arepo", default = TRUE)
+
+model <- lm(Sepal.Length ~ Petal.Length + Species, data=iris)
+saveToLocalRepo(model)
+
+library(ggplot2)
+
+plot <- ggplot(iris, aes(Sepal.Length, Petal.Length)) + geom_point()
+saveToLocalRepo(plot)
+```
+
+## 
+
+* Use [aread()](http://search.r-project.org/library/archivist/html/aread.html) to read an artifact from a repository to an R session. 
+* You can read artifacts either from local folders or remote  repositories.
+
+```{r, message=FALSE, warning=FALSE}
+# from the default local repository
+aread("e700c6704890022a4e0277e11cd46488")
+
+# from the github pbiecek/graphGallery repository
+aread("pbiecek/graphGallery/18a98048f0584469483afb65294ce3ed")
+```
+
+## 
+
+* Use [asearch()](http://search.r-project.org/library/archivist/html/asearch.html) to seek for all artifacts with properties that fit some patterns.
+* As a result you will get a list of R objects.
+* You may use time intervals as patters as well.
+* Below we ask for all `lm` models that are in a repository, apply BIC criteria and sort models.
+
+```{r, message=FALSE, warning=FALSE}
+models <- asearch("pbiecek/graphGallery", patterns = "class:lm")
+modelsBIC <- sapply(models, BIC)
+sort(modelsBIC)
+```
+
+## The structure
+
+- Repository is a folder with:
+* a subfolder `gallery` with `rda` dumps of recorded objects,
+* an SQLite database (file `backpack.db`).
+
+- The database contains two tables, with artifacts and their properties and relations.
+
+<img align="left" width="400" src="http://biecek.pl/archivist/dir.jpg">
+<img align="right" width="500" src="http://biecek.pl/archivist/archivistERD.jpg">
+
+## 
+
+* Properties and relations are stored as Tags.
+* Tags are being extracted from an artifact after each call to [saveToLocalRepo()](http://search.r-project.org/library/archivist/html/saveToRepo.html).
+* Use [showLocalRepo()](http://search.r-project.org/library/archivist/html/showLocalRepo.html) to examine tags for selected artifacts.
+* Popular and useful tags are: `format:...`, `name:...`, `class:...`, `date:...`.
+
+<img width="900" src="http://biecek.pl/archivist/tags2.png">
+
+## 
+
+* Different tags are extracted from different objects. 
+* The list is flexible, one may easily add new tags if needed.
+
+<img width="900" src="http://biecek.pl/archivist/tags.jpg">
+
+# What else you can do with the [archivist](http://pbiecek.github.io/archivist/)?
+
+## Pedigree of an object
+
+* Use [%a%](http://search.r-project.org/library/archivist/html/ahistory.html) operator to record function calls. 
+* Use [ahistory()](http://search.r-project.org/library/archivist/html/ahistory.html) to present the pedigree of an object. 
+* All partial intermediate results are also stored in a repo 
+
+```{r, message=FALSE, warning=FALSE}
+library("dplyr")
+iris %a%
+ dplyr::filter(Sepal.Length < 6) %a%
+ lm(Petal.Length~Species, data=.) %a%
+ summary() -> tmp
+```
+```{r, message=FALSE, warning=FALSE, results='asis'}
+ahistory(md5hash = "050e41ec3bc40b3004bc6bdd356acae7", format = "kable", alink = TRUE)
+```
+```{r, message=FALSE, warning=FALSE}
+ahistory(tmp)
+```
+
+## <small> You need a village to raise an R object</small>
+
+* For some artifacts you need specific versions of packages (see `ggplot2`).
+* For every object also the `sessionInfo` is stored.
+* Use [asession](http://search.r-project.org/library/archivist/html/asession.html) to check versions of packages loaded when artifact was added to the repo.
+* Use [restoreLibs](http://search.r-project.org/library/archivist/html/restoreLibs.html) to install packages in versions installed when artifact was added to the repo. 
+
+```{r, message=FALSE, warning=FALSE}
+asession("050e41ec3bc40b3004bc6bdd356acae7")
+# restoreLibs("pbiecek/graphGallery/arepo/600bda83cb840947976bd1ce3a11879d")
+```
+
+## Other features
+
+* Deeper integration with GitHub is available in [archivist.github](http://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github/) thanks to `@MarcinKosinski` (coauthor of the archivist).
+* Use [trace()](https://stat.ethz.ch/R-manual/R-devel/library/base/html/trace.html) to force adding an artifact to repo after each call of a specific function. 
+* The code below will adds all results of [lm()](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html) to the repository `allModels`.
+
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
+createLocalRepo("allModels", default = TRUE)
+trace(lm, exit = quote(saveToLocalRepo(z, repoDir="allModels")))
+```
+
+* Use [addHooksToPrint()](http://search.r-project.org/library/archivist/html/addHooksToPrint.html) to add archivist hooks to all objects of selected classes in a knitr report.
+
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
+addHooksToPrint(class=c("ggplot", "data.frame"),
+  repoDir = "arepo",
+  repo = "Eseje", user = "pbiecek", subdir = "arepo")
+```
+
+## 
+
+![structure](http://biecek.pl/archivist/structure.png)
+
+# Thank you! <br/><br/> Find  more at [pbiecek.github.io/archivist](http://pbiecek.github.io/archivist/)
+
+
