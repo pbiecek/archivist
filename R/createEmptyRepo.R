@@ -152,7 +152,7 @@ readSingleTable <- function( dir, table ){
 # for Github version function that requires to load database
 downloadDB <- function( remoteHook ){
   URLdb <- file.path( remoteHook, "backpack.db") 
-  if (url.exists(URLdb)){
+  if (!url.dont.exists(URLdb)){
     db <- getBinaryURL( URLdb )
     Temp2 <- tempfile()
     dir.create( Temp2 )
