@@ -125,12 +125,18 @@ searchInLocalRepo <- function( pattern, repoDir = aoptions("repoDir"), fixed = T
   stopifnot( is.logical( c( fixed, intersect ) ), length( fixed ) == 1, length( intersect ) == 1 )
   stopifnot( is.character( pattern ) | (is.list( pattern ) & length( pattern ) == 2) ) 
   
-  
   if ( is.character( pattern ) & length( pattern ) > 1 ) {
     return(multiSearchInLocalRepoInternal(patterns = pattern, repoDir = repoDir, fixed = fixed, intersect = intersect))
   }
   
   repoDir <- checkDirectory( repoDir )
+
+  # handle URL repos  
+  if (is.url(repoDir)) {
+    # download database and then work on the local copy
+    Temp <- downloadDB( repoDir )
+    repoDir <- Temp
+  }
   
   # extracts md5hash
   if ( fixed ){
@@ -150,6 +156,12 @@ searchInLocalRepo <- function( pattern, repoDir = aoptions("repoDir"), fixed = T
                                              paste0( "SELECT DISTINCT artifact FROM tag WHERE tag LIKE ",
                                                      "'", pattern, "%'" ) ) )
   }
+  
+  # handle URL repos  
+  if (!exists("Temp")) {
+    unlink( Temp, recursive = TRUE, force = TRUE)
+  }
+  
   return( as.character( md5hashES[, 1] ) ) 
 }
 
