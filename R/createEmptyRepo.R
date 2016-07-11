@@ -176,14 +176,26 @@ checkDirectory <- function( directory, create = FALSE ){
   }
   # check property of directory
   if ( !create ){
-    # check whether repository exists
-    if ( !dir.exists( directory ) ){
-      stop( paste0( "There is no such repository as ", directory ) )
-    }
-    # check if repository is proper (has backpack.db and gallery)
-    if ( !all( c("backpack.db", "gallery") %in% list.files(directory) ) ){
-      stop( paste0( directory, " is not a proper repository. There is neither backpack.db nor gallery." ) )
-    }
+    # check if it's URL or local directory
+    if (grepl(pattern = "http.?://")) { # it's URL
+        # check whether repository exists
+        if ( !url.exists( directory ) ){
+          stop( paste0( "There is no such repository as ", directory ) )
+        }
+        # check if repository is proper (has backpack.db and gallery)
+        if ( !( url.exists(paste0(directory, "/", "backpack.db")) ) ){
+          stop( paste0( directory, " is not a proper repository. There is no backpack.db file" ) )
+        }
+      } else { # it should be a folder
+        # check whether repository exists
+        if ( !dir.exists( directory ) ){
+          stop( paste0( "There is no such repository as ", directory ) )
+        }
+        # check if repository is proper (has backpack.db and gallery)
+        if ( !all( c("backpack.db", "gallery") %in% list.files(directory) ) ){
+          stop( paste0( directory, " is not a proper repository. There is neither backpack.db nor gallery." ) )
+        }
+      }
   }
   return( directory )
 }
