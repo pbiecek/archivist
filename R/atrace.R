@@ -19,8 +19,10 @@
 #' 
 #' @examples
 #' # read the object from local directory
-#' createLocalRepo("arepo_test")
-#' atrace("lm", z, "arepo_test")
+#' createLocalRepo("arepo_test", default=TRUE)
+#' atrace("lm", z)
+#' lm(Sepal.Length~Sepal.Width, data=iris)
+#' asearch("class:lm")
 #' @family archivist
 #' @rdname atrace
 #' @export
