@@ -130,12 +130,24 @@ getTagsLocal <- function( md5hash, repoDir = aoptions('repoDir'), tag ="name"){
   stopifnot( is.character( c( md5hash, tag ) ), length( md5hash ) ==  1, length( tag ) == 1)
   stopifnot( is.character( repoDir ) & length( repoDir ) == 1)
   repoDir <- checkDirectory( repoDir ) 
-  
 
   # sub( pattern = paste0(tag, ":"), replacement = "", x = tagToReturn)
   # there are so many kind of Tags (proposed by archivist or by an user)
   # that it will be very difficult to remove those "name:" at the beginning
-  returnTag( md5hash, repoDir = repoDir , tag = tag )
+  
+  # handling URLs
+  if (is.url(repoDir)) {
+    return(getTagsRemoteByUrl(md5hash, repoDir, tag))
+  } else {
+   return(returnTag( md5hash, repoDir = repoDir , tag = tag )) 
+  }
+}
+
+getTagsRemoteByUrl <- function(md5hash, remoteHook, tag) {
+  Temp <- downloadDB( remoteHook )
+  res <- returnTag( md5hash, repoDir = Temp, tag = tag )
+  unlink( Temp, recursive = TRUE, force = TRUE)
+  res
 }
 
 #' @family archivist
@@ -151,10 +163,7 @@ getTagsRemote <- function( md5hash, repo = aoptions("repo"), user = aoptions("us
   
   # first download database
   remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, subdir=subdir, repoType=repoType)
-  Temp <- downloadDB( remoteHook )
-  res <- returnTag( md5hash, repoDir = Temp, tag = tag )
-  unlink( Temp, recursive = TRUE, force = TRUE)
-  res
+  getTagsRemoteByUrl(md5hash, remoteHook, tag)
 }
 
 returnTag <- function( md5hash, repoDir, tag ){
