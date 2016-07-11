@@ -4,7 +4,7 @@
 \alias{atrace}
 \title{Add Tracing For All Objects Created By Given Function}
 \usage{
-atrace(FUN = "lm", object = "z", repoDir = aoptions("repoDir"))
+atrace(FUN = "lm", object = "z")
 }
 \arguments{
 \item{FUN}{name of a function to be traced (character)}
@@ -25,6 +25,7 @@ createLocalRepo("arepo_test", default=TRUE)
 atrace("lm", "z")
 lm(Sepal.Length~Sepal.Width, data=iris)
 asearch("class:lm")
+untrace("lm")
 }
 \author{
 Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}

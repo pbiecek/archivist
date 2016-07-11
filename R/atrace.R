@@ -23,10 +23,11 @@
 #' atrace("lm", "z")
 #' lm(Sepal.Length~Sepal.Width, data=iris)
 #' asearch("class:lm")
+#' untrace("lm")
 #' @family archivist
 #' @rdname atrace
 #' @export
-atrace <- function(FUN = "lm", object = "z", repoDir = aoptions("repoDir")){
-  stopifnot( is.character( repoDir ) )
-  trace(FUN, exit = quote(saveToLocalRepo(get(object), repoDir=repoDir)))
+atrace <- function(FUN = "lm", object = "z"){
+  stopifnot( is.character( aoptions("repoDir") ) )
+  trace(FUN, exit = substitute(saveToLocalRepo(get(.object.)), list(.object. = object)))
 }
