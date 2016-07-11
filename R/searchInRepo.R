@@ -158,7 +158,7 @@ searchInLocalRepo <- function( pattern, repoDir = aoptions("repoDir"), fixed = T
   }
   
   # handle URL repos  
-  if (!exists("Temp")) {
+  if (exists("Temp")) {
     unlink( Temp, recursive = TRUE, force = TRUE)
   }
   
