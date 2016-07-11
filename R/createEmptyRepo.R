@@ -173,6 +173,11 @@ url.dont.exists <- function(url) {
   suppressWarnings(class(try(readLines(url, n=1, warn = FALSE), silent = TRUE)) == "try-error")
 }
 
+# if starts with http:// or https://
+is.url <- function(url) {
+  grepl(pattern = "http.?://", url)
+}
+
 checkDirectory <- function( directory, create = FALSE ){
   # check if global repository was specified by setLocalRepo
   if ( is.null(directory) ){
@@ -182,7 +187,7 @@ checkDirectory <- function( directory, create = FALSE ){
   # check property of directory
   if ( !create ){
     # check if it's URL or local directory
-    if (grepl(pattern = "http.?://", directory)) { # it's URL, usefull for shiny applications
+    if (is.url(directory)) { # it's URL, usefull for shiny applications
         # check whether repository exists
         if ( url.dont.exists( directory ) ){
           stop( paste0( "There is no such repository as ", directory ) )
