@@ -51,6 +51,17 @@ addHooksToPrint <- function(class = "ggplot",
              (is.null(repo) || is.character( repo )), 
              is.character( user ) )
   
+  # check is all print function exist
+  # if any of them is not avaliable then stop
+  for (class1 in class) {
+    namespace <- gsub(grep(getAnywhere(paste0("print.",class1))$where, 
+                           pattern="namespace:", value=T), 
+                      pattern="namespace:", replacement="")
+    if (length(namespace) == 0) {
+      stop(paste0("The function print.", class1, " has not been found. Evaluation stopped for further classes."))
+    }
+  }
+  
   # set local repo to repoDir
   if (!file.exists( repoDir )) 
     createLocalRepo(repoDir)  
@@ -60,10 +71,6 @@ addHooksToPrint <- function(class = "ggplot",
     namespace <- gsub(grep(getAnywhere(paste0("print.",class1))$where, 
                            pattern="namespace:", value=T), 
                       pattern="namespace:", replacement="")
-    
-    if (length(namespace) == 0) {
-      stop(paste0("The function print.", class1, " has not been found. Evaluation stopped for further classes."))
-    }
     
     if (is.null(repo)) { # local version
       fun <- paste0('function(x, ...) {
