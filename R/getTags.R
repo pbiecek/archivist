@@ -152,7 +152,9 @@ getTagsRemote <- function( md5hash, repo = aoptions("repo"), user = aoptions("us
   # first download database
   remoteHook <- getRemoteHook(repo=repo, user=user, branch=branch, subdir=subdir, repoType=repoType)
   Temp <- downloadDB( remoteHook )
-  returnTag( md5hash, repoDir = Temp, tag = tag )
+  res <- returnTag( md5hash, repoDir = Temp, tag = tag )
+  unlink( Temp, recursive = TRUE, force = TRUE)
+  res
 }
 
 returnTag <- function( md5hash, repoDir, tag ){
