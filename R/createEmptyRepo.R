@@ -168,22 +168,27 @@ downloadDB <- function( remoteHook ){
   
 }
 
+# in some cases the RCurl::url.exists was not working
+url.dont.exists <- function(url) {
+  suppressWarnings(class(try(readLines(url, n=1, warn = FALSE), silent = TRUE)) == "try-error")
+}
+
 checkDirectory <- function( directory, create = FALSE ){
   # check if global repository was specified by setLocalRepo
   if ( is.null(directory) ){
-
+    
     directory <- aoptions("repoDir")
   }
   # check property of directory
   if ( !create ){
     # check if it's URL or local directory
-    if (grepl(pattern = "http.?://")) { # it's URL
+    if (grepl(pattern = "http.?://")) { # it's URL, usefull for shiny applications
         # check whether repository exists
-        if ( !url.exists( directory ) ){
+        if ( url.dont.exists( directory ) ){
           stop( paste0( "There is no such repository as ", directory ) )
         }
         # check if repository is proper (has backpack.db and gallery)
-        if ( !( url.exists(paste0(directory, "/", "backpack.db")) ) ){
+        if ( url.dont.exists(paste0(directory, "/", "backpack.db")) ){
           stop( paste0( directory, " is not a proper repository. There is no backpack.db file" ) )
         }
       } else { # it should be a folder
