@@ -182,7 +182,7 @@ checkDirectory <- function( directory, create = FALSE ){
   # check property of directory
   if ( !create ){
     # check if it's URL or local directory
-    if (grepl(pattern = "http.?://")) { # it's URL, usefull for shiny applications
+    if (grepl(pattern = "http.?://", directory)) { # it's URL, usefull for shiny applications
         # check whether repository exists
         if ( url.dont.exists( directory ) ){
           stop( paste0( "There is no such repository as ", directory ) )
