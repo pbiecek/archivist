@@ -6,13 +6,11 @@
 #' \code{atrace} add call to \link{saveToLocalRepo} at the end of a given function.
 #' 
 #' @details
-#' Function \code{atrace} calls the \link{tace} function.
+#' Function \code{atrace} calls the \link{trace} function.
 #' 
 #' @param FUN name of a function to be traced (character)
 #' 
 #' @param object name of an object that should be traced (character)
-#' 
-#' @param repoDir repo in which results should be stored
 #' 
 #' @author 
 #' Przemyslaw Biecek, \email{przemyslaw.biecek@@gmail.com}

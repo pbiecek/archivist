@@ -10,14 +10,12 @@ atrace(FUN = "lm", object = "z")
 \item{FUN}{name of a function to be traced (character)}
 
 \item{object}{name of an object that should be traced (character)}
-
-\item{repoDir}{repo in which results should be stored}
 }
 \description{
 \code{atrace} add call to \link{saveToLocalRepo} at the end of a given function.
 }
 \details{
-Function \code{atrace} calls the \link{tace} function.
+Function \code{atrace} calls the \link{trace} function.
 }
 \examples{
 # read the object from local directory
