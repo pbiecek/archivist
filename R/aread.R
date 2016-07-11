@@ -49,16 +49,23 @@ aread <- function(md5hash){
     # at least 3 elements
     elements <- strsplit(md5h, "/")[[1]]
     stopifnot( length(elements) >= 3 | length(elements) == 1)
-    if (length(elements) == 1) {
-      # local directory
-      res[[md5h]] <- loadFromLocalRepo(md5hash = elements, value = TRUE)
+    if (is.url(md5h)) {
+      # url - shiny repo
+      res[[md5h]] <- loadFromLocalRepo(md5hash = tail(elements,1), 
+                                       repoDir = paste(elements[-length(elements)], collapse="/"),
+                                       value = TRUE)
     } else {
-      # Remote directory
-      res[[md5h]] <- loadFromRemoteRepo(md5hash = tail(elements,1), 
-                                        repo = elements[2],
-                                        subdir = ifelse(length(elements) > 3, paste(elements[3:(length(elements)-1)], collapse="/"), "/"),
-                                        user = elements[1], value = TRUE)
-    }
+      if (length(elements) == 1) {
+        # local directory
+        res[[md5h]] <- loadFromLocalRepo(md5hash = elements, value = TRUE)
+      } else {
+        # Remote directory
+        res[[md5h]] <- loadFromRemoteRepo(md5hash = tail(elements,1), 
+                                          repo = elements[2],
+                                          subdir = ifelse(length(elements) > 3, paste(elements[3:(length(elements)-1)], collapse="/"), "/"),
+                                          user = elements[1], value = TRUE)
+      }
+    } 
   }
   if (length(res) == 1) return(res[[1]]) else res
 }
