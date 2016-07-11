@@ -37,29 +37,45 @@
 asession <- function( md5hash = NULL) {
   elements <- strsplit(md5hash, "/")[[1]]
   stopifnot( length(elements) >= 3 | length(elements) == 1)
-  if (length(elements) == 1) {
-    # local directory
-    tags <- getTagsLocal(md5hash, tag = "")
+  if (is.url(md5hash)) {
+    tags <- getTagsRemoteByUrl(tail(elements,1), 
+                               paste(elements[-length(elements)], collapse="/"), 
+                               tag = "")
+  
     tagss <- grep(tags, pattern="^session_info:", value = TRUE)
+
     if (length(tagss) == 0) {
       warning(paste0("No session info archived for ", md5hash))
       return(NA)
     }
-    return(loadFromLocalRepo(gsub(tagss[1], pattern = "^session_info:", replacement = ""), value = TRUE))
+    return(loadFromLocalRepo(gsub(tagss[1], pattern = "^session_info:", replacement = ""), 
+                             repoDir = paste(elements[-length(elements)], collapse="/"),
+                             value = TRUE))
   } else {
-    # Remote directory
-    tags <- getTagsRemote(tail(elements,1), repo = elements[2],
-                          subdir = ifelse(length(elements) > 3, paste(elements[3:(length(elements)-1)], collapse="/"), "/"),
-                          user = elements[1], tag = "")
-    tagss <- grep(tags, pattern="^session_info:", value = TRUE)
-    if (length(tagss) == 0) {
-      warning(paste0("No session info archived for ", md5hash))
-      return(NA)
+    if (length(elements) == 1) {
+      # local directory
+      tags <- getTagsLocal(md5hash, tag = "")
+      tagss <- grep(tags, pattern="^session_info:", value = TRUE)
+      if (length(tagss) == 0) {
+        warning(paste0("No session info archived for ", md5hash))
+        return(NA)
+      }
+      return(loadFromLocalRepo(gsub(tagss[1], pattern = "^session_info:", replacement = ""), value = TRUE))
+    } else {
+      # Remote directory
+      tags <- getTagsRemote(tail(elements,1), repo = elements[2],
+                            subdir = ifelse(length(elements) > 3, paste(elements[3:(length(elements)-1)], collapse="/"), "/"),
+                            user = elements[1], tag = "")
+      tagss <- grep(tags, pattern="^session_info:", value = TRUE)
+      if (length(tagss) == 0) {
+        warning(paste0("No session info archived for ", md5hash))
+        return(NA)
+      }
+      return(loadFromRemoteRepo(gsub(tagss[1], pattern = "^session_info:", replacement = ""), 
+                                repo = elements[2],
+                                subdir = ifelse(length(elements) > 3, paste(elements[3:(length(elements)-1)], collapse="/"), "/"),
+                                user = elements[1],
+                                value = TRUE))
     }
-    return(loadFromRemoteRepo(gsub(tagss[1], pattern = "^session_info:", replacement = ""), 
-                              repo = elements[2],
-                              subdir = ifelse(length(elements) > 3, paste(elements[3:(length(elements)-1)], collapse="/"), "/"),
-                              user = elements[1],
-                              value = TRUE))
   }
 }
