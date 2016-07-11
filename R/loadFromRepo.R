@@ -198,8 +198,14 @@ loadFromLocalRepo <- function( md5hash, repoDir = aoptions('repoDir'), value = F
     .nameEnv <- new.env()
     name <- character( length = length( md5hash ) )
     for( i in seq_along( md5hash ) ) {
-      name[i] <- load( file = file.path( repoDir, "gallery", paste0(md5hash[i], ".rda") ), 
-                       envir = .nameEnv ) 
+      # check if it's folder or URL
+        if (is.url(repoDir)) {
+          name[i] <- load( file = url(file.path( repoDir, "gallery", paste0(md5hash[i], ".rda") )), 
+                           envir = .nameEnv ) 
+        } else {
+          name[i] <- load( file = file.path( repoDir, "gallery", paste0(md5hash[i], ".rda") ), 
+                           envir = .nameEnv ) 
+        }
       }
     if ( length( name ) == 1) {
       return( as.list(.nameEnv)[[1]] )
