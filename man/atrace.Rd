@@ -7,9 +7,9 @@
 atrace(FUN = "lm", object = "z", repoDir = aoptions("repoDir"))
 }
 \arguments{
-\item{FUN}{the function to be traced (quoted name)}
+\item{FUN}{name of a function to be traced (character)}
 
-\item{object}{name of object that should be traced}
+\item{object}{name of an object that should be traced (character)}
 
 \item{repoDir}{repo in which results should be stored}
 }
@@ -22,7 +22,7 @@ Function \code{atrace} calls the \link{tace} function.
 \examples{
 # read the object from local directory
 createLocalRepo("arepo_test", default=TRUE)
-atrace("lm", z)
+atrace("lm", "z")
 lm(Sepal.Length~Sepal.Width, data=iris)
 asearch("class:lm")
 }

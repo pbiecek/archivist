@@ -8,9 +8,9 @@
 #' @details
 #' Function \code{atrace} calls the \link{tace} function.
 #' 
-#' @param FUN the function to be traced (quoted name)
+#' @param FUN name of a function to be traced (character)
 #' 
-#' @param object name of object that should be traced
+#' @param object name of an object that should be traced (character)
 #' 
 #' @param repoDir repo in which results should be stored
 #' 
@@ -20,13 +20,13 @@
 #' @examples
 #' # read the object from local directory
 #' createLocalRepo("arepo_test", default=TRUE)
-#' atrace("lm", z)
+#' atrace("lm", "z")
 #' lm(Sepal.Length~Sepal.Width, data=iris)
 #' asearch("class:lm")
 #' @family archivist
 #' @rdname atrace
 #' @export
 atrace <- function(FUN = "lm", object = "z", repoDir = aoptions("repoDir")){
-  stopifnot( is.character( md5hash ) )
+  stopifnot( is.character( repoDir ) )
   trace(FUN, exit = quote(saveToLocalRepo(get(object), repoDir=repoDir)))
 }
