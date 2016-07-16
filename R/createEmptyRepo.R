@@ -66,11 +66,8 @@ createLocalRepo <- function( repoDir, force = TRUE, default = FALSE ){
     stop( paste0("Directory ", repoDir, " does not exist. Try with force=TRUE.") )
   if ( !file.exists( repoDir ) & force ){
     cat( paste0("Directory ", repoDir, " did not exist. Forced to create a new directory.") )
-    repoDir <- checkDirectory( repoDir, create = TRUE )
     dir.create( repoDir )
   }
-  
-  repoDir <- checkDirectory( repoDir, create = TRUE )
   
   # create connection
   backpack <- getConnectionToDB( repoDir )
@@ -178,34 +175,31 @@ is.url <- function(url) {
   grepl(pattern = "http.?://", url)
 }
 
-checkDirectory <- function( directory, create = FALSE ){
+checkDirectory <- function( directory ){
   # check if global repository was specified by setLocalRepo
-  if ( is.null(directory) ){
-    
+  if ( is.null(directory) ) {
     directory <- aoptions("repoDir")
   }
   # check property of directory
-  if ( !create ){
-    # check if it's URL or local directory
-    if (is.url(directory)) { # it's URL, usefull for shiny applications
-        # check whether repository exists
-        if ( url.dont.exists( directory ) ){
-          stop( paste0( "There is no such repository as ", directory ) )
-        }
-        # check if repository is proper (has backpack.db and gallery)
-        if ( url.dont.exists(paste0(directory, "/", "backpack.db")) ){
-          stop( paste0( directory, " is not a proper repository. There is no backpack.db file" ) )
-        }
-      } else { # it should be a folder
-        # check whether repository exists
-        if ( !dir.exists( directory ) ){
-          stop( paste0( "There is no such repository as ", directory ) )
-        }
-        # check if repository is proper (has backpack.db and gallery)
-        if ( !all( c("backpack.db", "gallery") %in% list.files(directory) ) ){
-          stop( paste0( directory, " is not a proper repository. There is neither backpack.db nor gallery." ) )
-        }
+  # check if it's URL or local directory
+  if (is.url(directory)) { # it's URL, usefull for shiny applications
+      # check whether repository exists
+      if ( url.dont.exists( directory ) ){
+        stop( paste0( "There is no such repository as ", directory ) )
       }
-  }
+      # check if repository is proper (has backpack.db and gallery)
+      if ( url.dont.exists(paste0(directory, "/", "backpack.db")) ){
+        stop( paste0( directory, " is not a proper repository. There is no backpack.db file" ) )
+      }
+    } else { # it should be a folder
+      # check whether repository exists
+      if ( !dir.exists( directory ) ){
+        stop( paste0( "There is no such repository as ", directory ) )
+      }
+      # check if repository is proper (has backpack.db and gallery)
+      if ( !all( c("backpack.db", "gallery") %in% list.files(directory) ) ){
+        stop( paste0( directory, " is not a proper repository. There is neither backpack.db nor gallery." ) )
+      }
+    }
   return( directory )
 }
