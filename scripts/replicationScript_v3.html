@@ -129,8 +129,6 @@ $(document).ready(function () {
   install.packages(&quot;archivist&quot;)
   library(archivist)
 }</code></pre>
-<pre><code>## Loading required package: archivist</code></pre>
-<pre><code>## Welcome to archivist (version: 2.0.5).</code></pre>
 </div>
 <div id="section-2" class="section level1">
 <h1>Section 2</h1>
@@ -286,31 +284,31 @@ saveToRepo(pl, repoDir = repo)</code></pre>
 ## 7                       date:2016-03-04 20:00:45 2016-03-04 20:00:45
 ## 8  session_info:c77057faf5d26bc12c402b2a78a23fb7 2016-03-04 20:00:45
 ## 9                                     format:png 2016-03-04 20:00:45
-## 10                                    format:rda 2016-07-17 02:04:07
-## 11                                     name:iris 2016-07-17 02:04:07
-## 12                              class:data.frame 2016-07-17 02:04:07
-## 13                          varname:Sepal.Length 2016-07-17 02:04:07
-## 14                           varname:Sepal.Width 2016-07-17 02:04:07
-## 15                          varname:Petal.Length 2016-07-17 02:04:07
-## 16                           varname:Petal.Width 2016-07-17 02:04:07
-## 17                               varname:Species 2016-07-17 02:04:07
-## 18                      date:2016-07-17 02:04:07 2016-07-17 02:04:07
-## 19                                    format:rda 2016-07-17 02:04:07
-## 20 session_info:9f446359841c9205fdcf5855008295a0 2016-07-17 02:04:07
-## 21                                    format:txt 2016-07-17 02:04:07
-## 22                                    format:rda 2016-07-17 02:04:07
-## 23                                       name:pl 2016-07-17 02:04:07
-## 24                                      class:gg 2016-07-17 02:04:07
-## 25                                  class:ggplot 2016-07-17 02:04:07
-## 26                           labelx:Sepal.Length 2016-07-17 02:04:07
-## 27                           labely:Petal.Length 2016-07-17 02:04:07
-## 28                      date:2016-07-17 02:04:07 2016-07-17 02:04:07
-## 29                                    format:rda 2016-07-17 02:04:07
-## 30 session_info:307f73af981d9f8d6e1e019f57aba001 2016-07-17 02:04:07
-## 31                                    format:rda 2016-07-17 02:04:07
-## 32                                    format:txt 2016-07-17 02:04:07
-## 33 relationWith:abf399fa855697165294a45a6a2280f3 2016-07-17 02:04:07
-## 34                                    format:png 2016-07-17 02:04:07</code></pre>
+## 10                                    format:rda 2016-07-17 02:08:51
+## 11                                     name:iris 2016-07-17 02:08:51
+## 12                              class:data.frame 2016-07-17 02:08:51
+## 13                          varname:Sepal.Length 2016-07-17 02:08:51
+## 14                           varname:Sepal.Width 2016-07-17 02:08:51
+## 15                          varname:Petal.Length 2016-07-17 02:08:51
+## 16                           varname:Petal.Width 2016-07-17 02:08:51
+## 17                               varname:Species 2016-07-17 02:08:51
+## 18                      date:2016-07-17 02:08:51 2016-07-17 02:08:51
+## 19                                    format:rda 2016-07-17 02:08:51
+## 20 session_info:9f446359841c9205fdcf5855008295a0 2016-07-17 02:08:51
+## 21                                    format:txt 2016-07-17 02:08:51
+## 22                                    format:rda 2016-07-17 02:08:51
+## 23                                       name:pl 2016-07-17 02:08:51
+## 24                                      class:gg 2016-07-17 02:08:51
+## 25                                  class:ggplot 2016-07-17 02:08:51
+## 26                           labelx:Sepal.Length 2016-07-17 02:08:51
+## 27                           labely:Petal.Length 2016-07-17 02:08:51
+## 28                      date:2016-07-17 02:08:51 2016-07-17 02:08:51
+## 29                                    format:rda 2016-07-17 02:08:51
+## 30 session_info:307f73af981d9f8d6e1e019f57aba001 2016-07-17 02:08:51
+## 31                                    format:rda 2016-07-17 02:08:51
+## 32                                    format:txt 2016-07-17 02:08:51
+## 33 relationWith:abf399fa855697165294a45a6a2280f3 2016-07-17 02:08:51
+## 34                                    format:png 2016-07-17 02:08:51</code></pre>
 <pre class="r"><code># deleteLocalRepo(repo)</code></pre>
 <p>Session info for this object.</p>
 <pre class="r"><code>asession(&quot;11127cc6ce69a89d11d0e30865a33c13&quot;)</code></pre>
@@ -320,19 +318,8 @@ saveToRepo(pl, repoDir = repo)</code></pre>
 <p>Serialization of an object creation event into repository</p>
 <pre class="r"><code>library(&quot;archivist&quot;)
 createLocalRepo(&quot;arepo&quot;, default = TRUE)
-library(&quot;dplyr&quot;)</code></pre>
-<pre><code>## 
-## Attaching package: 'dplyr'</code></pre>
-<pre><code>## The following object is masked from 'package:gridExtra':
-## 
-##     combine</code></pre>
-<pre><code>## The following objects are masked from 'package:stats':
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<pre class="r"><code>iris %a%
+library(&quot;dplyr&quot;)
+iris %a%
    filter(Sepal.Length &lt; 6) %a%
    lm(Petal.Length~Species, data=.) %a%
    summary() -&gt; tmp
@@ -436,9 +423,8 @@ do.call(grid.arrange, plots)</code></pre>
 <div id="section-3.5" class="section level1">
 <h1>Section 3.5</h1>
 <pre class="r"><code>library(&quot;archivist&quot;)
-createLocalRepo(&quot;allModels&quot;, default = TRUE)</code></pre>
-<pre><code>## Directory allModels did not exist. Forced to create a new directory.</code></pre>
-<pre class="r"><code>atrace(&quot;lm&quot;, &quot;z&quot;)</code></pre>
+createLocalRepo(&quot;allModels&quot;, default = TRUE)
+atrace(&quot;lm&quot;, &quot;z&quot;)</code></pre>
 <pre><code>## Tracing function &quot;lm&quot; in package &quot;stats&quot;</code></pre>
 <pre><code>## [1] &quot;lm&quot;</code></pre>
 <pre class="r"><code>lm(Sepal.Length~Sepal.Width, data=iris)</code></pre>
@@ -450,9 +436,31 @@ createLocalRepo(&quot;allModels&quot;, default = TRUE)</code></pre>
 ## Coefficients:
 ## (Intercept)  Sepal.Width  
 ##      6.5262      -0.2234</code></pre>
+<pre class="r"><code>lm(Sepal.Length~Petal.Length, data=iris)</code></pre>
+<pre><code>## Tracing lm(Sepal.Length ~ Petal.Length, data = iris) on exit</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = Sepal.Length ~ Petal.Length, data = iris)
+## 
+## Coefficients:
+##  (Intercept)  Petal.Length  
+##       4.3066        0.4089</code></pre>
+<pre class="r"><code>lm(Sepal.Length~Petal.Length, data=iris)</code></pre>
+<pre><code>## Tracing lm(Sepal.Length ~ Petal.Length, data = iris) on exit</code></pre>
+<pre><code>## Warning in extractData.lm(artifact, parrentMd5hash = md5hash, parentDir =
+## repoDir, : This artifact's data was already archived. Another archivisation
+## executed with success.</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = Sepal.Length ~ Petal.Length, data = iris)
+## 
+## Coefficients:
+##  (Intercept)  Petal.Length  
+##       4.3066        0.4089</code></pre>
 <pre class="r"><code>sapply(asearch(&quot;class:lm&quot;), BIC)</code></pre>
-<pre><code>## 42fcf77af2c40f70c445cbba513aeabd 
-##                         381.0236</code></pre>
+<pre><code>## 42fcf77af2c40f70c445cbba513aeabd 5c5751e36b31b2251d2767d96993320a 
+##                         381.0236                         169.0723</code></pre>
+<pre class="r"><code>deleteLocalRepo(&quot;allModels&quot;)</code></pre>
 <pre class="r"><code>asession(&quot;pbiecek/graphGallery/arepo/600bda83cb840947976bd1ce3a11879d&quot;)</code></pre>
 <pre><code>## Session info --------------------------------------------------------------</code></pre>
 <pre><code>##  setting  value                       
