@@ -10,7 +10,7 @@ This is the replication script for 'archivist: An R Package for Managing, Record
 
 First, make sure that `archivist` is installed.
 
-```{r}
+```{r, warning=FALSE, message=FALSE}
 if (!require(archivist)) {
   install.packages("archivist")
   library(archivist)
@@ -131,7 +131,7 @@ asession("11127cc6ce69a89d11d0e30865a33c13")
 
 Serialization of an object creation event into repository
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library("archivist")
 createLocalRepo("arepo", default = TRUE)
 library("dplyr")
@@ -235,7 +235,10 @@ library("archivist")
 createLocalRepo("allModels", default = TRUE)
 atrace("lm", "z")
 lm(Sepal.Length~Sepal.Width, data=iris)
+lm(Sepal.Length~Petal.Length, data=iris)
+lm(Sepal.Length~Petal.Length, data=iris)
 sapply(asearch("class:lm"), BIC)
+deleteLocalRepo("allModels")
 ```
 
 ```{r}
