@@ -13,7 +13,7 @@ output:
 	
 ###  The list of blog-posts and conference talks about `archivist`
 
-- 2016-06 Ver 2.0.3 [useR! 2016 Conference, Stanford][How to use archivist
+- 2016-06 Ver 2.0.3 [useR! 2016 Conference, Stanford](http://user2016.org/) [How to use archivist
 to boost reproducibility (Przemyslaw Biecek)](https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/How-to-use-the-archivist-package-to-boost-reproducibility-of-your-research)
 - 2016-06 Ver 0.2.1 `archivist.github`: [R Hero saves Backup City with archivist and GitHub (Marcin Kosiński)](http://www.r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github/)
 - 2016-05 Ver 2.0.3 [All your models belong to us: how to combine package archivist and function trace() (Przemysław Biecek)](http://www.r-bloggers.com/all-your-models-belong-to-us-how-to-combine-package-archivist-and-function-trace/)
