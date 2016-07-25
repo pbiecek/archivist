@@ -1,0 +1,106 @@
+---
+title: "restoring artifact's pedigree from remote Repository"
+subtitle: "ahistory() function"
+author: "Marcin Kosiński"
+date: '2016-25-07'
+output:
+  html_document:
+    theme: flatly
+    number_sections: yes
+    toc: yes
+    toc_depth: 2
+    fig_width: 12
+    fig_height: 8
+    keep_md: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+```{r, echo=FALSE}
+library(knitr)
+opts_chunk$set(comment="", message=FALSE, warning = FALSE, 
+               tidy.opts=list(keep.blank.line=TRUE, width.cutoff=150),
+							 options(width=150), eval = TRUE)
+```
+
+# Setting for Repository creation
+
+```{r}
+library(archivist.github)
+load('github_token.rda')
+load('password.rda')
+aoptions("github_token", github_token)
+aoptions("user", 'MarcinKosinski')
+invisible(aoptions("password", password))
+```
+
+```{r, echo=FALSE}
+if (file.exists("ahistory_example/gallery")) {
+deleteLocalRepo(repoDir = 'ahistory_example', deleteRoot = TRUE)
+deleteGitHubRepo(repo = "ahistory_example", github_token = github_token, user = "archivistR", deleteRoot = TRUE)
+}
+```
+
+
+# Repository creation
+
+```{r}
+createGitHubRepo(repo = "ahistory_example", user = "archivistR", default = TRUE) 
+```
+
+# Artifact's archiving
+
+```{r}
+library(dplyr)
+iris %a%
+filter(Sepal.Length < 6) %a%
+ lm(Petal.Length~Species, data=.) %a%
+ summary() -> artifact
+```
+
+# Pushing locally archived partial results to GitHub
+
+
+```{r}
+pushGitHubRepo()
+```
+
+# Using ahistory() to get artifact's pedigree from remote Repository
+
+```{r, results='asis'}
+# results='asis'
+Sys.sleep(120)
+# be sure that GitHub API is aware of past commits
+ahistory(
+	md5hash = paste0('archivistR/ahistory_example/', 
+				 digest::digest(artifact)),
+	format = 'kable',
+	alink = TRUE)
+
+```
+
+
+```{r, results='asis'}
+# results='asis'
+ahistory(
+	md5hash = paste0('archivistR/ahistory_example/', 
+				 digest::digest(artifact)),
+	format = 'kable')
+```
+
+```{r}
+ahistory(
+	md5hash = paste0('archivistR/ahistory_example/', 
+				 digest::digest(artifact)),
+	format = 'regular')
+```
+
+
+# Show remote Repository
+
+```{r}
+showRemoteRepo()
+```
+
+
