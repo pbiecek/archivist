@@ -74,11 +74,27 @@
 ahistory <- function(artifact = NULL, md5hash = NULL, repoDir = aoptions('repoDir'), format = "regular", alink = FALSE, ...) {
   # if artifact is set then calculate md5hash for it
   if (!is.null(artifact)) 
-    md5hash = digest(artifact)
+    md5hash <- digest(artifact)
   if (is.null(md5hash)) 
     stop("Either artifact or md5hash has to be set")
   
   stopifnot(length(format) == 1 & format %in% c("regular", "kable"))
+  elements <- strsplit(md5hash, "/")[[1]]
+  
+  if (length(elements == 3)){
+  
+  RemoteRepoCheck( repo = elements[2], user = elements[1], 
+                   branch = "master", subdir = aoptions("subdir"),
+                                     repoType = aoptions("repoType")) # implemented in setRepo.R
+  
+  remoteHook <- getRemoteHook(repo = elements[2], user = elements[1], branch = "master", subdir = aoptions("subdir"))
+  Temp <- downloadDB( remoteHook )
+  on.exit( unlink( Temp, recursive = TRUE, force = TRUE))
+  repoDir <- Temp
+  md5hash <- elements[3]
+  }
+  
+  
   
   res_names <- c()
   res_md5 <- md5hash
