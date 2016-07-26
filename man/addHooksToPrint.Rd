@@ -6,7 +6,7 @@
 \usage{
 addHooksToPrint(class = "ggplot", repoDir = aoptions("repoDir"),
   repo = aoptions("repo"), user = aoptions("user"), branch = "master",
-  subdir = aoptions("subdir"))
+  subdir = aoptions("subdir"), format = "markdown")
 }
 \arguments{
 \item{class}{A character with a name of class (one or more) that should be archived.}
@@ -24,6 +24,8 @@ Default \code{branch} is \code{master}.}
 \item{subdir}{A character with a name of a subdirectory on a Remote repository 
 on which the Repository is stored. If the Repository is stored in main folder on a Remote repository, this should be set 
 to \code{subdir = "/"} as default.}
+
+\item{format}{A character denoting \code{format} as in \link{alink}.}
 }
 \description{
 \code{addHooksToPrint} adds an overloaded version of the print function for objects of selected class. 
