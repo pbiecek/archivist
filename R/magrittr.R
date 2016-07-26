@@ -141,7 +141,7 @@
       # for the output save both RHS as an object
       # and LHS as an instruction
       tag_rhs <- paste0("RHS:",rhs_name)
-      tag_lhs <- paste0("LHS:",saveToRepo(env[[nm]], archiveData = FALSE, userTags = paste0("name:",lhs_name), rememberName = FALSE))
+      tag_lhs <- paste0("LHS:",saveToRepo(env[[nm]], archiveData = FALSE, artifactName = lhs_name))
       # save the result
       res_val <- res$value
       saveToRepo(res_val, archiveData = FALSE, userTags = c(tag_lhs, tag_rhs), rememberName = FALSE)
