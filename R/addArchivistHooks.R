@@ -18,6 +18,7 @@
 #' on which the Repository is stored. If the Repository is stored in main folder on a Remote repository, this should be set 
 #' to \code{subdir = "/"} as default.
 #' @param repoDir A character containing a name of a Local Repository.
+#' @param format A character denoting \code{format} as in \link{alink}.
 #' 
 #' @author 
 #' Przemyslaw Biecek, \email{przemyslaw.biecek@@gmail.com}
@@ -44,7 +45,11 @@
 
 addHooksToPrint <- function(class = "ggplot",
                             repoDir = aoptions("repoDir"), 
-                            repo = aoptions("repo"), user = aoptions("user"), branch = "master", subdir = aoptions("subdir")
+                            repo = aoptions("repo"),
+                            user = aoptions("user"),
+                            branch = "master",
+                            subdir = aoptions("subdir"),
+                            format = "markdown"
 ){
   stopifnot( is.character( class ), 
              is.character( repoDir ), 
@@ -81,7 +86,7 @@ addHooksToPrint <- function(class = "ggplot",
     } else { # Remote version
       fun <- paste0('function(x, ...) {
                   hash <- saveToRepo(x)
-                  al <- alink(hash, repo = "',repo,'", user = "',user,'", subdir = "',subdir,'")
+                  al <- alink(hash, repo = "',repo,'", user = "',user,'", subdir = "',subdir,'", format = "',format,'")
                   cat("Load: ", al, "\n", sep="")
                   ',namespace,':::print.',class1,'(x, ...)
     }')
