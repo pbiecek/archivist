@@ -81,7 +81,7 @@ ahistory <- function(artifact = NULL, md5hash = NULL, repoDir = aoptions('repoDi
   stopifnot(length(format) == 1 & format %in% c("regular", "kable"))
   elements <- strsplit(md5hash, "/")[[1]]
   
-  if (length(elements == 3)){
+  if (length(elements) == 3){
   
   RemoteRepoCheck( repo = elements[2], user = elements[1], 
                    branch = "master", subdir = aoptions("subdir"),
