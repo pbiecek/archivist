@@ -78,14 +78,14 @@ addHooksToPrint <- function(class = "ggplot",
                       pattern="namespace:", replacement="")
     
     if (is.null(repo)) { # local version
-      fun <- paste0('function(x, ...) {
-                  hash <- saveToRepo(x)
+      fun <- paste0('function(x, ..., artifactName = deparse(substitute(x))) {
+                  hash <- saveToRepo(x, artifactName = artifactName)
                     cat("Load: [",hash,"](", repoDir, "/gallery/",hash,".rda)\n", sep="")
                     ',namespace,':::print.',class1,'(x, ...)
     }')
     } else { # Remote version
-      fun <- paste0('function(x, ...) {
-                  hash <- saveToRepo(x)
+      fun <- paste0('function(x, ..., artifactName = deparse(substitute(x))) {
+                  hash <- saveToRepo(x, artifactName = artifactName))
                   al <- alink(hash, repo = "',repo,'", user = "',user,'", subdir = "',subdir,'", format = "',format,'")
                   cat("Load: ", al, "\n", sep="")
                   ',namespace,':::print.',class1,'(x, ...)
