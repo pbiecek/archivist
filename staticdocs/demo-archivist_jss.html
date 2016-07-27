@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>Replication script for JSS submission. archivist 2.0.4</title>
+<title>Replication script for JSS submission. archivist 2.1</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -32,7 +32,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">archivist 2.0.4</a>
+      <a class="brand" href="#">archivist 2.1</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
@@ -227,26 +227,16 @@ createLocalRepo(repoDir = repo, default = TRUE)
 
 showLocalRepo(repoDir = repo, method = &quot;tags&quot;)
 </div>
-<div class='output'>                          artifact
-1 f05f0ed0662fe01850ec1b928830ef32
-2 f05f0ed0662fe01850ec1b928830ef32
-3 f05f0ed0662fe01850ec1b928830ef32
-4 f05f0ed0662fe01850ec1b928830ef32
-5 f05f0ed0662fe01850ec1b928830ef32
-6 f05f0ed0662fe01850ec1b928830ef32
-7 f05f0ed0662fe01850ec1b928830ef32
-8 f05f0ed0662fe01850ec1b928830ef32
-9 f05f0ed0662fe01850ec1b928830ef32
-                                            tag         createdDate
-1                                    format:rda 2016-03-04 20:00:45
-2                                      name:pl1 2016-03-04 20:00:45
-3                                      class:gg 2016-03-04 20:00:45
-4                                  class:ggplot 2016-03-04 20:00:45
-5                           labelx:Sepal.Length 2016-03-04 20:00:45
-6                           labely:Petal.Length 2016-03-04 20:00:45
-7                      date:2016-03-04 20:00:45 2016-03-04 20:00:45
-8 session_info:c77057faf5d26bc12c402b2a78a23fb7 2016-03-04 20:00:45
-9                                    format:png 2016-03-04 20:00:45
+<div class='output'>                          artifact                                           tag         createdDate
+1 f05f0ed0662fe01850ec1b928830ef32                                    format:rda 2016-03-04 20:00:45
+2 f05f0ed0662fe01850ec1b928830ef32                                      name:pl1 2016-03-04 20:00:45
+3 f05f0ed0662fe01850ec1b928830ef32                                      class:gg 2016-03-04 20:00:45
+4 f05f0ed0662fe01850ec1b928830ef32                                  class:ggplot 2016-03-04 20:00:45
+5 f05f0ed0662fe01850ec1b928830ef32                           labelx:Sepal.Length 2016-03-04 20:00:45
+6 f05f0ed0662fe01850ec1b928830ef32                           labely:Petal.Length 2016-03-04 20:00:45
+7 f05f0ed0662fe01850ec1b928830ef32                      date:2016-03-04 20:00:45 2016-03-04 20:00:45
+8 f05f0ed0662fe01850ec1b928830ef32 session_info:c77057faf5d26bc12c402b2a78a23fb7 2016-03-04 20:00:45
+9 f05f0ed0662fe01850ec1b928830ef32                                    format:png 2016-03-04 20:00:45
 </div>
 <div class='input'>
 summaryRemoteRepo(user=&quot;pbiecek&quot;, repo=&quot;graphGallery&quot;) 
@@ -330,52 +320,29 @@ attr(,&quot;data&quot;)
 <div class='input'>
 showLocalRepo(repoDir = repo, &quot;tags&quot;)
 </div>
-<div class='output'>                           artifact
-1  f05f0ed0662fe01850ec1b928830ef32
-2  f05f0ed0662fe01850ec1b928830ef32
-3  f05f0ed0662fe01850ec1b928830ef32
-4  f05f0ed0662fe01850ec1b928830ef32
-5  f05f0ed0662fe01850ec1b928830ef32
-6  f05f0ed0662fe01850ec1b928830ef32
-7  f05f0ed0662fe01850ec1b928830ef32
-8  f05f0ed0662fe01850ec1b928830ef32
-9  f05f0ed0662fe01850ec1b928830ef32
-10 b656dbc388dfb041d32efe81f36bcddd
-11 b656dbc388dfb041d32efe81f36bcddd
-12 b656dbc388dfb041d32efe81f36bcddd
-13 b656dbc388dfb041d32efe81f36bcddd
-14 b656dbc388dfb041d32efe81f36bcddd
-15 b656dbc388dfb041d32efe81f36bcddd
-16 b656dbc388dfb041d32efe81f36bcddd
-17 29dc59f0842c73bfcd78ce95fdce7af7
-18 b656dbc388dfb041d32efe81f36bcddd
-19 ff575c261c949d073b2895b05d1097c3
-20 ff575c261c949d073b2895b05d1097c3
-21 ff575c261c949d073b2895b05d1097c3
-22 b656dbc388dfb041d32efe81f36bcddd
-                                             tag         createdDate
-1                                     format:rda 2016-03-04 20:00:45
-2                                       name:pl1 2016-03-04 20:00:45
-3                                       class:gg 2016-03-04 20:00:45
-4                                   class:ggplot 2016-03-04 20:00:45
-5                            labelx:Sepal.Length 2016-03-04 20:00:45
-6                            labely:Petal.Length 2016-03-04 20:00:45
-7                       date:2016-03-04 20:00:45 2016-03-04 20:00:45
-8  session_info:c77057faf5d26bc12c402b2a78a23fb7 2016-03-04 20:00:45
-9                                     format:png 2016-03-04 20:00:45
-10                                    format:rda 2016-04-25 18:48:47
-11                                       name:pl 2016-04-25 18:48:47
-12                                      class:gg 2016-04-25 18:48:47
-13                                  class:ggplot 2016-04-25 18:48:47
-14                           labelx:Sepal.Length 2016-04-25 18:48:47
-15                           labely:Petal.Length 2016-04-25 18:48:47
-16                      date:2016-04-25 18:48:47 2016-04-25 18:48:47
-17                                    format:rda 2016-04-25 18:48:47
-18 session_info:29dc59f0842c73bfcd78ce95fdce7af7 2016-04-25 18:48:47
-19                                    format:rda 2016-04-25 18:48:47
-20                                    format:txt 2016-04-25 18:48:47
-21 relationWith:b656dbc388dfb041d32efe81f36bcddd 2016-04-25 18:48:47
-22                                    format:png 2016-04-25 18:48:47
+<div class='output'>                           artifact                                           tag         createdDate
+1  f05f0ed0662fe01850ec1b928830ef32                                    format:rda 2016-03-04 20:00:45
+2  f05f0ed0662fe01850ec1b928830ef32                                      name:pl1 2016-03-04 20:00:45
+3  f05f0ed0662fe01850ec1b928830ef32                                      class:gg 2016-03-04 20:00:45
+4  f05f0ed0662fe01850ec1b928830ef32                                  class:ggplot 2016-03-04 20:00:45
+5  f05f0ed0662fe01850ec1b928830ef32                           labelx:Sepal.Length 2016-03-04 20:00:45
+6  f05f0ed0662fe01850ec1b928830ef32                           labely:Petal.Length 2016-03-04 20:00:45
+7  f05f0ed0662fe01850ec1b928830ef32                      date:2016-03-04 20:00:45 2016-03-04 20:00:45
+8  f05f0ed0662fe01850ec1b928830ef32 session_info:c77057faf5d26bc12c402b2a78a23fb7 2016-03-04 20:00:45
+9  f05f0ed0662fe01850ec1b928830ef32                                    format:png 2016-03-04 20:00:45
+10 b656dbc388dfb041d32efe81f36bcddd                                    format:rda 2016-07-27 15:25:21
+11 b656dbc388dfb041d32efe81f36bcddd                                       name:pl 2016-07-27 15:25:21
+12 b656dbc388dfb041d32efe81f36bcddd                                      class:gg 2016-07-27 15:25:21
+13 b656dbc388dfb041d32efe81f36bcddd                                  class:ggplot 2016-07-27 15:25:21
+14 b656dbc388dfb041d32efe81f36bcddd                           labelx:Sepal.Length 2016-07-27 15:25:21
+15 b656dbc388dfb041d32efe81f36bcddd                           labely:Petal.Length 2016-07-27 15:25:21
+16 b656dbc388dfb041d32efe81f36bcddd                      date:2016-07-27 15:25:21 2016-07-27 15:25:21
+17 b9c0058fc395bea980540e732f2b4fd1                                    format:rda 2016-07-27 15:25:21
+18 b656dbc388dfb041d32efe81f36bcddd session_info:b9c0058fc395bea980540e732f2b4fd1 2016-07-27 15:25:21
+19 ff575c261c949d073b2895b05d1097c3                                    format:rda 2016-07-27 15:25:21
+20 ff575c261c949d073b2895b05d1097c3                                    format:txt 2016-07-27 15:25:21
+21 ff575c261c949d073b2895b05d1097c3 relationWith:b656dbc388dfb041d32efe81f36bcddd 2016-07-27 15:25:21
+22 b656dbc388dfb041d32efe81f36bcddd                                    format:png 2016-07-27 15:25:21
 </div>
 <div class='input'>
 #deleteLocalRepo(&quot;arepo&quot;, deleteRoot = TRUE)
@@ -391,8 +358,8 @@ summary() -&gt; tmp
 
 ahistory(tmp)
 </div>
-<div class='output'>   env[[nm]]  [817057e6c60fea315d23660a66041ffc]
--&gt; summary()  [5aac8e438ab6f48d0ef5c8c5addb3f0b]
+<div class='output'>   iris %a% filter(Sepal.Length &lt; 6) %a% lm(Petal.Length ~ Species,     data = .)  [817057e6c60fea315d23660a66041ffc]
+-&gt; summary()                                                                       [5aac8e438ab6f48d0ef5c8c5addb3f0b]
 </div>
 <div class='input'>ahistory(md5hash = &quot;050e41ec3bc40b3004bc6bdd356acae7&quot;)
 </div>
@@ -449,9 +416,8 @@ searchInLocalRepo(pattern = list(dateFrom = &quot;2016-01-01&quot;,
                                  dateTo = &quot;2016-02-07&quot; ), 
                   repoDir = system.file(&quot;graphGallery&quot;, package = &quot;archivist&quot;))
 </div>
-<div class='output'>[1] &quot;d9313a0de3e2980201a8971e3384ff26&quot; &quot;ff575c261c949d073b2895b05d1097c3&quot;
-[3] &quot;2a6e492cb6982f230e48cf46023e2e4f&quot; &quot;93ecfdf1436932e2860c6dbdf2abc2ad&quot;
-[5] &quot;afb2550d0f886f0cf3b050f04c5cd4f8&quot;
+<div class='output'>[1] &quot;d9313a0de3e2980201a8971e3384ff26&quot; &quot;ff575c261c949d073b2895b05d1097c3&quot; &quot;2a6e492cb6982f230e48cf46023e2e4f&quot;
+[4] &quot;93ecfdf1436932e2860c6dbdf2abc2ad&quot; &quot;afb2550d0f886f0cf3b050f04c5cd4f8&quot;
 </div>
 <div class='input'>
 

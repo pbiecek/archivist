@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>addHooksToPrint. archivist 2.0.4</title>
+<title>addHooksToPrint. archivist 2.1</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="
 Przemyslaw Biecek, &lt;a href='mailto:przemyslaw.biecek@gmail.com'&gt;przemyslaw.biecek@gmail.com&lt;/a&gt;
@@ -34,7 +34,7 @@ Przemyslaw Biecek, &lt;a href='mailto:przemyslaw.biecek@gmail.com'&gt;przemyslaw
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">archivist 2.0.4</a>
+      <a class="brand" href="#">archivist 2.1</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
@@ -49,45 +49,49 @@ Przemyslaw Biecek, &lt;a href='mailto:przemyslaw.biecek@gmail.com'&gt;przemyslaw
         
       </header>
       
-      <h1>Add Archivist Hooks to Report</h1>
+      <h1>Add <span class = "pkg">archivist</span> Hooks to <span class = "pkg">rmarkdown</span> Reports</h1>
 
 <div class="row">
   <div class="span8">
     <h2>Usage</h2>
-    <pre><div>addHooksToPrint(class&nbsp;=&nbsp;"ggplot", repoDir&nbsp;=&nbsp;aoptions("repoDir"), repo&nbsp;=&nbsp;aoptions("repo"), user&nbsp;=&nbsp;aoptions("user"), branch&nbsp;=&nbsp;"master", subdir&nbsp;=&nbsp;aoptions("subdir"))</div></pre>
+    <pre><div>addHooksToPrint(class&nbsp;=&nbsp;"ggplot", repoDir&nbsp;=&nbsp;aoptions("repoDir"), repo&nbsp;=&nbsp;aoptions("repo"), user&nbsp;=&nbsp;aoptions("user"), branch&nbsp;=&nbsp;"master", subdir&nbsp;=&nbsp;aoptions("subdir"), format&nbsp;=&nbsp;"markdown")</div></pre>
     
     <h2>Arguments</h2>
     <dl>
       <dt>class</dt>
-      <dd>A character containing a name of class (one or more) that should be archivised.</dd>
+      <dd>A character with a name of class (one or more) that should be archived.</dd>
       <dt>repoDir</dt>
-      <dd>A character containing a name of Local Repository.</dd>
+      <dd>A character containing a name of a Local Repository.</dd>
       <dt>repo</dt>
-      <dd>A character containing a name of a Git repository on which the Repository is archived.
+      <dd>A character with a name of a Remote repository on which the Repository is archived.
 If <code>repo = NULL</code> then hooks will be added to files in local directories.</dd>
       <dt>user</dt>
-      <dd>A character containing a name of a Git user on whose account the <code>repo</code> is created.</dd>
+      <dd>A character with a name of a Remote-repository user on whose account the <code>repo</code> is created.</dd>
       <dt>branch</dt>
-      <dd>A character containing a name of Git Repository's branch on which the Repository is archived. 
+      <dd>A character with a name of Remote-repository's branch on which the Repository is archived. 
 Default <code>branch</code> is <code>master</code>.</dd>
       <dt>subdir</dt>
-      <dd>A character containing a name of a directory on Git repository 
-on which the Repository is stored. If the Repository is stored in main folder on Git repository, this should be set 
+      <dd>A character with a name of a subdirectory on a Remote repository 
+on which the Repository is stored. If the Repository is stored in main folder on a Remote repository, this should be set 
 to <code>subdir = "/"</code> as default.</dd>
+      <dt>format</dt>
+      <dd>A character denoting <code>format</code> as in <a href='alink.html'>alink</a>.</dd>
     </dl>
     
     <div class="Description">
       <h2>Description</h2>
 
       <p><code>addHooksToPrint</code> adds an overloaded version of the print function for objects of selected class. 
-The overloaded function will add all object of selected class to the repo and then add hooks to the report for these objects .</p>
+The overloaded function will add all objects of selected class to the <a href='Repository.html'>Repository</a> and then will add hooks (to the Remote or Local Repository) 
+to the HTML report (generated in <span class = "pkg">rmarkdown</span>) for these objects (<code>artifacts</code> - <a href='archivist-package.html'>archivist-package</a>).
+The great example can be seen in this blogpost <a href = 'http://www.r-bloggers.com/why-should-you-backup-your-r-objects/'>http://www.r-bloggers.com/why-should-you-backup-your-r-objects/</a>.</p>
   
     </div>
 
     <div class="Note">
       <h2>Note</h2>
 
-      <p>One can specify <code>userTags</code> as in <a href='saveToRepo.html'>saveToLocalRepo</a> for artifacts by adding code"tags" attribute.
+      <p>One can specify <code>userTags</code> as in <a href='saveToRepo.html'>saveToLocalRepo</a> for artifacts by adding <code>"tags"</code> attribute.
 See note secion about that in <a href='saveToRepo.html'>saveToLocalRepo</a>.</p>
   
       <p>Bug reports and feature requests can be sent to <a href = 'https://github.com/pbiecek/archivist/issues'>https://github.com/pbiecek/archivist/issues</a></p>
@@ -122,8 +126,8 @@ Other archivist: <code><a href='Repository.html'>Repository</a></code>,
   <code><a href='ahistory.html'>ahistory</a></code>, <code><a href='alink.html'>alink</a></code>,
   <code><a href='archivistOptions.html'>aoptions</a></code>, <code><a href='archivist-package.html'>archivist-package</a></code>,
   <code><a href='aread.html'>aread</a></code>, <code><a href='asearch.html'>asearch</a></code>,
-  <code><a href='asession.html'>asession</a></code>, <code><a href='cache.html'>cache</a></code>,
-  <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
+  <code><a href='asession.html'>asession</a></code>, <code><a href='atrace.html'>atrace</a></code>,
+  <code><a href='cache.html'>cache</a></code>, <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
   <code><a href='createEmptyRepo.html'>createLocalRepo</a></code>,
   <code><a href='createMDGallery.html'>createMDGallery</a></code>,
   <code><a href='deleteLocalRepo.html'>deleteLocalRepo</a></code>,

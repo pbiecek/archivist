@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>shinySearchInLocalRepo. archivist 2.1</title>
+<title>atrace. archivist 2.1</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="
 Przemyslaw Biecek, &lt;a href='mailto:przemyslaw.biecek@gmail.com'&gt;przemyslaw.biecek@gmail.com&lt;/a&gt;
@@ -49,90 +49,78 @@ Przemyslaw Biecek, &lt;a href='mailto:przemyslaw.biecek@gmail.com'&gt;przemyslaw
         
       </header>
       
-      <h1>Shiny Based Live Search for an Artifact in a Repository Using Tags</h1>
+      <h1>Add Tracing For All Objects Created By Given Function</h1>
 
 <div class="row">
   <div class="span8">
     <h2>Usage</h2>
-    <pre><div>shinySearchInLocalRepo(repoDir&nbsp;=&nbsp;NULL, host&nbsp;=&nbsp;"0.0.0.0")</div></pre>
+    <pre><div>atrace(FUN&nbsp;=&nbsp;"lm", object&nbsp;=&nbsp;"z")</div></pre>
     
     <h2>Arguments</h2>
     <dl>
-      <dt>repoDir</dt>
-      <dd>A character denoting an existing directory in which artifacts will be searched.
-If set to <code>NULL</code> (by default), uses the <code>repoDir</code> specified in <a href='setRepo.html'>setLocalRepo</a>.</dd>
-      <dt>host</dt>
-      <dd>A host IP adress, see the <code>host</code> argument in <code>shiny::runApp</code>.</dd>
+      <dt>FUN</dt>
+      <dd>name of a function to be traced (character)</dd>
+      <dt>object</dt>
+      <dd>name of an object that should be traced (character)</dd>
     </dl>
     
-    <div class="Value">
-      <h2>Value</h2>
-
-      <p><dl>
-<code>shinySearchInLocalRepo</code> runs a shiny application.
-</dl></p>
-  
-    </div>
-
     <div class="Description">
       <h2>Description</h2>
 
-      <p><code>shinySearchInLocalRepo</code> searches for an artifact in a <a href='Repository.html'>Repository</a> using <a href='Tags.html'>Tags</a>.
-To create an application one needs to point the name of artifacts' repository.
-The application is generated on the run. As for now there are two controllers exposed. 
-A text input field and a slider. Tags that are typed into text field are used for searching in repository. 
-Objects that have the same Tags are presented on the right panel.
-These object might be also downloaded just by click.
-To learn more about artifacts visit archivist-package.</p>
+      <p><code>atrace</code> add call to <a href='saveToRepo.html'>saveToLocalRepo</a> at the end of a given function.</p>
   
     </div>
 
     <div class="Details">
       <h2>Details</h2>
 
-      <p><code>shinySearchInLocalRepo</code> searches for artifacts in a Repository using their <code>Tags</code> 
-(e.g., <code>name</code>, <code>class</code> or <code>archiving date</code>). <code>Tags</code> are submitted in a 
-text input in a shiny application. Many Tags may be specified, they should be comma separated. 
-User can specify more Tags like phase, project, author etc. when artifact is created.</p>
-  
-      <p>In the search query one can add Tags starting with <code>sort:</code> or <code>sort:-</code>.
-As a result, miniatures will be sorted appropriately.
-For example <code>sort:class</code> will sort <code>class</code> Tags, while <code>sort:-class</code> will
-sort <code>class</code> tags backwards. <code>sort:createdDate</code> will sort <code>createdDate</code> Tag and
-<code>sort:-createdDate</code> will sort <code>createdDate</code> Tag backwards.</p>
-  
-      <p><code>Tags</code>, submitted in the text field, should be given according to the 
-format: <code>"TagKey:TagValue"</code> - see examples.</p>
-  
-    </div>
-
-    <div class="Note">
-      <h2>Note</h2>
-
-      <p>Bug reports and feature requests can be sent to <a href = 'https://github.com/pbiecek/archivist/issues'>https://github.com/pbiecek/archivist/issues</a></p>
-  
-    </div>
-
-    <div class="shiny">
-      <h2>shiny</h2>
-
-      <p></p>
-  
-      <p>This function use tools from the fantastic <span class = "pkg">shiny</span>
-package, so you'll need to make sure to have it installed.</p>
+      <p>Function <code>atrace</code> calls the <a href='http://www.inside-r.org/r-doc/base/trace'>trace</a> function.</p>
   
     </div>
     
     <h2 id="examples">Examples</h2>
-    <pre class="examples"><div class='input'>## Not run: 
-#   # assuming that there is a &#39;repo&#39; dir with a valid archivist repository
-#   shinySearchInLocalRepo( repoDir = &#39;repo&#39; )
-# ## End(Not run)
-</div></pre>
+    <pre class="examples"><div class='input'># read the object from local directory
+createLocalRepo(&quot;arepo_test&quot;, default=TRUE)
+</div>
+<div class='output'>Directory arepo_test did not exist. Forced to create a new directory.</div>
+<div class='input'>atrace(&quot;lm&quot;, &quot;z&quot;)
+</div>
+<strong class='message'>Tracing function &quot;lm&quot; in package &quot;stats&quot;</strong>
+<div class='output'>[1] &quot;lm&quot;
+</div>
+<div class='input'>lm(Sepal.Length~Sepal.Width, data=iris)
+</div>
+<div class='output'>Tracing lm(Sepal.Length ~ Sepal.Width, data = iris) on exit 
+</div>
+<div class='output'>
+Call:
+lm(formula = Sepal.Length ~ Sepal.Width, data = iris)
+
+Coefficients:
+(Intercept)  Sepal.Width  
+     6.5262      -0.2234  
+
+</div>
+<div class='input'>asearch(&quot;class:lm&quot;)
+</div>
+<div class='output'>$bebcc58d5e5da07047c3133daaad78f3
+
+Call:
+lm(formula = Sepal.Length ~ Sepal.Width, data = iris)
+
+Coefficients:
+(Intercept)  Sepal.Width  
+     6.5262      -0.2234  
+
+
+</div>
+<div class='input'>untrace(&quot;lm&quot;)
+</div>
+<strong class='message'>Untracing function &quot;lm&quot; in package &quot;stats&quot;</strong></pre>
   </div>
   <div class="span4">
     <!-- <ul>
-      <li>shinySearchInLocalRepo</li>
+      <li>atrace</li>
     </ul>
     <ul>
       
@@ -147,8 +135,7 @@ Other archivist: <code><a href='Repository.html'>Repository</a></code>,
   <code><a href='alink.html'>alink</a></code>, <code><a href='archivistOptions.html'>aoptions</a></code>,
   <code><a href='archivist-package.html'>archivist-package</a></code>, <code><a href='aread.html'>aread</a></code>,
   <code><a href='asearch.html'>asearch</a></code>, <code><a href='asession.html'>asession</a></code>,
-  <code><a href='atrace.html'>atrace</a></code>, <code><a href='cache.html'>cache</a></code>,
-  <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
+  <code><a href='cache.html'>cache</a></code>, <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
   <code><a href='createEmptyRepo.html'>createLocalRepo</a></code>,
   <code><a href='createMDGallery.html'>createMDGallery</a></code>,
   <code><a href='deleteLocalRepo.html'>deleteLocalRepo</a></code>,
@@ -157,7 +144,9 @@ Other archivist: <code><a href='Repository.html'>Repository</a></code>,
   <code><a href='restoreLibs.html'>restoreLibs</a></code>, <code><a href='rmFromLocalRepo.html'>rmFromLocalRepo</a></code>,
   <code><a href='saveToRepo.html'>saveToLocalRepo</a></code>,
   <code><a href='searchInRepo.html'>searchInLocalRepo</a></code>,
-  <code><a href='setRepo.html'>setLocalRepo</a></code>, <code><a href='showRepo.html'>showLocalRepo</a></code>,
+  <code><a href='setRepo.html'>setLocalRepo</a></code>,
+  <code><a href='shinySearchInRepo.html'>shinySearchInLocalRepo</a></code>,
+  <code><a href='showRepo.html'>showLocalRepo</a></code>,
   <code><a href='splitTags.html'>splitTagsLocal</a></code>,
   <code><a href='summaryRepo.html'>summaryLocalRepo</a></code>,
   <code><a href='zipRepo.html'>zipLocalRepo</a></code>

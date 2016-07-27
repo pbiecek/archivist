@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>cache. archivist 2.0.4</title>
+<title>cache. archivist 2.1</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="
 Przemyslaw Biecek, &lt;a href='mailto:Przemyslaw.Biecek@gmail.com'&gt;Przemyslaw.Biecek@gmail.com&lt;/a&gt;
@@ -34,7 +34,7 @@ Przemyslaw Biecek, &lt;a href='mailto:Przemyslaw.Biecek@gmail.com'&gt;Przemyslaw
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">archivist 2.0.4</a>
+      <a class="brand" href="#">archivist 2.1</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
@@ -115,10 +115,18 @@ disk input-output operations may take more time than calculations itself.</p>
     <pre class="examples"><div class='input'>
 # objects preparation
 library(lubridate)
-cacheRepo &lt;- tempfile()
+</div>
+<strong class='message'>
+Attaching package: ‘lubridate’
+</strong>
+<strong class='message'>The following object is masked from ‘package:base’:
+
+    date
+</strong>
+<div class='input'>cacheRepo &lt;- tempfile()
 createLocalRepo( cacheRepo )
 </div>
-<div class='output'>Directory /tmp/Rtmp8itQ6j/file516f3e9e046f did not exist. Forced to create a new directory.</div>
+<div class='output'>Directory /tmp/RtmpqVAcSD/file200810ca46c4 did not exist. Forced to create a new directory.</div>
 <div class='input'>
 ## Example 1:
 # cache is useful when objects used by FUN are not that big but calculations
@@ -129,12 +137,12 @@ fun &lt;- function(n) {replicate(n, summary(lm(Sepal.Length~Species, iris))$r.sq
 system.time( res &lt;- cache(cacheRepo, fun, 1000) )
 </div>
 <div class='output'>   user  system elapsed 
-  2.731  13.676   2.276 
+  2.908  17.072   2.833 
 </div>
 <div class='input'>system.time( res &lt;- cache(cacheRepo, fun, 1000) ) 
 </div>
 <div class='output'>   user  system elapsed 
-  2.845  16.651   2.604 
+  2.693  13.559   2.104 
 </div>
 <div class='input'># The second call is much faster. Why is it so? Because the result of fun
 # function evaluation has been stored in local cacheRepo during the first evaluation
@@ -191,7 +199,7 @@ Other archivist: <code><a href='Repository.html'>Repository</a></code>,
   <code><a href='alink.html'>alink</a></code>, <code><a href='archivistOptions.html'>aoptions</a></code>,
   <code><a href='archivist-package.html'>archivist-package</a></code>, <code><a href='aread.html'>aread</a></code>,
   <code><a href='asearch.html'>asearch</a></code>, <code><a href='asession.html'>asession</a></code>,
-  <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
+  <code><a href='atrace.html'>atrace</a></code>, <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
   <code><a href='createEmptyRepo.html'>createLocalRepo</a></code>,
   <code><a href='createMDGallery.html'>createMDGallery</a></code>,
   <code><a href='deleteLocalRepo.html'>deleteLocalRepo</a></code>,
