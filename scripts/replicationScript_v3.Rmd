@@ -217,7 +217,7 @@ arepo <- system.file("graphGallery", package = "archivist")
 #shinySearchInLocalRepo(arepo)
 ```
 
-## Section 3.4. Extensions
+## Section 3.4 Extensions
 
 ### Archivisation of all results of a specific function
 
