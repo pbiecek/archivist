@@ -1,7 +1,10 @@
 ---
 title: "archivist: An R Package for Managing, Recording and Restoring Data Analysis Results"
 author: "Replication script"
-output: html_document
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
 ---
 
 # Intro
@@ -42,9 +45,8 @@ archivist::aread('http://mi2.mini.pw.edu.pl:8080/archivist/arepo/feb011baa9f607e
 
 # Section 3. Functionality
 
-## Section 3.1
+## Section 3.1 Repository management
 
-### Repository management
 
 Creation of a new empty repository
 
@@ -100,9 +102,7 @@ saveToLocalRepo(iris)
 aoptions("repoType", "github")
 ```
 
-## Section 3.2
-
-Artifact management
+## Section 3.2 Artifact management
 
 ### Saving an R object into a repository
 
@@ -136,7 +136,7 @@ ahistory(tmp)
 ahistory(md5hash = "050e41ec3bc40b3004bc6bdd356acae7")
 ```
 
-## Loading an object from a repository
+### Loading an object from a repository
 
 Femote, local or in a package
 
@@ -174,7 +174,7 @@ Remove all older than 30 days
 rmFromLocalRepo(obj2rm, repoDir = repo, many = TRUE)
 ```
 
-## 3.3 Search for an artifact
+## Section 3.3 Search for an artifact
 
 ### Search in a local/GitHub repository
 
@@ -217,9 +217,9 @@ arepo <- system.file("graphGallery", package = "archivist")
 #shinySearchInLocalRepo(arepo)
 ```
 
-## 3.4. Extensions
+## Section 3.4. Extensions
 
-### Archivisation of all results of a specic function
+### Archivisation of all results of a specific function
 
 ```{r}
 library("archivist")
