@@ -81,21 +81,20 @@ ahistory <- function(artifact = NULL, md5hash = NULL, repoDir = aoptions('repoDi
   stopifnot(length(format) == 1 & format %in% c("regular", "kable"))
   elements <- strsplit(md5hash, "/")[[1]]
   
-  if (length(elements) == 3){
-  
-  RemoteRepoCheck( repo = elements[2], user = elements[1], 
-                   branch = "master", subdir = aoptions("subdir"),
-                                     repoType = aoptions("repoType")) # implemented in setRepo.R
-  
-  remoteHook <- getRemoteHook(repo = elements[2], user = elements[1], branch = "master", subdir = aoptions("subdir"))
-  Temp <- downloadDB( remoteHook )
-  on.exit( unlink( Temp, recursive = TRUE, force = TRUE))
-  repoDir <- Temp
-  md5hash <- elements[3]
+  if (length(elements) >= 3){
+    md5hash <- tail(elements,1)
+    subdir <- ifelse(length(elements) > 3, paste(elements[3:(length(elements)-1)], collapse="/"), "/")
+
+    RemoteRepoCheck( repo = elements[2], user = elements[1], 
+                     branch = "master", subdir = subdir,
+                                       repoType = aoptions("repoType")) # implemented in setRepo.R
+    
+    remoteHook <- getRemoteHook(repo = elements[2], user = elements[1], branch = "master", subdir = subdir)
+    Temp <- downloadDB( remoteHook )
+    on.exit( unlink( Temp, recursive = TRUE, force = TRUE))
+    repoDir <- Temp
   }
-  
-  
-  
+
   res_names <- c()
   res_md5 <- md5hash
   ind <- 1
