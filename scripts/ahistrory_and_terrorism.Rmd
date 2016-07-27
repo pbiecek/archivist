@@ -1,0 +1,84 @@
+---
+title: "ahistory and terrorism"
+author: "Przemyslaw Biecek"
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+---
+
+# Data preparation
+
+We are using datafrom National Consortium for the Study of Terrorism and Responses to Terrorism (START). (2016).Global Terrorism Database [Data file]. Retrieved from http://www.start.umd.edu/gtd
+
+According to General Terms and Conditions of Use we cannot share whole data.
+Here is just a small portion. Find much more important data here:http://apps.start.umd.edu/gtd/downloads/
+
+```{r, cache=FALSE, warning=FALSE, message=FALSE}
+library("knitr")
+opts_chunk$set(comment=NA, fig.width=6, fig.height=6, results='asis', warning=FALSE, message=FALSE, cache=FALSE)
+
+library("openxlsx")
+data <- read.xlsx("globalterrorismdb_0616dist.xlsx", 1)
+small_data <- data[,c("iyear", "country_txt", "nkill","nwound","weaptype1_txt")]
+small_data <- small_data[small_data$iyear %in% c("2015","2014"),]
+```
+
+# Store
+
+Here the story with archivist begins.
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(ggrepel)
+library(ggthemes)
+
+library(archivist)
+setLocalRepo("~/GitHub/SmarterPoland_blog/arepo")
+
+addHooksToPrint(class="ggplot",
+                 repo = "SmarterPoland_blog", user = "pbiecek", subdir = "arepo")
+
+sel <- small_data %a%
+  dplyr::filter(iyear == "2015") %a%
+  group_by(country_txt) %a%
+  dplyr::summarise(sum_kills = sum(nkill, na.rm=TRUE),
+            sum_wounds = sum(nwound, na.rm=TRUE),
+            n = n()) %a%
+  dplyr::filter(sum_kills > 2, sum_wounds>2)
+```
+
+And the plot
+
+```{r}
+ggplot(sel, aes(sum_kills, sum_wounds)) +
+  geom_point(aes(size=n)) + geom_text_repel(size=3,aes(label=country_txt)) +
+  scale_x_log10() + scale_y_log10() + theme_classic() +
+  theme(legend.position="none") + xlab("Total Number of Fatalities") + ylab("Total Number of Injured")+
+  ggtitle("Victims of terrorism")
+
+```
+
+
+# Restore
+
+And here you can enjoy the magic
+
+```{r}
+
+pl <- archivist::aread('pbiecek/SmarterPoland_blog/arepo/e44de65f1e56ea42d2df2598c083d1ce')
+head(pl$data)
+
+getTagsRemote("e44de65f1e56ea42d2df2598c083d1ce", "SmarterPoland_blog", "pbiecek", subdir = "arepo", tag = "")
+
+digest::digest(pl$data)
+
+dat <- archivist::aread('pbiecek/SmarterPoland_blog/arepo/ceed21e997efd00940cdbcba497559c7')
+head(dat)
+
+ahistory(md5hash = 'pbiecek/SmarterPoland_blog/arepo/ceed21e997efd00940cdbcba497559c7')
+
+pl + ggtitle("Victims of terrorism in 2015\nCountries with > 2 Fatalities") + theme_bw()
+
+```
