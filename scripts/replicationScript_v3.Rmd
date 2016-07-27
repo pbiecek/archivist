@@ -182,6 +182,7 @@ rmFromLocalRepo(obj2rm, repoDir = repo, many = TRUE)
 searchInLocalRepo(pattern = "class:gg", 
     repoDir = system.file("graphGallery", package = "archivist"))
 
+
 searchInLocalRepo(pattern = list(dateFrom = "2016-01-01",
     dateTo = "2016-02-07" ), 
     repoDir = system.file("graphGallery", package = "archivist"))
@@ -191,10 +192,12 @@ searchInLocalRepo(pattern=c("class:gg", "labelx:Sepal.Length"),
          repoDir = system.file("graphGallery", package = "archivist"))	
 ```
 
+### Retrieval of a list of R objects with given tags
 
 ```{r}
 setLocalRepo(system.file("graphGallery", package = "archivist"))
 models <- asearch(patterns = c("class:lm", "coefname:Sepal.Length"))
+
 models <- asearch("pbiecek/graphGallery",  
     patterns = c("class:lm", "coefname:Sepal.Length"))
 lapply(models, coef)
@@ -207,35 +210,62 @@ do.call(grid.arrange, plots)
 
 ```
 
-Interactive search
+### Interactive search
 
 ```{r, eval=FALSE}
 arepo <- system.file("graphGallery", package = "archivist")
 #shinySearchInLocalRepo(arepo)
 ```
 
-Delete
+## 3.4. Extensions
 
-```{r}
-deleteLocalRepo("arepo")
-```
-
-# Section 3.5
+### Archivisation of all results of a specic function
 
 ```{r}
 library("archivist")
 createLocalRepo("allModels", default = TRUE)
 atrace("lm", "z")
+
+# in the article is only one call to lm()
 lm(Sepal.Length~Sepal.Width, data=iris)
 lm(Sepal.Length~Petal.Length, data=iris)
 lm(Sepal.Length~Petal.Length, data=iris)
+
 sapply(asearch("class:lm"), BIC)
+
 deleteLocalRepo("allModels")
 ```
 
+### Integration with the knitr package
+
+Requires a knitr report to work
+
+```{r}
+# addHooksToPrint(class=c("ggplot", "data.frame"),
+#     repoDir = "arepo",
+#     repo = "Eseje", user = "pbiecek", subdir = "arepo")
+```
+
+### Gallery of artifacts in the repository
+
+Requires a GitHub repository to work
+
+```{r}
+# createMDGallery("arepo/readme.md",
+#     repo="Eseje", user = "pbiecek", subdir = "arepo",
+#     addMiniature = TRUE, addTags = TRUE)
+```
+
+### Restoring older versions of packages
+
 ```{r}
 asession("pbiecek/graphGallery/arepo/600bda83cb840947976bd1ce3a11879d")
+
+# Be warned, this line will install al lot of packages in old versions
+# restoreLibs("pbiecek/graphGallery/arepo/600bda83cb840947976bd1ce3a11879d")
+# aread("pbiecek/graphGallery/arepo/600bda83cb840947976bd1ce3a11879d")
 ```
+
 
 # R Session
 
