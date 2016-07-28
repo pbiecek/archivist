@@ -16,7 +16,7 @@ Here is just a small portion. Find much more important data here:http://apps.sta
 
 ```{r, cache=FALSE, warning=FALSE, message=FALSE}
 library("knitr")
-opts_chunk$set(comment=NA, fig.width=6, fig.height=6, results='asis', warning=FALSE, message=FALSE, cache=FALSE)
+opts_chunk$set(comment=NA, fig.width=6, fig.height=6, warning=FALSE, message=FALSE, cache=FALSE)
 
 library("openxlsx")
 data <- read.xlsx("globalterrorismdb_0616dist.xlsx", 1)
