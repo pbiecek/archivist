@@ -12,7 +12,7 @@ output:
 We are using datafrom National Consortium for the Study of Terrorism and Responses to Terrorism (START). (2016).Global Terrorism Database [Data file]. Retrieved from http://www.start.umd.edu/gtd
 
 According to General Terms and Conditions of Use we cannot share whole data.
-Here is just a small portion. Find much more important data here:http://apps.start.umd.edu/gtd/downloads/
+Here is just a small portion. Find much more important data here: http://apps.start.umd.edu/gtd/
 
 ```{r, cache=FALSE, warning=FALSE, message=FALSE}
 library("knitr")
