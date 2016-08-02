@@ -101,7 +101,7 @@ createLocalRepo <- function( repoDir, force = TRUE, default = FALSE ){
   if (default) {
     setLocalRepo(repoDir)
   }
-   
+  return(invisible( repoDir ))
 }
 
 #' @family archivist
