@@ -1,10 +1,7 @@
-
 archivist 2.1.1
 ----------------------------------------------------------------
-* **New features**:
-  1.
-* **New functions**:
-  1.
+* **Bugs fixed:**
+ 1. Fixed bug: All examples fail when CreateLocalRepo is invoked with the `default=FALSE` parameter.
 
 
 archivist 2.1.0
