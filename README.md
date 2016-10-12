@@ -12,7 +12,7 @@
 A set of tools for datasets and plots archiving
 =====================================================
 
-![The new overview of archivist package](https://raw.githubusercontent.com/pbiecek/archivist/master/archiwum2_0.png)
+![The new overview of archivist package](https://raw.githubusercontent.com/pbiecek/archivist/master/archivist2_0.png)
 
 ![Overview of archivist package](https://raw.githubusercontent.com/pbiecek/archivist/master/archiwum2.png)
 
