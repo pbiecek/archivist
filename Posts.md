@@ -13,6 +13,8 @@ output:
 	
 ###  The list of blog-posts and conference talks about `archivist`
 
+- 2016-10 Ver 2.1.0 [archivist 2.0: (News from)
+Managing Data Analysis Results Toolkit, eRum2016 ! (Marcin Kosiński)](http://r-addict.com/eRum2016/#/)
 - 2016-08 Ver 2.1.0 [A link that can tell more than dozens of lines of R code – what’s new in archivist? (Przemysław Biecek)](https://www.r-bloggers.com/a-link-that-can-tell-more-than-dozens-of-lines-of-r-code-whats-new-in-archivist/)
 - 2016-06 Ver 2.0.4 [useR! 2016 Conference, Stanford](http://user2016.org/) [How to use archivist
 to boost reproducibility (Przemyslaw Biecek)](https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/How-to-use-the-archivist-package-to-boost-reproducibility-of-your-research)
