@@ -64,7 +64,7 @@
 #' Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 #' 
 #' @examples
-#' 
+#' \dontrun{
 #' ## Local version
 #' exampleRepoDir <- tempfile()
 #' createLocalRepo(repoDir = exampleRepoDir)
@@ -112,6 +112,7 @@
 #' showRemoteRepo()
 #' searchInRemoteRepo( pattern=c("varname:Sepal.Width", "class:lm", "name:myplot123"), 
 #'                          intersect = FALSE )
+#' }
 #' @family archivist
 #' @rdname setRepo
 #' @export

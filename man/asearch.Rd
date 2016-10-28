@@ -94,7 +94,14 @@ getTagsRemote(md5hash = "cd6557c6163a6f9800f308f343e75e72", tag = "")
 ## Searching for objects of class:lm
 asearch(patterns = c("class:lm"))
 ## Searching for objects of class:gg
-asearch(patterns = c("class:gg"))
+ggplot_objects <- asearch(patterns = c("class:gg"))
+# names(ggplot_objects)
+# To plot them remember to have ggplot2 in version 2.1.0
+# as this is stated in asession("pbiecek/archivist/13b2724139eb2c62578b4dab0d7b2cea") or
+asession("pbiecek/archivist/f05f0ed0662fe01850ec1b928830ef32") .
+# The state of R libraries can be restored to the same state in
+# which those objects were created with the restoreLibs function.
+
 
 ### Remote version 
 ## Note that repo argument is passed in the following way to asearch:
@@ -103,7 +110,7 @@ asearch(patterns = c("class:gg"))
 ## Searching for objects of class:gg
 asearch("pbiecek/graphGallery", 
         patterns = c("class:gg",
-                     "labelx:Sepal.Length"))
+                     "labelx:Sepal.Length")) -> ggplots_objects_v2
 }
 }
 \author{

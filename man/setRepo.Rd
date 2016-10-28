@@ -64,7 +64,7 @@ parameters \code{user}, \code{repo}, \code{branch}, \code{subdir}  may be omitte
 Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 }
 \examples{
-
+\dontrun{
 ## Local version
 exampleRepoDir <- tempfile()
 createLocalRepo(repoDir = exampleRepoDir)
@@ -112,6 +112,7 @@ setRemoteRepo( user="pbiecek", repo="archivist"  )
 showRemoteRepo()
 searchInRemoteRepo( pattern=c("varname:Sepal.Width", "class:lm", "name:myplot123"), 
                          intersect = FALSE )
+}
 }
 \author{
 Marcin Kosinski , \email{m.p.kosinski@gmail.com}

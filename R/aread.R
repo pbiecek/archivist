@@ -31,12 +31,17 @@
 #' # read the object from local directory
 #' setLocalRepo(system.file("graphGallery", package = "archivist"))
 #' pl <- aread("f05f0ed0662fe01850ec1b928830ef32")
-#' # plot it
-#' pl
+#' # To plot it remember to have ggplot2 in version 2.1.0
+#' # as this is stated in asession("f05f0ed0662fe01850ec1b928830ef32") .
+#' # The state of R libraries can be restored to the same state in
+#' # which f05f0ed0662fe01850ec1b928830ef32 was created with the restoreLibs function.
+#' 
 #' # read the object from Remote
 #' pl <- aread("pbiecek/graphGallery/f05f0ed0662fe01850ec1b928830ef32")
-#' # plot it
-#' pl
+#' # To plot it remember to have ggplot2 in version 2.1.0
+#' # as this is stated in asession("pbiecek/graphGallery/f05f0ed0662fe01850ec1b928830ef32") .
+#' # The state of R libraries can be restored to the same state in
+#' # which f05f0ed0662fe01850ec1b928830ef32 was created with the restoreLibs function.
 #' @family archivist
 #' @rdname aread
 #' @export
