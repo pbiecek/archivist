@@ -13,6 +13,7 @@ output:
 	
 ###  The list of blog-posts and conference talks about `archivist`
 
+- 2016-10 Ver 2.1.0 [News from archivist 2.0 on eRum2016 conference (Marcin Kosiński)](https://www.r-bloggers.com/news-from-archivist-2-0-on-erum2016-conference/)
 - 2016-10 Ver 2.1.0 [archivist 2.0: (News from)
 Managing Data Analysis Results Toolkit, eRum2016 ! (Marcin Kosiński)](http://r-addict.com/eRum2016/#/)
 - 2016-08 Ver 2.1.0 [A link that can tell more than dozens of lines of R code – what’s new in archivist? (Przemysław Biecek)](https://www.r-bloggers.com/a-link-that-can-tell-more-than-dozens-of-lines-of-r-code-whats-new-in-archivist/)
