@@ -2,6 +2,7 @@ archivist 2.1.1
 ----------------------------------------------------------------
 * **Bugs fixed:**
  1. Fixed bug: All examples fail when CreateLocalRepo is invoked with the `default=FALSE` parameter. [[#291](https://github.com/pbiecek/archivist/issues/291)]
+ 2. Changed `aread` and `asearch` examples due to new version of ggplot2 - 2.2.0 [[#296](https://github.com/pbiecek/archivist/issues/296)]
 
 
 archivist 2.1.0
