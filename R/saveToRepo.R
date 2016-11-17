@@ -138,11 +138,11 @@
 #' showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
 #' showLocalRepo(method = "tags", repoDir = exampleRepoDir)
 #' 
-#' loadFromLocalRepo(md5hash = 'f05f0ed0662fe01850ec1b928830ef32',
-#'   repoDir = system.file("graphGallery", package = "archivist"), value = TRUE) -> pl
+#' loadFromLocalRepo(md5hash = '2a6e492cb6982f230e48cf46023e2e4f',
+#'   repoDir = system.file("graphGallery", package = "archivist"), value = TRUE) -> model
 #' 
-#' saveToLocalRepo(pl, repoDir=exampleRepoDir,
-#'              userTags = c("do not delete", "my favourite graph"))
+#' saveToLocalRepo(model, repoDir=exampleRepoDir,
+#'              userTags = c("do not delete", "my favourite model"))
 #' aoptions('repoDir', system.file("graphGallery", package = "archivist"))
 #' showLocalRepo(method = "tags")
 #' data(iris)
