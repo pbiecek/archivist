@@ -35,7 +35,7 @@
 #' @examples
 #' \dontrun{
 #' ## objects preparation
-#' restoreLibs(md5hash = "pbiecek/graphGallery/f05f0ed0662fe01850ec1b928830ef32")
+#' restoreLibs(md5hash = "pbiecek/graphGallery/7f3453331910e3f321ef97d87adb5bad")
 #' }
 #' @family archivist
 #' @rdname restoreLibs

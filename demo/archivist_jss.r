@@ -14,10 +14,10 @@ if (!require(archivist)) {
 # Creation of hooks to R objects.
 # Following lines download R objects from remote repository.
 
-archivist::aread("pbiecek/graphGallery/f05f0ed0662fe01850ec1b928830ef32")
-archivist::aread("pbiecek/graphGallery/f05f0ed066")
+archivist::aread("pbiecek/graphGallery/7f3453331910e3f321ef97d87adb5bad")
+archivist::aread("pbiecek/graphGallery/7f34533")
 setLocalRepo(system.file("graphGallery", package = "archivist"))
-aread("f05f0ed0662fe01850ec1b928830ef32")
+aread("7f3453331910e3f321ef97d87adb5bad")
 
 # regression model
 
@@ -96,7 +96,7 @@ deleteLocalRepo(repoDir = repo, deleteRoot = TRUE)
 
 repo <- "arepo"
 createLocalRepo(repoDir = repo, default = TRUE)
-copyRemoteRepo(repoTo = repo, md5hashes= "f05f0ed0662fe01850ec1b928830ef32", 
+copyRemoteRepo(repoTo = repo, md5hashes= "7f3453331910e3f321ef97d87adb5bad", 
                user = "pbiecek", repo = "graphGallery", repoType = "github")
 
 # Showing repository statistics
@@ -138,17 +138,17 @@ ahistory(md5hash = "050e41ec3bc40b3004bc6bdd356acae7")
 
 # Loading an object from repository
 
-pl2 <- loadFromRemoteRepo("f05f0ed0662fe01850ec1b928830ef32", repo="graphGallery", user="pbiecek", 
+pl2 <- loadFromRemoteRepo("7f3453331910e3f321ef97d87adb5bad", repo="graphGallery", user="pbiecek", 
                           value=TRUE)
-pl3 <- loadFromLocalRepo("f05f0ed0662", system.file("graphGallery", package = "archivist"), value=TRUE)
+pl3 <- loadFromLocalRepo("7f345333", system.file("graphGallery", package = "archivist"), value=TRUE)
 
-archivist::aread("pbiecek/graphGallery/f05f0ed0662fe01850ec1b928830ef32")
+archivist::aread("pbiecek/graphGallery/7f3453331910e3f321ef97d87adb5bad")
 
 setLocalRepo(system.file("graphGallery", package = "archivist"))
 
-pl3 <- loadFromLocalRepo("f05f0ed", value=TRUE)
+pl3 <- loadFromLocalRepo("7f345333", value=TRUE)
 
-archivist::aread("f05f0ed")
+archivist::aread("7f345333")
 
 setLocalRepo(system.file("graphGallery", package = "archivist"))
 model <- aread("2a6e492cb6982f230e48cf46023e2e4f")
@@ -156,7 +156,7 @@ digest::digest(model)
 
 # Removal of an object from repository
 
-rmFromLocalRepo("f05f0ed0662fe01850ec1b928830ef32", repoDir = repo)
+rmFromLocalRepo("7f3453331910e3f321ef97d87adb5bad", repoDir = repo)
 
 #Remove all older than 30 days
 

@@ -97,7 +97,7 @@
 #' # names(ggplot_objects)
 #' # To plot them remember to have ggplot2 in version 2.1.0
 #' # as this is stated in asession("pbiecek/archivist/13b2724139eb2c62578b4dab0d7b2cea") or
-#' asession("pbiecek/archivist/f05f0ed0662fe01850ec1b928830ef32") .
+#' asession("pbiecek/archivist/7f3453331910e3f321ef97d87adb5bad") .
 #' # The state of R libraries can be restored to the same state in
 #' # which those objects were created with the restoreLibs function.
 #' 
