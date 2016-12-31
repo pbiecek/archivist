@@ -17,12 +17,12 @@ test_that("asearch works properly", {
   aoptions('repoDir', NULL, T)
   models <- asearch("pbiecek/graphGallery", patterns = c("class:lm", "coefname:Sepal.Length"))
   
-  expect_more_than(length(models), 1)
+  expect_gt(length(models), 1)
   plots <- asearch("pbiecek/graphGallery", 
                    patterns = c("class:gg",
                                 "labelx:Sepal.Length"))
   
-  expect_more_than(length(plots), 1)
+  expect_gt(length(plots), 1)
 })
 
 
@@ -74,7 +74,7 @@ test_that("object is properly serialized", {
 })
 
 test_that("search* functions does search", {
-  expect_equal(c("13b2724139eb2c62578b4dab0d7b2cea", "7f3453331910e3f321ef97d87adb5bad") %in%
+  expect_equal(c("5e9558aed86ab3d6657f52441d0f9b5a", "7f3453331910e3f321ef97d87adb5bad") %in%
   searchInRemoteRepo(pattern="class:gg", user="pbiecek", repo="graphGallery"), c(TRUE, TRUE))
   
   expect_equal(c("f9ebb370fa8fed2057be1bb11005f5fb", "6f6623ab33ae7f98bf8f5d7457c112eb") %in%
@@ -82,7 +82,7 @@ test_that("search* functions does search", {
                                      dateTo = "2014-09-30" ),
                      user="pbiecek", repo="graphGallery"), c(TRUE, TRUE))
   
-  expect_equal(c("7f3453331910e3f321ef97d87adb5bad", "369227e67f9164dcbe934dadf2b53cc2") %in%
+  expect_equal(c("7f3453331910e3f321ef97d87adb5bad", "5e9558aed86ab3d6657f52441d0f9b5a") %in%
   searchInRemoteRepo(pattern=c("class:gg", "labelx:Sepal.Length"),
                           user="pbiecek", repo="graphGallery"), c(TRUE, TRUE))
 })
