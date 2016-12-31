@@ -1,3 +1,5 @@
+^gallery.*$
+^backpack.db$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 # Travis scripts
