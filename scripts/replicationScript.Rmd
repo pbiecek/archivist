@@ -46,8 +46,9 @@ Reading artifacts from Shiny
 ```{r}
 # wake up the shiny container at shinyapps
 # not needed for other shiny apps
-xml2::read_html("https://cogito.shinyapps.io/archivistShiny/")
+invisible(xml2::read_html("https://cogito.shinyapps.io/archivistShiny/"))
 
+# here we are reading the artifact
 archivist::aread('https://cogito.shinyapps.io/archivistShiny/arepo/ca680b829abd8f0a4bd2347dcf9fe534')
 ```
 
@@ -157,8 +158,8 @@ archivist::aread("pbiecek/graphGallery/7f3453331910e3f321ef97d87adb5bad")
 
 library("archivist")
 setLocalRepo(system.file("graphGallery", package = "archivist"))
-# loadFromLocalRepo("f05f0ed", value=TRUE)
-archivist::aread("f05f0ed")
+# loadFromLocalRepo("7f3453", value=TRUE)
+archivist::aread("7f3453")
 ```
 
 ```{r}
