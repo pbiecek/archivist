@@ -1,3 +1,8 @@
+archivist 2.1.2
+----------------------------------------------------------------
+* GG-plots in the package's repository are now created with ggplot2 v2.2
+* Replication script is updated to be consistent with new ggplots
+
 archivist 2.1.1
 ----------------------------------------------------------------
 * **Bugs fixed:**

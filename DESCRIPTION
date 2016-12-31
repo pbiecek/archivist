@@ -1,5 +1,5 @@
 Package: archivist
-Version: 2.1.1
+Version: 2.1.2
 Type: Package
 Title: Tools for Storing, Restoring and Searching for R Objects
 Authors@R: c(
