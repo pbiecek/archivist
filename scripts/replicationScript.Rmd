@@ -1,8 +1,15 @@
 ---
 title: "archivist: An R Package for Managing, Recording and Restoring Data Analysis Results"
 author: "Replication script"
-output: html_document
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
 
 # Intro
 
@@ -10,132 +17,65 @@ This is the replication script for 'archivist: An R Package for Managing, Record
 
 First, make sure that `archivist` is installed.
 
-```{r}
+```{r, warning=FALSE, message=FALSE}
 if (!require(archivist)) {
   install.packages("archivist")
   library(archivist)
 }
 ```
 
-# Section 2.1
+# Section 2. Motivation
 
-Creation of hooks to R objects.
-Following lines download R objects from remote repository.
-
-```{r}
-archivist::aread("pbiecek/graphGallery/f05f0ed0662fe01850ec1b928830ef32")
-```
-
-These instructions retrieve R objects from graphGallery directory attached to the archivist package.
+Reading artifacts from GitHub
 
 ```{r}
-library(archivist)
-setLocalRepo(system.file("graphGallery", package = "archivist"))
-# plot
-archivist::aread("f05f0ed0662fe01850ec1b928830ef32")
-archivist::aread("f05f0ed")
-
-# regression model
-model <- archivist::aread("2a6e492cb6982f230e48cf46023e2e4f")
-summary(model)
+archivist::aread('pbiecek/Eseje/arepo/ba7f58fafe7373420e3ddce039558140') 
 ```
 
-
-
-# Section 2.2
-
-Retrieval of a list of R objects with given tags.
-
-Following lines search within remote repositories and download objects with given properties.
+Reading artifacts from package
 
 ```{r}
-models <- asearch("pbiecek/graphGallery", patterns = c("class:lm", "coefname:Sepal.Length"))
-
-lapply(models, coef)
-```
-
-And from the local repository.
-
-```{r}
-models <- asearch(patterns = c("class:lm", "coefname:Sepal.Length"))
-
-lapply(models, coef)
-```
-
-```{r}
-# from global
-plots <- asearch("pbiecek/graphGallery", 
-    patterns = c("class:gg", "labelx:Sepal.Length"))
-length(plots)
-
-library("gridExtra")
-
-do.call(grid.arrange,  plots)
-
-# from local
-plots <- asearch(patterns = c("class:gg", "labelx:Sepal.Length"))
-length(plots)
-
-do.call(grid.arrange,  plots)
-```
-
-# Section 2.3
-
-Retrieval of the object's pedigree.
-
-```{r, message=FALSE, warning=FALSE}
 library("archivist")
-library("dplyr")
-createLocalRepo("arepo", default = TRUE)
-
-data(iris)
-
-iris %a%
-   filter(Sepal.Length < 6) %a%
-   lm(Petal.Length~Species, data=.) %a%
-   summary() -> tmp
-
-ahistory(tmp)
-
-ahistory(md5hash = "050e41ec3bc40b3004bc6bdd356acae7")
+models <- asearch("pbiecek/graphGallery", patterns = "class:lm")
+modelsBIC <- sapply(models, BIC)
+sort(modelsBIC)
 ```
 
-Session info
+Reading artifacts from Shiny
 
 ```{r}
-sinfo <- asession("050e41ec3bc40b3004bc6bdd356acae7")
-head(sinfo$packages)
+# wake up the shiny container at shinyapps
+# not needed for other shiny apps
+xml2::read_html("https://cogito.shinyapps.io/archivistShiny/")
+
+archivist::aread('https://cogito.shinyapps.io/archivistShiny/arepo/ca680b829abd8f0a4bd2347dcf9fe534')
 ```
 
-# Section 3.1
+# Section 3. Functionality
 
-Repository management.
+## Section 3.1 Repository management
 
-Creation of a new empty repository.
+
+Creation of a new empty repository
 
 ```{r}
-# global path
-repo <- "/Users/pbiecek/GitHub/arepo"
-# local path
 repo <- "arepo"
 createLocalRepo(repoDir = repo, default = TRUE)
 ```
 
 Deletion of an existing repository
 
-
 ```{r}
 repo <- "arepo"
 deleteLocalRepo(repoDir = repo)
 ```
 
-
-Copying artifacts from other repositories.
+Copying artifacts from other repositories
 
 ```{r}
 repo <- "arepo"
 createLocalRepo(repoDir = repo, default = TRUE)
-copyRemoteRepo(repoTo = repo, md5hashes= "f05f0ed0662fe01850ec1b928830ef32", 
+copyRemoteRepo(repoTo = repo, md5hashes= "7f3453331910e3f321ef97d87adb5bad", 
          user = "pbiecek", repo = "graphGallery", repoType = "github")
 ```
 
@@ -150,14 +90,14 @@ summaryLocalRepo(repoDir =
     system.file("graphGallery", package = "archivist")) 
 ```
 
-Setting default repository
+Setting a default repository
 
 ```{r}
 setRemoteRepo(user = "pbiecek", repo = "graphGallery", repoType = "github")
 setLocalRepo(repoDir = system.file("graphGallery", package = "archivist"))
 ```
 
-Saving to the default repository.
+Saving to the default local repository
 
 ```{r}
 setLocalRepo(repoDir = repo)
@@ -165,17 +105,14 @@ data(iris)
 saveToLocalRepo(iris)
 ```
 
-aoptions
 
 ```{r}
 aoptions("repoType", "github")
 ```
 
-# Section 3.2
+## Section 3.2 Artifact management
 
-Artifact management
-
-Saving an R object into a repository
+### Saving an R object into a repository
 
 ```{r}
 library("ggplot2")
@@ -184,19 +121,19 @@ pl <- qplot(Sepal.Length, Petal.Length, data = iris)
 saveToRepo(pl, repoDir = repo)
 
 showLocalRepo(repoDir = repo, "tags")
-
-# deleteLocalRepo(repo)
 ```
 
-Session info for this obejct.
+Session info for this object
 
 ```{r}
 asession("11127cc6ce69a89d11d0e30865a33c13")
 ```
 
-Serialization of an object creation event into repository
+### Serialization of an object creation event into repository
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
+library("archivist")
+createLocalRepo("arepo", default = TRUE)
 library("dplyr")
 iris %a%
    filter(Sepal.Length < 6) %a%
@@ -207,49 +144,52 @@ ahistory(tmp)
 ahistory(md5hash = "050e41ec3bc40b3004bc6bdd356acae7")
 ```
 
-Loading an object from repository, remote, local or in a package.
+### Loading an object from a repository
+
+Femote, local or in a package
 
 ```{r}
-pl2 <- loadFromRemoteRepo("f05f0ed0662fe01850ec1b928830ef32", repo="graphGallery", user="pbiecek", 
+loadFromRemoteRepo("7f3453331910e3f321ef97d87adb5bad", repo="graphGallery", user="pbiecek", 
                              value=TRUE)
-pl3 <- loadFromLocalRepo("f05f0ed", system.file("graphGallery", package = "archivist"), value=TRUE)
+loadFromLocalRepo("7f3453", system.file("graphGallery", package = "archivist"), value=TRUE)
 
-archivist::aread("pbiecek/graphGallery/f05f0ed0662fe01850ec1b928830ef32")
+archivist::aread("pbiecek/graphGallery/7f3453331910e3f321ef97d87adb5bad")
 
+library("archivist")
 setLocalRepo(system.file("graphGallery", package = "archivist"))
-
-pl3 <- loadFromLocalRepo("f05f0ed", value=TRUE)
-
+# loadFromLocalRepo("f05f0ed", value=TRUE)
 archivist::aread("f05f0ed")
 ```
 
 ```{r}
 setLocalRepo(system.file("graphGallery", package = "archivist"))
 model <- aread("2a6e492cb6982f230e48cf46023e2e4f")
+summary(model)
 digest::digest(model)
 ```
 
-Removal of an object from repository
+### Removal of an object from repository
 
 ```{r}
-rmFromLocalRepo("f05f0ed0662fe01850ec1b928830ef32", repoDir = repo)
+rmFromLocalRepo("7f3453331910e3f321ef97d87adb5bad", repoDir = repo)
 ```
 
 Remove all older than 30 days
 
 ```{r}
-obj2rm <- searchInLocalRepo(list(dateFrom = "2010-01-01", dateTo = Sys.Date()), repoDir = repo)
+(obj2rm <- searchInLocalRepo(list(dateFrom = "2010-01-01", dateTo = Sys.Date() - 30), repoDir = repo))
 
 rmFromLocalRepo(obj2rm, repoDir = repo, many = TRUE)
 ```
 
+## Section 3.3 Search for an artifact
 
-Search for an artifact
-Search in a local/GitHub repository
+### Search in a local/GitHub repository
 
 ```{r}
 searchInLocalRepo(pattern = "class:gg", 
     repoDir = system.file("graphGallery", package = "archivist"))
+
 
 searchInLocalRepo(pattern = list(dateFrom = "2016-01-01",
     dateTo = "2016-02-07" ), 
@@ -260,17 +200,78 @@ searchInLocalRepo(pattern=c("class:gg", "labelx:Sepal.Length"),
          repoDir = system.file("graphGallery", package = "archivist"))	
 ```
 
-Interactive search
+### Retrieval of a list of R objects with given tags
+
+```{r}
+setLocalRepo(system.file("graphGallery", package = "archivist"))
+models <- asearch(patterns = c("class:lm", "coefname:Sepal.Length"))
+
+models <- asearch("pbiecek/graphGallery",  
+    patterns = c("class:lm", "coefname:Sepal.Length"))
+lapply(models, coef)
+
+plots <- asearch(patterns = c("class:gg", "labelx:Sepal.Length"))
+length(plots)
+
+library("gridExtra")
+do.call(grid.arrange, plots)
+
+```
+
+### Interactive search
 
 ```{r, eval=FALSE}
 arepo <- system.file("graphGallery", package = "archivist")
-shinySearchInLocalRepo(arepo)
+#shinySearchInLocalRepo(arepo)
 ```
 
-Delete
+## Section 3.4 Extensions
+
+### Archivisation of all results of a specific function
 
 ```{r}
-deleteLocalRepo("arepo")
+library("archivist")
+createLocalRepo("allModels", default = TRUE)
+atrace("lm", "z")
+
+# in the article is only one call to lm()
+lm(Sepal.Length~Sepal.Width, data=iris)
+lm(Sepal.Length~Petal.Length, data=iris)
+lm(Sepal.Length~Petal.Length, data=iris)
+
+sapply(asearch("class:lm"), BIC)
+
+deleteLocalRepo("allModels")
+```
+
+### Integration with the knitr package
+
+Requires a knitr report to work
+
+```{r}
+# addHooksToPrint(class=c("ggplot", "data.frame"),
+#     repoDir = "arepo",
+#     repo = "Eseje", user = "pbiecek", subdir = "arepo")
+```
+
+### Gallery of artifacts in the repository
+
+Requires a GitHub repository to work
+
+```{r}
+# createMDGallery("arepo/readme.md",
+#     repo="Eseje", user = "pbiecek", subdir = "arepo",
+#     addMiniature = TRUE, addTags = TRUE)
+```
+
+### Restoring older versions of packages
+
+```{r}
+asession("pbiecek/graphGallery/arepo/600bda83cb840947976bd1ce3a11879d")
+
+# Be warned, this line will install al lot of packages in old versions
+# restoreLibs("pbiecek/graphGallery/arepo/600bda83cb840947976bd1ce3a11879d")
+# aread("pbiecek/graphGallery/arepo/600bda83cb840947976bd1ce3a11879d")
 ```
 
 
