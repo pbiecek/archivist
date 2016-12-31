@@ -86,7 +86,7 @@ saveToLocalRepo(iris, repoDir=exampleRepoDir, archiveSessionInfo = TRUE)
 showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
 showLocalRepo(method = "tags", repoDir = exampleRepoDir)
 
-loadFromLocalRepo(md5hash = 'f05f0ed0662fe01850ec1b928830ef32',
+loadFromLocalRepo(md5hash = '7f3453331910e3f321ef97d87adb5bad',
   repoDir = system.file("graphGallery", package = "archivist"), value = TRUE) -> pl
 deleteLocalRepo(exampleRepoDir, TRUE)
 rm(exampleRepoDir)
