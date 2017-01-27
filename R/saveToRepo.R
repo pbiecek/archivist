@@ -154,18 +154,24 @@
 #' @family archivist
 #' @rdname saveToRepo
 #' @export
-saveToLocalRepo <- function( artifact, repoDir = aoptions('repoDir'), archiveData = TRUE,
-                        archiveTags = TRUE,
-                        archiveMiniature = TRUE, 
-                        archiveSessionInfo = TRUE, 
-                        force = TRUE, 
-                        value = FALSE, ... , userTags = c(),
-                        silent=aoptions("silent"), ascii = FALSE,
-                        artifactName = deparse(substitute(artifact))) {
-  stopifnot(is.logical(c(archiveData, archiveTags, archiveMiniature, force,  value, silent, ascii, archiveSessionInfo)))
+saveToLocalRepo <- function(
+  artifact, 
+  repoDir = aoptions('repoDir'), 
+  archiveData = TRUE,
+  archiveTags = TRUE,
+  archiveMiniature = TRUE, 
+  archiveSessionInfo = TRUE, 
+  force = TRUE, 
+  value = FALSE, ... , userTags = c(),
+  silent=aoptions("silent"), ascii = FALSE,
+  artifactName = deparse(substitute(artifact))) {
+  
+  stopifnot(is.logical(c(archiveData, archiveTags, archiveMiniature, force,  
+                         value, silent, ascii, archiveSessionInfo)))
   stopifnot(is.character(repoDir) & length(repoDir) == 1 )
   stopifnot(is.null(artifactName) | is.character(artifactName))
-  stopifnot(length(archiveData) == 1, length(archiveTags) == 1, length(archiveMiniature) == 1,
+  stopifnot(length(archiveData) == 1, length(archiveTags) == 1, 
+            length(archiveMiniature) == 1,
             length(archiveSessionInfo) == 1, length(force) == 1, 
             length(value) == 1, length(ascii) == 1, length(artifactName) <= 1)
 
@@ -194,14 +200,18 @@ saveToLocalRepo <- function( artifact, repoDir = aoptions('repoDir'), archiveDat
   # add entry to database
    addArtifact( md5hash, name = artifactName, dir = repoDir )
 
-  # whether to add Tags
+  # whether to add regular Tags
   if ( archiveTags ) {
     extractedTags <- extractTags( artifact, objectNameX = artifactName )
-    derivedTags <- attr( artifact, "tags" )
-    sapply( c( extractedTags, userTags, derivedTags), addTag, md5hash = md5hash, dir = repoDir )
+    sapply( extractedTags, addTag, md5hash = md5hash, dir = repoDir )
     # attr( artifact, "tags" ) are Tags specified by a user
   }
-
+  # whether to add user Tags
+  if ( length(userTags) > 0 ) {
+    derivedTags <- attr( artifact, "tags" )
+    sapply( c( userTags, derivedTags), addTag, md5hash = md5hash, dir = repoDir )
+  }
+   
   # whether to archive session_info
   if ( archiveSessionInfo ){
     if (!requireNamespace("devtools", quietly = TRUE)) {

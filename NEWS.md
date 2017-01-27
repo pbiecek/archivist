@@ -1,3 +1,7 @@
+archivist 2.1.3
+----------------------------------------------------------------
+1. It is possible to archive tags specified by a user without defualt tags [[#309](https://github.com/pbiecek/archivist/issues/309)]
+
 archivist 2.1.2
 ----------------------------------------------------------------
 * GG-plots in the package's repository are now created with ggplot2 v2.2
