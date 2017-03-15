@@ -32,9 +32,14 @@ but has shorter name and different parameter's specification.
 }
 \note{
 Remember that if you want to use local repository you should set it to default.
-
-Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 }
+\section{Contact}{
+
+ 
+Bug reports and feature requests can be sent to 
+\href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+}
+
 \examples{
 \dontrun{
 ### default LOCAL version
@@ -113,9 +118,6 @@ asearch("pbiecek/graphGallery",
                      "labelx:Sepal.Length")) -> ggplots_objects_v2
 }
 }
-\author{
-Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
-}
 \seealso{
 Other archivist: \code{\link{Repository}},
   \code{\link{Tags}}, \code{\link{\%a\%}},
@@ -140,4 +142,6 @@ Other archivist: \code{\link{Repository}},
   \code{\link{summaryLocalRepo}},
   \code{\link{zipLocalRepo}}
 }
-
+\author{
+Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
+}

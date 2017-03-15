@@ -22,14 +22,19 @@ The extension works as follows, the result of \code{\%a\%} operator is archived 
 with lhs (as an artifact) and rhs (as a Tag). This allows to present a history of
 an artifact. This option works only if a default repository is set.
 }
-\note{
-Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+\section{Contact}{
+
+ 
+Bug reports and feature requests can be sent to 
+\href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 }
+
 \section{Demonstration}{
 
 
 This function is well explained on this \href{http://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github}{http://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github} blog post.
 }
+
 \examples{
 \dontrun{
 
@@ -91,4 +96,3 @@ Other archivist: \code{\link{Repository}},
   \code{\link{summaryLocalRepo}},
   \code{\link{zipLocalRepo}}
 }
-

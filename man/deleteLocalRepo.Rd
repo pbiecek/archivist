@@ -33,9 +33,14 @@ in which R works so calling \code{deleteLocalRepo(exampleRepoDir, deleteRoot=TRU
 removes important R files. You can find out more information about this problem at 
 \href{http://stackoverflow.com/questions/22325820/unlink-function-causing-an-error-for-consequent-and-plot-functions}{stackoverflow}
 webpage.
-
-Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 }
+\section{Contact}{
+
+ 
+Bug reports and feature requests can be sent to 
+\href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+}
+
 \examples{
 
 exampleRepoDir <- tempfile()
@@ -44,9 +49,6 @@ data(iris)
 saveToLocalRepo(iris)
 deleteLocalRepo( repoDir = exampleRepoDir, unset = TRUE, deleteRoot = TRUE)
 
-}
-\author{
-Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 }
 \seealso{
 Other archivist: \code{\link{Repository}},
@@ -95,4 +97,6 @@ Other archivist: \code{\link{Repository}},
   \code{\link{summaryLocalRepo}},
   \code{\link{zipLocalRepo}}
 }
-
+\author{
+Marcin Kosinski, \email{m.p.kosinski@gmail.com}
+}

@@ -71,9 +71,14 @@ You should remember while using \code{loadFromRepo} wrapper that \code{repoDir} 
 a parameter used only in \code{loadFromLocalRepo} while \code{repo}, \code{user},
 \code{branch} and \code{subdir} are used only in \code{loadFromRemoteRepo}. When you mix those
 parameters you will receive an error message.
-
-Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 }
+\section{Contact}{
+
+ 
+Bug reports and feature requests can be sent to 
+\href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+}
+
 \examples{
 
 \dontrun{
@@ -182,9 +187,6 @@ loadFromRemoteRepo(md5hash = "08dc0b66975cded92b5cd8291ebdc955",
                repoType = "bitbucket", value = TRUE)
 }
 }
-\author{
-Marcin Kosinski , \email{m.p.kosinski@gmail.com}
-}
 \seealso{
 Other archivist: \code{\link{Repository}},
   \code{\link{Tags}}, \code{\link{\%a\%}},
@@ -210,4 +212,6 @@ Other archivist: \code{\link{Repository}},
   \code{\link{summaryLocalRepo}},
   \code{\link{zipLocalRepo}}
 }
-
+\author{
+Marcin Kosinski , \email{m.p.kosinski@gmail.com}
+}

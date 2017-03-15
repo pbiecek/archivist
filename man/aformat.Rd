@@ -20,9 +20,13 @@ A vector of characters.
 \code{aformat} extracts artifact's formats. Having formats one may decide which should he read.
 Currently only rda format is supported for artifact and txt/png for miniatures.
 }
-\note{
-Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+\section{Contact}{
+
+ 
+Bug reports and feature requests can be sent to 
+\href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 }
+
 \examples{
 \dontrun{
 setLocalRepo(system.file("graphGallery", package = "archivist"))
@@ -33,9 +37,6 @@ aformat("pbiecek/graphGallery/2a6e492cb6982f230e48cf46023e2e4f")
 # png
 aformat("pbiecek/graphGallery/7f3453331910e3f321ef97d87adb5bad")
 }
-}
-\author{
-Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
 }
 \seealso{
 Other archivist: \code{\link{Repository}},
@@ -61,4 +62,6 @@ Other archivist: \code{\link{Repository}},
   \code{\link{summaryLocalRepo}},
   \code{\link{zipLocalRepo}}
 }
-
+\author{
+Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
+}

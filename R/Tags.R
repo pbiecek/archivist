@@ -202,7 +202,8 @@
 #'    \item \link{searchInRemoteRepo}. 
 #'  }
 #' 
-#' @note 
+#' @template roxlate-contact
+#' @note
 #' In the following way one can specify his own \code{Tags} for artifacts by 
 #' setting artifact's attribute before call of the \code{saveToLocalRepo} function: 
 #' \code{attr(x, "tags" ) = c( "name1", "name2" )}, where \code{x} is an artifact 
@@ -212,8 +213,6 @@
 #'    \item \code{saveToLocalRepo(model, repoDir, userTags = c("my_model", "do not delete"))}.
 #'  }
 #'  Specifing additional \code{Tags} by attributes can be beneficial when one uses \link{addHooksToPrint}.
-#' 
-#' Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 #' 
 #' @examples
 #' 

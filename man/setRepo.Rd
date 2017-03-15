@@ -60,9 +60,13 @@ in the following function calls:
 \link{copyRemoteRepo}
 parameters \code{user}, \code{repo}, \code{branch}, \code{subdir}  may be omitted.
 }
-\note{
-Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+\section{Contact}{
+
+ 
+Bug reports and feature requests can be sent to 
+\href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 }
+
 \examples{
 \dontrun{
 ## Local version
@@ -114,11 +118,6 @@ searchInRemoteRepo( pattern=c("varname:Sepal.Width", "class:lm", "name:myplot123
                          intersect = FALSE )
 }
 }
-\author{
-Marcin Kosinski , \email{m.p.kosinski@gmail.com}
-
-Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
-}
 \seealso{
 \href{https://github.com/pbiecek/archivist/wiki}{https://github.com/pbiecek/archivist/wiki}
 
@@ -168,4 +167,8 @@ Other archivist: \code{\link{Repository}},
   \code{\link{summaryLocalRepo}},
   \code{\link{zipLocalRepo}}
 }
+\author{
+Marcin Kosinski , \email{m.p.kosinski@gmail.com}
 
+Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
+}

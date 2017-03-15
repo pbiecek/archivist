@@ -42,6 +42,7 @@
 #' If the Repository is stored in the main folder on the remote repository, this should be set 
 #' to \code{FALSE} as default.
 #' 
+#' @template roxlate-contact
 #' @note
 #' If \code{repo} and \code{user} are set to \code{NULL} (as default) in remote mode then global parameters
 #' set in \link{setRemoteRepo} function are used. If one would like to copy whole Repository we suggest to 
@@ -50,8 +51,6 @@
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #'
-#' @note 
-#' Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 #'
 #' @examples
 #' \dontrun{

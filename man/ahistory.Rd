@@ -48,14 +48,20 @@ in \code{.Rmd} files using \link[rmarkdown]{rmarkdown}.
 Moreover when user passes \code{format = 'kable'} and \code{alink = TRUE} then one can use links for remote Repository. 
 Then mdhashes are taken from Local Repository, so user has to specify \code{repo}, \code{user} and \code{repoDir} even though 
 they are set globally, because \code{repo} is a substring of \code{repoDir} and during evalutation of \code{...} R treats \code{repo} as \code{repoDir}.
-
-Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 }
+\section{Contact}{
+
+ 
+Bug reports and feature requests can be sent to 
+\href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+}
+
 \section{Demonstration}{
 
  
 This function is well explained on this \href{http://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github}{http://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github} blog post.
 }
+
 \examples{
 
 createLocalRepo("ahistory_check", default = TRUE)
@@ -76,11 +82,6 @@ repoDir <- file.path(getwd(), "ahistory_check")
 deleteLocalRepo(repoDir, deleteRoot = TRUE)
 aoptions('repoDir', NULL, unset = TRUE)
 
-}
-\author{
-Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
-
-Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 }
 \seealso{
 Other archivist: \code{\link{Repository}},
@@ -106,4 +107,8 @@ Other archivist: \code{\link{Repository}},
   \code{\link{summaryLocalRepo}},
   \code{\link{zipLocalRepo}}
 }
+\author{
+Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
 
+Marcin Kosinski, \email{m.p.kosinski@gmail.com}
+}

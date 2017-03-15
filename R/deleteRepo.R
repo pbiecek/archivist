@@ -16,6 +16,7 @@
 #' 
 #' @param ... All arguments are being passed to \code{deleteLocalRepo}.
 #' 
+#' @template roxlate-contact
 #' @note
 #' Remember that using \code{tempfile()} instead of \code{tempdir()}
 #' in examples section is crucial. \code{tempdir()} is existing directory
@@ -24,7 +25,6 @@
 #' \href{http://stackoverflow.com/questions/22325820/unlink-function-causing-an-error-for-consequent-and-plot-functions}{stackoverflow}
 #' webpage.
 #' 
-#' Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 #' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}

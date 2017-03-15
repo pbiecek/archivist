@@ -17,6 +17,13 @@ atrace(FUN = "lm", object = "z")
 \details{
 Function \code{atrace} calls the \link{trace} function.
 }
+\section{Contact}{
+
+ 
+Bug reports and feature requests can be sent to 
+\href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+}
+
 \examples{
 # read the object from local directory
 createLocalRepo("arepo_test", default=TRUE)
@@ -24,9 +31,6 @@ atrace("lm", "z")
 lm(Sepal.Length~Sepal.Width, data=iris)
 asearch("class:lm")
 untrace("lm")
-}
-\author{
-Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
 }
 \seealso{
 Other archivist: \code{\link{Repository}},
@@ -52,4 +56,6 @@ Other archivist: \code{\link{Repository}},
   \code{\link{summaryLocalRepo}},
   \code{\link{zipLocalRepo}}
 }
-
+\author{
+Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
+}

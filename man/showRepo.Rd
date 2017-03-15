@@ -64,9 +64,14 @@ be obtained.
 \note{
 If \code{repo} and \code{user} are set to \code{NULL} (as default) in the Remote mode then global parameters
 set in \link{setRemoteRepo} (or via \link{aoptions}) function are used.
-
-Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 }
+\section{Contact}{
+
+ 
+Bug reports and feature requests can be sent to 
+\href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+}
+
 \examples{
 \dontrun{
 # objects preparation
@@ -108,9 +113,6 @@ aoptions('subdir')
 
 }
 }
-\author{
-Marcin Kosinski , \email{m.p.kosinski@gmail.com}
-}
 \seealso{
 Other archivist: \code{\link{Repository}},
   \code{\link{Tags}}, \code{\link{\%a\%}},
@@ -135,4 +137,6 @@ Other archivist: \code{\link{Repository}},
   \code{\link{summaryLocalRepo}},
   \code{\link{zipLocalRepo}}
 }
-
+\author{
+Marcin Kosinski , \email{m.p.kosinski@gmail.com}
+}

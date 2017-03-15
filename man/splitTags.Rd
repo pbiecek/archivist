@@ -63,9 +63,14 @@ in \code{saveToRepo} to specify a \code{Tag} which might not match
 
 To learn more about \code{Tags} and \code{Repository} structure check 
 \link{Tags} and \link{Repository}.
-
-Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 }
+\section{Contact}{
+
+ 
+Bug reports and feature requests can be sent to 
+\href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+}
+
 \examples{
 \dontrun{
 ## LOCAL VERSION 
@@ -83,9 +88,6 @@ head(splitTagsRemote( user = "pbiecek", repo = "archivist" )[,2:3])
 
 head(splitTagsRemote("PieczaraPietraszki", "BetaAndBit", "master", "UniwersytetDzieci/arepo"))
 }
-}
-\author{
-Witold Chodor , \email{witoldchodor@gmail.com}
 }
 \seealso{
 Other archivist: \code{\link{Repository}},
@@ -111,4 +113,6 @@ Other archivist: \code{\link{Repository}},
   \code{\link{summaryLocalRepo}},
   \code{\link{zipLocalRepo}}
 }
-
+\author{
+Witold Chodor , \email{witoldchodor@gmail.com}
+}

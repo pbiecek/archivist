@@ -42,11 +42,16 @@ An object of class \code{repository} which can be printed: \code{print(object)}.
 \note{
 If the same artifact was archived many times then it is counted as one artifact or database in \code{print(summaryRepo)}.
 
-Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
-  
 If \code{repo} and \code{user} are set to \code{NULL} (as default) in the Remote mode then global parameters
 set in \link{setRemoteRepo} function are used.
 }
+\section{Contact}{
+
+ 
+Bug reports and feature requests can be sent to 
+\href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+}
+
 \examples{
 \dontrun{
 
@@ -64,9 +69,6 @@ summaryRemoteRepo(user="MarcinKosinski", repo="Museum",
 branch="master", subdir="ex2" )
 
 }
-}
-\author{
-Marcin Kosinski , \email{m.p.kosinski@gmail.com}
 }
 \seealso{
 Other archivist: \code{\link{Repository}},
@@ -91,4 +93,6 @@ Other archivist: \code{\link{Repository}},
   \code{\link{showLocalRepo}},
   \code{\link{splitTagsLocal}}, \code{\link{zipLocalRepo}}
 }
-
+\author{
+Marcin Kosinski , \email{m.p.kosinski@gmail.com}
+}

@@ -36,9 +36,14 @@ The great example can be seen in this blogpost \href{http://www.r-bloggers.com/w
 \note{
 One can specify \code{userTags} as in \link{saveToLocalRepo} for artifacts by adding \code{"tags"} attribute.
 See note secion about that in \link{saveToLocalRepo}.
-
-Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 }
+\section{Contact}{
+
+ 
+Bug reports and feature requests can be sent to 
+\href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+}
+
 \examples{
 
 \dontrun{
@@ -49,9 +54,6 @@ repo="graphGallery", user="pbiecek")
 addHooksToPrint(class="ggplot", repoDir = "arepo",
 repo=NULL)
 }
-}
-\author{
-Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
 }
 \seealso{
 Other archivist: \code{\link{Repository}},
@@ -77,4 +79,6 @@ Other archivist: \code{\link{Repository}},
   \code{\link{summaryLocalRepo}},
   \code{\link{zipLocalRepo}}
 }
-
+\author{
+Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
+}

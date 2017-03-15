@@ -57,9 +57,14 @@ artifacts visit \link[archivist]{archivist-package}.
 \note{
 If \code{repo} and \code{user} are set to \code{NULL} (as default) in Remote mode then global parameters
 set in \link{setRemoteRepo} function are used.
-
-Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 }
+\section{Contact}{
+
+ 
+Bug reports and feature requests can be sent to 
+\href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+}
+
 \examples{
 
 ### Local version
@@ -133,9 +138,6 @@ getTagsRemote("ff575c261c949d073b2895b05d1097c3", user="MarcinKosinski",
                
 
 }
-\author{
-Marcin Kosinski, \email{m.p.kosinski@gmail.com}
-}
 \seealso{
 Other archivist: \code{\link{Repository}},
   \code{\link{Tags}}, \code{\link{\%a\%}},
@@ -185,4 +187,6 @@ Other archivist: \code{\link{Repository}},
   \code{\link{summaryLocalRepo}},
   \code{\link{zipLocalRepo}}
 }
-
+\author{
+Marcin Kosinski, \email{m.p.kosinski@gmail.com}
+}

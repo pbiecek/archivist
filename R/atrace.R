@@ -15,6 +15,8 @@
 #' @author 
 #' Przemyslaw Biecek, \email{przemyslaw.biecek@@gmail.com}
 #' 
+#' @template roxlate-contact
+#' 
 #' @examples
 #' # read the object from local directory
 #' createLocalRepo("arepo_test", default=TRUE)

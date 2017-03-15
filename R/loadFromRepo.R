@@ -27,6 +27,7 @@
 #' can be attributed to new names. Note that, when an abbreviation of \code{md5hash} was given then a list of artifacts corresponding to this
 #' abbreviation will be loaded.
 #' 
+#' @template roxlate-contact
 #' @note
 #' You can specify one \code{md5hash} (or its abbreviation) per function call. 
 #' 
@@ -37,8 +38,6 @@
 #' a parameter used only in \code{loadFromLocalRepo} while \code{repo}, \code{user},
 #' \code{branch} and \code{subdir} are used only in \code{loadFromRemoteRepo}. When you mix those
 #' parameters you will receive an error message.
-#' 
-#' Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 #' 
 #' @param repoType A character containing a type of the remote repository. Currently it can be 'Remote' or 'bitbucket'.
 #' 

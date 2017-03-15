@@ -42,11 +42,10 @@
 #' If the Repository is stored in main folder on the Remote repository, this should be set 
 #' to \code{subdir = "/"} as default.
 #' 
+#' @template roxlate-contact
 #' @note
 #' If \code{repo} and \code{user} are set to \code{NULL} (as default) in Remote mode then global parameters
 #' set in \link{setRemoteRepo} function are used.
-#' 
-#' Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 #' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}

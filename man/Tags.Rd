@@ -202,9 +202,14 @@ It can be also done in a new, simpler way by using \code{userTags} parameter lik
    \item \code{saveToLocalRepo(model, repoDir, userTags = c("my_model", "do not delete"))}.
  }
  Specifing additional \code{Tags} by attributes can be beneficial when one uses \link{addHooksToPrint}.
-
-Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 }
+\section{Contact}{
+
+ 
+Bug reports and feature requests can be sent to 
+\href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+}
+
 \examples{
 
 \dontrun{
@@ -420,4 +425,3 @@ Other archivist: \code{\link{Repository}},
   \code{\link{summaryLocalRepo}},
   \code{\link{zipLocalRepo}}
 }
-

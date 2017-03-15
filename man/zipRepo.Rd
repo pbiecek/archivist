@@ -54,9 +54,14 @@ To solve this problem follow these \href{https://CRAN.R-project.org/package=open
 
 If \code{repo} and \code{user} are set to \code{NULL} (as default) in Github mode then global parameters
 set in \link{setRemoteRepo} function are used.
-
-Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 }
+\section{Contact}{
+
+ 
+Bug reports and feature requests can be sent to 
+\href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+}
+
 \examples{
 # objects preparation
 \dontrun{
@@ -100,9 +105,6 @@ zipRemoteRepo( user="pbiecek", repo="archivist", repoTo = getwd( ) )
 
 }
 
-}
-\author{
-Marcin Kosinski, \email{m.p.kosinski@gmail.com}, Przemyslaw Biecek
 }
 \seealso{
 Other archivist: \code{\link{Repository}},
@@ -151,4 +153,6 @@ Other archivist: \code{\link{Repository}},
   \code{\link{splitTagsLocal}},
   \code{\link{summaryLocalRepo}}
 }
-
+\author{
+Marcin Kosinski, \email{m.p.kosinski@gmail.com}, Przemyslaw Biecek
+}

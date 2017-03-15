@@ -17,9 +17,13 @@ The \code{md5hash} of each artifact that is archived in the \link{Repository} is
 on the Repository along with the artifact's \code{Tags} - see \link{Tags}. It enables to distinguish
 artifacts in the Repository and facilitates searching and loading them.
 }
-\note{
-Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+\section{Contact}{
+
+ 
+Bug reports and feature requests can be sent to 
+\href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 }
+
 \seealso{
 Functions that take \code{md5hash} as a parameter are:
 \itemize{
@@ -72,4 +76,3 @@ Other archivist: \code{\link{Repository}},
   \code{\link{summaryLocalRepo}},
   \code{\link{zipLocalRepo}}
 }
-

@@ -37,9 +37,13 @@ Note that \code{cache} is a good solution if objects are not that big but calcul
 are time consuming (see \code{Examples}). If objects are big and calculations are easy, then
 disk input-output operations may take more time than calculations itself.
 }
-\note{
-Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+\section{Contact}{
+
+ 
+Bug reports and feature requests can be sent to 
+\href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 }
+
 \examples{
 
 # objects preparation
@@ -81,9 +85,6 @@ deleteLocalRepo( cacheRepo, TRUE)
 rm( cacheRepo )
 
 }
-\author{
-Przemyslaw Biecek, \email{Przemyslaw.Biecek@gmail.com}
-}
 \seealso{
 For more detailed information, check the \pkg{archivist} package 
 \href{https://github.com/pbiecek/archivist#-the-list-of-use-cases-}{Use Cases}.
@@ -111,4 +112,6 @@ Other archivist: \code{\link{Repository}},
   \code{\link{summaryLocalRepo}},
   \code{\link{zipLocalRepo}}
 }
-
+\author{
+Przemyslaw Biecek, \email{Przemyslaw.Biecek@gmail.com}
+}

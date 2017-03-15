@@ -29,18 +29,18 @@ Typical use case is following. We have saved an object and now we are restoring 
 with current version of packages something is not working. The function \code{restoreLibs()} 
 reverts all libraries that were attached previously to their previous versions.
 }
-\note{
-Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+\section{Contact}{
+
+ 
+Bug reports and feature requests can be sent to 
+\href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 }
+
 \examples{
 \dontrun{
 ## objects preparation
 restoreLibs(md5hash = "pbiecek/graphGallery/7f3453331910e3f321ef97d87adb5bad")
 }
-}
-\author{
-Marcin Kosinski, \email{m.p.kosinski@gmail.com} \\
-Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
 }
 \seealso{
 Other archivist: \code{\link{Repository}},
@@ -67,4 +67,7 @@ Other archivist: \code{\link{Repository}},
   \code{\link{summaryLocalRepo}},
   \code{\link{zipLocalRepo}}
 }
-
+\author{
+Marcin Kosinski, \email{m.p.kosinski@gmail.com} \\
+Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
+}

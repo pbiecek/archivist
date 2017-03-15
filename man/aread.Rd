@@ -25,9 +25,14 @@ with different parameter's specification.
 \note{
 Before you start using this function, remember to set local or Remote repository
 to default by using \code{setLocalRepo()} or \code{setRemoteRepo} functions.
-
-Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 }
+\section{Contact}{
+
+ 
+Bug reports and feature requests can be sent to 
+\href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+}
+
 \examples{
 # read the object from local directory
 setLocalRepo(system.file("graphGallery", package = "archivist"))
@@ -43,9 +48,6 @@ pl <- aread("pbiecek/graphGallery/7f3453331910e3f321ef97d87adb5bad")
 # as this is stated in asession("pbiecek/graphGallery/7f3453331910e3f321ef97d87adb5bad") .
 # The state of R libraries can be restored to the same state in
 # which 7f3453331910e3f321ef97d87adb5bad was created with the restoreLibs function.
-}
-\author{
-Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
 }
 \seealso{
 Other archivist: \code{\link{Repository}},
@@ -71,4 +73,6 @@ Other archivist: \code{\link{Repository}},
   \code{\link{summaryLocalRepo}},
   \code{\link{zipLocalRepo}}
 }
-
+\author{
+Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
+}

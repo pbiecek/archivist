@@ -38,12 +38,11 @@
 #'
 #' Markdown example: \url{https://github.com/pbiecek/archivist/issues/144#issuecomment-174192366}
 #'
+#' @template roxlate-contact
 #' @note
 #' If \code{repo} and \code{user} are set to \code{NULL} (as default) in the Remote mode then global parameters
 #' set in \link{setRemoteRepo} (or via \link{aoptions}) function are used.
 #' 
-#' Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
-#'
 #' @author
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #'

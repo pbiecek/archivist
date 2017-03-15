@@ -40,9 +40,14 @@ corresponding to \code{md5hashes}. To learn more about artifacts visit
 One should remember that \code{length(tags)} modulo \code{length(md5hashes)} 
 must be equal to 0 or \code{length(md5hashes)} modulo \code{length(tags)}
 must be equal to 0.
-
-Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 }
+\section{Contact}{
+
+ 
+Bug reports and feature requests can be sent to 
+\href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+}
+
 \examples{
 \dontrun{
 
@@ -91,10 +96,6 @@ rm(exampleRepoDir)
 }
 
 }
-\author{
-Marcin Kosinski, \email{m.p.kosinski@gmail.com}, 
-Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
-}
 \seealso{
 Other archivist: \code{\link{Repository}},
   \code{\link{Tags}}, \code{\link{\%a\%}},
@@ -119,4 +120,7 @@ Other archivist: \code{\link{Repository}},
   \code{\link{summaryLocalRepo}},
   \code{\link{zipLocalRepo}}
 }
-
+\author{
+Marcin Kosinski, \email{m.p.kosinski@gmail.com}, 
+Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
+}

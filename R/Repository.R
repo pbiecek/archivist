@@ -7,8 +7,7 @@
 #' various artifact's classes and artifacts themselves.
 #' To learn more about artifacts visit \link[archivist]{archivist-package}.
 #' 
-#' @note 
-#' Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+#' @template roxlate-contact
 #' 
 #' @details
 #' 

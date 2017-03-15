@@ -64,8 +64,8 @@
 #' \href{https://github.com/pbiecek/archivist/wiki/archivist-package---Tags}{Github Repository}.
 #'
 #'
-#' @note 
-#' Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+#' @template roxlate-contact
+#' @note
 #' 
 #' In the following way one can specify his own \code{Tags} for artifacts by setting artifact's attribute
 #' before call of the \code{saveToLocalRepo} function:

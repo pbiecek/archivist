@@ -41,8 +41,7 @@
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}, 
 #' Przemyslaw Biecek, \email{przemyslaw.biecek@@gmail.com}
 #'
-#' @note 
-#' Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+#' @template roxlate-contact
 #'
 #' @examples
 #' \dontrun{

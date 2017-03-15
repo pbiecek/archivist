@@ -31,7 +31,8 @@
 #'    \item \code{sapply(obj2rm, rmFromLocalRepo, repoDir = )}
 #' }
 #' 
-#' @note 
+#' @template roxlate-contact
+#' @note
 #' \code{md5hash} can be a result of the \link{searchInLocalRepo} function called
 #' by \code{tag = NAME} argument, where \code{NAME} is a Tag that describes
 #' the property of the artifacts to be deleted. 
@@ -70,8 +71,6 @@
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
 #' Witold Chodor , \email{witoldchodor@@gmail.com}
 #'
-#' @note 
-#' Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 #'
 #' @examples
 #' \dontrun{

@@ -18,8 +18,7 @@
 #' with lhs (as an artifact) and rhs (as a Tag). This allows to present a history of
 #' an artifact. This option works only if a default repository is set.
 #'
-#' @note 
-#' Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+#' @template roxlate-contact
 #'
 #' @section Demonstration:
 #' 

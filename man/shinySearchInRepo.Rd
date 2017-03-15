@@ -39,23 +39,25 @@ sort \code{class} tags backwards. \code{sort:createdDate} will sort \code{create
 \code{Tags}, submitted in the text field, should be given according to the 
 format: \code{"TagKey:TagValue"} - see examples.
 }
-\note{
-Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+\section{Contact}{
+
+ 
+Bug reports and feature requests can be sent to 
+\href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 }
+
 \section{shiny}{
 
 
 This function use tools from the fantastic \pkg{shiny}
 package, so you'll need to make sure to have it installed.
 }
+
 \examples{
 \dontrun{
   # assuming that there is a 'repo' dir with a valid archivist repository
   shinySearchInLocalRepo( repoDir = 'repo' )
 }
-}
-\author{
-Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
 }
 \seealso{
 Other archivist: \code{\link{Repository}},
@@ -80,4 +82,6 @@ Other archivist: \code{\link{Repository}},
   \code{\link{summaryLocalRepo}},
   \code{\link{zipLocalRepo}}
 }
-
+\author{
+Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
+}

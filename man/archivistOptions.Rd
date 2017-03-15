@@ -27,9 +27,13 @@ of \code{key} parameter for other \code{archivist} functions. The function
 \code{aoptions} with one parameter returns value (stored in an internal environment))
 of the given \code{key} parameter.
 }
-\note{
-Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+\section{Contact}{
+
+ 
+Bug reports and feature requests can be sent to 
+\href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 }
+
 \examples{
 \dontrun{
 # data.frame object
@@ -93,9 +97,6 @@ aoptions('subdir')
 }
 
 }
-\author{
-Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
-}
 \seealso{
 Other archivist: \code{\link{Repository}},
   \code{\link{Tags}}, \code{\link{\%a\%}},
@@ -120,4 +121,6 @@ Other archivist: \code{\link{Repository}},
   \code{\link{summaryLocalRepo}},
   \code{\link{zipLocalRepo}}
 }
-
+\author{
+Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
+}

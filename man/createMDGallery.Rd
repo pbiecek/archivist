@@ -45,9 +45,14 @@ To learn more about artifacts visit \link[archivist]{archivist-package}.
 \note{
 If \code{repo} and \code{user} are set to \code{NULL} (as default) in the Remote mode then global parameters
 set in \link{setRemoteRepo} (or via \link{aoptions}) function are used.
-
-Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 }
+\section{Contact}{
+
+ 
+Bug reports and feature requests can be sent to 
+\href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
+}
+
 \examples{
 \dontrun{
 
@@ -58,9 +63,6 @@ createMDGallery('graphGallery', 'pbiecek', addMiniature = TRUE,
 
 }
 
-}
-\author{
-Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 }
 \seealso{
 Markdown example: \url{https://github.com/pbiecek/archivist/issues/144#issuecomment-174192366}
@@ -88,4 +90,6 @@ Other archivist: \code{\link{Repository}},
   \code{\link{summaryLocalRepo}},
   \code{\link{zipLocalRepo}}
 }
-
+\author{
+Marcin Kosinski, \email{m.p.kosinski@gmail.com}
+}

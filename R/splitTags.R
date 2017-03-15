@@ -42,6 +42,7 @@
 #' A \code{data.frame} with 4 columns: \code{artifact}, \code{tagKey},
 #' \code{tagValue} and \code{createdDate}, corresponding to the current state of \link{Repository}.
 #' 
+#' @template roxlate-contact
 #' @note
 #' If \code{repo} and \code{user} are set to \code{NULL} (as default) in the Github mode
 #' then global parameters set in \link{setRemoteRepo} function are used.
@@ -53,8 +54,6 @@
 #' 
 #' To learn more about \code{Tags} and \code{Repository} structure check 
 #' \link{Tags} and \link{Repository}.
-#' 
-#' Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 #' 
 #' @author 
 #' Witold Chodor , \email{witoldchodor@@gmail.com}
