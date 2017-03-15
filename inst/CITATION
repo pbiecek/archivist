@@ -4,11 +4,13 @@ citEntry(entry = "Manual",
   title        = "{archivist}: An {R} Package for Managing, Recording and Restoring Data Analysis Results",
   author       = personList(as.person("Przemys{\\l}aw Biecek"),
                    as.person("Marcin Kosinski")),
-  year         = "2016",
+  year         = "2017",
   url          = "https://github.com/pbiecek/archivist",
+  journal      = {Journal of Statistical Software},
+  note         = {Conditionally accepted for publication}
 
   textVersion  =
-  paste("Przemyslaw Biecek, Marcin Kosinski (2016).",
+  paste("Przemyslaw Biecek, Marcin Kosinski (2017).",
         "archivist: An R Package for Managing, Recording and Restoring Data Analysis Results",
         "URL https://github.com/pbiecek/archivist")
 )
