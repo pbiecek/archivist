@@ -1,0 +1,122 @@
+---
+title: "Accessibility"
+output: html_document
+---
+
+The archivist package allows to store, restore and look for R objects in repositories stored on hard disk or remote repository. There are different strategies that can be used to find an object, through it's name, date of creation of meta data. The package is mainly designed as a repository of artifacts, but it can be used in different use-cases.
+
+
+Open science rises new challenges, one of them is reproducibility yet another is availability of results.
+
+When working with data scientists should not only be able to reproduce others results 
+but also would like to make sure that they got 100% the same that others.
+
+Archivist helps in the accessibility part of open science.
+One can store partial results, search in repository of artifact, 
+share artifacts with others or himself.
+
+Below we are using some artifacts created during useR!2014 tutorial about dplyr given by Hadley Wickham.
+
+These artifacts are stored on my github repository.
+One can seek for all ggplots, plot them with their md5hashes,
+and choose the one that it's looked for
+.
+
+
+
+```{r, eval=FALSE}
+library(archivist)
+library(ggplot2)
+# objects of class ggplot for which the session_info was archvied
+md5plots <- searchInRemoteRepo(
+	pattern = c("class:ggplot", "session_info"), 
+	intersect = TRUE, repo = "graphGallery", 
+	user = "pbiecek", fixed = FALSE
+	)
+
+plots <- lapply(md5plots, function(pl) {
+	loadFromRemoteRepo(
+		md5hash = pl, 
+		repo = "graphGallery",
+		user = "pbiecek",
+		value = TRUE
+		) + 
+		ggtitle(pl)
+})
+	  
+library(gridExtra)
+do.call(
+	"grid.arrange",
+	c(plots, ncol=round(sqrt(length(md5plots))))
+	)
+```
+
+<img src="/archivist/figure/source/Accessibility/unnamed-chunk-2-1.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" style="display: block; margin: auto;" />
+
+```{r, eval=FALSE}
+summaryRemoteRepo(
+	repo = "graphGallery",
+	user = "pbiecek"
+	)
+```
+
+
+
+```{r, eval=FALSE}
+Number of archived artifacts in Repository:  53 
+Number of archived datasets in Repository:  24 
+Number of various classes archived in Repository: 
+              Number
+ggplot            6
+tbl_df            3
+grouped_df        3
+area              1
+proto             1
+lm                9
+numeric           2
+list              3
+summary.lm        4
+data.frame       16
+matrix            1
+igraph            1
+communities       1
+character         1
+table             1
+intsvy.mean       2
+intsvy.table      2
+intsvy.reg        1
+gg                2
+Saves per day in Repository: 
+            Saves
+2014-08-21     4
+2014-09-03    11
+2015-06-22     4
+2015-06-24    16
+2015-06-25    17
+2015-06-27     1
+2015-06-28     4
+2015-06-29     4
+2015-06-30     4
+2015-07-01     4
+2015-07-09     4
+2015-07-10     5
+2015-07-15     1
+2015-07-16     3
+2015-07-20     2
+2015-08-12     3
+2015-08-25     3
+2015-08-29     1
+2015-09-12     4
+2015-09-14     4
+2015-09-20     2
+2015-09-22     1
+2015-10-08     2
+2015-10-12     1
+2015-11-15     3
+2015-11-27     4
+2015-11-30    11
+2016-02-07     2
+2016-02-09     3
+2016-03-04     4
+```
+

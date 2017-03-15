@@ -22,3 +22,8 @@ _cache
 ^\.httr-oauth$
 Archivist_my_tests
 devel
+vignettes/posts.Rmd
+vignettes/caching.Rmd
+vignettes/accessibility.Rmd
+vignettes/chaining.Rmd
+vignettes/extensions.Rmd
