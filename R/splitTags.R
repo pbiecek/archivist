@@ -42,6 +42,7 @@
 #' A \code{data.frame} with 4 columns: \code{artifact}, \code{tagKey},
 #' \code{tagValue} and \code{createdDate}, corresponding to the current state of \link{Repository}.
 #' 
+#' @template roxlate-references
 #' @template roxlate-contact
 #' @note
 #' If \code{repo} and \code{user} are set to \code{NULL} (as default) in the Github mode

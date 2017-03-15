@@ -70,6 +70,11 @@ branch="master", subdir="ex2" )
 
 }
 }
+\references{
+Przemyslaw Biecek, Marcin Kosinski (2017). 
+archivist: An R Package for Managing, Recording and Restoring Data Analysis Results 
+URL https://github.com/pbiecek/archivist
+}
 \seealso{
 Other archivist: \code{\link{Repository}},
   \code{\link{Tags}}, \code{\link{\%a\%}},

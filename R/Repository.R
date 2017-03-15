@@ -7,6 +7,7 @@
 #' various artifact's classes and artifacts themselves.
 #' To learn more about artifacts visit \link[archivist]{archivist-package}.
 #' 
+#' @template roxlate-references
 #' @template roxlate-contact
 #' 
 #' @details

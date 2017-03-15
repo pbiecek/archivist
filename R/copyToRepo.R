@@ -42,6 +42,7 @@
 #' If the Repository is stored in the main folder on the remote repository, this should be set 
 #' to \code{FALSE} as default.
 #' 
+#' @template roxlate-references
 #' @template roxlate-contact
 #' @note
 #' If \code{repo} and \code{user} are set to \code{NULL} (as default) in remote mode then global parameters

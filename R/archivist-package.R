@@ -30,6 +30,7 @@
 #' For more detailed information visit \pkg{archivist} \code{wiki} on 
 #' \href{https://github.com/pbiecek/archivist/wiki}{Github}.
 #'
+#' @template roxlate-references
 #' @template roxlate-contact
 #'
 #' @section Blogging:

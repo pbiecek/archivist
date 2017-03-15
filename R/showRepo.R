@@ -52,7 +52,7 @@
 #' 
 #' To learn more about \code{Tags} or \code{md5hashes} check: \link{Tags} or \link{md5hash}.
 #' 
-#' 
+#' @template roxlate-references
 #' @template roxlate-contact
 #' @note
 #' If \code{repo} and \code{user} are set to \code{NULL} (as default) in the Remote mode then global parameters

@@ -64,6 +64,11 @@ createMDGallery('graphGallery', 'pbiecek', addMiniature = TRUE,
 }
 
 }
+\references{
+Przemyslaw Biecek, Marcin Kosinski (2017). 
+archivist: An R Package for Managing, Recording and Restoring Data Analysis Results 
+URL https://github.com/pbiecek/archivist
+}
 \seealso{
 Markdown example: \url{https://github.com/pbiecek/archivist/issues/144#issuecomment-174192366}
 

@@ -169,6 +169,11 @@ deleteLocalRepo(exampleRepoDir, TRUE)
 rm(exampleRepoDir)
 
 }
+\references{
+Przemyslaw Biecek, Marcin Kosinski (2017). 
+archivist: An R Package for Managing, Recording and Restoring Data Analysis Results 
+URL https://github.com/pbiecek/archivist
+}
 \seealso{
 For more detailed information check the \pkg{archivist} package
 \href{http://pbiecek.github.io/archivist/}{Use Cases}.

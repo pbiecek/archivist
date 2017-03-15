@@ -16,6 +16,7 @@
 #' 
 #' @param ... All arguments are being passed to \code{deleteLocalRepo}.
 #' 
+#' @template roxlate-references
 #' @template roxlate-contact
 #' @note
 #' Remember that using \code{tempfile()} instead of \code{tempdir()}

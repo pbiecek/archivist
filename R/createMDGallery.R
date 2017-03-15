@@ -38,6 +38,7 @@
 #'
 #' Markdown example: \url{https://github.com/pbiecek/archivist/issues/144#issuecomment-174192366}
 #'
+#' @template roxlate-references
 #' @template roxlate-contact
 #' @note
 #' If \code{repo} and \code{user} are set to \code{NULL} (as default) in the Remote mode then global parameters

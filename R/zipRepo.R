@@ -6,7 +6,7 @@
 #' existing \link{Repository}. \code{zipLocalRepo} zips local \code{Repository},
 #' \code{zipRemoteRepo} zips \code{Repository} stored on Github.
 #' 
-#' 
+#' @template roxlate-references
 #' @template roxlate-contact
 #' @note
 #' The function might not work if \code{Rtools} are not installed.

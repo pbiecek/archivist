@@ -202,6 +202,7 @@
 #'    \item \link{searchInRemoteRepo}. 
 #'  }
 #' 
+#' @template roxlate-references
 #' @template roxlate-contact
 #' @note
 #' In the following way one can specify his own \code{Tags} for artifacts by 

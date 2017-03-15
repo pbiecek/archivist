@@ -118,6 +118,11 @@ searchInRemoteRepo( pattern=c("varname:Sepal.Width", "class:lm", "name:myplot123
                          intersect = FALSE )
 }
 }
+\references{
+Przemyslaw Biecek, Marcin Kosinski (2017). 
+archivist: An R Package for Managing, Recording and Restoring Data Analysis Results 
+URL https://github.com/pbiecek/archivist
+}
 \seealso{
 \href{https://github.com/pbiecek/archivist/wiki}{https://github.com/pbiecek/archivist/wiki}
 

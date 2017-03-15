@@ -31,6 +31,7 @@
 #'    \item \code{sapply(obj2rm, rmFromLocalRepo, repoDir = )}
 #' }
 #' 
+#' @template roxlate-references
 #' @template roxlate-contact
 #' @note
 #' \code{md5hash} can be a result of the \link{searchInLocalRepo} function called

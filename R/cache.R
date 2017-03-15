@@ -39,6 +39,7 @@
 #' @author 
 #' Przemyslaw Biecek, \email{Przemyslaw.Biecek@@gmail.com}
 #'
+#' @template roxlate-references
 #' @template roxlate-contact
 #'
 #' @examples

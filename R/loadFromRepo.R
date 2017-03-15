@@ -27,6 +27,7 @@
 #' can be attributed to new names. Note that, when an abbreviation of \code{md5hash} was given then a list of artifacts corresponding to this
 #' abbreviation will be loaded.
 #' 
+#' @template roxlate-references
 #' @template roxlate-contact
 #' @note
 #' You can specify one \code{md5hash} (or its abbreviation) per function call. 

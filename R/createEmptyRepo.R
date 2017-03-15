@@ -42,6 +42,7 @@
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #'
+#' @template roxlate-references
 #' @template roxlate-contact
 #'
 #' @examples

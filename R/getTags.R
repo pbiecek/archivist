@@ -42,6 +42,7 @@
 #' If the Repository is stored in main folder on the Remote repository, this should be set 
 #' to \code{subdir = "/"} as default.
 #' 
+#' @template roxlate-references
 #' @template roxlate-contact
 #' @note
 #' If \code{repo} and \code{user} are set to \code{NULL} (as default) in Remote mode then global parameters

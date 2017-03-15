@@ -38,6 +38,11 @@ asession("pbiecek/graphGallery/2a6e492cb6982f230e48cf46023e2e4f")
 asession("pbiecek/graphGallery/7f3453331910e3f321ef97d87adb5bad")
 }
 }
+\references{
+Przemyslaw Biecek, Marcin Kosinski (2017). 
+archivist: An R Package for Managing, Recording and Restoring Data Analysis Results 
+URL https://github.com/pbiecek/archivist
+}
 \seealso{
 Other archivist: \code{\link{Repository}},
   \code{\link{Tags}}, \code{\link{\%a\%}},

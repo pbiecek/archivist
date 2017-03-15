@@ -28,6 +28,7 @@
 #'
 #' @return An object of class \code{repository} which can be printed: \code{print(object)}.
 #' 
+#' @template roxlate-references
 #' @template roxlate-contact
 #' @note
 #' If the same artifact was archived many times then it is counted as one artifact or database in \code{print(summaryRepo)}.

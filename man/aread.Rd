@@ -49,6 +49,11 @@ pl <- aread("pbiecek/graphGallery/7f3453331910e3f321ef97d87adb5bad")
 # The state of R libraries can be restored to the same state in
 # which 7f3453331910e3f321ef97d87adb5bad was created with the restoreLibs function.
 }
+\references{
+Przemyslaw Biecek, Marcin Kosinski (2017). 
+archivist: An R Package for Managing, Recording and Restoring Data Analysis Results 
+URL https://github.com/pbiecek/archivist
+}
 \seealso{
 Other archivist: \code{\link{Repository}},
   \code{\link{Tags}}, \code{\link{\%a\%}},

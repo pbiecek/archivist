@@ -59,6 +59,11 @@ package, so you'll need to make sure to have it installed.
   shinySearchInLocalRepo( repoDir = 'repo' )
 }
 }
+\references{
+Przemyslaw Biecek, Marcin Kosinski (2017). 
+archivist: An R Package for Managing, Recording and Restoring Data Analysis Results 
+URL https://github.com/pbiecek/archivist
+}
 \seealso{
 Other archivist: \code{\link{Repository}},
   \code{\link{Tags}}, \code{\link{\%a\%}},

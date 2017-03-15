@@ -24,6 +24,7 @@
 #' @author 
 #' Przemyslaw Biecek, \email{przemyslaw.biecek@@gmail.com}
 #' 
+#' @template roxlate-references
 #' @template roxlate-contact
 #' 
 #' @examples

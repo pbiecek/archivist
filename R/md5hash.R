@@ -16,6 +16,7 @@
 #' on the Repository along with the artifact's \code{Tags} - see \link{Tags}. It enables to distinguish
 #' artifacts in the Repository and facilitates searching and loading them.
 #' 
+#' @template roxlate-references
 #' @template roxlate-contact
 #' 
 #' @seealso 

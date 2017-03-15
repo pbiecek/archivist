@@ -23,6 +23,7 @@
 #' @author 
 #' Przemyslaw Biecek, \email{przemyslaw.biecek@@gmail.com}
 #'  
+#' @template roxlate-references
 #' @template roxlate-contact
 #' @note
 #' One can specify \code{userTags} as in \link{saveToLocalRepo} for artifacts by adding \code{"tags"} attribute.

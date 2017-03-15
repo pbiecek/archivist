@@ -85,6 +85,11 @@ deleteLocalRepo( cacheRepo, TRUE)
 rm( cacheRepo )
 
 }
+\references{
+Przemyslaw Biecek, Marcin Kosinski (2017). 
+archivist: An R Package for Managing, Recording and Restoring Data Analysis Results 
+URL https://github.com/pbiecek/archivist
+}
 \seealso{
 For more detailed information, check the \pkg{archivist} package 
 \href{https://github.com/pbiecek/archivist#-the-list-of-use-cases-}{Use Cases}.

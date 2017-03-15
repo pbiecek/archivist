@@ -63,7 +63,7 @@
 #' The list of supported artifacts and their tags is available on \code{wiki} on \pkg{archivist}
 #' \href{https://github.com/pbiecek/archivist/wiki/archivist-package---Tags}{Github Repository}.
 #'
-#'
+#' @template roxlate-references
 #' @template roxlate-contact
 #' @note
 #' 
