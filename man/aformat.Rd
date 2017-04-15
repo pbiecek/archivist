@@ -41,6 +41,7 @@ aformat("pbiecek/graphGallery/7f3453331910e3f321ef97d87adb5bad")
 \references{
 Przemyslaw Biecek, Marcin Kosinski (2017). 
 archivist: An R Package for Managing, Recording and Restoring Data Analysis Results 
+Conditionally accepted for Journal of Statistical Software
 URL https://github.com/pbiecek/archivist
 }
 \seealso{
