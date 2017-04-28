@@ -1,3 +1,9 @@
+%\VignetteIndexEntry{R packages: archivist}
+%\VignetteEngine{R.rsp::tex}
+%\VignetteKeyword{archivsit}
+%\VignetteKeyword{package}
+%\VignetteKeyword{vignette}
+%\VignetteKeyword{LaTeX}
 \documentclass[nojss]{jss} 
 
 \usepackage[utf8]{inputenc}
