@@ -2,6 +2,10 @@
 title: "Chaining"
 output: html_document
 ---
+<!--
+%\VignetteEngine{knitr::rmarkdown}
+%\VignetteIndexEntry{Chaining}
+-->
 
 
 The **archivist** package is very efficient and advantageous when archived artifacts were created with a chaining code offered by the [magrittr](http://cran.r-project.org/web/packages/magrittr/index.html) package. It is higly useful because the origin of the artifact is archived, which means that the artifact can be easly reproduced and it's origin code is stored for future use. 

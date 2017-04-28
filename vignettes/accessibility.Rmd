@@ -2,6 +2,10 @@
 title: "Accessibility"
 output: html_document
 ---
+<!--
+%\VignetteEngine{knitr::rmarkdown}
+%\VignetteIndexEntry{Accessibility}
+-->
 
 The archivist package allows to store, restore and look for R objects in repositories stored on hard disk or remote repository. There are different strategies that can be used to find an object, through it's name, date of creation of meta data. The package is mainly designed as a repository of artifacts, but it can be used in different use-cases.
 
@@ -51,7 +55,6 @@ do.call(
 	)
 ```
 
-<img src="/archivist/figure/source/Accessibility/unnamed-chunk-2-1.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" style="display: block; margin: auto;" />
 
 ```{r, eval=FALSE}
 summaryRemoteRepo(

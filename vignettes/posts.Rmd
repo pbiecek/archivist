@@ -2,6 +2,11 @@
 title: "Posts"
 output: html_document
 ---
+<!--
+%\VignetteEngine{knitr::rmarkdown}
+%\VignetteIndexEntry{Posts}
+%\VignetteEncoding{UTF-8}
+-->
 
 ###  The list of blog-posts and conference talks about `archivist`
 
