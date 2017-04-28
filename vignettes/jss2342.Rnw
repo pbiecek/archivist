@@ -38,7 +38,7 @@ The presented \pkg{archivist} package extends, in a combination with packages su
 }
 \Keywords{recordable research, reproducible research, data analysis management, data governance, meta-data, results management}
 
-<<warning=FALSE,results='hide', echo=FALSE>>=
+<<warning=FALSE,results=hide, echo=FALSE>>=
 options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE)
 @
 

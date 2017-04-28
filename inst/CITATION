@@ -6,8 +6,8 @@ citEntry(entry = "Manual",
                    as.person("Marcin Kosinski")),
   year         = "2017",
   url          = "https://github.com/pbiecek/archivist",
-  journal      = {Journal of Statistical Software},
-  note         = {Conditionally accepted for publication}
+  journal      = "Journal of Statistical Software",
+  note         = "Conditionally accepted for publication",
 
   textVersion  =
   paste("Przemyslaw Biecek, Marcin Kosinski (2017).",
