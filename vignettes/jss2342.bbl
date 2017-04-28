@@ -1,0 +1,139 @@
+\begin{thebibliography}{18}
+\newcommand{\enquote}[1]{``#1''}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem[{Auguie(2015)}]{gridExtra}
+Auguie B (2015).
+\newblock \emph{\pkg{gridExtra}: Miscellaneous Functions for "Grid" Graphics}.
+\newblock \proglang{R} package version 2.0.0,
+  \urlprefix\url{http://CRAN.R-project.org/package=gridExtra}.
+
+\bibitem[{Bache and Wickham(2014)}]{magrittr}
+Bache SM, Wickham H (2014).
+\newblock \emph{\pkg{magrittr}: A Forward-Pipe Operator for \proglang{R}}.
+\newblock \proglang{R} package version 1.5,
+  \urlprefix\url{http://CRAN.R-project.org/package=magrittr}.
+
+\bibitem[{Becker and Chambers(1988)}]{Auditing}
+Becker RA, Chambers JM (1988).
+\newblock \enquote{Auditing of Data Analyses.}
+\newblock \emph{SIAM Journal on Scientific and Statistical Computing},
+  \textbf{9}(4), 747--760.
+\newblock \urlprefix\url{http://epubs.siam.org/doi/ref/10.1137/0909049}.
+
+\bibitem[{Chambers(2016)}]{Chambers2016}
+Chambers JM (2016).
+\newblock \emph{Extending R}.
+\newblock Chapman and Hall/CRC.
+\newblock ISBN 978-1498775717.
+
+\bibitem[{Chang \emph{et~al.}(2015)Chang, Cheng, Allaire, Xie, and
+  McPherson}]{shiny}
+Chang W, Cheng J, Allaire J, Xie Y, McPherson J (2015).
+\newblock \emph{\pkg{shiny}: Web Application Framework for \proglang{R}}.
+\newblock \proglang{R} package version 0.12.1,
+  \urlprefix\url{http://CRAN.R-project.org/package=shiny}.
+
+\bibitem[{Dirk~Eddelbuettel \emph{et~al.}(2014)Dirk~Eddelbuettel, Tuszynski,
+  Bengtsson, Urbanek, Frasca, Lewis, Stokely, Muehleisen, Murdoch, Hester, and
+  Wu.}]{digest}
+Dirk~Eddelbuettel {with contributions by} AL, Tuszynski J, Bengtsson H, Urbanek
+  S, Frasca M, Lewis B, Stokely M, Muehleisen H, Murdoch D, Hester J, Wu W
+  (2014).
+\newblock \emph{\pkg{digest}: Create Cryptographic Hash Digests of \proglang{R}
+  Objects}.
+\newblock \proglang{R} package version 0.6.8,
+  \urlprefix\url{http://CRAN.R-project.org/package=digest}.
+
+\bibitem[{Drummond(2009)}]{Replicability}
+Drummond C (2009).
+\newblock \enquote{Replicability is not Reproducibility: Nor is it Good
+  Science.}
+\newblock \emph{ICML}.
+\newblock \urlprefix\url{http://cogprints.org/7691/7/ICMLws09.pdf}.
+
+\bibitem[{Koenker and Zeileis(2009)}]{Koenker}
+Koenker R, Zeileis A (2009).
+\newblock \enquote{On Reproducible Econometric Research.}
+\newblock \emph{J. Appl. Econ.}, \textbf{24}, 833–847.
+\newblock \urlprefix\url{http://biostats.bepress.com/uwbiostat/paper194}.
+
+\bibitem[{Kosinski and Biecek(2016)}]{archivist.github}
+Kosinski M, Biecek P (2016).
+\newblock \emph{\pkg{archivist.github}: Tools for Archiving, Managing and
+  Sharing R Objects via GitHub}.
+\newblock \proglang{R} package version 0.2.1,
+  \urlprefix\url{https://CRAN.R-project.org/package=archivist.github}.
+
+\bibitem[{Leisch(2002)}]{Sweave}
+Leisch F (2002).
+\newblock \enquote{Dynamic Generation of Statistical Reports Using Literate
+  Data Analysis.}
+\newblock \emph{Compstat 2002 - Proceedings in Computational Statistics}, pp.
+  575--580.
+
+\bibitem[{OECD(2015)}]{statlink}
+OECD (2015).
+\newblock \emph{StatLink}.
+\newblock The Organisation for Economic Co-operation and Development.
+\newblock \urlprefix\url{http://www.oecd.org/statistics/statlink}.
+
+\bibitem[{Peng(2009)}]{Peng01072009}
+Peng R (2009).
+\newblock \enquote{Reproducible Research and Biostatistics.}
+\newblock \emph{Biostatistics}, \textbf{10}(3), 405--408.
+\newblock
+  \urlprefix\url{http://biostatistics.oxfordjournals.org/content/10/3/405.short}.
+
+\bibitem[{Rossini and Leisch(2003)}]{Sweave2}
+Rossini A, Leisch F (2003).
+\newblock \enquote{Literate Statistical Practice.}
+\newblock \emph{Working Paper 194}.
+\newblock \urlprefix\url{http://biostats.bepress.com/uwbiostat/paper194}.
+
+\bibitem[{Sculley \emph{et~al.}(2014)Sculley, Holt, Golovin, Davydov, Phillips,
+  Ebner, Chaudhary, and Young}]{TechnicalDebt}
+Sculley D, Holt G, Golovin D, Davydov E, Phillips T, Ebner D, Chaudhary V,
+  Young M (2014).
+\newblock \enquote{Machine Learning: The High Interest Credit Card of Technical
+  Debt.}
+\newblock In \emph{SE4ML: Software Engineering for Machine Learning (NIPS 2014
+  Workshop)}.
+\newblock
+  \urlprefix\url{http://static.googleusercontent.com/media/research.google.com/en//pubs/archive/43146.pdf}.
+
+\bibitem[{Wickham(2009)}]{ggplot2}
+Wickham H (2009).
+\newblock \emph{\pkg{ggplot2}: Elegant Graphics for Data Analysis}.
+\newblock Springer-Verlag New York.
+\newblock ISBN 978-0-387-98140-6.
+\newblock \urlprefix\url{http://had.co.nz/ggplot2/book}.
+
+\bibitem[{Wickham and Francois(2015)}]{dplyr}
+Wickham H, Francois R (2015).
+\newblock \emph{\pkg{dplyr}: A Grammar of Data Manipulation}.
+\newblock \proglang{R} package version 0.4.2,
+  \urlprefix\url{http://CRAN.R-project.org/package=dplyr}.
+
+\bibitem[{Xie(2013)}]{knitr2}
+Xie Y (2013).
+\newblock \emph{Dynamic Documents with \proglang{R} and \pkg{knitr}}.
+\newblock Chapman and Hall/CRC.
+\newblock ISBN 978-1482203530.
+
+\bibitem[{Xie(2015)}]{knitr}
+Xie Y (2015).
+\newblock \emph{\pkg{knitr}: A General-Purpose Package for Dynamic Report
+  Generation in \proglang{R}}.
+\newblock CRAN.
+\newblock \proglang{R} package version 1.10.5,
+  \urlprefix\url{http://cran.r-project.org/package=knitr}.
+
+\end{thebibliography}

@@ -1,4 +1,54 @@
-\documentclass[nojss]{jss} 
+\documentclass[nojss]{jss}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt} 
 
 \usepackage[utf8]{inputenc}
 \usepackage{color}
@@ -70,7 +120,7 @@ E-mail: \email{M.P.Kosinski@gmail.com}
 %% need no \usepackage{Sweave.sty}
 
 %% end of declarations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
 
 %% include your article here, just as usual
@@ -137,14 +187,36 @@ An example report that illustrates this use-case is available at \texttt{http://
 
 \item A team of data scientists is working for some time on a forecasting model. During a certain period of time a large set of competing models is created. The team needs a tool that stores all models with additional metadata, such as model performance, information which data was used for model training and testing. The \pkg{archivist} creates a shared repository which can be used for storing models along with their meta-data and provides API for searching objects with specific meta-data. The example below reads all objects of the class \code{lm}, calculates a BIC score for them and sorts objects with respect to these scores.
 
-<<warning=FALSE,results='hide'>>=
-library("archivist")
-@
-<<>>=
-models <- asearch("pbiecek/graphGallery", patterns = "class:lm")
-modelsBIC <- sapply(models, BIC)
-sort(modelsBIC)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hlstd{(}\hlstr{"archivist"}\hlstd{)}
+\end{alltt}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Welcome to archivist (version: 2.1.2).}}\end{kframe}
+\end{knitrout}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{models} \hlkwb{<-} \hlkwd{asearch}\hlstd{(}\hlstr{"pbiecek/graphGallery"}\hlstd{,} \hlkwc{patterns} \hlstd{=} \hlstr{"class:lm"}\hlstd{)}
+\hlstd{modelsBIC} \hlkwb{<-} \hlkwd{sapply}\hlstd{(models, BIC)}
+\hlkwd{sort}\hlstd{(modelsBIC)}
+\end{alltt}
+\begin{verbatim}
+## 990861c7c27812ee959f10e5f76fe2c3 2a6e492cb6982f230e48cf46023e2e4f 
+##                         39.05577                         67.52735 
+## 0a82efeb8250a47718cea9d7f64e5ae7 378237103bb60c58600fe69bed6c7f11 
+##                        189.73593                        189.73593 
+## 7f11e03539d48d35f7e7fe7780527ba7 c1b1ef7bcddefb181f79176015bc3931 
+##                        189.73593                        189.73593 
+## 0e213ac68a45b6cd454d06b91f991bc7 e58d2f9d50b67ce4d397bf015ec1259c 
+##                        243.49450                        243.49450 
+## 18a98048f0584469483afb65294ce3ed 
+##                        396.16690
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
 \item Results are generated in a remote \proglang{R} process, like for example with a Shiny application. The \pkg{archivist} saves created \proglang{R} artifacts in an URL repository. 
 
@@ -268,20 +340,28 @@ The \code{createLocalRepo} function creates a new local repository. The \code{re
 The directory may be specified either by global path or local path. {The example below will create a repository named \code{arepo} in the current working directory.}
 
 % R> repo <- "/Users/pbiecek/GitHub/new_repo"
-<<>>=
-repo <- "arepo"
-createLocalRepo(repoDir = repo, default = TRUE)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{repo} \hlkwb{<-} \hlstr{"arepo"}
+\hlkwd{createLocalRepo}\hlstd{(}\hlkwc{repoDir} \hlstd{= repo,} \hlkwc{default} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 
 
 \subsubsection{Deletion of an existing repository}
 
 The \code{deleteLocalRepo} function deletes all artifacts, miniatures, the database with meta-data and the directory identified by the \code{repoDir} argument.
 
-<<>>=
-repo <- "arepo"
-deleteLocalRepo(repoDir = repo)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{repo} \hlkwb{<-} \hlstr{"arepo"}
+\hlkwd{deleteLocalRepo}\hlstd{(}\hlkwc{repoDir} \hlstd{= repo)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 
 \subsubsection{Copying artifacts from other repositories}
 
@@ -289,13 +369,17 @@ Functions \code{copyLocalRepo} and \code{copyRemoteRepo} copy selected artifacts
 
 In the example below the artifact identified by hash {\code{7f3453331910e3f321ef97d87adb5bad}} is copied along with its meta-data from remote GitHub repository  \code{pbiecek/graphGallery} to the local repository \code{arepo}.
 
-<<>>=
-repo <- "arepo"
-createLocalRepo(repoDir = repo, default = TRUE)
-copyRemoteRepo(repoTo = repo, 
-    md5hashes = "7f3453331910e3f321ef97d87adb5bad",
-    user = "pbiecek", repo = "graphGallery", repoType = "github")
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{repo} \hlkwb{<-} \hlstr{"arepo"}
+\hlkwd{createLocalRepo}\hlstd{(}\hlkwc{repoDir} \hlstd{= repo,} \hlkwc{default} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\hlkwd{copyRemoteRepo}\hlstd{(}\hlkwc{repoTo} \hlstd{= repo,}
+    \hlkwc{md5hashes} \hlstd{=} \hlstr{"7f3453331910e3f321ef97d87adb5bad"}\hlstd{,}
+    \hlkwc{user} \hlstd{=} \hlstr{"pbiecek"}\hlstd{,} \hlkwc{repo} \hlstd{=} \hlstr{"graphGallery"}\hlstd{,} \hlkwc{repoType} \hlstd{=} \hlstr{"github"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 
 Functions \code{zipLocalRepo} and \code{zipRemoteRepo} download all artifacts and create a single \code{zip} archive.
 
@@ -307,27 +391,80 @@ Functions \code{show*Repo} take argument \code{method} which may be either \code
 
 In the previous example we copied a single artifact from GitHub repository to the local one. The artifact is copied with its tags. In the example below we list all the tags within this single-artifact repository.
 
-<<>>=
-showLocalRepo(repoDir = repo, method = "tags")
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{showLocalRepo}\hlstd{(}\hlkwc{repoDir} \hlstd{= repo,} \hlkwc{method} \hlstd{=} \hlstr{"tags"}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##                           artifact
+## 1 7f3453331910e3f321ef97d87adb5bad
+## 2 7f3453331910e3f321ef97d87adb5bad
+## 3 7f3453331910e3f321ef97d87adb5bad
+## 4 7f3453331910e3f321ef97d87adb5bad
+## 5 7f3453331910e3f321ef97d87adb5bad
+## 6 7f3453331910e3f321ef97d87adb5bad
+## 7 7f3453331910e3f321ef97d87adb5bad
+## 8 7f3453331910e3f321ef97d87adb5bad
+## 9 7f3453331910e3f321ef97d87adb5bad
+##                                             tag         createdDate
+## 1                                    format:rda 2016-12-31 15:50:59
+## 2                                      name:pl1 2016-12-31 15:50:59
+## 3                                      class:gg 2016-12-31 15:50:59
+## 4                                  class:ggplot 2016-12-31 15:50:59
+## 5                           labelx:Sepal.Length 2016-12-31 15:50:59
+## 6                           labely:Petal.Length 2016-12-31 15:50:59
+## 7                      date:2016-12-31 15:50:59 2016-12-31 15:50:59
+## 8 session_info:0c325724f6118fdd80e6504204b72cfa 2016-12-31 15:50:59
+## 9                                    format:png 2016-12-31 15:51:00
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
 In the example below the function \code{summaryLocalRepo} is used to list summaries of artifacts in the repository called \code{graphGallery} which is attached to the \pkg{archivist} package. One can find information about dates on which artifacts were added, classes of artifacts and the total number of artifacts in the repository.
 
-<<>>=
-summaryLocalRepo(repoDir = 
-    system.file("graphGallery", package = "archivist")) 
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{summaryLocalRepo}\hlstd{(}\hlkwc{repoDir} \hlstd{=}
+    \hlkwd{system.file}\hlstd{(}\hlstr{"graphGallery"}\hlstd{,} \hlkwc{package} \hlstd{=} \hlstr{"archivist"}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+## Number of archived artifacts in Repository:  7 
+## Number of archived datasets in Repository:  3 
+## Number of various classes archived in Repository: 
+##             Number
+## lm              3
+## data.frame      2
+## summary.lm      1
+## gg              2
+## ggplot          2
+## Saves per day in Repository: 
+##             Saves
+## 2016-02-07     5
+## 2016-02-08    13
+## 2016-03-04     3
+## 2016-12-31     4
+## 2017-04-28     2
+## 2017-04-29     3
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
 
 \subsubsection{Setting a default repository}
 
 In most of the cases we work with one repository per project. In such cases it is convenient to set a default local or remote repository. It can be done with \code{setLocalRepo} or \code{setRemoteRepo} functions. Look at the example below.
 
-<<>>=
-setRemoteRepo(user = "pbiecek", repo = "graphGallery", repoType = "github")
-setLocalRepo(repoDir = 
-    system.file("graphGallery", package = "archivist"))
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{setRemoteRepo}\hlstd{(}\hlkwc{user} \hlstd{=} \hlstr{"pbiecek"}\hlstd{,} \hlkwc{repo} \hlstd{=} \hlstr{"graphGallery"}\hlstd{,} \hlkwc{repoType} \hlstd{=} \hlstr{"github"}\hlstd{)}
+\hlkwd{setLocalRepo}\hlstd{(}\hlkwc{repoDir} \hlstd{=}
+    \hlkwd{system.file}\hlstd{(}\hlstr{"graphGallery"}\hlstd{,} \hlkwc{package} \hlstd{=} \hlstr{"archivist"}\hlstd{))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 
 
 After setting a default repository, one can use the following functions
@@ -341,16 +478,30 @@ without specification of \code{repoDir} or \code{user/repo/branch/subdir/repoTyp
 
 For example, the instruction below will add \code{iris} data frame to the default local repository.
 
-<<>>=
-data("iris")
-saveToRepo(iris)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{data}\hlstd{(}\hlstr{"iris"}\hlstd{)}
+\hlkwd{saveToRepo}\hlstd{(iris)}
+\end{alltt}
+\begin{verbatim}
+## [1] "ff575c261c949d073b2895b05d1097c3"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
 
 Another option for setting a default value for an argument is the function \code{aoptions()}. It sets the default value for any argument that is used by \code{archivist}. For example the instruction below sets the default value for \code{repoType} to \code{"github"}.
-<<>>=
-aoptions("repoType", "github")
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{aoptions}\hlstd{(}\hlstr{"repoType"}\hlstd{,} \hlstr{"github"}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] "github"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
 
 %\clearpage
@@ -404,19 +555,80 @@ The process of adding an \proglang{R} object to the repository triggers a chain 
 
 The following example creates a plot of the class \code{gg} and saves the object into the repository. Plots created with the use of \pkg{ggplot2} package are objects and can be serialized in the same way as any other \proglang{R} objects \citep[see][]{ggplot2}. A hash of the recorded object is returned. In the example below it is \code{11127cc6ce69a89d11d0e30865a33c13}. By default, the related data object is also saved. In this case the dependent object is a dataset \code{iris} which is saved with the hash \code{ff575c261c949d073b2895b05d1097c3}.
 
-<<warning=FALSE>>=
-library("ggplot2")
-repo <- "arepo"
-pl <- qplot(Sepal.Length, Petal.Length, data = iris)
-saveToLocalRepo(pl, repoDir = repo)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hlstd{(}\hlstr{"ggplot2"}\hlstd{)}
+\hlstd{repo} \hlkwb{<-} \hlstr{"arepo"}
+\hlstd{pl} \hlkwb{<-} \hlkwd{qplot}\hlstd{(Sepal.Length, Petal.Length,} \hlkwc{data} \hlstd{= iris)}
+\hlkwd{saveToLocalRepo}\hlstd{(pl,} \hlkwc{repoDir} \hlstd{= repo)}
+\end{alltt}
+\begin{verbatim}
+## [1] "3582d9d9f70637c5cbfd3ab1da628fa0"
+## attr(,"data")
+## [1] "ff575c261c949d073b2895b05d1097c3"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
 
 The function \code{saveToLocalRepo} extracts additional tags such as the name of the original object (here: \code{name:pl}), its class (\code{class:gg}), labels on OX and OY axes (\code{labelx:Sepal.Length}) and MD5 hash of the data object. These tags are listed if we use \code{showLocalRepo} function on the repository.
 
-<<>>=
-showLocalRepo(repoDir = repo, "tags")
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{showLocalRepo}\hlstd{(}\hlkwc{repoDir} \hlstd{= repo,} \hlstr{"tags"}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##                            artifact
+## 1  7f3453331910e3f321ef97d87adb5bad
+## 2  7f3453331910e3f321ef97d87adb5bad
+## 3  7f3453331910e3f321ef97d87adb5bad
+## 4  7f3453331910e3f321ef97d87adb5bad
+## 5  7f3453331910e3f321ef97d87adb5bad
+## 6  7f3453331910e3f321ef97d87adb5bad
+## 7  7f3453331910e3f321ef97d87adb5bad
+## 8  7f3453331910e3f321ef97d87adb5bad
+## 9  7f3453331910e3f321ef97d87adb5bad
+## 10 3582d9d9f70637c5cbfd3ab1da628fa0
+## 11 3582d9d9f70637c5cbfd3ab1da628fa0
+## 12 3582d9d9f70637c5cbfd3ab1da628fa0
+## 13 3582d9d9f70637c5cbfd3ab1da628fa0
+## 14 3582d9d9f70637c5cbfd3ab1da628fa0
+## 15 3582d9d9f70637c5cbfd3ab1da628fa0
+## 16 3582d9d9f70637c5cbfd3ab1da628fa0
+## 17 6ea69e5c9dcdbad7a4a949276f3d5280
+## 18 3582d9d9f70637c5cbfd3ab1da628fa0
+## 19 ff575c261c949d073b2895b05d1097c3
+## 20 ff575c261c949d073b2895b05d1097c3
+## 21 ff575c261c949d073b2895b05d1097c3
+## 22 3582d9d9f70637c5cbfd3ab1da628fa0
+##                                              tag         createdDate
+## 1                                     format:rda 2016-12-31 15:50:59
+## 2                                       name:pl1 2016-12-31 15:50:59
+## 3                                       class:gg 2016-12-31 15:50:59
+## 4                                   class:ggplot 2016-12-31 15:50:59
+## 5                            labelx:Sepal.Length 2016-12-31 15:50:59
+## 6                            labely:Petal.Length 2016-12-31 15:50:59
+## 7                       date:2016-12-31 15:50:59 2016-12-31 15:50:59
+## 8  session_info:0c325724f6118fdd80e6504204b72cfa 2016-12-31 15:50:59
+## 9                                     format:png 2016-12-31 15:51:00
+## 10                                    format:rda 2017-04-29 00:21:03
+## 11                                       name:pl 2017-04-29 00:21:03
+## 12                                      class:gg 2017-04-29 00:21:03
+## 13                                  class:ggplot 2017-04-29 00:21:03
+## 14                           labelx:Sepal.Length 2017-04-29 00:21:03
+## 15                           labely:Petal.Length 2017-04-29 00:21:03
+## 16                      date:2017-04-29 00:21:03 2017-04-29 00:21:03
+## 17                                    format:rda 2017-04-29 00:21:03
+## 18 session_info:6ea69e5c9dcdbad7a4a949276f3d5280 2017-04-29 00:21:03
+## 19                                    format:rda 2017-04-29 00:21:03
+## 20                                    format:txt 2017-04-29 00:21:03
+## 21 relationWith:3582d9d9f70637c5cbfd3ab1da628fa0 2017-04-29 00:21:03
+## 22                                    format:png 2017-04-29 00:21:03
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
 %\begin{Sinput}
 %R> deleteRepo(repo)
@@ -424,9 +636,97 @@ showLocalRepo(repoDir = repo, "tags")
 
 By default, for each artifact also it's context, i.e., session info, is saved. It can be accessed with the function \code{asession()}. See the example below. Such additional information may be very useful if we cannot replicate previous results and we are in the need of recovering the exact versions of important packages, which can be done with \code{restoreLibs} function.
 
-<<>>=
-asession("7f3453331910e3f321ef97d87adb5bad")
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{asession}\hlstd{(}\hlstr{"7f3453331910e3f321ef97d87adb5bad"}\hlstd{)}
+\end{alltt}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Session info --------------------------------------------------------------}}\begin{verbatim}
+##  setting  value                       
+##  version  R version 3.3.2 (2016-10-31)
+##  system   x86_64, darwin13.4.0        
+##  ui       RStudio (1.0.44)            
+##  language (EN)                        
+##  collate  en_US.UTF-8                 
+##  tz       Europe/Warsaw               
+##  date     2016-12-31
+\end{verbatim}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Packages ------------------------------------------------------------------}}\begin{verbatim}
+##  package       * version    date       source                         
+##  archivist     * 2.1.1      2016-11-18 local (pbiecek/archivist@NA)   
+##  assertthat      0.1        2013-12-06 CRAN (R 3.3.0)                 
+##  backports       1.0.4      2016-10-24 CRAN (R 3.3.0)                 
+##  bitops          1.0-6      2013-08-17 CRAN (R 3.3.0)                 
+##  colorspace      1.3-1      2016-11-18 CRAN (R 3.3.2)                 
+##  DBI             0.5-1      2016-09-10 cran (@0.5-1)                  
+##  devtools      * 1.12.0     2016-06-24 CRAN (R 3.3.0)                 
+##  digest          0.6.10     2016-08-02 cran (@0.6.10)                 
+##  dplyr         * 0.5.0      2016-06-24 CRAN (R 3.3.0)                 
+##  evaluate        0.10       2016-10-11 CRAN (R 3.3.0)                 
+##  fields          8.4-1      2016-05-05 CRAN (R 3.3.0)                 
+##  foreign         0.8-67     2016-09-13 CRAN (R 3.3.2)                 
+##  geosphere       1.5-5      2016-06-15 CRAN (R 3.3.0)                 
+##  ggmap         * 2.7        2016-12-28 Github (dkahle/ggmap@c6b7579)  
+##  ggplot2       * 2.2.0.9000 2016-12-28 Github (hadley/ggplot2@f6f9f9d)
+##  ggthemes      * 3.3.0      2016-11-24 cran (@3.3.0)                  
+##  gridExtra     * 2.2.1      2016-02-29 CRAN (R 3.3.0)                 
+##  gtable          0.2.0      2016-02-26 CRAN (R 3.3.0)                 
+##  highr           0.6        2016-05-09 CRAN (R 3.3.0)                 
+##  htmltools     * 0.3.5      2016-03-21 CRAN (R 3.3.0)                 
+##  httpuv          1.3.3      2015-08-04 CRAN (R 3.3.0)                 
+##  httr          * 1.2.1      2016-07-03 cran (@1.2.1)                  
+##  jpeg            0.1-8      2014-01-23 CRAN (R 3.3.0)                 
+##  jsonlite        1.1        2016-09-14 cran (@1.1)                    
+##  knitr         * 1.15       2016-11-09 CRAN (R 3.3.2)                 
+##  labeling        0.3        2014-08-23 CRAN (R 3.3.0)                 
+##  lattice       * 0.20-34    2016-09-06 CRAN (R 3.3.2)                 
+##  latticeExtra  * 0.6-28     2016-02-09 CRAN (R 3.3.0)                 
+##  lazyeval        0.2.0      2016-06-12 CRAN (R 3.3.0)                 
+##  lubridate     * 1.6.0      2016-09-13 cran (@1.6.0)                  
+##  magrittr        1.5        2014-11-22 CRAN (R 3.3.0)                 
+##  mapproj         1.2-4      2015-08-03 CRAN (R 3.3.0)                 
+##  maps            3.1.1      2016-07-27 CRAN (R 3.3.0)                 
+##  maptools        0.8-40     2016-11-15 CRAN (R 3.3.2)                 
+##  memoise         1.0.0      2016-01-29 CRAN (R 3.3.0)                 
+##  mime            0.5        2016-07-07 cran (@0.5)                    
+##  munsell         0.4.3      2016-02-13 CRAN (R 3.3.0)                 
+##  plyr            1.8.4      2016-06-08 CRAN (R 3.3.0)                 
+##  png             0.1-7      2013-12-03 CRAN (R 3.3.0)                 
+##  proto           1.0.0      2016-10-29 CRAN (R 3.3.0)                 
+##  R6              2.2.0      2016-10-05 cran (@2.2.0)                  
+##  RColorBrewer  * 1.1-2      2014-12-07 CRAN (R 3.3.0)                 
+##  Rcpp            0.12.8     2016-11-17 CRAN (R 3.3.2)                 
+##  RCurl           1.95-4.8   2016-03-01 CRAN (R 3.3.0)                 
+##  readr         * 1.0.0      2016-08-03 CRAN (R 3.3.0)                 
+##  reshape2        1.4.2      2016-10-22 cran (@1.4.2)                  
+##  RgoogleMaps     1.4.1      2016-09-18 CRAN (R 3.3.0)                 
+##  rjson           0.2.15     2014-11-03 CRAN (R 3.3.0)                 
+##  RJSONIO         1.3-0      2014-07-28 CRAN (R 3.3.0)                 
+##  rmarkdown       1.2        2016-11-21 CRAN (R 3.3.2)                 
+##  rprojroot       1.1        2016-10-29 CRAN (R 3.3.0)                 
+##  rsconnect       0.6        2016-11-21 CRAN (R 3.3.2)                 
+##  RSQLite         1.0.0      2014-10-25 CRAN (R 3.1.2)                 
+##  rstudioapi      0.6        2016-06-27 cran (@0.6)                    
+##  rworldmap     * 1.3-6      2016-02-03 CRAN (R 3.3.0)                 
+##  scales        * 0.4.1      2016-11-09 cran (@0.4.1)                  
+##  shiny         * 0.14.2     2016-11-01 cran (@0.14.2)                 
+##  SmarterPoland * 1.7        2016-03-28 CRAN (R 3.3.0)                 
+##  sp            * 1.2-3      2016-04-14 CRAN (R 3.3.0)                 
+##  spam            1.4-0      2016-08-30 CRAN (R 3.3.0)                 
+##  stringi         1.1.2      2016-10-01 cran (@1.1.2)                  
+##  stringr         1.1.0      2016-08-19 CRAN (R 3.3.0)                 
+##  tibble          1.2        2016-08-26 cran (@1.2)                    
+##  tidyr         * 0.6.0      2016-08-12 CRAN (R 3.3.0)                 
+##  withr           1.0.2      2016-06-20 CRAN (R 3.3.0)                 
+##  xtable          1.8-2      2016-02-05 CRAN (R 3.3.0)                 
+##  yaml            2.1.14     2016-11-12 cran (@2.1.14)
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
 
 \subsubsection{Serialization of an object creation event into repository}
@@ -434,30 +734,50 @@ asession("7f3453331910e3f321ef97d87adb5bad")
 The \pkg{archivist} provides a new operator \code{\%a\%} {that} works as the extended pipe operator \code{\%>\%} from the \pkg{magrittr} package \cite[see][for more details]{magrittr}. In addition, it saves the resulting object to the default \pkg{archivist} repository together with the function call and its parameters. The default repository should be set first, see the \code{setLocalRepo} function for instructions how to do this.
 With this functionality it is possible to trace function calls and extract pedigree for some artifacts. 
 
-<<echo=FALSE, warning=FALSE>>=
-suppressPackageStartupMessages(library(dplyr))
-@
 
 
-<<>>=
-library("archivist")
-createLocalRepo("arepo", default = TRUE)
-library("dplyr")
-iris %a%
-    dplyr::filter(Sepal.Length < 6) %a%
-    lm(Petal.Length~Species, data=.) %a%
-    summary() -> tmp
-@
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hlstd{(}\hlstr{"archivist"}\hlstd{)}
+\hlkwd{createLocalRepo}\hlstd{(}\hlstr{"arepo"}\hlstd{,} \hlkwc{default} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\hlkwd{library}\hlstd{(}\hlstr{"dplyr"}\hlstd{)}
+\hlstd{iris} \hlopt{%a%}
+    \hlstd{dplyr}\hlopt{::}\hlkwd{filter}\hlstd{(Sepal.Length} \hlopt{<} \hlnum{6}\hlstd{)} \hlopt{%a%}
+    \hlkwd{lm}\hlstd{(Petal.Length}\hlopt{~}\hlstd{Species,} \hlkwc{data}\hlstd{=.)} \hlopt{%a%}
+    \hlkwd{summary}\hlstd{()} \hlkwb{->} \hlstd{tmp}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 
 
 How to recreate an object's history? The function \code{ahistory} extracts the chain of calls that leads to the selected object. As an argument one can specify either an object's value or its MD5 hash. The value of \code{ahistory} function is a \code{data.frame} with two columns – first contains function calls while second contains MD5 hashes of partial results.
 
 In the example above, a chain of three operations converts input \code{iris} data into the \code{tmp} object. The \pkg{dplyr} package \citep[see][]{dplyr} has to be loaded first since the function \code{filter} is used in this example. Following lines present the chain of consecutive transformations that are recorded in the repository.
 
-<<>>=
-ahistory(tmp)
-ahistory(md5hash = "050e41ec3bc40b3004bc6bdd356acae7")
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{ahistory}\hlstd{(tmp)}
+\end{alltt}
+\begin{verbatim}
+##    iris                                  [ff575c261c949d073b2895b05d1097c3]
+## -> dplyr::filter(Sepal.Length < 6)       [d3696e13d15223c7d0bbccb33cc20a11]
+## -> lm(Petal.Length ~ Species, data = .)  [990861c7c27812ee959f10e5f76fe2c3]
+## -> summary()                             [050e41ec3bc40b3004bc6bdd356acae7]
+\end{verbatim}
+\begin{alltt}
+\hlkwd{ahistory}\hlstd{(}\hlkwc{md5hash} \hlstd{=} \hlstr{"050e41ec3bc40b3004bc6bdd356acae7"}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##    iris                                  [ff575c261c949d073b2895b05d1097c3]
+## -> dplyr::filter(Sepal.Length < 6)       [d3696e13d15223c7d0bbccb33cc20a11]
+## -> lm(Petal.Length ~ Species, data = .)  [990861c7c27812ee959f10e5f76fe2c3]
+## -> summary()                             [050e41ec3bc40b3004bc6bdd356acae7]
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
 
 In order to restore an object's pedigree all partial results must be saved in a repository. So this option will work only for objects created by a chain of calls that use the \code{\%a\%} operator.
@@ -484,30 +804,44 @@ The full {MD5 hash} of an artifact is a 32-characters-long string but it is enou
 
 Both following instructions retrieve an \proglang{R} object from GitHub, load it into  \proglang{R} session and make it accessible for further processing. In this case it is a \code{ggplot2} object so after being loaded the \code{print} function is triggered and a plot is generated  (see Figure \ref{figExample1}). Note that by default the GitHub is assumed, but this may be changed with the parameter \code{repoType}.
 
-<<fig.width=6,fig.height=4>>=
-loadFromRemoteRepo("7f3453331910e3f321ef97d87adb5bad",
-    repo = "graphGallery", user = "pbiecek", value = TRUE)
-loadFromLocalRepo("7f34533", 
-    system.file("graphGallery", package = "archivist"), value = TRUE)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{loadFromRemoteRepo}\hlstd{(}\hlstr{"7f3453331910e3f321ef97d87adb5bad"}\hlstd{,}
+    \hlkwc{repo} \hlstd{=} \hlstr{"graphGallery"}\hlstd{,} \hlkwc{user} \hlstd{=} \hlstr{"pbiecek"}\hlstd{,} \hlkwc{value} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-17-1} 
+\begin{kframe}\begin{alltt}
+\hlkwd{loadFromLocalRepo}\hlstd{(}\hlstr{"7f34533"}\hlstd{,}
+    \hlkwd{system.file}\hlstd{(}\hlstr{"graphGallery"}\hlstd{,} \hlkwc{package} \hlstd{=} \hlstr{"archivist"}\hlstd{),} \hlkwc{value} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-17-2} 
+
+\end{knitrout}
 
 
 
 The \code{aread} function is a wrapper over \code{loadFromRemoteRepo} with more compact form. Shorter instructions and shorter code snippets might be placed in a figure or table caption. The single line below reads an object with the \code{7f34533...} hash from \code{graphGallery} GitHub repository  that is owned by the \code{pbiecek} user.
 
-<<eval=FALSE>>=
-archivist::aread("pbiecek/graphGallery/7f3453331910e3f321ef97d87adb5bad")
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{archivist}\hlopt{::}\hlkwd{aread}\hlstd{(}\hlstr{"pbiecek/graphGallery/7f3453331910e3f321ef97d87adb5bad"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 
 
 
 The following instructions retrieve the same \proglang{R} object but this time from the \code{graphGallery} repository attached to the \pkg{archivist} package. Note that the default repository is set first with the \code{setLocalRepo} function.
 
-<<echo=FALSE>>=
-library("archivist")
-setLocalRepo(system.file("graphGallery", package = "archivist"))
-aread("7f3453331910e3f321ef97d87adb5bad")
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-19-1} 
+
+\end{knitrout}
 
 
 
@@ -524,11 +858,18 @@ In the \pkg{archivist} package all objects have their cryptographical hash calcu
 
 In the example below the downloaded regression model is digested to confirm its identity.
 
-<<>>=
-setLocalRepo(system.file("graphGallery", package = "archivist"))
-model <- aread("2a6e492cb6982f230e48cf46023e2e4f")
-digest::digest(model)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{setLocalRepo}\hlstd{(}\hlkwd{system.file}\hlstd{(}\hlstr{"graphGallery"}\hlstd{,} \hlkwc{package} \hlstd{=} \hlstr{"archivist"}\hlstd{))}
+\hlstd{model} \hlkwb{<-} \hlkwd{aread}\hlstd{(}\hlstr{"2a6e492cb6982f230e48cf46023e2e4f"}\hlstd{)}
+\hlstd{digest}\hlopt{::}\hlkwd{digest}\hlstd{(model)}
+\end{alltt}
+\begin{verbatim}
+## [1] "2a6e492cb6982f230e48cf46023e2e4f"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
 \subsubsection{Removal of an object from a repository}
 
@@ -536,18 +877,26 @@ To remove an artifact from a repository one can use the \code{rmFromLocalRepo} f
 
 In the example below the artifact \code{92ada1e052d4d963e5787bfc9c4b506c} and all its tags are removed from the repository called \code{repo}.
 
-<<eval=FALSE>>=
-rmFromLocalRepo("7f3453331910e3f321ef97d87adb5bad", repoDir = repo)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{rmFromLocalRepo}\hlstd{(}\hlstr{"7f3453331910e3f321ef97d87adb5bad"}\hlstd{,} \hlkwc{repoDir} \hlstd{= repo)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 
 
 A list of artifact's hashes that should be removed may be obtained with the \code{search*} function. The example below searches for all artifacts older than 30 days and removes them from the \code{repo} repository.
 
-<<>>=
-obj2rm <- searchInLocalRepo(list(dateFrom = "2010-01-01", 
-    dateTo = Sys.Date()-30), repoDir = repo)
-rmFromLocalRepo(obj2rm, repoDir = repo, many = TRUE)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{obj2rm} \hlkwb{<-} \hlkwd{searchInLocalRepo}\hlstd{(}\hlkwd{list}\hlstd{(}\hlkwc{dateFrom} \hlstd{=} \hlstr{"2010-01-01"}\hlstd{,}
+    \hlkwc{dateTo} \hlstd{=} \hlkwd{Sys.Date}\hlstd{()}\hlopt{-}\hlnum{30}\hlstd{),} \hlkwc{repoDir} \hlstd{= repo)}
+\hlkwd{rmFromLocalRepo}\hlstd{(obj2rm,} \hlkwc{repoDir} \hlstd{= repo,} \hlkwc{many} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 
 
 It is also possible to remove many artifacts with one call. Broader examples of this function are explained in the package manual page accessed from \proglang{R} with \code{?rmFromLocalRepo}.
@@ -568,26 +917,49 @@ In both functions the \code{pattern} argument may be either a tag (name, class, 
 
 For example, the following command retrieves MD5 hashes of all objects of the class \code{gg} from the \code{pbiecek/graphGallery} repository.
 
-<<>>=
-searchInLocalRepo(pattern = "class:gg", 
-    repoDir = system.file("graphGallery", package = "archivist"))
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{searchInLocalRepo}\hlstd{(}\hlkwc{pattern} \hlstd{=} \hlstr{"class:gg"}\hlstd{,}
+    \hlkwc{repoDir} \hlstd{=} \hlkwd{system.file}\hlstd{(}\hlstr{"graphGallery"}\hlstd{,} \hlkwc{package} \hlstd{=} \hlstr{"archivist"}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+## [1] "7f3453331910e3f321ef97d87adb5bad" "369227e67f9164dcbe934dadf2b53cc2"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
 
 To get a list of artifacts created within a given date range one can use following instruction.
 
-<<>>=
-searchInLocalRepo(pattern = list(dateFrom = "2016-01-01",
-    dateTo = "2016-02-07"), 
-    repoDir = system.file("graphGallery", package = "archivist"))
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{searchInLocalRepo}\hlstd{(}\hlkwc{pattern} \hlstd{=} \hlkwd{list}\hlstd{(}\hlkwc{dateFrom} \hlstd{=} \hlstr{"2016-01-01"}\hlstd{,}
+    \hlkwc{dateTo} \hlstd{=} \hlstr{"2016-02-07"}\hlstd{),}
+    \hlkwc{repoDir} \hlstd{=} \hlkwd{system.file}\hlstd{(}\hlstr{"graphGallery"}\hlstd{,} \hlkwc{package} \hlstd{=} \hlstr{"archivist"}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+## [1] "d9313a0de3e2980201a8971e3384ff26" "ff575c261c949d073b2895b05d1097c3"
+## [3] "2a6e492cb6982f230e48cf46023e2e4f" "93ecfdf1436932e2860c6dbdf2abc2ad"
+## [5] "afb2550d0f886f0cf3b050f04c5cd4f8"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
 The \code{searchInLocalRepo} and \code{searchInRemoteRepo} functions allow to use more than one searching criteria. Additional argument \code{intersect} specifies if the resulting objects have to met all or any of the search criteria.
 
-<<>>=
-searchInLocalRepo(pattern=c("class:gg", "labelx:Sepal.Length"),
-    repoDir = system.file("graphGallery", package = "archivist"))
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{searchInLocalRepo}\hlstd{(}\hlkwc{pattern}\hlstd{=}\hlkwd{c}\hlstd{(}\hlstr{"class:gg"}\hlstd{,} \hlstr{"labelx:Sepal.Length"}\hlstd{),}
+    \hlkwc{repoDir} \hlstd{=} \hlkwd{system.file}\hlstd{(}\hlstr{"graphGallery"}\hlstd{,} \hlkwc{package} \hlstd{=} \hlstr{"archivist"}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+## [1] "369227e67f9164dcbe934dadf2b53cc2" "7f3453331910e3f321ef97d87adb5bad"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
 These two functions return MD5 hashes of artifacts. In order to load these artifacts from repository one needs to use either \code{loadFrom*Repo} or \code{aread} functions.
 Since both operations are usually performed together (search for MD5 hashes of artifacts by their tag / load artifacts with given MD5 hashes), one can use the \code{asearch} function which retrieves MD5 hashes and returns a list with values of artifacts that meet all selected criteria.
@@ -605,30 +977,58 @@ For example, the code below retrieves all objects of the \code{lm} class with th
 
 The following instruction searches within the default local repository.
 
-<<>>=
-setLocalRepo(system.file("graphGallery", package = "archivist"))
-models <- asearch(patterns = c("class:lm", "coefname:Sepal.Length"))
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{setLocalRepo}\hlstd{(}\hlkwd{system.file}\hlstd{(}\hlstr{"graphGallery"}\hlstd{,} \hlkwc{package} \hlstd{=} \hlstr{"archivist"}\hlstd{))}
+\hlstd{models} \hlkwb{<-} \hlkwd{asearch}\hlstd{(}\hlkwc{patterns} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"class:lm"}\hlstd{,} \hlstr{"coefname:Sepal.Length"}\hlstd{))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 
 Below is the code that searches within the GitHub repository.
 
-<<>>=
-models <- asearch("pbiecek/graphGallery",  
-    patterns = c("class:lm", "coefname:Sepal.Length"))
-lapply(models, coef)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{models} \hlkwb{<-} \hlkwd{asearch}\hlstd{(}\hlstr{"pbiecek/graphGallery"}\hlstd{,}
+    \hlkwc{patterns} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"class:lm"}\hlstd{,} \hlstr{"coefname:Sepal.Length"}\hlstd{))}
+\hlkwd{lapply}\hlstd{(models, coef)}
+\end{alltt}
+\begin{verbatim}
+## $`18a98048f0584469483afb65294ce3ed`
+##  (Intercept) Sepal.Length 
+##    -7.101443     1.858433 
+## 
+## $`2a6e492cb6982f230e48cf46023e2e4f`
+##       (Intercept)      Sepal.Length Speciesversicolor  Speciesvirginica 
+##        -1.7023422         0.6321099         2.2101378         3.0900021
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
 The following instruction retrieves all artifacts of the \code{gg} class (created with the package \pkg{ggplot2}) with label \code{Sepal.Length} on the X axis. Two objects are returned as a result. They are plotted together by the \code{grid.arrange} function from \pkg{gridExtra} package \citep[see][]{gridExtra}.
 
-<<>>=
-plots <- asearch(patterns = c("class:gg", "labelx:Sepal.Length"))
-length(plots)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{plots} \hlkwb{<-} \hlkwd{asearch}\hlstd{(}\hlkwc{patterns} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"class:gg"}\hlstd{,} \hlstr{"labelx:Sepal.Length"}\hlstd{))}
+\hlkwd{length}\hlstd{(plots)}
+\end{alltt}
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
-<<eval=FALSE>>=
-library("gridExtra")
-do.call(grid.arrange, plots)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hlstd{(}\hlstr{"gridExtra"}\hlstd{)}
+\hlkwd{do.call}\hlstd{(grid.arrange, plots)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 
 
 Result of these instructions is presented in Figure \ref{fig:twoplots}.
@@ -652,11 +1052,14 @@ For local repositories, it is also possible to explore the repository interactiv
 In the text box area one can specify tags that filter out objects presented on the right panel. Only miniatures of objects that meet all these criteria are presented. Additionally, the instruction \code{sort:key} sorts the artifacts along the key. For example, use \code{"sort:createdDate"} to sort miniatures along the date of creation of the object.
 
 
-<<eval=FALSE>>=
-arepo <- system.file("graphGallery", package = "archivist")
-shinySearchInLocalRepo(arepo)
-
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{arepo} \hlkwb{<-} \hlkwd{system.file}\hlstd{(}\hlstr{"graphGallery"}\hlstd{,} \hlkwc{package} \hlstd{=} \hlstr{"archivist"}\hlstd{)}
+\hlkwd{shinySearchInLocalRepo}\hlstd{(arepo)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 
 \clearpage
 
@@ -671,13 +1074,40 @@ The \code{trace()} function from the \pkg{base} package allows to insert a speci
 
 In the example below we modify the \code{lm()} function so that after it's each execution the created \code{lm} model is automatically added to the default local repository \code{allModels}.
 
-<<>>=
-library("archivist")
-createLocalRepo("allModels", default = TRUE)
-atrace("lm", "z")
-lm(Sepal.Length ~ Sepal.Width, data=iris)
-sapply(asearch("class:lm"), BIC)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hlstd{(}\hlstr{"archivist"}\hlstd{)}
+\hlkwd{createLocalRepo}\hlstd{(}\hlstr{"allModels"}\hlstd{,} \hlkwc{default} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\hlkwd{atrace}\hlstd{(}\hlstr{"lm"}\hlstd{,} \hlstr{"z"}\hlstd{)}
+\end{alltt}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Tracing function "{}lm"{} in package "{}stats"{}}}\begin{verbatim}
+## [1] "lm"
+\end{verbatim}
+\begin{alltt}
+\hlkwd{lm}\hlstd{(Sepal.Length} \hlopt{~} \hlstd{Sepal.Width,} \hlkwc{data}\hlstd{=iris)}
+\end{alltt}
+\begin{verbatim}
+## Tracing lm(Sepal.Length ~ Sepal.Width, data = iris) on exit
+## 
+## Call:
+## lm(formula = Sepal.Length ~ Sepal.Width, data = iris)
+## 
+## Coefficients:
+## (Intercept)  Sepal.Width  
+##      6.5262      -0.2234
+\end{verbatim}
+\begin{alltt}
+\hlkwd{sapply}\hlstd{(}\hlkwd{asearch}\hlstd{(}\hlstr{"class:lm"}\hlstd{), BIC)}
+\end{alltt}
+\begin{verbatim}
+## 42fcf77af2c40f70c445cbba513aeabd 
+##                         381.0236
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
 \subsubsection[Integration with the knitr package]{Integration with the \pkg{knitr} package}
 
@@ -689,11 +1119,15 @@ The function \code{addHooksToPrint} combines these two tools. A call to this fun
 An example is presented in the report \url{http://bit.ly/1nW9Cvz}. Part of this report is presented in Figure \ref{figExample3}.
 On the beginning there is a snippet presented below. It automatically adds hooks to the html report for all objects of classes \code{ggplot} or \code{data.frame}. 
 
-<<>>=
-addHooksToPrint(class=c("ggplot", "data.frame"),
-                  repoDir = "arepo", 
-                  repo = "Eseje", user = "pbiecek", subdir = "arepo")
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{addHooksToPrint}\hlstd{(}\hlkwc{class}\hlstd{=}\hlkwd{c}\hlstd{(}\hlstr{"ggplot"}\hlstd{,} \hlstr{"data.frame"}\hlstd{),}
+                  \hlkwc{repoDir} \hlstd{=} \hlstr{"arepo"}\hlstd{,}
+                  \hlkwc{repo} \hlstd{=} \hlstr{"Eseje"}\hlstd{,} \hlkwc{user} \hlstd{=} \hlstr{"pbiecek"}\hlstd{,} \hlkwc{subdir} \hlstd{=} \hlstr{"arepo"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 
 As a result, just before each plot, there are automatically created hooks to corresponding objects e.g., \code{archivist::aread("pbiecek/Eseje/arepo/24ea7c04b861083d4bf56eee1c5a17b7")}. These hooks serve also as links to the corresponding \proglang{R} objects.
 
@@ -708,12 +1142,15 @@ The biggest advantage of this integration is that a single call to \code{addHook
 Such gallery, if saved as file named \code{readme.md}, will automatically list all artifacts with miniatures and tags in the GitHub web portal user interface. See an example gallery at \url{http://bit.ly/1Q62Tpz}.
 This gallery was created with the following instruction. A part of the result is presented in Figure \ref{figExample4}.
 
-<<eval=FALSE>>=
-createMDGallery("arepo/readme.md", 
-           repo = "Eseje", user = "pbiecek", subdir = "arepo", 
-           addMiniature = TRUE, addTags = TRUE)
-
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{createMDGallery}\hlstd{(}\hlstr{"arepo/readme.md"}\hlstd{,}
+           \hlkwc{repo} \hlstd{=} \hlstr{"Eseje"}\hlstd{,} \hlkwc{user} \hlstd{=} \hlstr{"pbiecek"}\hlstd{,} \hlkwc{subdir} \hlstd{=} \hlstr{"arepo"}\hlstd{,}
+           \hlkwc{addMiniature} \hlstd{=} \hlnum{TRUE}\hlstd{,} \hlkwc{addTags} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 
 
 
@@ -743,23 +1180,105 @@ To use the object we need to downgrade \pkg{ggplot2} package to the version 2.0.
 
 For example, the \code{600bda83cb840947976bd1ce3a11879d} object was created with \pkg{ggplot2} version 2.0. The \code{asession()} function checks versions of packages that were then attached.
 
-<<>>=
-asession("pbiecek/graphGallery/arepo/600bda83cb840947976bd1ce3a11879d")
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{asession}\hlstd{(}\hlstr{"pbiecek/graphGallery/arepo/600bda83cb840947976bd1ce3a11879d"}\hlstd{)}
+\end{alltt}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Session info --------------------------------------------------------------}}\begin{verbatim}
+##  setting  value                       
+##  version  R version 3.2.2 (2015-08-14)
+##  system   x86_64, darwin13.4.0        
+##  ui       RStudio (0.99.441)          
+##  language (EN)                        
+##  collate  en_US.UTF-8                 
+##  tz       Europe/Warsaw               
+##  date     2016-02-09
+\end{verbatim}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Packages ------------------------------------------------------------------}}\begin{verbatim}
+##  package      * version  date       source                         
+##  acepack        1.3-3.3  2013-05-03 CRAN (R 3.1.0)                 
+##  archivist    * 1.9.7.2  2016-02-08 CRAN (R 3.2.2)                 
+##  assertthat     0.1      2013-12-06 CRAN (R 3.1.0)                 
+##  bitops         1.0-6    2013-08-17 CRAN (R 3.1.0)                 
+##  car            2.1-1    2015-12-14 CRAN (R 3.2.3)                 
+##  cluster        2.0.3    2015-07-21 CRAN (R 3.2.2)                 
+##  colorspace     1.2-6    2015-03-11 CRAN (R 3.1.3)                 
+##  DBI            0.3.1    2014-09-24 CRAN (R 3.1.1)                 
+##  devtools       1.9.1    2015-09-11 CRAN (R 3.2.0)                 
+##  digest         0.6.9    2016-01-08 CRAN (R 3.2.3)                 
+##  dplyr        * 0.4.3    2015-09-01 CRAN (R 3.2.0)                 
+##  foreign        0.8-65   2015-07-02 CRAN (R 3.2.2)                 
+##  Formula        1.2-1    2015-04-07 CRAN (R 3.1.3)                 
+##  ggplot2        2.0.0    2015-12-16 Github (hadley/ggplot2@11679cd)
+##  gridExtra    * 2.0.0    2015-07-14 CRAN (R 3.2.0)                 
+##  gtable         0.1.2    2012-12-05 CRAN (R 3.1.0)                 
+##  Hmisc          3.17-0   2015-09-21 CRAN (R 3.2.0)                 
+##  httr           1.0.0    2015-06-25 CRAN (R 3.2.0)                 
+##  intsvy         1.8      2015-11-30 CRAN (R 3.2.2)                 
+##  labeling       0.3      2014-08-23 CRAN (R 3.1.1)                 
+##  lattice        0.20-33  2015-07-14 CRAN (R 3.2.2)                 
+##  latticeExtra   0.6-26   2013-08-15 CRAN (R 3.1.0)                 
+##  lazyeval       0.1.10   2015-01-02 CRAN (R 3.1.2)                 
+##  lme4           1.1-10   2015-10-06 CRAN (R 3.2.2)                 
+##  lubridate      1.5.0    2015-12-03 CRAN (R 3.2.3)                 
+##  magrittr       1.5      2014-11-22 CRAN (R 3.1.2)                 
+##  MASS           7.3-43   2015-07-16 CRAN (R 3.2.2)                 
+##  Matrix         1.2-2    2015-07-08 CRAN (R 3.2.2)                 
+##  MatrixModels   0.4-1    2015-08-22 CRAN (R 3.2.0)                 
+##  memisc         0.97     2015-03-08 CRAN (R 3.1.3)                 
+##  memoise        0.2.1    2014-04-22 CRAN (R 3.1.0)                 
+##  mgcv           1.8-7    2015-07-23 CRAN (R 3.2.2)                 
+##  minqa          1.2.4    2014-10-09 CRAN (R 3.1.1)                 
+##  munsell        0.4.2    2013-07-11 CRAN (R 3.1.0)                 
+##  nlme           3.1-121  2015-06-29 CRAN (R 3.2.2)                 
+##  nloptr         1.0.4    2014-08-04 CRAN (R 3.1.1)                 
+##  nnet           7.3-10   2015-06-29 CRAN (R 3.2.2)                 
+##  pbkrtest       0.4-4    2015-12-12 CRAN (R 3.2.3)                 
+##  plyr           1.8.3    2015-06-12 CRAN (R 3.2.0)                 
+##  proto          0.3-10   2012-12-22 CRAN (R 3.1.0)                 
+##  quantreg       5.19     2015-08-31 CRAN (R 3.2.0)                 
+##  R6             2.1.2    2016-01-26 CRAN (R 3.2.3)                 
+##  RColorBrewer   1.1-2    2014-12-07 CRAN (R 3.1.2)                 
+##  Rcpp           0.12.3   2016-01-10 CRAN (R 3.2.3)                 
+##  RCurl          1.95-4.7 2015-06-30 CRAN (R 3.2.0)                 
+##  reshape        0.8.5    2014-04-23 CRAN (R 3.1.0)                 
+##  rpart          4.1-10   2015-06-29 CRAN (R 3.2.2)                 
+##  RSQLite        1.0.0    2014-10-25 CRAN (R 3.1.2)                 
+##  scales         0.3.0    2015-08-25 CRAN (R 3.2.0)                 
+##  SparseM        1.7      2015-08-15 CRAN (R 3.2.0)                 
+##  stringi        1.0-1    2015-10-22 CRAN (R 3.2.0)                 
+##  stringr        1.0.0    2015-04-30 CRAN (R 3.2.0)                 
+##  survival       2.38-3   2015-07-02 CRAN (R 3.2.2)
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
 
 Here the \pkg{ggplot2} was in the version 2.0 and was installed from GitHub. The \code{restoreLibs()} function reinstalls all libraries from proper repositories (here GitHub) to proper versions (here commit \code{11679cd}).
 
-<<eval=FALSE>>=
-restoreLibs("pbiecek/graphGallery/arepo/600bda83cb840947976bd1ce3a11879d")
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{restoreLibs}\hlstd{(}\hlstr{"pbiecek/graphGallery/arepo/600bda83cb840947976bd1ce3a11879d"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 
 
 After that one can load and plot the \code{ggplot} object since the structure of \code{gg} object is compatible with installed libraries.
 
-<<eval=FALSE>>=
-aread("pbiecek/graphGallery/arepo/600bda83cb840947976bd1ce3a11879d")
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{aread}\hlstd{(}\hlstr{"pbiecek/graphGallery/arepo/600bda83cb840947976bd1ce3a11879d"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 
 
 
