@@ -1,4 +1,4 @@
-\begin{thebibliography}{18}
+\begin{thebibliography}{19}
 \newcommand{\enquote}[1]{``#1''}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
@@ -27,6 +27,11 @@ Becker RA, Chambers JM (1988).
 \newblock \emph{SIAM Journal on Scientific and Statistical Computing},
   \textbf{9}(4), 747--760.
 \newblock \urlprefix\url{http://epubs.siam.org/doi/ref/10.1137/0909049}.
+
+\bibitem[{Biecek and Kosinski(2017)}]{archivist}
+Biecek P, Kosinski M (2017).
+\newblock \emph{\pkg{archivist}: An \proglang{R} Package for Managing,
+  Recording and Restoring Data Analysis Results}.
 
 \bibitem[{Chambers(2016)}]{Chambers2016}
 Chambers JM (2016).

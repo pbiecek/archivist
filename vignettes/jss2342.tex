@@ -82,6 +82,9 @@ The presented \pkg{archivist} package extends, in a combination with packages su
 }
 \Keywords{recordable research, reproducible research, data analysis management, data governance, meta-data, results management}
 
+
+
+
 %% at least one keyword must be supplied
 
 %% publication information
@@ -122,6 +125,8 @@ E-mail: \email{M.P.Kosinski@gmail.com}
 %% end of declarations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
+
+A vigniette for the \cite{archivist} article.
 
 %% include your article here, just as usual
 %% Note that you should use the \pkg{}, \proglang{} and \code{} commands.
@@ -194,7 +199,7 @@ An example report that illustrates this use-case is available at \texttt{http://
 \end{alltt}
 
 
-{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Welcome to archivist (version: 2.1.2).}}\end{kframe}
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Welcome to archivist (version: 2.1.3).}}\end{kframe}
 \end{knitrout}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
@@ -445,8 +450,7 @@ In the example below the function \code{summaryLocalRepo} is used to list summar
 ## 2016-02-08    13
 ## 2016-03-04     3
 ## 2016-12-31     4
-## 2017-04-28     2
-## 2017-04-29     3
+## 2017-04-29     2
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -597,7 +601,7 @@ The function \code{saveToLocalRepo} extracts additional tags such as the name of
 ## 14 3582d9d9f70637c5cbfd3ab1da628fa0
 ## 15 3582d9d9f70637c5cbfd3ab1da628fa0
 ## 16 3582d9d9f70637c5cbfd3ab1da628fa0
-## 17 6ea69e5c9dcdbad7a4a949276f3d5280
+## 17 ac06f87ee48fb91fca4372c3f8605ad3
 ## 18 3582d9d9f70637c5cbfd3ab1da628fa0
 ## 19 ff575c261c949d073b2895b05d1097c3
 ## 20 ff575c261c949d073b2895b05d1097c3
@@ -613,19 +617,19 @@ The function \code{saveToLocalRepo} extracts additional tags such as the name of
 ## 7                       date:2016-12-31 15:50:59 2016-12-31 15:50:59
 ## 8  session_info:0c325724f6118fdd80e6504204b72cfa 2016-12-31 15:50:59
 ## 9                                     format:png 2016-12-31 15:51:00
-## 10                                    format:rda 2017-04-29 00:21:03
-## 11                                       name:pl 2017-04-29 00:21:03
-## 12                                      class:gg 2017-04-29 00:21:03
-## 13                                  class:ggplot 2017-04-29 00:21:03
-## 14                           labelx:Sepal.Length 2017-04-29 00:21:03
-## 15                           labely:Petal.Length 2017-04-29 00:21:03
-## 16                      date:2017-04-29 00:21:03 2017-04-29 00:21:03
-## 17                                    format:rda 2017-04-29 00:21:03
-## 18 session_info:6ea69e5c9dcdbad7a4a949276f3d5280 2017-04-29 00:21:03
-## 19                                    format:rda 2017-04-29 00:21:03
-## 20                                    format:txt 2017-04-29 00:21:03
-## 21 relationWith:3582d9d9f70637c5cbfd3ab1da628fa0 2017-04-29 00:21:03
-## 22                                    format:png 2017-04-29 00:21:03
+## 10                                    format:rda 2017-04-29 00:50:01
+## 11                                       name:pl 2017-04-29 00:50:01
+## 12                                      class:gg 2017-04-29 00:50:01
+## 13                                  class:ggplot 2017-04-29 00:50:01
+## 14                           labelx:Sepal.Length 2017-04-29 00:50:01
+## 15                           labely:Petal.Length 2017-04-29 00:50:01
+## 16                      date:2017-04-29 00:50:01 2017-04-29 00:50:01
+## 17                                    format:rda 2017-04-29 00:50:01
+## 18 session_info:ac06f87ee48fb91fca4372c3f8605ad3 2017-04-29 00:50:01
+## 19                                    format:rda 2017-04-29 00:50:01
+## 20                                    format:txt 2017-04-29 00:50:01
+## 21 relationWith:3582d9d9f70637c5cbfd3ab1da628fa0 2017-04-29 00:50:01
+## 22                                    format:png 2017-04-29 00:50:01
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -643,7 +647,7 @@ By default, for each artifact also it's context, i.e., session info, is saved. I
 \end{alltt}
 
 
-{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Session info --------------------------------------------------------------}}\begin{verbatim}
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Session info ---------------------------------------------------------}}\begin{verbatim}
 ##  setting  value                       
 ##  version  R version 3.3.2 (2016-10-31)
 ##  system   x86_64, darwin13.4.0        
@@ -655,75 +659,143 @@ By default, for each artifact also it's context, i.e., session info, is saved. I
 \end{verbatim}
 
 
-{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Packages ------------------------------------------------------------------}}\begin{verbatim}
-##  package       * version    date       source                         
-##  archivist     * 2.1.1      2016-11-18 local (pbiecek/archivist@NA)   
-##  assertthat      0.1        2013-12-06 CRAN (R 3.3.0)                 
-##  backports       1.0.4      2016-10-24 CRAN (R 3.3.0)                 
-##  bitops          1.0-6      2013-08-17 CRAN (R 3.3.0)                 
-##  colorspace      1.3-1      2016-11-18 CRAN (R 3.3.2)                 
-##  DBI             0.5-1      2016-09-10 cran (@0.5-1)                  
-##  devtools      * 1.12.0     2016-06-24 CRAN (R 3.3.0)                 
-##  digest          0.6.10     2016-08-02 cran (@0.6.10)                 
-##  dplyr         * 0.5.0      2016-06-24 CRAN (R 3.3.0)                 
-##  evaluate        0.10       2016-10-11 CRAN (R 3.3.0)                 
-##  fields          8.4-1      2016-05-05 CRAN (R 3.3.0)                 
-##  foreign         0.8-67     2016-09-13 CRAN (R 3.3.2)                 
-##  geosphere       1.5-5      2016-06-15 CRAN (R 3.3.0)                 
-##  ggmap         * 2.7        2016-12-28 Github (dkahle/ggmap@c6b7579)  
-##  ggplot2       * 2.2.0.9000 2016-12-28 Github (hadley/ggplot2@f6f9f9d)
-##  ggthemes      * 3.3.0      2016-11-24 cran (@3.3.0)                  
-##  gridExtra     * 2.2.1      2016-02-29 CRAN (R 3.3.0)                 
-##  gtable          0.2.0      2016-02-26 CRAN (R 3.3.0)                 
-##  highr           0.6        2016-05-09 CRAN (R 3.3.0)                 
-##  htmltools     * 0.3.5      2016-03-21 CRAN (R 3.3.0)                 
-##  httpuv          1.3.3      2015-08-04 CRAN (R 3.3.0)                 
-##  httr          * 1.2.1      2016-07-03 cran (@1.2.1)                  
-##  jpeg            0.1-8      2014-01-23 CRAN (R 3.3.0)                 
-##  jsonlite        1.1        2016-09-14 cran (@1.1)                    
-##  knitr         * 1.15       2016-11-09 CRAN (R 3.3.2)                 
-##  labeling        0.3        2014-08-23 CRAN (R 3.3.0)                 
-##  lattice       * 0.20-34    2016-09-06 CRAN (R 3.3.2)                 
-##  latticeExtra  * 0.6-28     2016-02-09 CRAN (R 3.3.0)                 
-##  lazyeval        0.2.0      2016-06-12 CRAN (R 3.3.0)                 
-##  lubridate     * 1.6.0      2016-09-13 cran (@1.6.0)                  
-##  magrittr        1.5        2014-11-22 CRAN (R 3.3.0)                 
-##  mapproj         1.2-4      2015-08-03 CRAN (R 3.3.0)                 
-##  maps            3.1.1      2016-07-27 CRAN (R 3.3.0)                 
-##  maptools        0.8-40     2016-11-15 CRAN (R 3.3.2)                 
-##  memoise         1.0.0      2016-01-29 CRAN (R 3.3.0)                 
-##  mime            0.5        2016-07-07 cran (@0.5)                    
-##  munsell         0.4.3      2016-02-13 CRAN (R 3.3.0)                 
-##  plyr            1.8.4      2016-06-08 CRAN (R 3.3.0)                 
-##  png             0.1-7      2013-12-03 CRAN (R 3.3.0)                 
-##  proto           1.0.0      2016-10-29 CRAN (R 3.3.0)                 
-##  R6              2.2.0      2016-10-05 cran (@2.2.0)                  
-##  RColorBrewer  * 1.1-2      2014-12-07 CRAN (R 3.3.0)                 
-##  Rcpp            0.12.8     2016-11-17 CRAN (R 3.3.2)                 
-##  RCurl           1.95-4.8   2016-03-01 CRAN (R 3.3.0)                 
-##  readr         * 1.0.0      2016-08-03 CRAN (R 3.3.0)                 
-##  reshape2        1.4.2      2016-10-22 cran (@1.4.2)                  
-##  RgoogleMaps     1.4.1      2016-09-18 CRAN (R 3.3.0)                 
-##  rjson           0.2.15     2014-11-03 CRAN (R 3.3.0)                 
-##  RJSONIO         1.3-0      2014-07-28 CRAN (R 3.3.0)                 
-##  rmarkdown       1.2        2016-11-21 CRAN (R 3.3.2)                 
-##  rprojroot       1.1        2016-10-29 CRAN (R 3.3.0)                 
-##  rsconnect       0.6        2016-11-21 CRAN (R 3.3.2)                 
-##  RSQLite         1.0.0      2014-10-25 CRAN (R 3.1.2)                 
-##  rstudioapi      0.6        2016-06-27 cran (@0.6)                    
-##  rworldmap     * 1.3-6      2016-02-03 CRAN (R 3.3.0)                 
-##  scales        * 0.4.1      2016-11-09 cran (@0.4.1)                  
-##  shiny         * 0.14.2     2016-11-01 cran (@0.14.2)                 
-##  SmarterPoland * 1.7        2016-03-28 CRAN (R 3.3.0)                 
-##  sp            * 1.2-3      2016-04-14 CRAN (R 3.3.0)                 
-##  spam            1.4-0      2016-08-30 CRAN (R 3.3.0)                 
-##  stringi         1.1.2      2016-10-01 cran (@1.1.2)                  
-##  stringr         1.1.0      2016-08-19 CRAN (R 3.3.0)                 
-##  tibble          1.2        2016-08-26 cran (@1.2)                    
-##  tidyr         * 0.6.0      2016-08-12 CRAN (R 3.3.0)                 
-##  withr           1.0.2      2016-06-20 CRAN (R 3.3.0)                 
-##  xtable          1.8-2      2016-02-05 CRAN (R 3.3.0)                 
-##  yaml            2.1.14     2016-11-12 cran (@2.1.14)
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Packages -------------------------------------------------------------}}\begin{verbatim}
+##  package       * version    date      
+##  archivist     * 2.1.1      2016-11-18
+##  assertthat      0.1        2013-12-06
+##  backports       1.0.4      2016-10-24
+##  bitops          1.0-6      2013-08-17
+##  colorspace      1.3-1      2016-11-18
+##  DBI             0.5-1      2016-09-10
+##  devtools      * 1.12.0     2016-06-24
+##  digest          0.6.10     2016-08-02
+##  dplyr         * 0.5.0      2016-06-24
+##  evaluate        0.10       2016-10-11
+##  fields          8.4-1      2016-05-05
+##  foreign         0.8-67     2016-09-13
+##  geosphere       1.5-5      2016-06-15
+##  ggmap         * 2.7        2016-12-28
+##  ggplot2       * 2.2.0.9000 2016-12-28
+##  ggthemes      * 3.3.0      2016-11-24
+##  gridExtra     * 2.2.1      2016-02-29
+##  gtable          0.2.0      2016-02-26
+##  highr           0.6        2016-05-09
+##  htmltools     * 0.3.5      2016-03-21
+##  httpuv          1.3.3      2015-08-04
+##  httr          * 1.2.1      2016-07-03
+##  jpeg            0.1-8      2014-01-23
+##  jsonlite        1.1        2016-09-14
+##  knitr         * 1.15       2016-11-09
+##  labeling        0.3        2014-08-23
+##  lattice       * 0.20-34    2016-09-06
+##  latticeExtra  * 0.6-28     2016-02-09
+##  lazyeval        0.2.0      2016-06-12
+##  lubridate     * 1.6.0      2016-09-13
+##  magrittr        1.5        2014-11-22
+##  mapproj         1.2-4      2015-08-03
+##  maps            3.1.1      2016-07-27
+##  maptools        0.8-40     2016-11-15
+##  memoise         1.0.0      2016-01-29
+##  mime            0.5        2016-07-07
+##  munsell         0.4.3      2016-02-13
+##  plyr            1.8.4      2016-06-08
+##  png             0.1-7      2013-12-03
+##  proto           1.0.0      2016-10-29
+##  R6              2.2.0      2016-10-05
+##  RColorBrewer  * 1.1-2      2014-12-07
+##  Rcpp            0.12.8     2016-11-17
+##  RCurl           1.95-4.8   2016-03-01
+##  readr         * 1.0.0      2016-08-03
+##  reshape2        1.4.2      2016-10-22
+##  RgoogleMaps     1.4.1      2016-09-18
+##  rjson           0.2.15     2014-11-03
+##  RJSONIO         1.3-0      2014-07-28
+##  rmarkdown       1.2        2016-11-21
+##  rprojroot       1.1        2016-10-29
+##  rsconnect       0.6        2016-11-21
+##  RSQLite         1.0.0      2014-10-25
+##  rstudioapi      0.6        2016-06-27
+##  rworldmap     * 1.3-6      2016-02-03
+##  scales        * 0.4.1      2016-11-09
+##  shiny         * 0.14.2     2016-11-01
+##  SmarterPoland * 1.7        2016-03-28
+##  sp            * 1.2-3      2016-04-14
+##  spam            1.4-0      2016-08-30
+##  stringi         1.1.2      2016-10-01
+##  stringr         1.1.0      2016-08-19
+##  tibble          1.2        2016-08-26
+##  tidyr         * 0.6.0      2016-08-12
+##  withr           1.0.2      2016-06-20
+##  xtable          1.8-2      2016-02-05
+##  yaml            2.1.14     2016-11-12
+##  source                         
+##  local (pbiecek/archivist@NA)   
+##  CRAN (R 3.3.0)                 
+##  CRAN (R 3.3.0)                 
+##  CRAN (R 3.3.0)                 
+##  CRAN (R 3.3.2)                 
+##  cran (@0.5-1)                  
+##  CRAN (R 3.3.0)                 
+##  cran (@0.6.10)                 
+##  CRAN (R 3.3.0)                 
+##  CRAN (R 3.3.0)                 
+##  CRAN (R 3.3.0)                 
+##  CRAN (R 3.3.2)                 
+##  CRAN (R 3.3.0)                 
+##  Github (dkahle/ggmap@c6b7579)  
+##  Github (hadley/ggplot2@f6f9f9d)
+##  cran (@3.3.0)                  
+##  CRAN (R 3.3.0)                 
+##  CRAN (R 3.3.0)                 
+##  CRAN (R 3.3.0)                 
+##  CRAN (R 3.3.0)                 
+##  CRAN (R 3.3.0)                 
+##  cran (@1.2.1)                  
+##  CRAN (R 3.3.0)                 
+##  cran (@1.1)                    
+##  CRAN (R 3.3.2)                 
+##  CRAN (R 3.3.0)                 
+##  CRAN (R 3.3.2)                 
+##  CRAN (R 3.3.0)                 
+##  CRAN (R 3.3.0)                 
+##  cran (@1.6.0)                  
+##  CRAN (R 3.3.0)                 
+##  CRAN (R 3.3.0)                 
+##  CRAN (R 3.3.0)                 
+##  CRAN (R 3.3.2)                 
+##  CRAN (R 3.3.0)                 
+##  cran (@0.5)                    
+##  CRAN (R 3.3.0)                 
+##  CRAN (R 3.3.0)                 
+##  CRAN (R 3.3.0)                 
+##  CRAN (R 3.3.0)                 
+##  cran (@2.2.0)                  
+##  CRAN (R 3.3.0)                 
+##  CRAN (R 3.3.2)                 
+##  CRAN (R 3.3.0)                 
+##  CRAN (R 3.3.0)                 
+##  cran (@1.4.2)                  
+##  CRAN (R 3.3.0)                 
+##  CRAN (R 3.3.0)                 
+##  CRAN (R 3.3.0)                 
+##  CRAN (R 3.3.2)                 
+##  CRAN (R 3.3.0)                 
+##  CRAN (R 3.3.2)                 
+##  CRAN (R 3.1.2)                 
+##  cran (@0.6)                    
+##  CRAN (R 3.3.0)                 
+##  cran (@0.4.1)                  
+##  cran (@0.14.2)                 
+##  CRAN (R 3.3.0)                 
+##  CRAN (R 3.3.0)                 
+##  CRAN (R 3.3.0)                 
+##  cran (@1.1.2)                  
+##  CRAN (R 3.3.0)                 
+##  cran (@1.2)                    
+##  CRAN (R 3.3.0)                 
+##  CRAN (R 3.3.0)                 
+##  CRAN (R 3.3.0)                 
+##  cran (@2.1.14)
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -811,13 +883,13 @@ Both following instructions retrieve an \proglang{R} object from GitHub, load it
     \hlkwc{repo} \hlstd{=} \hlstr{"graphGallery"}\hlstd{,} \hlkwc{user} \hlstd{=} \hlstr{"pbiecek"}\hlstd{,} \hlkwc{value} \hlstd{=} \hlnum{TRUE}\hlstd{)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-17-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-18-1} 
 \begin{kframe}\begin{alltt}
 \hlkwd{loadFromLocalRepo}\hlstd{(}\hlstr{"7f34533"}\hlstd{,}
     \hlkwd{system.file}\hlstd{(}\hlstr{"graphGallery"}\hlstd{,} \hlkwc{package} \hlstd{=} \hlstr{"archivist"}\hlstd{),} \hlkwc{value} \hlstd{=} \hlnum{TRUE}\hlstd{)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-17-2} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-18-2} 
 
 \end{knitrout}
 
@@ -839,7 +911,7 @@ The following instructions retrieve the same \proglang{R} object but this time f
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-19-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-20-1} 
 
 \end{knitrout}
 
@@ -924,7 +996,8 @@ For example, the following command retrieves MD5 hashes of all objects of the cl
     \hlkwc{repoDir} \hlstd{=} \hlkwd{system.file}\hlstd{(}\hlstr{"graphGallery"}\hlstd{,} \hlkwc{package} \hlstd{=} \hlstr{"archivist"}\hlstd{))}
 \end{alltt}
 \begin{verbatim}
-## [1] "7f3453331910e3f321ef97d87adb5bad" "369227e67f9164dcbe934dadf2b53cc2"
+## [1] "7f3453331910e3f321ef97d87adb5bad"
+## [2] "369227e67f9164dcbe934dadf2b53cc2"
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -940,8 +1013,10 @@ To get a list of artifacts created within a given date range one can use followi
     \hlkwc{repoDir} \hlstd{=} \hlkwd{system.file}\hlstd{(}\hlstr{"graphGallery"}\hlstd{,} \hlkwc{package} \hlstd{=} \hlstr{"archivist"}\hlstd{))}
 \end{alltt}
 \begin{verbatim}
-## [1] "d9313a0de3e2980201a8971e3384ff26" "ff575c261c949d073b2895b05d1097c3"
-## [3] "2a6e492cb6982f230e48cf46023e2e4f" "93ecfdf1436932e2860c6dbdf2abc2ad"
+## [1] "d9313a0de3e2980201a8971e3384ff26"
+## [2] "ff575c261c949d073b2895b05d1097c3"
+## [3] "2a6e492cb6982f230e48cf46023e2e4f"
+## [4] "93ecfdf1436932e2860c6dbdf2abc2ad"
 ## [5] "afb2550d0f886f0cf3b050f04c5cd4f8"
 \end{verbatim}
 \end{kframe}
@@ -956,7 +1031,8 @@ The \code{searchInLocalRepo} and \code{searchInRemoteRepo} functions allow to us
     \hlkwc{repoDir} \hlstd{=} \hlkwd{system.file}\hlstd{(}\hlstr{"graphGallery"}\hlstd{,} \hlkwc{package} \hlstd{=} \hlstr{"archivist"}\hlstd{))}
 \end{alltt}
 \begin{verbatim}
-## [1] "369227e67f9164dcbe934dadf2b53cc2" "7f3453331910e3f321ef97d87adb5bad"
+## [1] "369227e67f9164dcbe934dadf2b53cc2"
+## [2] "7f3453331910e3f321ef97d87adb5bad"
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -1001,8 +1077,10 @@ Below is the code that searches within the GitHub repository.
 ##    -7.101443     1.858433 
 ## 
 ## $`2a6e492cb6982f230e48cf46023e2e4f`
-##       (Intercept)      Sepal.Length Speciesversicolor  Speciesvirginica 
-##        -1.7023422         0.6321099         2.2101378         3.0900021
+##       (Intercept)      Sepal.Length Speciesversicolor 
+##        -1.7023422         0.6321099         2.2101378 
+##  Speciesvirginica 
+##         3.0900021
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -1187,7 +1265,7 @@ For example, the \code{600bda83cb840947976bd1ce3a11879d} object was created with
 \end{alltt}
 
 
-{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Session info --------------------------------------------------------------}}\begin{verbatim}
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Session info ---------------------------------------------------------}}\begin{verbatim}
 ##  setting  value                       
 ##  version  R version 3.2.2 (2015-08-14)
 ##  system   x86_64, darwin13.4.0        
@@ -1199,7 +1277,7 @@ For example, the \code{600bda83cb840947976bd1ce3a11879d} object was created with
 \end{verbatim}
 
 
-{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Packages ------------------------------------------------------------------}}\begin{verbatim}
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Packages -------------------------------------------------------------}}\begin{verbatim}
 ##  package      * version  date       source                         
 ##  acepack        1.3-3.3  2013-05-03 CRAN (R 3.1.0)                 
 ##  archivist    * 1.9.7.2  2016-02-08 CRAN (R 3.2.2)                 

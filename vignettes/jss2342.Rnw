@@ -32,6 +32,11 @@ The presented \pkg{archivist} package extends, in a combination with packages su
 }
 \Keywords{recordable research, reproducible research, data analysis management, data governance, meta-data, results management}
 
+<<warning=FALSE,results='hide', echo=FALSE>>=
+options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE)
+@
+
+
 %% at least one keyword must be supplied
 
 %% publication information
@@ -72,6 +77,8 @@ E-mail: \email{M.P.Kosinski@gmail.com}
 %% end of declarations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
+
+A vigniette for the \cite{archivist} article.
 
 %% include your article here, just as usual
 %% Note that you should use the \pkg{}, \proglang{} and \code{} commands.
