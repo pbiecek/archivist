@@ -3,7 +3,7 @@ title: "Posts"
 output: html_document
 ---
 <!--
-%\VignetteEngine{knitr::rmarkdown}
+%\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{Posts}
 %\VignetteEncoding{UTF-8}
 -->
