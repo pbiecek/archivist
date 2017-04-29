@@ -49,5 +49,4 @@ Enhances:
 URL: https://pbiecek.github.io/archivist/
 BugReports: https://github.com/pbiecek/archivist/issues
 RoxygenNote: 6.0.1
-BuildVignettes: TRUE
 VignetteBuilder: knitr
