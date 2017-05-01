@@ -38,7 +38,7 @@ The presented \pkg{archivist} package extends, in a combination with packages su
 }
 \Keywords{recordable research, reproducible research, data analysis management, data governance, meta-data, results management}
 
-<<warning=FALSE,results=hide, echo=FALSE>>=
+<<warning=FALSE,results='hide', echo=FALSE>>=
 options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE)
 @
 
@@ -794,7 +794,7 @@ In this article we have also presented some use-cases for the \pkg{archivist} pa
 Thanks go to Ross Ihaka, \L{}ukasz Bartnik, Cezary Chudzian and two anonymous reviewers for valuable discussions and comments on the idea of recordable research and early versions of this paper. We would like to thank Witold Chodor for his great contributions to the development of this package. The package \pkg{archivist} was initiated as an open project in the company \textit{iQor Polska sp. z o.o.}.
 
 
-\bibliographystyle{apacite}
+%\bibliographystyle{apacite}
 \bibliography{jss2342}
 
 \end{document}
