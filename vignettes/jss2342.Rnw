@@ -1,4 +1,4 @@
-%\VignetteIndexEntry{R packages: archivist}
+%\VignetteIndexEntry{archivist: An R Package for Managing, Recording and Restoring Data Analysis Results (article)}
 %\VignetteEngine{knitr::knitr}
 %\VignetteKeyword{archivsit}
 %\VignetteKeyword{package}
