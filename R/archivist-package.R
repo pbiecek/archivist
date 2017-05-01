@@ -36,7 +36,7 @@
 #' @section Blogging:
 #'  
 #' We have prepared history of blog posts and conference talks about \pkg{archivist} under this link 
-#' \href{http://pbiecek.github.io/archivist/Posts.html}{http://pbiecek.github.io/archivist/Posts.html}
+#' \href{http://pbiecek.github.io/archivist/articles/posts.html}{http://pbiecek.github.io/archivist/articles/posts.html}
 #'
 #' @author
 #' Przemyslaw Biecek [aut, cre] \email{przemyslaw.biecek@@gmail.com} \cr

@@ -27,3 +27,16 @@ vignettes/caching.Rmd
 vignettes/accessibility.Rmd
 vignettes/chaining.Rmd
 vignettes/extensions.Rmd
+vignettes/figure/
+vignettes/allModels/
+vignettes/arepo/
+vignettes/jss2343.pdf
+vignettes/jss2343.tex
+vignettes/jss2343.blg
+docs/
+man-roxygen/
+inst/doc/posts.Rmd
+inst/doc/caching.Rmd
+inst/doc/accessibility.Rmd
+inst/doc/chaining.Rmd
+inst/doc/extensions.Rmd

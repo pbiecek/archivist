@@ -1,4 +1,4 @@
-##    code copied from http://cran.r-project.org/web/packages/magrittr/
+##    code copied from https://cran.r-project.org/package=magrittr
 ##    package binaries - version 1.0.1
 ##
 #' @title magrittr - a Forward-Pipe Operator for R
