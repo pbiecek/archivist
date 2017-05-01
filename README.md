@@ -19,7 +19,6 @@ A set of tools for datasets and plots archiving
 Project is supported by [Travis CI](https://travis-ci.org/) and [waffle.io](https://waffle.io/).
 
 
-
 ### Please see the  [archivist wiki](https://github.com/pbiecek/archivist/wiki) for information. 
 
 ### Information for [developers](https://github.com/pbiecek/archivist/wiki/For-developers)
@@ -27,11 +26,15 @@ Project is supported by [Travis CI](https://travis-ci.org/) and [waffle.io](http
 [![Gitter](https://badges.gitter.im/pbiecek/archivist.svg)](https://gitter.im/pbiecek/archivist?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 <h5> Installation of the archivist package: </h5>
+
 To get started, install the latest version of **archivist** from CRAN:
+
 ```{Ruby}
 install.packages("archivist")
 ```
+
 or use:
+
 ```{Ruby}
 if (!require(devtools)) {
     install.packages("devtools")
@@ -39,16 +42,20 @@ if (!require(devtools)) {
 }
 install_github("pbiecek/archivist")
 ```
+
 Make sure you have [rtools](http://cran.r-project.org/bin/windows/Rtools/) installed on your computer.
 
 <h5> The list of available functions: </h5>
+
 ```{Ruby}
 help(package="archivist")
 ```
+
 <h4> The list of use-cases: is available on archivist webpage http://pbiecek.github.io/archivist/</h4>
 
 
 <h5> Authors of the project: </h5>
+
 > Przemysław Biecek, przemyslaw.biecek@gmail.com
 >
 > Marcin Kosiński, m.p.kosinski@gmail.com
