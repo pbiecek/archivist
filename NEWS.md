@@ -1,6 +1,7 @@
 archivist 2.1.4
 ----------------------------------------------------------------
 1. `dbExecute()` is used instead of `dbGetQuery()` as is recommended in latest version of `DBI` package ([#316](https://github.com/pbiecek/archivist/issues/316)).
+2. Function `removeTagsRepo()` is added. It allows to remove specific tags from specific objects. Note that you cannot specify tags via regular expressions (to avoid some accidental deletes). You can always use `getLocalTags()` to get list of available tags.
 
 archivist 2.1.3
 ----------------------------------------------------------------
