@@ -1,3 +1,7 @@
+archivist 2.1.4
+----------------------------------------------------------------
+1. `dbExecute()` is used instead of `dbGetQuery()` as is recommended in latest version of `DBI` package ([#316](https://github.com/pbiecek/archivist/issues/316)).
+
 archivist 2.1.3
 ----------------------------------------------------------------
 1. It is possible to archive tags specified by a user without defualt tags [[#309](https://github.com/pbiecek/archivist/issues/309)]
