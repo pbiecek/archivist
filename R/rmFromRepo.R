@@ -361,11 +361,11 @@ rmFromLocalRepo <- function( md5hash, repoDir = aoptions('repoDir'), removeData 
       dataMd5hash <- unlist(dataMd5hash, use.names = FALSE) 
       
       # remove object's data from backpack.db file
-      executeSingleQuery( dir = repoDir,
+      executeSingleSilentQuery( dir = repoDir,
                           paste0( "DELETE FROM artifact WHERE ",
                                   "md5hash IN ('", paste0( dataMd5hash, collapse = "','" ), "')")
       )
-      executeSingleQuery( dir = repoDir,
+      executeSingleSilentQuery( dir = repoDir,
                           paste0( "DELETE FROM tag WHERE ",
                                   "artifact IN ('", paste0( dataMd5hash, collapse = "','" ), "')")
       )      
@@ -387,12 +387,12 @@ If you used artifact's md5hash that was recently deleted from repository then it
 Otherwise you used md5hash that was not stored in the repository. Try again with different md5hash.") 
     }
     # remove objects from backpack.db file
-    executeSingleQuery( dir = repoDir,
+    executeSingleSilentQuery( dir = repoDir,
                         paste0( "DELETE FROM artifact WHERE ",
                                 "md5hash IN ('", paste0( md5hash, collapse = "','" ), "')")
                       )
                         
-    executeSingleQuery( dir = repoDir,
+    executeSingleSilentQuery( dir = repoDir,
                         paste0( "DELETE FROM tag WHERE ",
                                 "artifact IN ('", paste0( md5hash, collapse = "','" ), "')")
                       )      
@@ -449,12 +449,12 @@ If you used artifact's md5hash abreviation that was deleted then try to use comp
       cat( "Data related to more than 1 artifact was removed from Repository.")
     
     # remove object's (objects') data from backpack.db file
-    executeSingleQuery( dir = repoDir,
+    executeSingleSilentQuery( dir = repoDir,
                         paste0( "DELETE FROM artifact WHERE ",
                                 "md5hash IN ('", paste0( dataMd5hash, collapse = "','" ), "')")
     )
     
-    executeSingleQuery( dir = repoDir,
+    executeSingleSilentQuery( dir = repoDir,
                         paste0( "DELETE FROM tag WHERE ",
                                 "artifact IN ('", paste0( dataMd5hash, collapse = "','" ), "')")
     )
@@ -479,11 +479,11 @@ Otherwise you used md5hash that was not stored in the repository. Try again with
   # remove object from database
   # if there are many objects with the same md5hash (copies) all of them will be deleted
   sapply( md5hash, function(x){
-    executeSingleQuery( dir = repoDir,
+    executeSingleSilentQuery( dir = repoDir,
                 paste0( "DELETE FROM artifact WHERE ",
                         "md5hash = '", x, "'" ) )} )
   sapply( md5hash, function(x){
-    executeSingleQuery( dir = repoDir,
+    executeSingleSilentQuery( dir = repoDir,
                 paste0( "DELETE FROM tag WHERE ",
                         "artifact = '", x, "'" ) )} )
    
