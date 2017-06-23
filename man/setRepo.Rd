@@ -21,7 +21,7 @@ make dafault.}
 Within every transaction the connection is opened and closed, thus the \code{connector} function will be executed often and shall not be computationally heavy.
 See examples for \code{createLocalRepo} for some applications. 
 If \code{connector=NULL} then information about connectors to an external database will be removed.
-Note that it’s an experimental feature.}
+Note that it's an experimental feature.}
 
 \item{user}{While working with the Remote repository. A character containing
 a name of the Remote user that we want to make default.}

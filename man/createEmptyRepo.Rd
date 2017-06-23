@@ -24,7 +24,7 @@ Default set to \code{force = TRUE}.}
 \item{connector}{If user want to use some external database instead of SQLite, then the \code{connector} shall be the function that create a \code{DBI} connection with the database.
 Within every transaction the connection is opened and closed, thus the \code{connector} function will be executed often and shall not be computationally heavy.
 See the Examples section for some examples.
-Note that it’s an experimental feature.}
+Note that it's an experimental feature.}
 
 \item{...}{All arguments are being passed to \code{createLocalRepo}.}
 }
