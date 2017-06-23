@@ -127,3 +127,72 @@ addTagsRepo <- function( md5hashes, repoDir = NULL, FUN = NULL, tags = NULL, ...
   
   invisible(helpfulDF)
 }
+
+##
+#' @title Remove Tags from Repository
+#' 
+#' @description
+#' \code{removeTagsRepo} removes selected \link{Tags} from selected objects in \link{Repository}.
+#' 
+#' @details
+#' \code{removeTagsRepo} function removes all Tags from all listed objects.
+#' Note that some hashes are required for keeping erlations between objects in the repository.
+#' Be carefull what are you removing.
+#'
+#' @param md5hashes a character vector of \code{md5hashes} specifying to which
+#' corresponding artifacts \code{Tags} should be removes 
+#'  
+#' @param tags A character vector which specifies what Tags should be removed.
+#' 
+#' @param repoDir A character that specifies the directory of the Repository to which
+#' new \code{Tags} will be added. If it is set to \code{NULL} (by default),
+#' it uses the \code{repoDir} specified in \link{setLocalRepo}.
+#' 
+#' @author 
+#' Przemyslaw Biecek, \email{przemyslaw.biecek@@gmail.com}
+#'
+#' @template roxlate-references
+#' @template roxlate-contact
+#'
+#' @examples
+#' \dontrun{
+#' # Creating empty repository
+#' exampleRepoDir <- tempfile()
+#' createLocalRepo(exampleRepoDir, force=TRUE)
+#' 
+#' # Saving lm artifacts into repository
+#' m1 <- lm(Sepal.Length~Species, iris)
+#' saveToLocalRepo(m1, exampleRepoDir)
+#' 
+#' # We may see what kind of Tags are related to "m1" artifact corresponding to
+#' getTagsLocal("9e66edd297c2f291446f3503c01d443a", exampleRepoDir, "")
+#' 
+#' # One more look at our Repo
+#' removeTagsRepo("9e66edd297c2f291446f3503c01d443a", exampleRepoDir, tags = "rank:3")
+#' 
+#' # Deleting example repository
+#' deleteLocalRepo(exampleRepoDir, deleteRoot=TRUE)
+#' rm(exampleRepoDir)
+#' }
+#' 
+#' @family archivist
+#' @rdname removeTagsRepo
+#' @export
+removeTagsRepo <- function(md5hashes, repoDir = NULL, tags = NULL){
+  stopifnot( is.character( md5hashes  ))
+  stopifnot( is.character( tags  ))
+  stopifnot( is.character( repoDir ) & length( repoDir ) == 1 )
+  if (length( md5hashes ) == 0) return(invisible(NULL))
+
+  repoDir <- checkDirectory( repoDir )
+  
+  # remove tags
+  for (md5hash in md5hashes) {
+    for (tag in tags) {
+      executeSingleSilentQuery( dir = repoDir,
+                    paste0( "DELETE FROM tag WHERE ",
+                            "artifact = '", md5hash, "' and tag = '",  tag,"'" ) )
+    }
+  }
+}
+

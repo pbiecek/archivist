@@ -122,8 +122,8 @@ addArtifact <- function( md5hash, name, dir ){
 
 addTag <- function( tag, md5hash, createdDate = now(), dir ){
   executeSingleSilentQuery( dir,
-              paste0("insert into tag (artifact, tag, createdDate) values ",
-                     "('", md5hash, "', '", gsub(tag, pattern="'", replacement=""), "', '", as.character( now() ), "')" ) )
+                            paste0("insert into tag (artifact, tag, createdDate) values ",
+                                   "('", md5hash, "', '", gsub(tag, pattern="'", replacement=""), "', '", as.character( now() ), "')" ) )
 }
 
 # realDBname was needed because Github version function uses temporary file as database
