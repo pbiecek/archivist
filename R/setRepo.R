@@ -55,8 +55,14 @@
 #' If the Repository is stored in the main folder on the Remote repository,
 #' this should be set to \code{subdir = "/"} as default.
 #' 
+#' @param connector If user want to use some external database instead of SQLite, then the \code{connector} shall be the function that create a \code{DBI} connection with the database.
+#' Within every transaction the connection is opened and closed, thus the \code{connector} function will be executed often and shall not be computationally heavy.
+#' See examples for \code{createLocalRepo} for some applications. 
+#' If \code{connector=NULL} then information about connectors to an external database will be removed.
+#' Note that it’s an experimental feature.
+#' 
 #' @author 
-#' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
+#' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #' 
 #' Przemyslaw Biecek, \email{przemyslaw.biecek@@gmail.com}
 #' 
@@ -124,6 +130,25 @@ setLocalRepo <- function( repoDir ){
   invisible(aoptions("repoDir", repoDir))
 }
 
+#' @family archivist
+#' @rdname setRepo
+#' @export
+setPostgresRepo <- function( repoDir, connector = NULL){
+  if (is.null(connector)) {
+    .ArchivistEnv$useExternalDatabase <- FALSE
+    return(invisible("disconnected"))
+  } 
+  
+  stopifnot( is.character( repoDir ), length( repoDir ) == 1 )
+  stopifnot( is.function( connector ))
+  
+  repoDir <- checkDirectory( repoDir )
+  
+  .ArchivistEnv$useExternalDatabase <- TRUE
+  .ArchivistEnv$externalConnector <- connector
+  
+  invisible(aoptions("repoDir", repoDir))
+}
 
 #' @family archivist
 #' @rdname setRepo

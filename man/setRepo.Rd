@@ -2,10 +2,13 @@
 % Please edit documentation in R/setRepo.R
 \name{setLocalRepo}
 \alias{setLocalRepo}
+\alias{setPostgresRepo}
 \alias{setRemoteRepo}
 \title{Set Repository's Global Path}
 \usage{
 setLocalRepo(repoDir)
+
+setPostgresRepo(repoDir, connector = NULL)
 
 setRemoteRepo(user, repo, branch = "master", subdir = "/",
   repoType = "github")
@@ -13,6 +16,12 @@ setRemoteRepo(user, repo, branch = "master", subdir = "/",
 \arguments{
 \item{repoDir}{A character denoting a directory of a Repository that we want to
 make dafault.}
+
+\item{connector}{If user want to use some external database instead of SQLite, then the \code{connector} shall be the function that create a \code{DBI} connection with the database.
+Within every transaction the connection is opened and closed, thus the \code{connector} function will be executed often and shall not be computationally heavy.
+See examples for \code{createLocalRepo} for some applications. 
+If \code{connector=NULL} then information about connectors to an external database will be removed.
+Note that it’s an experimental feature.}
 
 \item{user}{While working with the Remote repository. A character containing
 a name of the Remote user that we want to make default.}
@@ -174,9 +183,33 @@ Other archivist: \code{\link{Repository}},
   \code{\link{splitTagsLocal}},
   \code{\link{summaryLocalRepo}},
   \code{\link{zipLocalRepo}}
+
+Other archivist: \code{\link{Repository}},
+  \code{\link{Tags}}, \code{\link{\%a\%}},
+  \code{\link{addHooksToPrint}}, \code{\link{addTagsRepo}},
+  \code{\link{aformat}}, \code{\link{ahistory}},
+  \code{\link{alink}}, \code{\link{aoptions}},
+  \code{\link{archivist-package}}, \code{\link{aread}},
+  \code{\link{asearch}}, \code{\link{asession}},
+  \code{\link{atrace}}, \code{\link{cache}},
+  \code{\link{copyLocalRepo}},
+  \code{\link{createLocalRepo}},
+  \code{\link{createMDGallery}},
+  \code{\link{deleteLocalRepo}},
+  \code{\link{getRemoteHook}}, \code{\link{getTagsLocal}},
+  \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
+  \code{\link{removeTagsRepo}}, \code{\link{restoreLibs}},
+  \code{\link{rmFromLocalRepo}},
+  \code{\link{saveToLocalRepo}},
+  \code{\link{searchInLocalRepo}},
+  \code{\link{shinySearchInLocalRepo}},
+  \code{\link{showLocalRepo}},
+  \code{\link{splitTagsLocal}},
+  \code{\link{summaryLocalRepo}},
+  \code{\link{zipLocalRepo}}
 }
 \author{
-Marcin Kosinski , \email{m.p.kosinski@gmail.com}
+Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 
 Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
 }

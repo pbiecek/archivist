@@ -37,10 +37,16 @@
 #' 
 #' @param default If \code{default = TRUE} then \code{repoDir} is set as default Local Repository. 
 #' 
+#' @param connector If user want to use some external database instead of SQLite, then the \code{connector} shall be the function that create a \code{DBI} connection with the database.
+#' Within every transaction the connection is opened and closed, thus the \code{connector} function will be executed often and shall not be computationally heavy.
+#' See the Examples section for some examples.
+#' Note that it’s an experimental feature.
+#' 
 #' @param ... All arguments are being passed to \code{createLocalRepo}.
 #' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
+#' Przemyslaw Biecek, \email{przemyslaw.biecek@@gmail.com}
 #'
 #' @template roxlate-references
 #' @template roxlate-contact
@@ -54,6 +60,25 @@
 #' showLocalRepo()
 #' showLocalRepo(method = "tags")
 #' deleteLocalRepo( repoDir = exampleRepoDir, unset = TRUE, deleteRoot = TRUE)
+#' 
+#' # example with external database
+#' # create a connector
+#' require("RPostgreSQL")
+#' drv <- dbDriver("PostgreSQL")
+#' connector <- function() {
+#'   dbConnect(drv, dbname = "postgres",
+#'             host = "localhost", port = 5432,
+#'             user = "user", password = pw)
+#' }
+#' # Now you can create an empty repository with postgress database
+#' exampleRepoDir <- tempfile()
+#' createPostgresRepo( repoDir = exampleRepoDir, connector)
+#' data(iris)
+#' saveToLocalRepo(iris)
+#' showLocalRepo()
+#' showLocalRepo(method = "tags")
+#' deleteLocalRepo( repoDir = exampleRepoDir, unset = TRUE, deleteRoot = TRUE)
+#' 
 #' }
 #' @family archivist
 #' @rdname createEmptyRepo
@@ -107,6 +132,27 @@ createLocalRepo <- function( repoDir, force = TRUE, default = FALSE ){
 #' @family archivist
 #' @rdname createEmptyRepo
 #' @export
+createPostgresRepo <- function( repoDir, connector, force = TRUE, default = FALSE ){
+  stopifnot( is.character( repoDir ), length( repoDir ) == 1 )
+  stopifnot( is.logical( default ), length( default ) == 1 )
+  stopifnot( is.function( connector ))
+
+  if ( !file.exists( repoDir ) & !force ) 
+    stop( paste0("Directory ", repoDir, " does not exist. Try with force=TRUE.") )
+  if ( !file.exists( repoDir ) & force ){
+    cat( paste0("Directory ", repoDir, " did not exist. Forced to create a new directory.") )
+    dir.create( repoDir )
+  }
+  
+  .ArchivistEnv$useExternalDatabase <- TRUE
+  .ArchivistEnv$externalConnector <- connector
+  
+  createLocalRepo( repoDir, force = force, default = default )
+}
+
+#' @family archivist
+#' @rdname createEmptyRepo
+#' @export
 createEmptyRepo <- function(...) {
   .Deprecated("createEmptyRepo is deprecated. Use createLocalRepo() instead.")
   createLocalRepo(...)
@@ -129,7 +175,13 @@ addTag <- function( tag, md5hash, createdDate = now(), dir ){
 # realDBname was needed because Github version function uses temporary file as database
 # and they do not name this file as backpack.db in repoDir directory
 getConnectionToDB <- function( repoDir ){
-  dbConnect( get( "sqlite", envir = .ArchivistEnv ), file.path( repoDir, "backpack.db" ) )
+  useExternal <- get( "useExternalDatabase", envir = .ArchivistEnv )
+  if (!is.null(useExternal) & useExternal) {
+    externalConnector <- get( "externalConnector", envir = .ArchivistEnv )
+    externalConnector()
+  } else {
+    dbConnect( get( "sqlite", envir = .ArchivistEnv ), file.path( repoDir, "backpack.db" ) )
+  }
 }
   
 executeSingleQuery <- function( dir, query ) {

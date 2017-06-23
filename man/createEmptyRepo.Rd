@@ -2,10 +2,13 @@
 % Please edit documentation in R/createEmptyRepo.R
 \name{createLocalRepo}
 \alias{createLocalRepo}
+\alias{createPostgresRepo}
 \alias{createEmptyRepo}
 \title{Create an Empty Repository}
 \usage{
 createLocalRepo(repoDir, force = TRUE, default = FALSE)
+
+createPostgresRepo(repoDir, connector, force = TRUE, default = FALSE)
 
 createEmptyRepo(...)
 }
@@ -17,6 +20,11 @@ then function call will force to create new \code{repoDir} directory.
 Default set to \code{force = TRUE}.}
 
 \item{default}{If \code{default = TRUE} then \code{repoDir} is set as default Local Repository.}
+
+\item{connector}{If user want to use some external database instead of SQLite, then the \code{connector} shall be the function that create a \code{DBI} connection with the database.
+Within every transaction the connection is opened and closed, thus the \code{connector} function will be executed often and shall not be computationally heavy.
+See the Examples section for some examples.
+Note that it’s an experimental feature.}
 
 \item{...}{All arguments are being passed to \code{createLocalRepo}.}
 }
@@ -62,6 +70,25 @@ saveToLocalRepo(iris)
 showLocalRepo()
 showLocalRepo(method = "tags")
 deleteLocalRepo( repoDir = exampleRepoDir, unset = TRUE, deleteRoot = TRUE)
+
+# example with external database
+# create a connector
+require("RPostgreSQL")
+drv <- dbDriver("PostgreSQL")
+connector <- function() {
+  dbConnect(drv, dbname = "postgres",
+            host = "localhost", port = 5432,
+            user = "user", password = pw)
+}
+# Now you can create an empty repository with postgress database
+exampleRepoDir <- tempfile()
+createPostgresRepo( repoDir = exampleRepoDir, connector)
+data(iris)
+saveToLocalRepo(iris)
+showLocalRepo()
+showLocalRepo(method = "tags")
+deleteLocalRepo( repoDir = exampleRepoDir, unset = TRUE, deleteRoot = TRUE)
+
 }
 }
 \references{
@@ -118,7 +145,32 @@ Other archivist: \code{\link{Repository}},
   \code{\link{splitTagsLocal}},
   \code{\link{summaryLocalRepo}},
   \code{\link{zipLocalRepo}}
+
+Other archivist: \code{\link{Repository}},
+  \code{\link{Tags}}, \code{\link{\%a\%}},
+  \code{\link{addHooksToPrint}}, \code{\link{addTagsRepo}},
+  \code{\link{aformat}}, \code{\link{ahistory}},
+  \code{\link{alink}}, \code{\link{aoptions}},
+  \code{\link{archivist-package}}, \code{\link{aread}},
+  \code{\link{asearch}}, \code{\link{asession}},
+  \code{\link{atrace}}, \code{\link{cache}},
+  \code{\link{copyLocalRepo}},
+  \code{\link{createMDGallery}},
+  \code{\link{deleteLocalRepo}},
+  \code{\link{getRemoteHook}}, \code{\link{getTagsLocal}},
+  \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
+  \code{\link{removeTagsRepo}}, \code{\link{restoreLibs}},
+  \code{\link{rmFromLocalRepo}},
+  \code{\link{saveToLocalRepo}},
+  \code{\link{searchInLocalRepo}},
+  \code{\link{setLocalRepo}},
+  \code{\link{shinySearchInLocalRepo}},
+  \code{\link{showLocalRepo}},
+  \code{\link{splitTagsLocal}},
+  \code{\link{summaryLocalRepo}},
+  \code{\link{zipLocalRepo}}
 }
 \author{
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}
+Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
 }
