@@ -48,6 +48,7 @@
 #' @import httr
 #' @importFrom DBI dbWriteTable
 #' @importFrom DBI dbGetQuery
+#' @importFrom DBI dbExecute
 #' @importFrom DBI dbDisconnect
 #' @importFrom DBI dbConnect
 #' @importFrom DBI dbReadTable

@@ -88,8 +88,8 @@ createLocalRepo <- function( repoDir, force = TRUE, default = FALSE ){
   dbWriteTable( backpack, "tag", tag, overwrite = TRUE, row.names = FALSE )
   
   
-  dbGetQuery(backpack, "delete from artifact")
-  dbGetQuery(backpack, "delete from tag")
+  dbExecute(backpack, "delete from artifact")
+  dbExecute(backpack, "delete from tag")
   
   dbDisconnect( backpack )
   
