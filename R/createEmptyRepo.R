@@ -115,13 +115,13 @@ createEmptyRepo <- function(...) {
 addArtifact <- function( md5hash, name, dir ){
   # creates connection and driver
   # send insert
-  executeSingleQuery( dir,
+  executeSingleSilentQuery( dir,
               paste0( "insert into artifact (md5hash, name, createdDate) values",
                       "('", md5hash, "', '", name, "', '", as.character( now() ), "')" ) )
 }
 
 addTag <- function( tag, md5hash, createdDate = now(), dir ){
- executeSingleQuery( dir,
+  executeSingleSilentQuery( dir,
               paste0("insert into tag (artifact, tag, createdDate) values ",
                      "('", md5hash, "', '", gsub(tag, pattern="'", replacement=""), "', '", as.character( now() ), "')" ) )
 }
@@ -136,6 +136,13 @@ executeSingleQuery <- function( dir, query ) {
   conn <- getConnectionToDB( dir )
   on.exit( dbDisconnect( conn ) )
   res <- dbGetQuery( conn, query )
+  return( res )
+}
+
+executeSingleSilentQuery <- function( dir, query ) {
+  conn <- getConnectionToDB( dir )
+  on.exit( dbDisconnect( conn ) )
+  res <- dbExecute( conn, query )
   return( res )
 }
 

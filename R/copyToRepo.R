@@ -180,7 +180,7 @@ copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, bra
                              "('", paste0( md5hashes, collapse="','"), "')" ) ) 
   
   apply( toInsertArtifactTable, 1, function(x){
-         executeSingleQuery( dir = repoTo, 
+    executeSingleSilentQuery( dir = repoTo, 
                               paste0( "INSERT INTO artifact (md5hash, name, createdDate) VALUES ('",
                               x[1], "','",
                               x[2], "','",
@@ -190,7 +190,7 @@ copyRepo <- function( repoFrom, repoTo, md5hashes, local = TRUE, user, repo, bra
                                                paste0( "SELECT DISTINCT * FROM tag WHERE artifact IN ",
                                                        "('", paste0( md5hashes, collapse="','"), "')" ) ) 
   apply( toInsertTagTable, 1, function(x){
-    executeSingleQuery( dir = repoTo, 
+    executeSingleSilentQuery( dir = repoTo, 
                         paste0( "INSERT INTO tag (artifact, tag, createdDate) VALUES ('",
                                 x[1], "','",
                                 x[2], "','",
