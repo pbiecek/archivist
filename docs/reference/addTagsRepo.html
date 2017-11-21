@@ -23,14 +23,17 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -49,10 +52,34 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
 </li>
 <li>
-  <a href="../articles/index.html">Articles</a>
+  <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/accessibility.html">Accessibility</a>
+    </li>
+    <li>
+      <a href="../articles/caching.html">Caching</a>
+    </li>
+    <li>
+      <a href="../articles/chaining.html">Chaining</a>
+    </li>
+    <li>
+      <a href="../articles/posts.html">Posts</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -79,30 +106,41 @@
     <p><code>addTagsRepo</code> adds new <a href='Tags.html'>Tags</a> to the existing <a href='Repository.html'>Repository</a>.</p>
     
 
-    <pre><span class='fu'>addTagsRepo</span>(<span class='no'>md5hashes</span>, <span class='kw'>repoDir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>tags</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>addTagsRepo</span>(<span class='no'>md5hashes</span>, <span class='kw'>repoDir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>tags</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>md5hashes</dt>
-      <dd>a character vector of <code>md5hashes</code> specifying to which
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>md5hashes</th>
+      <td><p>a character vector of <code>md5hashes</code> specifying to which
 corresponding artifacts new <code>Tags</code> should be added. See <code>Note</code> 
-to get to know about the length of <code>tags</code> and <code>md5hashes</code> parameters.</dd>
-      <dt>repoDir</dt>
-      <dd>A character that specifies the directory of the Repository to which
+to get to know about the length of <code>tags</code> and <code>md5hashes</code> parameters.</p></td>
+    </tr>
+    <tr>
+      <th>repoDir</th>
+      <td><p>A character that specifies the directory of the Repository to which
 new <code>Tags</code> will be added. If it is set to <code>NULL</code> (by default),
-it uses the <code>repoDir</code> specified in <a href='setLocalRepo.html'>setLocalRepo</a>.</dd>
-      <dt>FUN</dt>
-      <dd>A function which is evaluated on the artifacts for which <code>md5hashes</code>
+it uses the <code>repoDir</code> specified in <a href='setRepo.html'>setLocalRepo</a>.</p></td>
+    </tr>
+    <tr>
+      <th>FUN</th>
+      <td><p>A function which is evaluated on the artifacts for which <code>md5hashes</code>
 are given. The result of this function evaluation are <code>Tags</code> which will
-be added to the local Repository.</dd>
-      <dt>tags</dt>
-      <dd>A character vector which specifies what kind of Tags should be added to
+be added to the local Repository.</p></td>
+    </tr>
+    <tr>
+      <th>tags</th>
+      <td><p>A character vector which specifies what kind of Tags should be added to
 artifacts corresponding to given <code>md5hashes</code>. See <code>Note</code> to get to know about
 the length of <code>tags</code> and <code>md5hashes</code> parameters.
-One can specify either <code>FUN</code> or <code>tags</code>.</dd>
-      <dt>...</dt>
-      <dd>Other arguments that will be passed to FUN.</dd>
-    </dl>
+One can specify either <code>FUN</code> or <code>tags</code>.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Other arguments that will be passed to FUN.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -120,88 +158,90 @@ must be equal to 0.</p>
     
     <h2 class="hasAnchor" id="contact"><a class="anchor" href="#contact"></a>Contact</h2>
 
-    <p></p>
+    
     <p>Bug reports and feature requests can be sent to 
-<a href = 'https://github.com/pbiecek/archivist/issues'>https://github.com/pbiecek/archivist/issues</a></p>
+<a href='https://github.com/pbiecek/archivist/issues'>https://github.com/pbiecek/archivist/issues</a></p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Przemyslaw Biecek, Marcin Kosinski (2017). 
 archivist: An R Package for Managing, Recording and Restoring Data Analysis Results 
+Conditionally accepted for Journal of Statistical Software
 URL https://github.com/pbiecek/archivist</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>Other archivist: <code><a href='Repository.html'>Repository</a></code>,
-  <code><a href='Tags.html'>Tags</a></code>, <code><a href='%a%.html'>%a%</a></code>,
+  <code><a href='Tags.html'>Tags</a></code>, <code><a href='magrittr.html'>%a%</a></code>,
   <code><a href='addHooksToPrint.html'>addHooksToPrint</a></code>, <code><a href='aformat.html'>aformat</a></code>,
   <code><a href='ahistory.html'>ahistory</a></code>, <code><a href='alink.html'>alink</a></code>,
-  <code><a href='aoptions.html'>aoptions</a></code>, <code><a href='archivist-package.html'>archivist-package</a></code>,
+  <code><a href='archivistOptions.html'>aoptions</a></code>, <code><a href='archivist-package.html'>archivist-package</a></code>,
   <code><a href='aread.html'>aread</a></code>, <code><a href='asearch.html'>asearch</a></code>,
   <code><a href='asession.html'>asession</a></code>, <code><a href='atrace.html'>atrace</a></code>,
-  <code><a href='cache.html'>cache</a></code>, <code><a href='copyLocalRepo.html'>copyLocalRepo</a></code>,
-  <code><a href='createLocalRepo.html'>createLocalRepo</a></code>,
+  <code><a href='cache.html'>cache</a></code>, <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
+  <code><a href='createEmptyRepo.html'>createLocalRepo</a></code>,
   <code><a href='createMDGallery.html'>createMDGallery</a></code>,
   <code><a href='deleteLocalRepo.html'>deleteLocalRepo</a></code>,
-  <code><a href='getRemoteHook.html'>getRemoteHook</a></code>, <code><a href='getTagsLocal.html'>getTagsLocal</a></code>,
-  <code><a href='loadFromLocalRepo.html'>loadFromLocalRepo</a></code>, <code><a href='md5hash.html'>md5hash</a></code>,
-  <code><a href='restoreLibs.html'>restoreLibs</a></code>, <code><a href='rmFromLocalRepo.html'>rmFromLocalRepo</a></code>,
-  <code><a href='saveToLocalRepo.html'>saveToLocalRepo</a></code>,
-  <code><a href='searchInLocalRepo.html'>searchInLocalRepo</a></code>,
-  <code><a href='setLocalRepo.html'>setLocalRepo</a></code>,
-  <code><a href='shinySearchInLocalRepo.html'>shinySearchInLocalRepo</a></code>,
-  <code><a href='showLocalRepo.html'>showLocalRepo</a></code>,
-  <code><a href='splitTagsLocal.html'>splitTagsLocal</a></code>,
-  <code><a href='summaryLocalRepo.html'>summaryLocalRepo</a></code>,
-  <code><a href='zipLocalRepo.html'>zipLocalRepo</a></code></p>
+  <code><a href='getRemoteHook.html'>getRemoteHook</a></code>, <code><a href='getTags.html'>getTagsLocal</a></code>,
+  <code><a href='loadFromRepo.html'>loadFromLocalRepo</a></code>, <code><a href='md5hash.html'>md5hash</a></code>,
+  <code><a href='removeTagsRepo.html'>removeTagsRepo</a></code>, <code><a href='restoreLibs.html'>restoreLibs</a></code>,
+  <code><a href='rmFromLocalRepo.html'>rmFromLocalRepo</a></code>,
+  <code><a href='saveToRepo.html'>saveToLocalRepo</a></code>,
+  <code><a href='searchInRepo.html'>searchInLocalRepo</a></code>,
+  <code><a href='setRepo.html'>setLocalRepo</a></code>,
+  <code><a href='shinySearchInRepo.html'>shinySearchInLocalRepo</a></code>,
+  <code><a href='showRepo.html'>showLocalRepo</a></code>,
+  <code><a href='splitTags.html'>splitTagsLocal</a></code>,
+  <code><a href='summaryRepo.html'>summaryLocalRepo</a></code>,
+  <code><a href='zipRepo.html'>zipLocalRepo</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
-<span class='co'># </span>
-<span class='co'># ## We Take all artifacts of lm class from repository, </span>
-<span class='co'># ## extract R^2 for them and store as R^2:number Tags</span>
-<span class='co'># </span>
-<span class='co'># # Creating empty repository</span>
-<span class='co'># exampleRepoDir &lt;- tempfile()</span>
-<span class='co'># createLocalRepo(exampleRepoDir, force=TRUE)</span>
-<span class='co'># </span>
-<span class='co'># # Saving lm artifacts into repository</span>
-<span class='co'># m1 &lt;- lm(Sepal.Length~Species, iris)</span>
-<span class='co'># saveToLocalRepo(m1, exampleRepoDir)</span>
-<span class='co'># m2 &lt;- lm(Sepal.Width~Species, iris)</span>
-<span class='co'># saveToLocalRepo(m2, exampleRepoDir)</span>
-<span class='co'># </span>
-<span class='co'># # We may see what kind of Tags are related to "m1" artifact corresponding to</span>
-<span class='co'># # "9e66edd297c2f291446f3503c01d443a" md5hash</span>
-<span class='co'># getTagsLocal("9e66edd297c2f291446f3503c01d443a", exampleRepoDir, "")</span>
-<span class='co'># </span>
-<span class='co'># # We may see what kind of Tags are related to "m2" artifact corresponding to</span>
-<span class='co'># # "da1bcaf68752c146903f700c1a458438" md5hash</span>
-<span class='co'># getTagsLocal("da1bcaf68752c146903f700c1a458438", exampleRepoDir, "")</span>
-<span class='co'># </span>
-<span class='co'># # We Take all objects of lm class from repository</span>
-<span class='co'># md5hashes &lt;- searchInLocalRepo(repoDir=exampleRepoDir, "class:lm")</span>
-<span class='co'># </span>
-<span class='co'># # Adding new tag "test" explicitly</span>
-<span class='co'># addTagsRepo(md5hashes, exampleRepoDir, tags = "test")</span>
-<span class='co'># </span>
-<span class='co'># # Adding new tag "R^2: " using FUN parameter</span>
-<span class='co'># addTagsRepo(md5hashes, exampleRepoDir, function(x) paste0("R^2:",summary(x)$r.square))</span>
-<span class='co'># </span>
-<span class='co'># # And now: Tags related to "m1" artifact are</span>
-<span class='co'># getTagsLocal("9e66edd297c2f291446f3503c01d443a", exampleRepoDir, "")</span>
-<span class='co'># </span>
-<span class='co'># # And now: Tags related to "m2" artifact are</span>
-<span class='co'># getTagsLocal("da1bcaf68752c146903f700c1a458438", exampleRepoDir, "")</span>
-<span class='co'># </span>
-<span class='co'># # One more look at our Repo</span>
-<span class='co'># showLocalRepo(exampleRepoDir, method = "tags")</span>
-<span class='co'># </span>
-<span class='co'># # Deleting example repository</span>
-<span class='co'># deleteLocalRepo(exampleRepoDir, deleteRoot=TRUE)</span>
-<span class='co'># rm(exampleRepoDir)</span>
-<span class='co'>## ---------------------------------------------</span></div></pre>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'>## We Take all artifacts of lm class from repository, </span>
+<span class='co'>## extract R^2 for them and store as R^2:number Tags</span>
+
+<span class='co'># Creating empty repository</span>
+<span class='no'>exampleRepoDir</span> <span class='kw'>&lt;-</span> <span class='fu'>tempfile</span>()
+<span class='fu'><a href='createEmptyRepo.html'>createLocalRepo</a></span>(<span class='no'>exampleRepoDir</span>, <span class='kw'>force</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+
+<span class='co'># Saving lm artifacts into repository</span>
+<span class='no'>m1</span> <span class='kw'>&lt;-</span> <span class='fu'>lm</span>(<span class='no'>Sepal.Length</span>~<span class='no'>Species</span>, <span class='no'>iris</span>)
+<span class='fu'><a href='saveToRepo.html'>saveToLocalRepo</a></span>(<span class='no'>m1</span>, <span class='no'>exampleRepoDir</span>)
+<span class='no'>m2</span> <span class='kw'>&lt;-</span> <span class='fu'>lm</span>(<span class='no'>Sepal.Width</span>~<span class='no'>Species</span>, <span class='no'>iris</span>)
+<span class='fu'><a href='saveToRepo.html'>saveToLocalRepo</a></span>(<span class='no'>m2</span>, <span class='no'>exampleRepoDir</span>)
+
+<span class='co'># We may see what kind of Tags are related to "m1" artifact corresponding to</span>
+<span class='co'># "9e66edd297c2f291446f3503c01d443a" md5hash</span>
+<span class='fu'><a href='getTags.html'>getTagsLocal</a></span>(<span class='st'>"9e66edd297c2f291446f3503c01d443a"</span>, <span class='no'>exampleRepoDir</span>, <span class='st'>""</span>)
+
+<span class='co'># We may see what kind of Tags are related to "m2" artifact corresponding to</span>
+<span class='co'># "da1bcaf68752c146903f700c1a458438" md5hash</span>
+<span class='fu'><a href='getTags.html'>getTagsLocal</a></span>(<span class='st'>"da1bcaf68752c146903f700c1a458438"</span>, <span class='no'>exampleRepoDir</span>, <span class='st'>""</span>)
+
+<span class='co'># We Take all objects of lm class from repository</span>
+<span class='no'>md5hashes</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='searchInRepo.html'>searchInLocalRepo</a></span>(<span class='kw'>repoDir</span><span class='kw'>=</span><span class='no'>exampleRepoDir</span>, <span class='st'>"class:lm"</span>)
+
+<span class='co'># Adding new tag "test" explicitly</span>
+<span class='fu'>addTagsRepo</span>(<span class='no'>md5hashes</span>, <span class='no'>exampleRepoDir</span>, <span class='kw'>tags</span> <span class='kw'>=</span> <span class='st'>"test"</span>)
+
+<span class='co'># Adding new tag "R^2: " using FUN parameter</span>
+<span class='fu'>addTagsRepo</span>(<span class='no'>md5hashes</span>, <span class='no'>exampleRepoDir</span>, <span class='kw'>function</span>(<span class='no'>x</span>) <span class='fu'>paste0</span>(<span class='st'>"R^2:"</span>,<span class='fu'>summary</span>(<span class='no'>x</span>)$<span class='no'>r.square</span>))
+
+<span class='co'># And now: Tags related to "m1" artifact are</span>
+<span class='fu'><a href='getTags.html'>getTagsLocal</a></span>(<span class='st'>"9e66edd297c2f291446f3503c01d443a"</span>, <span class='no'>exampleRepoDir</span>, <span class='st'>""</span>)
+
+<span class='co'># And now: Tags related to "m2" artifact are</span>
+<span class='fu'><a href='getTags.html'>getTagsLocal</a></span>(<span class='st'>"da1bcaf68752c146903f700c1a458438"</span>, <span class='no'>exampleRepoDir</span>, <span class='st'>""</span>)
+
+<span class='co'># One more look at our Repo</span>
+<span class='fu'><a href='showRepo.html'>showLocalRepo</a></span>(<span class='no'>exampleRepoDir</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"tags"</span>)
+
+<span class='co'># Deleting example repository</span>
+<span class='fu'><a href='deleteLocalRepo.html'>deleteLocalRepo</a></span>(<span class='no'>exampleRepoDir</span>, <span class='kw'>deleteRoot</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='fu'>rm</span>(<span class='no'>exampleRepoDir</span>)
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -23,14 +23,17 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -49,10 +52,34 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
 </li>
 <li>
-  <a href="../articles/index.html">Articles</a>
+  <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/accessibility.html">Accessibility</a>
+    </li>
+    <li>
+      <a href="../articles/caching.html">Caching</a>
+    </li>
+    <li>
+      <a href="../articles/chaining.html">Chaining</a>
+    </li>
+    <li>
+      <a href="../articles/posts.html">Posts</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -80,376 +107,392 @@
 To learn more about artifacts visit <a href='archivist-package.html'>archivist-package</a>.</p>
     
 
-    <pre><span class='fu'>rmFromLocalRepo</span>(<span class='no'>md5hash</span>, <span class='kw'>repoDir</span> <span class='kw'>=</span> <span class='fu'><a href='aoptions.html'>aoptions</a></span>(<span class='st'>"repoDir"</span>), <span class='kw'>removeData</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+    <pre class="usage"><span class='fu'>rmFromLocalRepo</span>(<span class='no'>md5hash</span>, <span class='kw'>repoDir</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"repoDir"</span>), <span class='kw'>removeData</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>removeMiniature</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>many</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='fu'>rmFromRepo</span>(<span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>md5hash</dt>
-      <dd>A character assigned to the artifact through the use of a
-cryptographical hash function with MD5 algorithm, or it&#39;s abbreviation.
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>md5hash</th>
+      <td><p>A character assigned to the artifact through the use of a
+cryptographical hash function with MD5 algorithm, or it's abbreviation.
 This object will be removed. If <code>many</code> parameter is set to TRUE then
-md5hash will be a character vector.</dd>
-      <dt>repoDir</dt>
-      <dd>A character denoting an existing directory from which an 
-artifact will be removed.</dd>
-      <dt>removeData</dt>
-      <dd>A logical value denoting whether to remove data along with
-the <code>artifact</code> specified by the <code>md5hash</code>. Defualt <code>FALSE</code>.</dd>
-      <dt>removeMiniature</dt>
-      <dd>A logical value denoting whether to remove a miniature
-along with the <code>artifact</code> specified by the <code>md5hash</code>. Defualt <code>FALSE</code>.</dd>
-      <dt>force</dt>
-      <dd>A logical value denoting whether to remove data related to more than one artifact.
-Defualt <code>FALSE</code>.</dd>
-      <dt>many</dt>
-      <dd>A logical value. To accelerate the speed of removing many objects,
-you can set this parameter to <code>TRUE</code> and pass a vector of artifacts&#39; <code>md5hashes</code>
-to a <code>md5hash</code> parameter. It is not possible to use a vector of artifacts&#39; 
-<code>md5hashes</code> abbreviations - see <code>Note</code>. By default, set to <code>FALSE</code>.</dd>
-      <dt>...</dt>
-      <dd>All arguments are being passed to <code>rmFromLocalRepo</code>.</dd>
-    </dl>
+md5hash will be a character vector.</p></td>
+    </tr>
+    <tr>
+      <th>repoDir</th>
+      <td><p>A character denoting an existing directory from which an 
+artifact will be removed.</p></td>
+    </tr>
+    <tr>
+      <th>removeData</th>
+      <td><p>A logical value denoting whether to remove data along with
+the <code>artifact</code> specified by the <code>md5hash</code>. Defualt <code>FALSE</code>.</p></td>
+    </tr>
+    <tr>
+      <th>removeMiniature</th>
+      <td><p>A logical value denoting whether to remove a miniature
+along with the <code>artifact</code> specified by the <code>md5hash</code>. Defualt <code>FALSE</code>.</p></td>
+    </tr>
+    <tr>
+      <th>force</th>
+      <td><p>A logical value denoting whether to remove data related to more than one artifact.
+Defualt <code>FALSE</code>.</p></td>
+    </tr>
+    <tr>
+      <th>many</th>
+      <td><p>A logical value. To accelerate the speed of removing many objects,
+you can set this parameter to <code>TRUE</code> and pass a vector of artifacts' <code>md5hashes</code>
+to a <code>md5hash</code> parameter. It is not possible to use a vector of artifacts' 
+<code>md5hashes</code> abbreviations - see <code>Note</code>. By default, set to <code>FALSE</code>.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>All arguments are being passed to <code>rmFromLocalRepo</code>.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p><code>rmFromLocalRepo</code> removes an artifact given as a <a href='md5hash.html'>md5hash</a> from the <a href='Repository.html'>Repository</a>.
 To be more precise, an artifact is removed 
 both from <code>backpack.db</code> file(the SQLite database)and <code>gallery</code> subdirectory,
-where the artifacts are stored as <code>md5hash.rda</code> files.</p>
-    <p>Important: instead of giving the whole <code>md5hash</code> character, a user
-can simply give its first few characters. For example, <code>&quot;a09dd&quot;</code> 
-instead of <code>&quot;a09ddjdkf9kj33dcjdnfjgos9jd9jkcv&quot;</code>.
+where the artifacts are stored as <code>md5hash.rda</code> files.</p>  
+<p>Important: instead of giving the whole <code>md5hash</code> character, a user
+can simply give its first few characters. For example, <code>"a09dd"</code> 
+instead of <code>"a09ddjdkf9kj33dcjdnfjgos9jd9jkcv"</code>.
 All artifacts with the same <code>md5hash</code> abbreviation  will be removed 
-from the <code>Repository</code>.</p>
-    <p><code>rmFromLocalRepo</code> provides functionality that enables us to delete miniatures
+from the <code>Repository</code>.
+    <code>rmFromLocalRepo</code> provides functionality that enables us to delete miniatures
 of the artifacts (.txt or .png files) while removing .rda files.
 To delete miniature of the artifact use <code>removeMiniature = TRUE</code> argument.
 Moreover, if the data from the artifact is archived then there is a possibility 
-to delete this data while removing the artifact. Simply use <code>removeData = TRUE</code> argument.</p>
-    <p>If one wants to remove all artifacts created between two dates, it is suggested to
-perform:
-<ul>
-<li> <code>obj2rm &lt;- searchInLocalRepo( tag = list(dateFrom, dateTo), repoDir = )</code>
-   </li>
-<li> <code>sapply(obj2rm, rmFromLocalRepo, repoDir = )</code>
-</li>
-</ul></p>
+to delete this data while removing the artifact. Simply use <code>removeData = TRUE</code> argument.</p>  
+<p>If one wants to remove all artifacts created between two dates, it is suggested to
+perform:</p><ul>
+<li><p><code>obj2rm &lt;- searchInLocalRepo( tag = list(dateFrom, dateTo), repoDir = )</code></p></li>
+<li><p><code>sapply(obj2rm, rmFromLocalRepo, repoDir = )</code></p></li>
+</ul>
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p><code>md5hash</code> can be a result of the <a href='searchInLocalRepo.html'>searchInLocalRepo</a> function called
+    <p><code>md5hash</code> can be a result of the <a href='searchInRepo.html'>searchInLocalRepo</a> function called
 by <code>tag = NAME</code> argument, where <code>NAME</code> is a Tag that describes
 the property of the artifacts to be deleted.</p>
-    <p>It is not possible to use a vector of artifacts&#39; <code>md5hashes</code> abbreviations
+<p>It is not possible to use a vector of artifacts' <code>md5hashes</code> abbreviations
 while using <code>many = TRUE</code> argument. This assumption was made 
 to protect a user from removing, by accident, too many artifacts from the Repository.</p>
-    <p>For more information about <code>Tags</code> check <a href='Tags.html'>Tags</a>.</p>
+<p>For more information about <code>Tags</code> check <a href='Tags.html'>Tags</a>.</p>
     
     <h2 class="hasAnchor" id="contact"><a class="anchor" href="#contact"></a>Contact</h2>
 
-    <p></p>
+    
     <p>Bug reports and feature requests can be sent to 
-<a href = 'https://github.com/pbiecek/archivist/issues'>https://github.com/pbiecek/archivist/issues</a></p>
+<a href='https://github.com/pbiecek/archivist/issues'>https://github.com/pbiecek/archivist/issues</a></p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Przemyslaw Biecek, Marcin Kosinski (2017). 
 archivist: An R Package for Managing, Recording and Restoring Data Analysis Results 
+Conditionally accepted for Journal of Statistical Software
 URL https://github.com/pbiecek/archivist</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>Other archivist: <code><a href='Repository.html'>Repository</a></code>,
-  <code><a href='Tags.html'>Tags</a></code>, <code><a href='%a%.html'>%a%</a></code>,
+  <code><a href='Tags.html'>Tags</a></code>, <code><a href='magrittr.html'>%a%</a></code>,
   <code><a href='addHooksToPrint.html'>addHooksToPrint</a></code>, <code><a href='addTagsRepo.html'>addTagsRepo</a></code>,
   <code><a href='aformat.html'>aformat</a></code>, <code><a href='ahistory.html'>ahistory</a></code>,
-  <code><a href='alink.html'>alink</a></code>, <code><a href='aoptions.html'>aoptions</a></code>,
+  <code><a href='alink.html'>alink</a></code>, <code><a href='archivistOptions.html'>aoptions</a></code>,
   <code><a href='archivist-package.html'>archivist-package</a></code>, <code><a href='aread.html'>aread</a></code>,
   <code><a href='asearch.html'>asearch</a></code>, <code><a href='asession.html'>asession</a></code>,
   <code><a href='atrace.html'>atrace</a></code>, <code><a href='cache.html'>cache</a></code>,
-  <code><a href='copyLocalRepo.html'>copyLocalRepo</a></code>,
-  <code><a href='createLocalRepo.html'>createLocalRepo</a></code>,
+  <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
+  <code><a href='createEmptyRepo.html'>createLocalRepo</a></code>,
   <code><a href='createMDGallery.html'>createMDGallery</a></code>,
   <code><a href='deleteLocalRepo.html'>deleteLocalRepo</a></code>,
-  <code><a href='getRemoteHook.html'>getRemoteHook</a></code>, <code><a href='getTagsLocal.html'>getTagsLocal</a></code>,
-  <code><a href='loadFromLocalRepo.html'>loadFromLocalRepo</a></code>, <code><a href='md5hash.html'>md5hash</a></code>,
-  <code><a href='restoreLibs.html'>restoreLibs</a></code>, <code><a href='saveToLocalRepo.html'>saveToLocalRepo</a></code>,
-  <code><a href='searchInLocalRepo.html'>searchInLocalRepo</a></code>,
-  <code><a href='setLocalRepo.html'>setLocalRepo</a></code>,
-  <code><a href='shinySearchInLocalRepo.html'>shinySearchInLocalRepo</a></code>,
-  <code><a href='showLocalRepo.html'>showLocalRepo</a></code>,
-  <code><a href='splitTagsLocal.html'>splitTagsLocal</a></code>,
-  <code><a href='summaryLocalRepo.html'>summaryLocalRepo</a></code>,
-  <code><a href='zipLocalRepo.html'>zipLocalRepo</a></code></p>
-    <p>Other archivist: <code><a href='Repository.html'>Repository</a></code>,
-  <code><a href='Tags.html'>Tags</a></code>, <code><a href='%a%.html'>%a%</a></code>,
+  <code><a href='getRemoteHook.html'>getRemoteHook</a></code>, <code><a href='getTags.html'>getTagsLocal</a></code>,
+  <code><a href='loadFromRepo.html'>loadFromLocalRepo</a></code>, <code><a href='md5hash.html'>md5hash</a></code>,
+  <code><a href='removeTagsRepo.html'>removeTagsRepo</a></code>, <code><a href='restoreLibs.html'>restoreLibs</a></code>,
+  <code><a href='saveToRepo.html'>saveToLocalRepo</a></code>,
+  <code><a href='searchInRepo.html'>searchInLocalRepo</a></code>,
+  <code><a href='setRepo.html'>setLocalRepo</a></code>,
+  <code><a href='shinySearchInRepo.html'>shinySearchInLocalRepo</a></code>,
+  <code><a href='showRepo.html'>showLocalRepo</a></code>,
+  <code><a href='splitTags.html'>splitTagsLocal</a></code>,
+  <code><a href='summaryRepo.html'>summaryLocalRepo</a></code>,
+  <code><a href='zipRepo.html'>zipLocalRepo</a></code></p>
+<p>Other archivist: <code><a href='Repository.html'>Repository</a></code>,
+  <code><a href='Tags.html'>Tags</a></code>, <code><a href='magrittr.html'>%a%</a></code>,
   <code><a href='addHooksToPrint.html'>addHooksToPrint</a></code>, <code><a href='addTagsRepo.html'>addTagsRepo</a></code>,
   <code><a href='aformat.html'>aformat</a></code>, <code><a href='ahistory.html'>ahistory</a></code>,
-  <code><a href='alink.html'>alink</a></code>, <code><a href='aoptions.html'>aoptions</a></code>,
+  <code><a href='alink.html'>alink</a></code>, <code><a href='archivistOptions.html'>aoptions</a></code>,
   <code><a href='archivist-package.html'>archivist-package</a></code>, <code><a href='aread.html'>aread</a></code>,
   <code><a href='asearch.html'>asearch</a></code>, <code><a href='asession.html'>asession</a></code>,
   <code><a href='atrace.html'>atrace</a></code>, <code><a href='cache.html'>cache</a></code>,
-  <code><a href='copyLocalRepo.html'>copyLocalRepo</a></code>,
-  <code><a href='createLocalRepo.html'>createLocalRepo</a></code>,
+  <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
+  <code><a href='createEmptyRepo.html'>createLocalRepo</a></code>,
   <code><a href='createMDGallery.html'>createMDGallery</a></code>,
   <code><a href='deleteLocalRepo.html'>deleteLocalRepo</a></code>,
-  <code><a href='getRemoteHook.html'>getRemoteHook</a></code>, <code><a href='getTagsLocal.html'>getTagsLocal</a></code>,
-  <code><a href='loadFromLocalRepo.html'>loadFromLocalRepo</a></code>, <code><a href='md5hash.html'>md5hash</a></code>,
-  <code><a href='restoreLibs.html'>restoreLibs</a></code>, <code><a href='saveToLocalRepo.html'>saveToLocalRepo</a></code>,
-  <code><a href='searchInLocalRepo.html'>searchInLocalRepo</a></code>,
-  <code><a href='setLocalRepo.html'>setLocalRepo</a></code>,
-  <code><a href='shinySearchInLocalRepo.html'>shinySearchInLocalRepo</a></code>,
-  <code><a href='showLocalRepo.html'>showLocalRepo</a></code>,
-  <code><a href='splitTagsLocal.html'>splitTagsLocal</a></code>,
-  <code><a href='summaryLocalRepo.html'>summaryLocalRepo</a></code>,
-  <code><a href='zipLocalRepo.html'>zipLocalRepo</a></code></p>
+  <code><a href='getRemoteHook.html'>getRemoteHook</a></code>, <code><a href='getTags.html'>getTagsLocal</a></code>,
+  <code><a href='loadFromRepo.html'>loadFromLocalRepo</a></code>, <code><a href='md5hash.html'>md5hash</a></code>,
+  <code><a href='removeTagsRepo.html'>removeTagsRepo</a></code>, <code><a href='restoreLibs.html'>restoreLibs</a></code>,
+  <code><a href='saveToRepo.html'>saveToLocalRepo</a></code>,
+  <code><a href='searchInRepo.html'>searchInLocalRepo</a></code>,
+  <code><a href='setRepo.html'>setLocalRepo</a></code>,
+  <code><a href='shinySearchInRepo.html'>shinySearchInLocalRepo</a></code>,
+  <code><a href='showRepo.html'>showLocalRepo</a></code>,
+  <code><a href='splitTags.html'>splitTagsLocal</a></code>,
+  <code><a href='summaryRepo.html'>summaryLocalRepo</a></code>,
+  <code><a href='zipRepo.html'>zipLocalRepo</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
-<span class='co'># # objects preparation</span>
-<span class='co'># data.frame object</span>
-<span class='co'># data(iris)</span>
-<span class='co'># </span>
-<span class='co'># # ggplot/gg object</span>
-<span class='co'># library(ggplot2)</span>
-<span class='co'># df &lt;- data.frame(gp = factor(rep(letters[1:3], each = 10)),y = rnorm(30))</span>
-<span class='co'># library(plyr)</span>
-<span class='co'># ds &lt;- ddply(df, .(gp), summarise, mean = mean(y), sd = sd(y))</span>
-<span class='co'># myplot123 &lt;- ggplot(df, aes(x = gp, y = y)) +</span>
-<span class='co'>#   geom_point() +  geom_point(data = ds, aes(y = mean),</span>
-<span class='co'>#                              colour = 'red', size = 3)</span>
-<span class='co'># </span>
-<span class='co'># # lm object</span>
-<span class='co'># model &lt;- lm(Sepal.Length~ Sepal.Width + Petal.Length + Petal.Width, data= iris)</span>
-<span class='co'># model2 &lt;- lm(Sepal.Length~ Sepal.Width + Petal.Width, data= iris)</span>
-<span class='co'># model3 &lt;- lm(Sepal.Length~ Sepal.Width, data= iris)</span>
-<span class='co'># </span>
-<span class='co'># # agnes (twins) object</span>
-<span class='co'># library(cluster)</span>
-<span class='co'># data(votes.repub)</span>
-<span class='co'># agn1 &lt;- agnes(votes.repub, metric = "manhattan", stand = TRUE)</span>
-<span class='co'># </span>
-<span class='co'># # fanny (partition) object</span>
-<span class='co'># x &lt;- rbind(cbind(rnorm(10, 0, 0.5), rnorm(10, 0, 0.5)),</span>
-<span class='co'>#            cbind(rnorm(15, 5, 0.5), rnorm(15, 5, 0.5)),</span>
-<span class='co'>#            cbind(rnorm( 3,3.2,0.5), rnorm( 3,3.2,0.5)))</span>
-<span class='co'># fannyx &lt;- fanny(x, 2)</span>
-<span class='co'># </span>
-<span class='co'># # creating example Repository - on which examples will work</span>
-<span class='co'># </span>
-<span class='co'># exampleRepoDir &lt;- tempfile()</span>
-<span class='co'># createLocalRepo(repoDir = exampleRepoDir)</span>
-<span class='co'># myplot123Md5hash &lt;- saveToLocalRepo(myplot123, repoDir=exampleRepoDir)</span>
-<span class='co'># irisMd5hash &lt;- saveToLocalRepo(iris, repoDir=exampleRepoDir)</span>
-<span class='co'># modelMd5hash  &lt;- saveToLocalRepo(model, repoDir=exampleRepoDir)</span>
-<span class='co'># agn1Md5hash &lt;- saveToLocalRepo(agn1, repoDir=exampleRepoDir)</span>
-<span class='co'># fannyxMd5hash &lt;- saveToLocalRepo(fannyx, repoDir=exampleRepoDir)</span>
-<span class='co'># </span>
-<span class='co'># # let's see how the Repository looks like: show</span>
-<span class='co'># showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)</span>
-<span class='co'># showLocalRepo(method = "tags", repoDir = exampleRepoDir)</span>
-<span class='co'># </span>
-<span class='co'># # let's see how the Repository looks like: summary</span>
-<span class='co'># summaryLocalRepo( exampleRepoDir )</span>
-<span class='co'># </span>
-<span class='co'># # remove examples</span>
-<span class='co'># </span>
-<span class='co'># rmFromLocalRepo(fannyxMd5hash, repoDir = exampleRepoDir)</span>
-<span class='co'># # removeData = FALSE default argument provides from removing archived</span>
-<span class='co'># # fannyxMd5hash object's data from the Repository and the gallery</span>
-<span class='co'># rmFromLocalRepo(irisMd5hash, repoDir = exampleRepoDir)</span>
-<span class='co'>#  </span>
-<span class='co'># # let's see how the Repository looks like: show</span>
-<span class='co'># showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)</span>
-<span class='co'># showLocalRepo(method = "tags", repoDir = exampleRepoDir)</span>
-<span class='co'># </span>
-<span class='co'># # let's see how the Repository looks like: summary</span>
-<span class='co'># summaryLocalRepo( exampleRepoDir )</span>
-<span class='co'># </span>
-<span class='co'># </span>
-<span class='co'># # one can have the same object archived three different times,</span>
-<span class='co'># # there will appear a warning message</span>
-<span class='co'># agn1Md5hash2 &lt;- saveToLocalRepo(agn1, repoDir=exampleRepoDir)</span>
-<span class='co'># agn1Md5hash3 &lt;- saveToLocalRepo(agn1, repoDir=exampleRepoDir)</span>
-<span class='co'># </span>
-<span class='co'># # md5hashes are the same for the same object (agn1)</span>
-<span class='co'># agn1Md5hash == agn1Md5hash2</span>
-<span class='co'># agn1Md5hash2 == agn1Md5hash3</span>
-<span class='co'># </span>
-<span class='co'># # but in the Repository database (backpack.db)</span>
-<span class='co'># # there are three identical rows describing the object</span>
-<span class='co'># # as well as three identical rows describing object's data.</span>
-<span class='co'># </span>
-<span class='co'># # let's see how the Repository looks like: show</span>
-<span class='co'># showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)</span>
-<span class='co'># showLocalRepo(method = "tags", repoDir = exampleRepoDir)</span>
-<span class='co'># </span>
-<span class='co'># # let's see how the Repository looks like: summary</span>
-<span class='co'># summaryLocalRepo( exampleRepoDir )</span>
-<span class='co'># # in spite of multiplying object's appearance in database it is</span>
-<span class='co'># </span>
-<span class='co'># # one easy call removes them all but this call will result in error</span>
-<span class='co'># rmFromLocalRepo(agn1Md5hash, repoDir = exampleRepoDir, removeData = TRUE, </span>
-<span class='co'>#             removeMiniature = TRUE)</span>
-<span class='co'># </span>
-<span class='co'># # soultion to that is</span>
-<span class='co'># rmFromLocalRepo(agn1Md5hash, repoDir = exampleRepoDir, removeData = TRUE, </span>
-<span class='co'>#             removeMiniature = TRUE, force = TRUE)</span>
-<span class='co'># # removeMiniature = TRUE removes miniatures from the gallery folder</span>
-<span class='co'># </span>
-<span class='co'># # rest of the artifacts can be removed for example by</span>
-<span class='co'># # looking for dates of creation and then removing all objects</span>
-<span class='co'># # created in a specific period of time</span>
-<span class='co'># </span>
-<span class='co'># obj2rm &lt;- searchInLocalRepo( pattern = list(dateFrom = Sys.Date(), dateTo = Sys.Date()),</span>
-<span class='co'>#                              repoDir = exampleRepoDir )</span>
-<span class='co'># sapply(obj2rm, rmFromLocalRepo, repoDir = exampleRepoDir)</span>
-<span class='co'># # above function call removed all objects which were created in these examples.</span>
-<span class='co'># # Note that in the gallery folder there may be still some miniatures as</span>
-<span class='co'># # removeMiniature parameter is set to FALSE</span>
-<span class='co'># </span>
-<span class='co'># # let's see how the Repository looks like: show</span>
-<span class='co'># showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)</span>
-<span class='co'># showLocalRepo(method = "tags", repoDir = exampleRepoDir)</span>
-<span class='co'># </span>
-<span class='co'># # one can also delete objects of a specific class</span>
-<span class='co'># modelMd5hash  &lt;- saveToLocalRepo(model, repoDir=exampleRepoDir)</span>
-<span class='co'># model2Md5hash  &lt;- saveToLocalRepo(model2, repoDir=exampleRepoDir)</span>
-<span class='co'># model3Md5hash  &lt;- saveToLocalRepo(model3, repoDir=exampleRepoDir)</span>
-<span class='co'># showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)</span>
-<span class='co'># </span>
-<span class='co'># objMd5hash &lt;- searchInLocalRepo("class:lm", repoDir = exampleRepoDir)</span>
-<span class='co'># sapply(objMd5hash, rmFromLocalRepo, repoDir = exampleRepoDir, removeData = TRUE, force = TRUE)</span>
-<span class='co'># showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)</span>
-<span class='co'># summaryLocalRepo( exampleRepoDir )</span>
-<span class='co'># </span>
-<span class='co'># </span>
-<span class='co'># # one can remove object specifying only its md5hash abbreviation</span>
-<span class='co'># (myplo123Md5hash &lt;- saveToLocalRepo(myplot123, repoDir=exampleRepoDir))</span>
-<span class='co'># showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)</span>
-<span class='co'># </span>
-<span class='co'># # If md5hash is "db50a4e667581f8c531acd78ad24bfee" then</span>
-<span class='co'># # model abbreviation might be : "db50a"</span>
-<span class='co'># # Note that with each evaluation of createEmptyRepo function new md5hashes</span>
-<span class='co'># # are created. This is why, in your evaluation of the code, artifact </span>
-<span class='co'># # myplo123Md5hash will have a different md5hash and the following</span>
-<span class='co'># # instruction will result in an error.</span>
-<span class='co'># rmFromLocalRepo("db40a", repoDir = exampleRepoDir, removeData = TRUE)</span>
-<span class='co'># summaryLocalRepo( repoDir = exampleRepoDir )</span>
-<span class='co'># </span>
-<span class='co'># </span>
-<span class='co'># # removing an example Repository</span>
-<span class='co'># </span>
-<span class='co'># deleteLocalRepo( exampleRepoDir, TRUE)</span>
-<span class='co'># </span>
-<span class='co'># </span>
-<span class='co'># ######</span>
-<span class='co'># ######</span>
-<span class='co'># REMOVING MANY ARTIFACTS</span>
-<span class='co'># ######</span>
-<span class='co'># ######</span>
-<span class='co'># </span>
-<span class='co'># data(iris)</span>
-<span class='co'># </span>
-<span class='co'># # lm object</span>
-<span class='co'># model &lt;- lm(Sepal.Length~ Sepal.Width + Petal.Length + Petal.Width, data= iris)</span>
-<span class='co'># </span>
-<span class='co'># # agnes (twins) object</span>
-<span class='co'># library(cluster)</span>
-<span class='co'># data(votes.repub)</span>
-<span class='co'># agn1 &lt;- agnes(votes.repub, metric = "manhattan", stand = TRUE)</span>
-<span class='co'># </span>
-<span class='co'># # fanny (partition) object</span>
-<span class='co'># x &lt;- rbind(cbind(rnorm(10, 0, 0.5), rnorm(10, 0, 0.5)),</span>
-<span class='co'>#            cbind(rnorm(15, 5, 0.5), rnorm(15, 5, 0.5)),</span>
-<span class='co'>#            cbind(rnorm( 3,3.2,0.5), rnorm( 3,3.2,0.5)))</span>
-<span class='co'># fannyx &lt;- fanny(x, 2)</span>
-<span class='co'># </span>
-<span class='co'># # lda object</span>
-<span class='co'># library(MASS)</span>
-<span class='co'># </span>
-<span class='co'># Iris &lt;- data.frame(rbind(iris3[,,1], iris3[,,2], iris3[,,3]),</span>
-<span class='co'>#                   Sp = rep(c("s","c","v"), rep(50,3)))</span>
-<span class='co'># train &lt;- c(8,83,115,118,146,82,76,9,70,139,85,59,78,143,68,</span>
-<span class='co'>#            134,148,12,141,101,144,114,41,95,61,128,2,42,37,</span>
-<span class='co'>#            29,77,20,44,98,74,32,27,11,49,52,111,55,48,33,38,</span>
-<span class='co'>#            113,126,24,104,3,66,81,31,39,26,123,18,108,73,50,</span>
-<span class='co'>#            56,54,65,135,84,112,131,60,102,14,120,117,53,138,5)</span>
-<span class='co'># lda1 &lt;- lda(Sp ~ ., Iris, prior = c(1,1,1)/3, subset = train)</span>
-<span class='co'># </span>
-<span class='co'># # qda object</span>
-<span class='co'># tr &lt;- c(7,38,47,43,20,37,44,22,46,49,50,19,4,32,12,29,27,34,2,1,17,13,3,35,36)</span>
-<span class='co'># train &lt;- rbind(iris3[tr,,1], iris3[tr,,2], iris3[tr,,3])</span>
-<span class='co'># cl &lt;- factor(c(rep("s",25), rep("c",25), rep("v",25)))</span>
-<span class='co'># qda1 &lt;- qda(train, cl)</span>
-<span class='co'># </span>
-<span class='co'># # glmnet object</span>
-<span class='co'># library( glmnet )</span>
-<span class='co'># </span>
-<span class='co'># zk=matrix(rnorm(100*20),100,20)</span>
-<span class='co'># bk=rnorm(100)</span>
-<span class='co'># glmnet1=glmnet(zk,bk)</span>
-<span class='co'>#  </span>
-<span class='co'># # Creating example Repository so that we may see it on our computer</span>
-<span class='co'># </span>
-<span class='co'># exampleRepoDir &lt;- tempfile()</span>
-<span class='co'># createLocalRepo( repoDir = exampleRepoDir, force = TRUE)</span>
-<span class='co'># saveToLocalRepo( iris, repoDir=exampleRepoDir)</span>
-<span class='co'># saveToLocalRepo( model, repoDir=exampleRepoDir )</span>
-<span class='co'># saveToLocalRepo( agn1, repoDir=exampleRepoDir )</span>
-<span class='co'># saveToLocalRepo( fannyx, repoDir=exampleRepoDir )</span>
-<span class='co'># saveToLocalRepo( lda1, repoDir=exampleRepoDir )</span>
-<span class='co'># saveToLocalRepo( glmnet1, repoDir=exampleRepoDir )</span>
-<span class='co'># </span>
-<span class='co'># ArtifactsAndData &lt;- unique(showLocalRepo(repoDir = exampleRepoDir)[,1])</span>
-<span class='co'># ArtifactsData &lt;- unique(searchInLocalRepo(pattern = "relationWith", fixed = FALSE,</span>
-<span class='co'>#                                    repoDir = exampleRepoDir))</span>
-<span class='co'># Artifacts &lt;- setdiff(ArtifactsAndData, ArtifactsData)</span>
-<span class='co'># </span>
-<span class='co'># </span>
-<span class='co'># # Removing many artifacts with many = TRUE argument</span>
-<span class='co'># rmFromLocalRepo(Artifacts, repoDir = exampleRepoDir, many = TRUE)</span>
-<span class='co'># </span>
-<span class='co'># # We may notice, in two ways, that artifacts' data is still in "exampleRepoDir".</span>
-<span class='co'># # Either we may look into gallery folder of "exampleRepoDir" </span>
-<span class='co'># list.files(file.path(exampleRepoDir, "gallery"))</span>
-<span class='co'># # or show how database.db file looks like.</span>
-<span class='co'># showLocalRepo(repoDir = exampleRepoDir) # artifacts' data is there indeed!</span>
-<span class='co'># </span>
-<span class='co'># # If we want to remove artifact's data now we simply call rmFromLocalRepo function</span>
-<span class='co'># # with removeData = TRUE additional argument.</span>
-<span class='co'># rmFromLocalRepo(Artifacts, repoDir = exampleRepoDir, removeData = TRUE,  many = TRUE)</span>
-<span class='co'># </span>
-<span class='co'># # We receive a warning as Artifacts are no longer in the repository. </span>
-<span class='co'># # However, let's check what happened with Artifact's data.</span>
-<span class='co'># showLocalRepo(repoDir = exampleRepoDir) # They were removed.</span>
-<span class='co'># # Perhaps you may think that "exampleRepoDir" is empty as database indicates. However,</span>
-<span class='co'># # if you look into gallery folder there will be some ".txt" or ".png" files. </span>
-<span class='co'># list.files(file.path(exampleRepoDir, "gallery"))</span>
-<span class='co'># </span>
-<span class='co'># # Those are probably, the so called, Miniatures. Let's try to remove them.</span>
-<span class='co'># # In order to do it we call rmFromLocalRepo function with removeMiniature = TRUE argument.</span>
-<span class='co'># rmFromLocalRepo(Artifacts, many = TRUE, repoDir = exampleRepoDir, removeMiniature = TRUE)</span>
-<span class='co'># </span>
-<span class='co'># # Again we receive a warning as Artifacts are no longer in the repository but ...</span>
-<span class='co'># list.files(file.path(exampleRepoDir, "gallery")) </span>
-<span class='co'># # gallery folder is empty now! Artifact's miniature's were removed.</span>
-<span class='co'># </span>
-<span class='co'># </span>
-<span class='co'># # Of course we may have done all these instructions by one simple function call.</span>
-<span class='co'># # rmFromLocalRepo(Artifacts, many = TRUE, repoDir = exampleRepoDir,</span>
-<span class='co'># #            removeData = TRUE, removeMiniature = TRUE)</span>
-<span class='co'># # Nevertheless, it may be instructive to see how it is done step by step.</span>
-<span class='co'># </span>
-<span class='co'># # removing an example Repository</span>
-<span class='co'># deleteLocalRepo(repoDir = exampleRepoDir, deleteRoot = TRUE)</span>
-<span class='co'>#    </span>
-<span class='co'># rm( exampleRepoDir )</span>
-<span class='co'>## ---------------------------------------------</span></div></pre>
+    <pre class="examples"># NOT RUN {
+# objects preparation
+data.frame object
+data(iris)
+
+# ggplot/gg object
+library(ggplot2)
+df <- data.frame(gp = factor(rep(letters[1:3], each = 10)),y = rnorm(30))
+library(plyr)
+ds <- ddply(df, .(gp), summarise, mean = mean(y), sd = sd(y))
+myplot123 <- ggplot(df, aes(x = gp, y = y)) +
+  geom_point() +  geom_point(data = ds, aes(y = mean),
+                             colour = 'red', size = 3)
+
+# lm object
+model <- lm(Sepal.Length~ Sepal.Width + Petal.Length + Petal.Width, data= iris)
+model2 <- lm(Sepal.Length~ Sepal.Width + Petal.Width, data= iris)
+model3 <- lm(Sepal.Length~ Sepal.Width, data= iris)
+
+# agnes (twins) object
+library(cluster)
+data(votes.repub)
+agn1 <- agnes(votes.repub, metric = "manhattan", stand = TRUE)
+
+# fanny (partition) object
+x <- rbind(cbind(rnorm(10, 0, 0.5), rnorm(10, 0, 0.5)),
+           cbind(rnorm(15, 5, 0.5), rnorm(15, 5, 0.5)),
+           cbind(rnorm( 3,3.2,0.5), rnorm( 3,3.2,0.5)))
+fannyx <- fanny(x, 2)
+
+# creating example Repository - on which examples will work
+
+exampleRepoDir <- tempfile()
+createLocalRepo(repoDir = exampleRepoDir)
+myplot123Md5hash <- saveToLocalRepo(myplot123, repoDir=exampleRepoDir)
+irisMd5hash <- saveToLocalRepo(iris, repoDir=exampleRepoDir)
+modelMd5hash  <- saveToLocalRepo(model, repoDir=exampleRepoDir)
+agn1Md5hash <- saveToLocalRepo(agn1, repoDir=exampleRepoDir)
+fannyxMd5hash <- saveToLocalRepo(fannyx, repoDir=exampleRepoDir)
+
+# let's see how the Repository looks like: show
+showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
+showLocalRepo(method = "tags", repoDir = exampleRepoDir)
+
+# let's see how the Repository looks like: summary
+summaryLocalRepo( exampleRepoDir )
+
+# remove examples
+
+rmFromLocalRepo(fannyxMd5hash, repoDir = exampleRepoDir)
+# removeData = FALSE default argument provides from removing archived
+# fannyxMd5hash object's data from the Repository and the gallery
+rmFromLocalRepo(irisMd5hash, repoDir = exampleRepoDir)
+ 
+# let's see how the Repository looks like: show
+showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
+showLocalRepo(method = "tags", repoDir = exampleRepoDir)
+
+# let's see how the Repository looks like: summary
+summaryLocalRepo( exampleRepoDir )
+
+
+# one can have the same object archived three different times,
+# there will appear a warning message
+agn1Md5hash2 <- saveToLocalRepo(agn1, repoDir=exampleRepoDir)
+agn1Md5hash3 <- saveToLocalRepo(agn1, repoDir=exampleRepoDir)
+
+# md5hashes are the same for the same object (agn1)
+agn1Md5hash == agn1Md5hash2
+agn1Md5hash2 == agn1Md5hash3
+
+# but in the Repository database (backpack.db)
+# there are three identical rows describing the object
+# as well as three identical rows describing object's data.
+
+# let's see how the Repository looks like: show
+showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
+showLocalRepo(method = "tags", repoDir = exampleRepoDir)
+
+# let's see how the Repository looks like: summary
+summaryLocalRepo( exampleRepoDir )
+# in spite of multiplying object's appearance in database it is
+
+# one easy call removes them all but this call will result in error
+rmFromLocalRepo(agn1Md5hash, repoDir = exampleRepoDir, removeData = TRUE, 
+            removeMiniature = TRUE)
+
+# soultion to that is
+rmFromLocalRepo(agn1Md5hash, repoDir = exampleRepoDir, removeData = TRUE, 
+            removeMiniature = TRUE, force = TRUE)
+# removeMiniature = TRUE removes miniatures from the gallery folder
+
+# rest of the artifacts can be removed for example by
+# looking for dates of creation and then removing all objects
+# created in a specific period of time
+
+obj2rm <- searchInLocalRepo( pattern = list(dateFrom = Sys.Date(), dateTo = Sys.Date()),
+                             repoDir = exampleRepoDir )
+sapply(obj2rm, rmFromLocalRepo, repoDir = exampleRepoDir)
+# above function call removed all objects which were created in these examples.
+# Note that in the gallery folder there may be still some miniatures as
+# removeMiniature parameter is set to FALSE
+
+# let's see how the Repository looks like: show
+showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
+showLocalRepo(method = "tags", repoDir = exampleRepoDir)
+
+# one can also delete objects of a specific class
+modelMd5hash  <- saveToLocalRepo(model, repoDir=exampleRepoDir)
+model2Md5hash  <- saveToLocalRepo(model2, repoDir=exampleRepoDir)
+model3Md5hash  <- saveToLocalRepo(model3, repoDir=exampleRepoDir)
+showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
+
+objMd5hash <- searchInLocalRepo("class:lm", repoDir = exampleRepoDir)
+sapply(objMd5hash, rmFromLocalRepo, repoDir = exampleRepoDir, removeData = TRUE, force = TRUE)
+showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
+summaryLocalRepo( exampleRepoDir )
+
+
+# one can remove object specifying only its md5hash abbreviation
+(myplo123Md5hash <- saveToLocalRepo(myplot123, repoDir=exampleRepoDir))
+showLocalRepo(method = "md5hashes", repoDir = exampleRepoDir)
+
+# If md5hash is "db50a4e667581f8c531acd78ad24bfee" then
+# model abbreviation might be : "db50a"
+# Note that with each evaluation of createEmptyRepo function new md5hashes
+# are created. This is why, in your evaluation of the code, artifact 
+# myplo123Md5hash will have a different md5hash and the following
+# instruction will result in an error.
+rmFromLocalRepo("db40a", repoDir = exampleRepoDir, removeData = TRUE)
+summaryLocalRepo( repoDir = exampleRepoDir )
+
+
+# removing an example Repository
+
+deleteLocalRepo( exampleRepoDir, TRUE)
+
+
+######
+######
+REMOVING MANY ARTIFACTS
+######
+######
+
+data(iris)
+
+# lm object
+model <- lm(Sepal.Length~ Sepal.Width + Petal.Length + Petal.Width, data= iris)
+
+# agnes (twins) object
+library(cluster)
+data(votes.repub)
+agn1 <- agnes(votes.repub, metric = "manhattan", stand = TRUE)
+
+# fanny (partition) object
+x <- rbind(cbind(rnorm(10, 0, 0.5), rnorm(10, 0, 0.5)),
+           cbind(rnorm(15, 5, 0.5), rnorm(15, 5, 0.5)),
+           cbind(rnorm( 3,3.2,0.5), rnorm( 3,3.2,0.5)))
+fannyx <- fanny(x, 2)
+
+# lda object
+library(MASS)
+
+Iris <- data.frame(rbind(iris3[,,1], iris3[,,2], iris3[,,3]),
+                  Sp = rep(c("s","c","v"), rep(50,3)))
+train <- c(8,83,115,118,146,82,76,9,70,139,85,59,78,143,68,
+           134,148,12,141,101,144,114,41,95,61,128,2,42,37,
+           29,77,20,44,98,74,32,27,11,49,52,111,55,48,33,38,
+           113,126,24,104,3,66,81,31,39,26,123,18,108,73,50,
+           56,54,65,135,84,112,131,60,102,14,120,117,53,138,5)
+lda1 <- lda(Sp ~ ., Iris, prior = c(1,1,1)/3, subset = train)
+
+# qda object
+tr <- c(7,38,47,43,20,37,44,22,46,49,50,19,4,32,12,29,27,34,2,1,17,13,3,35,36)
+train <- rbind(iris3[tr,,1], iris3[tr,,2], iris3[tr,,3])
+cl <- factor(c(rep("s",25), rep("c",25), rep("v",25)))
+qda1 <- qda(train, cl)
+
+# glmnet object
+library( glmnet )
+
+zk=matrix(rnorm(100*20),100,20)
+bk=rnorm(100)
+glmnet1=glmnet(zk,bk)
+ 
+# Creating example Repository so that we may see it on our computer
+
+exampleRepoDir <- tempfile()
+createLocalRepo( repoDir = exampleRepoDir, force = TRUE)
+saveToLocalRepo( iris, repoDir=exampleRepoDir)
+saveToLocalRepo( model, repoDir=exampleRepoDir )
+saveToLocalRepo( agn1, repoDir=exampleRepoDir )
+saveToLocalRepo( fannyx, repoDir=exampleRepoDir )
+saveToLocalRepo( lda1, repoDir=exampleRepoDir )
+saveToLocalRepo( glmnet1, repoDir=exampleRepoDir )
+
+ArtifactsAndData <- unique(showLocalRepo(repoDir = exampleRepoDir)[,1])
+ArtifactsData <- unique(searchInLocalRepo(pattern = "relationWith", fixed = FALSE,
+                                   repoDir = exampleRepoDir))
+Artifacts <- setdiff(ArtifactsAndData, ArtifactsData)
+
+
+# Removing many artifacts with many = TRUE argument
+rmFromLocalRepo(Artifacts, repoDir = exampleRepoDir, many = TRUE)
+
+# We may notice, in two ways, that artifacts' data is still in "exampleRepoDir".
+# Either we may look into gallery folder of "exampleRepoDir" 
+list.files(file.path(exampleRepoDir, "gallery"))
+# or show how database.db file looks like.
+showLocalRepo(repoDir = exampleRepoDir) # artifacts' data is there indeed!
+
+# If we want to remove artifact's data now we simply call rmFromLocalRepo function
+# with removeData = TRUE additional argument.
+rmFromLocalRepo(Artifacts, repoDir = exampleRepoDir, removeData = TRUE,  many = TRUE)
+
+# We receive a warning as Artifacts are no longer in the repository. 
+# However, let's check what happened with Artifact's data.
+showLocalRepo(repoDir = exampleRepoDir) # They were removed.
+# Perhaps you may think that "exampleRepoDir" is empty as database indicates. However,
+# if you look into gallery folder there will be some ".txt" or ".png" files. 
+list.files(file.path(exampleRepoDir, "gallery"))
+
+# Those are probably, the so called, Miniatures. Let's try to remove them.
+# In order to do it we call rmFromLocalRepo function with removeMiniature = TRUE argument.
+rmFromLocalRepo(Artifacts, many = TRUE, repoDir = exampleRepoDir, removeMiniature = TRUE)
+
+# Again we receive a warning as Artifacts are no longer in the repository but ...
+list.files(file.path(exampleRepoDir, "gallery")) 
+# gallery folder is empty now! Artifact's miniature's were removed.
+
+
+# Of course we may have done all these instructions by one simple function call.
+# rmFromLocalRepo(Artifacts, many = TRUE, repoDir = exampleRepoDir,
+#            removeData = TRUE, removeMiniature = TRUE)
+# Nevertheless, it may be instructive to see how it is done step by step.
+
+# removing an example Repository
+deleteLocalRepo(repoDir = exampleRepoDir, deleteRoot = TRUE)
+   
+rm( exampleRepoDir )
+# }
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

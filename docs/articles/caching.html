@@ -9,7 +9,7 @@
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><!-- mathjax --><script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
+<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
@@ -29,10 +29,34 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
 </li>
 <li>
-  <a href="../articles/index.html">Articles</a>
+  <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="../articles/accessibility.html">Accessibility</a>
+    </li>
+    <li>
+      <a href="../articles/caching.html">Caching</a>
+    </li>
+    <li>
+      <a href="../articles/chaining.html">Chaining</a>
+    </li>
+    <li>
+      <a href="../articles/posts.html">Posts</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -57,15 +81,19 @@
     
     
 <div class="contents">
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{Caching}
+-->
 <p>The archivist package allows to store, restore and look for R objects in repositories stored on hard disk. There are different strategies that can be used to find an object, through it’s name, date of creation of meta data. The package is mainly designed as a repository of artifacts, but it can be used in different use-cases.</p>
 <p>Let’s see how it can be used as caching engine.</p>
 <p>Let’s consider a function with few arguments, which evaluation may takes a significant amount of time. If there is a chance that the function will be executed with same parameteres more than just one, it would be desireble to cache results to avoid unncessary evaluations.</p>
 <p>Such cache can be easily constructed with the <code>archivist</code> package.</p>
 <div id="heavyweight-function" class="section level1">
 <h1 class="hasAnchor">
-<html><body><a href="#heavyweight-function" class="anchor"> </a></body></html>Heavyweight function</h1>
+<a href="#heavyweight-function" class="anchor"></a>Heavyweight function</h1>
 <p>Let’s see an example. The <code>Heavyweight</code> function <code>getMaxDistribution</code> summarizes the distribution of maximum from N draw of random variables from distribuition D with the use of R replications.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">getMaxDistribution &lt;-<span class="st"> </span>function(
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">getMaxDistribution &lt;-<span class="st"> </span><span class="cf">function</span>(
     <span class="dt">D =</span> rnorm, 
     <span class="dt">N =</span> <span class="dv">10</span>,
     <span class="dt">R =</span> <span class="dv">1000000</span>) {
@@ -86,15 +114,15 @@
 </div>
 <div id="cache-preparation" class="section level1">
 <h1 class="hasAnchor">
-<html><body><a href="#cache-preparation" class="anchor"> </a></body></html>Cache preparation</h1>
+<a href="#cache-preparation" class="anchor"></a>Cache preparation</h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(archivist)
 cacheRepo &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
-<span class="kw"><a href="../reference/createLocalRepo.html">createLocalRepo</a></span>(cacheRepo)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Directory /tmp/Rtmp45GZsm/file65d3676f9387 did not exist. Forced to create a new directory.</code></pre></div>
+<span class="kw"><a href="../reference/createEmptyRepo.html">createLocalRepo</a></span>(cacheRepo)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Directory <span class="op">/</span>tmp<span class="op">/</span>Rtmp45GZsm<span class="op">/</span>file65d3676f9387 did not exist. Forced to create a new directory.</code></pre></div>
 </div>
 <div id="how-to-work-with-cache" class="section level1">
 <h1 class="hasAnchor">
-<html><body><a href="#how-to-work-with-cache" class="anchor"> </a></body></html>How to work with cache</h1>
+<a href="#how-to-work-with-cache" class="anchor"></a>How to work with cache</h1>
 <p>The <code>cacheRepo</code> is a folder with already evaluated function calls. How to use it?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(<span class="kw"><a href="../reference/cache.html">cache</a></span>(cacheRepo, getMaxDistribution, rnorm, <span class="dv">10</span>))</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">   user  system elapsed 
@@ -109,7 +137,7 @@ cacheRepo &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
 </div>
 <div id="how-the-cache-function-works" class="section level1">
 <h1 class="hasAnchor">
-<html><body><a href="#how-the-cache-function-works" class="anchor"> </a></body></html>How the <code>cache</code> function works?</h1>
+<a href="#how-the-cache-function-works" class="anchor"></a>How the <code>cache</code> function works?</h1>
 <p>It create a md5 signature of the function FUN and it’s arguments and use this signature as a key. If such key is present in the cache repository, then the object is just restored. If it’s not present then the call is evaluated and result is stored. Note that, if <code>cacheRepo</code> is a shared folder, then you get a shared cache repository!</p>
 </div>
 </div>
@@ -117,7 +145,8 @@ cacheRepo &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#heavyweight-function">Heavyweight function</a></li>
       <li><a href="#cache-preparation">Cache preparation</a></li>

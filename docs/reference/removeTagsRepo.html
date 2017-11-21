@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Read Artifacts Given as a List of Tags — asearch • archivist</title>
+<title>Remove Tags from Repository — removeTagsRepo • archivist</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -99,47 +99,40 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Read Artifacts Given as a List of Tags</h1>
+    <h1>Remove Tags from Repository</h1>
     </div>
 
     
-    <p><code>asearch</code> searches for artifacts that contain all specified <a href='Tags.html'>Tags</a>
-and reads all of them from a default or Remote <a href='Repository.html'>Repository</a>. It's a wrapper around 
-<a href='searchInRepo.html'>searchInLocalRepo</a> and <a href='loadFromRepo.html'>loadFromLocalRepo</a> and their Remote versions.</p>
+    <p><code>removeTagsRepo</code> removes selected <a href='Tags.html'>Tags</a> from selected objects in <a href='Repository.html'>Repository</a>.</p>
     
 
-    <pre class="usage"><span class='fu'>asearch</span>(<span class='no'>patterns</span>, <span class='kw'>repo</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>removeTagsRepo</span>(<span class='no'>md5hashes</span>, <span class='kw'>repoDir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>tags</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>patterns</th>
-      <td><p>A character vector of <code>Tags</code>. Only artifacts that 
-contain all Tags are returned.</p></td>
+      <th>md5hashes</th>
+      <td><p>a character vector of <code>md5hashes</code> specifying to which
+corresponding artifacts <code>Tags</code> should be removes</p></td>
     </tr>
     <tr>
-      <th>repo</th>
-      <td><p>One of following:</p>
-<p>A character with Remote user name and Remote repository name separated by `/`.</p>
-<p>NULL in this case search will be performed in the default repo, either local or Remote</p></td>
+      <th>repoDir</th>
+      <td><p>A character that specifies the directory of the Repository to which
+new <code>Tags</code> will be added. If it is set to <code>NULL</code> (by default),
+it uses the <code>repoDir</code> specified in <a href='setRepo.html'>setLocalRepo</a>.</p></td>
+    </tr>
+    <tr>
+      <th>tags</th>
+      <td><p>A character vector which specifies what Tags should be removed.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>This function returns a list of artifacts (by their values).</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Function <code>asearch</code> reads all artifacts that contain given list of <code>Tags</code>
-from default or Remote Repository.
-It uses both <a href='loadFromRepo.html'>loadFromLocalRepo</a> and <a href='searchInRepo.html'>searchInLocalRepo</a> functions (or their Remote versions)
-but has shorter name and different parameter's specification.</p>
-    
-    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
-
-    <p>Remember that if you want to use local repository you should set it to default.</p>
+    <p><code>removeTagsRepo</code> function removes all Tags from all listed objects.
+Note that some hashes are required for keeping erlations between objects in the repository.
+Be carefull what are you removing.</p>
     
     <h2 class="hasAnchor" id="contact"><a class="anchor" href="#contact"></a>Contact</h2>
 
@@ -162,15 +155,15 @@ URL https://github.com/pbiecek/archivist</p>
   <code><a href='aformat.html'>aformat</a></code>, <code><a href='ahistory.html'>ahistory</a></code>,
   <code><a href='alink.html'>alink</a></code>, <code><a href='archivistOptions.html'>aoptions</a></code>,
   <code><a href='archivist-package.html'>archivist-package</a></code>, <code><a href='aread.html'>aread</a></code>,
-  <code><a href='asession.html'>asession</a></code>, <code><a href='atrace.html'>atrace</a></code>,
-  <code><a href='cache.html'>cache</a></code>, <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
+  <code><a href='asearch.html'>asearch</a></code>, <code><a href='asession.html'>asession</a></code>,
+  <code><a href='atrace.html'>atrace</a></code>, <code><a href='cache.html'>cache</a></code>,
+  <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
   <code><a href='createEmptyRepo.html'>createLocalRepo</a></code>,
   <code><a href='createMDGallery.html'>createMDGallery</a></code>,
   <code><a href='deleteLocalRepo.html'>deleteLocalRepo</a></code>,
   <code><a href='getRemoteHook.html'>getRemoteHook</a></code>, <code><a href='getTags.html'>getTagsLocal</a></code>,
   <code><a href='loadFromRepo.html'>loadFromLocalRepo</a></code>, <code><a href='md5hash.html'>md5hash</a></code>,
-  <code><a href='removeTagsRepo.html'>removeTagsRepo</a></code>, <code><a href='restoreLibs.html'>restoreLibs</a></code>,
-  <code><a href='rmFromLocalRepo.html'>rmFromLocalRepo</a></code>,
+  <code><a href='restoreLibs.html'>restoreLibs</a></code>, <code><a href='rmFromLocalRepo.html'>rmFromLocalRepo</a></code>,
   <code><a href='saveToRepo.html'>saveToLocalRepo</a></code>,
   <code><a href='searchInRepo.html'>searchInLocalRepo</a></code>,
   <code><a href='setRepo.html'>setLocalRepo</a></code>,
@@ -182,94 +175,33 @@ URL https://github.com/pbiecek/archivist</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"># NOT RUN {
-### default LOCAL version
-## objects preparation
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'># Creating empty repository</span>
+<span class='no'>exampleRepoDir</span> <span class='kw'>&lt;-</span> <span class='fu'>tempfile</span>()
+<span class='fu'><a href='createEmptyRepo.html'>createLocalRepo</a></span>(<span class='no'>exampleRepoDir</span>, <span class='kw'>force</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 
-# data.frame object
-data(iris)
+<span class='co'># Saving lm artifacts into repository</span>
+<span class='no'>m1</span> <span class='kw'>&lt;-</span> <span class='fu'>lm</span>(<span class='no'>Sepal.Length</span>~<span class='no'>Species</span>, <span class='no'>iris</span>)
+<span class='fu'><a href='saveToRepo.html'>saveToLocalRepo</a></span>(<span class='no'>m1</span>, <span class='no'>exampleRepoDir</span>)
 
-# ggplot/gg object
-library(ggplot2)
-df <- data.frame(gp = factor(rep(letters[1:3], each = 10)),y = rnorm(30))
-library(plyr)
-ds <- ddply(df, .(gp), summarise, mean = mean(y), sd = sd(y))
-myplot123 <- ggplot(df, aes(x = gp, y = y)) +
-  geom_point() +  geom_point(data = ds, aes(y = mean),
-                             colour = 'red', size = 3)
+<span class='co'># We may see what kind of Tags are related to "m1" artifact corresponding to</span>
+<span class='fu'><a href='getTags.html'>getTagsLocal</a></span>(<span class='st'>"9e66edd297c2f291446f3503c01d443a"</span>, <span class='no'>exampleRepoDir</span>, <span class='st'>""</span>)
 
-# lm object
-model <- lm(Sepal.Length~ Sepal.Width + Petal.Length + Petal.Width, data= iris)
-model2 <- lm(Sepal.Length~ Sepal.Width + Petal.Width, data= iris)
-model3 <- lm(Sepal.Length~ Sepal.Width, data= iris)
+<span class='co'># One more look at our Repo</span>
+<span class='fu'>removeTagsRepo</span>(<span class='st'>"9e66edd297c2f291446f3503c01d443a"</span>, <span class='no'>exampleRepoDir</span>, <span class='kw'>tags</span> <span class='kw'>=</span> <span class='st'>"rank:3"</span>)
 
-## creating example default local repository
-exampleRepoDir <- tempfile()
-createLocalRepo(repoDir = exampleRepoDir)
-## setting default local repository
-setLocalRepo( repoDir = exampleRepoDir )
-
-saveToLocalRepo(myplot123)
-saveToLocalRepo(iris)
-saveToLocalRepo(model)
-saveToLocalRepo(model2)
-saveToLocalRepo(model3)
-
-## Searching for objects of class:lm
-lm <- asearch(patterns = "class:lm")
-
-## Searching for objects of class:lm with coefname:Petal.Width
-lm_c_PW <- asearch(patterns = c("class:lm","coefname:Petal.Width"))
-
-# Note that we searched for objects. Then loaded them from repository by their value.
-
-
-## deleting example repository
-deleteLocalRepo(repoDir = exampleRepoDir, deleteRoot = TRUE)
-rm(exampleRepoDir)
-
-### default GitHub version
-## Setting default github repository
-setRemoteRepo( user = "pbiecek", repo = "archivist")
-
-showRemoteRepo(method = "tags")$tag
-searchInRemoteRepo(pattern = "class:lm")
-searchInRemoteRepo(pattern = "class:gg")
-getTagsRemote(md5hash = "cd6557c6163a6f9800f308f343e75e72", tag = "")
-
-## Searching for objects of class:lm
-asearch(patterns = c("class:lm"))
-## Searching for objects of class:gg
-ggplot_objects <- asearch(patterns = c("class:gg"))
-# names(ggplot_objects)
-# To plot them remember to have ggplot2 in version 2.1.0
-# as this is stated in asession("pbiecek/archivist/13b2724139eb2c62578b4dab0d7b2cea") or
-asession("pbiecek/archivist/7f3453331910e3f321ef97d87adb5bad") .
-# The state of R libraries can be restored to the same state in
-# which those objects were created with the restoreLibs function.
-
-
-### Remote version 
-## Note that repo argument is passed in the following way to asearch:
-## repo = "GitHub user name/GitHub repository name"
-
-## Searching for objects of class:gg
-asearch("pbiecek/graphGallery", 
-        patterns = c("class:gg",
-                     "labelx:Sepal.Length")) -> ggplots_objects_v2
-# }
-</pre>
+<span class='co'># Deleting example repository</span>
+<span class='fu'><a href='deleteLocalRepo.html'>deleteLocalRepo</a></span>(<span class='no'>exampleRepoDir</span>, <span class='kw'>deleteRoot</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='fu'>rm</span>(<span class='no'>exampleRepoDir</span>)
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-
-      <li><a href="#note">Note</a></li>
 
       <li><a href="#contact">Contact</a></li>
 
