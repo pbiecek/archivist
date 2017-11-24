@@ -8,7 +8,7 @@ setDefaultArchivistEnv <- function() {
   .ArchivistEnv$ascii <- FALSE
   .ArchivistEnv$branch <- "master"
   .ArchivistEnv$chain <- FALSE 
-  .ArchivistEnv$force <- TRUE
+  .ArchivistEnv$force <- FALSE
   .ArchivistEnv$subdir <- "/"
   .ArchivistEnv$repoType <- "github"
   .ArchivistEnv$silent <- TRUE

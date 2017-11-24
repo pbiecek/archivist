@@ -31,9 +31,9 @@
 #' 
 #' @param repoDir A character that specifies the directory for the Repository which is to be made. 
 #'  
-#' @param force If \code{force = TRUE} and \code{repoDir} parameter specifies the directory that doesn't exist,
-#' then function call will force to create new \code{repoDir} directory.
-#' Default set to \code{force = TRUE}.
+#' @param force If \code{force = TRUE} and \code{repoDir} parameter specifies the directory that contains backpack.db file,
+#' then function call will force to recreate new \code{backpack.db}
+#' Default set to \code{force = FALSE}.
 #' 
 #' @param default If \code{default = TRUE} then \code{repoDir} is set as default Local Repository. 
 #' 
@@ -83,14 +83,18 @@
 #' @family archivist
 #' @rdname createEmptyRepo
 #' @export
-createLocalRepo <- function( repoDir, force = TRUE, default = FALSE ){
+createLocalRepo <- function( repoDir, force = FALSE, default = FALSE ){
   stopifnot( is.character( repoDir ), length( repoDir ) == 1 )
   stopifnot( is.logical( default ), length( default ) == 1 )
   
-  if ( !file.exists( repoDir ) & !force ) 
-    stop( paste0("Directory ", repoDir, " does not exist. Try with force=TRUE.") )
-  if ( !file.exists( repoDir ) & force ){
-    cat( paste0("Directory ", repoDir, " did not exist. Forced to create a new directory.") )
+  if ( file.exists( repoDir ) & file.exists( paste0(repoDir,"/backpack.db") ) & !force ){
+    message( paste0("Directory ", repoDir, " does exist and contain the backpack.db file. Use force=TRUE to reinitialize.") )
+    return(invisible( repoDir ))  
+  } 
+  if ( file.exists( repoDir ) & file.exists( paste0(repoDir,"/backpack.db") ) & force ){
+    message( paste0("Directory ", repoDir, " does exist and contain the backpack.db file. Reinitialized due to force=TRUE.") )
+  }
+  if ( !file.exists( repoDir ) ){
     dir.create( repoDir )
   }
   
@@ -132,18 +136,22 @@ createLocalRepo <- function( repoDir, force = TRUE, default = FALSE ){
 #' @family archivist
 #' @rdname createEmptyRepo
 #' @export
-createPostgresRepo <- function( repoDir, connector, force = TRUE, default = FALSE ){
+createPostgresRepo <- function( repoDir, connector, force = FALSE, default = FALSE ){
   stopifnot( is.character( repoDir ), length( repoDir ) == 1 )
   stopifnot( is.logical( default ), length( default ) == 1 )
   stopifnot( is.function( connector ))
 
-  if ( !file.exists( repoDir ) & !force ) 
-    stop( paste0("Directory ", repoDir, " does not exist. Try with force=TRUE.") )
-  if ( !file.exists( repoDir ) & force ){
-    cat( paste0("Directory ", repoDir, " did not exist. Forced to create a new directory.") )
+  if ( file.exists( repoDir ) & file.exists( paste0(repoDir,"/backpack.db") ) & !force ){
+    message( paste0("Directory ", repoDir, " does exist and contain the backpack.db file. Use force=TRUE to reinitialize.") )
+    return(invisible( repoDir ))  
+  } 
+  if ( file.exists( repoDir ) & file.exists( paste0(repoDir,"/backpack.db") ) & force ){
+    message( paste0("Directory ", repoDir, " does exist and contain the backpack.db file. Reinitialized due to force=TRUE.") )
+  }
+  if ( !file.exists( repoDir ) ){
     dir.create( repoDir )
   }
-  
+
   .ArchivistEnv$useExternalDatabase <- TRUE
   .ArchivistEnv$externalConnector <- connector
   

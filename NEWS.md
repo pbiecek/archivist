@@ -1,3 +1,8 @@
+archivist 2.2
+----------------------------------------------------------------
+* parameter `force` has now different meaning in `createLocalRepo()`. As suggested in ([#319](https://github.com/pbiecek/archivist/issues/319)) and ([#318](https://github.com/pbiecek/archivist/issues/318)) if forces to override existing backpack.db file.
+* Updated CITATION
+
 archivist 2.1.4
 ----------------------------------------------------------------
 * `dbExecute()` is used instead of `dbGetQuery()` as is recommended in latest version of `DBI` package ([#316](https://github.com/pbiecek/archivist/issues/316)).
