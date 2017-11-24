@@ -1,18 +1,16 @@
-citHeader("To cite archivist in publications use:")
-
-citEntry(entry = "Manual",
+bibentry(bibtype = "Article",
   title        = "{archivist}: An {R} Package for Managing, Recording and Restoring Data Analysis Results",
-  author       = personList(as.person("Przemys{\\l}aw Biecek"),
-                   as.person("Marcin Kosinski")),
-  year         = "2017",
-  url          = "https://github.com/pbiecek/archivist",
+  author       = c(person(given = "Przemyslaw",
+                          family = "Biecek"),
+                   person(given = "Marcin",
+                          family = "Kosinski")),
   journal      = "Journal of Statistical Software",
-  note         = "Conditionally accepted for publication",
+  year         = "2017",
+  volume       = "82",
+  number       = "11",
+  pages        = "1--28",
+  doi          = "10.18637/jss.v082.i11",
 
-  textVersion  =
-  paste("Przemyslaw Biecek, Marcin Kosinski (2017).",
-        "archivist: An R Package for Managing, Recording and Restoring Data Analysis Results",
-        "Conditionally accepted for Journal of Statistical Software",
-        "URL https://github.com/pbiecek/archivist")
+  header       = "To cite archivist in publications use:"
 )
 
