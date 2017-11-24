@@ -18,7 +18,6 @@ A set of tools for datasets and plots archiving
 
 Project is supported by [Travis CI](https://travis-ci.org/) and [waffle.io](https://waffle.io/).
 
-
 ### Please see the  [archivist wiki](https://github.com/pbiecek/archivist/wiki) for information. 
 
 ### Information for [developers](https://github.com/pbiecek/archivist/wiki/For-developers)
@@ -33,17 +32,35 @@ To get started, install the latest version of **archivist** from CRAN:
 install.packages("archivist")
 ```
 
-or use:
+or from GitHub:
 
 ```{Ruby}
-if (!require(devtools)) {
-    install.packages("devtools")
-    require(devtools)
-}
-install_github("pbiecek/archivist")
+devtools::install_github("pbiecek/archivist")
 ```
 
-Make sure you have [rtools](http://cran.r-project.org/bin/windows/Rtools/) installed on your computer.
+<h5> Citation </h5>
+
+To cite the `archivist` in publications please use:
+
+```
+Biecek P and Kosinski M (2017). “archivist: An R Package for Managing,
+Recording and Restoring Data Analysis Results.” _Journal of Statistical
+Software_, *82*(11), pp. 1-28. doi: 10.18637/jss.v082.i11 (URL:
+http://doi.org/10.18637/jss.v082.i11).
+
+A BibTeX entry for LaTeX users is
+
+  @Article{,
+    title = {{archivist}: An {R} Package for Managing, Recording and Restoring Data Analysis Results},
+    author = {Przemyslaw Biecek and Marcin Kosinski},
+    journal = {Journal of Statistical Software},
+    year = {2017},
+    volume = {82},
+    number = {11},
+    pages = {1--28},
+    doi = {10.18637/jss.v082.i11},
+  }
+  ```
 
 <h5> The list of available functions: </h5>
 
