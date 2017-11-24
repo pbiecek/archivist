@@ -149,3 +149,45 @@ asearch <- function( patterns, repo = NULL){
   } 
   res
 }
+
+#' @title Read Artifacts Given as a List of Tags
+#'
+#' @description
+#' \code{asearchLocal} searches for artifacts that contain all specified \link{Tags}
+#' and reads all of them from a local \link{Repository}. It's a wrapper around 
+#' \link{searchInLocalRepo} and \link{loadFromLocalRepo}.
+#' 
+#' @details
+#' Function \code{asearchLocal} reads all artifacts that contain given list of \code{Tags}
+#' from the selected Local Repository.
+#' 
+#' @param repo A character with path to local repository.
+#' 
+#' @param patterns  A character vector of \code{Tags}. Only artifacts that 
+#' contain all Tags are returned.  
+#' 
+#' @return This function returns a list of artifacts (by their values).
+#' 
+#' @author 
+#' Przemyslaw Biecek, \email{przemyslaw.biecek@@gmail.com}
+#' 
+#' @template roxlate-references
+#' @template roxlate-contact
+#' @family archivist
+#' @rdname asearchLocal
+#' @export
+asearchLocal <- function( patterns, repo = NULL){
+  stopifnot( (is.character( repo ) & length( repo ) == 1) | is.null( repo ) )
+  stopifnot( is.character( patterns ) )
+  
+  oblist <- multiSearchInLocalRepoInternal(patterns = patterns,
+                                           repoDir = repo,
+                                           intersect = TRUE)
+  if (length(oblist) > 0) {
+    res <- lapply(oblist, loadFromLocalRepo, value = TRUE)
+    names(res) <- oblist
+  } else {
+    res <- list()
+  }
+  res
+}

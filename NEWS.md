@@ -1,5 +1,6 @@
 archivist 2.2
 ----------------------------------------------------------------
+* Two new functions `asearchLocal()` and `areadLocal()` that work as `asearch()` and `aread()` for selected local repositories ([#298](https://github.com/pbiecek/archivist/issues/298)).
 * parameter `force` has now different meaning in `createLocalRepo()`. As suggested in ([#319](https://github.com/pbiecek/archivist/issues/319)) and ([#318](https://github.com/pbiecek/archivist/issues/318)) if forces to override existing backpack.db file.
 * Updated CITATION
 

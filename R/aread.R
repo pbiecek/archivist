@@ -74,3 +74,38 @@ aread <- function(md5hash){
   }
   if (length(res) == 1) return(res[[1]]) else res
 }
+
+#' @title Read Artifacts Given as md5hashes from the Repository
+#'
+#' @description
+#' \code{areadLocal} reads the artifact from the Local \link{Repository}. It's a wrapper around 
+#' \link{loadFromLocalRepo}.
+#' 
+#' @details
+#' Function \code{areadLocal} reads artifacts (by \code{md5hashes}) from Local Repository.
+#' 
+#' @param md5hash A character vector which elements  are consisting name of the repository and name of the artifact (MD5 hash) or it's abbreviation.
+#' 
+#' @param repo A character with path to local repository.
+#' 
+#' @author 
+#' Przemyslaw Biecek, \email{przemyslaw.biecek@@gmail.com}
+#' 
+#' @template roxlate-references
+#' @template roxlate-contact
+#' 
+#' @family archivist
+#' @rdname areadLocal
+#' @export
+areadLocal <- function(md5hash, repo){
+  stopifnot( (is.character( repo ) & length( repo ) == 1) | is.null( repo ) )
+  stopifnot( is.character( md5hash ) )
+  
+  # work for vectors  
+  res <- list()
+  for (md5h in md5hash) {
+    # at least 3 elements
+      res[[md5h]] <- loadFromLocalRepo(md5hash = md5h, value = TRUE, repoDir = repo)
+  }
+  if (length(res) == 1) return(res[[1]]) else res
+}
