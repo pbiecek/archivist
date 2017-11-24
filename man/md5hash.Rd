@@ -83,3 +83,4 @@ Other archivist: \code{\link{Repository}},
   \code{\link{summaryLocalRepo}},
   \code{\link{zipLocalRepo}}
 }
+\concept{archivist}

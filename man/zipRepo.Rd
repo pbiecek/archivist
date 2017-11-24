@@ -164,3 +164,4 @@ Other archivist: \code{\link{Repository}},
 \author{
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}, Przemyslaw Biecek
 }
+\concept{archivist}

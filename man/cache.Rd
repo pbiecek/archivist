@@ -122,3 +122,4 @@ Other archivist: \code{\link{Repository}},
 \author{
 Przemyslaw Biecek, \email{Przemyslaw.Biecek@gmail.com}
 }
+\concept{archivist}

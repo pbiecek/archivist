@@ -123,3 +123,4 @@ Other archivist: \code{\link{Repository}},
 \author{
 Witold Chodor , \email{witoldchodor@gmail.com}
 }
+\concept{archivist}

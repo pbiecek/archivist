@@ -66,3 +66,4 @@ Other archivist: \code{\link{Repository}},
 \author{
 Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
 }
+\concept{archivist}

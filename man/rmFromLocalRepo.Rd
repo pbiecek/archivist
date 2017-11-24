@@ -384,3 +384,4 @@ Other archivist: \code{\link{Repository}},
 Marcin Kosinski , \email{m.p.kosinski@gmail.com}
 Witold Chodor , \email{witoldchodor@gmail.com}
 }
+\concept{archivist}

@@ -82,3 +82,4 @@ Przemyslaw Biecek [aut, cre] \email{przemyslaw.biecek@gmail.com} \cr
 Marcin Kosinski [aut] \email{m.p.kosinski@gmail.com} \cr
 Witold Chodor [ctb] \email{witold.chodor@gmail.com}
 }
+\concept{archivist}

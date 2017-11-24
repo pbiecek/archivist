@@ -131,3 +131,4 @@ Other archivist: \code{\link{Repository}},
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}, 
 Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
 }
+\concept{archivist}

@@ -6,18 +6,18 @@
 \alias{createEmptyRepo}
 \title{Create an Empty Repository}
 \usage{
-createLocalRepo(repoDir, force = TRUE, default = FALSE)
+createLocalRepo(repoDir, force = FALSE, default = FALSE)
 
-createPostgresRepo(repoDir, connector, force = TRUE, default = FALSE)
+createPostgresRepo(repoDir, connector, force = FALSE, default = FALSE)
 
 createEmptyRepo(...)
 }
 \arguments{
 \item{repoDir}{A character that specifies the directory for the Repository which is to be made.}
 
-\item{force}{If \code{force = TRUE} and \code{repoDir} parameter specifies the directory that doesn't exist,
-then function call will force to create new \code{repoDir} directory.
-Default set to \code{force = TRUE}.}
+\item{force}{If \code{force = TRUE} and \code{repoDir} parameter specifies the directory that contains backpack.db file,
+then function call will force to recreate new \code{backpack.db}
+Default set to \code{force = FALSE}.}
 
 \item{default}{If \code{default = TRUE} then \code{repoDir} is set as default Local Repository.}
 
@@ -174,3 +174,4 @@ Other archivist: \code{\link{Repository}},
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
 }
+\concept{archivist}

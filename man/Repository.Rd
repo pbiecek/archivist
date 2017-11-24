@@ -120,3 +120,4 @@ Other archivist: \code{\link{Tags}}, \code{\link{\%a\%}},
   \code{\link{summaryLocalRepo}},
   \code{\link{zipLocalRepo}}
 }
+\concept{archivist}
