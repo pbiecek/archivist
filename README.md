@@ -18,13 +18,7 @@ A set of tools for datasets and plots archiving
 
 Project is supported by [Travis CI](https://travis-ci.org/) and [waffle.io](https://waffle.io/).
 
-### Please see the  [archivist wiki](https://github.com/pbiecek/archivist/wiki) for information. 
-
-### Information for [developers](https://github.com/pbiecek/archivist/wiki/For-developers)
-
-[![Gitter](https://badges.gitter.im/pbiecek/archivist.svg)](https://gitter.im/pbiecek/archivist?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-
-<h5> Installation of the archivist package: </h5>
+## Installation of the archivist package:
 
 To get started, install the latest version of **archivist** from CRAN:
 
@@ -38,7 +32,7 @@ or from GitHub:
 devtools::install_github("pbiecek/archivist")
 ```
 
-<h5> Citation </h5>
+## Citation 
 
 To cite the `archivist` in publications please use:
 
@@ -62,7 +56,9 @@ A BibTeX entry for LaTeX users is
   }
   ```
 
-<h5> The list of available functions: </h5>
+## Misc
+
+The list of available functions:
 
 ```{Ruby}
 help(package="archivist")
@@ -78,8 +74,6 @@ help(package="archivist")
 > Marcin Kosiński, m.p.kosinski@gmail.com
 >
 > Witold Chodor, witoldchodor@gmail.com
-
-# Extenstions
 
 ### [archivist.github](http://marcinkosinski.github.io/archivist.github/): Archiving, Managing and Sharing R Objects via GitHub
 
