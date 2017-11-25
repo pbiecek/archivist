@@ -139,9 +139,10 @@ getTagsRemote("ff575c261c949d073b2895b05d1097c3", user="MarcinKosinski",
 
 }
 \references{
-Przemyslaw Biecek, Marcin Kosinski (2017). 
-archivist: An R Package for Managing, Recording and Restoring Data Analysis Results 
-Conditionally accepted for Journal of Statistical Software
+Biecek P and Kosinski M (2017). “archivist: An R Package for Managing,
+Recording and Restoring Data Analysis Results.” _Journal of Statistical
+Software_, *82*(11), pp. 1-28. doi: 10.18637/jss.v082.i11 (URL:
+http://doi.org/10.18637/jss.v082.i11).
 URL https://github.com/pbiecek/archivist
 }
 \seealso{
