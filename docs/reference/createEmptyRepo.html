@@ -106,9 +106,9 @@
     <p><code>createLocalRepo</code> creates an empty <a href='Repository.html'>Repository</a> in the given directory in which archived artifacts will be stored.</p>
     
 
-    <pre class="usage"><span class='fu'>createLocalRepo</span>(<span class='no'>repoDir</span>, <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>default</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>createLocalRepo</span>(<span class='no'>repoDir</span>, <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>default</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>createPostgresRepo</span>(<span class='no'>repoDir</span>, <span class='no'>connector</span>, <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>default</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>createPostgresRepo</span>(<span class='no'>repoDir</span>, <span class='no'>connector</span>, <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>default</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='fu'>createEmptyRepo</span>(<span class='no'>...</span>)</pre>
     
@@ -121,9 +121,9 @@
     </tr>
     <tr>
       <th>force</th>
-      <td><p>If <code>force = TRUE</code> and <code>repoDir</code> parameter specifies the directory that doesn't exist,
-then function call will force to create new <code>repoDir</code> directory.
-Default set to <code>force = TRUE</code>.</p></td>
+      <td><p>If <code>force = TRUE</code> and <code>repoDir</code> parameter specifies the directory that contains backpack.db file,
+then function call will force to recreate new <code>backpack.db</code>
+Default set to <code>force = FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>default</th>
@@ -181,10 +181,11 @@ URL https://github.com/pbiecek/archivist</p>
   <code><a href='addHooksToPrint.html'>addHooksToPrint</a></code>, <code><a href='addTagsRepo.html'>addTagsRepo</a></code>,
   <code><a href='aformat.html'>aformat</a></code>, <code><a href='ahistory.html'>ahistory</a></code>,
   <code><a href='alink.html'>alink</a></code>, <code><a href='archivistOptions.html'>aoptions</a></code>,
-  <code><a href='archivist-package.html'>archivist-package</a></code>, <code><a href='aread.html'>aread</a></code>,
-  <code><a href='asearch.html'>asearch</a></code>, <code><a href='asession.html'>asession</a></code>,
-  <code><a href='atrace.html'>atrace</a></code>, <code><a href='cache.html'>cache</a></code>,
-  <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
+  <code><a href='archivist-package.html'>archivist-package</a></code>,
+  <code><a href='areadLocal.html'>areadLocal</a></code>, <code><a href='aread.html'>aread</a></code>,
+  <code><a href='asearchLocal.html'>asearchLocal</a></code>, <code><a href='asearch.html'>asearch</a></code>,
+  <code><a href='asession.html'>asession</a></code>, <code><a href='atrace.html'>atrace</a></code>,
+  <code><a href='cache.html'>cache</a></code>, <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
   <code><a href='createMDGallery.html'>createMDGallery</a></code>,
   <code><a href='deleteLocalRepo.html'>deleteLocalRepo</a></code>,
   <code><a href='getRemoteHook.html'>getRemoteHook</a></code>, <code><a href='getTags.html'>getTagsLocal</a></code>,
@@ -204,10 +205,11 @@ URL https://github.com/pbiecek/archivist</p>
   <code><a href='addHooksToPrint.html'>addHooksToPrint</a></code>, <code><a href='addTagsRepo.html'>addTagsRepo</a></code>,
   <code><a href='aformat.html'>aformat</a></code>, <code><a href='ahistory.html'>ahistory</a></code>,
   <code><a href='alink.html'>alink</a></code>, <code><a href='archivistOptions.html'>aoptions</a></code>,
-  <code><a href='archivist-package.html'>archivist-package</a></code>, <code><a href='aread.html'>aread</a></code>,
-  <code><a href='asearch.html'>asearch</a></code>, <code><a href='asession.html'>asession</a></code>,
-  <code><a href='atrace.html'>atrace</a></code>, <code><a href='cache.html'>cache</a></code>,
-  <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
+  <code><a href='archivist-package.html'>archivist-package</a></code>,
+  <code><a href='areadLocal.html'>areadLocal</a></code>, <code><a href='aread.html'>aread</a></code>,
+  <code><a href='asearchLocal.html'>asearchLocal</a></code>, <code><a href='asearch.html'>asearch</a></code>,
+  <code><a href='asession.html'>asession</a></code>, <code><a href='atrace.html'>atrace</a></code>,
+  <code><a href='cache.html'>cache</a></code>, <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
   <code><a href='createMDGallery.html'>createMDGallery</a></code>,
   <code><a href='deleteLocalRepo.html'>deleteLocalRepo</a></code>,
   <code><a href='getRemoteHook.html'>getRemoteHook</a></code>, <code><a href='getTags.html'>getTagsLocal</a></code>,
@@ -227,10 +229,11 @@ URL https://github.com/pbiecek/archivist</p>
   <code><a href='addHooksToPrint.html'>addHooksToPrint</a></code>, <code><a href='addTagsRepo.html'>addTagsRepo</a></code>,
   <code><a href='aformat.html'>aformat</a></code>, <code><a href='ahistory.html'>ahistory</a></code>,
   <code><a href='alink.html'>alink</a></code>, <code><a href='archivistOptions.html'>aoptions</a></code>,
-  <code><a href='archivist-package.html'>archivist-package</a></code>, <code><a href='aread.html'>aread</a></code>,
-  <code><a href='asearch.html'>asearch</a></code>, <code><a href='asession.html'>asession</a></code>,
-  <code><a href='atrace.html'>atrace</a></code>, <code><a href='cache.html'>cache</a></code>,
-  <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
+  <code><a href='archivist-package.html'>archivist-package</a></code>,
+  <code><a href='areadLocal.html'>areadLocal</a></code>, <code><a href='aread.html'>aread</a></code>,
+  <code><a href='asearchLocal.html'>asearchLocal</a></code>, <code><a href='asearch.html'>asearch</a></code>,
+  <code><a href='asession.html'>asession</a></code>, <code><a href='atrace.html'>atrace</a></code>,
+  <code><a href='cache.html'>cache</a></code>, <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
   <code><a href='createMDGallery.html'>createMDGallery</a></code>,
   <code><a href='deleteLocalRepo.html'>deleteLocalRepo</a></code>,
   <code><a href='getRemoteHook.html'>getRemoteHook</a></code>, <code><a href='getTags.html'>getTagsLocal</a></code>,

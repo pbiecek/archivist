@@ -82,27 +82,41 @@
 <p><img src="https://raw.githubusercontent.com/pbiecek/archivist/master/archivist2_0.png" alt="The new overview of archivist package"></p>
 <p><img src="https://raw.githubusercontent.com/pbiecek/archivist/master/archiwum2.png" alt="Overview of archivist package"></p>
 <p>Project is supported by <a href="https://travis-ci.org/">Travis CI</a> and <a href="https://waffle.io/">waffle.io</a>.</p>
-<div id="please-see-the-archivist-wiki-for-information-" class="section level3">
-<h3 class="hasAnchor">
-<a href="#please-see-the-archivist-wiki-for-information-" class="anchor"></a>Please see the <a href="https://github.com/pbiecek/archivist/wiki">archivist wiki</a> for information.</h3>
-</div>
-<div id="information-for-developers" class="section level3">
-<h3 class="hasAnchor">
-<a href="#information-for-developers" class="anchor"></a>Information for <a href="https://github.com/pbiecek/archivist/wiki/For-developers">developers</a>
-</h3>
-<p><a href="https://gitter.im/pbiecek/archivist?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge"><img src="https://badges.gitter.im/pbiecek/archivist.svg" alt="Gitter"></a></p>
-<h5> Installation of the archivist package: </h5>
+<div id="installation-of-the-archivist-package" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installation-of-the-archivist-package" class="anchor"></a>Installation of the archivist package:</h2>
 <p>To get started, install the latest version of <strong>archivist</strong> from CRAN:</p>
 <pre class="{ruby}"><code>install.packages("archivist")</code></pre>
-<p>or use:</p>
-<pre class="{ruby}"><code>if (!require(devtools)) {
-    install.packages("devtools")
-    require(devtools)
-}
-install_github("pbiecek/archivist")</code></pre>
-<p>Make sure you have <a href="http://cran.r-project.org/bin/windows/Rtools/">rtools</a> installed on your computer.</p>
-<h5> The list of available functions: </h5>
-<pre class="{ruby}"><code><a href="http://www.rdocumentation.org/packages/devtools/topics/help">help(package="archivist")</a></code></pre>
+<p>or from GitHub:</p>
+<pre class="{ruby}"><code><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">devtools::install_github("pbiecek/archivist")</a></code></pre>
+</div>
+<div id="citation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#citation" class="anchor"></a>Citation</h2>
+<p>To cite the <code>archivist</code> in publications please use:</p>
+<pre><code>Biecek P and Kosinski M (2017). “archivist: An R Package for Managing,
+Recording and Restoring Data Analysis Results.” _Journal of Statistical
+Software_, *82*(11), pp. 1-28. doi: 10.18637/jss.v082.i11 (URL:
+http://doi.org/10.18637/jss.v082.i11).
+
+A BibTeX entry for LaTeX users is
+
+  @Article{,
+    title = {{archivist}: An {R} Package for Managing, Recording and Restoring Data Analysis Results},
+    author = {Przemyslaw Biecek and Marcin Kosinski},
+    journal = {Journal of Statistical Software},
+    year = {2017},
+    volume = {82},
+    number = {11},
+    pages = {1--28},
+    doi = {10.18637/jss.v082.i11},
+  }</code></pre>
+</div>
+<div id="misc" class="section level2">
+<h2 class="hasAnchor">
+<a href="#misc" class="anchor"></a>Misc</h2>
+<p>The list of available functions:</p>
+<pre class="{ruby}"><code>help(package="archivist")</code></pre>
 <h4> The list of use-cases: is available on archivist webpage http://pbiecek.github.io/archivist/</h4>
 <h5> Authors of the project: </h5>
 <blockquote>
@@ -110,15 +124,11 @@ install_github("pbiecek/archivist")</code></pre>
 <p>Marcin Kosiński, <a href="mailto:m.p.kosinski@gmail.com">m.p.kosinski@gmail.com</a></p>
 <p>Witold Chodor, <a href="mailto:witoldchodor@gmail.com">witoldchodor@gmail.com</a></p>
 </blockquote>
-</div>
-</div>
-<div id="extenstions" class="section level1">
-<h1 class="hasAnchor">
-<a href="#extenstions" class="anchor"></a>Extenstions</h1>
 <div id="archivist-github-archiving-managing-and-sharing-r-objects-via-github" class="section level3">
 <h3 class="hasAnchor">
 <a href="#archivist-github-archiving-managing-and-sharing-r-objects-via-github" class="anchor"></a><a href="http://marcinkosinski.github.io/archivist.github/">archivist.github</a>: Archiving, Managing and Sharing R Objects via GitHub</h3>
 <p><img src="https://raw.githubusercontent.com/MarcinKosinski/archivist.github/master/vignettes/archivist_github_workflow.png" alt="Workflow of archivist.github package"></p>
+</div>
 </div>
 </div>
 

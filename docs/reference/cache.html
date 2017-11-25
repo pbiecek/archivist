@@ -171,9 +171,11 @@ URL https://github.com/pbiecek/archivist</p>
   <code><a href='addHooksToPrint.html'>addHooksToPrint</a></code>, <code><a href='addTagsRepo.html'>addTagsRepo</a></code>,
   <code><a href='aformat.html'>aformat</a></code>, <code><a href='ahistory.html'>ahistory</a></code>,
   <code><a href='alink.html'>alink</a></code>, <code><a href='archivistOptions.html'>aoptions</a></code>,
-  <code><a href='archivist-package.html'>archivist-package</a></code>, <code><a href='aread.html'>aread</a></code>,
-  <code><a href='asearch.html'>asearch</a></code>, <code><a href='asession.html'>asession</a></code>,
-  <code><a href='atrace.html'>atrace</a></code>, <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
+  <code><a href='archivist-package.html'>archivist-package</a></code>,
+  <code><a href='areadLocal.html'>areadLocal</a></code>, <code><a href='aread.html'>aread</a></code>,
+  <code><a href='asearchLocal.html'>asearchLocal</a></code>, <code><a href='asearch.html'>asearch</a></code>,
+  <code><a href='asession.html'>asession</a></code>, <code><a href='atrace.html'>atrace</a></code>,
+  <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
   <code><a href='createEmptyRepo.html'>createLocalRepo</a></code>,
   <code><a href='createMDGallery.html'>createMDGallery</a></code>,
   <code><a href='deleteLocalRepo.html'>deleteLocalRepo</a></code>,
@@ -194,11 +196,10 @@ URL https://github.com/pbiecek/archivist</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'># objects preparation</span>
-<span class='fu'>library</span>(<span class='no'>lubridate</span>)</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘lubridate’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:base’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    date</span></div><div class='input'><span class='no'>cacheRepo</span> <span class='kw'>&lt;-</span> <span class='fu'>tempfile</span>()
-<span class='fu'><a href='createEmptyRepo.html'>createLocalRepo</a></span>( <span class='no'>cacheRepo</span> )</div><div class='output co'>#&gt; Directory /var/folders/_l/jllqh32s3llbxmtrh2431vpr0000gn/T//RtmpDvQURu/file107d615045453 did not exist. Forced to create a new directory.</div><div class='input'>
+<span class='fu'>library</span>(<span class='no'>lubridate</span>)
+<span class='no'>cacheRepo</span> <span class='kw'>&lt;-</span> <span class='fu'>tempfile</span>()
+<span class='fu'><a href='createEmptyRepo.html'>createLocalRepo</a></span>( <span class='no'>cacheRepo</span> )
+
 <span class='co'>## Example 1:</span>
 <span class='co'># cache is useful when objects used by FUN are not that big but calculations</span>
 <span class='co'># are time-comsuming. Take a look at this example:</span>
@@ -206,8 +207,8 @@ URL https://github.com/pbiecek/archivist</p>
 
 <span class='co'># let's check time of two evaluations of cache function</span>
 <span class='fu'>system.time</span>( <span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'>cache</span>(<span class='no'>cacheRepo</span>, <span class='no'>fun</span>, <span class='fl'>1000</span>) )</div><div class='output co'>#&gt;    user  system elapsed 
-#&gt;   1.353   0.067   1.434 </div><div class='input'><span class='fu'>system.time</span>( <span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'>cache</span>(<span class='no'>cacheRepo</span>, <span class='no'>fun</span>, <span class='fl'>1000</span>) )</div><div class='output co'>#&gt;    user  system elapsed 
-#&gt;   1.301   0.013   1.316 </div><div class='input'><span class='co'># The second call is much faster. Why is it so? Because the result of fun</span>
+#&gt;   1.366   0.342   1.775 </div><div class='input'><span class='fu'>system.time</span>( <span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'>cache</span>(<span class='no'>cacheRepo</span>, <span class='no'>fun</span>, <span class='fl'>1000</span>) )</div><div class='output co'>#&gt;    user  system elapsed 
+#&gt;   1.301   0.018   1.320 </div><div class='input'><span class='co'># The second call is much faster. Why is it so? Because the result of fun</span>
 <span class='co'># function evaluation has been stored in local cacheRepo during the first evaluation</span>
 <span class='co'># of cache. In the second call of cache we are simply loading the result of fun</span>
 <span class='co'># from local cacheRepo Repository.</span>
@@ -224,7 +225,7 @@ URL https://github.com/pbiecek/archivist</p>
 <span class='no'>tmp</span> <span class='kw'>&lt;-</span> <span class='fu'>cache</span>(<span class='no'>cacheRepo</span>, <span class='no'>testFun</span>, <span class='st'>"Say hallo!"</span>, <span class='kw'>notOlderThan</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/lubridate/topics/now'>now</a></span>())</div><div class='output co'>#&gt; Say hallo!</div><div class='input'>
 <span class='co'># testFun execution will be loaded from repository as it</span>
 <span class='co'># passes with expiration date [within hour]</span>
-<span class='no'>tmp</span> <span class='kw'>&lt;-</span> <span class='fu'>cache</span>(<span class='no'>cacheRepo</span>, <span class='no'>testFun</span>, <span class='st'>"Say hallo!"</span>, <span class='kw'>notOlderThan</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/lubridate/topics/now'>now</a></span>() - <span class='fu'><a href='http://www.rdocumentation.org/packages/lubridate/topics/quick_periods'>hours</a></span>(<span class='fl'>1</span>))</div><div class='output co'>#&gt; Say hallo!</div><div class='input'>
+<span class='no'>tmp</span> <span class='kw'>&lt;-</span> <span class='fu'>cache</span>(<span class='no'>cacheRepo</span>, <span class='no'>testFun</span>, <span class='st'>"Say hallo!"</span>, <span class='kw'>notOlderThan</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/lubridate/topics/now'>now</a></span>() - <span class='fu'><a href='http://www.rdocumentation.org/packages/lubridate/topics/period'>hours</a></span>(<span class='fl'>1</span>))</div><div class='output co'>#&gt; Say hallo!</div><div class='input'>
 <span class='fu'><a href='deleteLocalRepo.html'>deleteLocalRepo</a></span>( <span class='no'>cacheRepo</span>, <span class='fl'>TRUE</span>)
 <span class='fu'>rm</span>( <span class='no'>cacheRepo</span> )</div></pre>
   </div>

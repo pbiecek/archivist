@@ -145,9 +145,11 @@ URL https://github.com/pbiecek/archivist</p>
   <code><a href='addHooksToPrint.html'>addHooksToPrint</a></code>, <code><a href='addTagsRepo.html'>addTagsRepo</a></code>,
   <code><a href='aformat.html'>aformat</a></code>, <code><a href='ahistory.html'>ahistory</a></code>,
   <code><a href='alink.html'>alink</a></code>, <code><a href='archivistOptions.html'>aoptions</a></code>,
-  <code><a href='archivist-package.html'>archivist-package</a></code>, <code><a href='aread.html'>aread</a></code>,
-  <code><a href='asearch.html'>asearch</a></code>, <code><a href='asession.html'>asession</a></code>,
-  <code><a href='cache.html'>cache</a></code>, <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
+  <code><a href='archivist-package.html'>archivist-package</a></code>,
+  <code><a href='areadLocal.html'>areadLocal</a></code>, <code><a href='aread.html'>aread</a></code>,
+  <code><a href='asearchLocal.html'>asearchLocal</a></code>, <code><a href='asearch.html'>asearch</a></code>,
+  <code><a href='asession.html'>asession</a></code>, <code><a href='cache.html'>cache</a></code>,
+  <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
   <code><a href='createEmptyRepo.html'>createLocalRepo</a></code>,
   <code><a href='createMDGallery.html'>createMDGallery</a></code>,
   <code><a href='deleteLocalRepo.html'>deleteLocalRepo</a></code>,
@@ -167,15 +169,44 @@ URL https://github.com/pbiecek/archivist</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># read the object from local directory</span>
-<span class='fu'><a href='createEmptyRepo.html'>createLocalRepo</a></span>(<span class='st'>"arepo_test"</span>, <span class='kw'>default</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'>atrace</span>(<span class='st'>"lm"</span>, <span class='st'>"z"</span>)</div><div class='output co'>#&gt; <span class='message'>Tracing function "lm" in package "stats"</span></div><div class='output co'>#&gt; [1] "lm"</div><div class='input'><span class='fu'>lm</span>(<span class='no'>Sepal.Length</span>~<span class='no'>Sepal.Width</span>, <span class='kw'>data</span><span class='kw'>=</span><span class='no'>iris</span>)</div><div class='output co'>#&gt; Tracing lm(Sepal.Length ~ Sepal.Width, data = iris) on exit </div><div class='output co'>#&gt; 
+<span class='fu'><a href='createEmptyRepo.html'>createLocalRepo</a></span>(<span class='st'>"arepo_test"</span>, <span class='kw'>default</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>Directory arepo_test does exist and contain the backpack.db file. Use force=TRUE to reinitialize.</span></div><div class='input'><span class='fu'>atrace</span>(<span class='st'>"lm"</span>, <span class='st'>"z"</span>)</div><div class='output co'>#&gt; <span class='message'>Tracing function "lm" in package "stats"</span></div><div class='output co'>#&gt; [1] "lm"</div><div class='input'><span class='fu'>lm</span>(<span class='no'>Sepal.Length</span>~<span class='no'>Sepal.Width</span>, <span class='kw'>data</span><span class='kw'>=</span><span class='no'>iris</span>)</div><div class='output co'>#&gt; Tracing lm(Sepal.Length ~ Sepal.Width, data = iris) on exit </div><div class='output co'>#&gt; <span class='warning'>Warning: This artifact's data was already archived. Another archivisation executed with success.</span></div><div class='output co'>#&gt; 
 #&gt; Call:
 #&gt; lm(formula = Sepal.Length ~ Sepal.Width, data = iris)
 #&gt; 
 #&gt; Coefficients:
 #&gt; (Intercept)  Sepal.Width  
 #&gt;      6.5262      -0.2234  
-#&gt; </div><div class='input'><span class='fu'><a href='asearch.html'>asearch</a></span>(<span class='st'>"class:lm"</span>)</div><div class='output co'>#&gt; $f2152da1fea50f1e76643d0569b3ed84
+#&gt; </div><div class='input'><span class='fu'><a href='asearch.html'>asearch</a></span>(<span class='st'>"class:lm"</span>)</div><div class='output co'>#&gt; $`18a98048f0584469483afb65294ce3ed`
+#&gt; 
+#&gt; Call:
+#&gt; lm(formula = Petal.Length ~ Sepal.Length, data = iris)
+#&gt; 
+#&gt; Coefficients:
+#&gt;  (Intercept)  Sepal.Length  
+#&gt;       -7.101         1.858  
+#&gt; 
+#&gt; 
+#&gt; $`2a6e492cb6982f230e48cf46023e2e4f`
+#&gt; 
+#&gt; Call:
+#&gt; lm(formula = Petal.Length ~ Sepal.Length + Species, data = iris)
+#&gt; 
+#&gt; Coefficients:
+#&gt;       (Intercept)       Sepal.Length  Speciesversicolor   Speciesvirginica  
+#&gt;           -1.7023             0.6321             2.2101             3.0900  
+#&gt; 
+#&gt; 
+#&gt; $`990861c7c27812ee959f10e5f76fe2c3`
+#&gt; 
+#&gt; Call:
+#&gt; lm(formula = Petal.Length ~ Species, data = `__LHS`)
+#&gt; 
+#&gt; Coefficients:
+#&gt;       (Intercept)  Speciesversicolor   Speciesvirginica  
+#&gt;             1.462              2.507              3.509  
+#&gt; 
+#&gt; 
+#&gt; $f2152da1fea50f1e76643d0569b3ed84
 #&gt; 
 #&gt; Call:
 #&gt; lm(formula = Sepal.Length ~ Sepal.Width, data = iris)

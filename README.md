@@ -54,7 +54,7 @@ A BibTeX entry for LaTeX users is
     pages = {1--28},
     doi = {10.18637/jss.v082.i11},
   }
-  ```
+```
 
 ## Misc
 

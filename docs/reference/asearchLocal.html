@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Read Artifacts Given as md5hashes from the Repository — aread • archivist</title>
+<title>Read Artifacts Given as a List of Tags — asearchLocal • archivist</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -99,37 +99,39 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Read Artifacts Given as md5hashes from the Repository</h1>
+    <h1>Read Artifacts Given as a List of Tags</h1>
     </div>
 
     
-    <p><code>aread</code> reads the artifact from the <a href='Repository.html'>Repository</a>. It's a wrapper around 
-<a href='loadFromRepo.html'>loadFromLocalRepo</a> and <a href='loadFromRepo.html'>loadFromRemoteRepo</a>.</p>
+    <p><code>asearchLocal</code> searches for artifacts that contain all specified <a href='Tags.html'>Tags</a>
+and reads all of them from a local <a href='Repository.html'>Repository</a>. It's a wrapper around 
+<a href='searchInRepo.html'>searchInLocalRepo</a> and <a href='loadFromRepo.html'>loadFromLocalRepo</a>.</p>
     
 
-    <pre class="usage"><span class='fu'>aread</span>(<span class='no'>md5hash</span>)</pre>
+    <pre class="usage"><span class='fu'>asearchLocal</span>(<span class='no'>patterns</span>, <span class='kw'>repo</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>md5hash</th>
-      <td><p>One of the following:</p>
-<p>A character vector which elements  are consisting of at least three components separated with '/': Remote user name, Remote repository and name of the artifact (MD5 hash) or it's abbreviation.</p>
-<p>MD5 hashes of artifacts in current local default directory or its abbreviations.</p></td>
+      <th>patterns</th>
+      <td><p>A character vector of <code>Tags</code>. Only artifacts that 
+contain all Tags are returned.</p></td>
+    </tr>
+    <tr>
+      <th>repo</th>
+      <td><p>A character with path to local repository.</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>This function returns a list of artifacts (by their values).</p>
+    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Function <code>aread</code> reads artifacts (by <code>md5hashes</code>) from Remote Repository.
-It uses <a href='loadFromRepo.html'>loadFromLocalRepo</a> and <a href='loadFromRepo.html'>loadFromRemoteRepo</a> functions
-with different parameter's specification.</p>
-    
-    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
-
-    <p>Before you start using this function, remember to set local or Remote repository
-to default by using <code><a href='setRepo.html'>setLocalRepo()</a></code> or <code>setRemoteRepo</code> functions.</p>
+    <p>Function <code>asearchLocal</code> reads all artifacts that contain given list of <code>Tags</code>
+from the selected Local Repository.</p>
     
     <h2 class="hasAnchor" id="contact"><a class="anchor" href="#contact"></a>Contact</h2>
 
@@ -152,7 +154,7 @@ URL https://github.com/pbiecek/archivist</p>
   <code><a href='aformat.html'>aformat</a></code>, <code><a href='ahistory.html'>ahistory</a></code>,
   <code><a href='alink.html'>alink</a></code>, <code><a href='archivistOptions.html'>aoptions</a></code>,
   <code><a href='archivist-package.html'>archivist-package</a></code>,
-  <code><a href='areadLocal.html'>areadLocal</a></code>, <code><a href='asearchLocal.html'>asearchLocal</a></code>,
+  <code><a href='areadLocal.html'>areadLocal</a></code>, <code><a href='aread.html'>aread</a></code>,
   <code><a href='asearch.html'>asearch</a></code>, <code><a href='asession.html'>asession</a></code>,
   <code><a href='atrace.html'>atrace</a></code>, <code><a href='cache.html'>cache</a></code>,
   <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
@@ -173,39 +175,22 @@ URL https://github.com/pbiecek/archivist</p>
   <code><a href='zipRepo.html'>zipLocalRepo</a></code></p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># read the object from local directory</span>
-<span class='fu'><a href='setRepo.html'>setLocalRepo</a></span>(<span class='fu'>system.file</span>(<span class='st'>"graphGallery"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"archivist"</span>))
-<span class='no'>pl</span> <span class='kw'>&lt;-</span> <span class='fu'>aread</span>(<span class='st'>"7f3453331910e3f321ef97d87adb5bad"</span>)
-<span class='co'># To plot it remember to have ggplot2 in version 2.1.0</span>
-<span class='co'># as this is stated in asession("7f3453331910e3f321ef97d87adb5bad") .</span>
-<span class='co'># The state of R libraries can be restored to the same state in</span>
-<span class='co'># which 7f3453331910e3f321ef97d87adb5bad was created with the restoreLibs function.</span>
-
-<span class='co'># read the object from Remote</span>
-<span class='no'>pl</span> <span class='kw'>&lt;-</span> <span class='fu'>aread</span>(<span class='st'>"pbiecek/graphGallery/7f3453331910e3f321ef97d87adb5bad"</span>)
-<span class='co'># To plot it remember to have ggplot2 in version 2.1.0</span>
-<span class='co'># as this is stated in asession("pbiecek/graphGallery/7f3453331910e3f321ef97d87adb5bad") .</span>
-<span class='co'># The state of R libraries can be restored to the same state in</span>
-<span class='co'># which 7f3453331910e3f321ef97d87adb5bad was created with the restoreLibs function.</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#details">Details</a></li>
+      <li><a href="#value">Value</a></li>
 
-      <li><a href="#note">Note</a></li>
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#contact">Contact</a></li>
 
       <li><a href="#references">References</a></li>
 
       <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
     <h2>Author</h2>
     

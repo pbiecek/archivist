@@ -278,10 +278,11 @@ The list of supported artifacts and their tags is available on <code>wiki</code>
   <code><a href='addHooksToPrint.html'>addHooksToPrint</a></code>, <code><a href='addTagsRepo.html'>addTagsRepo</a></code>,
   <code><a href='aformat.html'>aformat</a></code>, <code><a href='ahistory.html'>ahistory</a></code>,
   <code><a href='alink.html'>alink</a></code>, <code><a href='archivistOptions.html'>aoptions</a></code>,
-  <code><a href='archivist-package.html'>archivist-package</a></code>, <code><a href='aread.html'>aread</a></code>,
-  <code><a href='asearch.html'>asearch</a></code>, <code><a href='asession.html'>asession</a></code>,
-  <code><a href='atrace.html'>atrace</a></code>, <code><a href='cache.html'>cache</a></code>,
-  <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
+  <code><a href='archivist-package.html'>archivist-package</a></code>,
+  <code><a href='areadLocal.html'>areadLocal</a></code>, <code><a href='aread.html'>aread</a></code>,
+  <code><a href='asearchLocal.html'>asearchLocal</a></code>, <code><a href='asearch.html'>asearch</a></code>,
+  <code><a href='asession.html'>asession</a></code>, <code><a href='atrace.html'>atrace</a></code>,
+  <code><a href='cache.html'>cache</a></code>, <code><a href='copyToRepo.html'>copyLocalRepo</a></code>,
   <code><a href='createEmptyRepo.html'>createLocalRepo</a></code>,
   <code><a href='createMDGallery.html'>createMDGallery</a></code>,
   <code><a href='deleteLocalRepo.html'>deleteLocalRepo</a></code>,
@@ -300,13 +301,14 @@ The list of supported artifacts and their tags is available on <code>wiki</code>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>exampleRepoDir</span> <span class='kw'>&lt;-</span> <span class='fu'>tempfile</span>()
-<span class='fu'><a href='createEmptyRepo.html'>createLocalRepo</a></span>(<span class='kw'>repoDir</span> <span class='kw'>=</span> <span class='no'>exampleRepoDir</span>)</div><div class='output co'>#&gt; Directory /var/folders/_l/jllqh32s3llbxmtrh2431vpr0000gn/T//RtmpDvQURu/file107d63d3f316 did not exist. Forced to create a new directory.</div><div class='input'><span class='fu'>data</span>(<span class='no'>swiss</span>)
+<span class='fu'><a href='createEmptyRepo.html'>createLocalRepo</a></span>(<span class='kw'>repoDir</span> <span class='kw'>=</span> <span class='no'>exampleRepoDir</span>)
+<span class='fu'>data</span>(<span class='no'>swiss</span>)
 <span class='fu'>saveToLocalRepo</span>(<span class='no'>swiss</span>, <span class='kw'>repoDir</span><span class='kw'>=</span><span class='no'>exampleRepoDir</span>, <span class='kw'>archiveSessionInfo</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; [1] "4c43fa8a4d8f0cbf65353e397f37338c"</div><div class='input'><span class='fu'><a href='showRepo.html'>showLocalRepo</a></span>(<span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"md5hashes"</span>, <span class='kw'>repoDir</span> <span class='kw'>=</span> <span class='no'>exampleRepoDir</span>)</div><div class='output co'>#&gt;                            md5hash                             name
 #&gt; 1 4c43fa8a4d8f0cbf65353e397f37338c                            swiss
-#&gt; 2 c648ca6d0bb605062f5b9416818262e7 c648ca6d0bb605062f5b9416818262e7
+#&gt; 2 56794be0e35bb01089cfe0faa72c9296 56794be0e35bb01089cfe0faa72c9296
 #&gt;           createdDate
-#&gt; 1 2017-11-21 14:20:10
-#&gt; 2 2017-11-21 14:20:10</div><div class='input'><span class='fu'><a href='showRepo.html'>showLocalRepo</a></span>(<span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"tags"</span>, <span class='kw'>repoDir</span> <span class='kw'>=</span> <span class='no'>exampleRepoDir</span>)</div><div class='output co'>#&gt;                            artifact
+#&gt; 1 2017-11-25 01:00:14
+#&gt; 2 2017-11-25 01:00:14</div><div class='input'><span class='fu'><a href='showRepo.html'>showLocalRepo</a></span>(<span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"tags"</span>, <span class='kw'>repoDir</span> <span class='kw'>=</span> <span class='no'>exampleRepoDir</span>)</div><div class='output co'>#&gt;                            artifact
 #&gt; 1  4c43fa8a4d8f0cbf65353e397f37338c
 #&gt; 2  4c43fa8a4d8f0cbf65353e397f37338c
 #&gt; 3  4c43fa8a4d8f0cbf65353e397f37338c
@@ -317,23 +319,23 @@ The list of supported artifacts and their tags is available on <code>wiki</code>
 #&gt; 8  4c43fa8a4d8f0cbf65353e397f37338c
 #&gt; 9  4c43fa8a4d8f0cbf65353e397f37338c
 #&gt; 10 4c43fa8a4d8f0cbf65353e397f37338c
-#&gt; 11 c648ca6d0bb605062f5b9416818262e7
+#&gt; 11 56794be0e35bb01089cfe0faa72c9296
 #&gt; 12 4c43fa8a4d8f0cbf65353e397f37338c
 #&gt; 13 4c43fa8a4d8f0cbf65353e397f37338c
 #&gt;                                              tag         createdDate
-#&gt; 1                                     format:rda 2017-11-21 14:20:10
-#&gt; 2                                     name:swiss 2017-11-21 14:20:10
-#&gt; 3                               class:data.frame 2017-11-21 14:20:10
-#&gt; 4                              varname:Fertility 2017-11-21 14:20:10
-#&gt; 5                            varname:Agriculture 2017-11-21 14:20:10
-#&gt; 6                            varname:Examination 2017-11-21 14:20:10
-#&gt; 7                              varname:Education 2017-11-21 14:20:10
-#&gt; 8                               varname:Catholic 2017-11-21 14:20:10
-#&gt; 9                       varname:Infant.Mortality 2017-11-21 14:20:10
-#&gt; 10                      date:2017-11-21 14:20:10 2017-11-21 14:20:10
-#&gt; 11                                    format:rda 2017-11-21 14:20:10
-#&gt; 12 session_info:c648ca6d0bb605062f5b9416818262e7 2017-11-21 14:20:10
-#&gt; 13                                    format:txt 2017-11-21 14:20:10</div><div class='input'>
+#&gt; 1                                     format:rda 2017-11-25 01:00:14
+#&gt; 2                                     name:swiss 2017-11-25 01:00:14
+#&gt; 3                               class:data.frame 2017-11-25 01:00:14
+#&gt; 4                              varname:Fertility 2017-11-25 01:00:14
+#&gt; 5                            varname:Agriculture 2017-11-25 01:00:14
+#&gt; 6                            varname:Examination 2017-11-25 01:00:14
+#&gt; 7                              varname:Education 2017-11-25 01:00:14
+#&gt; 8                               varname:Catholic 2017-11-25 01:00:14
+#&gt; 9                       varname:Infant.Mortality 2017-11-25 01:00:14
+#&gt; 10                      date:2017-11-25 01:00:14 2017-11-25 01:00:14
+#&gt; 11                                    format:rda 2017-11-25 01:00:14
+#&gt; 12 session_info:56794be0e35bb01089cfe0faa72c9296 2017-11-25 01:00:14
+#&gt; 13                                    format:txt 2017-11-25 01:00:14</div><div class='input'>
 <span class='fu'><a href='loadFromRepo.html'>loadFromLocalRepo</a></span>(<span class='kw'>md5hash</span> <span class='kw'>=</span> <span class='st'>'2a6e492cb6982f230e48cf46023e2e4f'</span>,
   <span class='kw'>repoDir</span> <span class='kw'>=</span> <span class='fu'>system.file</span>(<span class='st'>"graphGallery"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"archivist"</span>), <span class='kw'>value</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) <span class='kw'>-&gt;</span> <span class='no'>model</span>
 
@@ -499,6 +501,58 @@ The list of supported artifacts and their tags is available on <code>wiki</code>
 #&gt; 156 ff575c261c949d073b2895b05d1097c3
 #&gt; 157 ff575c261c949d073b2895b05d1097c3
 #&gt; 158 369227e67f9164dcbe934dadf2b53cc2
+#&gt; 159 ff575c261c949d073b2895b05d1097c3
+#&gt; 160 ff575c261c949d073b2895b05d1097c3
+#&gt; 161 ff575c261c949d073b2895b05d1097c3
+#&gt; 162 ff575c261c949d073b2895b05d1097c3
+#&gt; 163 ff575c261c949d073b2895b05d1097c3
+#&gt; 164 ff575c261c949d073b2895b05d1097c3
+#&gt; 165 ff575c261c949d073b2895b05d1097c3
+#&gt; 166 ff575c261c949d073b2895b05d1097c3
+#&gt; 167 ff575c261c949d073b2895b05d1097c3
+#&gt; 168 c648ca6d0bb605062f5b9416818262e7
+#&gt; 169 ff575c261c949d073b2895b05d1097c3
+#&gt; 170 ff575c261c949d073b2895b05d1097c3
+#&gt; 171 f2152da1fea50f1e76643d0569b3ed84
+#&gt; 172 f2152da1fea50f1e76643d0569b3ed84
+#&gt; 173 f2152da1fea50f1e76643d0569b3ed84
+#&gt; 174 f2152da1fea50f1e76643d0569b3ed84
+#&gt; 175 f2152da1fea50f1e76643d0569b3ed84
+#&gt; 176 f2152da1fea50f1e76643d0569b3ed84
+#&gt; 177 f2152da1fea50f1e76643d0569b3ed84
+#&gt; 178 f2152da1fea50f1e76643d0569b3ed84
+#&gt; 179 4b49bd556d87809a77d1054a5e4cfddd
+#&gt; 180 f2152da1fea50f1e76643d0569b3ed84
+#&gt; 181 5bff91d3bb65f86cc334bc504c5ccb84
+#&gt; 182 5bff91d3bb65f86cc334bc504c5ccb84
+#&gt; 183 5bff91d3bb65f86cc334bc504c5ccb84
+#&gt; 184 f2152da1fea50f1e76643d0569b3ed84
+#&gt; 185 ff575c261c949d073b2895b05d1097c3
+#&gt; 186 ff575c261c949d073b2895b05d1097c3
+#&gt; 187 ff575c261c949d073b2895b05d1097c3
+#&gt; 188 ff575c261c949d073b2895b05d1097c3
+#&gt; 189 ff575c261c949d073b2895b05d1097c3
+#&gt; 190 ff575c261c949d073b2895b05d1097c3
+#&gt; 191 ff575c261c949d073b2895b05d1097c3
+#&gt; 192 ff575c261c949d073b2895b05d1097c3
+#&gt; 193 ff575c261c949d073b2895b05d1097c3
+#&gt; 194 416341de4b73fd5b875d3770eea4a5a2
+#&gt; 195 ff575c261c949d073b2895b05d1097c3
+#&gt; 196 ff575c261c949d073b2895b05d1097c3
+#&gt; 197 f2152da1fea50f1e76643d0569b3ed84
+#&gt; 198 f2152da1fea50f1e76643d0569b3ed84
+#&gt; 199 f2152da1fea50f1e76643d0569b3ed84
+#&gt; 200 f2152da1fea50f1e76643d0569b3ed84
+#&gt; 201 f2152da1fea50f1e76643d0569b3ed84
+#&gt; 202 f2152da1fea50f1e76643d0569b3ed84
+#&gt; 203 f2152da1fea50f1e76643d0569b3ed84
+#&gt; 204 f2152da1fea50f1e76643d0569b3ed84
+#&gt; 205 56794be0e35bb01089cfe0faa72c9296
+#&gt; 206 f2152da1fea50f1e76643d0569b3ed84
+#&gt; 207 5bff91d3bb65f86cc334bc504c5ccb84
+#&gt; 208 5bff91d3bb65f86cc334bc504c5ccb84
+#&gt; 209 5bff91d3bb65f86cc334bc504c5ccb84
+#&gt; 210 f2152da1fea50f1e76643d0569b3ed84
 #&gt;                                                                                     tag
 #&gt; 1                                                                            format:rda
 #&gt; 2                                                                            format:rda
@@ -658,6 +712,58 @@ The list of supported artifacts and their tags is available on <code>wiki</code>
 #&gt; 156                                                                          format:txt
 #&gt; 157                                       relationWith:369227e67f9164dcbe934dadf2b53cc2
 #&gt; 158                                                                          format:png
+#&gt; 159                                                                          format:rda
+#&gt; 160                                                                           name:iris
+#&gt; 161                                                                    class:data.frame
+#&gt; 162                                                                varname:Sepal.Length
+#&gt; 163                                                                 varname:Sepal.Width
+#&gt; 164                                                                varname:Petal.Length
+#&gt; 165                                                                 varname:Petal.Width
+#&gt; 166                                                                     varname:Species
+#&gt; 167                                                            date:2017-11-21 14:20:10
+#&gt; 168                                                                          format:rda
+#&gt; 169                                       session_info:c648ca6d0bb605062f5b9416818262e7
+#&gt; 170                                                                          format:txt
+#&gt; 171                                                                          format:rda
+#&gt; 172                                                                       name:get("z")
+#&gt; 173                                                                            class:lm
+#&gt; 174                                                                coefname:(Intercept)
+#&gt; 175                                                                coefname:Sepal.Width
+#&gt; 176                                                                              rank:2
+#&gt; 177                                                                     df.residual:148
+#&gt; 178                                                            date:2017-11-25 00:58:33
+#&gt; 179                                                                          format:rda
+#&gt; 180                                       session_info:4b49bd556d87809a77d1054a5e4cfddd
+#&gt; 181                                                                          format:rda
+#&gt; 182                                                                          format:txt
+#&gt; 183                                       relationWith:f2152da1fea50f1e76643d0569b3ed84
+#&gt; 184                                                                          format:txt
+#&gt; 185                                                                          format:rda
+#&gt; 186                                                                           name:iris
+#&gt; 187                                                                    class:data.frame
+#&gt; 188                                                                varname:Sepal.Length
+#&gt; 189                                                                 varname:Sepal.Width
+#&gt; 190                                                                varname:Petal.Length
+#&gt; 191                                                                 varname:Petal.Width
+#&gt; 192                                                                     varname:Species
+#&gt; 193                                                            date:2017-11-25 00:58:44
+#&gt; 194                                                                          format:rda
+#&gt; 195                                       session_info:416341de4b73fd5b875d3770eea4a5a2
+#&gt; 196                                                                          format:txt
+#&gt; 197                                                                          format:rda
+#&gt; 198                                                                       name:get("z")
+#&gt; 199                                                                            class:lm
+#&gt; 200                                                                coefname:(Intercept)
+#&gt; 201                                                                coefname:Sepal.Width
+#&gt; 202                                                                              rank:2
+#&gt; 203                                                                     df.residual:148
+#&gt; 204                                                            date:2017-11-25 01:00:03
+#&gt; 205                                                                          format:rda
+#&gt; 206                                       session_info:56794be0e35bb01089cfe0faa72c9296
+#&gt; 207                                                                          format:rda
+#&gt; 208                                                                          format:txt
+#&gt; 209                                       relationWith:f2152da1fea50f1e76643d0569b3ed84
+#&gt; 210                                                                          format:txt
 #&gt;             createdDate
 #&gt; 1   2016-02-07 00:48:44
 #&gt; 2   2016-02-07 00:48:44
@@ -816,7 +922,59 @@ The list of supported artifacts and their tags is available on <code>wiki</code>
 #&gt; 155 2016-12-31 15:40:19
 #&gt; 156 2016-12-31 15:40:19
 #&gt; 157 2016-12-31 15:40:19
-#&gt; 158 2016-12-31 15:40:19</div><div class='input'><span class='fu'>data</span>(<span class='no'>iris</span>)
+#&gt; 158 2016-12-31 15:40:19
+#&gt; 159 2017-11-21 14:20:10
+#&gt; 160 2017-11-21 14:20:10
+#&gt; 161 2017-11-21 14:20:10
+#&gt; 162 2017-11-21 14:20:10
+#&gt; 163 2017-11-21 14:20:10
+#&gt; 164 2017-11-21 14:20:10
+#&gt; 165 2017-11-21 14:20:10
+#&gt; 166 2017-11-21 14:20:10
+#&gt; 167 2017-11-21 14:20:10
+#&gt; 168 2017-11-21 14:20:10
+#&gt; 169 2017-11-21 14:20:10
+#&gt; 170 2017-11-21 14:20:10
+#&gt; 171 2017-11-25 00:58:33
+#&gt; 172 2017-11-25 00:58:33
+#&gt; 173 2017-11-25 00:58:33
+#&gt; 174 2017-11-25 00:58:33
+#&gt; 175 2017-11-25 00:58:33
+#&gt; 176 2017-11-25 00:58:33
+#&gt; 177 2017-11-25 00:58:33
+#&gt; 178 2017-11-25 00:58:33
+#&gt; 179 2017-11-25 00:58:33
+#&gt; 180 2017-11-25 00:58:33
+#&gt; 181 2017-11-25 00:58:33
+#&gt; 182 2017-11-25 00:58:33
+#&gt; 183 2017-11-25 00:58:33
+#&gt; 184 2017-11-25 00:58:33
+#&gt; 185 2017-11-25 00:58:44
+#&gt; 186 2017-11-25 00:58:44
+#&gt; 187 2017-11-25 00:58:44
+#&gt; 188 2017-11-25 00:58:44
+#&gt; 189 2017-11-25 00:58:44
+#&gt; 190 2017-11-25 00:58:44
+#&gt; 191 2017-11-25 00:58:44
+#&gt; 192 2017-11-25 00:58:44
+#&gt; 193 2017-11-25 00:58:44
+#&gt; 194 2017-11-25 00:58:45
+#&gt; 195 2017-11-25 00:58:45
+#&gt; 196 2017-11-25 00:58:45
+#&gt; 197 2017-11-25 01:00:03
+#&gt; 198 2017-11-25 01:00:03
+#&gt; 199 2017-11-25 01:00:03
+#&gt; 200 2017-11-25 01:00:03
+#&gt; 201 2017-11-25 01:00:03
+#&gt; 202 2017-11-25 01:00:03
+#&gt; 203 2017-11-25 01:00:03
+#&gt; 204 2017-11-25 01:00:03
+#&gt; 205 2017-11-25 01:00:04
+#&gt; 206 2017-11-25 01:00:04
+#&gt; 207 2017-11-25 01:00:04
+#&gt; 208 2017-11-25 01:00:04
+#&gt; 209 2017-11-25 01:00:04
+#&gt; 210 2017-11-25 01:00:04</div><div class='input'><span class='fu'>data</span>(<span class='no'>iris</span>)
 <span class='fu'>asave</span>(<span class='no'>iris</span>, <span class='kw'>silent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) <span class='co'># iris was used in pl</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Artifact ff575c261c949d073b2895b05d1097c3 was already archived. Another archivisation executed with success.</span></div><div class='output co'>#&gt; [1] "ff575c261c949d073b2895b05d1097c3"</div><div class='input'><span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>'repoDir'</span>, <span class='kw'>NULL</span>, <span class='kw'>unset</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; NULL</div><div class='input'><span class='fu'><a href='deleteLocalRepo.html'>deleteLocalRepo</a></span>(<span class='no'>exampleRepoDir</span>, <span class='fl'>TRUE</span>)
 <span class='fu'>rm</span>(<span class='no'>exampleRepoDir</span>)</div></pre>
   </div>
