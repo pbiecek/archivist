@@ -157,8 +157,8 @@ disk input-output operations may take more time than calculations itself.</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Biecek P and Kosinski M (2017). “archivist: An R Package for Managing,
-Recording and Restoring Data Analysis Results.” _Journal of Statistical
+    <p>Biecek P and Kosinski M (2017). "archivist: An R Package for Managing,
+Recording and Restoring Data Analysis Results." _Journal of Statistical
 Software_, *82*(11), pp. 1-28. doi: 10.18637/jss.v082.i11 (URL:
 http://doi.org/10.18637/jss.v082.i11).
 URL https://github.com/pbiecek/archivist</p>
@@ -197,10 +197,8 @@ URL https://github.com/pbiecek/archivist</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'># objects preparation</span>
-<span class='fu'>library</span>(<span class='no'>lubridate</span>)</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘lubridate’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:base’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    date</span></div><div class='input'><span class='no'>cacheRepo</span> <span class='kw'>&lt;-</span> <span class='fu'>tempfile</span>()
+<span class='fu'>library</span>(<span class='no'>lubridate</span>)
+<span class='no'>cacheRepo</span> <span class='kw'>&lt;-</span> <span class='fu'>tempfile</span>()
 <span class='fu'><a href='createEmptyRepo.html'>createLocalRepo</a></span>( <span class='no'>cacheRepo</span> )
 
 <span class='co'>## Example 1:</span>
@@ -210,8 +208,8 @@ URL https://github.com/pbiecek/archivist</p>
 
 <span class='co'># let's check time of two evaluations of cache function</span>
 <span class='fu'>system.time</span>( <span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'>cache</span>(<span class='no'>cacheRepo</span>, <span class='no'>fun</span>, <span class='fl'>1000</span>) )</div><div class='output co'>#&gt;    user  system elapsed 
-#&gt;   1.276   0.056   1.346 </div><div class='input'><span class='fu'>system.time</span>( <span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'>cache</span>(<span class='no'>cacheRepo</span>, <span class='no'>fun</span>, <span class='fl'>1000</span>) )</div><div class='output co'>#&gt;    user  system elapsed 
-#&gt;   1.220   0.016   1.236 </div><div class='input'><span class='co'># The second call is much faster. Why is it so? Because the result of fun</span>
+#&gt;   1.465   0.066   1.550 </div><div class='input'><span class='fu'>system.time</span>( <span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'>cache</span>(<span class='no'>cacheRepo</span>, <span class='no'>fun</span>, <span class='fl'>1000</span>) )</div><div class='output co'>#&gt;    user  system elapsed 
+#&gt;   1.490   0.016   1.508 </div><div class='input'><span class='co'># The second call is much faster. Why is it so? Because the result of fun</span>
 <span class='co'># function evaluation has been stored in local cacheRepo during the first evaluation</span>
 <span class='co'># of cache. In the second call of cache we are simply loading the result of fun</span>
 <span class='co'># from local cacheRepo Repository.</span>
