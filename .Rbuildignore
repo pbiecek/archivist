@@ -11,7 +11,6 @@ archiwum.png
 buildingDB.R
 buildingVignette.R
 README.md
-archiwum.png
 archiwum2.png
 archivist2_0.png
 archiwum3.png
@@ -68,3 +67,4 @@ vignettes/framed.sty
 vignettes/*.md
 vignettes/*.html
 vignettes/*.R
+^_pkgdown\.yml$
