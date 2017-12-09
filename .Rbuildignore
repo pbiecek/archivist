@@ -1,4 +1,5 @@
 ^gallery.*$
+^cheatsheets.*$
 ^backpack.db$
 ^.*\.Rproj$
 ^\.Rproj\.user$
