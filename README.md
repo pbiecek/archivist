@@ -12,7 +12,12 @@
 A set of tools for datasets and plots archiving
 =====================================================
 
-## Installation of the archivist package:
+Everything that exists in *R* is an object.
+`archivist` is an R package that stores copies of all objects along with their metadata. It helps to manage and recreate objects with final or partial results from data analysis.
+
+Use the `archivist` to record every result, to share these results with future you or with others, to search through repository of objects created in the past but needed now.
+
+## Installation
 
 To get started, install the latest version of **archivist** from CRAN:
 
