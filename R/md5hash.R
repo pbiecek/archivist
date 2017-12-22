@@ -52,4 +52,4 @@
 #' @docType class
 invisible(NULL)
 
-adigest <- function(x) digest(x, algo = getOption("archivist.hash.function", default = "md5"))
+adigest <- function(x) digest(x, algo = archivist::aoptions("hashFunction"))
