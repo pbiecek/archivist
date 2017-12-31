@@ -51,3 +51,5 @@
 #' @name md5hash
 #' @docType class
 invisible(NULL)
+
+adigest <- function(x) digest(x, algo = archivist::aoptions("hashFunction"))

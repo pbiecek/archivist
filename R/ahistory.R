@@ -75,7 +75,7 @@
 ahistory <- function(artifact = NULL, md5hash = NULL, repoDir = aoptions('repoDir'), format = "regular", alink = FALSE, ...) {
   # if artifact is set then calculate md5hash for it
   if (!is.null(artifact)) 
-    md5hash <- digest(artifact)
+    md5hash <- adigest(artifact)
   if (is.null(md5hash)) 
     stop("Either artifact or md5hash has to be set")
   

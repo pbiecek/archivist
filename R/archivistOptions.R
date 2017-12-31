@@ -88,6 +88,17 @@
 #' showRemoteRepo(subdir = 'ex2')
 #' 
 #' aoptions('subdir')
+#' 
+#' ## EXAMPLE 4 : SET sha256 as a hasing algorithm
+#' aoptions("hashFunction", value = "sha256")
+#' exampleRepoDir <- tempfile()
+#' createLocalRepo(exampleRepoDir)
+#' aoptions(key = "repoDir", value = exampleRepoDir)
+#' 
+#' data(iris)
+#' saveToLocalRepo(iris)
+#' getTagsLocal(digest::digest(iris, algo = "sha256"))
+#' 
 #' }
 #' 
 #' @family archivist

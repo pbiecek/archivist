@@ -88,7 +88,7 @@
 cache <- function( cacheRepo = NULL, FUN, ..., notOlderThan = NULL ) {
   tmpl <- list(...)
   tmpl$.FUN <- FUN
-  outputHash <- digest(tmpl)
+  outputHash <- adigest(tmpl)
   localTags <- showLocalRepo(cacheRepo, "tags")
   isInRepo <- localTags[localTags$tag == paste0("cacheId:", outputHash),,drop=FALSE]
    if (nrow(isInRepo) > 0) {

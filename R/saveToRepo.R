@@ -175,7 +175,7 @@ saveToLocalRepo <- function(
             length(archiveSessionInfo) == 1, length(force) == 1, 
             length(value) == 1, length(ascii) == 1, length(artifactName) <= 1)
 
-  md5hash <- digest( artifact )
+  md5hash <- adigest( artifact )
   if (is.null(artifactName)) {
     artifactName <- md5hash
   }

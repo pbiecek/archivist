@@ -9,12 +9,12 @@ extractData.ggplot <- function( object, parrentMd5hash, parentDir, isForce, ASCI
   extractedDF <- object$data
   # check if that artifact might have been already archived
   check <- executeSingleQuery( dir = parentDir , 
-                               paste0( "SELECT * from artifact WHERE md5hash ='", digest(extractedDF), "'") )[,1]
+                               paste0( "SELECT * from artifact WHERE md5hash ='", adigest(extractedDF), "'") )[,1]
     if ( length( check ) > 0 & isForce ) {
     warning( "This artifact's data was already archived. Another archivisation executed with success.")
   }
   # archive data
-  DFname <- digest(extractedDF)
+  DFname <- adigest(extractedDF)
   md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, repoDir = parentDir, 
                            artifactName = DFname, archiveTags = FALSE, force = isForce, ascii = ASCII,
                            archiveSessionInfo = FALSE, silent = TRUE)
@@ -26,12 +26,12 @@ extractData.lm <- function( object, parrentMd5hash, parentDir, isForce, ASCII ){
   extractedDF <- object$model
   # check if that artifact might have been already archived
   check <- executeSingleQuery( dir = parentDir , 
-                               paste0( "SELECT * from artifact WHERE md5hash ='", digest(extractedDF), "'") )[,1]
+                               paste0( "SELECT * from artifact WHERE md5hash ='", adigest(extractedDF), "'") )[,1]
   if ( length( check ) > 0 & isForce ) {
     warning( "This artifact's data was already archived. Another archivisation executed with success.")
   }
   # archive data
-  DFname <- digest(extractedDF)
+  DFname <- adigest(extractedDF)
   md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, repoDir = parentDir,
                            artifactName = DFname, archiveTags = FALSE, force = isForce, ascii = ASCII,
                            archiveSessionInfo = FALSE, silent = TRUE)
@@ -46,12 +46,12 @@ extractData.htest <- function( object, parrentMd5hash, parentDir, isForce, ASCII
   extractedDF2 <- get( strsplit(object$data.name, " and ")[[1]][2], envir = parent.frame(1) )
   # check if that artifact might have been already archived
   check <- executeSingleQuery( dir = parentDir , 
-                               paste0( "SELECT * from artifact WHERE md5hash ='", digest(list( extractedDF1, extractedDF2 )), "'") )[,1]
+                               paste0( "SELECT * from artifact WHERE md5hash ='", adigest(list( extractedDF1, extractedDF2 )), "'") )[,1]
   if ( length( check ) > 0 & isForce ) {
     warning( "This artifact's data was already archived. Another archivisation executed with success.")
   }
   # archive data
-  DFname <- digest(list( extractedDF1, extractedDF2 ))
+  DFname <- adigest(list( extractedDF1, extractedDF2 ))
   md5hashDF <- saveToRepo( list( extractedDF1, extractedDF2 ), 
                            archiveData = FALSE, repoDir = parentDir,
                            artifactName = DFname, archiveTags = FALSE,
@@ -71,12 +71,12 @@ extractData.lda <- function( object, parrentMd5hash, parentDir, isForce, ASCII )
     extractedDF <-  get( as.character( ( object$call ) )[3], envir = parent.frame(1) )
     # check if that artifact might have been already archived
     check <- executeSingleQuery( dir = parentDir , 
-                                 paste0( "SELECT * from artifact WHERE md5hash ='", digest(extractedDF), "'") )[,1]
+                                 paste0( "SELECT * from artifact WHERE md5hash ='", adigest(extractedDF), "'") )[,1]
     if ( length( check ) > 0 & isForce ) {
       warning( "This artifact's data was already archived. Another archivisation executed with success.")
     }
     # archive data
-    DFname <- digest(extractedDF)
+    DFname <- adigest(extractedDF)
     md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, repoDir = parentDir,
                              artifactName = DFname, archiveTags = FALSE, force = isForce,
                              ascii = ASCII, archiveSessionInfo = FALSE, silent = TRUE)
@@ -93,12 +93,12 @@ extractData.trellis <- function( object, parrentMd5hash, parentDir, isForce, ASC
   extractedDF <- get( as.character( object$call )[3], envir = parent.frame(1) )
   # check if that artifact might have been already archived
   check <- executeSingleQuery( dir = parentDir , 
-                               paste0( "SELECT * from artifact WHERE md5hash ='", digest(extractedDF), "'") )[,1]
+                               paste0( "SELECT * from artifact WHERE md5hash ='", adigest(extractedDF), "'") )[,1]
   if ( length( check ) > 0 & isForce ) {
     warning( "This artifact's data was already archived. Another archivisation executed with success.")
   }
   # archive data
-  DFname <- digest(extractedDF)
+  DFname <- adigest(extractedDF)
   md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, repoDir = parentDir,
                            artifactName = DFname, archiveTags = FALSE, force = isForce,
                            ascii = ASCII, archiveSessionInfo = FALSE, silent = TRUE)
@@ -115,12 +115,12 @@ extractData.twins <- function( object, parrentMd5hash, parentDir, isForce, ASCII
   extractedDF <- object$data
   # check if that artifact might have been already archived
   check <- executeSingleQuery( dir = parentDir , 
-                               paste0( "SELECT * from artifact WHERE md5hash ='", digest(extractedDF), "'") )[,1]
+                               paste0( "SELECT * from artifact WHERE md5hash ='", adigest(extractedDF), "'") )[,1]
   if ( length( check ) > 0 & isForce ) {
     warning( "This artifact's data was already archived. Another archivisation executed with success.")
   }
   # archive data
-  DFname <- digest(extractedDF)
+  DFname <- adigest(extractedDF)
   md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, repoDir = parentDir,
                            artifactName = DFname, archiveTags = FALSE, force = isForce, ascii = ASCII,
                            archiveSessionInfo = FALSE, silent = TRUE)
@@ -133,12 +133,12 @@ extractData.partition <- function( object, parrentMd5hash, parentDir, isForce, A
   extractedDF <- object$data
   # check if that artifact might have been already archived
   check <- executeSingleQuery( dir = parentDir , 
-                               paste0( "SELECT * from artifact WHERE md5hash ='", digest(extractedDF), "'") )[,1]
+                               paste0( "SELECT * from artifact WHERE md5hash ='", adigest(extractedDF), "'") )[,1]
   if ( length( check ) > 0 & isForce ) {
     warning( "This artifact's data was already archived. Another archivisation executed with success.")
   }
   # archive data
-  DFname <- digest(extractedDF)
+  DFname <- adigest(extractedDF)
   md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, repoDir = parentDir,
                            artifactName = DFname, archiveTags = FALSE, force = isForce, ascii = ASCII,
                            archiveSessionInfo = FALSE, silent = TRUE)
@@ -151,12 +151,12 @@ extractData.qda <- function( object, parrentMd5hash, parentDir, isForce, ASCII )
   extractedDF <-  get( as.character( ( object$call ) )[2], envir = parent.frame(1) )
   # check if that artifact might have been already archived
   check <- executeSingleQuery( dir = parentDir , 
-                               paste0( "SELECT * from artifact WHERE md5hash ='", digest(extractedDF), "'") )[,1]
+                               paste0( "SELECT * from artifact WHERE md5hash ='", adigest(extractedDF), "'") )[,1]
   if ( length( check ) > 0 & isForce ) {
     warning( "This artifact's data was already archived. Another archivisation executed with success.")
   }
   # archive data
-  DFname <- digest(extractedDF)
+  DFname <- adigest(extractedDF)
   md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, repoDir = parentDir,
                            artifactName = DFname, archiveTags = FALSE, force = isForce, ascii = ASCII,
                            archiveSessionInfo = FALSE, silent = TRUE)
@@ -178,12 +178,12 @@ extractData.glmnet <- function( object, parrentMd5hash, parentDir, isForce, ASCI
   extractedDF2 <- get( as.character( object$call )[3], envir = parent.frame(1) )
   # check if that artifact might have been already archived
   check <- executeSingleQuery( dir = parentDir , 
-                               paste0( "SELECT * from artifact WHERE md5hash ='", digest(c( extractedDF1, extractedDF1 )), "'") )[,1]
+                               paste0( "SELECT * from artifact WHERE md5hash ='", adigest(c( extractedDF1, extractedDF1 )), "'") )[,1]
   if ( length( check ) > 0 & isForce ) {
     warning( "This artifact's data was already archived. Another archivisation executed with success.")
   }
   # archive data
-  DFname <- digest(c( extractedDF1, extractedDF1 ))
+  DFname <- adigest(c( extractedDF1, extractedDF1 ))
   md5hashDF <- saveToRepo( c( extractedDF1, extractedDF1 ), archiveData = FALSE, 
                            repoDir = parentDir, artifactName = DFname,
                            archiveTags = FALSE, 
@@ -202,12 +202,12 @@ extractData.survfit <- function( object, parrentMd5hash, parentDir, isForce, ASC
   extractedDF <-  get( as.character( object$call )[3], envir = parent.frame(1) )
   # check if that artifact might have been already archived
   check <- executeSingleQuery( dir = parentDir , 
-                               paste0( "SELECT * from artifact WHERE md5hash ='", digest(extractedDF), "'") )[,1]
+                               paste0( "SELECT * from artifact WHERE md5hash ='", adigest(extractedDF), "'") )[,1]
   if ( length( check ) > 0 & isForce ) {
     warning( "This artifact's data was already archived. Another archivisation executed with success.")
   }
   # archive data
-  DFname <- digest(extractedDF)
+  DFname <- adigest(extractedDF)
   md5hashDF <- saveToRepo( extractedDF, archiveData = FALSE, repoDir = parentDir, 
                            artifactName = DFname, archiveTags = FALSE, force = isForce, ascii = ASCII,
                            archiveSessionInfo = FALSE, silent = TRUE)
