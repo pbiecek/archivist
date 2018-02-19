@@ -189,7 +189,7 @@ saveToLocalRepo <- function(
   # check if locks are set up
   if (isTRUE(use_flocks)) {
     if (dir.exists(repoDir)) {
-      .archivist_locker <- flock::lock(paste0(repoDir, "/archivist_database.flock"))
+      .archivist_locker <- flock::lock(paste0(repoDir, "/.archivist_database.flock"))
     }
   }
 
@@ -251,9 +251,7 @@ saveToLocalRepo <- function(
    
    # check if locks are set up
    if (isTRUE(use_flocks)) {
-     if (dir.exists(repoDir)) {
        flock::unlock(.archivist_locker)
-     }
    }
    
   # whether to return md5hash or an artifact if valueing code is used
