@@ -5,10 +5,7 @@ test_that("test locks", {
   invisible(aoptions("use_flocks", TRUE))
   data(iris)
   
-  iris %a%
-    dplyr::filter(Sepal.Length < 16) %a%
-    lm(Petal.Length~Species, data=.) %a%
-    summary() -> obj
+  saveToRepo(iris)
   
   invisible(aoptions("use_flocks", FALSE))
   deleteLocalRepo("flocks_test", deleteRoot = TRUE)

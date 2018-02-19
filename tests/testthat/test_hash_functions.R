@@ -13,5 +13,6 @@ test_that("test sha256", {
   hash1 <- digest::digest(dplyr::filter(iris, Sepal.Length < 16), algo = "sha256")
   expect_equal(getTagsLocal(hash1), c("name:res_val", "name:iris %a% dplyr::filter(Sepal.Length < 16)"))
   
+  aoptions("hashFunction", value = "md5")
   deleteLocalRepo("sha256", deleteRoot = TRUE)
 })
