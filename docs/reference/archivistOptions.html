@@ -243,6 +243,17 @@ URL https://github.com/pbiecek/archivist</p>
 <span class='fu'><a href='showRepo.html'>showRemoteRepo</a></span>(<span class='kw'>subdir</span> <span class='kw'>=</span> <span class='st'>'ex2'</span>)
 
 <span class='fu'>aoptions</span>(<span class='st'>'subdir'</span>)
+
+<span class='co'>## EXAMPLE 4 : SET sha256 as a hasing algorithm</span>
+<span class='fu'>aoptions</span>(<span class='st'>"hashFunction"</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='st'>"sha256"</span>)
+<span class='no'>exampleRepoDir</span> <span class='kw'>&lt;-</span> <span class='fu'>tempfile</span>()
+<span class='fu'><a href='createEmptyRepo.html'>createLocalRepo</a></span>(<span class='no'>exampleRepoDir</span>)
+<span class='fu'>aoptions</span>(<span class='kw'>key</span> <span class='kw'>=</span> <span class='st'>"repoDir"</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='no'>exampleRepoDir</span>)
+
+<span class='fu'>data</span>(<span class='no'>iris</span>)
+<span class='fu'><a href='saveToRepo.html'>saveToLocalRepo</a></span>(<span class='no'>iris</span>)
+<span class='fu'><a href='getTags.html'>getTagsLocal</a></span>(<span class='kw pkg'>digest</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/digest/topics/digest'>digest</a></span>(<span class='no'>iris</span>, <span class='kw'>algo</span> <span class='kw'>=</span> <span class='st'>"sha256"</span>))
+
 <span class='co'># }</span><div class='input'>
 </div></pre>
   </div>
