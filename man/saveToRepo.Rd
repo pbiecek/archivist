@@ -9,20 +9,20 @@
 saveToLocalRepo(artifact, repoDir = aoptions("repoDir"), archiveData = TRUE,
   archiveTags = TRUE, archiveMiniature = TRUE, archiveSessionInfo = TRUE,
   force = TRUE, value = FALSE, ..., userTags = c(),
-  silent = aoptions("silent"), ascii = FALSE,
-  artifactName = deparse(substitute(artifact)))
+  use_flocks = aoptions("use_flocks"), silent = aoptions("silent"),
+  ascii = FALSE, artifactName = deparse(substitute(artifact)))
 
 saveToRepo(artifact, repoDir = aoptions("repoDir"), archiveData = TRUE,
   archiveTags = TRUE, archiveMiniature = TRUE, archiveSessionInfo = TRUE,
   force = TRUE, value = FALSE, ..., userTags = c(),
-  silent = aoptions("silent"), ascii = FALSE,
-  artifactName = deparse(substitute(artifact)))
+  use_flocks = aoptions("use_flocks"), silent = aoptions("silent"),
+  ascii = FALSE, artifactName = deparse(substitute(artifact)))
 
 asave(artifact, repoDir = aoptions("repoDir"), archiveData = TRUE,
   archiveTags = TRUE, archiveMiniature = TRUE, archiveSessionInfo = TRUE,
   force = TRUE, value = FALSE, ..., userTags = c(),
-  silent = aoptions("silent"), ascii = FALSE,
-  artifactName = deparse(substitute(artifact)))
+  use_flocks = aoptions("use_flocks"), silent = aoptions("silent"),
+  ascii = FALSE, artifactName = deparse(substitute(artifact)))
 }
 \arguments{
 \item{artifact}{An arbitrary R artifact to be saved. For supported artifacts see details.}
@@ -48,6 +48,8 @@ can be used. See examples.}
 Further arguments passed to \link{head}. See Details section about \code{firtsRows} parameter}
 
 \item{userTags}{A character vector with Tags. These Tags will be added to the repository along with the artifact.}
+
+\item{use_flocks}{A logical value. If \code{TRUE} then \code{flock} package is used to lock access to a database. By default it's \code{FALSE}.}
 
 \item{silent}{If TRUE produces no warnings.}
 

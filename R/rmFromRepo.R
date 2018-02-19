@@ -332,7 +332,8 @@ rmFromLocalRepo <- function( md5hash, repoDir = aoptions('repoDir'), removeData 
   }
     
   repoDir <- checkDirectory( repoDir )
-  
+
+    
   # We will use md5hash list in checking whether md5hash is in the Repository
   md5hashList <- executeSingleQuery( dir = repoDir,
                                      paste0( "SELECT md5hash FROM artifact" ) )

@@ -1,6 +1,7 @@
 archivist 2.3
 ----------------------------------------------------------------
 * Examples are changed to comply with CRAN Policy  ([#324](https://github.com/pbiecek/archivist/issues/324)).
+* `saveToLocalRepo()` and `saveToRepo()` have now additional parameter `use_flocks`. If set up to `TRUE` then `flock` package is use to synchronize access to database ([#322](https://github.com/pbiecek/archivist/issues/322)).
 
 archivist 2.2
 ----------------------------------------------------------------

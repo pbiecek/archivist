@@ -36,7 +36,8 @@ Imports:
     DBI,
     lubridate,
     RSQLite,
-    magrittr
+    magrittr,
+    flock
 Suggests:
     shiny,
     dplyr,

@@ -123,9 +123,12 @@
 #' @param silent If TRUE produces no warnings.
 #'
 #' @param ascii A logical value. An \code{ascii} argument is passed to \link{save} function.
+#' 
+#' @param use_flocks A logical value. If \code{TRUE} then \code{flock} package is used to lock access to a database. By default it's \code{FALSE}.
 #'
 #' @param artifactName The name of the artifact with which it should be archived. If \code{NULL} then object's MD5 hash will be used instead.
 #'
+#' @import flock
 #'
 #' @author
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
@@ -163,7 +166,8 @@ saveToLocalRepo <- function(
   archiveSessionInfo = TRUE, 
   force = TRUE, 
   value = FALSE, ... , userTags = c(),
-  silent=aoptions("silent"), ascii = FALSE,
+  use_flocks = aoptions("use_flocks"), 
+  silent = aoptions("silent"), ascii = FALSE,
   artifactName = deparse(substitute(artifact))) {
   
   stopifnot(is.logical(c(archiveData, archiveTags, archiveMiniature, force,  
@@ -181,6 +185,13 @@ saveToLocalRepo <- function(
   }
 
   repoDir <- checkDirectory( repoDir )
+  
+  # check if locks are set up
+  if (isTRUE(use_flocks)) {
+    if (dir.exists(repoDir)) {
+      .archivist_locker <- flock::lock(paste0(repoDir, "/archivist_database.flock"))
+    }
+  }
 
   # check if that artifact might have been already archived
   check <- executeSingleQuery( dir = repoDir , 
@@ -237,6 +248,14 @@ saveToLocalRepo <- function(
   # whether to archive miniature
   if ( archiveMiniature )
     extractMiniature( artifact, md5hash, parentDir = repoDir ,... )
+   
+   # check if locks are set up
+   if (isTRUE(use_flocks)) {
+     if (dir.exists(repoDir)) {
+       flock::unlock(.archivist_locker)
+     }
+   }
+   
   # whether to return md5hash or an artifact if valueing code is used
   if ( !value ){
     return( md5hash )
