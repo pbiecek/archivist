@@ -27,7 +27,7 @@
 #' @examples 
 #' \dontrun{
 #' 
-#' library(dplyr)
+#' library("dplyr")
 #' 
 #' ## Usage of %a% operator without setting default repository
 #' # We will receive sepcial warning

@@ -43,9 +43,10 @@
 #' @template roxlate-contact
 #'
 #' @examples
+#' \dontrun{
 #' 
 #' # objects preparation
-#' library(lubridate)
+#' library("lubridate")
 #' cacheRepo <- tempfile()
 #' createLocalRepo( cacheRepo )
 #' 
@@ -82,18 +83,20 @@
 #' deleteLocalRepo( cacheRepo, TRUE)
 #' rm( cacheRepo )
 #' 
+#' }
+#' 
 #' @family archivist
 #' @rdname cache
 #' @export
-cache <- function( cacheRepo = NULL, FUN, ..., notOlderThan = NULL ) {
+cache <- function(cacheRepo = NULL, FUN, ..., notOlderThan = NULL ) {
   tmpl <- list(...)
   tmpl$.FUN <- FUN
   outputHash <- adigest(tmpl)
   localTags <- showLocalRepo(cacheRepo, "tags")
-  isInRepo <- localTags[localTags$tag == paste0("cacheId:", outputHash),,drop=FALSE]
+  isInRepo <- localTags[localTags$tag == paste0("cacheId:", outputHash),,drop = FALSE]
    if (nrow(isInRepo) > 0) {
     lastEntry <- max(isInRepo$createdDate)
-    if (is.null(notOlderThan) || (notOlderThan < lastEntry)){
+    if (is.null(notOlderThan) || (notOlderThan < lastEntry)) {
       lastOne <- order(isInRepo$createdDate, decreasing = TRUE)[1]
       return(loadFromLocalRepo(isInRepo$artifact[lastOne], repoDir = cacheRepo, value = TRUE))
     }

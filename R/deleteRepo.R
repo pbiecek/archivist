@@ -31,12 +31,13 @@
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #'
 #' @examples
-#' 
+#' \dontrun{
 #' exampleRepoDir <- tempfile()
 #' createLocalRepo( repoDir = exampleRepoDir, default =  TRUE )
 #' data(iris)
 #' saveToLocalRepo(iris)
 #' deleteLocalRepo( repoDir = exampleRepoDir, unset = TRUE, deleteRoot = TRUE)
+#' }
 #' 
 #' @family archivist
 #' @rdname deleteLocalRepo

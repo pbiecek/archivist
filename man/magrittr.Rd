@@ -38,7 +38,7 @@ This function is well explained on this \href{http://r-bloggers.com/r-hero-saves
 \examples{
 \dontrun{
 
-library(dplyr)
+library("dplyr")
 
 ## Usage of \%a\% operator without setting default repository
 # We will receive sepcial warning

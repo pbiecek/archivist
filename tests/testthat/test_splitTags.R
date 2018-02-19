@@ -1,6 +1,6 @@
 test_that("split*Repo does not react on errors as it should and works as it's made to", {
   # Creating example default repository
-  exampleRepoDir <- tempfile()
+  exampleRepoDir <- tempfile(tmpdir = ".")
   createLocalRepo( exampleRepoDir, default = TRUE )
   aoptions('silent', TRUE)
   # what about empty repo

@@ -54,7 +54,7 @@
 #' @examples
 #' 
 #' ### Local version
-#' 
+#' \dontrun{
 #' ## EXAMPLE with pipe operator %a%
 #' 
 #' # Creating empty repository
@@ -121,7 +121,7 @@
 #' # "ff575c261c949d073b2895b05d1097c3" md5hash.
 #' getTagsRemote("ff575c261c949d073b2895b05d1097c3", user="MarcinKosinski",
 #'                repo="Museum", branch="master", subdir="ex1")
-#'                
+#' }               
 #' 
 #' @family archivist
 #' @rdname getTags

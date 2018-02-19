@@ -45,9 +45,10 @@ Bug reports and feature requests can be sent to
 }
 
 \examples{
+\dontrun{
 
 # objects preparation
-library(lubridate)
+library("lubridate")
 cacheRepo <- tempfile()
 createLocalRepo( cacheRepo )
 
@@ -83,6 +84,8 @@ tmp <- cache(cacheRepo, testFun, "Say hallo!", notOlderThan = now() - hours(1))
 
 deleteLocalRepo( cacheRepo, TRUE)
 rm( cacheRepo )
+
+}
 
 }
 \references{

@@ -68,7 +68,6 @@ Bug reports and feature requests can be sent to
 \examples{
 \dontrun{
 
-
 ## Using archivist remote Repository to copy artifacts
 # creating example Repository
  

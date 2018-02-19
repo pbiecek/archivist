@@ -42,12 +42,13 @@ Bug reports and feature requests can be sent to
 }
 
 \examples{
-
+\dontrun{
 exampleRepoDir <- tempfile()
 createLocalRepo( repoDir = exampleRepoDir, default =  TRUE )
 data(iris)
 saveToLocalRepo(iris)
 deleteLocalRepo( repoDir = exampleRepoDir, unset = TRUE, deleteRoot = TRUE)
+}
 
 }
 \references{

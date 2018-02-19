@@ -148,7 +148,7 @@ Bug reports and feature requests can be sent to
 }
 
 \examples{
-exampleRepoDir <- tempfile()
+exampleRepoDir <- tempfile(tmpdir = ".")
 createLocalRepo(repoDir = exampleRepoDir)
 data(swiss)
 saveToLocalRepo(swiss, repoDir=exampleRepoDir, archiveSessionInfo = TRUE)

@@ -55,7 +55,6 @@
 #'
 #' @examples
 #' \dontrun{
-#'
 #' 
 #' ## Using archivist remote Repository to copy artifacts
 #' # creating example Repository

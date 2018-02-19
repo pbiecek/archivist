@@ -39,6 +39,7 @@ Bug reports and feature requests can be sent to
 \examples{
 \dontrun{
 ## objects preparation
+## be aware! this will probably downgrade many of your libraries
 restoreLibs(md5hash = "pbiecek/graphGallery/7f3453331910e3f321ef97d87adb5bad")
 }
 }

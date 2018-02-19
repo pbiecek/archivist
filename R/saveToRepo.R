@@ -131,7 +131,7 @@
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
 #'
 #' @examples
-#' exampleRepoDir <- tempfile()
+#' exampleRepoDir <- tempfile(tmpdir = ".")
 #' createLocalRepo(repoDir = exampleRepoDir)
 #' data(swiss)
 #' saveToLocalRepo(swiss, repoDir=exampleRepoDir, archiveSessionInfo = TRUE)

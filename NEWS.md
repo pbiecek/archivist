@@ -1,3 +1,7 @@
+archivist 2.3
+----------------------------------------------------------------
+* Examples are changed to comply with CRAN Policy  ([#324](https://github.com/pbiecek/archivist/issues/324)).
+
 archivist 2.2
 ----------------------------------------------------------------
 * Two new functions `asearchLocal()` and `areadLocal()` that work as `asearch()` and `aread()` for selected local repositories ([#298](https://github.com/pbiecek/archivist/issues/298)).
