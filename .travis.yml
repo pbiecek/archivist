@@ -1,4 +1,5 @@
 language: r
+dist: trusty
 r_packages:
  - RCurl
  - digest
