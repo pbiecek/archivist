@@ -253,6 +253,9 @@ saveToLocalRepo <- function(
    if (isTRUE(use_flocks)) {
        flock::unlock(.archivist_locker)
    }
+   if (file.exists(paste0(repoDir, "/.archivist_database.flock"))) {
+     unlink(paste0(repoDir, "/.archivist_database.flock"))
+   }
    
   # whether to return md5hash or an artifact if valueing code is used
   if ( !value ){
