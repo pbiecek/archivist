@@ -1,3 +1,7 @@
+archivist 2.3.1
+----------------------------------------------------------------
+* Internal changes in the `cache()` function due to  ([#327](https://github.com/pbiecek/archivist/issues/327)). Effect of the bytecompiler needs further research.
+
 archivist 2.3
 ----------------------------------------------------------------
 * Examples are changed to comply with CRAN Policy  ([#324](https://github.com/pbiecek/archivist/issues/324)).

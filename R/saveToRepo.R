@@ -214,13 +214,13 @@ saveToLocalRepo <- function(
   # whether to add regular Tags
   if ( archiveTags ) {
     extractedTags <- extractTags( artifact, objectNameX = artifactName )
-    sapply( extractedTags, addTag, md5hash = md5hash, dir = repoDir )
+    derivedTags <- attr( artifact, "tags" )
+    sapply( c(extractedTags, derivedTags), addTag, md5hash = md5hash, dir = repoDir )
     # attr( artifact, "tags" ) are Tags specified by a user
   }
   # whether to add user Tags
   if ( length(userTags) > 0 ) {
-    derivedTags <- attr( artifact, "tags" )
-    sapply( c( userTags, derivedTags), addTag, md5hash = md5hash, dir = repoDir )
+    sapply( userTags, addTag, md5hash = md5hash, dir = repoDir )
   }
    
   # whether to archive session_info

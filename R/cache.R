@@ -90,6 +90,7 @@
 #' @export
 cache <- function(cacheRepo = NULL, FUN, ..., notOlderThan = NULL ) {
   tmpl <- list(...)
+  attributes(FUN) <- NULL
   tmpl$.FUN <- FUN
   outputHash <- adigest(tmpl)
   localTags <- showLocalRepo(cacheRepo, "tags")
@@ -103,10 +104,9 @@ cache <- function(cacheRepo = NULL, FUN, ..., notOlderThan = NULL ) {
   }
   
   output <- do.call(FUN, list(...))
-  attr( output, "tags") <- paste0("cacheId:", outputHash)
   attr( output, "call") <- ""
   saveToRepo(output, repoDir = cacheRepo, archiveData = TRUE, 
              archiveMiniature = FALSE, rememberName = FALSE,
-             silent = TRUE)
+             silent = TRUE, userTags = paste0("cacheId:", outputHash))
   output
 }
