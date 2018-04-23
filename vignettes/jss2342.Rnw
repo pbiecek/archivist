@@ -354,7 +354,7 @@ without specification of \code{repoDir} or \code{user/repo/branch/subdir/repoTyp
 
 For example, the instruction below will add \code{iris} data frame to the default local repository.
 
-<<>>=
+<<eval=FALSE>>=
 data("iris")
 saveToRepo(iris)
 @

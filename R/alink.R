@@ -42,6 +42,7 @@
 #' @template roxlate-contact
 #' 
 #' @examples
+#' \dontrun{
 #' # link in markdown format
 #' alink('pbiecek/archivist/134ecbbe2a8814d98f0c2758000c408e')
 #' # link in markdown format with additional subdir
@@ -54,6 +55,8 @@
 #' # link in raw format
 #' alink('pbiecek/graphGallery/f5185c458bff721f0faa8e1332f01e0f', rawLink = TRUE)  
 #' alink('pbiecek/graphgallerygit/02af4f99e440324b9e329faa293a9394', repoType='bitbucket')  
+#' }
+#' 
 #' @family archivist
 #' @rdname alink
 #' @export

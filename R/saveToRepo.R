@@ -134,6 +134,7 @@
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}
 #'
 #' @examples
+#' \dontrun{
 #' exampleRepoDir <- tempfile(tmpdir = ".")
 #' createLocalRepo(repoDir = exampleRepoDir)
 #' data(swiss)
@@ -153,6 +154,7 @@
 #' aoptions('repoDir', NULL, unset = TRUE)
 #' deleteLocalRepo(exampleRepoDir, TRUE)
 #' rm(exampleRepoDir)
+#' }
 #'
 #' @family archivist
 #' @rdname saveToRepo

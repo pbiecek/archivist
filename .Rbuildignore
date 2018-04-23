@@ -34,6 +34,7 @@ vignettes/jss2343.pdf
 vignettes/jss2343.tex
 vignettes/jss2343.blg
 docs/
+tests/
 man-roxygen/
 inst/doc/posts.Rmd
 inst/doc/caching.Rmd

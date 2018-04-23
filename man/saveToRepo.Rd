@@ -150,6 +150,7 @@ Bug reports and feature requests can be sent to
 }
 
 \examples{
+\dontrun{
 exampleRepoDir <- tempfile(tmpdir = ".")
 createLocalRepo(repoDir = exampleRepoDir)
 data(swiss)
@@ -169,6 +170,7 @@ asave(iris, silent = FALSE) # iris was used in pl
 aoptions('repoDir', NULL, unset = TRUE)
 deleteLocalRepo(exampleRepoDir, TRUE)
 rm(exampleRepoDir)
+}
 
 }
 \references{
