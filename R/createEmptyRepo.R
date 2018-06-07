@@ -200,8 +200,13 @@ executeSingleQuery <- function( dir, query ) {
 }
 
 executeSingleSilentQuery <- function( dir, query ) {
+  lock.name = "~/.file.lock"
+  ll <- flock::lock(lock.name)
   conn <- getConnectionToDB( dir )
-  on.exit( dbDisconnect( conn ) )
+  on.exit( {
+    dbDisconnect( conn ) 
+    flock::unlock(ll)
+    })
   res <- dbExecute( conn, query )
   return( res )
 }
