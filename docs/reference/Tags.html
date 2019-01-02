@@ -23,8 +23,6 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -50,7 +48,7 @@
 	  <a class = "navbar-mi2logo" href="http://mi2.mini.pw.edu.pl/">
         <img src = "https://github.com/mi2-warsaw/MI2template/blob/master/inst/pkgdown/assets/MI2logo.jpg?raw=true" alt = "MI2" height = 46 title = "MI2">
 	  </a>
-      <a class="navbar-brand navbar-mi2" href="../index.html">archivist</a>
+      <a class="navbar-brand navbar-mi2" href="../index.html">Tags</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="navbar-mi2 nav navbar-nav">
@@ -85,7 +83,7 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -118,14 +116,15 @@ To learn more about artifacts visit <a href='archivist-package.html'>archivist-p
 <code>class</code> or <code>archiving date</code>. Furthermore, for various artifact's classes 
 more different <code>Tags</code> are available.</p>
 <p>A <code>Tag</code> is represented as a string and usually has the following structure
-<code>"TagKey:TagValue"</code>, e.g., <code>"name:iris"</code>.
-    <code>Tags</code> are stored in the <a href='Repository.html'>Repository</a>. If data is extracted from an artifact
+<code>"TagKey:TagValue"</code>, e.g., <code>"name:iris"</code>.</p>
+<p><code>Tags</code> are stored in the <a href='Repository.html'>Repository</a>. If data is extracted from an artifact
 then a special <code>Tag</code>, named <code>relationWith</code> is created.
 It specifies with which artifact this data is related to.</p>
 <p>The list of supported artifacts which are divided thematically is presented below.
 The newest list is also available on <span class="pkg">archivist</span> <code>wiki</code> on 
 <a href='https://github.com/pbiecek/archivist/wiki/archivist-package---Tags'>Github</a>.</p>
-<p>Regression Models</p><dl class='dl-horizontal'>
+<p>Regression Models</p>
+<dl class='dl-horizontal'>
   <dt><code>lm</code></dt><dd><p><ul>
 <li><p>name</p></li>
 <li><p>class</p></li>
@@ -165,7 +164,8 @@ The newest list is also available on <span class="pkg">archivist</span> <code>wi
 <li><p>strata</p></li>
 <li><p>date</p></li>
 </ul></p></dd>
-</dl><p>Plots</p><dl class='dl-horizontal'>
+</dl><p>Plots</p>
+<dl class='dl-horizontal'>
   <dt><code>ggplot</code></dt><dd><p><ul>
 <li><p>name</p></li>
 <li><p>class</p></li>
@@ -178,7 +178,8 @@ The newest list is also available on <span class="pkg">archivist</span> <code>wi
 <li><p>name</p></li>
 <li><p>class</p></li>
 </ul></p></dd> 
-</dl><p>Results of Agglomeration Methods</p><dl class='dl-horizontal'>
+</dl><p>Results of Agglomeration Methods</p>
+<dl class='dl-horizontal'>
 <dt><code>twins which is a result of agnes, diana or mona functions</code></dt><dd><p><ul>
 <li><p>date</p></li>
 <li><p>name</p></li>
@@ -222,7 +223,8 @@ The newest list is also available on <span class="pkg">archivist</span> <code>wi
 <li><p>terms</p></li>
 <li><p>date</p></li>
 </ul></p></dd>
-</dl><p>Statistical Tests</p><dl class='dl-horizontal'>
+</dl><p>Statistical Tests</p>
+<dl class='dl-horizontal'>
   <dt><code>htest</code></dt><dd><p><ul>
 <li><p>name</p></li>
 <li><p>class</p></li>
@@ -238,7 +240,8 @@ The newest list is also available on <span class="pkg">archivist</span> <code>wi
 <li><p>date</p></li>
 </ul></p></dd>
 </dl>
-    <p>When none of above is specified, Tags are assigned by default</p><dl class='dl-horizontal'>
+    <p>When none of above is specified, Tags are assigned by default</p>
+<dl class='dl-horizontal'>
   <dt><code>default</code></dt><dd><p><ul>
 <li><p>name</p></li>
 <li><p>class</p></li>
@@ -278,15 +281,15 @@ URL https://github.com/pbiecek/archivist</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Functions using <code>Tags</code> are:</p><ul>
+    <div class='dont-index'><p>Functions using <code>Tags</code> are:</p><ul>
 <li><p><a href='addTagsRepo.html'>addTagsRepo</a></p></li>
 <li><p><a href='getTags.html'>getTagsLocal</a></p></li>
 <li><p><a href='getTags.html'>getTagsRemote</a></p></li>
 <li><p><a href='saveToRepo.html'>saveToLocalRepo</a></p></li>
 <li><p><a href='searchInRepo.html'>searchInLocalRepo</a>,</p></li>
 <li><p><a href='searchInRepo.html'>searchInRemoteRepo</a>.</p></li>
-</ul>
-    <p>Other archivist: <code><a href='Repository.html'>Repository</a></code>,
+</ul></div>
+    <div class='dont-index'><p>Other archivist: <code><a href='Repository.html'>Repository</a></code>,
   <code><a href='magrittr.html'>%a%</a></code>, <code><a href='addHooksToPrint.html'>addHooksToPrint</a></code>,
   <code><a href='addTagsRepo.html'>addTagsRepo</a></code>, <code><a href='aformat.html'>aformat</a></code>,
   <code><a href='ahistory.html'>ahistory</a></code>, <code><a href='alink.html'>alink</a></code>,
@@ -309,7 +312,7 @@ URL https://github.com/pbiecek/archivist</p>
   <code><a href='showRepo.html'>showLocalRepo</a></code>,
   <code><a href='splitTags.html'>splitTagsLocal</a></code>,
   <code><a href='summaryRepo.html'>summaryLocalRepo</a></code>,
-  <code><a href='zipRepo.html'>zipLocalRepo</a></code></p>
+  <code><a href='zipRepo.html'>zipLocalRepo</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -329,8 +332,8 @@ URL https://github.com/pbiecek/archivist</p>
 <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>data.frame</span>(<span class='kw'>gp</span> <span class='kw'>=</span> <span class='fu'>factor</span>(<span class='fu'>rep</span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>3</span>], <span class='kw'>each</span> <span class='kw'>=</span> <span class='fl'>10</span>)),<span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fl'>30</span>))
 <span class='fu'>library</span>(<span class='no'>plyr</span>)
 <span class='no'>ds</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/plyr/topics/ddply'>ddply</a></span>(<span class='no'>df</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/plyr/topics/quoted'>.</a></span>(<span class='no'>gp</span>), <span class='no'>summarise</span>, <span class='kw'>mean</span> <span class='kw'>=</span> <span class='fu'>mean</span>(<span class='no'>y</span>), <span class='kw'>sd</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/stats/topics/sd'>sd</a></span>(<span class='no'>y</span>))
-<span class='no'>myplot123</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>df</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>gp</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>)) +
-  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>() +  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>ds</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>mean</span>),
+<span class='no'>myplot123</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>df</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>gp</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>)) +
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() +  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>ds</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>mean</span>),
                              <span class='kw'>colour</span> <span class='kw'>=</span> <span class='st'>'red'</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>)
 <span class='no'>exampleRepoDir</span> <span class='kw'>&lt;-</span> <span class='fu'>tempfile</span>()
 <span class='fu'><a href='createEmptyRepo.html'>createLocalRepo</a></span>( <span class='kw'>repoDir</span> <span class='kw'>=</span> <span class='no'>exampleRepoDir</span> )
@@ -527,3 +530,4 @@ URL https://github.com/pbiecek/archivist</p>
 
   </body>
 </html>
+

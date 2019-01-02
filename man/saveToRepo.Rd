@@ -6,23 +6,26 @@
 \alias{asave}
 \title{Save an Artifact into a Repository}
 \usage{
-saveToLocalRepo(artifact, repoDir = aoptions("repoDir"), archiveData = TRUE,
-  archiveTags = TRUE, archiveMiniature = TRUE, archiveSessionInfo = TRUE,
-  force = TRUE, value = FALSE, ..., userTags = c(),
-  use_flocks = aoptions("use_flocks"), silent = aoptions("silent"),
-  ascii = FALSE, artifactName = deparse(substitute(artifact)))
+saveToLocalRepo(artifact, repoDir = aoptions("repoDir"),
+  archiveData = TRUE, archiveTags = TRUE, archiveMiniature = TRUE,
+  archiveSessionInfo = TRUE, force = TRUE, value = FALSE, ...,
+  userTags = c(), use_flocks = aoptions("use_flocks"),
+  silent = aoptions("silent"), ascii = FALSE,
+  artifactName = deparse(substitute(artifact)))
 
 saveToRepo(artifact, repoDir = aoptions("repoDir"), archiveData = TRUE,
-  archiveTags = TRUE, archiveMiniature = TRUE, archiveSessionInfo = TRUE,
-  force = TRUE, value = FALSE, ..., userTags = c(),
-  use_flocks = aoptions("use_flocks"), silent = aoptions("silent"),
-  ascii = FALSE, artifactName = deparse(substitute(artifact)))
+  archiveTags = TRUE, archiveMiniature = TRUE,
+  archiveSessionInfo = TRUE, force = TRUE, value = FALSE, ...,
+  userTags = c(), use_flocks = aoptions("use_flocks"),
+  silent = aoptions("silent"), ascii = FALSE,
+  artifactName = deparse(substitute(artifact)))
 
 asave(artifact, repoDir = aoptions("repoDir"), archiveData = TRUE,
-  archiveTags = TRUE, archiveMiniature = TRUE, archiveSessionInfo = TRUE,
-  force = TRUE, value = FALSE, ..., userTags = c(),
-  use_flocks = aoptions("use_flocks"), silent = aoptions("silent"),
-  ascii = FALSE, artifactName = deparse(substitute(artifact)))
+  archiveTags = TRUE, archiveMiniature = TRUE,
+  archiveSessionInfo = TRUE, force = TRUE, value = FALSE, ...,
+  userTags = c(), use_flocks = aoptions("use_flocks"),
+  silent = aoptions("silent"), ascii = FALSE,
+  artifactName = deparse(substitute(artifact)))
 }
 \arguments{
 \item{artifact}{An arbitrary R artifact to be saved. For supported artifacts see details.}

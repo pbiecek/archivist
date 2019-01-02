@@ -11,8 +11,9 @@ searchInLocalRepo(pattern, repoDir = aoptions("repoDir"), fixed = TRUE,
   intersect = TRUE)
 
 searchInRemoteRepo(pattern, repo = aoptions("repo"),
-  user = aoptions("user"), branch = "master", subdir = aoptions("subdir"),
-  repoType = aoptions("repoType"), fixed = TRUE, intersect = TRUE)
+  user = aoptions("user"), branch = "master",
+  subdir = aoptions("subdir"), repoType = aoptions("repoType"),
+  fixed = TRUE, intersect = TRUE)
 
 multiSearchInLocalRepo(...)
 

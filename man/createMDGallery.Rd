@@ -4,10 +4,10 @@
 \alias{createMDGallery}
 \title{Create the Summary for Each Artifact in a Markdown Format}
 \usage{
-createMDGallery(output, repo = aoptions("repo"), user = aoptions("user"),
-  branch = aoptions("branch"), subdir = aoptions("subdir"),
-  repoType = aoptions("repoType"), addTags = FALSE, addMiniature = FALSE,
-  maxTags = 100)
+createMDGallery(output, repo = aoptions("repo"),
+  user = aoptions("user"), branch = aoptions("branch"),
+  subdir = aoptions("subdir"), repoType = aoptions("repoType"),
+  addTags = FALSE, addMiniature = FALSE, maxTags = 100)
 }
 \arguments{
 \item{output}{A name of the file in which artifacts should be summarized.}

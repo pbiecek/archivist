@@ -23,8 +23,6 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -50,7 +48,7 @@
 	  <a class = "navbar-mi2logo" href="http://mi2.mini.pw.edu.pl/">
         <img src = "https://github.com/mi2-warsaw/MI2template/blob/master/inst/pkgdown/assets/MI2logo.jpg?raw=true" alt = "MI2" height = 46 title = "MI2">
 	  </a>
-      <a class="navbar-brand navbar-mi2" href="../index.html">archivist</a>
+      <a class="navbar-brand navbar-mi2" href="../index.html">Search for an Artifact in the Repository Using Tags</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="navbar-mi2 nav navbar-nav">
@@ -85,7 +83,7 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -114,8 +112,9 @@ To learn more about artifacts visit <a href='archivist-package.html'>archivist-p
   <span class='kw'>intersect</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='fu'>searchInRemoteRepo</span>(<span class='no'>pattern</span>, <span class='kw'>repo</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"repo"</span>),
-  <span class='kw'>user</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"user"</span>), <span class='kw'>branch</span> <span class='kw'>=</span> <span class='st'>"master"</span>, <span class='kw'>subdir</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"subdir"</span>),
-  <span class='kw'>repoType</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"repoType"</span>), <span class='kw'>fixed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>intersect</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+  <span class='kw'>user</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"user"</span>), <span class='kw'>branch</span> <span class='kw'>=</span> <span class='st'>"master"</span>,
+  <span class='kw'>subdir</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"subdir"</span>), <span class='kw'>repoType</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"repoType"</span>),
+  <span class='kw'>fixed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>intersect</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='fu'>multiSearchInLocalRepo</span>(<span class='no'>...</span>)
 
@@ -195,8 +194,8 @@ is not in the Repository then a logical value <code>FALSE</code> is returned.</p
 parameter. For various artifact classes different <code>Tags</code> can be searched for. 
 See <a href='Tags.html'>Tags</a>. If a <code>pattern</code> is a list of length 2 then <code>md5hashes</code> of all 
 artifacts created from date <code>dateFrom</code> to date <code>dateTo</code> are returned. The date 
-should be formatted according to the YYYY-MM-DD format, e.g., <code>"2014-07-31"</code>.
-    <code>Tags</code>, used in a <code>pattern</code> parameter, should be determined according to the 
+should be formatted according to the YYYY-MM-DD format, e.g., <code>"2014-07-31"</code>.</p>
+<p><code>Tags</code>, used in a <code>pattern</code> parameter, should be determined according to the 
 format: <code>"TagKey:TagValue"</code> - see examples.</p>
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
@@ -221,7 +220,7 @@ URL https://github.com/pbiecek/archivist</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other archivist: <code><a href='Repository.html'>Repository</a></code>,
+    <div class='dont-index'><p>Other archivist: <code><a href='Repository.html'>Repository</a></code>,
   <code><a href='Tags.html'>Tags</a></code>, <code><a href='magrittr.html'>%a%</a></code>,
   <code><a href='addHooksToPrint.html'>addHooksToPrint</a></code>, <code><a href='addTagsRepo.html'>addTagsRepo</a></code>,
   <code><a href='aformat.html'>aformat</a></code>, <code><a href='ahistory.html'>ahistory</a></code>,
@@ -292,7 +291,7 @@ URL https://github.com/pbiecek/archivist</p>
   <code><a href='showRepo.html'>showLocalRepo</a></code>,
   <code><a href='splitTags.html'>splitTagsLocal</a></code>,
   <code><a href='summaryRepo.html'>summaryLocalRepo</a></code>,
-  <code><a href='zipRepo.html'>zipLocalRepo</a></code></p>
+  <code><a href='zipRepo.html'>zipLocalRepo</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -386,3 +385,4 @@ Marcin Kosinski, <a href='mailto:m.p.kosinski@gmail.com'>m.p.kosinski@gmail.com<
 
   </body>
 </html>
+

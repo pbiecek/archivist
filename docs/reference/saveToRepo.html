@@ -23,8 +23,6 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -50,7 +48,7 @@
 	  <a class = "navbar-mi2logo" href="http://mi2.mini.pw.edu.pl/">
         <img src = "https://github.com/mi2-warsaw/MI2template/blob/master/inst/pkgdown/assets/MI2logo.jpg?raw=true" alt = "MI2" height = 46 title = "MI2">
 	  </a>
-      <a class="navbar-brand navbar-mi2" href="../index.html">archivist</a>
+      <a class="navbar-brand navbar-mi2" href="../index.html">Save an Artifact into a Repository</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="navbar-mi2 nav navbar-nav">
@@ -85,7 +83,7 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -110,23 +108,26 @@
 To learn more about artifacts visit <a href='archivist-package.html'>archivist-package</a>.</p>
     
 
-    <pre class="usage"><span class='fu'>saveToLocalRepo</span>(<span class='no'>artifact</span>, <span class='kw'>repoDir</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"repoDir"</span>), <span class='kw'>archiveData</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>archiveTags</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>archiveMiniature</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>archiveSessionInfo</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>, <span class='kw'>userTags</span> <span class='kw'>=</span> <span class='fu'>c</span>(),
-  <span class='kw'>use_flocks</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"use_flocks"</span>), <span class='kw'>silent</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"silent"</span>),
-  <span class='kw'>ascii</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>artifactName</span> <span class='kw'>=</span> <span class='fu'>deparse</span>(<span class='fu'>substitute</span>(<span class='no'>artifact</span>)))
+    <pre class="usage"><span class='fu'>saveToLocalRepo</span>(<span class='no'>artifact</span>, <span class='kw'>repoDir</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"repoDir"</span>),
+  <span class='kw'>archiveData</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>archiveTags</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>archiveMiniature</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>archiveSessionInfo</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>,
+  <span class='kw'>userTags</span> <span class='kw'>=</span> <span class='fu'>c</span>(), <span class='kw'>use_flocks</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"use_flocks"</span>),
+  <span class='kw'>silent</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"silent"</span>), <span class='kw'>ascii</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>artifactName</span> <span class='kw'>=</span> <span class='fu'>deparse</span>(<span class='fu'>substitute</span>(<span class='no'>artifact</span>)))
 
 <span class='fu'>saveToRepo</span>(<span class='no'>artifact</span>, <span class='kw'>repoDir</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"repoDir"</span>), <span class='kw'>archiveData</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>archiveTags</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>archiveMiniature</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>archiveSessionInfo</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>, <span class='kw'>userTags</span> <span class='kw'>=</span> <span class='fu'>c</span>(),
-  <span class='kw'>use_flocks</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"use_flocks"</span>), <span class='kw'>silent</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"silent"</span>),
-  <span class='kw'>ascii</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>artifactName</span> <span class='kw'>=</span> <span class='fu'>deparse</span>(<span class='fu'>substitute</span>(<span class='no'>artifact</span>)))
+  <span class='kw'>archiveTags</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>archiveMiniature</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>archiveSessionInfo</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>,
+  <span class='kw'>userTags</span> <span class='kw'>=</span> <span class='fu'>c</span>(), <span class='kw'>use_flocks</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"use_flocks"</span>),
+  <span class='kw'>silent</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"silent"</span>), <span class='kw'>ascii</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>artifactName</span> <span class='kw'>=</span> <span class='fu'>deparse</span>(<span class='fu'>substitute</span>(<span class='no'>artifact</span>)))
 
 <span class='fu'>asave</span>(<span class='no'>artifact</span>, <span class='kw'>repoDir</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"repoDir"</span>), <span class='kw'>archiveData</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>archiveTags</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>archiveMiniature</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>archiveSessionInfo</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>, <span class='kw'>userTags</span> <span class='kw'>=</span> <span class='fu'>c</span>(),
-  <span class='kw'>use_flocks</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"use_flocks"</span>), <span class='kw'>silent</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"silent"</span>),
-  <span class='kw'>ascii</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>artifactName</span> <span class='kw'>=</span> <span class='fu'>deparse</span>(<span class='fu'>substitute</span>(<span class='no'>artifact</span>)))</pre>
+  <span class='kw'>archiveTags</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>archiveMiniature</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>archiveSessionInfo</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>,
+  <span class='kw'>userTags</span> <span class='kw'>=</span> <span class='fu'>c</span>(), <span class='kw'>use_flocks</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"use_flocks"</span>),
+  <span class='kw'>silent</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"silent"</span>), <span class='kw'>ascii</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>artifactName</span> <span class='kw'>=</span> <span class='fu'>deparse</span>(<span class='fu'>substitute</span>(<span class='no'>artifact</span>)))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -217,13 +218,13 @@ that exists in the directory specified in the <code>repoDir</code> argument. Mor
 is going to be added to the <code>backpack</code> dataset in case there is a need to load
 the artifact with it's related data set - see <a href='loadFromRepo.html'>loadFromLocalRepo</a> or <a href='loadFromRepo.html'>loadFromRemoteRepo</a>. Default settings
 may be changed by using the <code>archiveData</code>, <code>archiveTag</code> or <code>archiveMiniature</code> arguments with the
-<code>FALSE</code> value.
-    <code>Tags</code> are artifact's attributes, different for various artifact's classes. For more detailed
+<code>FALSE</code> value.</p>
+<p><code>Tags</code> are artifact's attributes, different for various artifact's classes. For more detailed
 information check <a href='Tags.html'>Tags</a></p>
 <p>Archived artifact can be searched in the <code>backpack</code> dataset by using the
 <a href='searchInRepo.html'>searchInLocalRepo</a> or <a href='searchInRepo.html'>searchInRemoteRepo</a> functions. Artifacts can be searched by their <a href='Tags.html'>Tags</a>,
-<code>names</code>, <code>classes</code> or <code>archiving date</code>.
-    <code>firstRows</code> parameter.</p>
+<code>names</code>, <code>classes</code> or <code>archiving date</code>.</p>
+<p><code>firstRows</code> parameter.</p>
 <p>If the artifact is of class <code>data.frame</code> or user set <code>archiveData = TRUE</code> for artifact that stores data within it,
  it is possible to specify
 how many rows of that data (or that <code>data.frame</code>) should be archived in a <code>miniature</code>.
@@ -277,7 +278,7 @@ URL https://github.com/pbiecek/archivist</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>For more detailed information check the <span class="pkg">archivist</span> package
+    <div class='dont-index'><p>For more detailed information check the <span class="pkg">archivist</span> package
 <a href='http://pbiecek.github.io/archivist/'>Use Cases</a>.
 The list of supported artifacts and their tags is available on <code>wiki</code> on <span class="pkg">archivist</span>
 <a href='https://github.com/pbiecek/archivist/wiki/archivist-package---Tags'>Github Repository</a>.</p>
@@ -304,609 +305,32 @@ The list of supported artifacts and their tags is available on <code>wiki</code>
   <code><a href='showRepo.html'>showLocalRepo</a></code>,
   <code><a href='splitTags.html'>splitTagsLocal</a></code>,
   <code><a href='summaryRepo.html'>summaryLocalRepo</a></code>,
-  <code><a href='zipRepo.html'>zipLocalRepo</a></code></p>
+  <code><a href='zipRepo.html'>zipLocalRepo</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>exampleRepoDir</span> <span class='kw'>&lt;-</span> <span class='fu'>tempfile</span>(<span class='kw'>tmpdir</span> <span class='kw'>=</span> <span class='st'>"."</span>)
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='no'>exampleRepoDir</span> <span class='kw'>&lt;-</span> <span class='fu'>tempfile</span>(<span class='kw'>tmpdir</span> <span class='kw'>=</span> <span class='st'>"."</span>)
 <span class='fu'><a href='createEmptyRepo.html'>createLocalRepo</a></span>(<span class='kw'>repoDir</span> <span class='kw'>=</span> <span class='no'>exampleRepoDir</span>)
 <span class='fu'>data</span>(<span class='no'>swiss</span>)
-<span class='fu'>saveToLocalRepo</span>(<span class='no'>swiss</span>, <span class='kw'>repoDir</span><span class='kw'>=</span><span class='no'>exampleRepoDir</span>, <span class='kw'>archiveSessionInfo</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; [1] "4c43fa8a4d8f0cbf65353e397f37338c"</div><div class='input'><span class='fu'><a href='showRepo.html'>showLocalRepo</a></span>(<span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"md5hashes"</span>, <span class='kw'>repoDir</span> <span class='kw'>=</span> <span class='no'>exampleRepoDir</span>)</div><div class='output co'>#&gt;                            md5hash                             name
-#&gt; 1 4c43fa8a4d8f0cbf65353e397f37338c                            swiss
-#&gt; 2 77ee5d1d78f008deea81c1405a773b4a 77ee5d1d78f008deea81c1405a773b4a
-#&gt;           createdDate
-#&gt; 1 2018-02-19 14:40:03
-#&gt; 2 2018-02-19 14:40:03</div><div class='input'><span class='fu'><a href='showRepo.html'>showLocalRepo</a></span>(<span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"tags"</span>, <span class='kw'>repoDir</span> <span class='kw'>=</span> <span class='no'>exampleRepoDir</span>)</div><div class='output co'>#&gt;                            artifact
-#&gt; 1  4c43fa8a4d8f0cbf65353e397f37338c
-#&gt; 2  4c43fa8a4d8f0cbf65353e397f37338c
-#&gt; 3  4c43fa8a4d8f0cbf65353e397f37338c
-#&gt; 4  4c43fa8a4d8f0cbf65353e397f37338c
-#&gt; 5  4c43fa8a4d8f0cbf65353e397f37338c
-#&gt; 6  4c43fa8a4d8f0cbf65353e397f37338c
-#&gt; 7  4c43fa8a4d8f0cbf65353e397f37338c
-#&gt; 8  4c43fa8a4d8f0cbf65353e397f37338c
-#&gt; 9  4c43fa8a4d8f0cbf65353e397f37338c
-#&gt; 10 4c43fa8a4d8f0cbf65353e397f37338c
-#&gt; 11 77ee5d1d78f008deea81c1405a773b4a
-#&gt; 12 4c43fa8a4d8f0cbf65353e397f37338c
-#&gt; 13 4c43fa8a4d8f0cbf65353e397f37338c
-#&gt;                                              tag         createdDate
-#&gt; 1                                     format:rda 2018-02-19 14:40:03
-#&gt; 2                                     name:swiss 2018-02-19 14:40:03
-#&gt; 3                               class:data.frame 2018-02-19 14:40:03
-#&gt; 4                              varname:Fertility 2018-02-19 14:40:03
-#&gt; 5                            varname:Agriculture 2018-02-19 14:40:03
-#&gt; 6                            varname:Examination 2018-02-19 14:40:03
-#&gt; 7                              varname:Education 2018-02-19 14:40:03
-#&gt; 8                               varname:Catholic 2018-02-19 14:40:03
-#&gt; 9                       varname:Infant.Mortality 2018-02-19 14:40:03
-#&gt; 10                      date:2018-02-19 14:40:03 2018-02-19 14:40:03
-#&gt; 11                                    format:rda 2018-02-19 14:40:03
-#&gt; 12 session_info:77ee5d1d78f008deea81c1405a773b4a 2018-02-19 14:40:03
-#&gt; 13                                    format:txt 2018-02-19 14:40:03</div><div class='input'>
+<span class='fu'>saveToLocalRepo</span>(<span class='no'>swiss</span>, <span class='kw'>repoDir</span><span class='kw'>=</span><span class='no'>exampleRepoDir</span>, <span class='kw'>archiveSessionInfo</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'><a href='showRepo.html'>showLocalRepo</a></span>(<span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"md5hashes"</span>, <span class='kw'>repoDir</span> <span class='kw'>=</span> <span class='no'>exampleRepoDir</span>)
+<span class='fu'><a href='showRepo.html'>showLocalRepo</a></span>(<span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"tags"</span>, <span class='kw'>repoDir</span> <span class='kw'>=</span> <span class='no'>exampleRepoDir</span>)
+
 <span class='fu'><a href='loadFromRepo.html'>loadFromLocalRepo</a></span>(<span class='kw'>md5hash</span> <span class='kw'>=</span> <span class='st'>'2a6e492cb6982f230e48cf46023e2e4f'</span>,
   <span class='kw'>repoDir</span> <span class='kw'>=</span> <span class='fu'>system.file</span>(<span class='st'>"graphGallery"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"archivist"</span>), <span class='kw'>value</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) <span class='kw'>-&gt;</span> <span class='no'>model</span>
 
 <span class='fu'>saveToLocalRepo</span>(<span class='no'>model</span>, <span class='kw'>repoDir</span><span class='kw'>=</span><span class='no'>exampleRepoDir</span>,
-             <span class='kw'>userTags</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"do not delete"</span>, <span class='st'>"my favourite model"</span>))</div><div class='output co'>#&gt; [1] "2a6e492cb6982f230e48cf46023e2e4f"
-#&gt; attr(,"data")
-#&gt; [1] "afb2550d0f886f0cf3b050f04c5cd4f8"</div><div class='input'><span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>'repoDir'</span>, <span class='fu'>system.file</span>(<span class='st'>"graphGallery"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"archivist"</span>))</div><div class='output co'>#&gt; [1] "/Users/pbiecek/GitHub/archivist/inst/graphGallery"</div><div class='input'><span class='fu'><a href='showRepo.html'>showLocalRepo</a></span>(<span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"tags"</span>)</div><div class='output co'>#&gt;                             artifact
-#&gt; 1   d9313a0de3e2980201a8971e3384ff26
-#&gt; 2   ff575c261c949d073b2895b05d1097c3
-#&gt; 3   ff575c261c949d073b2895b05d1097c3
-#&gt; 4   ff575c261c949d073b2895b05d1097c3
-#&gt; 5   2a6e492cb6982f230e48cf46023e2e4f
-#&gt; 6   2a6e492cb6982f230e48cf46023e2e4f
-#&gt; 7   2a6e492cb6982f230e48cf46023e2e4f
-#&gt; 8   2a6e492cb6982f230e48cf46023e2e4f
-#&gt; 9   2a6e492cb6982f230e48cf46023e2e4f
-#&gt; 10  2a6e492cb6982f230e48cf46023e2e4f
-#&gt; 11  2a6e492cb6982f230e48cf46023e2e4f
-#&gt; 12  2a6e492cb6982f230e48cf46023e2e4f
-#&gt; 13  2a6e492cb6982f230e48cf46023e2e4f
-#&gt; 14  2a6e492cb6982f230e48cf46023e2e4f
-#&gt; 15  93ecfdf1436932e2860c6dbdf2abc2ad
-#&gt; 16  2a6e492cb6982f230e48cf46023e2e4f
-#&gt; 17  afb2550d0f886f0cf3b050f04c5cd4f8
-#&gt; 18  afb2550d0f886f0cf3b050f04c5cd4f8
-#&gt; 19  afb2550d0f886f0cf3b050f04c5cd4f8
-#&gt; 20  2a6e492cb6982f230e48cf46023e2e4f
-#&gt; 21  18a98048f0584469483afb65294ce3ed
-#&gt; 22  18a98048f0584469483afb65294ce3ed
-#&gt; 23  18a98048f0584469483afb65294ce3ed
-#&gt; 24  18a98048f0584469483afb65294ce3ed
-#&gt; 25  18a98048f0584469483afb65294ce3ed
-#&gt; 26  18a98048f0584469483afb65294ce3ed
-#&gt; 27  18a98048f0584469483afb65294ce3ed
-#&gt; 28  18a98048f0584469483afb65294ce3ed
-#&gt; 29  2b1fe80a89976f859ee2247723889256
-#&gt; 30  18a98048f0584469483afb65294ce3ed
-#&gt; 31  9325d4e26da1002bbb0ee75d099e6722
-#&gt; 32  b17388f623ba94ef7ca4254ed39c92a7
-#&gt; 33  9325d4e26da1002bbb0ee75d099e6722
-#&gt; 34  9325d4e26da1002bbb0ee75d099e6722
-#&gt; 35  9325d4e26da1002bbb0ee75d099e6722
-#&gt; 36  18a98048f0584469483afb65294ce3ed
-#&gt; 37  b17388f623ba94ef7ca4254ed39c92a7
-#&gt; 38  ff575c261c949d073b2895b05d1097c3
-#&gt; 39  b17388f623ba94ef7ca4254ed39c92a7
-#&gt; 40  ff575c261c949d073b2895b05d1097c3
-#&gt; 41  ff575c261c949d073b2895b05d1097c3
-#&gt; 42  ff575c261c949d073b2895b05d1097c3
-#&gt; 43  ff575c261c949d073b2895b05d1097c3
-#&gt; 44  ff575c261c949d073b2895b05d1097c3
-#&gt; 45  ff575c261c949d073b2895b05d1097c3
-#&gt; 46  ff575c261c949d073b2895b05d1097c3
-#&gt; 47  ff575c261c949d073b2895b05d1097c3
-#&gt; 48  ff575c261c949d073b2895b05d1097c3
-#&gt; 49  ff575c261c949d073b2895b05d1097c3
-#&gt; 50  ff575c261c949d073b2895b05d1097c3
-#&gt; 51  ff575c261c949d073b2895b05d1097c3
-#&gt; 52  fe1dd03597308686a7fff7161f644b6b
-#&gt; 53  ff575c261c949d073b2895b05d1097c3
-#&gt; 54  ff575c261c949d073b2895b05d1097c3
-#&gt; 55  d3696e13d15223c7d0bbccb33cc20a11
-#&gt; 56  d3696e13d15223c7d0bbccb33cc20a11
-#&gt; 57  d3696e13d15223c7d0bbccb33cc20a11
-#&gt; 58  d3696e13d15223c7d0bbccb33cc20a11
-#&gt; 59  d3696e13d15223c7d0bbccb33cc20a11
-#&gt; 60  d3696e13d15223c7d0bbccb33cc20a11
-#&gt; 61  d3696e13d15223c7d0bbccb33cc20a11
-#&gt; 62  d3696e13d15223c7d0bbccb33cc20a11
-#&gt; 63  d3696e13d15223c7d0bbccb33cc20a11
-#&gt; 64  d3696e13d15223c7d0bbccb33cc20a11
-#&gt; 65  fe1dd03597308686a7fff7161f644b6b
-#&gt; 66  d3696e13d15223c7d0bbccb33cc20a11
-#&gt; 67  d3696e13d15223c7d0bbccb33cc20a11
-#&gt; 68  d3696e13d15223c7d0bbccb33cc20a11
-#&gt; 69  d3696e13d15223c7d0bbccb33cc20a11
-#&gt; 70  d3696e13d15223c7d0bbccb33cc20a11
-#&gt; 71  d3696e13d15223c7d0bbccb33cc20a11
-#&gt; 72  d3696e13d15223c7d0bbccb33cc20a11
-#&gt; 73  d3696e13d15223c7d0bbccb33cc20a11
-#&gt; 74  d3696e13d15223c7d0bbccb33cc20a11
-#&gt; 75  d3696e13d15223c7d0bbccb33cc20a11
-#&gt; 76  d3696e13d15223c7d0bbccb33cc20a11
-#&gt; 77  fe1dd03597308686a7fff7161f644b6b
-#&gt; 78  d3696e13d15223c7d0bbccb33cc20a11
-#&gt; 79  d3696e13d15223c7d0bbccb33cc20a11
-#&gt; 80  990861c7c27812ee959f10e5f76fe2c3
-#&gt; 81  990861c7c27812ee959f10e5f76fe2c3
-#&gt; 82  990861c7c27812ee959f10e5f76fe2c3
-#&gt; 83  990861c7c27812ee959f10e5f76fe2c3
-#&gt; 84  990861c7c27812ee959f10e5f76fe2c3
-#&gt; 85  990861c7c27812ee959f10e5f76fe2c3
-#&gt; 86  990861c7c27812ee959f10e5f76fe2c3
-#&gt; 87  990861c7c27812ee959f10e5f76fe2c3
-#&gt; 88  990861c7c27812ee959f10e5f76fe2c3
-#&gt; 89  990861c7c27812ee959f10e5f76fe2c3
-#&gt; 90  fe1dd03597308686a7fff7161f644b6b
-#&gt; 91  990861c7c27812ee959f10e5f76fe2c3
-#&gt; 92  990861c7c27812ee959f10e5f76fe2c3
-#&gt; 93  990861c7c27812ee959f10e5f76fe2c3
-#&gt; 94  990861c7c27812ee959f10e5f76fe2c3
-#&gt; 95  990861c7c27812ee959f10e5f76fe2c3
-#&gt; 96  990861c7c27812ee959f10e5f76fe2c3
-#&gt; 97  990861c7c27812ee959f10e5f76fe2c3
-#&gt; 98  990861c7c27812ee959f10e5f76fe2c3
-#&gt; 99  990861c7c27812ee959f10e5f76fe2c3
-#&gt; 100 990861c7c27812ee959f10e5f76fe2c3
-#&gt; 101 990861c7c27812ee959f10e5f76fe2c3
-#&gt; 102 fe1dd03597308686a7fff7161f644b6b
-#&gt; 103 990861c7c27812ee959f10e5f76fe2c3
-#&gt; 104 990861c7c27812ee959f10e5f76fe2c3
-#&gt; 105 050e41ec3bc40b3004bc6bdd356acae7
-#&gt; 106 050e41ec3bc40b3004bc6bdd356acae7
-#&gt; 107 050e41ec3bc40b3004bc6bdd356acae7
-#&gt; 108 050e41ec3bc40b3004bc6bdd356acae7
-#&gt; 109 050e41ec3bc40b3004bc6bdd356acae7
-#&gt; 110 050e41ec3bc40b3004bc6bdd356acae7
-#&gt; 111 050e41ec3bc40b3004bc6bdd356acae7
-#&gt; 112 050e41ec3bc40b3004bc6bdd356acae7
-#&gt; 113 050e41ec3bc40b3004bc6bdd356acae7
-#&gt; 114 050e41ec3bc40b3004bc6bdd356acae7
-#&gt; 115 050e41ec3bc40b3004bc6bdd356acae7
-#&gt; 116 050e41ec3bc40b3004bc6bdd356acae7
-#&gt; 117 050e41ec3bc40b3004bc6bdd356acae7
-#&gt; 118 050e41ec3bc40b3004bc6bdd356acae7
-#&gt; 119 fe1dd03597308686a7fff7161f644b6b
-#&gt; 120 050e41ec3bc40b3004bc6bdd356acae7
-#&gt; 121 2362b67ee86693d7326c95d3526a5cd8
-#&gt; 122 ff575c261c949d073b2895b05d1097c3
-#&gt; 123 ff575c261c949d073b2895b05d1097c3
-#&gt; 124 ff575c261c949d073b2895b05d1097c3
-#&gt; 125 1862bb3adaf78b7b3b9a30b46526bf7e
-#&gt; 126 ff575c261c949d073b2895b05d1097c3
-#&gt; 127 ff575c261c949d073b2895b05d1097c3
-#&gt; 128 ff575c261c949d073b2895b05d1097c3
-#&gt; 129 1862bb3adaf78b7b3b9a30b46526bf7e
-#&gt; 130 ff575c261c949d073b2895b05d1097c3
-#&gt; 131 ff575c261c949d073b2895b05d1097c3
-#&gt; 132 ff575c261c949d073b2895b05d1097c3
-#&gt; 133 7f3453331910e3f321ef97d87adb5bad
-#&gt; 134 7f3453331910e3f321ef97d87adb5bad
-#&gt; 135 7f3453331910e3f321ef97d87adb5bad
-#&gt; 136 7f3453331910e3f321ef97d87adb5bad
-#&gt; 137 7f3453331910e3f321ef97d87adb5bad
-#&gt; 138 7f3453331910e3f321ef97d87adb5bad
-#&gt; 139 7f3453331910e3f321ef97d87adb5bad
-#&gt; 140 78ce2c8ede25776f1f22c538258eed6d
-#&gt; 141 7f3453331910e3f321ef97d87adb5bad
-#&gt; 142 ff575c261c949d073b2895b05d1097c3
-#&gt; 143 ff575c261c949d073b2895b05d1097c3
-#&gt; 144 ff575c261c949d073b2895b05d1097c3
-#&gt; 145 7f3453331910e3f321ef97d87adb5bad
-#&gt; 146 369227e67f9164dcbe934dadf2b53cc2
-#&gt; 147 369227e67f9164dcbe934dadf2b53cc2
-#&gt; 148 369227e67f9164dcbe934dadf2b53cc2
-#&gt; 149 369227e67f9164dcbe934dadf2b53cc2
-#&gt; 150 369227e67f9164dcbe934dadf2b53cc2
-#&gt; 151 369227e67f9164dcbe934dadf2b53cc2
-#&gt; 152 369227e67f9164dcbe934dadf2b53cc2
-#&gt; 153 78ce2c8ede25776f1f22c538258eed6d
-#&gt; 154 369227e67f9164dcbe934dadf2b53cc2
-#&gt; 155 ff575c261c949d073b2895b05d1097c3
-#&gt; 156 ff575c261c949d073b2895b05d1097c3
-#&gt; 157 ff575c261c949d073b2895b05d1097c3
-#&gt; 158 369227e67f9164dcbe934dadf2b53cc2
-#&gt; 159 ff575c261c949d073b2895b05d1097c3
-#&gt; 160 ff575c261c949d073b2895b05d1097c3
-#&gt; 161 ff575c261c949d073b2895b05d1097c3
-#&gt; 162 ff575c261c949d073b2895b05d1097c3
-#&gt; 163 ff575c261c949d073b2895b05d1097c3
-#&gt; 164 ff575c261c949d073b2895b05d1097c3
-#&gt; 165 ff575c261c949d073b2895b05d1097c3
-#&gt; 166 ff575c261c949d073b2895b05d1097c3
-#&gt; 167 ff575c261c949d073b2895b05d1097c3
-#&gt; 168 c648ca6d0bb605062f5b9416818262e7
-#&gt; 169 ff575c261c949d073b2895b05d1097c3
-#&gt; 170 ff575c261c949d073b2895b05d1097c3
-#&gt; 171 f2152da1fea50f1e76643d0569b3ed84
-#&gt; 172 f2152da1fea50f1e76643d0569b3ed84
-#&gt; 173 f2152da1fea50f1e76643d0569b3ed84
-#&gt; 174 f2152da1fea50f1e76643d0569b3ed84
-#&gt; 175 f2152da1fea50f1e76643d0569b3ed84
-#&gt; 176 f2152da1fea50f1e76643d0569b3ed84
-#&gt; 177 f2152da1fea50f1e76643d0569b3ed84
-#&gt; 178 f2152da1fea50f1e76643d0569b3ed84
-#&gt; 179 77ee5d1d78f008deea81c1405a773b4a
-#&gt; 180 f2152da1fea50f1e76643d0569b3ed84
-#&gt; 181 5bff91d3bb65f86cc334bc504c5ccb84
-#&gt; 182 5bff91d3bb65f86cc334bc504c5ccb84
-#&gt; 183 5bff91d3bb65f86cc334bc504c5ccb84
-#&gt; 184 f2152da1fea50f1e76643d0569b3ed84
-#&gt;                                                                                     tag
-#&gt; 1                                                                            format:rda
-#&gt; 2                                                                            format:rda
-#&gt; 3                                                                            format:txt
-#&gt; 4                                         relationWith:600bda83cb840947976bd1ce3a11879d
-#&gt; 5                                                                            format:rda
-#&gt; 6                                                                            name:model
-#&gt; 7                                                                              class:lm
-#&gt; 8                                                                  coefname:(Intercept)
-#&gt; 9                                                                 coefname:Sepal.Length
-#&gt; 10                                                           coefname:Speciesversicolor
-#&gt; 11                                                            coefname:Speciesvirginica
-#&gt; 12                                                                               rank:4
-#&gt; 13                                                                      df.residual:146
-#&gt; 14                                                             date:2016-02-07 01:00:33
-#&gt; 15                                                                           format:rda
-#&gt; 16                                        session_info:93ecfdf1436932e2860c6dbdf2abc2ad
-#&gt; 17                                                                           format:rda
-#&gt; 18                                                                           format:txt
-#&gt; 19                                        relationWith:2a6e492cb6982f230e48cf46023e2e4f
-#&gt; 20                                                                           format:txt
-#&gt; 21                                                                           format:rda
-#&gt; 22                                                                          name:model2
-#&gt; 23                                                                             class:lm
-#&gt; 24                                                                 coefname:(Intercept)
-#&gt; 25                                                                coefname:Sepal.Length
-#&gt; 26                                                                               rank:2
-#&gt; 27                                                                      df.residual:148
-#&gt; 28                                                             date:2016-02-08 15:22:15
-#&gt; 29                                                                           format:rda
-#&gt; 30                                        session_info:2b1fe80a89976f859ee2247723889256
-#&gt; 31                                                                           format:rda
-#&gt; 32                                                                           format:rda
-#&gt; 33                                        session_info:b17388f623ba94ef7ca4254ed39c92a7
-#&gt; 34                                                                           format:txt
-#&gt; 35                                        relationWith:18a98048f0584469483afb65294ce3ed
-#&gt; 36                                                                           format:txt
-#&gt; 37                                                                           format:rda
-#&gt; 38                                                                           format:rda
-#&gt; 39                                                                           format:rda
-#&gt; 40                                        session_info:b17388f623ba94ef7ca4254ed39c92a7
-#&gt; 41                                                                           format:txt
-#&gt; 42                                        relationWith:70f4f83dbfef2a8afb2f495208d0a60f
-#&gt; 43                                                                           format:rda
-#&gt; 44                                                                     class:data.frame
-#&gt; 45                                                                 varname:Sepal.Length
-#&gt; 46                                                                  varname:Sepal.Width
-#&gt; 47                                                                 varname:Petal.Length
-#&gt; 48                                                                  varname:Petal.Width
-#&gt; 49                                                                      varname:Species
-#&gt; 50                                                             date:2016-02-08 15:57:32
-#&gt; 51                                                                            name:iris
-#&gt; 52                                                                           format:rda
-#&gt; 53                                        session_info:fe1dd03597308686a7fff7161f644b6b
-#&gt; 54                                                                           format:txt
-#&gt; 55                                                                           format:rda
-#&gt; 56                                                                     class:data.frame
-#&gt; 57                                                                 varname:Sepal.Length
-#&gt; 58                                                                  varname:Sepal.Width
-#&gt; 59                                                                 varname:Petal.Length
-#&gt; 60                                                                  varname:Petal.Width
-#&gt; 61                                                                      varname:Species
-#&gt; 62                                                             date:2016-02-08 15:57:32
-#&gt; 63                                                 LHS:ff575c261c949d073b2895b05d1097c3
-#&gt; 64                                                         RHS:filter(Sepal.Length &lt; 6)
-#&gt; 65                                                                           format:rda
-#&gt; 66                                        session_info:fe1dd03597308686a7fff7161f644b6b
-#&gt; 67                                                                           format:txt
-#&gt; 68                                                                           format:rda
-#&gt; 69                                                                     class:data.frame
-#&gt; 70                                                                 varname:Sepal.Length
-#&gt; 71                                                                  varname:Sepal.Width
-#&gt; 72                                                                 varname:Petal.Length
-#&gt; 73                                                                  varname:Petal.Width
-#&gt; 74                                                                      varname:Species
-#&gt; 75                                                             date:2016-02-08 15:57:32
-#&gt; 76                                               name:iris %a% filter(Sepal.Length &lt; 6)
-#&gt; 77                                                                           format:rda
-#&gt; 78                                        session_info:fe1dd03597308686a7fff7161f644b6b
-#&gt; 79                                                                           format:txt
-#&gt; 80                                                                           format:rda
-#&gt; 81                                                                             class:lm
-#&gt; 82                                                                 coefname:(Intercept)
-#&gt; 83                                                           coefname:Speciesversicolor
-#&gt; 84                                                            coefname:Speciesvirginica
-#&gt; 85                                                                               rank:3
-#&gt; 86                                                                       df.residual:80
-#&gt; 87                                                             date:2016-02-08 15:57:32
-#&gt; 88                                                 LHS:d3696e13d15223c7d0bbccb33cc20a11
-#&gt; 89                                             RHS:lm(Petal.Length ~ Species, data = .)
-#&gt; 90                                                                           format:rda
-#&gt; 91                                        session_info:fe1dd03597308686a7fff7161f644b6b
-#&gt; 92                                                                           format:txt
-#&gt; 93                                                                           format:rda
-#&gt; 94                                                                             class:lm
-#&gt; 95                                                                 coefname:(Intercept)
-#&gt; 96                                                           coefname:Speciesversicolor
-#&gt; 97                                                            coefname:Speciesvirginica
-#&gt; 98                                                                               rank:3
-#&gt; 99                                                                       df.residual:80
-#&gt; 100                                                            date:2016-02-08 15:57:32
-#&gt; 101 name:iris %a% filter(Sepal.Length &lt; 6) %a% lm(Petal.Length ~ Species,     data = .)
-#&gt; 102                                                                          format:rda
-#&gt; 103                                       session_info:fe1dd03597308686a7fff7161f644b6b
-#&gt; 104                                                                          format:txt
-#&gt; 105                                                                          format:rda
-#&gt; 106                                                                    class:summary.lm
-#&gt; 107                                                                        sigma:0.2803
-#&gt; 108                                                                                df:3
-#&gt; 109                                                                               df:80
-#&gt; 110                                                                                df:3
-#&gt; 111                                                                          R^2:0.9604
-#&gt; 112                                                                 adjusted R^2:0.9594
-#&gt; 113                                                                    fstatistic:970.8
-#&gt; 114                                                                     fstatistic.df:2
-#&gt; 115                                                                    fstatistic.df:80
-#&gt; 116                                                            date:2016-02-08 15:57:32
-#&gt; 117                                                LHS:990861c7c27812ee959f10e5f76fe2c3
-#&gt; 118                                                                       RHS:summary()
-#&gt; 119                                                                          format:rda
-#&gt; 120                                       session_info:fe1dd03597308686a7fff7161f644b6b
-#&gt; 121                                                                          format:rda
-#&gt; 122                                                                          format:rda
-#&gt; 123                                                                          format:txt
-#&gt; 124                                       relationWith:f05f0ed0662fe01850ec1b928830ef32
-#&gt; 125                                                                          format:rda
-#&gt; 126                                                                          format:rda
-#&gt; 127                                                                          format:txt
-#&gt; 128                                       relationWith:13b2724139eb2c62578b4dab0d7b2cea
-#&gt; 129                                                                          format:rda
-#&gt; 130                                                                          format:rda
-#&gt; 131                                                                          format:txt
-#&gt; 132                                       relationWith:13b2724139eb2c62578b4dab0d7b2cea
-#&gt; 133                                                                          format:rda
-#&gt; 134                                                                            name:pl1
-#&gt; 135                                                                            class:gg
-#&gt; 136                                                                        class:ggplot
-#&gt; 137                                                                 labelx:Sepal.Length
-#&gt; 138                                                                 labely:Petal.Length
-#&gt; 139                                                            date:2016-12-31 15:39:59
-#&gt; 140                                                                          format:rda
-#&gt; 141                                       session_info:78ce2c8ede25776f1f22c538258eed6d
-#&gt; 142                                                                          format:rda
-#&gt; 143                                                                          format:txt
-#&gt; 144                                       relationWith:7f3453331910e3f321ef97d87adb5bad
-#&gt; 145                                                                          format:png
-#&gt; 146                                                                          format:rda
-#&gt; 147                                                                            name:pl2
-#&gt; 148                                                                            class:gg
-#&gt; 149                                                                        class:ggplot
-#&gt; 150                                                                 labelx:Sepal.Length
-#&gt; 151                                                                 labely:Petal.Length
-#&gt; 152                                                            date:2016-12-31 15:40:19
-#&gt; 153                                                                          format:rda
-#&gt; 154                                       session_info:78ce2c8ede25776f1f22c538258eed6d
-#&gt; 155                                                                          format:rda
-#&gt; 156                                                                          format:txt
-#&gt; 157                                       relationWith:369227e67f9164dcbe934dadf2b53cc2
-#&gt; 158                                                                          format:png
-#&gt; 159                                                                          format:rda
-#&gt; 160                                                                           name:iris
-#&gt; 161                                                                    class:data.frame
-#&gt; 162                                                                varname:Sepal.Length
-#&gt; 163                                                                 varname:Sepal.Width
-#&gt; 164                                                                varname:Petal.Length
-#&gt; 165                                                                 varname:Petal.Width
-#&gt; 166                                                                     varname:Species
-#&gt; 167                                                            date:2017-11-21 14:20:10
-#&gt; 168                                                                          format:rda
-#&gt; 169                                       session_info:c648ca6d0bb605062f5b9416818262e7
-#&gt; 170                                                                          format:txt
-#&gt; 171                                                                          format:rda
-#&gt; 172                                                                       name:get("z")
-#&gt; 173                                                                            class:lm
-#&gt; 174                                                                coefname:(Intercept)
-#&gt; 175                                                                coefname:Sepal.Width
-#&gt; 176                                                                              rank:2
-#&gt; 177                                                                     df.residual:148
-#&gt; 178                                                            date:2018-02-19 14:39:59
-#&gt; 179                                                                          format:rda
-#&gt; 180                                       session_info:77ee5d1d78f008deea81c1405a773b4a
-#&gt; 181                                                                          format:rda
-#&gt; 182                                                                          format:txt
-#&gt; 183                                       relationWith:f2152da1fea50f1e76643d0569b3ed84
-#&gt; 184                                                                          format:txt
-#&gt;             createdDate
-#&gt; 1   2016-02-07 00:48:44
-#&gt; 2   2016-02-07 00:48:44
-#&gt; 3   2016-02-07 00:48:44
-#&gt; 4   2016-02-07 00:48:44
-#&gt; 5   2016-02-07 01:00:33
-#&gt; 6   2016-02-07 01:00:33
-#&gt; 7   2016-02-07 01:00:33
-#&gt; 8   2016-02-07 01:00:33
-#&gt; 9   2016-02-07 01:00:33
-#&gt; 10  2016-02-07 01:00:33
-#&gt; 11  2016-02-07 01:00:33
-#&gt; 12  2016-02-07 01:00:33
-#&gt; 13  2016-02-07 01:00:33
-#&gt; 14  2016-02-07 01:00:33
-#&gt; 15  2016-02-07 01:00:33
-#&gt; 16  2016-02-07 01:00:33
-#&gt; 17  2016-02-07 01:00:33
-#&gt; 18  2016-02-07 01:00:33
-#&gt; 19  2016-02-07 01:00:33
-#&gt; 20  2016-02-07 01:00:33
-#&gt; 21  2016-02-08 15:22:15
-#&gt; 22  2016-02-08 15:22:15
-#&gt; 23  2016-02-08 15:22:15
-#&gt; 24  2016-02-08 15:22:15
-#&gt; 25  2016-02-08 15:22:15
-#&gt; 26  2016-02-08 15:22:15
-#&gt; 27  2016-02-08 15:22:15
-#&gt; 28  2016-02-08 15:22:15
-#&gt; 29  2016-02-08 15:22:15
-#&gt; 30  2016-02-08 15:22:15
-#&gt; 31  2016-02-08 15:22:15
-#&gt; 32  2016-02-08 15:22:15
-#&gt; 33  2016-02-08 15:22:15
-#&gt; 34  2016-02-08 15:22:15
-#&gt; 35  2016-02-08 15:22:15
-#&gt; 36  2016-02-08 15:22:15
-#&gt; 37  2016-02-08 15:34:53
-#&gt; 38  2016-02-08 15:34:53
-#&gt; 39  2016-02-08 15:34:53
-#&gt; 40  2016-02-08 15:34:53
-#&gt; 41  2016-02-08 15:34:53
-#&gt; 42  2016-02-08 15:34:53
-#&gt; 43  2016-02-08 15:57:32
-#&gt; 44  2016-02-08 15:57:32
-#&gt; 45  2016-02-08 15:57:32
-#&gt; 46  2016-02-08 15:57:32
-#&gt; 47  2016-02-08 15:57:32
-#&gt; 48  2016-02-08 15:57:32
-#&gt; 49  2016-02-08 15:57:32
-#&gt; 50  2016-02-08 15:57:32
-#&gt; 51  2016-02-08 15:57:32
-#&gt; 52  2016-02-08 15:57:32
-#&gt; 53  2016-02-08 15:57:32
-#&gt; 54  2016-02-08 15:57:32
-#&gt; 55  2016-02-08 15:57:32
-#&gt; 56  2016-02-08 15:57:32
-#&gt; 57  2016-02-08 15:57:32
-#&gt; 58  2016-02-08 15:57:32
-#&gt; 59  2016-02-08 15:57:32
-#&gt; 60  2016-02-08 15:57:32
-#&gt; 61  2016-02-08 15:57:32
-#&gt; 62  2016-02-08 15:57:32
-#&gt; 63  2016-02-08 15:57:32
-#&gt; 64  2016-02-08 15:57:32
-#&gt; 65  2016-02-08 15:57:32
-#&gt; 66  2016-02-08 15:57:32
-#&gt; 67  2016-02-08 15:57:32
-#&gt; 68  2016-02-08 15:57:32
-#&gt; 69  2016-02-08 15:57:32
-#&gt; 70  2016-02-08 15:57:32
-#&gt; 71  2016-02-08 15:57:32
-#&gt; 72  2016-02-08 15:57:32
-#&gt; 73  2016-02-08 15:57:32
-#&gt; 74  2016-02-08 15:57:32
-#&gt; 75  2016-02-08 15:57:32
-#&gt; 76  2016-02-08 15:57:32
-#&gt; 77  2016-02-08 15:57:32
-#&gt; 78  2016-02-08 15:57:32
-#&gt; 79  2016-02-08 15:57:32
-#&gt; 80  2016-02-08 15:57:32
-#&gt; 81  2016-02-08 15:57:32
-#&gt; 82  2016-02-08 15:57:32
-#&gt; 83  2016-02-08 15:57:32
-#&gt; 84  2016-02-08 15:57:32
-#&gt; 85  2016-02-08 15:57:32
-#&gt; 86  2016-02-08 15:57:32
-#&gt; 87  2016-02-08 15:57:32
-#&gt; 88  2016-02-08 15:57:32
-#&gt; 89  2016-02-08 15:57:32
-#&gt; 90  2016-02-08 15:57:32
-#&gt; 91  2016-02-08 15:57:32
-#&gt; 92  2016-02-08 15:57:32
-#&gt; 93  2016-02-08 15:57:32
-#&gt; 94  2016-02-08 15:57:32
-#&gt; 95  2016-02-08 15:57:32
-#&gt; 96  2016-02-08 15:57:32
-#&gt; 97  2016-02-08 15:57:32
-#&gt; 98  2016-02-08 15:57:32
-#&gt; 99  2016-02-08 15:57:32
-#&gt; 100 2016-02-08 15:57:32
-#&gt; 101 2016-02-08 15:57:32
-#&gt; 102 2016-02-08 15:57:32
-#&gt; 103 2016-02-08 15:57:32
-#&gt; 104 2016-02-08 15:57:32
-#&gt; 105 2016-02-08 15:57:32
-#&gt; 106 2016-02-08 15:57:32
-#&gt; 107 2016-02-08 15:57:32
-#&gt; 108 2016-02-08 15:57:32
-#&gt; 109 2016-02-08 15:57:32
-#&gt; 110 2016-02-08 15:57:32
-#&gt; 111 2016-02-08 15:57:32
-#&gt; 112 2016-02-08 15:57:32
-#&gt; 113 2016-02-08 15:57:32
-#&gt; 114 2016-02-08 15:57:32
-#&gt; 115 2016-02-08 15:57:32
-#&gt; 116 2016-02-08 15:57:32
-#&gt; 117 2016-02-08 15:57:32
-#&gt; 118 2016-02-08 15:57:32
-#&gt; 119 2016-02-08 15:57:32
-#&gt; 120 2016-02-08 15:57:32
-#&gt; 121 2016-03-04 19:52:25
-#&gt; 122 2016-03-04 19:52:25
-#&gt; 123 2016-03-04 19:52:25
-#&gt; 124 2016-03-04 19:52:25
-#&gt; 125 2016-03-04 19:52:31
-#&gt; 126 2016-03-04 19:52:31
-#&gt; 127 2016-03-04 19:52:31
-#&gt; 128 2016-03-04 19:52:31
-#&gt; 129 2016-03-04 19:55:05
-#&gt; 130 2016-03-04 19:55:05
-#&gt; 131 2016-03-04 19:55:05
-#&gt; 132 2016-03-04 19:55:05
-#&gt; 133 2016-12-31 15:39:59
-#&gt; 134 2016-12-31 15:39:59
-#&gt; 135 2016-12-31 15:39:59
-#&gt; 136 2016-12-31 15:39:59
-#&gt; 137 2016-12-31 15:39:59
-#&gt; 138 2016-12-31 15:39:59
-#&gt; 139 2016-12-31 15:39:59
-#&gt; 140 2016-12-31 15:39:59
-#&gt; 141 2016-12-31 15:39:59
-#&gt; 142 2016-12-31 15:39:59
-#&gt; 143 2016-12-31 15:39:59
-#&gt; 144 2016-12-31 15:39:59
-#&gt; 145 2016-12-31 15:39:59
-#&gt; 146 2016-12-31 15:40:19
-#&gt; 147 2016-12-31 15:40:19
-#&gt; 148 2016-12-31 15:40:19
-#&gt; 149 2016-12-31 15:40:19
-#&gt; 150 2016-12-31 15:40:19
-#&gt; 151 2016-12-31 15:40:19
-#&gt; 152 2016-12-31 15:40:19
-#&gt; 153 2016-12-31 15:40:19
-#&gt; 154 2016-12-31 15:40:19
-#&gt; 155 2016-12-31 15:40:19
-#&gt; 156 2016-12-31 15:40:19
-#&gt; 157 2016-12-31 15:40:19
-#&gt; 158 2016-12-31 15:40:19
-#&gt; 159 2017-11-21 14:20:10
-#&gt; 160 2017-11-21 14:20:10
-#&gt; 161 2017-11-21 14:20:10
-#&gt; 162 2017-11-21 14:20:10
-#&gt; 163 2017-11-21 14:20:10
-#&gt; 164 2017-11-21 14:20:10
-#&gt; 165 2017-11-21 14:20:10
-#&gt; 166 2017-11-21 14:20:10
-#&gt; 167 2017-11-21 14:20:10
-#&gt; 168 2017-11-21 14:20:10
-#&gt; 169 2017-11-21 14:20:10
-#&gt; 170 2017-11-21 14:20:10
-#&gt; 171 2018-02-19 14:39:59
-#&gt; 172 2018-02-19 14:39:59
-#&gt; 173 2018-02-19 14:39:59
-#&gt; 174 2018-02-19 14:39:59
-#&gt; 175 2018-02-19 14:39:59
-#&gt; 176 2018-02-19 14:39:59
-#&gt; 177 2018-02-19 14:39:59
-#&gt; 178 2018-02-19 14:39:59
-#&gt; 179 2018-02-19 14:39:59
-#&gt; 180 2018-02-19 14:39:59
-#&gt; 181 2018-02-19 14:39:59
-#&gt; 182 2018-02-19 14:39:59
-#&gt; 183 2018-02-19 14:39:59
-#&gt; 184 2018-02-19 14:39:59</div><div class='input'><span class='fu'>data</span>(<span class='no'>iris</span>)
-<span class='fu'>asave</span>(<span class='no'>iris</span>, <span class='kw'>silent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) <span class='co'># iris was used in pl</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Artifact ff575c261c949d073b2895b05d1097c3 was already archived. Another archivisation executed with success.</span></div><div class='output co'>#&gt; [1] "ff575c261c949d073b2895b05d1097c3"</div><div class='input'><span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>'repoDir'</span>, <span class='kw'>NULL</span>, <span class='kw'>unset</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; NULL</div><div class='input'><span class='fu'><a href='deleteLocalRepo.html'>deleteLocalRepo</a></span>(<span class='no'>exampleRepoDir</span>, <span class='fl'>TRUE</span>)
-<span class='fu'>rm</span>(<span class='no'>exampleRepoDir</span>)</div></pre>
+             <span class='kw'>userTags</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"do not delete"</span>, <span class='st'>"my favourite model"</span>))
+<span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>'repoDir'</span>, <span class='fu'>system.file</span>(<span class='st'>"graphGallery"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"archivist"</span>))
+<span class='fu'><a href='showRepo.html'>showLocalRepo</a></span>(<span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"tags"</span>)
+<span class='fu'>data</span>(<span class='no'>iris</span>)
+<span class='fu'>asave</span>(<span class='no'>iris</span>, <span class='kw'>silent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) <span class='co'># iris was used in pl</span>
+<span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>'repoDir'</span>, <span class='kw'>NULL</span>, <span class='kw'>unset</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'><a href='deleteLocalRepo.html'>deleteLocalRepo</a></span>(<span class='no'>exampleRepoDir</span>, <span class='fl'>TRUE</span>)
+<span class='fu'>rm</span>(<span class='no'>exampleRepoDir</span>)
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -949,3 +373,4 @@ Marcin Kosinski , <a href='mailto:m.p.kosinski@gmail.com'>m.p.kosinski@gmail.com
 
   </body>
 </html>
+

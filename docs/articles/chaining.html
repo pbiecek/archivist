@@ -15,7 +15,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top navbar-mi2" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -26,7 +26,7 @@
       </button>
 	  <a class="navbar-mi2logo" href="http://mi2.mini.pw.edu.pl/">
         <img src="https://github.com/mi2-warsaw/MI2template/blob/master/inst/pkgdown/assets/MI2logo.jpg?raw=true" alt="MI2" height="46" title="MI2"></a>
-      <a class="navbar-brand navbar-mi2" href="../index.html">archivist</a>
+      <a class="navbar-brand navbar-mi2" href="../index.html"></a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="navbar-mi2 nav navbar-nav">
@@ -61,7 +61,7 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right"></ul>
@@ -74,115 +74,118 @@
 
       
       </header><div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Chaining</h1>
             
-          </div>
+      
+      
+      <div class="hidden name"><code>chaining.Rmd</code></div>
+
+    </div>
 
     
     
-<div class="contents">
 <!--
 %\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{Chaining}
 -->
-<p>The <strong>archivist</strong> package is very efficient and advantageous when archived artifacts were created with a chaining code offered by the <a href="http://cran.r-project.org/package=magrittr">magrittr</a> package. It is higly useful because the origin of the artifact is archived, which means that the artifact can be easly reproduced and it’s origin code is stored for future use.</p>
+<p>The <strong>archivist</strong> package is very efficient and advantageous when archived artifacts were created with a chaining code offered by the <a href="https://cran.r-project.org/package=magrittr">magrittr</a> package. It is higly useful because the origin of the artifact is archived, which means that the artifact can be easly reproduced and it’s origin code is stored for future use.</p>
 <p>Below are examples of creating artifacts with a chaining code, that requires using a <code>%&gt;%</code> and a <code>%.%</code> operators, offered by the <strong>magrittr</strong> and the <strong>dplyr</strong> package.</p>
 <p>Since the version 1.5 of the <strong>magrittr</strong> package has changed functionality of a mentioned pipe operator <code>%&gt;%</code>, we copied (in version 1.3 of the <strong>archivist</strong>) functionality from version 1.0.1 and added old operator to the <strong>archivist</strong> package as <code>%a%</code> operator.</p>
 <p>Let us prepare a <a href="https://github.com/pbiecek/archivist/wiki/archivist-package-Repository"><strong>Repository</strong></a> where archived artifacts will be stored.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(archivist)
-exampleRepoDir &lt;-<span class="st"> </span><span class="kw">getwd</span>()
-<span class="kw"><a href="../reference/createEmptyRepo.html">createLocalRepo</a></span>(exampleRepoDir, <span class="dt">default =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(archivist)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">exampleRepoDir &lt;-<span class="st"> </span><span class="kw">getwd</span>()</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="../reference/createEmptyRepo.html">createLocalRepo</a></span>(exampleRepoDir, <span class="dt">default =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <div id="chaining-code" class="section level1">
 <h1 class="hasAnchor">
 <a href="#chaining-code" class="anchor"></a>Chaining code</h1>
 <p>Then one might create artifacts like those below. The code lines are ordered in chaining code, which will be used by the <code>asave</code> function to store an artifact and archive it’s origin code as a <code>name</code> of this artifact.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># example 1</span>
-<span class="kw">library</span>(dplyr)
-
-<span class="kw">data</span>(<span class="st">"hflights"</span>, <span class="dt">package =</span> <span class="st">"hflights"</span>)
-hflights <span class="op">%a%</span>
-<span class="st">   </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(Year, Month, DayofMonth) <span class="op">%a%</span>
-<span class="st">   </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(Year<span class="op">:</span>DayofMonth, ArrDelay, DepDelay) <span class="op">%a%</span>
-<span class="st">   </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(
-      <span class="dt">arr =</span> <span class="kw">mean</span>(ArrDelay, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
-      <span class="dt">dep =</span> <span class="kw">mean</span>(DepDelay, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)
-   ) <span class="op">%a%</span>
-<span class="st">   </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(arr <span class="op">&gt;</span><span class="st"> </span><span class="dv">30</span> <span class="op">|</span><span class="st"> </span>dep <span class="op">&gt;</span><span class="st"> </span><span class="dv">30</span>) -&gt;<span class="st"> </span>example1</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># example 1</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw">data</span>(<span class="st">"hflights"</span>, <span class="dt">package =</span> <span class="st">"hflights"</span>)</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">hflights <span class="op">%a%</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="st">   </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(Year, Month, DayofMonth) <span class="op">%a%</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="st">   </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(Year<span class="op">:</span>DayofMonth, ArrDelay, DepDelay) <span class="op">%a%</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="st">   </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(</a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">      <span class="dt">arr =</span> <span class="kw">mean</span>(ArrDelay, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">      <span class="dt">dep =</span> <span class="kw">mean</span>(DepDelay, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb2-11" data-line-number="11">   ) <span class="op">%a%</span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="st">   </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(arr <span class="op">&gt;</span><span class="st"> </span><span class="dv">30</span> <span class="op">|</span><span class="st"> </span>dep <span class="op">&gt;</span><span class="st"> </span><span class="dv">30</span>) -&gt;<span class="st"> </span>example1</a></code></pre></div>
 <p>One may see a vast difference in code evalution when using chaining code. Here is an example of a traditional <code>R</code> call and one that uses the <code>chaining code</code> philosophy.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># example 2</span>
-<span class="kw">library</span>(Lahman)
-
-<span class="co"># Traditional R code</span>
-players &lt;-<span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(Batting, playerID)
-games &lt;-<span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(players, <span class="dt">total =</span> <span class="kw">sum</span>(G))
-<span class="kw">head</span>(<span class="kw"><a href="http://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(games, <span class="kw"><a href="http://dplyr.tidyverse.org/reference/desc.html">desc</a></span>(total)), <span class="dv">5</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Source<span class="op">:</span><span class="st"> </span>local data frame [<span class="dv">5</span> x <span class="dv">2</span>]
-
-   playerID total
-      (chr) (int)
-<span class="dv">1</span>  rosepe01  <span class="dv">3562</span>
-<span class="dv">2</span> yastrca01  <span class="dv">3308</span>
-<span class="dv">3</span> aaronha01  <span class="dv">3298</span>
-<span class="dv">4</span> henderi01  <span class="dv">3081</span>
-<span class="dv">5</span>  cobbty01  <span class="dv">3035</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Corresponding chaining code</span>
-Batting <span class="op">%a%</span>
-<span class="st">   </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(playerID) <span class="op">%a%</span>
-<span class="st">   </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">total =</span> <span class="kw">sum</span>(G)) <span class="op">%a%</span>
-<span class="st">   </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(<span class="kw"><a href="http://dplyr.tidyverse.org/reference/desc.html">desc</a></span>(total)) <span class="op">%a%</span>
-<span class="st">   </span><span class="kw">head</span>(<span class="dv">5</span>) <span class="op">%a%</span>
-<span class="st">   </span><span class="kw"><a href="../reference/saveToRepo.html">asave</a></span>( <span class="dt">repoDir =</span> exampleRepoDir )</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">[<span class="dv">1</span>] <span class="st">"b5ba48251904ce231c382594cdc75bb2"</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># example 2</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">library</span>(Lahman)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co"># Traditional R code</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">players &lt;-<span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(Batting, playerID)</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">games &lt;-<span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(players, <span class="dt">total =</span> <span class="kw">sum</span>(G))</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="kw">head</span>(<span class="kw"><a href="http://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(games, <span class="kw"><a href="http://dplyr.tidyverse.org/reference/desc.html">desc</a></span>(total)), <span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">Source<span class="op">:</span><span class="st"> </span>local data frame [<span class="dv">5</span> x <span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">   playerID total</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">      (chr) (int)</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="dv">1</span>  rosepe01  <span class="dv">3562</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="dv">2</span> yastrca01  <span class="dv">3308</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="dv">3</span> aaronha01  <span class="dv">3298</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="dv">4</span> henderi01  <span class="dv">3081</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="dv">5</span>  cobbty01  <span class="dv">3035</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># Corresponding chaining code</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">Batting <span class="op">%a%</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="st">   </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(playerID) <span class="op">%a%</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="st">   </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">total =</span> <span class="kw">sum</span>(G)) <span class="op">%a%</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="st">   </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(<span class="kw"><a href="http://dplyr.tidyverse.org/reference/desc.html">desc</a></span>(total)) <span class="op">%a%</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="st">   </span><span class="kw">head</span>(<span class="dv">5</span>) <span class="op">%a%</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="st">   </span><span class="kw"><a href="../reference/saveToRepo.html">asave</a></span>( <span class="dt">repoDir =</span> exampleRepoDir )</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">[<span class="dv">1</span>] <span class="st">"b5ba48251904ce231c382594cdc75bb2"</span></a></code></pre></div>
 </div>
 <div id="setlocalrepo" class="section level1">
 <h1 class="hasAnchor">
 <a href="#setlocalrepo" class="anchor"></a><code>setLocalRepo</code>
 </h1>
 <p>To simplify the code one can set globally the path to <strong>Repository</strong> using code as below. Now one no longer need to specify the <code>repoDir</code> parameter with every call.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/setRepo.html">setLocalRepo</a></span>( exampleRepoDir )</code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="../reference/setRepo.html">setLocalRepo</a></span>( exampleRepoDir )</a></code></pre></div>
 </div>
 <div id="archiving-artifacts" class="section level1">
 <h1 class="hasAnchor">
 <a href="#archiving-artifacts" class="anchor"></a>Archiving artifacts</h1>
 <p>Many of various operations can be performed on a single <code>data.frame</code> before one consideres to archive these artifacts. <strong>Archivist</strong> guarantees that all of them will be <code>archived</code>, which means a code alone will no longer be needed to be stored in a separate file. Also an artifact may be saved during operations are performed and used in further code evaluations. This can be done when argument  in <code>asave</code> is specified.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># example 3</span>
-<span class="kw"><a href="../reference/aread.html">aread</a></span>(<span class="st">'MarcinKosinski/Museum/3374db20ecaf2fa0d070d'</span>) -&gt;<span class="st"> </span>crime.by.state
-crime.by.state <span class="op">%a%</span>
-<span class="st">   </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(State<span class="op">==</span><span class="st">"New York"</span>, Year<span class="op">==</span><span class="dv">2005</span>) <span class="op">%a%</span>
-<span class="st">   </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(<span class="kw"><a href="http://dplyr.tidyverse.org/reference/desc.html">desc</a></span>(Count)) <span class="op">%a%</span>
-<span class="st">   </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(Type.of.Crime, Count) <span class="op">%a%</span>
-<span class="st">   </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">Proportion=</span>Count<span class="op">/</span><span class="kw">sum</span>(Count)) <span class="op">%a%</span>
-<span class="st">   </span><span class="kw"><a href="../reference/saveToRepo.html">asave</a></span>( exampleRepoDir, <span class="dt">value =</span> <span class="ot">TRUE</span>) <span class="op">%a%</span>
-<span class="st">   </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(Type.of.Crime) <span class="op">%a%</span>
-<span class="st">   </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">num.types =</span> <span class="kw"><a href="http://dplyr.tidyverse.org/reference/n.html">n</a></span>(), <span class="dt">counts =</span> <span class="kw">sum</span>(Count)) <span class="op">%a%</span>
-<span class="st">   </span><span class="kw"><a href="../reference/saveToRepo.html">asave</a></span>( )</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">[<span class="dv">1</span>] <span class="st">"9a3dd58b75558273c53a441ec823b219"</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># example 3</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw"><a href="../reference/aread.html">aread</a></span>(<span class="st">'MarcinKosinski/Museum/3374db20ecaf2fa0d070d'</span>) -&gt;<span class="st"> </span>crime.by.state</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">crime.by.state <span class="op">%a%</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="st">   </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(State<span class="op">==</span><span class="st">"New York"</span>, Year<span class="op">==</span><span class="dv">2005</span>) <span class="op">%a%</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="st">   </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(<span class="kw"><a href="http://dplyr.tidyverse.org/reference/desc.html">desc</a></span>(Count)) <span class="op">%a%</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="st">   </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(Type.of.Crime, Count) <span class="op">%a%</span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="st">   </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">Proportion=</span>Count<span class="op">/</span><span class="kw">sum</span>(Count)) <span class="op">%a%</span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="st">   </span><span class="kw"><a href="../reference/saveToRepo.html">asave</a></span>( exampleRepoDir, <span class="dt">value =</span> <span class="ot">TRUE</span>) <span class="op">%a%</span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="st">   </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(Type.of.Crime) <span class="op">%a%</span></a>
+<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="st">   </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">num.types =</span> <span class="kw"><a href="http://dplyr.tidyverse.org/reference/n.html">n</a></span>(), <span class="dt">counts =</span> <span class="kw">sum</span>(Count)) <span class="op">%a%</span></a>
+<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="st">   </span><span class="kw"><a href="../reference/saveToRepo.html">asave</a></span>( )</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">[<span class="dv">1</span>] <span class="st">"9a3dd58b75558273c53a441ec823b219"</span></a></code></pre></div>
 <p>Dozens of artifacts may now be stored in one <strong>Repository</strong>. Every artifact may have an additional Tag specified by an user. This will simplify searching for this artifact in the future.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># example 4</span>
-<span class="kw">library</span>(ggplot2)
-
-diamonds <span class="op">%a%</span><span class="st"> </span>
-<span class="st">   </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(cut, clarity, color) <span class="op">%a%</span><span class="st">  </span>
-<span class="st">   </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span>(
-      <span class="dt">meancarat =</span> <span class="kw">mean</span>(carat, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), 
-      <span class="dt">ndiamonds =</span> <span class="kw">length</span>(carat)
-   ) <span class="op">%a%</span><span class="st"> </span>
-<span class="st">   </span><span class="kw">head</span>( <span class="dv">10</span>) <span class="op">%a%</span>
-<span class="st">   </span><span class="kw"><a href="../reference/saveToRepo.html">asave</a></span>(<span class="dt">userTags =</span> <span class="kw">c</span>(<span class="st">"tags"</span>, <span class="st">"operations on diamonds"</span>))</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">[<span class="dv">1</span>] <span class="st">"33576ab6aa88e5aedb4887aeffd84fa9"</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co"># example 4</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">diamonds <span class="op">%a%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="st">   </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(cut, clarity, color) <span class="op">%a%</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="st">   </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span>(</a>
+<a class="sourceLine" id="cb10-7" data-line-number="7">      <span class="dt">meancarat =</span> <span class="kw">mean</span>(carat, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), </a>
+<a class="sourceLine" id="cb10-8" data-line-number="8">      <span class="dt">ndiamonds =</span> <span class="kw">length</span>(carat)</a>
+<a class="sourceLine" id="cb10-9" data-line-number="9">   ) <span class="op">%a%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-10" data-line-number="10"><span class="st">   </span><span class="kw">head</span>( <span class="dv">10</span>) <span class="op">%a%</span></a>
+<a class="sourceLine" id="cb10-11" data-line-number="11"><span class="st">   </span><span class="kw"><a href="../reference/saveToRepo.html">asave</a></span>(<span class="dt">userTags =</span> <span class="kw">c</span>(<span class="st">"tags"</span>, <span class="st">"operations on diamonds"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">[<span class="dv">1</span>] <span class="st">"33576ab6aa88e5aedb4887aeffd84fa9"</span></a></code></pre></div>
 </div>
 <div id="restoring-origin-code---artifacts-pedigree" class="section level1">
 <h1 class="hasAnchor">
 <a href="#restoring-origin-code---artifacts-pedigree" class="anchor"></a>Restoring origin code - Artifact’s Pedigree</h1>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># results = 'asis'</span>
-hash2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/searchInRepo.html">searchInLocalRepo</a></span>( <span class="dt">pattern =</span> <span class="st">"operations on diamonds"</span> )
-<span class="kw"><a href="../reference/ahistory.html">ahistory</a></span>(hash2, <span class="dt">format =</span> <span class="st">"kable"</span>)</code></pre></div>
-<table style="width:100%;" class="table">
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="co"># results = 'asis'</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">hash2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/searchInRepo.html">searchInLocalRepo</a></span>( <span class="dt">pattern =</span> <span class="st">"operations on diamonds"</span> )</a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="kw"><a href="../reference/ahistory.html">ahistory</a></span>(hash2, <span class="dt">format =</span> <span class="st">"kable"</span>)</a></code></pre></div>
+<table class="table">
 <colgroup>
-<col width="3%">
-<col width="66%">
+<col width="2%">
+<col width="67%">
 <col width="29%">
 </colgroup>
 <thead><tr class="header">
@@ -218,7 +221,6 @@ hash2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/searc
 </tr>
 </tbody>
 </table>
-</div>
 </div>
   </div>
 

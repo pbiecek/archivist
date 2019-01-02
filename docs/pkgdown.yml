@@ -1,0 +1,9 @@
+pandoc: 2.3.1
+pkgdown: 1.0.0
+pkgdown_sha: ~
+articles:
+  accessibility: accessibility.html
+  caching: caching.html
+  chaining: chaining.html
+  posts: posts.html
+

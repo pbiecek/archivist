@@ -23,8 +23,6 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -50,7 +48,7 @@
 	  <a class = "navbar-mi2logo" href="http://mi2.mini.pw.edu.pl/">
         <img src = "https://github.com/mi2-warsaw/MI2template/blob/master/inst/pkgdown/assets/MI2logo.jpg?raw=true" alt = "MI2" height = 46 title = "MI2">
 	  </a>
-      <a class="navbar-brand navbar-mi2" href="../index.html">archivist</a>
+      <a class="navbar-brand navbar-mi2" href="../index.html">Return a Link To Download an Artifact Stored on Remote Repository</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="navbar-mi2 nav navbar-nav">
@@ -85,7 +83,7 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -107,14 +105,15 @@
 
     
     <p><code>alink</code> returns a link to download an artifact from the Remote <a href='Repository.html'>Repository</a>.
-Artifact has to be already archived on GitHub, e.g with <code><a href='http://www.rdocumentation.org/packages/archivist.github/topics/archive'>archivist.github::archive</a></code> function (recommended) or 
+Artifact has to be already archived on GitHub, e.g with <code>archivist.github::archive</code> function (recommended) or 
 <a href='saveToRepo.html'>saveToRepo</a> function and traditional Git manual synchronization.
 To learn more about artifacts visit <a href='archivist-package.html'>archivist-package</a>.</p>
     
 
     <pre class="usage"><span class='fu'>alink</span>(<span class='no'>md5hash</span>, <span class='kw'>repo</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"repo"</span>), <span class='kw'>user</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"user"</span>),
   <span class='kw'>subdir</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"subdir"</span>), <span class='kw'>branch</span> <span class='kw'>=</span> <span class='st'>"master"</span>,
-  <span class='kw'>repoType</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"repoType"</span>), <span class='kw'>format</span> <span class='kw'>=</span> <span class='st'>"markdown"</span>, <span class='kw'>rawLink</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+  <span class='kw'>repoType</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"repoType"</span>), <span class='kw'>format</span> <span class='kw'>=</span> <span class='st'>"markdown"</span>,
+  <span class='kw'>rawLink</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -176,7 +175,7 @@ Default value is <code>FALSE</code>.</p></td>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other archivist: <code><a href='Repository.html'>Repository</a></code>,
+    <div class='dont-index'><p>Other archivist: <code><a href='Repository.html'>Repository</a></code>,
   <code><a href='Tags.html'>Tags</a></code>, <code><a href='magrittr.html'>%a%</a></code>,
   <code><a href='addHooksToPrint.html'>addHooksToPrint</a></code>, <code><a href='addTagsRepo.html'>addTagsRepo</a></code>,
   <code><a href='aformat.html'>aformat</a></code>, <code><a href='ahistory.html'>ahistory</a></code>,
@@ -199,18 +198,25 @@ Default value is <code>FALSE</code>.</p></td>
   <code><a href='showRepo.html'>showLocalRepo</a></code>,
   <code><a href='splitTags.html'>splitTagsLocal</a></code>,
   <code><a href='summaryRepo.html'>summaryLocalRepo</a></code>,
-  <code><a href='zipRepo.html'>zipLocalRepo</a></code></p>
+  <code><a href='zipRepo.html'>zipLocalRepo</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># link in markdown format</span>
-<span class='fu'>alink</span>(<span class='st'>'pbiecek/archivist/134ecbbe2a8814d98f0c2758000c408e'</span>)</div><div class='output co'>#&gt; [`archivist::aread('pbiecek/archivist/134ecbbe2a8814d98f0c2758000c408e')`](https://raw.githubusercontent.com/pbiecek/archivist/master/gallery/134ecbbe2a8814d98f0c2758000c408e.rda)</div><div class='input'><span class='co'># link in markdown format with additional subdir</span>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'># link in markdown format</span>
+<span class='fu'>alink</span>(<span class='st'>'pbiecek/archivist/134ecbbe2a8814d98f0c2758000c408e'</span>)
+<span class='co'># link in markdown format with additional subdir</span>
 <span class='fu'>alink</span>(<span class='kw'>user</span><span class='kw'>=</span><span class='st'>'BetaAndBit'</span>,<span class='kw'>repo</span><span class='kw'>=</span><span class='st'>'PieczaraPietraszki'</span>,
      <span class='kw'>md5hash</span> <span class='kw'>=</span> <span class='st'>'1569cc44e8450439ac52c11ccac35138'</span>,
-     <span class='kw'>subdir</span> <span class='kw'>=</span> <span class='st'>'UniwersytetDzieci/arepo'</span>)</div><div class='output co'>#&gt; [`archivist::aread('BetaAndBit/PieczaraPietraszki/UniwersytetDzieci/arepo/1569cc44e8450439ac52c11ccac35138')`](https://raw.githubusercontent.com/BetaAndBit/PieczaraPietraszki/master/UniwersytetDzieci/arepo/gallery/1569cc44e8450439ac52c11ccac35138.rda)</div><div class='input'><span class='co'># link in latex format</span>
+     <span class='kw'>subdir</span> <span class='kw'>=</span> <span class='st'>'UniwersytetDzieci/arepo'</span>)
+<span class='co'># link in latex format</span>
 <span class='fu'>alink</span>(<span class='kw'>user</span> <span class='kw'>=</span> <span class='st'>'MarcinKosinski'</span>, <span class='kw'>repo</span> <span class='kw'>=</span> <span class='st'>'Museum'</span>,
-      <span class='kw'>md5hash</span> <span class='kw'>=</span> <span class='st'>'1651caa499a2b07a3bdad3896a2fc717'</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='st'>'latex'</span>)</div><div class='output co'>#&gt; \href{https://raw.githubusercontent.com/MarcinKosinski/Museum/master/gallery/1651caa499a2b07a3bdad3896a2fc717.rda}{archivist::aread('MarcinKosinski/Museum/1651caa499a2b07a3bdad3896a2fc717')}</div><div class='input'><span class='co'># link in raw format</span>
-<span class='fu'>alink</span>(<span class='st'>'pbiecek/graphGallery/f5185c458bff721f0faa8e1332f01e0f'</span>, <span class='kw'>rawLink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; https://raw.githubusercontent.com/pbiecek/graphGallery/master/gallery/f5185c458bff721f0faa8e1332f01e0f.rda</div><div class='input'><span class='fu'>alink</span>(<span class='st'>'pbiecek/graphgallerygit/02af4f99e440324b9e329faa293a9394'</span>, <span class='kw'>repoType</span><span class='kw'>=</span><span class='st'>'bitbucket'</span>)</div><div class='output co'>#&gt; [`archivist::aread('pbiecek/graphgallerygit/02af4f99e440324b9e329faa293a9394')`](https://bitbucket.org/pbiecek/graphgallerygit/raw/1aac0cd80e9896889b374ca6747bb6eaf9213e6e/gallery/02af4f99e440324b9e329faa293a9394.rda)</div></pre>
+      <span class='kw'>md5hash</span> <span class='kw'>=</span> <span class='st'>'1651caa499a2b07a3bdad3896a2fc717'</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='st'>'latex'</span>)
+<span class='co'># link in raw format</span>
+<span class='fu'>alink</span>(<span class='st'>'pbiecek/graphGallery/f5185c458bff721f0faa8e1332f01e0f'</span>, <span class='kw'>rawLink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>alink</span>(<span class='st'>'pbiecek/graphgallerygit/02af4f99e440324b9e329faa293a9394'</span>, <span class='kw'>repoType</span><span class='kw'>=</span><span class='st'>'bitbucket'</span>)
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -249,3 +255,4 @@ Marcin Kosinski, <a href='mailto:m.p.kosinski@gmail.com'>m.p.kosinski@gmail.com<
 
   </body>
 </html>
+

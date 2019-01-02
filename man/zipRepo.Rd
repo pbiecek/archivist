@@ -9,8 +9,9 @@ zipLocalRepo(repoDir = aoptions("repoDir"), repoTo = getwd(),
   zipname = "repository.zip")
 
 zipRemoteRepo(repoTo = getwd(), user = aoptions("user"),
-  repo = aoptions("repo"), branch = "master", subdir = aoptions("subdir"),
-  repoType = aoptions("repoType"), zipname = "repository.zip")
+  repo = aoptions("repo"), branch = "master",
+  subdir = aoptions("subdir"), repoType = aoptions("repoType"),
+  zipname = "repository.zip")
 }
 \arguments{
 \item{repoDir}{A character that specifies the directory of the Repository which

@@ -7,9 +7,10 @@
 \usage{
 getTagsLocal(md5hash, repoDir = aoptions("repoDir"), tag = "name")
 
-getTagsRemote(md5hash, repo = aoptions("repo"), user = aoptions("user"),
-  branch = aoptions("branch"), subdir = aoptions("subdir"),
-  repoType = aoptions("repoType"), tag = "name")
+getTagsRemote(md5hash, repo = aoptions("repo"),
+  user = aoptions("user"), branch = aoptions("branch"),
+  subdir = aoptions("subdir"), repoType = aoptions("repoType"),
+  tag = "name")
 }
 \arguments{
 \item{md5hash}{A character containing \code{md5hash} 

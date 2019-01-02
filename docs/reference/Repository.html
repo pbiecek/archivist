@@ -23,8 +23,6 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -50,7 +48,7 @@
 	  <a class = "navbar-mi2logo" href="http://mi2.mini.pw.edu.pl/">
         <img src = "https://github.com/mi2-warsaw/MI2template/blob/master/inst/pkgdown/assets/MI2logo.jpg?raw=true" alt = "MI2" height = 46 title = "MI2">
 	  </a>
-      <a class="navbar-brand navbar-mi2" href="../index.html">archivist</a>
+      <a class="navbar-brand navbar-mi2" href="../index.html">Repository</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="navbar-mi2 nav navbar-nav">
@@ -85,7 +83,7 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -115,8 +113,8 @@ To learn more about artifacts visit <a href='archivist-package.html'>archivist-p
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p><code>Repository</code> is a folder with an SQLite database stored in a file named <code>backpack</code>
-and a subdirectory named <code>gallery</code>.
-    <code>backpack</code> contains two tables:<em>artifact</em> and <em>tag</em>.
+and a subdirectory named <code>gallery</code>.</p>
+<p><code>backpack</code> contains two tables:<em>artifact</em> and <em>tag</em>.
 <em>artifact</em> table consists of three columns:</p><ul>
 <li><p><code>md5hash</code>,</p></li>
 <li><p><code>name</code>,</p></li>
@@ -125,7 +123,8 @@ and a subdirectory named <code>gallery</code>.
 <li><p><code>artifact</code>,</p></li>
 <li><p><code>tag</code>,</p></li>
 <li><p><code>createdDate</code>.</p></li>
-</ul><p><code>gallery</code> collects the following objects:</p><ul>
+</ul>
+    <p><code>gallery</code> collects the following objects:</p><ul>
 <li><p>artifacts and artifacts' data saved as <code>.rda</code> files,</p></li>
 <li><p>artifacts' miniatures saved as <code>.txt</code> and <code>.png</code> files.</p></li>
 </ul>
@@ -146,7 +145,7 @@ URL https://github.com/pbiecek/archivist</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Functions using <code>Repository</code> are:</p><ul>
+    <div class='dont-index'><p>Functions using <code>Repository</code> are:</p><ul>
 <li><p><a href='addTagsRepo.html'>addTagsRepo</a>,</p></li>
 <li><p><a href='ahistory.html'>ahistory</a>,</p></li>
 <li><p><a href='aread.html'>aread</a>,</p></li>
@@ -205,7 +204,7 @@ URL https://github.com/pbiecek/archivist</p>
   <code><a href='showRepo.html'>showLocalRepo</a></code>,
   <code><a href='splitTags.html'>splitTagsLocal</a></code>,
   <code><a href='summaryRepo.html'>summaryLocalRepo</a></code>,
-  <code><a href='zipRepo.html'>zipLocalRepo</a></code></p>
+  <code><a href='zipRepo.html'>zipLocalRepo</a></code></p></div>
     
 
   </div>
@@ -239,3 +238,4 @@ URL https://github.com/pbiecek/archivist</p>
 
   </body>
 </html>
+

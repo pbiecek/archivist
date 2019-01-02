@@ -5,8 +5,9 @@
 \title{Add \pkg{archivist} Hooks to \pkg{rmarkdown} Reports}
 \usage{
 addHooksToPrint(class = "ggplot", repoDir = aoptions("repoDir"),
-  repo = aoptions("repo"), user = aoptions("user"), branch = "master",
-  subdir = aoptions("subdir"), format = "markdown")
+  repo = aoptions("repo"), user = aoptions("user"),
+  branch = "master", subdir = aoptions("subdir"),
+  format = "markdown")
 }
 \arguments{
 \item{class}{A character with a name of class (one or more) that should be archived.}

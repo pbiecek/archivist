@@ -5,7 +5,8 @@
 \alias{loadFromRemoteRepo}
 \title{Load Artifact Given as a md5hash from a Repository}
 \usage{
-loadFromLocalRepo(md5hash, repoDir = aoptions("repoDir"), value = FALSE)
+loadFromLocalRepo(md5hash, repoDir = aoptions("repoDir"),
+  value = FALSE)
 
 loadFromRemoteRepo(md5hash, repo = aoptions("repo"),
   user = aoptions("user"), branch = aoptions("branch"),

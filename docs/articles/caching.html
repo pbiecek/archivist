@@ -15,7 +15,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top navbar-mi2" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -26,7 +26,7 @@
       </button>
 	  <a class="navbar-mi2logo" href="http://mi2.mini.pw.edu.pl/">
         <img src="https://github.com/mi2-warsaw/MI2template/blob/master/inst/pkgdown/assets/MI2logo.jpg?raw=true" alt="MI2" height="46" title="MI2"></a>
-      <a class="navbar-brand navbar-mi2" href="../index.html">archivist</a>
+      <a class="navbar-brand navbar-mi2" href="../index.html"></a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="navbar-mi2 nav navbar-nav">
@@ -61,7 +61,7 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right"></ul>
@@ -74,15 +74,18 @@
 
       
       </header><div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Caching</h1>
             
-          </div>
+      
+      
+      <div class="hidden name"><code>caching.Rmd</code></div>
+
+    </div>
 
     
     
-<div class="contents">
 <!--
 %\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{Caching}
@@ -95,53 +98,52 @@
 <h1 class="hasAnchor">
 <a href="#heavyweight-function" class="anchor"></a>Heavyweight function</h1>
 <p>Let’s see an example. The <code>Heavyweight</code> function <code>getMaxDistribution</code> summarizes the distribution of maximum from N draw of random variables from distribuition D with the use of R replications.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">getMaxDistribution &lt;-<span class="st"> </span><span class="cf">function</span>(
-    <span class="dt">D =</span> rnorm, 
-    <span class="dt">N =</span> <span class="dv">10</span>,
-    <span class="dt">R =</span> <span class="dv">1000000</span>) {
-    res &lt;-<span class="st"> </span><span class="kw">replicate</span>(R, <span class="kw">max</span>(<span class="kw">D</span>(N)))
-  <span class="kw">summary</span>(res)
-}
-
-<span class="kw">system.time</span>(<span class="kw">getMaxDistribution</span>(rnorm, <span class="dv">10</span>))</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">   user  system elapsed 
-  <span class="fl">5.477</span>   <span class="fl">0.035</span>   <span class="fl">5.511</span> </code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(<span class="kw">getMaxDistribution</span>(rexp, <span class="dv">20</span>))</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">   user  system elapsed 
-  <span class="fl">5.156</span>   <span class="fl">0.008</span>   <span class="fl">5.164</span> </code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(<span class="kw">getMaxDistribution</span>(rnorm, <span class="dv">10</span>))</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">   user  system elapsed 
-  <span class="fl">4.845</span>   <span class="fl">0.001</span>   <span class="fl">4.844</span> </code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">getMaxDistribution &lt;-<span class="st"> </span><span class="cf">function</span>(</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">    <span class="dt">D =</span> rnorm, </a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">    <span class="dt">N =</span> <span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">    <span class="dt">R =</span> <span class="dv">1000000</span>) {</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">    res &lt;-<span class="st"> </span><span class="kw">replicate</span>(R, <span class="kw">max</span>(<span class="kw">D</span>(N)))</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">  <span class="kw">summary</span>(res)</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">}</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="kw">system.time</span>(<span class="kw">getMaxDistribution</span>(rnorm, <span class="dv">10</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">   user  system elapsed </a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="fl">5.477</span>   <span class="fl">0.035</span>   <span class="fl">5.511</span> </a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">system.time</span>(<span class="kw">getMaxDistribution</span>(rexp, <span class="dv">20</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">   user  system elapsed </a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">  <span class="fl">5.156</span>   <span class="fl">0.008</span>   <span class="fl">5.164</span> </a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">system.time</span>(<span class="kw">getMaxDistribution</span>(rnorm, <span class="dv">10</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">   user  system elapsed </a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">  <span class="fl">4.845</span>   <span class="fl">0.001</span>   <span class="fl">4.844</span> </a></code></pre></div>
 <p>Now, let’s load the archivist package and prepare a repository for cached objects.</p>
 </div>
 <div id="cache-preparation" class="section level1">
 <h1 class="hasAnchor">
 <a href="#cache-preparation" class="anchor"></a>Cache preparation</h1>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(archivist)
-cacheRepo &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
-<span class="kw"><a href="../reference/createEmptyRepo.html">createLocalRepo</a></span>(cacheRepo)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Directory <span class="op">/</span>tmp<span class="op">/</span>Rtmp45GZsm<span class="op">/</span>file65d3676f9387 did not exist. Forced to create a new directory.</code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">library</span>(archivist)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">cacheRepo &lt;-<span class="st"> </span><span class="kw">tempfile</span>()</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="kw"><a href="../reference/createEmptyRepo.html">createLocalRepo</a></span>(cacheRepo)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">Directory <span class="op">/</span>tmp<span class="op">/</span>Rtmp45GZsm<span class="op">/</span>file65d3676f9387 did not exist. Forced to create a new directory.</a></code></pre></div>
 </div>
 <div id="how-to-work-with-cache" class="section level1">
 <h1 class="hasAnchor">
 <a href="#how-to-work-with-cache" class="anchor"></a>How to work with cache</h1>
 <p>The <code>cacheRepo</code> is a folder with already evaluated function calls. How to use it?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(<span class="kw"><a href="../reference/cache.html">cache</a></span>(cacheRepo, getMaxDistribution, rnorm, <span class="dv">10</span>))</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">   user  system elapsed 
-  <span class="fl">4.738</span>   <span class="fl">0.004</span>   <span class="fl">4.740</span> </code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(<span class="kw"><a href="../reference/cache.html">cache</a></span>(cacheRepo, getMaxDistribution, rexp, <span class="dv">10</span>))</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">   user  system elapsed 
-  <span class="fl">4.950</span>   <span class="fl">0.008</span>   <span class="fl">4.955</span> </code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(<span class="kw"><a href="../reference/cache.html">cache</a></span>(cacheRepo, getMaxDistribution, rnorm, <span class="dv">10</span>))</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">   user  system elapsed 
-  <span class="fl">0.003</span>   <span class="fl">0.000</span>   <span class="fl">0.003</span> </code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">system.time</span>(<span class="kw"><a href="../reference/cache.html">cache</a></span>(cacheRepo, getMaxDistribution, rnorm, <span class="dv">10</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">   user  system elapsed </a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">  <span class="fl">4.738</span>   <span class="fl">0.004</span>   <span class="fl">4.740</span> </a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">system.time</span>(<span class="kw"><a href="../reference/cache.html">cache</a></span>(cacheRepo, getMaxDistribution, rexp, <span class="dv">10</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">   user  system elapsed </a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">  <span class="fl">4.950</span>   <span class="fl">0.008</span>   <span class="fl">4.955</span> </a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">system.time</span>(<span class="kw"><a href="../reference/cache.html">cache</a></span>(cacheRepo, getMaxDistribution, rnorm, <span class="dv">10</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">   user  system elapsed </a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">  <span class="fl">0.003</span>   <span class="fl">0.000</span>   <span class="fl">0.003</span> </a></code></pre></div>
 <p>The second evaluation of <code>getMaxDistribution</code> is much, much faster. Results are just read from disk.</p>
 </div>
 <div id="how-the-cache-function-works" class="section level1">
 <h1 class="hasAnchor">
 <a href="#how-the-cache-function-works" class="anchor"></a>How the <code>cache</code> function works?</h1>
 <p>It create a md5 signature of the function FUN and it’s arguments and use this signature as a key. If such key is present in the cache repository, then the object is just restored. If it’s not present then the call is evaluated and result is stored. Note that, if <code>cacheRepo</code> is a shared folder, then you get a shared cache repository!</p>
-</div>
 </div>
   </div>
 

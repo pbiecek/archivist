@@ -4,8 +4,9 @@
 \alias{ahistory}
 \title{Show Artifact's History}
 \usage{
-ahistory(artifact = NULL, md5hash = NULL, repoDir = aoptions("repoDir"),
-  format = "regular", alink = FALSE, ...)
+ahistory(artifact = NULL, md5hash = NULL,
+  repoDir = aoptions("repoDir"), format = "regular", alink = FALSE,
+  ...)
 }
 \arguments{
 \item{artifact}{An artifact which history is supposed to be reconstructed.

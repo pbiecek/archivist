@@ -23,8 +23,6 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -50,7 +48,7 @@
 	  <a class = "navbar-mi2logo" href="http://mi2.mini.pw.edu.pl/">
         <img src = "https://github.com/mi2-warsaw/MI2template/blob/master/inst/pkgdown/assets/MI2logo.jpg?raw=true" alt = "MI2" height = 46 title = "MI2">
 	  </a>
-      <a class="navbar-brand navbar-mi2" href="../index.html">archivist</a>
+      <a class="navbar-brand navbar-mi2" href="../index.html">Create the Summary for Each Artifact in a Markdown Format</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="navbar-mi2 nav navbar-nav">
@@ -85,7 +83,7 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -112,10 +110,10 @@ miniature (<code>addMiniature = TRUE</code>) if the artifact was archived with i
  or head over an artifact or it's <code>png</code> when it was a plot. But this function only supports <code>png</code> miniatures.</p>
     
 
-    <pre class="usage"><span class='fu'>createMDGallery</span>(<span class='no'>output</span>, <span class='kw'>repo</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"repo"</span>), <span class='kw'>user</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"user"</span>),
-  <span class='kw'>branch</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"branch"</span>), <span class='kw'>subdir</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"subdir"</span>),
-  <span class='kw'>repoType</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"repoType"</span>), <span class='kw'>addTags</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>addMiniature</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>maxTags</span> <span class='kw'>=</span> <span class='fl'>100</span>)</pre>
+    <pre class="usage"><span class='fu'>createMDGallery</span>(<span class='no'>output</span>, <span class='kw'>repo</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"repo"</span>),
+  <span class='kw'>user</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"user"</span>), <span class='kw'>branch</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"branch"</span>),
+  <span class='kw'>subdir</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"subdir"</span>), <span class='kw'>repoType</span> <span class='kw'>=</span> <span class='fu'><a href='archivistOptions.html'>aoptions</a></span>(<span class='st'>"repoType"</span>),
+  <span class='kw'>addTags</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>addMiniature</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>maxTags</span> <span class='kw'>=</span> <span class='fl'>100</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -188,7 +186,7 @@ URL https://github.com/pbiecek/archivist</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Markdown example: <a href='https://github.com/pbiecek/archivist/issues/144#issuecomment-174192366'>https://github.com/pbiecek/archivist/issues/144#issuecomment-174192366</a></p>
+    <div class='dont-index'><p>Markdown example: <a href='https://github.com/pbiecek/archivist/issues/144#issuecomment-174192366'>https://github.com/pbiecek/archivist/issues/144#issuecomment-174192366</a></p>
 <p>Other archivist: <code><a href='Repository.html'>Repository</a></code>,
   <code><a href='Tags.html'>Tags</a></code>, <code><a href='magrittr.html'>%a%</a></code>,
   <code><a href='addHooksToPrint.html'>addHooksToPrint</a></code>, <code><a href='addTagsRepo.html'>addTagsRepo</a></code>,
@@ -212,7 +210,7 @@ URL https://github.com/pbiecek/archivist</p>
   <code><a href='showRepo.html'>showLocalRepo</a></code>,
   <code><a href='splitTags.html'>splitTagsLocal</a></code>,
   <code><a href='summaryRepo.html'>summaryLocalRepo</a></code>,
-  <code><a href='zipRepo.html'>zipLocalRepo</a></code></p>
+  <code><a href='zipRepo.html'>zipLocalRepo</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -264,3 +262,4 @@ Marcin Kosinski, <a href='mailto:m.p.kosinski@gmail.com'>m.p.kosinski@gmail.com<
 
   </body>
 </html>
+

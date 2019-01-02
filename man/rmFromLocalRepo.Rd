@@ -5,8 +5,9 @@
 \alias{rmFromRepo}
 \title{Remove an Artifact Given as a md5hash from the Repository}
 \usage{
-rmFromLocalRepo(md5hash, repoDir = aoptions("repoDir"), removeData = FALSE,
-  removeMiniature = FALSE, force = FALSE, many = FALSE)
+rmFromLocalRepo(md5hash, repoDir = aoptions("repoDir"),
+  removeData = FALSE, removeMiniature = FALSE, force = FALSE,
+  many = FALSE)
 
 rmFromRepo(...)
 }
