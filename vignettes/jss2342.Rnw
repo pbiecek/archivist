@@ -421,7 +421,8 @@ The following example creates a plot of the class \code{gg} and saves the object
 library("ggplot2")
 repo <- "arepo"
 pl <- qplot(Sepal.Length, Petal.Length, data = iris)
-saveToLocalRepo(pl, repoDir = repo)
+pl_hash <- saveToLocalRepo(pl, repoDir = repo)
+pl_hash
 @
 
 
@@ -438,7 +439,7 @@ showLocalRepo(repoDir = repo, "tags")
 By default, for each artifact also it's context, i.e., session info, is saved. It can be accessed with the function \code{asession()}. See the example below. Such additional information may be very useful if we cannot replicate previous results and we are in the need of recovering the exact versions of important packages, which can be done with \code{restoreLibs} function.
 
 <<>>=
-asession("7f3453331910e3f321ef97d87adb5bad")
+asession(pl_hash)
 @
 
 
