@@ -29,7 +29,7 @@ setDefaultArchivistEnv <- function() {
 .onLoad <- function(...) {
   setDefaultArchivistEnv()
   assign( x = "sqlite", value = dbDriver( "SQLite" ), envir = .ArchivistEnv )
-  assign( x = ".GithubURL", value = "https://raw.githubusercontent.com", envir = .ArchivistEnv )
+  assign( x = ".GithubURL", value = "https://raw.githack.com", envir = .ArchivistEnv )
 }
 
 onUnload <- function( libpath ){
