@@ -1,13 +1,13 @@
-[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.47154.svg)](http://dx.doi.org/10.5281/zenodo.47154)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/archivist)](https://cran.r-project.org/package=archivist)
+[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.47154.svg)](http://dx.doi.org/10.5281/zenodo.47154)
 [![Downloads](http://cranlogs.r-pkg.org/badges/archivist)](http://cran.rstudio.com/package=archivist)
 [![Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/archivist?color=orange)](http://cranlogs.r-pkg.org/badges/grand-total/archivist)
 
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 [![Build Status](https://api.travis-ci.org/pbiecek/archivist.png)](https://travis-ci.org/pbiecek/archivist)
-[![Pending Pull-Requests](http://githubbadges.herokuapp.com/pbiecek/archivist/pulls.svg?style=flat)](https://github.com/pbiecek/archivist/pulls)
 [![Github Issues](http://githubbadges.herokuapp.com/pbiecek/archivist/issues.svg)](https://github.com/pbiecek/archivist/issues)
-[![Coverage Status](https://coveralls.io/repos/pbiecek/archivist/badge.svg)](https://coveralls.io/r/pbiecek/archivist)
+[![Coverage coveralls](https://coveralls.io/repos/pbiecek/archivist/badge.svg)](https://coveralls.io/r/pbiecek/archivist)
+[![Coverage codecov](https://img.shields.io/codecov/c/github/pbiecek/archivist/master.svg)](https://codecov.io/github/pbiecek/archivist?branch=master)
 
 A set of tools for datasets and plots archiving
 =====================================================
