@@ -184,7 +184,7 @@ asearchLocal <- function( patterns, repo = NULL){
                                            repoDir = repo,
                                            intersect = TRUE)
   if (length(oblist) > 0) {
-    res <- lapply(oblist, loadFromLocalRepo, value = TRUE)
+    res <- lapply(oblist, loadFromLocalRepo, repoDir = repo, value = TRUE)
     names(res) <- oblist
   } else {
     res <- list()

@@ -1,3 +1,7 @@
+archivist 2.3.3
+----------------------------------------------------------------
+* Missing parameter in `asearchLocal()`. Now `repo` is passed correctly to `loadFromLocalRepo` ([#333](https://github.com/pbiecek/archivist/issues/333)). 
+
 archivist 2.3.2
 ----------------------------------------------------------------
 * The `https://raw.githubusercontent.com` serwis is closed, this is why we need to update hooks to `https://raw.githack.com` ([#332](https://github.com/pbiecek/archivist/issues/332)). 
