@@ -18,12 +18,8 @@ r_packages:
  - knitr
  - covr
  - devtools
- - archivist.github
 
 sudo: required
 
-r_github_packages:
-  - codecov/example-r
-
 after_success:
-  - Rscript -e 'library(covr);codecov()'
+  - Rscript -e 'library(covr); codecov()'
