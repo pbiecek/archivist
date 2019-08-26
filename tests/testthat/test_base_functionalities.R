@@ -14,7 +14,7 @@ test_that("setLocalRepo sets repo", {
 
 test_that(".ArchivistEnv exists", {
   expect_equal(get("sqlite", envir = .ArchivistEnv), DBI::dbDriver( "SQLite" ))
-  expect_equal(get(".GithubURL", envir = .ArchivistEnv), "https://raw.githubusercontent.com")
+  expect_equal(get(".GithubURL", envir = .ArchivistEnv), "https://raw.githack.com")
 })
 
 test_that("aoptions sets options", {
