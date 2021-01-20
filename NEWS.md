@@ -1,3 +1,7 @@
+archivist 2.3.4
+----------------------------------------------------------------
+* (dirty) fix for TCL protocol in SSL for git on Windows ([#380](https://github.com/ModelOriented/DALEX/issues/380)). 
+
 archivist 2.3.3
 ----------------------------------------------------------------
 * Missing parameter in `asearchLocal()`. Now `repo` is passed correctly to `loadFromLocalRepo` ([#333](https://github.com/pbiecek/archivist/issues/333)). 
