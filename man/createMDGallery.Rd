@@ -4,10 +4,17 @@
 \alias{createMDGallery}
 \title{Create the Summary for Each Artifact in a Markdown Format}
 \usage{
-createMDGallery(output, repo = aoptions("repo"),
-  user = aoptions("user"), branch = aoptions("branch"),
-  subdir = aoptions("subdir"), repoType = aoptions("repoType"),
-  addTags = FALSE, addMiniature = FALSE, maxTags = 100)
+createMDGallery(
+  output,
+  repo = aoptions("repo"),
+  user = aoptions("user"),
+  branch = aoptions("branch"),
+  subdir = aoptions("subdir"),
+  repoType = aoptions("repoType"),
+  addTags = FALSE,
+  addMiniature = FALSE,
+  maxTags = 100
+)
 }
 \arguments{
 \item{output}{A name of the file in which artifacts should be summarized.}
@@ -74,30 +81,42 @@ URL https://github.com/pbiecek/archivist
 \seealso{
 Markdown example: \url{https://github.com/pbiecek/archivist/issues/144#issuecomment-174192366}
 
-Other archivist: \code{\link{Repository}},
-  \code{\link{Tags}}, \code{\link{\%a\%}},
-  \code{\link{addHooksToPrint}}, \code{\link{addTagsRepo}},
-  \code{\link{aformat}}, \code{\link{ahistory}},
-  \code{\link{alink}}, \code{\link{aoptions}},
-  \code{\link{archivist-package}},
-  \code{\link{areadLocal}}, \code{\link{aread}},
-  \code{\link{asearchLocal}}, \code{\link{asearch}},
-  \code{\link{asession}}, \code{\link{atrace}},
-  \code{\link{cache}}, \code{\link{copyLocalRepo}},
-  \code{\link{createLocalRepo}},
-  \code{\link{deleteLocalRepo}},
-  \code{\link{getRemoteHook}}, \code{\link{getTagsLocal}},
-  \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
-  \code{\link{removeTagsRepo}}, \code{\link{restoreLibs}},
-  \code{\link{rmFromLocalRepo}},
-  \code{\link{saveToLocalRepo}},
-  \code{\link{searchInLocalRepo}},
-  \code{\link{setLocalRepo}},
-  \code{\link{shinySearchInLocalRepo}},
-  \code{\link{showLocalRepo}},
-  \code{\link{splitTagsLocal}},
-  \code{\link{summaryLocalRepo}},
-  \code{\link{zipLocalRepo}}
+Other archivist: 
+\code{\link{Repository}},
+\code{\link{Tags}},
+\code{\link{\%a\%}()},
+\code{\link{addHooksToPrint}()},
+\code{\link{addTagsRepo}()},
+\code{\link{aformat}()},
+\code{\link{ahistory}()},
+\code{\link{alink}()},
+\code{\link{aoptions}()},
+\code{\link{archivist-package}},
+\code{\link{areadLocal}()},
+\code{\link{aread}()},
+\code{\link{asearchLocal}()},
+\code{\link{asearch}()},
+\code{\link{asession}()},
+\code{\link{atrace}()},
+\code{\link{cache}()},
+\code{\link{copyLocalRepo}()},
+\code{\link{createLocalRepo}()},
+\code{\link{deleteLocalRepo}()},
+\code{\link{getRemoteHook}()},
+\code{\link{getTagsLocal}()},
+\code{\link{loadFromLocalRepo}()},
+\code{\link{md5hash}},
+\code{\link{removeTagsRepo}()},
+\code{\link{restoreLibs}()},
+\code{\link{rmFromLocalRepo}()},
+\code{\link{saveToLocalRepo}()},
+\code{\link{searchInLocalRepo}()},
+\code{\link{setLocalRepo}()},
+\code{\link{shinySearchInLocalRepo}()},
+\code{\link{showLocalRepo}()},
+\code{\link{splitTagsLocal}()},
+\code{\link{summaryLocalRepo}()},
+\code{\link{zipLocalRepo}()}
 }
 \author{
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}

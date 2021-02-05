@@ -4,10 +4,15 @@
 \alias{addHooksToPrint}
 \title{Add \pkg{archivist} Hooks to \pkg{rmarkdown} Reports}
 \usage{
-addHooksToPrint(class = "ggplot", repoDir = aoptions("repoDir"),
-  repo = aoptions("repo"), user = aoptions("user"),
-  branch = "master", subdir = aoptions("subdir"),
-  format = "markdown")
+addHooksToPrint(
+  class = "ggplot",
+  repoDir = aoptions("repoDir"),
+  repo = aoptions("repo"),
+  user = aoptions("user"),
+  branch = "master",
+  subdir = aoptions("subdir"),
+  format = "markdown"
+)
 }
 \arguments{
 \item{class}{A character with a name of class (one or more) that should be archived.}
@@ -32,7 +37,7 @@ to \code{subdir = "/"} as default.}
 \code{addHooksToPrint} adds an overloaded version of the print function for objects of selected class. 
 The overloaded function will add all objects of selected class to the \link{Repository} and then will add hooks (to the Remote or Local Repository) 
 to the HTML report (generated in \pkg{rmarkdown}) for these objects (\code{artifacts} - \link{archivist-package}).
-The great example can be seen in this blogpost \href{http://www.r-bloggers.com/why-should-you-backup-your-r-objects/}{http://www.r-bloggers.com/why-should-you-backup-your-r-objects/}.
+The great example can be seen in this blogpost \href{https://www.r-bloggers.com/why-should-you-backup-your-r-objects/}{https://www.r-bloggers.com/why-should-you-backup-your-r-objects/}.
 }
 \note{
 One can specify \code{userTags} as in \link{saveToLocalRepo} for artifacts by adding \code{"tags"} attribute.
@@ -64,30 +69,42 @@ http://doi.org/10.18637/jss.v082.i11).
 URL https://github.com/pbiecek/archivist
 }
 \seealso{
-Other archivist: \code{\link{Repository}},
-  \code{\link{Tags}}, \code{\link{\%a\%}},
-  \code{\link{addTagsRepo}}, \code{\link{aformat}},
-  \code{\link{ahistory}}, \code{\link{alink}},
-  \code{\link{aoptions}}, \code{\link{archivist-package}},
-  \code{\link{areadLocal}}, \code{\link{aread}},
-  \code{\link{asearchLocal}}, \code{\link{asearch}},
-  \code{\link{asession}}, \code{\link{atrace}},
-  \code{\link{cache}}, \code{\link{copyLocalRepo}},
-  \code{\link{createLocalRepo}},
-  \code{\link{createMDGallery}},
-  \code{\link{deleteLocalRepo}},
-  \code{\link{getRemoteHook}}, \code{\link{getTagsLocal}},
-  \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
-  \code{\link{removeTagsRepo}}, \code{\link{restoreLibs}},
-  \code{\link{rmFromLocalRepo}},
-  \code{\link{saveToLocalRepo}},
-  \code{\link{searchInLocalRepo}},
-  \code{\link{setLocalRepo}},
-  \code{\link{shinySearchInLocalRepo}},
-  \code{\link{showLocalRepo}},
-  \code{\link{splitTagsLocal}},
-  \code{\link{summaryLocalRepo}},
-  \code{\link{zipLocalRepo}}
+Other archivist: 
+\code{\link{Repository}},
+\code{\link{Tags}},
+\code{\link{\%a\%}()},
+\code{\link{addTagsRepo}()},
+\code{\link{aformat}()},
+\code{\link{ahistory}()},
+\code{\link{alink}()},
+\code{\link{aoptions}()},
+\code{\link{archivist-package}},
+\code{\link{areadLocal}()},
+\code{\link{aread}()},
+\code{\link{asearchLocal}()},
+\code{\link{asearch}()},
+\code{\link{asession}()},
+\code{\link{atrace}()},
+\code{\link{cache}()},
+\code{\link{copyLocalRepo}()},
+\code{\link{createLocalRepo}()},
+\code{\link{createMDGallery}()},
+\code{\link{deleteLocalRepo}()},
+\code{\link{getRemoteHook}()},
+\code{\link{getTagsLocal}()},
+\code{\link{loadFromLocalRepo}()},
+\code{\link{md5hash}},
+\code{\link{removeTagsRepo}()},
+\code{\link{restoreLibs}()},
+\code{\link{rmFromLocalRepo}()},
+\code{\link{saveToLocalRepo}()},
+\code{\link{searchInLocalRepo}()},
+\code{\link{setLocalRepo}()},
+\code{\link{shinySearchInLocalRepo}()},
+\code{\link{showLocalRepo}()},
+\code{\link{splitTagsLocal}()},
+\code{\link{summaryLocalRepo}()},
+\code{\link{zipLocalRepo}()}
 }
 \author{
 Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}

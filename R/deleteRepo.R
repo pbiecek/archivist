@@ -23,7 +23,7 @@
 #' in examples section is crucial. \code{tempdir()} is existing directory
 #' in which R works so calling \code{deleteLocalRepo(exampleRepoDir, deleteRoot=TRUE)}
 #' removes important R files. You can find out more information about this problem at 
-#' \href{http://stackoverflow.com/questions/22325820/unlink-function-causing-an-error-for-consequent-and-plot-functions}{stackoverflow}
+#' \href{https://stackoverflow.com/questions/22325820/unlink-function-causing-an-error-for-consequent-and-plot-functions}{stackoverflow}
 #' webpage.
 #' 
 #' 

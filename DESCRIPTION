@@ -1,5 +1,5 @@
 Package: archivist
-Version: 2.3.4
+Version: 2.3.5
 Type: Package
 Title: Tools for Storing, Restoring and Searching for R Objects
 Authors@R: c(
@@ -47,5 +47,5 @@ Suggests:
     knitr
 URL: https://pbiecek.github.io/archivist/
 BugReports: https://github.com/pbiecek/archivist/issues
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 VignetteBuilder: knitr

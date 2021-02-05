@@ -4,10 +4,16 @@
 \alias{alink}
 \title{Return a Link To Download an Artifact Stored on Remote Repository}
 \usage{
-alink(md5hash, repo = aoptions("repo"), user = aoptions("user"),
-  subdir = aoptions("subdir"), branch = "master",
-  repoType = aoptions("repoType"), format = "markdown",
-  rawLink = FALSE)
+alink(
+  md5hash,
+  repo = aoptions("repo"),
+  user = aoptions("user"),
+  subdir = aoptions("subdir"),
+  branch = "master",
+  repoType = aoptions("repoType"),
+  format = "markdown",
+  rawLink = FALSE
+)
 }
 \arguments{
 \item{md5hash}{A character assigned to the artifact through the use of a cryptographical hash function with MD5 algorithm. 
@@ -38,8 +44,8 @@ This function returns a link to download artifact that is archived on GitHub.
 }
 \description{
 \code{alink} returns a link to download an artifact from the Remote \link{Repository}.
-Artifact has to be already archived on GitHub, e.g with \code{archivist.github::archive} function (recommended) or 
-\link{saveToRepo} function and traditional Git manual synchronization.
+Artifact has to be already archived on GitHub, e.g with archive function archivist.github package (recommended) 
+or \link{saveToRepo} function and traditional Git manual synchronization.
 To learn more about artifacts visit \link[archivist]{archivist-package}.
 }
 \details{
@@ -70,30 +76,42 @@ alink('pbiecek/graphgallerygit/02af4f99e440324b9e329faa293a9394', repoType='bitb
 
 }
 \seealso{
-Other archivist: \code{\link{Repository}},
-  \code{\link{Tags}}, \code{\link{\%a\%}},
-  \code{\link{addHooksToPrint}}, \code{\link{addTagsRepo}},
-  \code{\link{aformat}}, \code{\link{ahistory}},
-  \code{\link{aoptions}}, \code{\link{archivist-package}},
-  \code{\link{areadLocal}}, \code{\link{aread}},
-  \code{\link{asearchLocal}}, \code{\link{asearch}},
-  \code{\link{asession}}, \code{\link{atrace}},
-  \code{\link{cache}}, \code{\link{copyLocalRepo}},
-  \code{\link{createLocalRepo}},
-  \code{\link{createMDGallery}},
-  \code{\link{deleteLocalRepo}},
-  \code{\link{getRemoteHook}}, \code{\link{getTagsLocal}},
-  \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
-  \code{\link{removeTagsRepo}}, \code{\link{restoreLibs}},
-  \code{\link{rmFromLocalRepo}},
-  \code{\link{saveToLocalRepo}},
-  \code{\link{searchInLocalRepo}},
-  \code{\link{setLocalRepo}},
-  \code{\link{shinySearchInLocalRepo}},
-  \code{\link{showLocalRepo}},
-  \code{\link{splitTagsLocal}},
-  \code{\link{summaryLocalRepo}},
-  \code{\link{zipLocalRepo}}
+Other archivist: 
+\code{\link{Repository}},
+\code{\link{Tags}},
+\code{\link{\%a\%}()},
+\code{\link{addHooksToPrint}()},
+\code{\link{addTagsRepo}()},
+\code{\link{aformat}()},
+\code{\link{ahistory}()},
+\code{\link{aoptions}()},
+\code{\link{archivist-package}},
+\code{\link{areadLocal}()},
+\code{\link{aread}()},
+\code{\link{asearchLocal}()},
+\code{\link{asearch}()},
+\code{\link{asession}()},
+\code{\link{atrace}()},
+\code{\link{cache}()},
+\code{\link{copyLocalRepo}()},
+\code{\link{createLocalRepo}()},
+\code{\link{createMDGallery}()},
+\code{\link{deleteLocalRepo}()},
+\code{\link{getRemoteHook}()},
+\code{\link{getTagsLocal}()},
+\code{\link{loadFromLocalRepo}()},
+\code{\link{md5hash}},
+\code{\link{removeTagsRepo}()},
+\code{\link{restoreLibs}()},
+\code{\link{rmFromLocalRepo}()},
+\code{\link{saveToLocalRepo}()},
+\code{\link{searchInLocalRepo}()},
+\code{\link{setLocalRepo}()},
+\code{\link{shinySearchInLocalRepo}()},
+\code{\link{showLocalRepo}()},
+\code{\link{splitTagsLocal}()},
+\code{\link{summaryLocalRepo}()},
+\code{\link{zipLocalRepo}()}
 }
 \author{
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}

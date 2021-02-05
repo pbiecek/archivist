@@ -6,26 +6,56 @@
 \alias{asave}
 \title{Save an Artifact into a Repository}
 \usage{
-saveToLocalRepo(artifact, repoDir = aoptions("repoDir"),
-  archiveData = TRUE, archiveTags = TRUE, archiveMiniature = TRUE,
-  archiveSessionInfo = TRUE, force = TRUE, value = FALSE, ...,
-  userTags = c(), use_flocks = aoptions("use_flocks"),
-  silent = aoptions("silent"), ascii = FALSE,
-  artifactName = deparse(substitute(artifact)))
+saveToLocalRepo(
+  artifact,
+  repoDir = aoptions("repoDir"),
+  archiveData = TRUE,
+  archiveTags = TRUE,
+  archiveMiniature = TRUE,
+  archiveSessionInfo = TRUE,
+  force = TRUE,
+  value = FALSE,
+  ...,
+  userTags = c(),
+  use_flocks = aoptions("use_flocks"),
+  silent = aoptions("silent"),
+  ascii = FALSE,
+  artifactName = deparse(substitute(artifact))
+)
 
-saveToRepo(artifact, repoDir = aoptions("repoDir"), archiveData = TRUE,
-  archiveTags = TRUE, archiveMiniature = TRUE,
-  archiveSessionInfo = TRUE, force = TRUE, value = FALSE, ...,
-  userTags = c(), use_flocks = aoptions("use_flocks"),
-  silent = aoptions("silent"), ascii = FALSE,
-  artifactName = deparse(substitute(artifact)))
+saveToRepo(
+  artifact,
+  repoDir = aoptions("repoDir"),
+  archiveData = TRUE,
+  archiveTags = TRUE,
+  archiveMiniature = TRUE,
+  archiveSessionInfo = TRUE,
+  force = TRUE,
+  value = FALSE,
+  ...,
+  userTags = c(),
+  use_flocks = aoptions("use_flocks"),
+  silent = aoptions("silent"),
+  ascii = FALSE,
+  artifactName = deparse(substitute(artifact))
+)
 
-asave(artifact, repoDir = aoptions("repoDir"), archiveData = TRUE,
-  archiveTags = TRUE, archiveMiniature = TRUE,
-  archiveSessionInfo = TRUE, force = TRUE, value = FALSE, ...,
-  userTags = c(), use_flocks = aoptions("use_flocks"),
-  silent = aoptions("silent"), ascii = FALSE,
-  artifactName = deparse(substitute(artifact)))
+asave(
+  artifact,
+  repoDir = aoptions("repoDir"),
+  archiveData = TRUE,
+  archiveTags = TRUE,
+  archiveMiniature = TRUE,
+  archiveSessionInfo = TRUE,
+  force = TRUE,
+  value = FALSE,
+  ...,
+  userTags = c(),
+  use_flocks = aoptions("use_flocks"),
+  silent = aoptions("silent"),
+  ascii = FALSE,
+  artifactName = deparse(substitute(artifact))
+)
 }
 \arguments{
 \item{artifact}{An arbitrary R artifact to be saved. For supported artifacts see details.}
@@ -189,30 +219,42 @@ For more detailed information check the \pkg{archivist} package
 The list of supported artifacts and their tags is available on \code{wiki} on \pkg{archivist}
 \href{https://github.com/pbiecek/archivist/wiki/archivist-package---Tags}{Github Repository}.
 
-Other archivist: \code{\link{Repository}},
-  \code{\link{Tags}}, \code{\link{\%a\%}},
-  \code{\link{addHooksToPrint}}, \code{\link{addTagsRepo}},
-  \code{\link{aformat}}, \code{\link{ahistory}},
-  \code{\link{alink}}, \code{\link{aoptions}},
-  \code{\link{archivist-package}},
-  \code{\link{areadLocal}}, \code{\link{aread}},
-  \code{\link{asearchLocal}}, \code{\link{asearch}},
-  \code{\link{asession}}, \code{\link{atrace}},
-  \code{\link{cache}}, \code{\link{copyLocalRepo}},
-  \code{\link{createLocalRepo}},
-  \code{\link{createMDGallery}},
-  \code{\link{deleteLocalRepo}},
-  \code{\link{getRemoteHook}}, \code{\link{getTagsLocal}},
-  \code{\link{loadFromLocalRepo}}, \code{\link{md5hash}},
-  \code{\link{removeTagsRepo}}, \code{\link{restoreLibs}},
-  \code{\link{rmFromLocalRepo}},
-  \code{\link{searchInLocalRepo}},
-  \code{\link{setLocalRepo}},
-  \code{\link{shinySearchInLocalRepo}},
-  \code{\link{showLocalRepo}},
-  \code{\link{splitTagsLocal}},
-  \code{\link{summaryLocalRepo}},
-  \code{\link{zipLocalRepo}}
+Other archivist: 
+\code{\link{Repository}},
+\code{\link{Tags}},
+\code{\link{\%a\%}()},
+\code{\link{addHooksToPrint}()},
+\code{\link{addTagsRepo}()},
+\code{\link{aformat}()},
+\code{\link{ahistory}()},
+\code{\link{alink}()},
+\code{\link{aoptions}()},
+\code{\link{archivist-package}},
+\code{\link{areadLocal}()},
+\code{\link{aread}()},
+\code{\link{asearchLocal}()},
+\code{\link{asearch}()},
+\code{\link{asession}()},
+\code{\link{atrace}()},
+\code{\link{cache}()},
+\code{\link{copyLocalRepo}()},
+\code{\link{createLocalRepo}()},
+\code{\link{createMDGallery}()},
+\code{\link{deleteLocalRepo}()},
+\code{\link{getRemoteHook}()},
+\code{\link{getTagsLocal}()},
+\code{\link{loadFromLocalRepo}()},
+\code{\link{md5hash}},
+\code{\link{removeTagsRepo}()},
+\code{\link{restoreLibs}()},
+\code{\link{rmFromLocalRepo}()},
+\code{\link{searchInLocalRepo}()},
+\code{\link{setLocalRepo}()},
+\code{\link{shinySearchInLocalRepo}()},
+\code{\link{showLocalRepo}()},
+\code{\link{splitTagsLocal}()},
+\code{\link{summaryLocalRepo}()},
+\code{\link{zipLocalRepo}()}
 }
 \author{
 Marcin Kosinski , \email{m.p.kosinski@gmail.com}

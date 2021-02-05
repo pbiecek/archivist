@@ -20,11 +20,13 @@
 #' 
 #' @examples
 #' # read the object from local directory
+#' \dontrun{
 #' createLocalRepo("arepo_test", default=TRUE)
 #' atrace("lm", "z")
 #' lm(Sepal.Length~Sepal.Width, data=iris)
 #' asearch("class:lm")
 #' untrace("lm")
+#' }
 #' @family archivist
 #' @rdname atrace
 #' @export

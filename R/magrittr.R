@@ -22,7 +22,7 @@
 #'
 #' @section Demonstration:
 #' 
-#' This function is well explained on this \href{http://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github}{http://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github} blog post.
+#' This function is well explained on this \href{https://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github}{https://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github} blog post.
 #'
 #' @examples 
 #' \dontrun{
