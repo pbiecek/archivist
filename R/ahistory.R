@@ -46,7 +46,7 @@
 #' 
 #' @section Demonstration:
 #'  
-#' This function is well explained on this \href{https://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github}{https://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github} blog post.
+#' This function is well explained on this \href{https://www.r-bloggers.com/2016/06/r-hero-saves-backup-city-with-archivist-and-github/}{https://www.r-bloggers.com/2016/06/r-hero-saves-backup-city-with-archivist-and-github/} blog post.
 #' 
 #' @examples
 #' 

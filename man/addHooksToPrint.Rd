@@ -37,7 +37,7 @@ to \code{subdir = "/"} as default.}
 \code{addHooksToPrint} adds an overloaded version of the print function for objects of selected class. 
 The overloaded function will add all objects of selected class to the \link{Repository} and then will add hooks (to the Remote or Local Repository) 
 to the HTML report (generated in \pkg{rmarkdown}) for these objects (\code{artifacts} - \link{archivist-package}).
-The great example can be seen in this blogpost \href{https://www.r-bloggers.com/why-should-you-backup-your-r-objects/}{https://www.r-bloggers.com/why-should-you-backup-your-r-objects/}.
+The great example can be seen in this blogpost \href{https://www.r-bloggers.com/2016/02/why-should-you-backup-your-r-objects/}{https://www.r-bloggers.com/2016/02/why-should-you-backup-your-r-objects/}.
 }
 \note{
 One can specify \code{userTags} as in \link{saveToLocalRepo} for artifacts by adding \code{"tags"} attribute.

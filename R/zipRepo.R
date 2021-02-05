@@ -10,7 +10,6 @@
 #' @template roxlate-contact
 #' @note
 #' The function might not work if \code{Rtools} are not installed.
-#' To solve this problem follow these \href{https://CRAN.R-project.org/package=openxlsx/vignettes/Introduction.pdf}{Instructions.}
 #' 
 #' If \code{repo} and \code{user} are set to \code{NULL} (as default) in Github mode then global parameters
 #' set in \link{setRemoteRepo} function are used.

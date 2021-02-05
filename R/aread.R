@@ -37,7 +37,7 @@
 #' # which 7f3453331910e3f321ef97d87adb5bad was created with the restoreLibs function.
 #' 
 #' # read the object from Remote
-#' pl <- aread("pbiecek/graphGallery/7f3453331910e3f321ef97d87adb5bad")
+#' # pl <- aread("pbiecek/graphGallery/7f3453331910e3f321ef97d87adb5bad")
 #' # To plot it remember to have ggplot2 in version 2.1.0
 #' # as this is stated in asession("pbiecek/graphGallery/7f3453331910e3f321ef97d87adb5bad") .
 #' # The state of R libraries can be restored to the same state in

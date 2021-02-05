@@ -23,7 +23,7 @@
 #' 
 #' Extensions of \pkg{archivist} are
 #' \itemize{
-#'  \item Tools for Archiving, Managing and Sharing R Objects via GitHub: archivist.github \href{https://marcinkosinski.github.io/archivist.github/}{https://marcinkosinski.github.io/archivist.github/}
+#'  \item Tools for Archiving, Managing and Sharing R Objects via GitHub: archivist.github
 #' }
 #'
 #' @details
