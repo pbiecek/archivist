@@ -83,11 +83,9 @@ aread <- function(md5hash){
 
 aread_for_ema <- function(md5hash) {
   # this one works only for hooks like pbiecek/models/ceb40
-  tmpobject <- RCurl::getBinaryURL(paste0("http://ema.drwhy.ai/models/",paste0(substr(md5hash, 16, 20)),".rda"))
-  tf <- tempfile()
-  writeBin(tmpobject, tf)
   .nameEnv <- new.env()
-  load(file = tf, envir = .nameEnv)
+  load(url(paste0("http://ema.drwhy.ai/models/",paste0(substr(md5hash, 16, 20)),".rda")), 
+       envir = .nameEnv)
   as.list(.nameEnv)[[1]]
 }
 
