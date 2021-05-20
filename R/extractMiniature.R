@@ -19,6 +19,13 @@ extractMiniature.ggplot <- function( object, md5hash, parentDir, ..., width = 80
   addTag("format:png", md5hash, dir=parentDir)
 }
 
+extractMiniature.recordedplot <- function( object, md5hash, parentDir, ..., width = 800, height = 600 ){
+  png( file.path( parentDir, "gallery", paste0(md5hash, ".png" )), width, height )
+  grDevices::replayPlot( object )
+  dev.off()
+  addTag("format:png", md5hash, dir=parentDir)
+}
+
 extractMiniature.lm <- function( object, md5hash, parentDir, ... ){
   sink( file = file.path(parentDir, "gallery", paste0(md5hash, ".txt")) )
   print( summary( object ) )

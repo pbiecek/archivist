@@ -138,7 +138,7 @@ the \pkg{archivist} package; see \link{Tags}.
 
 Graphical parameters.
 
-If the artifact is of class \code{lattice} or \code{ggplot}, and
+If the artifact is of class \code{lattice}, \code{ggplot} or \code{recordedplot}, and
 \code{archiveMiniature = TRUE}, then it is
 possible to set the miniature's \code{width} and \code{height} parameters. By default they are set to
 \code{width = 800}, \code{height = 600}.
