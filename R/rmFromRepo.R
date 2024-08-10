@@ -4,7 +4,7 @@
 #'
 #' @description
 #' \code{rmFromLocalRepo} removes an artifact given as a \code{md5hash} from the \link{Repository}.
-#' To learn more about artifacts visit \link[archivist]{archivist-package}.
+#' To learn more about artifacts visit \link[archivist]{archivistPackage}.
 #'  
 #' @details
 #' \code{rmFromLocalRepo} removes an artifact given as a \link{md5hash} from the \link{Repository}.
@@ -53,10 +53,10 @@
 #' artifact will be removed. 
 #' 
 #' @param removeData A logical value denoting whether to remove data along with
-#' the \code{artifact} specified by the \code{md5hash}. Defualt \code{FALSE}.
+#' the \code{artifact} specified by the \code{md5hash}. Default \code{FALSE}.
 #' 
 #' @param removeMiniature A logical value denoting whether to remove a miniature
-#' along with the \code{artifact} specified by the \code{md5hash}. Defualt \code{FALSE}.
+#' along with the \code{artifact} specified by the \code{md5hash}. Default \code{FALSE}.
 #' 
 #' @param force A logical value denoting whether to remove data related to more than one artifact.
 #' Defualt \code{FALSE}.

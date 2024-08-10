@@ -36,7 +36,7 @@
 #' \href{https://github.com/pbiecek/archivist/wiki}{https://github.com/pbiecek/archivist/wiki}
 #' 
 #' @param repoDir A character denoting a directory of a Repository that we want to
-#' make dafault. 
+#' make default. 
 #' 
 #' @param repo While working with the Remote repository. A character containing
 #' a name of the Remote repository that we want to make default. 

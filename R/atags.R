@@ -1,6 +1,6 @@
 ##    archivist package for R
 ##
-#' @title Show Artifact's List of Foramts
+#' @title Show Artifact's List of Formats
 #'
 #' @description
 #' \code{aformat} extracts artifact's formats. Having formats one may decide which should he read.

@@ -4,7 +4,7 @@
 #'
 #' @description
 #' \code{saveToLocalRepo} function saves desired artifacts to the local \link{Repository} in a given directory.
-#' To learn more about artifacts visit \link[archivist]{archivist-package}.
+#' To learn more about artifacts visit \link[archivist]{archivistPackage}.
 #'
 #' @details
 #' \code{saveToLocalRepo} function saves desired artifacts to the local Repository in a given directory.
@@ -76,7 +76,7 @@
 #'    \item \code{saveToLocalRepo(model, repoDir, userTags = c("my_model", "do not delete"))}.
 #'  }
 #'  
-#' Specifing additional \code{Tags} by attributes can be beneficial when one uses \link{addHooksToPrint}.
+#' Specifying additional \code{Tags} by attributes can be beneficial when one uses \link{addHooksToPrint}.
 #'  
 #'
 #' Important: if one wants to archive data from artifacts which is one of:
@@ -117,7 +117,7 @@
 #' a Repository.
 #'
 #' @param value A logical value. Should the result be (default \code{value = FALSE}) the \code{md5hash}
-#' of a stored artifact or should the result be an input artifact (\code{value = TRUE}), so that valueing code
+#' of a stored artifact or should the result be an input artifact (\code{value = TRUE}), so that valuing code
 #' can be used. See examples.
 #'
 #' @param silent If TRUE produces no warnings.

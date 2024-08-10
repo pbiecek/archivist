@@ -6,7 +6,7 @@
 #' \code{Repository} stores specific values of an artifact, different for 
 #' various artifact's classes, and artifact themselves. Artifacts are archived with
 #' a special attribute named \code{md5hash}.
-#' To learn more about artifacts visit \link[archivist]{archivist-package}.
+#' To learn more about artifacts visit \link[archivist]{archivistPackage}.
 #' 
 #' @details
 #' 

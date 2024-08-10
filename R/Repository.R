@@ -5,7 +5,7 @@
 #' @description
 #' \code{Repository} stores specific values of an artifact, different for 
 #' various artifact's classes and artifacts themselves.
-#' To learn more about artifacts visit \link[archivist]{archivist-package}.
+#' To learn more about artifacts visit \link[archivist]{archivistPackage}.
 #' 
 #' @template roxlate-references
 #' @template roxlate-contact

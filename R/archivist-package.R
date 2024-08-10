@@ -69,9 +69,13 @@
 #' @importFrom utils getAnywhere
 #' @importFrom utils installed.packages
 #'
+#' @keywords internal
 #' @family archivist
-#' @name archivist-package
+#' @name archivistPackage
+#' @aliases archivist
 #' @docType package
+"_PACKAGE"
+
 invisible(NULL)
 #' Pipe operator
 #'

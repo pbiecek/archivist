@@ -32,7 +32,7 @@
 #'
 #' @details
 #'
-#' To learn more about artifacts visit \link[archivist]{archivist-package}.
+#' To learn more about artifacts visit \link[archivist]{archivistPackage}.
 #'
 #' @seealso
 #'

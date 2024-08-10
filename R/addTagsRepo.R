@@ -10,7 +10,7 @@
 #' in the repository. One can add new \code{Tags} either explicitly with \code{tags} parameter
 #' or by passing a function which extracts \code{Tags} from selected artifacts
 #' corresponding to \code{md5hashes}. To learn more about artifacts visit
-#' \link[archivist]{archivist-package}.
+#' \link[archivist]{archivistPackage}.
 #'
 #' @note
 #' One should remember that \code{length(tags)} modulo \code{length(md5hashes)} 
@@ -136,8 +136,8 @@ addTagsRepo <- function( md5hashes, repoDir = NULL, FUN = NULL, tags = NULL, ...
 #' 
 #' @details
 #' \code{removeTagsRepo} function removes all Tags from all listed objects.
-#' Note that some hashes are required for keeping erlations between objects in the repository.
-#' Be carefull what are you removing.
+#' Note that some hashes are required for keeping relations between objects in the repository.
+#' Be careful what are you removing.
 #'
 #' @param md5hashes a character vector of \code{md5hashes} specifying to which
 #' corresponding artifacts \code{Tags} should be removes 

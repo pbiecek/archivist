@@ -5,7 +5,7 @@
 #' @description
 #' \code{loadFromLocalRepo} loads an artifact from a local \link{Repository} into the workspace.
 #' \code{loadFromRemoteRepo} loads an artifact from a github / git / mercurial \link{Repository} into the workspace.
-#' To learn more about artifacts visit \link[archivist]{archivist-package}.
+#' To learn more about artifacts visit \link[archivist]{archivistPackage}.
 #' 
 #' @details
 #' Functions \code{loadFromLocalRepo} and \code{loadFromRemoteRepo} load artifacts from the archivist Repositories 

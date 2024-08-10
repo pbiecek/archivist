@@ -4,7 +4,7 @@
 #'
 #' @description
 #' \code{searchInRepo} searches for an artifact in the \link{Repository} using it's \link{Tags}.
-#' To learn more about artifacts visit \link[archivist]{archivist-package}.
+#' To learn more about artifacts visit \link[archivist]{archivistPackage}.
 #' 
 #' 
 #' @details

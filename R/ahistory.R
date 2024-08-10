@@ -28,13 +28,13 @@
 #' @return A data frame with two columns - names of calls and md5hashes of partial results.
 #' 
 #' @note There are provided functions (\code{print.ahistory} and \code{print.ahistoryKable}) to print the artifact's history. 
-#' History can be printed either in a \code{regular} way which is friendy for the console output or in a \code{kable} format which 
+#' History can be printed either in a \code{regular} way which is friendly for the console output or in a \code{kable} format which 
 #' prints the artifact's history in a way \link[knitr]{kable} function would. This is convenient when one prints history
 #' in \code{.Rmd} files using \link[rmarkdown]{rmarkdown}.
 #' 
 #' Moreover when user passes \code{format = 'kable'} and \code{alink = TRUE} then one can use links for remote Repository. 
-#' Then mdhashes are taken from Local Repository, so user has to specify \code{repo}, \code{user} and \code{repoDir} even though 
-#' they are set globally, because \code{repo} is a substring of \code{repoDir} and during evalutation of \code{...} R treats \code{repo} as \code{repoDir}.
+#' Then md5hashes are taken from Local Repository, so user has to specify \code{repo}, \code{user} and \code{repoDir} even though 
+#' they are set globally, because \code{repo} is a substring of \code{repoDir} and during evaluation of \code{...} R treats \code{repo} as \code{repoDir}.
 #' 
 #' @template roxlate-references
 #' @template roxlate-contact

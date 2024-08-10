@@ -5,12 +5,12 @@
 #' @description
 #' \code{getTagsLocal} and \code{getTagsRemote} return \code{Tags} (see \link{Tags})
 #' related to \link{md5hash} of an artifact. To learn more about artifacts visit
-#' \link[archivist]{archivist-package}.
+#' \link[archivist]{archivistPackage}.
 #' 
 #' @details
 #' \code{getTagsLocal} and \code{getTagsRemote} return \code{Tags}, of a specific type described
 #' by \code{tag} parameter, related to \link{md5hash} of an artifact. To learn more about 
-#' artifacts visit \link[archivist]{archivist-package}.
+#' artifacts visit \link[archivist]{archivistPackage}.
 #'  
 #' @return The character vector of \code{Tags} (see \link{Tags}) related to \link{md5hash} 
 #' of an artifact.

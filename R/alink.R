@@ -6,7 +6,7 @@
 #' \code{alink} returns a link to download an artifact from the Remote \link{Repository}.
 #' Artifact has to be already archived on GitHub, e.g with archive function archivist.github package (recommended) 
 #' or \link{saveToRepo} function and traditional Git manual synchronization.
-#' To learn more about artifacts visit \link[archivist]{archivist-package}.
+#' To learn more about artifacts visit \link[archivist]{archivistPackage}.
 #' 
 #' @details
 #' For more information about \code{md5hash} see \link{md5hash}.
@@ -29,7 +29,7 @@
 #' @param branch A character containing a name of the Remote Repository's branch
 #' on which the Repository is archived. Default \code{branch} is \code{master}.
 #' 
-#' @param format In which format the link should be returned. Possibilites are \code{markdown} (default) or \code{latex}.
+#' @param format In which format the link should be returned. Possibilities are \code{markdown} (default) or \code{latex}.
 #' 
 #' @param rawLink A logical denoting whether to return raw link or a link in the \code{format} convention. 
 #' Default value is \code{FALSE}.

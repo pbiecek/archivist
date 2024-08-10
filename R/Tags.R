@@ -5,7 +5,7 @@
 #' @description
 #' \code{Tags} are attributes of an artifact, i.e., a class, a name, names of artifact's parts, etc... 
 #' The list of artifact tags vary across artifact's classes. 
-#' To learn more about artifacts visit \link[archivist]{archivist-package}.
+#' To learn more about artifacts visit \link[archivist]{archivistPackage}.
 #' 
 #' @details
 #' 
