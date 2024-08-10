@@ -8,7 +8,7 @@
 #' \code{tagKey} and \code{tagValue}.
 #' 
 #' @details
-#' \code{tag} column from \emph{tag} table has normally the follwing structure:
+#' \code{tag} column from \emph{tag} table has normally the following structure:
 #' \code{TagKey:TagValue}. \code{splitTagsLocal} and \code{splitTagsRemote} functions
 #' can be used to split \code{tag} column into two separate columns:
 #' \code{tagKey} and \code{tagValue}. As a result functions from \code{dplyr} package

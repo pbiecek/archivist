@@ -34,7 +34,7 @@ One can specify either \code{FUN} or \code{tags}.}
 in the repository. One can add new \code{Tags} either explicitly with \code{tags} parameter
 or by passing a function which extracts \code{Tags} from selected artifacts
 corresponding to \code{md5hashes}. To learn more about artifacts visit
-\link[archivist]{archivist-package}.
+\link[archivist]{archivistPackage}.
 }
 \note{
 One should remember that \code{length(tags)} modulo \code{length(md5hashes)} 
@@ -113,11 +113,11 @@ Other archivist:
 \code{\link{ahistory}()},
 \code{\link{alink}()},
 \code{\link{aoptions}()},
-\code{\link{archivist-package}},
-\code{\link{areadLocal}()},
+\code{\link{archivistPackage}},
 \code{\link{aread}()},
-\code{\link{asearchLocal}()},
+\code{\link{areadLocal}()},
 \code{\link{asearch}()},
+\code{\link{asearchLocal}()},
 \code{\link{asession}()},
 \code{\link{atrace}()},
 \code{\link{cache}()},

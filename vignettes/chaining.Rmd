@@ -8,7 +8,7 @@ output: html_document
 -->
 
 
-The **archivist** package is very efficient and advantageous when archived artifacts were created with a chaining code offered by the [magrittr](https://cran.r-project.org/package=magrittr) package. It is higly useful because the origin of the artifact is archived, which means that the artifact can be easly reproduced and it's origin code is stored for future use. 
+The **archivist** package is very efficient and advantageous when archived artifacts were created with a chaining code offered by the [magrittr](https://cran.r-project.org/package=magrittr) package. It is highly useful because the origin of the artifact is archived, which means that the artifact can be easily reproduced and it's origin code is stored for future use. 
 
 Below are examples of creating artifacts with a chaining code, that requires using a `%>%` and  a `%.%` operators, offered by the **magrittr** and the **dplyr** package.
 
@@ -43,7 +43,7 @@ hflights %a%
    filter(arr > 30 | dep > 30) -> example1
 ```
 
-One may see a vast difference in code evalution when using chaining code.
+One may see a vast difference in code evaluation when using chaining code.
 Here is an example of a traditional `R` call and one that uses the `chaining code` philosophy.
 
 ```{r, eval=FALSE}
@@ -99,7 +99,7 @@ setLocalRepo( exampleRepoDir )
 # Archiving artifacts
 
 
-Many of various operations can be performed on a single `data.frame` before one consideres to archive these artifacts. **Archivist** guarantees that all of them will be `archived`, which means a code alone will no longer be needed to be stored in a separate file. Also an artifact may be saved during operations are performed and used in further code evaluations. This can be done when
+Many of various operations can be performed on a single `data.frame` before one considers to archive these artifacts. **Archivist** guarantees that all of them will be `archived`, which means a code alone will no longer be needed to be stored in a separate file. Also an artifact may be saved during operations are performed and used in further code evaluations. This can be done when
 argument \code{value = TRUE} in `asave` is specified.
 
 ```{r, eval=FALSE}

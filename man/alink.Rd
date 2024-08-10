@@ -46,7 +46,7 @@ This function returns a link to download artifact that is archived on GitHub.
 \code{alink} returns a link to download an artifact from the Remote \link{Repository}.
 Artifact has to be already archived on GitHub, e.g with archive function archivist.github package (recommended) 
 or \link{saveToRepo} function and traditional Git manual synchronization.
-To learn more about artifacts visit \link[archivist]{archivist-package}.
+To learn more about artifacts visit \link[archivist]{archivistPackage}.
 }
 \details{
 For more information about \code{md5hash} see \link{md5hash}.
@@ -85,11 +85,11 @@ Other archivist:
 \code{\link{aformat}()},
 \code{\link{ahistory}()},
 \code{\link{aoptions}()},
-\code{\link{archivist-package}},
-\code{\link{areadLocal}()},
+\code{\link{archivistPackage}},
 \code{\link{aread}()},
-\code{\link{asearchLocal}()},
+\code{\link{areadLocal}()},
 \code{\link{asearch}()},
+\code{\link{asearchLocal}()},
 \code{\link{asession}()},
 \code{\link{atrace}()},
 \code{\link{cache}()},

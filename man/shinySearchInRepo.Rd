@@ -22,7 +22,7 @@ The application is generated on the run. As for now there are two controllers ex
 A text input field and a slider. Tags that are typed into text field are used for searching in repository. 
 Objects that have the same Tags are presented on the right panel.
 These object might be also downloaded just by click.
-To learn more about artifacts visit \link[archivist]{archivist-package}.
+To learn more about artifacts visit \link[archivist]{archivistPackage}.
 }
 \details{
 \code{shinySearchInLocalRepo} searches for artifacts in a Repository using their \code{Tags} 
@@ -77,11 +77,11 @@ Other archivist:
 \code{\link{ahistory}()},
 \code{\link{alink}()},
 \code{\link{aoptions}()},
-\code{\link{archivist-package}},
-\code{\link{areadLocal}()},
+\code{\link{archivistPackage}},
 \code{\link{aread}()},
-\code{\link{asearchLocal}()},
+\code{\link{areadLocal}()},
 \code{\link{asearch}()},
+\code{\link{asearchLocal}()},
 \code{\link{asession}()},
 \code{\link{atrace}()},
 \code{\link{cache}()},

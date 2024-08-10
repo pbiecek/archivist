@@ -7,7 +7,7 @@
 \description{
 \code{Repository} stores specific values of an artifact, different for 
 various artifact's classes and artifacts themselves.
-To learn more about artifacts visit \link[archivist]{archivist-package}.
+To learn more about artifacts visit \link[archivist]{archivistPackage}.
 }
 \details{
 \code{Repository} is a folder with an SQLite database stored in a file named \code{backpack}
@@ -106,11 +106,11 @@ Other archivist:
 \code{\link{ahistory}()},
 \code{\link{alink}()},
 \code{\link{aoptions}()},
-\code{\link{archivist-package}},
-\code{\link{areadLocal}()},
+\code{\link{archivistPackage}},
 \code{\link{aread}()},
-\code{\link{asearchLocal}()},
+\code{\link{areadLocal}()},
 \code{\link{asearch}()},
+\code{\link{asearchLocal}()},
 \code{\link{asession}()},
 \code{\link{atrace}()},
 \code{\link{cache}()},

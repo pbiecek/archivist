@@ -53,12 +53,12 @@ of an artifact.
 \description{
 \code{getTagsLocal} and \code{getTagsRemote} return \code{Tags} (see \link{Tags})
 related to \link{md5hash} of an artifact. To learn more about artifacts visit
-\link[archivist]{archivist-package}.
+\link[archivist]{archivistPackage}.
 }
 \details{
 \code{getTagsLocal} and \code{getTagsRemote} return \code{Tags}, of a specific type described
 by \code{tag} parameter, related to \link{md5hash} of an artifact. To learn more about 
-artifacts visit \link[archivist]{archivist-package}.
+artifacts visit \link[archivist]{archivistPackage}.
 }
 \note{
 If \code{repo} and \code{user} are set to \code{NULL} (as default) in Remote mode then global parameters
@@ -162,11 +162,11 @@ Other archivist:
 \code{\link{ahistory}()},
 \code{\link{alink}()},
 \code{\link{aoptions}()},
-\code{\link{archivist-package}},
-\code{\link{areadLocal}()},
+\code{\link{archivistPackage}},
 \code{\link{aread}()},
-\code{\link{asearchLocal}()},
+\code{\link{areadLocal}()},
 \code{\link{asearch}()},
+\code{\link{asearchLocal}()},
 \code{\link{asession}()},
 \code{\link{atrace}()},
 \code{\link{cache}()},
@@ -199,11 +199,11 @@ Other archivist:
 \code{\link{ahistory}()},
 \code{\link{alink}()},
 \code{\link{aoptions}()},
-\code{\link{archivist-package}},
-\code{\link{areadLocal}()},
+\code{\link{archivistPackage}},
 \code{\link{aread}()},
-\code{\link{asearchLocal}()},
+\code{\link{areadLocal}()},
 \code{\link{asearch}()},
+\code{\link{asearchLocal}()},
 \code{\link{asession}()},
 \code{\link{atrace}()},
 \code{\link{cache}()},

@@ -99,7 +99,7 @@ to compute the artifact.
 }
 \description{
 \code{saveToLocalRepo} function saves desired artifacts to the local \link{Repository} in a given directory.
-To learn more about artifacts visit \link[archivist]{archivist-package}.
+To learn more about artifacts visit \link[archivist]{archivistPackage}.
 }
 \details{
 \code{saveToLocalRepo} function saves desired artifacts to the local Repository in a given directory.
@@ -229,11 +229,11 @@ Other archivist:
 \code{\link{ahistory}()},
 \code{\link{alink}()},
 \code{\link{aoptions}()},
-\code{\link{archivist-package}},
-\code{\link{areadLocal}()},
+\code{\link{archivistPackage}},
 \code{\link{aread}()},
-\code{\link{asearchLocal}()},
+\code{\link{areadLocal}()},
 \code{\link{asearch}()},
+\code{\link{asearchLocal}()},
 \code{\link{asession}()},
 \code{\link{atrace}()},
 \code{\link{cache}()},

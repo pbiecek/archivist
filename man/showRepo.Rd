@@ -54,7 +54,7 @@ To learn more about \code{Tags} or \code{md5hashes} check: \link{Tags} or \link{
 the \link{Repository} saved in a given \code{repoDir} (directory). \code{showLocalRepo}
 shows the artifacts from the \code{Repository} that exists on the user's computer whereas \code{showRemoteRepo}
 shows the artifacts of the \code{Repository} existing on the remote repository.
-To learn more about artifacts visit \link[archivist]{archivist-package}.
+To learn more about artifacts visit \link[archivist]{archivistPackage}.
 }
 \details{
 \code{showLocalRepo} and \code{showRemoteRepo} functions produce the \code{data.frame} of the artifacts from
@@ -136,11 +136,11 @@ Other archivist:
 \code{\link{ahistory}()},
 \code{\link{alink}()},
 \code{\link{aoptions}()},
-\code{\link{archivist-package}},
-\code{\link{areadLocal}()},
+\code{\link{archivistPackage}},
 \code{\link{aread}()},
-\code{\link{asearchLocal}()},
+\code{\link{areadLocal}()},
 \code{\link{asearch}()},
+\code{\link{asearchLocal}()},
 \code{\link{asession}()},
 \code{\link{atrace}()},
 \code{\link{cache}()},

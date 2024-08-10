@@ -7,7 +7,7 @@
 #' the \link{Repository} saved in a given \code{repoDir} (directory). \code{showLocalRepo}
 #' shows the artifacts from the \code{Repository} that exists on the user's computer whereas \code{showRemoteRepo}
 #' shows the artifacts of the \code{Repository} existing on the remote repository.
-#' To learn more about artifacts visit \link[archivist]{archivist-package}.
+#' To learn more about artifacts visit \link[archivist]{archivistPackage}.
 #' 
 #' @details
 #' \code{showLocalRepo} and \code{showRemoteRepo} functions produce the \code{data.frame} of the artifacts from

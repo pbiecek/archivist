@@ -3,7 +3,7 @@
 #' @title Get http Hook for Remote Repo
 #'
 #' @description
-#' \code{getRemoteHook} returns http adress of the remote \link{Repository}.
+#' \code{getRemoteHook} returns http address of the remote \link{Repository}.
 #' Then it can be used to download artifacts from the remote \link{Repository}.
 #' 
 #' @param repoType A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.

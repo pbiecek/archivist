@@ -59,7 +59,7 @@
 #' 
 #' @param value If \code{FALSE} (default) then artifacts are loaded into the Global Environment with their original names, 
 #' if \code{TRUE} then artifacts are returned as a list of values (if there is more than one artifact)
-#' or as a single value (if there is only one arfifact that matches md5hash).
+#' or as a single value (if there is only one artifact that matches md5hash).
 #' 
 #' @author 
 #' Marcin Kosinski , \email{m.p.kosinski@@gmail.com}

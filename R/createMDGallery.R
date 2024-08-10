@@ -4,7 +4,7 @@
 #'
 #' @description
 #' \code{createMDGallery} creates a summary for each artifact from \link{Repository} stored on a GitHub.
-#' For each artifact tihd function creates a markdown file with: the download link, artifact's \link{Tags} (when \code{addTags = TRUE}) and
+#' For each artifact this function creates a markdown file with: the download link, artifact's \link{Tags} (when \code{addTags = TRUE}) and
 #' miniature (\code{addMiniature = TRUE}) if the artifact was archived with it's miniature and \code{Tags}. The miniature is a \link{print}
 #'  or \link{head} over an artifact or it's \code{png} when it was a plot. But this function only supports \code{png} miniatures.
 #'
@@ -25,9 +25,9 @@
 #'
 #' @param output A name of the file in which artifacts should be summarized.
 #'
-#' @param addTags Logical, whether to add artfiact's \link{Tags} to the \code{output}.
+#' @param addTags Logical, whether to add artifact's \link{Tags} to the \code{output}.
 #'
-#' @param addMiniature Logical, whether to add artfiact's \code{miniature/plots} to the \code{output}.
+#' @param addMiniature Logical, whether to add artifact's \code{miniature/plots} to the \code{output}.
 #' @param maxTags Integer. The maximal length of chunks output when describing \code{Tags} of artifact.
 #'
 #' @details
