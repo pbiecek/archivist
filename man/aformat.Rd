@@ -2,7 +2,7 @@
 % Please edit documentation in R/atags.R
 \name{aformat}
 \alias{aformat}
-\title{Show Artifact's List of Foramts}
+\title{Show Artifact's List of Formats}
 \usage{
 aformat(md5hash = NULL)
 }

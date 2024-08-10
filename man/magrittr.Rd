@@ -32,7 +32,7 @@ Bug reports and feature requests can be sent to
 \section{Demonstration}{
 
 
-This function is well explained on this \href{https://www.r-bloggers.com/2016/06/r-hero-saves-backup-city-with-archivist-and-github/}{https://www.r-bloggers.com/2016/06/r-hero-saves-backup-city-with-archivist-and-github/} blog post.
+This function is well explained on this  blog post.
 }
 
 \examples{
@@ -41,7 +41,7 @@ This function is well explained on this \href{https://www.r-bloggers.com/2016/06
 library("dplyr")
 
 ## Usage of \%a\% operator without setting default repository
-# We will receive sepcial warning
+# We will receive special warning
 iris \%a\% summary()
 
 ## Archiving artifacts with their chaining code

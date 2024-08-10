@@ -12,10 +12,12 @@
 extractData <- function( object, parrentMd5hash, parentDir, isForce, ASCII )
   UseMethod( "extractData" )
 
+#' @exportS3Method archivist::extractData
+
 #' @return \code{NULL}
 #'
 #' @rdname extractData
-#' @method extractData default
+#' @export extractData.default
 
 extractData.default <- function( object, parrentMd5hash, parentDir, isForce, ASCII ){
   
@@ -24,7 +26,7 @@ extractData.default <- function( object, parrentMd5hash, parentDir, isForce, ASC
 #' @return \code{NULL}
 #'
 #' @rdname extractData
-#' @method extractData ggplot
+#' @export extractData.ggplot
 
 extractData.ggplot <- function( object, parrentMd5hash, parentDir, isForce, ASCII ){
   extractedDF <- object$data
@@ -46,7 +48,7 @@ extractData.ggplot <- function( object, parrentMd5hash, parentDir, isForce, ASCI
 #' @return \code{NULL}
 #'
 #' @rdname extractData
-#' @method extractData lm
+#' @export extractData.lm
 
 extractData.lm <- function( object, parrentMd5hash, parentDir, isForce, ASCII ){
   extractedDF <- object$model
@@ -68,7 +70,7 @@ extractData.lm <- function( object, parrentMd5hash, parentDir, isForce, ASCII ){
 #' @return \code{NULL}
 #'
 #' @rdname extractData
-#' @method extractData htest
+#' @export extractData.htest
 
 extractData.htest <- function( object, parrentMd5hash, parentDir, isForce, ASCII ){
   if (exists(strsplit(object$data.name, " and ")[[1]][1], envir = parent.frame(1)) &
@@ -100,7 +102,7 @@ extractData.htest <- function( object, parrentMd5hash, parentDir, isForce, ASCII
 #' @return \code{NULL}
 #'
 #' @rdname extractData
-#' @method extractData lda
+#' @export extractData.lda
 
 extractData.lda <- function( object, parrentMd5hash, parentDir, isForce, ASCII ){
   if (exists(as.character( ( object$call ) )[3], envir = parent.frame(1) )){
@@ -127,7 +129,7 @@ extractData.lda <- function( object, parrentMd5hash, parentDir, isForce, ASCII )
 #' @return \code{NULL}
 #'
 #' @rdname extractData
-#' @method extractData trellis
+#' @export extractData.trellis
 
 extractData.trellis <- function( object, parrentMd5hash, parentDir, isForce, ASCII ){
   if (exists(as.character( ( object$call ) )[3], envir = parent.frame(1) )){
@@ -154,7 +156,7 @@ extractData.trellis <- function( object, parrentMd5hash, parentDir, isForce, ASC
 #' @return \code{NULL}
 #'
 #' @rdname extractData
-#' @method extractData twins
+#' @export extractData.twins
 
 extractData.twins <- function( object, parrentMd5hash, parentDir, isForce, ASCII ){
   # agnes / diana / mona inherits after twins
@@ -177,7 +179,7 @@ extractData.twins <- function( object, parrentMd5hash, parentDir, isForce, ASCII
 #' @return \code{NULL}
 #'
 #' @rdname extractData
-#' @method extractData partition
+#' @export extractData.partition
 
 extractData.partition <- function( object, parrentMd5hash, parentDir, isForce, ASCII ){
   # pam / clara / fanny inherits after partition
@@ -200,7 +202,7 @@ extractData.partition <- function( object, parrentMd5hash, parentDir, isForce, A
 #' @return \code{NULL}
 #'
 #' @rdname extractData
-#' @method extractData qda
+#' @export extractData.qda
 
 extractData.qda <- function( object, parrentMd5hash, parentDir, isForce, ASCII ){
   if (exists(as.character( ( object$call ) )[2], envir = parent.frame(1) )){
@@ -227,7 +229,7 @@ extractData.qda <- function( object, parrentMd5hash, parentDir, isForce, ASCII )
 #' @return \code{NULL}
 #'
 #' @rdname extractData
-#' @method extractData glmnet
+#' @export extractData.glmnet
 
 extractData.glmnet <- function( object, parrentMd5hash, parentDir, isForce, ASCII ){
   # elmet / lognet / multnet /foshnet /coxnet /mrelnet 
@@ -260,7 +262,7 @@ extractData.glmnet <- function( object, parrentMd5hash, parentDir, isForce, ASCI
 #' @return \code{NULL}
 #'
 #' @rdname extractData
-#' @method extractData survfit
+#' @export extractData.survfit
 
 extractData.survfit <- function( object, parrentMd5hash, parentDir, isForce, ASCII ){
   if (exists(as.character( ( object$call ) )[3], envir = parent.frame(1) )){

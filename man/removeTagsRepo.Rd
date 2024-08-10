@@ -21,8 +21,8 @@ it uses the \code{repoDir} specified in \link{setLocalRepo}.}
 }
 \details{
 \code{removeTagsRepo} function removes all Tags from all listed objects.
-Note that some hashes are required for keeping erlations between objects in the repository.
-Be carefull what are you removing.
+Note that some hashes are required for keeping relations between objects in the repository.
+Be careful what are you removing.
 }
 \section{Contact}{
 

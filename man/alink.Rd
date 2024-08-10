@@ -34,7 +34,7 @@ on which the Repository is archived. Default \code{branch} is \code{master}.}
 
 \item{repoType}{A character containing a type of the remote repository. Currently it can be 'github' or 'bitbucket'.}
 
-\item{format}{In which format the link should be returned. Possibilites are \code{markdown} (default) or \code{latex}.}
+\item{format}{In which format the link should be returned. Possibilities are \code{markdown} (default) or \code{latex}.}
 
 \item{rawLink}{A logical denoting whether to return raw link or a link in the \code{format} convention. 
 Default value is \code{FALSE}.}

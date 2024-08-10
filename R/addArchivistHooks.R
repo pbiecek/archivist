@@ -6,7 +6,7 @@
 #' \code{addHooksToPrint} adds an overloaded version of the print function for objects of selected class. 
 #' The overloaded function will add all objects of selected class to the \link{Repository} and then will add hooks (to the Remote or Local Repository) 
 #' to the HTML report (generated in \pkg{rmarkdown}) for these objects (\code{artifacts} - \link{archivistPackage}).
-#' The great example can be seen in this blogpost \href{https://www.r-bloggers.com/2016/02/why-should-you-backup-your-r-objects/}{https://www.r-bloggers.com/2016/02/why-should-you-backup-your-r-objects/}.
+#' The great example can be seen in this blogpost.
 #' 
 #' @param class A character with a name of class (one or more) that should be archived.
 #' @param repo A character with a name of a Remote repository on which the Repository is archived.
@@ -14,7 +14,7 @@
 #' @param user A character with a name of a Remote-repository user on whose account the \code{repo} is created.
 #' @param branch A character with a name of Remote-repository's branch on which the Repository is archived. 
 #' Default \code{branch} is \code{master}.
-#' @param subdir A character with a name of a subdirectory on a Remote repository 
+#' @param subdir A character with a name of a sub directory on a Remote repository 
 #' on which the Repository is stored. If the Repository is stored in main folder on a Remote repository, this should be set 
 #' to \code{subdir = "/"} as default.
 #' @param repoDir A character containing a name of a Local Repository.
@@ -27,7 +27,7 @@
 #' @template roxlate-contact
 #' @note
 #' One can specify \code{userTags} as in \link{saveToLocalRepo} for artifacts by adding \code{"tags"} attribute.
-#' See note secion about that in \link{saveToLocalRepo}.
+#' See note section about that in \link{saveToLocalRepo}.
 #' 
 #' @examples
 #' 

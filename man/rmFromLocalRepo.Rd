@@ -26,10 +26,10 @@ md5hash will be a character vector.}
 artifact will be removed.}
 
 \item{removeData}{A logical value denoting whether to remove data along with
-the \code{artifact} specified by the \code{md5hash}. Defualt \code{FALSE}.}
+the \code{artifact} specified by the \code{md5hash}. Default \code{FALSE}.}
 
 \item{removeMiniature}{A logical value denoting whether to remove a miniature
-along with the \code{artifact} specified by the \code{md5hash}. Defualt \code{FALSE}.}
+along with the \code{artifact} specified by the \code{md5hash}. Default \code{FALSE}.}
 
 \item{force}{A logical value denoting whether to remove data related to more than one artifact.
 Defualt \code{FALSE}.}

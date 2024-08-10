@@ -74,7 +74,7 @@ asave(
 a Repository.}
 
 \item{value}{A logical value. Should the result be (default \code{value = FALSE}) the \code{md5hash}
-of a stored artifact or should the result be an input artifact (\code{value = TRUE}), so that valueing code
+of a stored artifact or should the result be an input artifact (\code{value = TRUE}), so that valuing code
 can be used. See examples.}
 
 \item{...}{Graphical parameters denoting width and height of a miniature. See details.
@@ -155,7 +155,7 @@ It can be also done in a new, simpler way by using \code{userTags} parameter lik
    \item \code{saveToLocalRepo(model, repoDir, userTags = c("my_model", "do not delete"))}.
  }
  
-Specifing additional \code{Tags} by attributes can be beneficial when one uses \link{addHooksToPrint}.
+Specifying additional \code{Tags} by attributes can be beneficial when one uses \link{addHooksToPrint}.
  
 
 Important: if one wants to archive data from artifacts which is one of:

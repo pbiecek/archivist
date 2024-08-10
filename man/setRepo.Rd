@@ -14,7 +14,7 @@ setRemoteRepo(user, repo, branch = "master", subdir = "/", repoType = "github")
 }
 \arguments{
 \item{repoDir}{A character denoting a directory of a Repository that we want to
-make dafault.}
+make default.}
 
 \item{connector}{If user want to use some external database instead of SQLite, then the \code{connector} shall be the function that create a \code{DBI} connection with the database.
 Within every transaction the connection is opened and closed, thus the \code{connector} function will be executed often and shall not be computationally heavy.
