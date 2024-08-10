@@ -18,6 +18,7 @@ extractMiniature <- function( object, md5hash, parentDir, ... )
 #'
 #' @rdname extractMiniature
 #' @method extractMiniature default
+#' @exportS3Method archivist::extractMiniature
 
 extractMiniature.default <- function( object, md5hash, parentDir, ... ){
 
@@ -27,6 +28,7 @@ extractMiniature.default <- function( object, md5hash, parentDir, ... ){
 #'
 #' @rdname extractMiniature
 #' @method extractMiniature data.frame
+#' @exportS3Method archivist::extractMiniature
 
 extractMiniature.data.frame <- function( object, md5hash, parentDir, ..., firstRows = 6 ){
   sink( file = file.path( parentDir, "gallery", paste0(md5hash, ".txt" )) )
@@ -39,6 +41,7 @@ extractMiniature.data.frame <- function( object, md5hash, parentDir, ..., firstR
 #'
 #' @rdname extractMiniature
 #' @method extractMiniature ggplot
+#' @exportS3Method archivist::extractMiniature
 
 extractMiniature.ggplot <- function( object, md5hash, parentDir, ..., width = 800, height = 600 ){
   png( file.path( parentDir, "gallery", paste0(md5hash, ".png" )), width, height )
@@ -51,6 +54,7 @@ extractMiniature.ggplot <- function( object, md5hash, parentDir, ..., width = 80
 #'
 #' @rdname extractMiniature
 #' @method extractMiniature recordedplot
+#' @exportS3Method archivist::extractMiniature
 
 extractMiniature.recordedplot <- function( object, md5hash, parentDir, ..., width = 800, height = 600 ){
   png( file.path( parentDir, "gallery", paste0(md5hash, ".png" )), width, height )
@@ -63,6 +67,7 @@ extractMiniature.recordedplot <- function( object, md5hash, parentDir, ..., widt
 #'
 #' @rdname extractMiniature
 #' @method extractMiniature lm
+#' @exportS3Method archivist::extractMiniature
 
 extractMiniature.lm <- function( object, md5hash, parentDir, ... ){
   sink( file = file.path(parentDir, "gallery", paste0(md5hash, ".txt")) )
@@ -75,6 +80,7 @@ extractMiniature.lm <- function( object, md5hash, parentDir, ... ){
 #'
 #' @rdname extractMiniature
 #' @method extractMiniature htest
+#' @exportS3Method archivist::extractMiniature
 
 extractMiniature.htest <- function( object, md5hash, parentDir, ... ){
   sink( file = file.path(parentDir, "gallery", paste0(md5hash, ".txt" )) )
@@ -87,6 +93,7 @@ extractMiniature.htest <- function( object, md5hash, parentDir, ... ){
 #'
 #' @rdname extractMiniature
 #' @method extractMiniature trellis
+#' @exportS3Method archivist::extractMiniature
 
 extractMiniature.trellis <- function( object, md5hash, parentDir, ..., width = 800, height = 600 ){
   png( file.path( parentDir, "gallery", paste0(md5hash, ".png" )), width, height )
@@ -99,6 +106,7 @@ extractMiniature.trellis <- function( object, md5hash, parentDir, ..., width = 8
 #'
 #' @rdname extractMiniature
 #' @method extractMiniature twins
+#' @exportS3Method archivist::extractMiniature
 
 extractMiniature.twins <- function( object, md5hash, parentDir, ..., width = 800, height = 600 ){
   png( file.path( parentDir, "gallery", paste0(md5hash, ".png" )), width, height )
@@ -113,6 +121,7 @@ extractMiniature.twins <- function( object, md5hash, parentDir, ..., width = 800
 #'
 #' @rdname extractMiniature
 #' @method extractMiniature partition
+#' @exportS3Method archivist::extractMiniature
 
 extractMiniature.partition <- function( object, md5hash, parentDir, ...,width = 800, height = 600 ){
   png( file.path( parentDir, "gallery", paste0(md5hash, ".png" )), width, height )
@@ -127,6 +136,7 @@ extractMiniature.partition <- function( object, md5hash, parentDir, ...,width = 
 #'
 #' @rdname extractMiniature
 #' @method extractMiniature lda
+#' @exportS3Method archivist::extractMiniature
 
 extractMiniature.lda <- function( object, md5hash, parentDir, ... ){
   sink( file = file.path(parentDir, "gallery", paste0(md5hash, ".txt" )) )
@@ -139,6 +149,7 @@ extractMiniature.lda <- function( object, md5hash, parentDir, ... ){
 #'
 #' @rdname extractMiniature
 #' @method extractMiniature qda
+#' @exportS3Method archivist::extractMiniature
 
 extractMiniature.qda <- function( object, md5hash, parentDir, ... ){
   sink( file = file.path(parentDir, "gallery", paste0(md5hash, ".txt" )) )
@@ -151,6 +162,7 @@ extractMiniature.qda <- function( object, md5hash, parentDir, ... ){
 #'
 #' @rdname extractMiniature
 #' @method extractMiniature glmnet
+#' @exportS3Method archivist::extractMiniature
 
 extractMiniature.glmnet <- function( object, md5hash, parentDir, ... ){
   sink( file = file.path(parentDir, "gallery", paste0(md5hash, ".txt" )) )
@@ -163,6 +175,7 @@ extractMiniature.glmnet <- function( object, md5hash, parentDir, ... ){
 #'
 #' @rdname extractMiniature
 #' @method extractMiniature survfit
+#' @exportS3Method archivist::extractMiniature
 
 extractMiniature.survfit <- function( object, md5hash, parentDir, ... ){
   sink( file = file.path(parentDir, "gallery", paste0(md5hash, ".txt" )) )
