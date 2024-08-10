@@ -8,7 +8,7 @@ archivist 2.3.3
 
 archivist 2.3.2
 ----------------------------------------------------------------
-* The `https://raw.githubusercontent.com` serwis is closed, this is why we need to update hooks to `https://raw.githack.com` ([#332](https://github.com/pbiecek/archivist/issues/332)). 
+* The `https://raw.githubusercontent.com` is closed, this is why we need to update hooks to `https://raw.githack.com` ([#332](https://github.com/pbiecek/archivist/issues/332)). 
 
 archivist 2.3.1
 ----------------------------------------------------------------
@@ -106,7 +106,7 @@ archivist 1.9
 * **New functions**:
     1. `alink` function: Returns a Link To Download an Artifact Stored on GitHub Repository. Ideal combination with `archive`
     2. `pushRepo` function which add files, commits them and pushes from Local `Repository` to synchronized GitHub one. [[#146](https://github.com/pbiecek/archivist/issues/146)].
-    3. `pullRepo` pulls (`git pull`) changes from remote GitHub `Repository` to the correspoding Local one. [[#146](https://github.com/pbiecek/archivist/issues/146)].
+    3. `pullRepo` pulls (`git pull`) changes from remote GitHub `Repository` to the corresponding Local one. [[#146](https://github.com/pbiecek/archivist/issues/146)].
     4. New functions `deleteLocalRepo` (previous `deleteRepo`) and `deleteGithubRepo`.  [[#156](https://github.com/pbiecek/archivist/issues/156)].
     5. `createGithubMDGallery` that give the markdown summary for each artifact in the repository. Ideal for README.md file. Example [[#144](https://github.com/pbiecek/archivist/issues/144#issuecomment-174192366)]
 * **Bugs fixed**:
@@ -138,7 +138,7 @@ archivist 1.8
 * **Archivist Integration With GitHub API:** new functions:
 	  1. It is possible to create new GitHub repository with an empty `archivist`-like `Repository` with `createEmptyGithubRepo` function. We also added `createEmptyLocalRepo` to maintain consistency with other sister functions. `createEmptyRepo` is now a wrapper around `createEmptyLocalRepo` and `createEmptyGithubRepo` functions.
 	  2. One can now clone GitHub-archivist repo with new `cloneGithubRepo` function.
-  	3. One can automatically archive artifacts to Local and synchronized GitHub archivist-like Repositiories with new `archive` function. Example: https://github.com/MarcinKosinski/archive-test4/commits/master
+  	3. One can automatically archive artifacts to Local and synchronized GitHub archivist-like Repositories with new `archive` function. Example: https://github.com/MarcinKosinski/archive-test4/commits/master
   	4. Added manual page to enable easier usage of this integration: ``?`archivist-github-integration``` (or shorter `?agithub`).
 * **New functions:** 
 	  1. `splitTagsLocal` and `splitTagsGithub` enabling to split `tag` column in database into two separate columns: `tagKey` and `tagValue`.
